@@ -1,0 +1,689 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		686D9C67F7BF92A5D80167CB /* wake-up_notif.caf in Resources */ = {isa = PBXBuildFile; fileRef = D438BBC6048859C07106D332 /* wake-up_notif.caf */; };
+		CA5F44E60B05AFBF8C8CEDBF /* alarm_takbir_loud_notif.caf in Resources */ = {isa = PBXBuildFile; fileRef = 70225D373416F554F3512C55 /* alarm_takbir_loud_notif.caf */; };
+		CCDE9694C670BDA37FDCA862 /* alarm_makkah_loud_notif.caf in Resources */ = {isa = PBXBuildFile; fileRef = E946F05A5888C3F2B31A087C /* alarm_makkah_loud_notif.caf */; };
+		CF28F2382F190396008FA0E0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF28F2372F190396008FA0E0 /* WidgetKit.framework */; };
+		CF28F23A2F190396008FA0E0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF28F2392F190396008FA0E0 /* SwiftUI.framework */; };
+		CF7393122F1BAC0000FA2843 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = CF7393112F1BAC0000FA2843 /* Adhan */; };
+		CF7393132F1BAC0000FA2843 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = CF7393112F1BAC0000FA2843 /* Adhan */; };
+		CF739B8F2F1CE9FC00FA2843 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CF739B8E2F1CE9FC00FA2843 /* FirebaseAuth */; };
+		CF739B912F1CE9FC00FA2843 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = CF739B902F1CE9FC00FA2843 /* FirebaseCore */; };
+		CF739B932F1CE9FC00FA2843 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CF739B922F1CE9FC00FA2843 /* FirebaseFirestore */; };
+		CF8CD2B92F20A74E0025BD1B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CF8CD2B82F20A74E0025BD1B /* GoogleSignIn */; };
+		CF8CD2BB2F20A74E0025BD1B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CF8CD2BA2F20A74E0025BD1B /* GoogleSignInSwift */; };
+		CF8CD37A2F20BA190025BD1B /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = CF8CD3792F20BA190025BD1B /* RevenueCat */; };
+		CF8CD37C2F20BA190025BD1B /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = CF8CD37B2F20BA190025BD1B /* RevenueCatUI */; };
+		CF9576932F3B7755006BAE0C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF9576922F3B7755006BAE0C /* FirebaseAnalytics */; };
+		DFC0564D7F6A5188EE1F1F75 /* alarm_madinah_loud_notif.caf in Resources */ = {isa = PBXBuildFile; fileRef = 25BBF55BAC38ADD58599994B /* alarm_madinah_loud_notif.caf */; };
+		FB1E7FF0ADCF2CC34892E0E3 /* alarm_fajr_loud_notif.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3D72DC6F7F3BF83BAD8C4FD5 /* alarm_fajr_loud_notif.caf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		25BBF55BAC38ADD58599994B /* alarm_madinah_loud_notif.caf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = alarm_madinah_loud_notif.caf; path = "Ramadan Pro/Resources/AlarmAudio/alarm_madinah_loud_notif.caf"; sourceTree = "<group>"; };
+		3D72DC6F7F3BF83BAD8C4FD5 /* alarm_fajr_loud_notif.caf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = alarm_fajr_loud_notif.caf; path = "Ramadan Pro/Resources/AlarmAudio/alarm_fajr_loud_notif.caf"; sourceTree = "<group>"; };
+		70225D373416F554F3512C55 /* alarm_takbir_loud_notif.caf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = alarm_takbir_loud_notif.caf; path = "Ramadan Pro/Resources/AlarmAudio/alarm_takbir_loud_notif.caf"; sourceTree = "<group>"; };
+		CF28F1F82F18FCF8008FA0E0 /* Ramadan Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ramadan Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF28F2352F190396008FA0E0 /* RamadanWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RamadanWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF28F2372F190396008FA0E0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		CF28F2392F190396008FA0E0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		D438BBC6048859C07106D332 /* wake-up_notif.caf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "wake-up_notif.caf"; path = "Ramadan Pro/Resources/AlarmAudio/wake-up_notif.caf"; sourceTree = "<group>"; };
+		E946F05A5888C3F2B31A087C /* alarm_makkah_loud_notif.caf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = alarm_makkah_loud_notif.caf; path = "Ramadan Pro/Resources/AlarmAudio/alarm_makkah_loud_notif.caf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CF28F24A2F190398008FA0E0 /* Exceptions for "RamadanWidgetExtension" folder in "RamadanWidgetExtensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CF28F2342F190396008FA0E0 /* RamadanWidgetExtensionExtension */;
+		};
+		CF28F3A02F191440008FA0E0 /* Exceptions for "Ramadan Pro" folder in "RamadanWidgetExtensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"CustomFont/canela-text-trial/Canela-Black-Trial.otf",
+				"CustomFont/canela-text-trial/Canela-Bold-Trial.otf",
+				"CustomFont/canela-text-trial/Canela-Light-Trial.otf",
+				"CustomFont/canela-text-trial/Canela-Medium-Trial.otf",
+				"CustomFont/canela-text-trial/Canela-Regular-Trial.otf",
+				"CustomFont/canela-text-trial/Canela-Thin-Trial.otf",
+				Extensions/DateExtensions.swift,
+				Models/Location.swift,
+				Models/PrayerTime.swift,
+				Models/RamadanDay.swift,
+				Utils/PrayerTimesCalculator.swift,
+				Utils/WidgetConfiguration.swift,
+			);
+			target = CF28F2342F190396008FA0E0 /* RamadanWidgetExtensionExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CF28F1FA2F18FCF8008FA0E0 /* Ramadan Pro */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CF28F3A02F191440008FA0E0 /* Exceptions for "Ramadan Pro" folder in "RamadanWidgetExtensionExtension" target */,
+			);
+			path = "Ramadan Pro";
+			sourceTree = "<group>";
+		};
+		CF28F23B2F190396008FA0E0 /* RamadanWidgetExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CF28F24A2F190398008FA0E0 /* Exceptions for "RamadanWidgetExtension" folder in "RamadanWidgetExtensionExtension" target */,
+			);
+			path = RamadanWidgetExtension;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF28F1F52F18FCF8008FA0E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF8CD2B92F20A74E0025BD1B /* GoogleSignIn in Frameworks */,
+				CF7393122F1BAC0000FA2843 /* Adhan in Frameworks */,
+				CF8CD37A2F20BA190025BD1B /* RevenueCat in Frameworks */,
+				CF739B932F1CE9FC00FA2843 /* FirebaseFirestore in Frameworks */,
+				CF8CD37C2F20BA190025BD1B /* RevenueCatUI in Frameworks */,
+				CF8CD2BB2F20A74E0025BD1B /* GoogleSignInSwift in Frameworks */,
+				CF739B912F1CE9FC00FA2843 /* FirebaseCore in Frameworks */,
+				CF739B8F2F1CE9FC00FA2843 /* FirebaseAuth in Frameworks */,
+				CF9576932F3B7755006BAE0C /* FirebaseAnalytics in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28F2322F190396008FA0E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF28F23A2F190396008FA0E0 /* SwiftUI.framework in Frameworks */,
+				CF28F2382F190396008FA0E0 /* WidgetKit.framework in Frameworks */,
+				CF7393132F1BAC0000FA2843 /* Adhan in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF28F1EF2F18FCF8008FA0E0 = {
+			isa = PBXGroup;
+			children = (
+				CF28F1FA2F18FCF8008FA0E0 /* Ramadan Pro */,
+				CF28F23B2F190396008FA0E0 /* RamadanWidgetExtension */,
+				CF28F2362F190396008FA0E0 /* Frameworks */,
+				CF28F1F92F18FCF8008FA0E0 /* Products */,
+				25BBF55BAC38ADD58599994B /* alarm_madinah_loud_notif.caf */,
+				70225D373416F554F3512C55 /* alarm_takbir_loud_notif.caf */,
+				E946F05A5888C3F2B31A087C /* alarm_makkah_loud_notif.caf */,
+				D438BBC6048859C07106D332 /* wake-up_notif.caf */,
+				3D72DC6F7F3BF83BAD8C4FD5 /* alarm_fajr_loud_notif.caf */,
+			);
+			sourceTree = "<group>";
+		};
+		CF28F1F92F18FCF8008FA0E0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF28F1F82F18FCF8008FA0E0 /* Ramadan Pro.app */,
+				CF28F2352F190396008FA0E0 /* RamadanWidgetExtensionExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF28F2362F190396008FA0E0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF28F2372F190396008FA0E0 /* WidgetKit.framework */,
+				CF28F2392F190396008FA0E0 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF28F1F72F18FCF8008FA0E0 /* Ramadan Pro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF28F2032F18FCF9008FA0E0 /* Build configuration list for PBXNativeTarget "Ramadan Pro" */;
+			buildPhases = (
+				CF28F1F42F18FCF8008FA0E0 /* Sources */,
+				CF28F1F52F18FCF8008FA0E0 /* Frameworks */,
+				CF28F1F62F18FCF8008FA0E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF28F1FA2F18FCF8008FA0E0 /* Ramadan Pro */,
+			);
+			name = "Ramadan Pro";
+			packageProductDependencies = (
+				CF7393112F1BAC0000FA2843 /* Adhan */,
+				CF739B8E2F1CE9FC00FA2843 /* FirebaseAuth */,
+				CF739B902F1CE9FC00FA2843 /* FirebaseCore */,
+				CF739B922F1CE9FC00FA2843 /* FirebaseFirestore */,
+				CF8CD2B82F20A74E0025BD1B /* GoogleSignIn */,
+				CF8CD2BA2F20A74E0025BD1B /* GoogleSignInSwift */,
+				CF8CD3792F20BA190025BD1B /* RevenueCat */,
+				CF8CD37B2F20BA190025BD1B /* RevenueCatUI */,
+				CF9576922F3B7755006BAE0C /* FirebaseAnalytics */,
+			);
+			productName = "Ramadan Pro";
+			productReference = CF28F1F82F18FCF8008FA0E0 /* Ramadan Pro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF28F2342F190396008FA0E0 /* RamadanWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF28F24B2F190398008FA0E0 /* Build configuration list for PBXNativeTarget "RamadanWidgetExtensionExtension" */;
+			buildPhases = (
+				CF28F2312F190396008FA0E0 /* Sources */,
+				CF28F2322F190396008FA0E0 /* Frameworks */,
+				CF28F2332F190396008FA0E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF28F23B2F190396008FA0E0 /* RamadanWidgetExtension */,
+			);
+			name = RamadanWidgetExtensionExtension;
+			packageProductDependencies = (
+				CF7393112F1BAC0000FA2843 /* Adhan */,
+			);
+			productName = RamadanWidgetExtensionExtension;
+			productReference = CF28F2352F190396008FA0E0 /* RamadanWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF28F1F02F18FCF8008FA0E0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					CF28F1F72F18FCF8008FA0E0 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					CF28F2342F190396008FA0E0 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+				};
+			};
+			buildConfigurationList = CF28F1F32F18FCF8008FA0E0 /* Build configuration list for PBXProject "Ramadan Pro" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF28F1EF2F18FCF8008FA0E0;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CF7393102F1BAC0000FA2843 /* XCRemoteSwiftPackageReference "adhan-swift" */,
+				CF739B8D2F1CE9FC00FA2843 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CF8CD2B72F20A74E0025BD1B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				CF8CD3782F20BA190025BD1B /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = CF28F1F92F18FCF8008FA0E0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF28F1F72F18FCF8008FA0E0 /* Ramadan Pro */,
+				CF28F2342F190396008FA0E0 /* RamadanWidgetExtensionExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF28F1F62F18FCF8008FA0E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFC0564D7F6A5188EE1F1F75 /* alarm_madinah_loud_notif.caf in Resources */,
+				CA5F44E60B05AFBF8C8CEDBF /* alarm_takbir_loud_notif.caf in Resources */,
+				CCDE9694C670BDA37FDCA862 /* alarm_makkah_loud_notif.caf in Resources */,
+				686D9C67F7BF92A5D80167CB /* wake-up_notif.caf in Resources */,
+				FB1E7FF0ADCF2CC34892E0E3 /* alarm_fajr_loud_notif.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28F2332F190396008FA0E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF28F1F42F18FCF8008FA0E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28F2312F190396008FA0E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CF28F2012F18FCF9008FA0E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CF28F2022F18FCF9008FA0E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CF28F2042F18FCF9008FA0E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Ramadan Pro/Ramadan Pro.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 63F577CS68;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Ramadan-Pro-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Salah Alarm";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SalahAlarm uses your location to calculate accurate prayer times and show the correct Qibla direction.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Ramadan-Pro";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = apppp;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF28F2052F18FCF9008FA0E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Ramadan Pro/Ramadan Pro.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 63F577CS68;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Ramadan-Pro-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Salah Alarm";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SalahAlarm uses your location to calculate accurate prayer times and show the correct Qibla direction.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Ramadan-Pro";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = apppp;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CF28F24C2F190398008FA0E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RamadanWidgetExtensionExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 12;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 63F577CS68;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RamadanWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "SalahAlarm Widget";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Ramadan-Pro.RamadanWidgetExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = widgeett;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF28F24D2F190398008FA0E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RamadanWidgetExtensionExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 12;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 63F577CS68;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RamadanWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "SalahAlarm Widget";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Ramadan-Pro.RamadanWidgetExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = widgeett;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF28F1F32F18FCF8008FA0E0 /* Build configuration list for PBXProject "Ramadan Pro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF28F2012F18FCF9008FA0E0 /* Debug */,
+				CF28F2022F18FCF9008FA0E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF28F2032F18FCF9008FA0E0 /* Build configuration list for PBXNativeTarget "Ramadan Pro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF28F2042F18FCF9008FA0E0 /* Debug */,
+				CF28F2052F18FCF9008FA0E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF28F24B2F190398008FA0E0 /* Build configuration list for PBXNativeTarget "RamadanWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF28F24C2F190398008FA0E0 /* Debug */,
+				CF28F24D2F190398008FA0E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF7393102F1BAC0000FA2843 /* XCRemoteSwiftPackageReference "adhan-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/batoulapps/adhan-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+		CF739B8D2F1CE9FC00FA2843 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
+		CF8CD2B72F20A74E0025BD1B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		CF8CD3782F20BA190025BD1B /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.55.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF7393112F1BAC0000FA2843 /* Adhan */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF7393102F1BAC0000FA2843 /* XCRemoteSwiftPackageReference "adhan-swift" */;
+			productName = Adhan;
+		};
+		CF739B8E2F1CE9FC00FA2843 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF739B8D2F1CE9FC00FA2843 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CF739B902F1CE9FC00FA2843 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF739B8D2F1CE9FC00FA2843 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		CF739B922F1CE9FC00FA2843 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF739B8D2F1CE9FC00FA2843 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		CF8CD2B82F20A74E0025BD1B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF8CD2B72F20A74E0025BD1B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		CF8CD2BA2F20A74E0025BD1B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF8CD2B72F20A74E0025BD1B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		CF8CD3792F20BA190025BD1B /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF8CD3782F20BA190025BD1B /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		CF8CD37B2F20BA190025BD1B /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF8CD3782F20BA190025BD1B /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
+		CF9576922F3B7755006BAE0C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF739B8D2F1CE9FC00FA2843 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = CF28F1F02F18FCF8008FA0E0 /* Project object */;
+}

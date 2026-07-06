@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>151770307855-752bh07f1krbbfr36uhvvlit5ah2op0d.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.151770307855-752bh07f1krbbfr36uhvvlit5ah2op0d</string>
+	<key>API_KEY</key>
+	<string>AIzaSyABdJ9QWxrxu4GGs8hXqhgouMjE4B7TQlI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>151770307855</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Ramadan-Pro</string>
+	<key>PROJECT_ID</key>
+	<string>ramadan-pro-684da</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ramadan-pro-684da.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:151770307855:ios:96ca1da5d7b4984acc327a</string>
+</dict>
+</plist>

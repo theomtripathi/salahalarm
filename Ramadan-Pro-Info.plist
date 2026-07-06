@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.ramadanpro.alarm.refresh</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.151770307855-752bh07f1krbbfr36uhvvlit5ah2op0d</string>
+			</array>
+		</dict>
+	</array>
+	<key>KochavaAppGUID</key>
+	<string>kosalahalarm-db3nht</string>
+	<key>NSCameraUsageDescription</key>
+	<string>SalahAlarm uses your camera so you can scan your prayer mat when dismissing alarms.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>SalahAlarm uses your location to calculate accurate prayer times and show the correct Qibla direction.</string>
+	<key>RevenueCatAPIKey</key>
+	<string>test_tajeOGblNDJrBdEESJrRzsLNVDS</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Canela-Thin-Trial.otf</string>
+		<string>Canela-Light-Trial.otf</string>
+		<string>Canela-Regular-Trial.otf</string>
+		<string>Canela-Medium-Trial.otf</string>
+		<string>Canela-Bold-Trial.otf</string>
+		<string>Canela-Black-Trial.otf</string>
+		<string>Canela-ThinItalic-Trial.otf</string>
+		<string>Canela-LightItalic-Trial.otf</string>
+		<string>Canela-RegularItalic-Trial.otf</string>
+		<string>Canela-MediumItalic-Trial.otf</string>
+		<string>Canela-BoldItalic-Trial.otf</string>
+		<string>Canela-BlackItalic-Trial.otf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>fetch</string>
+		<string>processing</string>
+	</array>
+</dict>
+</plist>

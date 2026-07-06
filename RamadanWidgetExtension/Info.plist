@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widgetkit-extension</string>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CustomFont/Inter/Inter-VariableFont_opsz,wght.ttf</string>
+		<string>CustomFont/Inter/Inter-Italic-VariableFont_opsz,wght.ttf</string>
+		<string>CustomFont/canela-text-trial/Canela-Thin-Trial.otf</string>
+		<string>CustomFont/canela-text-trial/Canela-Light-Trial.otf</string>
+		<string>CustomFont/canela-text-trial/Canela-Regular-Trial.otf</string>
+		<string>CustomFont/canela-text-trial/Canela-Medium-Trial.otf</string>
+		<string>CustomFont/canela-text-trial/Canela-Bold-Trial.otf</string>
+		<string>CustomFont/canela-text-trial/Canela-Black-Trial.otf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-Thin.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-ExtraLight.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-Light.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-Regular.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-Medium.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-SemiBold.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-Bold.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-ExtraBold.ttf</string>
+		<string>CustomFont/NotoSerif/NotoSerif-Black.ttf</string>
+	</array>
+</dict>
+</plist>
