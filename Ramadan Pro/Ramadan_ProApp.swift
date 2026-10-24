@@ -403,12 +403,13 @@ struct SplashScreenWrapper: View {
 }
 
 extension View {
-    /// Urdu otherwise mixes Nastaliq (localized keys) and Naskh (plain strings), and
-    /// Nastaliq's tall glyphs collide at our line heights. Typeset it all as Naskh.
+    /// Plain-string Text carries no language, so Urdu otherwise mixes Nastaliq (localized
+    /// keys) with Naskh, and Nastaliq lines collide. Tagging all text as Urdu gives one
+    /// typeface and Nastaliq-sized line heights.
     @ViewBuilder
     func appTypesetting(_ language: AppLanguage) -> some View {
         if #available(iOS 17.0, *), language == .urdu {
-            typesettingLanguage(Locale.Language(identifier: "ar"))
+            typesettingLanguage(Locale.Language(identifier: "ur"), isEnabled: true)
         } else {
             self
         }

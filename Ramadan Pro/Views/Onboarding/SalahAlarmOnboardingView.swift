@@ -933,7 +933,7 @@ struct SalahAlarmOnboardingView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         if option != .custom {
                             Text("LOUD")
-                                .font(.system(size: 11, weight: .bold))
+                                .font(.system(size: 12, weight: .bold))
                                 .foregroundColor(.white)
                                 .lineLimit(1)
                                 .fixedSize()
