@@ -45,6 +45,11 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
         }
     }
 
+    /// User-facing name. The raw value is persisted, so it never changes.
+    var displayName: String {
+        self == .newAudio ? "Wake-Up Alarm" : rawValue
+    }
+
     var shortLabel: String {
         switch self {
         case .makkahLoud:
@@ -56,7 +61,7 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
         case .takbirLoud:
             return "Takbir"
         case .newAudio:
-            return "Funny Wake Up Bitch"
+            return "Wake-Up"
         case .custom:
             return "Custom"
         }

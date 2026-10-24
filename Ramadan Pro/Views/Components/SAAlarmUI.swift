@@ -170,11 +170,11 @@ struct SAAlarmSettingsSheet: View {
                     )) {
                         ForEach(AlarmSoundOption.allCases, id: \.rawValue) { sound in
                             if sound == .custom {
-                                Button(L10n.text(sound.rawValue)) {
+                                Button(L10n.text(sound.displayName)) {
                                     showFileImporter = true
                                 }.tag(sound.rawValue)
                             } else {
-                                Text(L10n.text(sound.rawValue)).tag(sound.rawValue)
+                                Text(L10n.text(sound.displayName)).tag(sound.rawValue)
                             }
                         }
                     }

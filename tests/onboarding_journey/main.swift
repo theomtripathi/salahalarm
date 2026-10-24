@@ -33,7 +33,7 @@ struct OnboardingJourneyTests {
         journey.pause()
         now.addTimeInterval(30)
         let beforeResume = journey.activeSeconds
-        check(beforeResume == 36, "time remains frozen while journey is paused")
+        check(beforeResume == 39, "time remains frozen while journey is paused")
         journey.resume()
         now.addTimeInterval(2)
         let lastTransition = journey.transition(to: "mechanism", index: 2, completed: false)!

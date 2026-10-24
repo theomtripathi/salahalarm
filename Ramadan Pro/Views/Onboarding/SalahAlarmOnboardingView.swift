@@ -136,6 +136,13 @@ struct SalahAlarmOnboardingView: View {
             } else {
                 vm.currentScreen = .screen1
             }
+            #if DEBUG
+            // Screenshot/QA hook: launch with `-SAOnboardingScreen screen14` to open a step directly.
+            if let raw = UserDefaults.standard.string(forKey: "SAOnboardingScreen"),
+               let screen = OnboardingScreenID(rawValue: raw) {
+                vm.currentScreen = screen
+            }
+            #endif
             vm.startAnalytics()
         }
         .animation(.easeInOut(duration: 0.25), value: vm.currentScreen)
@@ -879,7 +886,7 @@ struct SalahAlarmOnboardingView: View {
             HStack(alignment: .top, spacing: 14) {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 8) {
-                        Text(L10n.text(option.rawValue))
+                        Text(L10n.text(option.displayName))
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(AppColors.slTextPrimary)
                         Text("LOUD")
