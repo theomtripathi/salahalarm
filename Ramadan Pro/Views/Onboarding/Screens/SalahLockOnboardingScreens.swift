@@ -1777,6 +1777,7 @@ struct SLPaywallScreen: View {
             Text("your subscription supports the app,\nfuture updates, and continued improvements")
                 .font(.system(size: 13))
                 .foregroundColor(AppColors.slTextSecondary)
+                .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
             premiumFeaturesBlock
             choosePlanHeader
