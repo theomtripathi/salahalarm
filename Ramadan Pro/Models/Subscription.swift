@@ -31,12 +31,14 @@ enum SubscriptionPlanType: String, Codable {
     case weekly = "weekly"
     case monthly = "monthly"
     case yearly = "yearly"
+    case lifetime = "lifetime"
     
     var displayName: String {
         switch self {
         case .weekly: return "Weekly"
         case .monthly: return "Monthly"
         case .yearly: return "Yearly"
+        case .lifetime: return "Lifetime"
         }
     }
 }
@@ -61,6 +63,9 @@ struct SubscriptionPlanDetails: Identifiable, Codable {
     }
 
     var renewalDescription: String? {
+        if type == .lifetime {
+            return "\(priceString) one-time payment. No subscription."
+        }
         if let introductoryTrialDays, introductoryTrialDays > 0 {
             return "Then \(priceString) / \(billingPeriodLabel). Cancel anytime."
         }

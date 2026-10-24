@@ -105,7 +105,7 @@ class SubscriptionViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private let revenueCatService = RevenueCatService.shared
-    private let supportedPlanTypes: [SubscriptionPlanType] = [.weekly, .yearly]
+    private let supportedPlanTypes: [SubscriptionPlanType] = [.weekly, .yearly, .lifetime]
     
     init() {
         loadSubscriptionStatus()
@@ -177,9 +177,9 @@ class SubscriptionViewModel: ObservableObject {
                 self.errorMessage = "Plans are temporarily unavailable. Please try again."
                 print("⚠️ SubscriptionViewModel: No supported packages returned from RevenueCat")
             } else {
-                // Sort plans: weekly, yearly
+                // Sort plans: weekly, yearly, lifetime
                 self.availablePlans = plans.sorted { plan1, plan2 in
-                    let order: [SubscriptionPlanType] = [.weekly, .yearly]
+                    let order: [SubscriptionPlanType] = [.weekly, .yearly, .lifetime]
                     let index1 = order.firstIndex(of: plan1.type) ?? Int.max
                     let index2 = order.firstIndex(of: plan2.type) ?? Int.max
                     return index1 < index2
