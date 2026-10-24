@@ -126,7 +126,7 @@ export function homePage(config, latest) {
 
 <section class="section gallery-section" aria-label="App screenshots">
   <div class="gallery">
-    ${[1, 2, 3, 4, 5, 6, 7, 8].map((n) => `<img src="/img/store-0${n}.webp" alt="Salah Alarm App Store screenshot ${n}" width="270" height="584" loading="lazy" decoding="async">`).join('')}
+    ${[1, 2, 3, 4, 5, 6, 7, 8].map((n) => `<img src="/img/store-0${n}.webp" alt="Salah Alarm App Store screenshot ${n}" width="270" height="584" decoding="async">`).join('')}
   </div>
 </section>
 
