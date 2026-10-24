@@ -52,11 +52,14 @@ The build fails if an article breaks the rules in `scripts/build.mjs`
    volume and competition (once pulled), and urgency for seasonal keywords:
    Ramadan 2027 is expected to start on 8 February 2027, so Ramadan pages carry a
    `deadline` in December and climb the list as it approaches.
-2. Write `content/<lang>/<slug>.md` following `seo/ARTICLE_BRIEF.md`, with
-   `status: draft`.
-3. `npm run build:drafts` and read it in the browser.
-4. Om reviews (religious content especially), flips `status: published`, commits.
-5. Cloudflare Pages rebuilds on push. Then `seo/gum/submit-sitemap.sh`.
+2. Write `content/<lang>/<slug>.md` following `seo/ARTICLE_BRIEF.md`.
+3. Checks before publishing (Om chose auto-publish, no manual review):
+   `npm test` and `npm run build` pass; every hadith reference is one we are sure
+   of; Ramadan/Eid dates say "expected"; app claims match real features; the
+   non-English text reads natively. If any check is in doubt, leave
+   `status: draft` and flag it to Om instead of publishing.
+4. Set `status: published`, commit and push. Cloudflare Pages rebuilds on push.
+5. `seo/gum/submit-sitemap.sh`.
 
 Weekly: `seo/gum/pull-rankings.sh` (Search Console positions written back into
 `keywords.csv`, plus a list of page-two queries worth refreshing) and, monthly,
