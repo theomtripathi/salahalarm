@@ -12,6 +12,8 @@ test("campaign tokens follow account-format-tail", () => {
   assert.equal(campaignToken({ account: "tt03", format: "anim" }), "tt03-anim-bio");
   assert.equal(campaignToken({ account: "tt03", format: "whatif", videoId: "tt03-1024-2" }), "tt03-whatif-1024-2");
   assert.throws(() => campaignToken({ account: "tt03", format: "x".repeat(40) }), /too long/);
+  assert.equal(campaignToken({ account: "seo-en", format: "seo" }), "seo-en-bio");
+  assert.equal(campaignToken({ account: "seo-en", format: "seo", videoId: "seo-en-fajr-tips" }), "seo-en-fajr-tips");
 });
 
 test("builds bio and video links pointing at App Store campaign URLs", () => {

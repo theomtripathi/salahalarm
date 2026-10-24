@@ -107,6 +107,51 @@
     "ct": "tt10-ramadan-bio",
     "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt10-ramadan-bio&mt=8"
   },
+  "seo-en": {
+    "kind": "bio",
+    "account": "seo-en",
+    "platform": "web",
+    "format": "seo",
+    "video": null,
+    "ct": "seo-en-bio",
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-en-bio&mt=8"
+  },
+  "seo-ar": {
+    "kind": "bio",
+    "account": "seo-ar",
+    "platform": "web",
+    "format": "seo",
+    "video": null,
+    "ct": "seo-ar-bio",
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-ar-bio&mt=8"
+  },
+  "seo-tr": {
+    "kind": "bio",
+    "account": "seo-tr",
+    "platform": "web",
+    "format": "seo",
+    "video": null,
+    "ct": "seo-tr-bio",
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-tr-bio&mt=8"
+  },
+  "seo-id": {
+    "kind": "bio",
+    "account": "seo-id",
+    "platform": "web",
+    "format": "seo",
+    "video": null,
+    "ct": "seo-id-bio",
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-id-bio&mt=8"
+  },
+  "seo-ur": {
+    "kind": "bio",
+    "account": "seo-ur",
+    "platform": "web",
+    "format": "seo",
+    "video": null,
+    "ct": "seo-ur-bio",
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-ur-bio&mt=8"
+  },
   "v/tt01-1024-1": {
     "kind": "video",
     "account": "tt01",

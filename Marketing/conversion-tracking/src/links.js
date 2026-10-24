@@ -8,9 +8,11 @@ export function slugify(value) {
 
 // Campaign token Apple stores and reports in App Analytics > Campaigns.
 // Account links:  tt03-anim-bio      Video links: tt03-anim-1024-1
+// Accounts already named after their format skip the repeat: seo-en-bio, seo-en-fajr-tips
 export function campaignToken({ account, format, videoId }) {
   const tail = videoId ? videoId.slice(account.length + 1) : "bio";
-  const ct = slugify(`${account}-${format}-${tail}`);
+  const prefix = account.startsWith(`${format}-`) ? account : `${account}-${format}`;
+  const ct = slugify(`${prefix}-${tail}`);
   if (ct.length > CT_MAX) throw new Error(`campaign token too long (${ct.length}): ${ct}`);
   return ct;
 }

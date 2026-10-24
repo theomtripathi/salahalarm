@@ -59,7 +59,7 @@ can be filtered by either. If an account changes format after the test, change
 
 ## What's here
 
-- `data/accounts.json`: App Store id, Apple provider token (`pt`), accounts and formats.
+- `data/accounts.json`: App Store id, Apple provider token (`pt`), accounts and formats. SEO articles use one account per language (`seo-en` … `seo-ur`); article ids are `seo-<lang>-<short-slug>`, giving `ct` like `seo-en-fajr-tips` and links like `salahalarm.com/go/v/seo-en-fajr-tips`.
 - `data/videos.csv`: one row per post (only needed for videos that get their own link).
 - `scripts/gen-links.mjs`: builds `data/links.json` (read by the redirect) and
   `data/links.csv` (every short link with its Apple URL).
