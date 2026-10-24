@@ -12,3 +12,4 @@ node_modules/
 .next/
 full_prompt*.txt
 remove_file.rb
+website/dist/
