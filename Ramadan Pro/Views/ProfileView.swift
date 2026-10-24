@@ -29,6 +29,11 @@ struct ProfileView: View {
                 header
                 statsRow
                 section("Prayer Settings") {
+                    HStack {
+                        Text(L10n.text("App language"))
+                        Spacer()
+                        LanguagePickerButton()
+                    }
                     settingRow(title: "Prayer calculation method", value: prayerMethod)
                     segmentedPicker(["Hanafi", "ISNA", "MWL"], selection: $prayerMethod)
                     settingRow(title: "Notification timing", value: notificationOffsetLabel)
@@ -133,11 +138,21 @@ struct ProfileView: View {
                     actionRow("Terms of Use") {
                         openExternalURL("https://ramadan-pro.lovable.app/terms")
                     }
-                    actionRow("Rate SalahAlarm") {
-                        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                            SKStoreReviewController.requestReview(in: scene)
-                        }
+                    actionRow("Leave a Review") {
+                        // User-initiated reviews are open to everyone, with no
+                        // satisfaction filter or requested star rating.
+                        openExternalURL("https://apps.apple.com/app/id6758457826?action=write-review")
                     }
+                    actionRow("Send Feedback") {
+                        // This is the support form listed in App Store Connect.
+                        // Never prefill account details or send feedback automatically.
+                        openExternalURL("https://ramadan-pro.lovable.app/support")
+                    }
+                    Text("Your reviews help us reach more Muslims and improve the app.")
+                        .font(.system(size: 12))
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 4)
                     actionRow("Share SalahAlarm") {
                         let activity = UIActivityViewController(activityItems: ["SalahAlarm"], applicationActivities: nil)
                         UIApplication.shared.topMostViewController?.present(activity, animated: true)

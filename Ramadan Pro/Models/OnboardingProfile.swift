@@ -62,20 +62,20 @@ enum PrayerFrequency: String, Codable, CaseIterable {
     var displayLabel: String {
         switch self {
         case .unset: return ""
-        case .fiveTimes: return "five times a day"
-        case .threeToFour: return "three to four times a day"
-        case .oneToTwo: return "one to two times a day"
-        case .none: return "i currently don't pray at all"
+        case .fiveTimes: return L10n.text("five times a day")
+        case .threeToFour: return L10n.text("three to four times a day")
+        case .oneToTwo: return L10n.text("one to two times a day")
+        case .none: return L10n.text("i currently don't pray at all")
         }
     }
 
     var habitSummary: String {
         switch self {
         case .unset: return ""
-        case .fiveTimes: return "You already show up for salah daily and want stronger consistency."
-        case .threeToFour: return "You pray often and want to close the gap to full consistency."
-        case .oneToTwo: return "You are rebuilding the habit and need more structure around prayer."
-        case .none: return "You are at the beginning of your prayer journey and need a simple first step."
+        case .fiveTimes: return L10n.text("You already show up for salah daily and want stronger consistency.")
+        case .threeToFour: return L10n.text("You pray often and want to close the gap to full consistency.")
+        case .oneToTwo: return L10n.text("You are rebuilding the habit and need more structure around prayer.")
+        case .none: return L10n.text("You are at the beginning of your prayer journey and need a simple first step.")
         }
     }
 }
@@ -121,12 +121,12 @@ enum UserGoal: String, Codable, CaseIterable {
 
     var displayLabel: String {
         switch self {
-        case .allahFirst: return "put Allah first, before my phone"
-        case .consistentPrayer: return "build a consistent prayer habit"
-        case .deepenRelationship: return "deepen my relationship with Allah"
-        case .fajrMornings: return "start my day with Fajr"
-        case .findPeace: return "find peace in a chaotic world"
-        case .strengthenImaan: return "strengthen my imaan"
+        case .allahFirst: return L10n.text("put Allah first, before my phone")
+        case .consistentPrayer: return L10n.text("build a consistent prayer habit")
+        case .deepenRelationship: return L10n.text("deepen my relationship with Allah")
+        case .fajrMornings: return L10n.text("start my day with Fajr")
+        case .findPeace: return L10n.text("find peace in a chaotic world")
+        case .strengthenImaan: return L10n.text("strengthen my imaan")
         }
     }
 }
@@ -152,12 +152,12 @@ enum UserObstacle: String, Codable, CaseIterable {
 
     var displayLabel: String {
         switch self {
-        case .phoneSocialMedia: return "phone & social media distraction"
-        case .lowMotivation: return "low motivation or tiredness"
-        case .busySchedule: return "busy schedule, no time"
-        case .wanderingThoughts: return "wandering thoughts during salah"
-        case .lackDiscipline: return "lack of discipline"
-        case .forgettingTimes: return "forgetting prayer times"
+        case .phoneSocialMedia: return L10n.text("phone & social media distraction")
+        case .lowMotivation: return L10n.text("low motivation or tiredness")
+        case .busySchedule: return L10n.text("busy schedule, no time")
+        case .wanderingThoughts: return L10n.text("wandering thoughts during salah")
+        case .lackDiscipline: return L10n.text("lack of discipline")
+        case .forgettingTimes: return L10n.text("forgetting prayer times")
         }
     }
 }
@@ -182,10 +182,10 @@ enum RelationshipState: String, Codable, CaseIterable {
     var displayLabel: String {
         switch self {
         case .unset: return ""
-        case .upsAndDowns: return "it has its ups and downs"
-        case .feelingDistant: return "feeling a bit distant lately"
-        case .rebuilding: return "i'm trying to rebuild my connection"
-        case .closeAndConsistent: return "close and consistent, Alhamdulillah"
+        case .upsAndDowns: return L10n.text("it has its ups and downs")
+        case .feelingDistant: return L10n.text("feeling a bit distant lately")
+        case .rebuilding: return L10n.text("i'm trying to rebuild my connection")
+        case .closeAndConsistent: return L10n.text("close and consistent, Alhamdulillah")
         }
     }
 }
@@ -209,11 +209,11 @@ enum DeeperStruggle: String, Codable, CaseIterable {
 
     var displayLabel: String {
         switch self {
-        case .temptations: return "struggling with temptations"
-        case .anxiety: return "constant worry or anxiety"
-        case .spirituallyEmpty: return "feeling spiritually empty"
-        case .pride: return "pride or relying only on myself"
-        case .prayersNotAccepted: return "I don't feel like my prayers are accepted"
+        case .temptations: return L10n.text("struggling with temptations")
+        case .anxiety: return L10n.text("constant worry or anxiety")
+        case .spirituallyEmpty: return L10n.text("feeling spiritually empty")
+        case .pride: return L10n.text("pride or relying only on myself")
+        case .prayersNotAccepted: return L10n.text("I don't feel like my prayers are accepted")
         }
     }
 }
@@ -229,11 +229,11 @@ enum MuslimBackground: String, Codable, CaseIterable {
     var displayLabel: String {
         switch self {
         case .unset: return ""
-        case .sunni: return "Sunni"
-        case .shia: return "Shia"
-        case .justMuslim: return "Just Muslim"
-        case .revert: return "Revert / New to Islam"
-        case .preferNotSay: return "Prefer not to say"
+        case .sunni: return L10n.text("Sunni")
+        case .shia: return L10n.text("Shia")
+        case .justMuslim: return L10n.text("Just Muslim")
+        case .revert: return L10n.text("Revert / New to Islam")
+        case .preferNotSay: return L10n.text("Prefer not to say")
         }
     }
 }
@@ -247,9 +247,9 @@ enum UserGender: String, Codable, CaseIterable {
     var displayLabel: String {
         switch self {
         case .unset: return ""
-        case .man: return "Man"
-        case .woman: return "Woman"
-        case .preferNotSay: return "Prefer not to say"
+        case .man: return L10n.text("Man")
+        case .woman: return L10n.text("Woman")
+        case .preferNotSay: return L10n.text("Prefer not to say")
         }
     }
 }
@@ -276,22 +276,22 @@ enum CommitmentLevel: String, Codable, CaseIterable {
     var displayLabel: String {
         switch self {
         case .unset: return ""
-        case .extremelyCommitted: return "Extremely committed"
-        case .veryCommitted: return "Very committed"
-        case .committed: return "Committed"
-        case .startingJourney: return "Starting my journey"
-        case .justExploring: return "Just exploring for now"
+        case .extremelyCommitted: return L10n.text("Extremely committed")
+        case .veryCommitted: return L10n.text("Very committed")
+        case .committed: return L10n.text("Committed")
+        case .startingJourney: return L10n.text("Starting my journey")
+        case .justExploring: return L10n.text("Just exploring for now")
         }
     }
 
     var description: String {
         switch self {
         case .unset: return ""
-        case .extremelyCommitted: return "I want all five prayers, daily"
-        case .veryCommitted: return "I want to improve my consistency"
-        case .committed: return "I'm trying to pray more often"
-        case .startingJourney: return "I want to build the habit"
-        case .justExploring: return "I'm still exploring for now"
+        case .extremelyCommitted: return L10n.text("I want all five prayers, daily")
+        case .veryCommitted: return L10n.text("I want to improve my consistency")
+        case .committed: return L10n.text("I'm trying to pray more often")
+        case .startingJourney: return L10n.text("I want to build the habit")
+        case .justExploring: return L10n.text("I'm still exploring for now")
         }
     }
 

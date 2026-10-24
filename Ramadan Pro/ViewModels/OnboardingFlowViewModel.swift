@@ -16,6 +16,9 @@ final class OnboardingFlowViewModel: ObservableObject {
             progressValue = OnboardingRouter.progress(for: currentScreen)
             profile.lastCompletedScreen = currentScreen.rawValue
             saveLocal()
+            guard analyticsTrackingActive, oldValue != currentScreen else { return }
+            FunnelAnalytics.shared.transitionOnboarding(to: currentScreen, completed: pendingTransitionCompleted)
+            pendingTransitionCompleted = false
         }
     }
     @Published var progressValue: Double? = nil
@@ -27,6 +30,8 @@ final class OnboardingFlowViewModel: ObservableObject {
     @Published var currentLocation: UserLocation?
     @Published var showEmailSignUp = false
     @Published var showLogin = false
+    private var analyticsTrackingActive = false
+    private var pendingTransitionCompleted = false
 
     let authViewModel: AuthViewModel
     private let persistence = OnboardingPersistenceService()
@@ -37,38 +42,57 @@ final class OnboardingFlowViewModel: ObservableObject {
     }
 
     func advance() {
+        guard let nextScreen = nextScreen(after: currentScreen) else { return }
+        FunnelAnalytics.shared.onboardingAction(action: "continue_tapped", screen: currentScreen)
         AnalyticsLogger.logAnswerSubmitted(screen: currentScreen.rawValue)
-        let nextScreen: OnboardingScreenID?
-
-        switch currentScreen {
-        case .screen16:
-            nextScreen = FirebaseAuthService.shared.isAuthenticated ? .screen18 : .screen17
-        case .screen17:
-            nextScreen = .screen18
-        case .screen17B:
-            nextScreen = .screen18
-        case .screen17C, .screen17D, .screen17E:
-            nextScreen = .screen18
-        default:
-            nextScreen = OnboardingRouter.next(after: currentScreen)
-        }
-
-        if let nextScreen {
-            currentScreen = nextScreen
-            AnalyticsLogger.logScreenView(screenID: nextScreen.rawValue)
-        }
+        pendingTransitionCompleted = true
+        if currentScreen == .screen10 { FunnelAnalytics.shared.onboardingQuestionnaireCompleted() }
+        currentScreen = nextScreen
+        AnalyticsLogger.logScreenView(screenID: nextScreen.rawValue)
     }
 
     func back() {
         guard !OnboardingRouter.noBackScreens.contains(currentScreen),
               let previous = OnboardingRouter.previous(before: currentScreen) else { return }
+        FunnelAnalytics.shared.onboardingAction(action: "back_tapped", screen: currentScreen)
+        pendingTransitionCompleted = false
         currentScreen = previous
         AnalyticsLogger.logScreenView(screenID: previous.rawValue)
     }
 
     func skipTo(_ screen: OnboardingScreenID) {
+        guard screen != currentScreen else { return }
+        FunnelAnalytics.shared.onboardingAction(action: "skip_tapped", screen: currentScreen)
+        pendingTransitionCompleted = true
+        if currentScreen == .screen10 { FunnelAnalytics.shared.onboardingQuestionnaireCompleted() }
         currentScreen = screen
         AnalyticsLogger.logScreenView(screenID: screen.rawValue)
+    }
+
+    /// Call after saved-progress/auth resolution has selected the initial screen.
+    func startAnalytics() {
+        guard !analyticsTrackingActive else { return }
+        analyticsTrackingActive = true
+        FunnelAnalytics.shared.startOnboardingAnalytics(screen: currentScreen)
+    }
+
+    func pauseAnalytics() {
+        analyticsTrackingActive = false
+        FunnelAnalytics.shared.pauseOnboardingJourney()
+    }
+
+    func resumeAnalytics() {
+        guard !analyticsTrackingActive else { return }
+        analyticsTrackingActive = true
+        FunnelAnalytics.shared.resumeOnboardingJourney()
+    }
+
+    private func nextScreen(after screen: OnboardingScreenID) -> OnboardingScreenID? {
+        switch screen {
+        case .screen16: return FirebaseAuthService.shared.isAuthenticated ? .screen18 : .screen17
+        case .screen17: return .screen18
+        default: return OnboardingRouter.next(after: screen)
+        }
     }
 
     func setName(_ name: String) {
@@ -101,6 +125,7 @@ final class OnboardingFlowViewModel: ObservableObject {
         } else if profile.goals.count < 3 {
             profile.goals.append(goal)
         }
+        FunnelAnalytics.shared.onboardingSelectionChanged(questionID: "goals", selectionCount: profile.goals.count)
         saveLocal()
     }
 
@@ -142,6 +167,7 @@ final class OnboardingFlowViewModel: ObservableObject {
         derivedPlan.commitmentProgressPct = level.progressPercentage
         derivedPlan.targetConsistencyDate = Calendar.current.date(byAdding: .day, value: 21, to: Date()) ?? Date()
         finalizeDerivedPlan()
+        FunnelAnalytics.shared.onboardingSelectionChanged(questionID: "support_pace", selectionCount: 1)
         saveLocal()
     }
 
@@ -206,11 +232,20 @@ final class OnboardingFlowViewModel: ObservableObject {
 
     func setNotificationsPermission(_ granted: Bool) {
         profile.notificationsPermissionState = granted ? .granted : .denied
+        FunnelAnalytics.shared.onboardingAction(action: "permission_result", screen: currentScreen, permissionReason: granted ? "granted" : "denied")
         saveLocal()
     }
 
     func setLocationPermission(_ state: PermissionState) {
         profile.locationPermissionState = state
+        let reason: String
+        switch state {
+        case .granted: reason = "granted"
+        case .denied: reason = "denied"
+        case .notDetermined: reason = "not_determined"
+        case .skipped: reason = "unavailable"
+        }
+        FunnelAnalytics.shared.onboardingAction(action: "permission_result", screen: currentScreen, permissionReason: reason)
         saveLocal()
     }
 
@@ -262,6 +297,7 @@ final class OnboardingFlowViewModel: ObservableObject {
             matSetupCompleted: profile.matSetupCompleted
         )
         AppState.shared.onboardingComplete = true
+        FunnelAnalytics.shared.onboardingFinished()
         saveLocal()
         AnalyticsLogger.logCompleted()
         Task {

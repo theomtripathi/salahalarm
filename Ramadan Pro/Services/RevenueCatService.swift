@@ -15,9 +15,13 @@ import FirebaseFirestore
 @MainActor
 class RevenueCatService: ObservableObject {
     static let shared = RevenueCatService()
+    static let annualTrialOfferingIdentifier = "yearly-trial"
+    static let annualTrialProductIdentifier = "yearlydiscountedtrial"
     
     @Published var customerInfo: CustomerInfo?
     @Published var availablePackages: [Package] = []
+    @Published private(set) var annualTrialPlan: SubscriptionPlanDetails?
+    @Published private(set) var annualTrialUnavailableReason = "Trial offer has not been checked."
     @Published var subscriptionStatus: SubscriptionStatus = SubscriptionStatus()
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -71,6 +75,8 @@ class RevenueCatService: ObservableObject {
         customerInfo = nil
         subscriptionStatus = SubscriptionStatus(isActive: false)
         availablePackages = []
+        annualTrialPlan = nil
+        annualTrialUnavailableReason = "Sign in and check trial availability again."
             // Clear subscription status from UserDefaults and App Group (widget)
             UserDefaults.standard.set(false, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
             WidgetConfig.saveIsSubscribed(false)
@@ -91,6 +97,8 @@ class RevenueCatService: ObservableObject {
     func fetchOfferings(offeringIdentifier: String? = nil) async {
         isLoading = true
         errorMessage = nil
+        annualTrialPlan = nil
+        annualTrialUnavailableReason = "Checking trial eligibility…"
         
         do {
             print("📡 RevenueCatService: Fetching offerings...")
@@ -126,7 +134,10 @@ class RevenueCatService: ObservableObject {
             
             if let offering = selectedOffering {
                 print("✅ RevenueCatService: Using offering - ID: \(offering.identifier)")
-                self.availablePackages = offering.availablePackages
+                self.availablePackages = offering.availablePackages.filter {
+                    offeringIdentifier != nil
+                        || $0.storeProduct.productIdentifier != Self.annualTrialProductIdentifier
+                }
                 print("✅ RevenueCatService: Fetched \(availablePackages.count) packages from offering:")
                 for package in availablePackages {
                     print("   - Package ID: \(package.identifier), Product ID: \(package.storeProduct.productIdentifier), Price: \(package.localizedPriceString)")
@@ -136,20 +147,144 @@ class RevenueCatService: ObservableObject {
                 print("⚠️ RevenueCatService: Available offerings: \(offerings.all.keys.joined(separator: ", "))")
                 print("⚠️ RevenueCatService: Make sure you set an offering as 'Current Offering' in RevenueCat Dashboard")
                 
-                // Try to use the first available offering as fallback
-                if let firstOffering = offerings.all.values.first {
-                    print("⚠️ RevenueCatService: Using first available offering as fallback: \(firstOffering.identifier)")
-                    self.availablePackages = firstOffering.availablePackages
-                } else {
-                    self.availablePackages = []
+                // Never substitute an arbitrary offering (e.g. donations or the
+                // discounted annual offer) for the main subscription paywall.
+                self.availablePackages = []
+            }
+
+            // The final offer is intentionally a separate RevenueCat offering.
+            // Keep its package/StoreProduct intact so localized App Store pricing
+            // and RevenueCat's presented-offering attribution remain authoritative.
+            if offeringIdentifier == nil {
+                if !availablePackages.isEmpty,
+                   !availablePackages.contains(where: { $0.storeProduct.productIdentifier == "yearlydiscounted" }),
+                   let finalOffering = offerings.all["yearly-discounted"],
+                   let finalPackage = finalOffering.availablePackages.first(where: {
+                       $0.storeProduct.productIdentifier == "yearlydiscounted"
+                   }) {
+                    availablePackages.append(finalPackage)
+                }
+                // Append only the exact product from its dedicated offering. Never
+                // search another offering or substitute a similarly named SKU.
+                if let trialOffering = offerings.all[Self.annualTrialOfferingIdentifier],
+                   let trialPackage = trialOffering.availablePackages.first(where: {
+                       $0.storeProduct.productIdentifier == Self.annualTrialProductIdentifier
+                   }),
+                   !availablePackages.contains(where: {
+                       $0.storeProduct.productIdentifier == Self.annualTrialProductIdentifier
+                   }) {
+                    availablePackages.append(trialPackage)
                 }
             }
-            
+
+            _ = await refreshAnnualTrialEligibility()
             isLoading = false
         } catch {
+            availablePackages = []
+            annualTrialPlan = nil
+            annualTrialUnavailableReason = "Trial offer could not be loaded."
             errorMessage = error.localizedDescription
             isLoading = false
             print("❌ RevenueCatService: Error fetching offerings: \(error.localizedDescription)")
+        }
+    }
+
+    /// Re-checks the dedicated annual trial. Any missing/ambiguous store or
+    /// RevenueCat eligibility information fails closed and clears prior approval.
+    @discardableResult
+    func refreshAnnualTrialEligibility() async -> SubscriptionPlanDetails? {
+        let checkedUserID = Purchases.shared.appUserID
+        annualTrialPlan = nil
+        annualTrialUnavailableReason = "Checking trial eligibility…"
+
+        guard !subscriptionStatus.isActive else {
+            annualTrialUnavailableReason = "An active subscription already exists."
+            return nil
+        }
+
+        do {
+            let latestCustomerInfo = try await Purchases.shared.customerInfo()
+            self.customerInfo = latestCustomerInfo
+            guard latestCustomerInfo.entitlements.active.isEmpty else {
+                annualTrialUnavailableReason = "An active subscription already exists."
+                return nil
+            }
+
+            let offerings = try await Purchases.shared.offerings()
+            guard let offering = offerings.all[Self.annualTrialOfferingIdentifier],
+                  let package = offering.availablePackages.first(where: {
+                      $0.storeProduct.productIdentifier == Self.annualTrialProductIdentifier
+                  }) else {
+                annualTrialUnavailableReason = "The annual trial offer is unavailable."
+                return nil
+            }
+
+            let product = package.storeProduct
+            guard let annualPeriod = product.subscriptionPeriod,
+                  AnnualTrialOfferPolicy.isAnnual(unit: trialPolicyUnit(annualPeriod.unit), value: annualPeriod.value) else {
+                annualTrialUnavailableReason = "The trial product is not billed annually."
+                return nil
+            }
+
+            let price = NSDecimalNumber(decimal: product.price).doubleValue
+            guard AnnualTrialOfferPolicy.hasRenewalPrice(price, currency: product.currencyCode) else {
+                annualTrialUnavailableReason = "The annual renewal price is unavailable."
+                return nil
+            }
+
+            guard let intro = product.introductoryDiscount,
+                  AnnualTrialOfferPolicy.isSevenDayFreeTrial(
+                    unit: trialPolicyUnit(intro.subscriptionPeriod.unit), value: intro.subscriptionPeriod.value,
+                    periods: intro.numberOfPeriods, isFreeTrial: intro.paymentMode == .freeTrial,
+                    introductoryPrice: intro.price) else {
+                annualTrialUnavailableReason = "The product does not have an exact 7-day free trial."
+                return nil
+            }
+
+            guard await Purchases.shared.checkTrialOrIntroDiscountEligibility(product: product) == .eligible else {
+                annualTrialUnavailableReason = "This Apple ID is not confirmed eligible for the free trial."
+                return nil
+            }
+
+            // Eligibility belongs to this customer, not whichever account may
+            // have signed in while the network checks were in flight.
+            guard Purchases.shared.appUserID == checkedUserID,
+                  !subscriptionStatus.isActive else {
+                annualTrialUnavailableReason = "Your account changed. Please check trial availability again."
+                return nil
+            }
+            availablePackages.removeAll { $0.storeProduct.productIdentifier == Self.annualTrialProductIdentifier }
+            availablePackages.append(package)
+
+            let billingPeriodLabel = formatSubscriptionPeriod(annualPeriod)
+            let priceString = product.localizedPriceString
+            let plan = SubscriptionPlanDetails(
+                type: .yearly,
+                price: price,
+                priceString: priceString,
+                currencyCode: product.currencyCode,
+                productId: product.productIdentifier,
+                billingPeriodLabel: billingPeriodLabel,
+                pricePerPeriodText: "\(priceString) / \(billingPeriodLabel)",
+                introductoryTrialDays: 7
+            )
+            annualTrialPlan = plan
+            annualTrialUnavailableReason = ""
+            return plan
+        } catch {
+            annualTrialUnavailableReason = "Trial eligibility could not be verified."
+            print("⚠️ RevenueCatService: Annual trial check failed: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    private func trialPolicyUnit(_ unit: SubscriptionPeriod.Unit) -> AnnualTrialOfferPolicy.Unit {
+        switch unit {
+        case .day: return .day
+        case .week: return .week
+        case .month: return .month
+        case .year: return .year
+        @unknown default: return .unknown
         }
     }
     
@@ -222,22 +357,67 @@ class RevenueCatService: ObservableObject {
             
             self.customerInfo = customerInfo
             
-            // Update subscription status
+            // A completed App Store purchase is successful even if the optional
+            // Firebase mirror is temporarily unavailable. Do not tell a charged
+            // customer that payment failed or leave them stranded on the paywall.
             await updateSubscriptionStatus(from: customerInfo)
 
-            
-            // Sync with Firebase
             if let userId = Auth.auth().currentUser?.uid {
-                try await syncSubscriptionToFirebase(userId: userId, customerInfo: customerInfo)
+                do {
+                    try await syncSubscriptionToFirebase(userId: userId, customerInfo: customerInfo)
+                } catch {
+                    print("⚠️ RevenueCatService: Purchase succeeded; Firebase subscription sync will retry on the next status refresh: \(error.localizedDescription)")
+                }
             }
             
             isLoading = false
             print("✅ RevenueCatService: Purchase successful - Transaction: \(transaction?.transactionIdentifier ?? "N/A")")
+            if subscriptionStatus.isInTrial {
+                TikTokAdsService.shared.trackTrialStarted(productId: package.storeProduct.productIdentifier)
+            } else if subscriptionStatus.isActive {
+                TikTokAdsService.shared.trackPurchase(
+                    productId: package.storeProduct.productIdentifier,
+                    value: NSDecimalNumber(decimal: package.storeProduct.price).doubleValue,
+                    currency: package.storeProduct.currencyCode
+                )
+            }
             return true
         } catch {
             errorMessage = error.localizedDescription
             isLoading = false
             print("❌ RevenueCatService: Purchase failed: \(error.localizedDescription)")
+            throw error
+        }
+    }
+
+    /// Purchases a consumable donation without changing the user's subscription
+    /// entitlement. Returns the StoreKit transaction ID for the donation record.
+    func purchaseDonationPackage(_ package: Package) async throws -> (transactionIdentifier: String?, userCancelled: Bool) {
+        print("💳 RevenueCatService: Purchasing donation: \(package.storeProduct.productIdentifier)")
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let (transaction, _, userCancelled) = try await Purchases.shared.purchase(package: package)
+            isLoading = false
+
+            guard !userCancelled else {
+                print("⚠️ RevenueCatService: Donation purchase cancelled")
+                return (nil, true)
+            }
+
+            let transactionIdentifier = transaction?.transactionIdentifier
+            TikTokAdsService.shared.trackPurchase(
+                productId: package.storeProduct.productIdentifier,
+                value: NSDecimalNumber(decimal: package.storeProduct.price).doubleValue,
+                currency: package.storeProduct.currencyCode
+            )
+            print("✅ RevenueCatService: Donation purchase completed - Transaction: \(transactionIdentifier ?? "N/A")")
+            return (transactionIdentifier, false)
+        } catch {
+            errorMessage = error.localizedDescription
+            isLoading = false
+            print("❌ RevenueCatService: Donation purchase failed: \(error.localizedDescription)")
             throw error
         }
     }
@@ -272,9 +452,14 @@ class RevenueCatService: ObservableObject {
             // Update subscription status
             await updateSubscriptionStatus(from: customerInfo)
             
-            // Sync with Firebase
             if let userId = Auth.auth().currentUser?.uid {
-                try await syncSubscriptionToFirebase(userId: userId, customerInfo: customerInfo)
+                do {
+                    try await syncSubscriptionToFirebase(userId: userId, customerInfo: customerInfo)
+                } catch {
+                    // StoreKit/RevenueCat restore already succeeded. A mirror
+                    // outage must not turn a valid entitlement into a restore failure.
+                    print("⚠️ RevenueCatService: Restore succeeded; Firebase sync failed: \(error.localizedDescription)")
+                }
             }
             
             isLoading = false
@@ -371,6 +556,7 @@ class RevenueCatService: ObservableObject {
         // Get dates
         let startDate = activeEntitlement.latestPurchaseDate
         let expiryDate = activeEntitlement.expirationDate
+        let isInTrial = activeEntitlement.periodType == .trial
         let willRenew = activeEntitlement.willRenew
         
         // Check if cancelled
@@ -383,8 +569,8 @@ class RevenueCatService: ObservableObject {
             expiryDate: expiryDate,
             autoRenew: willRenew,
             cancelledDate: cancelledDate,
-            trialEndDate: nil,
-            isInTrial: false
+            trialEndDate: isInTrial ? expiryDate : nil,
+            isInTrial: isInTrial
         )
         
         subscriptionStatus.save()
@@ -397,10 +583,18 @@ class RevenueCatService: ObservableObject {
 
     // MARK: - Admin Access
     
+    /// Account granted full access without a purchase (marketing/demo + App Review).
+    private static let adminEmails: Set<String> = [
+        "marketing@salahalarm.com"
+    ]
+
     /// Checks if the current user is the admin. If so, automatically grants lifetime access.
     private func checkAdminAccess() -> Bool {
-        if let email = Auth.auth().currentUser?.email, email.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == "marketing@salahalarm.co" {
-            print("👑 RevenueCatService: Admin user detected, granting full lifetime access")
+        let email = Auth.auth().currentUser?.email?
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if let email, Self.adminEmails.contains(email) {
+            print("👑 RevenueCatService: Admin user detected (\(email)), granting full lifetime access")
             self.subscriptionStatus = SubscriptionStatus(
                 isActive: true,
                 planType: .yearly,
@@ -472,13 +666,18 @@ class RevenueCatService: ObservableObject {
         }
         
         subscriptionDetails["autoRenew"] = activeEntitlement.willRenew
-        subscriptionDetails["isInTrial"] = false
+        let isInTrial = activeEntitlement.periodType == .trial
+        subscriptionDetails["isInTrial"] = isInTrial
         
         if !activeEntitlement.willRenew, let expiryDate = activeEntitlement.expirationDate {
             subscriptionDetails["cancelledDate"] = Timestamp(date: expiryDate)
         }
         
-        subscriptionDetails["trialEndDate"] = NSNull()
+        if isInTrial, let trialEndDate = activeEntitlement.expirationDate {
+            subscriptionDetails["trialEndDate"] = Timestamp(date: trialEndDate)
+        } else {
+            subscriptionDetails["trialEndDate"] = NSNull()
+        }
         
         // Update subscription status in Firebase (new structure: subscriptionStatus boolean + subscriptionDetails object)
         try await db.collection("users").document(userId).setData([
@@ -543,41 +742,55 @@ class RevenueCatService: ObservableObject {
             print("❌ RevenueCatService: Expected product IDs: \(productIds.values.joined(separator: ", "))")
             return nil
         }
-        
-        print("✅ RevenueCatService: Converted package to plan type: \(type.rawValue)")
-        
-        let billingPeriodLabel = package.storeProduct.subscriptionPeriod.map { formatSubscriptionPeriod($0) } ?? type.rawValue
-        let displayPriceString: String
-        let displayPriceValue: Double
 
+        // A SKU's name is not proof of its billing interval. In particular, a
+        // monthly product must never be advertised as an annual charge / 12.
+        let period = package.storeProduct.subscriptionPeriod
+        let periodMatchesPlan: Bool
         switch type {
         case .weekly:
-            displayPriceString = AppConstants.Pricing.weekly
-            displayPriceValue = 6.99
+            periodMatchesPlan = period.map { ($0.unit == .week && $0.value == 1) || ($0.unit == .day && $0.value == 7) } ?? false
         case .monthly:
-            displayPriceString = "$0.00"
-            displayPriceValue = 0.0
+            periodMatchesPlan = period.map { $0.unit == .month && $0.value == 1 } ?? false
         case .yearly:
-            displayPriceString = AppConstants.Pricing.yearly
-            displayPriceValue = 29.99
+            periodMatchesPlan = period.map { ($0.unit == .year && $0.value == 1) || ($0.unit == .month && $0.value == 12) } ?? false
+        }
+        guard periodMatchesPlan else {
+            FunnelAnalytics.shared.track(.paywallProductRejected, [
+                "plan_id": productId,
+                "expected_plan_type": type.rawValue,
+                "actual_billing_period": period.map { formatSubscriptionPeriod($0) } ?? "missing",
+                "rejection_reason": "billing_period_mismatch"
+            ])
+            return nil
         }
 
+        print("✅ RevenueCatService: Converted package to plan type: \(type.rawValue)")
+
+        let billingPeriodLabel = package.storeProduct.subscriptionPeriod.map { formatSubscriptionPeriod($0) } ?? type.rawValue
+
+        // A paywall must only display a real App Store price, localized by the
+        // storefront. Do not substitute a hardcoded amount for an invalid product.
+        guard livePrice > 0 else {
+            print("❌ RevenueCatService: Ignoring product with no live store price: \(productId)")
+            return nil
+        }
+
+        let displayPriceString = package.storeProduct.localizedPriceString
+        let displayPriceValue = livePrice
+
         let pricePerPeriodText = "\(displayPriceString) / \(billingPeriodLabel)"
-        
-        let trialLabel: String? = nil
-        let renewalDescription = "\(pricePerPeriodText). Cancel anytime."
         
         return SubscriptionPlanDetails(
             type: type,
             price: displayPriceValue,
             priceString: displayPriceString,
+            currencyCode: package.storeProduct.currencyCode,
             features: [], // Add features if needed
             isBestValue: type == .yearly,
             productId: productId,
             billingPeriodLabel: billingPeriodLabel,
-            pricePerPeriodText: pricePerPeriodText,
-            trialLabel: trialLabel,
-            renewalDescription: renewalDescription
+            pricePerPeriodText: pricePerPeriodText
         )
     }
 

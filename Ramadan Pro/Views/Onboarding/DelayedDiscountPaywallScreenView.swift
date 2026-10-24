@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAnalytics
+import PostHog
 
 /// Screen 9: Delayed Discount Paywall
 struct DelayedDiscountPaywallScreenView: View {
@@ -14,6 +15,7 @@ struct DelayedDiscountPaywallScreenView: View {
     @EnvironmentObject var appState: AppState
     @StateObject private var viewModel = SubscriptionViewModel()
     @State private var showError: Bool = false
+    @State private var purchaseTaskRunning = false
     
     var body: some View {
         ZStack {
@@ -41,7 +43,7 @@ struct DelayedDiscountPaywallScreenView: View {
                         .padding(.top, 40)
                     
                     // Copy
-                    Text("Yearly access for less than $2.50/month.")
+                    Text("A full year of SalahAlarm, billed once annually.")
                         .font(.canela(size: 18, weight: .regular))
                         .foregroundColor(AppColors.customPlaceholderText)
                         .multilineTextAlignment(.center)
@@ -50,23 +52,23 @@ struct DelayedDiscountPaywallScreenView: View {
                     // Price
                     VStack(spacing: 8) {
                         HStack(spacing: 12) {
-                            Text("$83.88")
-                                .font(.canela(size: 32, weight: .bold))
-                                .foregroundColor(AppColors.customPlaceholderText)
-                                .strikethrough()
-                            
-                            Text("→")
-                                .font(.canela(size: 32, weight: .regular))
-                                .foregroundColor(AppColors.customButtonColor)
-                            
-                            Text("$29.99")
-                                .font(.canela(size: 40, weight: .bold))
-                                .foregroundColor(AppColors.customButtonColor)
+                            if let plan = discountedYearlyPlan {
+                                Text(plan.formatAmount(plan.price / 12))
+                                    .font(.canela(size: 40, weight: .bold))
+                                    .foregroundColor(AppColors.customButtonColor)
+                            } else {
+                                Text("Loading App Store price…")
+                                    .font(.canela(size: 20, weight: .semibold))
+                                    .foregroundColor(AppColors.customPlaceholderText)
+                            }
                         }
                         
-                        Text("/ year")
-                            .font(.canela(size: 16, weight: .regular))
-                            .foregroundColor(AppColors.customPlaceholderText)
+                        if let plan = discountedYearlyPlan {
+                            Text("per month · billed once a year at \(plan.priceString) / year")
+                                .font(.canela(size: 16, weight: .regular))
+                                .foregroundColor(AppColors.customPlaceholderText)
+                                .multilineTextAlignment(.center)
+                        }
                     }
                     .padding(.vertical, 20)
                     
@@ -75,13 +77,13 @@ struct DelayedDiscountPaywallScreenView: View {
                     // CTA
                     VStack(spacing: 16) {
                         CustomGradientButton(
-                            title: viewModel.isProcessingPurchase ? "Processing..." : "Unlock for $29.99/year",
+                            title: viewModel.isProcessingPurchase ? "Processing..." : (discountedYearlyPlan.map { "Unlock for \($0.priceString)/year" } ?? "Offer temporarily unavailable"),
                             style: .primary,
                             action: {
                                 handleDiscountPurchase()
                             }
                         )
-                        .disabled(viewModel.isProcessingPurchase)
+                        .disabled(viewModel.isProcessingPurchase || discountedYearlyPlan == nil)
                         .frame(maxWidth: .infinity)
                         
                         Button(action: {
@@ -111,8 +113,9 @@ struct DelayedDiscountPaywallScreenView: View {
                 .padding(.horizontal, 32)
             }
         }
+        .postHogNoMask()
         .loadingOverlay(isLoading: viewModel.isLoading || viewModel.isProcessingPurchase, message: viewModel.isProcessingPurchase ? "Processing purchase..." : "Loading...")
-        .alert("Error", isPresented: $showError) {
+        .alert(viewModel.purchaseErrorTitle, isPresented: $showError) {
             Button("OK") {
                 viewModel.errorMessage = nil
                 showError = false
@@ -130,41 +133,32 @@ struct DelayedDiscountPaywallScreenView: View {
             Analytics.logEvent("discount_paywall_view", parameters: [
                 "entry_point": "discount_paywall" as NSString
             ])
-            // Load available plans when view appears
+            // Report actual loaded products rather than implying the offer exists.
             await viewModel.loadAvailablePlans()
+            FunnelAnalytics.shared.track(.paywallViewed, [
+                "paywall_id": "discount_yearly",
+                "paywall_placement": "post_onboarding",
+                "available_plan_ids": discountedYearlyPlan?.productId ?? "",
+                "plans_loaded": discountedYearlyPlan != nil
+            ])
         }
     }
     
     // MARK: - Private Methods
     
     private func handleDiscountPurchase() {
-        // Try to find discounted yearly plan first, fallback to regular yearly plan
-        // Option 1: Look for discounted product ID specifically
-        let discountedProductId = "com.ramadanpro.yearly.discount"
-        var planToPurchase = viewModel.availablePlans.first(where: { 
-            $0.productId == discountedProductId 
-        })
+        guard !viewModel.isProcessingPurchase, !purchaseTaskRunning else { return }
+        let discountedProductId = "yearlydiscounted"
+        guard let planToPurchase = discountedYearlyPlan else {
+            viewModel.errorMessage = "This offer is temporarily unavailable. Please try again later."
+            return
+        }
         
         print("🔍 DelayedDiscountPaywallScreenView: Looking for discounted plan...")
         print("   - Discounted product ID: \(discountedProductId)")
         print("   - Available plans: \(viewModel.availablePlans.map { "\($0.type.rawValue) - \($0.productId ?? "no ID")" })")
         
-        if let discountedPlan = planToPurchase {
-            print("✅ DelayedDiscountPaywallScreenView: Found discounted plan: \(discountedPlan.productId ?? "no ID")")
-        } else {
-            print("⚠️ DelayedDiscountPaywallScreenView: Discounted plan not found, looking for regular yearly plan")
-            // Option 2: Fallback to regular yearly plan if discounted not found
-            // Make sure we get the regular yearly, not the discounted one
-            planToPurchase = viewModel.availablePlans.first(where: { 
-                $0.type == .yearly && $0.productId != discountedProductId
-            })
-        }
-        
-        guard let plan = planToPurchase else {
-            print("❌ DelayedDiscountPaywallScreenView: Yearly plan (discounted or regular) not found")
-            print("❌ Available plans: \(viewModel.availablePlans.map { "\($0.type.rawValue) - \($0.productId ?? "no ID")" })")
-            return
-        }
+        let plan = planToPurchase
         
         print("🛒 DelayedDiscountPaywallScreenView: Purchasing plan: \(plan.type.rawValue) - \(plan.productId ?? "no ID")")
         
@@ -174,11 +168,24 @@ struct DelayedDiscountPaywallScreenView: View {
             "plan_type": plan.type.rawValue as NSString,
             "product_id": (plan.productId ?? "") as NSString
         ])
+        purchaseTaskRunning = true
+        let attemptProperties: [String: Any] = [
+            "paywall_id": "discount_yearly",
+            "purchase_attempt_id": UUID().uuidString,
+            "offer_stage": "final_discount",
+            "paywall_placement": "post_onboarding",
+            "plan_id": plan.productId ?? "",
+            "billing_period": plan.type.rawValue,
+            "price_billed": plan.priceString
+        ]
+        FunnelAnalytics.shared.track(.purchaseInitiated, attemptProperties)
         
         Task {
-            let success = await viewModel.purchasePlan(plan)
+            defer { purchaseTaskRunning = false }
+            let success = await viewModel.purchasePlan(plan, analyticsContext: attemptProperties)
             
             if success {
+                FunnelAnalytics.shared.track(.purchaseCompleted, attemptProperties)
                 // Purchase successful - reset abandonment tracking
                 onboardingState.resetPaywallTracking()
                 
@@ -197,17 +204,38 @@ struct DelayedDiscountPaywallScreenView: View {
                 appState.onboardingComplete = true
                 appState.shouldExitOnboarding = true
             } else {
-                // Purchase failed - error is already set in viewModel
-                print("❌ DelayedDiscountPaywallScreenView: Purchase failed")
-                
-                // Firebase Analytics: purchase failure
-                Analytics.logEvent("subscription_purchase_failure", parameters: [
+                let event: FunnelEvent
+                let analyticsEvent: String
+                switch viewModel.lastPurchaseOutcome {
+                case .cancelled:
+                    event = .purchaseCancelled
+                    analyticsEvent = "subscription_purchase_cancelled"
+                case .pending:
+                    event = .purchasePending
+                    analyticsEvent = "subscription_purchase_pending"
+                case .notAllowed:
+                    event = .purchaseNotAllowed
+                    analyticsEvent = "subscription_purchase_not_allowed"
+                default:
+                    event = .purchaseFailed
+                    analyticsEvent = "subscription_purchase_failure"
+                }
+                var parameters: [String: Any] = [
                     "entry_point": "discount_paywall" as NSString,
                     "plan_type": plan.type.rawValue as NSString,
                     "product_id": (plan.productId ?? "") as NSString
-                ])
+                ]
+                viewModel.purchaseErrorProperties.forEach { parameters[$0.key] = $0.value as NSString }
+                Analytics.logEvent(analyticsEvent, parameters: parameters)
+                var properties = attemptProperties
+                viewModel.purchaseErrorProperties.forEach { properties[$0.key] = $0.value }
+                FunnelAnalytics.shared.track(event, properties)
             }
         }
+    }
+
+    private var discountedYearlyPlan: SubscriptionPlanDetails? {
+        viewModel.availablePlans.first { $0.productId == "yearlydiscounted" }
     }
 }
 

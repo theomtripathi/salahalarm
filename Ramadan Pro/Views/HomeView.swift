@@ -10,6 +10,8 @@ struct HomeView: View {
     @ObservedObject private var authService = FirebaseAuthService.shared
     @ObservedObject private var prayerLogViewModel = PrayerLogViewModel.shared
     @ObservedObject private var alarmViewModel = AlarmViewModel.shared
+    @ObservedObject private var revenueCatService = RevenueCatService.shared
+    @ObservedObject private var lockManager = AppLockManager.shared
     @EnvironmentObject var appState: AppState
     @StateObject private var internalPrayerTimesViewModel = PrayerTimesViewModel()
     @State private var currentTime = Date()
@@ -36,8 +38,14 @@ struct HomeView: View {
                 }
                 nextPrayerCard
                 nextAlarmCard
+                if isEligibleTrialJourney {
+                    trialJourneyCard
+                }
+                lockStatusStrip
+                duaCard
                 streakCard
                 todaysPrayerProgressCard
+                qiblaShortcutCard
                 if !hideWidgetPromo {
                     widgetPromoCard
                 }
@@ -48,6 +56,10 @@ struct HomeView: View {
         .task {
             await prayerTimesViewModel.loadPrayerTimes()
             await prayerLogViewModel.load()
+            recordTrialJourneyVisibility()
+        }
+        .onChange(of: trialStatusFingerprint) { _ in
+            recordTrialJourneyVisibility()
         }
         .onReceive(timer) { _ in
             currentTime = Date()
@@ -76,6 +88,126 @@ struct HomeView: View {
                 .presentationDetents([.medium])
         }
     }
+
+    private var isEligibleTrialJourney: Bool {
+        let status = revenueCatService.subscriptionStatus
+        return status.isActive && status.isInTrial && !status.isExpired
+    }
+
+    private var trialStatusFingerprint: String {
+        let status = revenueCatService.subscriptionStatus
+        return "\(status.isActive)|\(status.isInTrial)|\(status.startDate?.timeIntervalSince1970 ?? 0)|\((status.trialEndDate ?? status.expiryDate)?.timeIntervalSince1970 ?? 0)"
+    }
+
+    private func recordTrialJourneyVisibility() {
+        guard isEligibleTrialJourney else { return }
+        let status = revenueCatService.subscriptionStatus
+        TrialJourneyTracker.shared.recordView(status: status)
+    }
+
+    private var trialJourneyCard: some View {
+        let status = revenueCatService.subscriptionStatus
+        let configured = alarmViewModel.settings.alarmsEnabled
+            && PrayerName.allCases.contains(where: { alarmViewModel.settings.isEnabled(for: $0) })
+        let trialPrayerLogged = prayerLogViewModel.weeklyLogs.values.contains { log in
+            log.confirmedAt.contains { date in
+                guard let start = status.startDate,
+                      let end = status.trialEndDate ?? status.expiryDate else { return false }
+                return date >= start && date <= end
+            }
+        } || prayerLogViewModel.todayLog.confirmedAt.contains { date in
+            guard let start = status.startDate,
+                  let end = status.trialEndDate ?? status.expiryDate else { return false }
+            return date >= start && date <= end
+        }
+
+        return VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                Image(systemName: "leaf.fill")
+                    .foregroundStyle(AppColors.slGreen)
+                    .accessibilityHidden(true)
+                Text(L10n.text("Your trial, one steady step at a time"))
+                    .font(.headline)
+                    .foregroundStyle(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+                Text(trialDateSummary(for: status))
+                .font(.subheadline)
+                .foregroundStyle(AppColors.slTextSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button {
+                alarmViewModel.showSettingsSheet = true
+            } label: {
+                trialChecklistRow(L10n.text("Set up a prayer alarm"), isComplete: configured, action: L10n.text("Open alarm settings"))
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                appState.selectedTab = AppEnums.TabItem.prayers.rawValue
+            } label: {
+                trialChecklistRow(L10n.text("Log a prayer during your trial"), isComplete: trialPrayerLogged, action: L10n.text("Open prayers"))
+            }
+            .buttonStyle(.plain)
+
+            Link(destination: URL(string: "https://apps.apple.com/account/subscriptions")!) {
+                Text(L10n.text("Manage subscription"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppColors.slGreen)
+                    .underline()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(minHeight: 44, alignment: .leading)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityHint(L10n.text("Opens Apple subscription settings"))
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppColors.slGreen.opacity(0.08), in: RoundedRectangle(cornerRadius: 18))
+        .overlay(RoundedRectangle(cornerRadius: 18).stroke(AppColors.slGreen.opacity(0.18), lineWidth: 1))
+    }
+
+    private func trialChecklistRow(_ title: String, isComplete: Bool, action: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: isComplete ? "checkmark.circle.fill" : "circle")
+                .foregroundStyle(isComplete ? AppColors.slGreen : AppColors.slTextSecondary)
+                .accessibilityHidden(true)
+            Text(title)
+                .font(.subheadline)
+                .foregroundStyle(AppColors.slTextPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 4)
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(AppColors.slTextSecondary)
+                .accessibilityHidden(true)
+        }
+        .frame(minHeight: 44)
+        .padding(.vertical, 5)
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(title)
+        .accessibilityValue(L10n.text(isComplete ? "Complete" : "Not complete"))
+        .accessibilityHint(action)
+    }
+
+    private func trialDateSummary(for status: SubscriptionStatus) -> String {
+        let end = status.trialEndDate ?? status.expiryDate
+        if let start = status.startDate, let end {
+            return "Trial: \(Self.trialDateFormatter.string(from: start)) – \(Self.trialDateFormatter.string(from: end))"
+        }
+        if let end {
+            return "Your free trial ends \(Self.trialDateFormatter.string(from: end))."
+        }
+        return "Your free trial is active."
+    }
+
+    private static let trialDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
 
     private var header: some View {
         HStack {
@@ -117,7 +249,7 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Assalamu Alaikum, \(displayName) 🌙")
                             .font(.system(size: 18, weight: .semibold))
-                        Text(prayerTimesViewModel.currentLocation?.city ?? schedule?.city ?? "Your city")
+                        Text(prayerTimesViewModel.currentLocation?.city ?? schedule?.city ?? L10n.text("Your city"))
                             .font(.system(size: 13))
                             .foregroundColor(AppColors.slTextSecondary)
                     }
@@ -136,7 +268,7 @@ struct HomeView: View {
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 } else {
-                    Text("Today's prayers are complete")
+                    Text(L10n.text("Today's prayers are complete"))
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(AppColors.slGreen)
                 }
@@ -165,6 +297,108 @@ struct HomeView: View {
         }
     }
 
+    /// Compact strip showing the SalahLock state; tapping opens the Lock tab.
+    @ViewBuilder
+    private var lockStatusStrip: some View {
+        if lockManager.lockEnabled && lockManager.isAuthorized && lockManager.hasSelection {
+            Button {
+                appState.selectedTab = AppEnums.TabItem.lock.rawValue
+            } label: {
+                HStack(spacing: 12) {
+                    Image(systemName: lockManager.activeLockPrayer != nil ? "lock.fill" : "lock.open.fill")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(lockManager.activeLockPrayer != nil ? AppColors.saAlarmRed : AppColors.slGreen)
+                    Text(lockManager.activeLockPrayer.map { "apps locked — pray \($0.displayName) to unlock" } ?? "SalahLock armed · apps unlocked")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(AppColors.slTextSecondary.opacity(0.7))
+                }
+                .padding(14)
+                .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
+                .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 4)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    /// Rotating dua card — same 30-minute rotation as the Dua widget.
+    private var duaCard: some View {
+        let dua = DuaLibrary.dua(for: currentTime)
+        let theme = DuaLibrary.theme(for: currentTime)
+        return VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 6) {
+                Image(systemName: "hands.and.sparkles.fill")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(Color(hex: theme.accentHex))
+                    Text(L10n.text("DUA OF THE MOMENT"))
+                    .font(.system(size: 10, weight: .bold))
+                    .tracking(1.1)
+                    .foregroundColor(.white.opacity(0.75))
+                Spacer()
+            }
+            Text("“\(dua.english)”")
+                .font(.system(size: 17, weight: .semibold, design: .serif))
+                .foregroundColor(.white)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(dua.arabic)
+                .font(.system(size: 19, weight: .medium))
+                .foregroundColor(Color(hex: theme.accentHex))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .environment(\.layoutDirection, .rightToLeft)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(dua.reference)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundColor(.white.opacity(0.7))
+        }
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(
+                    LinearGradient(
+                        colors: [Color(hex: theme.topHex), Color(hex: theme.bottomHex)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+        )
+        .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
+    }
+
+    private var qiblaShortcutCard: some View {
+        NavigationLink(value: AppEnums.NavigationRoute.qibla) {
+            HStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(AppColors.slGreen.opacity(0.12))
+                        .frame(width: 40, height: 40)
+                    Image(systemName: "location.north.fill")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(AppColors.slGreen)
+                }
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(L10n.text("Qibla Compass"))
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                    Text(L10n.text("Find the direction of the Kaaba"))
+                        .font(.system(size: 13))
+                        .foregroundColor(AppColors.slTextSecondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(AppColors.slTextSecondary.opacity(0.7))
+            }
+            .padding(14)
+            .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
+            .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 4)
+        }
+        .buttonStyle(.plain)
+    }
+
     private var streakCard: some View {
         card {
             HStack(alignment: .top, spacing: 20) {
@@ -174,7 +408,7 @@ struct HomeView: View {
                     Text("\(prayerLogViewModel.streakData.currentStreak)")
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(AppColors.slGold)
-                    Text("day streak")
+                    Text(L10n.text("day streak"))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -202,7 +436,7 @@ struct HomeView: View {
                                 .frame(width: 20, height: 20)
                         }
                     }
-                    Text(prayerLogViewModel.todayLog.allFivePrayed ? "streak maintained! ✓" : "\(max(0, 5 - prayerLogViewModel.todayConfirmedCount)) prayers today to keep your streak")
+                    Text(prayerLogViewModel.todayLog.allFivePrayed ? L10n.text("Streak maintained! ✓") : L10n.format("%d prayers today to keep your streak", max(0, 5 - prayerLogViewModel.todayConfirmedCount)))
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -216,7 +450,7 @@ struct HomeView: View {
         return card {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .center) {
-                    Label("Next Alarm", systemImage: "bell.fill")
+                    Label(L10n.text("Next Alarm"), systemImage: "bell.fill")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
                         .labelStyle(.titleAndIcon)
@@ -234,13 +468,13 @@ struct HomeView: View {
 
                 if !alarmViewModel.hasAlarmAccess {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Alarm access is locked")
+                        Text(L10n.text("Alarm access is locked"))
                             .font(.system(size: 22, weight: .bold))
                             .foregroundColor(AppColors.saAlarmRed)
-                        Text("Your subscription is inactive. Renew to keep prayer alarms running.")
+                        Text(L10n.text("Your subscription is inactive. Renew to keep prayer alarms running."))
                             .font(.system(size: 14))
                             .foregroundColor(AppColors.slTextSecondary)
-                        SLPrimaryButton(title: "unlock alarms") {
+                        SLPrimaryButton(title: L10n.text("Unlock alarms")) {
                             alarmViewModel.showSubscriptionPaywall = true
                         }
                     }
@@ -273,10 +507,10 @@ struct HomeView: View {
                         .background(alarmModeColor.opacity(0.1))
                         .clipShape(Capsule())
                 } else {
-                    Text("No more alarms scheduled today.")
+                    Text(L10n.text("No more alarms scheduled today."))
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(AppColors.slTextPrimary)
-                    Text("Tomorrow's prayer alarms will refresh automatically.")
+                    Text(L10n.text("Tomorrow's prayer alarms will refresh automatically."))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -293,10 +527,10 @@ struct HomeView: View {
         return card {
             VStack(alignment: .leading, spacing: 14) {
                 HStack {
-                    Text("Today's Prayers")
+                    Text(L10n.text("Today's Prayers"))
                         .font(.system(size: 18, weight: .bold))
                     Spacer()
-                    Text("\(prayerLogViewModel.todayConfirmedCount) / 5 prayed")
+                    Text(L10n.format("%d / 5 prayed", prayerLogViewModel.todayConfirmedCount))
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(AppColors.slGold)
                 }
@@ -329,13 +563,13 @@ struct HomeView: View {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundColor(AppColors.slGreen)
         } else if isPast {
-            Button("missed") {
+            Button(L10n.text("Missed")) {
                 selectedPrayer = prayer
             }
             .font(.system(size: 13, weight: .semibold))
             .foregroundColor(.red)
         } else {
-            Button("confirm 🤲") {
+            Button(L10n.text("Confirm 🤲")) {
                 selectedPrayer = prayer
             }
             .font(.system(size: 13, weight: .semibold))
@@ -350,7 +584,7 @@ struct HomeView: View {
     private var widgetPromoCard: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("Add SalahAlarm to your Home Screen")
+                Text(L10n.text("Add SalahAlarm to your Home Screen"))
                     .font(.system(size: 16, weight: .bold))
                 Spacer()
                 Button {
@@ -360,10 +594,10 @@ struct HomeView: View {
                         .foregroundColor(AppColors.slTextSecondary)
                 }
             }
-            Text("See your streak and next prayer time without opening the app.")
+            Text(L10n.text("See your streak and next prayer time without opening the app."))
                 .font(.system(size: 14))
                 .foregroundColor(AppColors.slTextSecondary)
-            Button("Add Widget →") { }
+            Button(L10n.text("Add Widget →")) { }
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(AppColors.slGold)
         }

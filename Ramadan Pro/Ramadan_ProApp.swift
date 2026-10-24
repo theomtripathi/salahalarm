@@ -49,9 +49,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Initialize RevenueCat
         RevenueCatService.configure()
-        
 
-        
+        FunnelAnalytics.shared.configure()
+        // Configure attribution before emitting install or onboarding events.
+        AppsFlyerService.shared.configure()
+
+        FunnelAnalytics.shared.trackInstallIfNeeded()
+
+        // Initialize TikTok ads measurement.
+        TikTokAdsService.shared.configure()
+
         // Set up notification delegate
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
 
@@ -66,6 +73,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Ramadan_ProApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @AppStorage(AppLanguage.preferenceKey) private var languageCode = AppLanguage.current.rawValue
     
     @StateObject private var appState = AppState.shared
     @StateObject private var onboardingState = OnboardingState.shared
@@ -74,6 +82,8 @@ struct Ramadan_ProApp: App {
     var body: some Scene {
         WindowGroup {
             RootRouterView()
+                .environment(\.locale, (AppLanguage(rawValue: languageCode) ?? .current).locale)
+                .environment(\.layoutDirection, (AppLanguage(rawValue: languageCode) ?? .current).isRightToLeft ? .rightToLeft : .leftToRight)
                 .environmentObject(appState)
                 .environmentObject(onboardingState)
                 .environmentObject(authService)
@@ -96,9 +106,26 @@ struct RootRouterView: View {
         revenueCatService.subscriptionStatus.isActive || isSubscribed
     }
 
+    /// Launch-only QA routing; unavailable in release builds and never bypasses payment.
+    private var replayVerificationView: AnyView? {
+        #if DEBUG
+        let environment = ProcessInfo.processInfo.environment
+        if environment["POSTHOG_REPLAY_VERIFICATION_ID"] != nil {
+            switch environment["POSTHOG_REPLAY_QA_SCREEN"] {
+            case "paywall": return AnyView(SLPaywallScreen(vm: OnboardingFlowViewModel()))
+            case "privacy": return AnyView(LoginView())
+            default: break
+            }
+        }
+        #endif
+        return nil
+    }
+
     var body: some View {
         Group {
-            if authService.isAuthenticated && hasSubscription {
+            if let replayVerificationView {
+                replayVerificationView
+            } else if hasSubscription {
                 MainTabView()
                     .environmentObject(appState)
             } else if authService.isAuthenticated && appState.onboardingComplete {
@@ -116,6 +143,12 @@ struct RootRouterView: View {
                 print("⚠️ RootRouterView: Failed to initialize subscription state - \(error.localizedDescription)")
             }
         }
+        .onAppear {
+            FunnelAnalytics.shared.applicationDidBecomeActive()
+            if hasSubscription {
+                RatingPromptManager.shared.recordAppActivation()
+            }
+        }
         .onChange(of: revenueCatService.subscriptionStatus.isActive) { isActive in
             UserDefaults.standard.set(isActive, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
             WidgetConfig.saveIsSubscribed(isActive)
@@ -124,7 +157,12 @@ struct RootRouterView: View {
             }
         }
         .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background { FunnelAnalytics.shared.applicationDidEnterBackground() }
+            if newPhase == .active { FunnelAnalytics.shared.applicationDidBecomeActive() }
             guard newPhase == .active, authService.isAuthenticated else { return }
+            if hasSubscription {
+                RatingPromptManager.shared.recordAppActivation()
+            }
             Task {
                 await RevenueCatService.shared.checkSubscriptionStatus()
             }

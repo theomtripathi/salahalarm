@@ -12,9 +12,9 @@ enum SLAuthProvider {
 
     var title: String {
         switch self {
-        case .google: return "Continue with Google"
-        case .apple: return "Continue with Apple"
-        case .email: return "Continue with Email"
+        case .google: return L10n.text("Continue with Google")
+        case .apple: return L10n.text("Continue with Apple")
+        case .email: return L10n.text("Continue with Email")
         }
     }
 
@@ -63,7 +63,7 @@ struct SLPrimaryButton: View {
                 if isLoading {
                     ProgressView().tint(foregroundColor)
                 } else {
-                    Text(title)
+                    Text(L10n.text(title))
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(foregroundColor)
                 }
@@ -80,7 +80,7 @@ struct SLSecondaryButton: View {
 
     var body: some View {
         Button(action: action) {
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundColor(AppColors.slGreen)
                 .frame(maxWidth: .infinity)
@@ -113,14 +113,14 @@ struct SLOptionPill: View {
                         .font(.system(size: 20))
                 }
                 VStack(alignment: .leading, spacing: subtitle == nil ? 0 : 4) {
-                    Text(title)
+                    Text(L10n.text(title))
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(AppColors.slTextPrimary)
                         .multilineTextAlignment(.leading)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                     if let subtitle {
-                        Text(subtitle)
+                        Text(L10n.text(subtitle))
                             .font(.system(size: 13))
                             .foregroundColor(AppColors.slTextSecondary)
                             .multilineTextAlignment(.leading)
@@ -159,11 +159,11 @@ struct SLQuoteCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(quote)
+            Text(L10n.text(quote))
                 .font(.system(size: 15))
                 .italic()
                 .foregroundColor(AppColors.slTextSecondary)
-            Text(attribution)
+            Text(L10n.text(attribution))
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(AppColors.slGold)
         }
@@ -187,15 +187,15 @@ struct SLStatCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(label)
+            Text(L10n.text(label))
                 .font(.system(size: 13))
                 .foregroundColor(AppColors.slTextSecondary)
             if let sublabel {
-                Text(sublabel)
+                Text(L10n.text(sublabel))
                     .font(.system(size: 11))
                     .foregroundColor(AppColors.slTextSecondary)
             }
-            Text(value)
+            Text(L10n.text(value))
                 .font(.system(size: 22, weight: .bold))
                 .foregroundColor(AppColors.slTextPrimary)
         }
@@ -215,11 +215,11 @@ struct SLSummaryCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(sectionLabel)
+            Text(L10n.text(sectionLabel))
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(AppColors.slGreen)
             ForEach(content, id: \.self) { item in
-                Text(content.count > 1 ? "• \(item)" : item)
+                Text(content.count > 1 ? "• \(L10n.text(item))" : L10n.text(item))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(AppColors.slTextPrimary)
             }
@@ -300,10 +300,10 @@ struct SLFeatureRow: View {
             .frame(width: 36, height: 36)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(AppColors.slTextPrimary)
-                Text(description)
+                Text(L10n.text(description))
                     .font(.system(size: 13))
                     .foregroundColor(AppColors.slTextSecondary)
             }
@@ -326,7 +326,7 @@ struct SLNotificationPreviewCard: View {
                 Text("SalahAlarm")
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.white)
-                Text(message)
+                Text(L10n.text(message))
                     .font(.system(size: 13))
                     .foregroundColor(.white.opacity(0.92))
             }
@@ -365,7 +365,7 @@ struct SLTimelineRow: View {
                         .frame(width: 2, height: 34)
                 }
             }
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundColor(AppColors.slTextPrimary)
                 .padding(.top, 4)

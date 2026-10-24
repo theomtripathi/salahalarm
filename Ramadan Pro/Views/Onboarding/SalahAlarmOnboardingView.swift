@@ -9,14 +9,30 @@ import AVFoundation
 import Charts
 import UniformTypeIdentifiers
 import StoreKit
+import FamilyControls
+import PostHog
 
 struct SalahAlarmOnboardingView: View {
+    @AppStorage(AppLanguage.confirmedKey) private var hasChosenLanguage = false
+    @State private var didRestoreProgress = false
     @StateObject private var vm = OnboardingFlowViewModel()
     @ObservedObject private var authService = FirebaseAuthService.shared
     @State private var showFileImporter = false
+    @State private var showOnboardingAppPicker = false
+    @ObservedObject private var lockManager = AppLockManager.shared
     private let alarmAudioService = AlarmAudioService.shared
 
     var body: some View {
+        Group {
+            if hasChosenLanguage {
+                onboardingContent
+            } else {
+                LanguagePickerView()
+            }
+        }
+    }
+
+    private var onboardingContent: some View {
         ZStack {
             AppColors.slBackground.ignoresSafeArea()
 
@@ -25,25 +41,28 @@ struct SalahAlarmOnboardingView: View {
                 SLScreen0SignUp(vm: vm)
             case .screen1:
                 splashScreen
+                    .postHogNoMask()
             case .screen2:
                 messageScreen(
-                    eyebrow: "",
-                    title: "How Many Prayers Passed You By This Week?",
-                    body: "not because you stopped caring.\n\nthe day gets busy.\nyour phone is always there.\nand before you know it,\nanother salah slips past.\n\nyou're not alone.\nand it doesn't have to stay this way.",
-                    cta: "continue"
+                    eyebrow: "The part normal alarms miss",
+                    title: "The Problem Isn't Setting an Alarm. It's How Easy It Is to Dismiss.",
+                    body: "One tap, one snooze, and the moment passes. SalahAlarm adds a real action between the reminder and turning it off.",
+                    cta: "see how it works"
                 )
+                .postHogNoMask()
             case .screen3:
                 featuresScreen
+                    .postHogNoMask()
             case .screen4:
-                nameScreen
-            case .screen5:
                 prayerFrequencyScreen
+            case .screen5:
+                phoneUsageScreen
             case .screen6:
                 alarmPrayerSelectionScreen
             case .screen7A:
                 goalsScreen
             case .screen7B:
-                alarmDemoScreen
+                screenTimeInsightScreen
             case .screen8:
                 commitmentScreen
             case .screen9:
@@ -51,7 +70,9 @@ struct SalahAlarmOnboardingView: View {
             case .screen10:
                 planReadyScreen
             case .screen10A:
-                reviewRequestScreen
+                // Review prompt removed from onboarding; keep the case so users
+                // with saved progress on this screen fall through to the next.
+                notificationsScreen
             case .screen11:
                 notificationsScreen
             case .screen12:
@@ -64,6 +85,10 @@ struct SalahAlarmOnboardingView: View {
                 cameraPermissionScreen
             case .screen16:
                 matSetupScreen
+            case .screen16A:
+                lockIntroScreen
+            case .screen16B:
+                lockSetupScreen
             case .screen17:
                 SLScreen0SignUp(vm: vm)
             case .screen17A:
@@ -76,6 +101,8 @@ struct SalahAlarmOnboardingView: View {
                 freeToTryScreen
             case .screen17E:
                 trialReminderScreen
+            case .screen17F:
+                whyWeNeedSupportScreen
             case .screen18:
                 SLPaywallScreen(vm: vm)
             default:
@@ -86,12 +113,15 @@ struct SalahAlarmOnboardingView: View {
             }
         }
         .onAppear {
+            guard !didRestoreProgress else { return }
+            didRestoreProgress = true
             if let savedScreen = vm.loadSavedProgress() {
                 let allowed: Set<OnboardingScreenID> = [
                     .screen0, .screen1, .screen2, .screen3, .screen4, .screen5, .screen6,
                     .screen7A, .screen7B, .screen8, .screen9, .screen10, .screen11,
-                    .screen12, .screen13, .screen14, .screen15, .screen16, .screen17,
-                    .screen17A, .screen17B, .screen17C, .screen17D, .screen17E, .screen18
+                    .screen12, .screen13, .screen14, .screen15, .screen16, .screen16A,
+                    .screen16B, .screen17,
+                    .screen17A, .screen17B, .screen17C, .screen17D, .screen17E, .screen17F, .screen18
                 ]
                 let resolvedScreen = allowed.contains(savedScreen) ? savedScreen : .screen1
                 if resolvedScreen == .screen0 && !authService.isAuthenticated {
@@ -99,80 +129,227 @@ struct SalahAlarmOnboardingView: View {
                 } else if authService.isAuthenticated && resolvedScreen == .screen17 {
                     // If they are on screen17 (signup) but already authenticated, they should move to the next step.
                     // We advance them to 17A to start the 3-step payment onboarding.
-                    vm.currentScreen = .screen17A
+                    vm.currentScreen = .screen18
                 } else {
                     vm.currentScreen = resolvedScreen
                 }
             } else {
                 vm.currentScreen = .screen1
             }
+            vm.startAnalytics()
         }
         .animation(.easeInOut(duration: 0.25), value: vm.currentScreen)
     }
 
     private var splashScreen: some View {
-        SAOnboardingContainer(vm: vm, showBack: false, background: AnyView(
-            LinearGradient(colors: [AppColors.slGradientTop, AppColors.slDeepGreen], startPoint: .top, endPoint: .bottom)
-        )) {
-            VStack(spacing: 20) {
-                Spacer()
-                SalahLockBrandMark(size: 126)
-                Text("Assalamu Alaikum")
-                    .font(.system(size: 30, weight: .bold, design: .serif))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                Text("السَّلامُ عَلَيْكُم")
-                    .font(.system(size: 24))
-                    .foregroundColor(.white.opacity(0.9))
-                    .multilineTextAlignment(.center)
+        SAOnboardingContainer(vm: vm, showBack: false) {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(spacing: 10) {
+                        SalahLockBrandMark(size: 38)
+                        Text("SalahAlarm")
+                            .font(.headline.weight(.semibold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                        Spacer()
+                    }
 
-                Spacer()
-                Text("tap to begin ->")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.white.opacity(0.75))
-                    .padding(.bottom, 28)
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("YOUR NEXT SALAH CAN BE DIFFERENT")
+                            .font(.caption.weight(.bold))
+                            .foregroundColor(AppColors.slDeepGreen)
+
+                        Text("Set an alarm you can't dismiss from bed.")
+                            .font(.system(.largeTitle, design: .rounded).weight(.bold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Text("SalahAlarm keeps the reminder active until you get up and scan your prayer mat.")
+                            .font(.body)
+                            .foregroundColor(AppColors.slTextSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    VStack(spacing: 0) {
+                        firstAlarmStep(
+                            icon: "bell.badge.fill",
+                            title: "Your prayer alarm rings",
+                            detail: "A clear interruption at prayer time"
+                        )
+                        Divider().padding(.leading, 58)
+                        firstAlarmStep(
+                            icon: "figure.walk",
+                            title: "You get up",
+                            detail: "No dismissing it half-asleep"
+                        )
+                        Divider().padding(.leading, 58)
+                        firstAlarmStep(
+                            icon: "camera.viewfinder",
+                            title: "Scan your prayer mat",
+                            detail: "The alarm stops and your salah is logged"
+                        )
+                    }
+                    .padding(.horizontal, 16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(AppColors.slGreen.opacity(0.07))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 24)
+                            .stroke(AppColors.slGreen.opacity(0.18), lineWidth: 1)
+                    )
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 10)
+                .padding(.bottom, 18)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 24)
-            .contentShape(Rectangle())
-            .onTapGesture { vm.advance() }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                VStack(spacing: 8) {
+                    SLPrimaryButton(title: "set up my first alarm") {
+                        vm.advance()
+                    }
+
+                    Text("You can adjust these preferences after setup.")
+                        .font(.footnote)
+                        .foregroundColor(AppColors.slTextSecondary)
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 12)
+                .padding(.bottom, 10)
+                .background(Color.white)
+            }
         }
+    }
+
+    private func firstAlarmStep(icon: String, title: String, detail: String) -> some View {
+        HStack(spacing: 14) {
+            ZStack {
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 44, height: 44)
+                Image(systemName: icon)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(AppColors.slGreen)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(L10n.text(title))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                Text(L10n.text(detail))
+                    .font(.caption)
+                    .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, 11)
+        .accessibilityElement(children: .combine)
     }
 
     private var featuresScreen: some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 20) {
-                Text("SalahAlarm Helps You")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(AppColors.slTextPrimary)
-                Text("Show Up for Every Prayer")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(AppColors.slGold)
-                (
-                    Text("it's simple. an alarm rings.\nit doesn't stop until you ")
-                    + Text("scan your prayer mat").foregroundColor(AppColors.slGreen)
-                    + Text(".\nthis is how the habit forms.")
-                )
-                .font(.system(size: 15))
-                .foregroundColor(AppColors.slTextSecondary)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 18) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Pray First.")
+                            .font(.largeTitle.weight(.bold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
 
-                VStack(spacing: 14) {
-                    SLFeatureRow(icon: "bell.fill", title: "Prayer Alarms That Don't Quit", description: "rings until you take action — no silencing, no scrolling")
-                    SLFeatureRow(icon: "camera.fill", title: "Mat Scan to Dismiss", description: "physically reaching your mat is half the prayer already done")
-                    SLFeatureRow(icon: "flame.fill", title: "Streak and Prayer History", description: "watch your consistency grow, one prayer at a time")
-                    SLFeatureRow(icon: "book.fill", title: "Full Quran", description: "read and reflect between prayers")
-                    SLFeatureRow(icon: "location.north.fill", title: "Qibla Directions", description: "accurate compass to find the qibla")
+                        Text("Then Unlock\nYour Apps.")
+                            .font(.largeTitle.weight(.bold))
+                            .foregroundColor(AppColors.slGreen)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityLabel("Then unlock your apps.")
+
+                        Text("A simple loop that turns prayer time into action.")
+                            .font(.body)
+                            .foregroundColor(AppColors.slTextSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    VStack(spacing: 12) {
+                        mechanismStep(
+                            number: 1,
+                            icon: "bell.badge.fill",
+                            title: "Prayer time arrives",
+                            detail: "A persistent alarm interrupts the scroll."
+                        )
+                        mechanismStep(
+                            number: 2,
+                            icon: "app.badge.fill",
+                            title: "Distractions pause",
+                            detail: "The apps you choose stay blocked."
+                        )
+                        mechanismStep(
+                            number: 3,
+                            icon: "camera.viewfinder",
+                            title: "Scan your prayer mat",
+                            detail: "The alarm ends, apps unlock, and salah is logged."
+                        )
+                    }
+
+                    HStack(spacing: 10) {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.title3)
+                            .foregroundColor(AppColors.slGreen)
+                        Text("No complicated setup. Just one clear next step.")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(14)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(RoundedRectangle(cornerRadius: 16).fill(AppColors.slGreen.opacity(0.08)))
                 }
-
-                Spacer()
-
-                SLPrimaryButton(title: "get started") {
+                .padding(.horizontal, 24)
+                .padding(.top, 14)
+                .padding(.bottom, 18)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                SLPrimaryButton(title: "personalize my plan") {
                     vm.advance()
                 }
-                .padding(.bottom, 24)
+                .padding(.horizontal, 24)
+                .padding(.top, 12)
+                .padding(.bottom, 10)
+                .background(Color.white)
             }
-            .padding(24)
         }
+    }
+
+    private func mechanismStep(number: Int, icon: String, title: String, detail: String) -> some View {
+        HStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(AppColors.slGreen.opacity(0.11))
+                    .frame(width: 52, height: 52)
+                Image(systemName: icon)
+                    .font(.title3.weight(.semibold))
+                    .foregroundColor(AppColors.slGreen)
+            }
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(L10n.format("STEP %d", number))
+                    .font(.caption2.weight(.bold))
+                    .foregroundColor(AppColors.slGold)
+                Text(L10n.text(title))
+                    .font(.headline)
+                    .foregroundColor(AppColors.slTextPrimary)
+                Text(L10n.text(detail))
+                    .font(.subheadline)
+                    .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(14)
+        .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+        .overlay(RoundedRectangle(cornerRadius: 20).stroke(AppColors.slBorderDefault, lineWidth: 1))
     }
 
     private var nameScreen: some View {
@@ -231,9 +408,25 @@ struct SalahAlarmOnboardingView: View {
             }
         )
     }
+    private var phoneUsageScreen: some View {
+        choiceScreen(
+            title: "About How Much Time Do You Spend on Your Phone Each Day?",
+            subtitle: "A quick estimate is enough. This helps SalahAlarm create a realistic interruption plan.",
+            options: PhoneUsageRange.allCases.filter { $0 != .unset }.map {
+                ($0.displayLabel, nil, $0.rawValue)
+            },
+            selection: vm.profile.dailyPhoneUsageRange.rawValue,
+            onSelect: { raw in
+                vm.setPhoneUsage(PhoneUsageRange(rawValue: raw) ?? .unset)
+            }
+        )
+    }
+
+
 
     private var alarmPrayerSelectionScreen: some View {
         SAOnboardingContainer(vm: vm) {
+            ScrollView {
             VStack(alignment: .leading, spacing: 22) {
                 Text("Which Prayers Do You Want Alarms For?")
                     .font(.system(size: 30, weight: .bold))
@@ -275,6 +468,7 @@ struct SalahAlarmOnboardingView: View {
             }
             .padding(.horizontal, 24)
             .padding(.top, 36)
+            }
         }
     }
 
@@ -282,7 +476,7 @@ struct SalahAlarmOnboardingView: View {
         multiChoiceScreen(
             title: "What Does Consistency Look Like for You?",
             subtitle: "choose up to 3.\nwe'll build your habit plan around these.",
-            options: UserGoal.allCases.map { ("\($0.emoji) \($0.displayLabel)", nil, $0.rawValue) },
+            options: UserGoal.allCases.map { ("\($0.emoji) \(L10n.text($0.displayLabel))", nil, $0.rawValue) },
             selected: Set(vm.profile.goals.map(\.rawValue)),
             continueEnabled: !vm.profile.goals.isEmpty
         ) { raw in
@@ -292,51 +486,152 @@ struct SalahAlarmOnboardingView: View {
         }
     }
 
-    private var alarmDemoScreen: some View {
+    private var screenTimeInsightScreen: some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(spacing: 22) {
-                Text("How It Works")
-                    .font(.system(size: 28, weight: .bold))
+            VStack(alignment: .leading, spacing: 22) {
+                Text("Your Attention Can Make Room for Salah.")
+                    .font(.largeTitle.weight(.bold))
                     .foregroundColor(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                SAAlarmPulseView(color: AppColors.saAlarmRed)
-                    .frame(height: 180)
-
-                VStack(spacing: 0) {
-                    SLTimelineRow(number: 1, title: "prayer time arrives", isLast: false)
-                    SLTimelineRow(number: 2, title: "your alarm rings — and keeps ringing", isLast: false)
-                    SLTimelineRow(number: 3, title: "you scan your prayer mat to dismiss it", isLast: false)
-                    SLTimelineRow(number: 4, title: "the prayer is logged. the streak stays alive.", isLast: true)
-                }
-
-                Text("no silencing. no scrolling first.\njust you, your mat, and Allah.")
-                    .font(.system(size: 15))
+                Text(L10n.format("You estimated %@ of phone time each day.", L10n.text(vm.profile.dailyPhoneUsageRange.displayLabel)))
+                    .font(.body)
                     .foregroundColor(AppColors.slTextSecondary)
-                    .multilineTextAlignment(.center)
 
-                Spacer()
+                VStack(spacing: 14) {
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Text("60+")
+                            .font(.system(size: 58, weight: .bold, design: .rounded))
+                            .foregroundColor(AppColors.slGreen)
+                        Text("focused hours")
+                            .font(.title3.weight(.semibold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                    }
+                    .frame(maxWidth: .infinity)
 
-                SLPrimaryButton(title: "sounds good →") {
+                    Text("Reclaiming only 10 minutes a day creates more than 60 hours a year for prayer, Quran, and reflection.")
+                        .font(.body)
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    HStack(spacing: 8) {
+                        ForEach(PrayerName.allCases) { prayer in
+                            VStack(spacing: 6) {
+                                Circle()
+                                    .fill(AppColors.slGreen.opacity(0.12))
+                                    .frame(width: 42, height: 42)
+                                    .overlay(
+                                        Image(systemName: "moon.stars.fill")
+                                            .font(.caption)
+                                            .foregroundColor(AppColors.slGreen)
+                                    )
+                                Text(L10n.text(prayer.displayName))
+                                    .font(.caption2.weight(.semibold))
+                                    .foregroundColor(AppColors.slTextSecondary)
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
+                .padding(20)
+                .background(RoundedRectangle(cornerRadius: 26).fill(Color.white))
+                .overlay(RoundedRectangle(cornerRadius: 26).stroke(AppColors.slBorderDefault, lineWidth: 1))
+
+                Text("The goal isn't more screen time control. It's an easier return to salah.")
+                    .font(.headline)
+                    .foregroundColor(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: 0)
+
+                SLPrimaryButton(title: "build that rhythm") {
                     vm.advance()
                 }
-                .padding(.bottom, 24)
+                .padding(.bottom, 20)
             }
-            .padding(24)
+            .padding(.horizontal, 24)
+            .padding(.top, 24)
         }
     }
 
     private var commitmentScreen: some View {
-        choiceScreen(
-            title: "How Serious Are You About This?",
-            subtitle: "your alarm strictness is set based on this.\nyou can always adjust it in settings.",
-            options: CommitmentLevel.allCases.filter { $0 != .unset }.map {
-                ("\($0.emoji) \($0.displayLabel)", $0.description, $0.rawValue)
-            },
-            selection: vm.profile.commitmentLevel.rawValue,
-            onSelect: { raw in
-                vm.setCommitment(CommitmentLevel(rawValue: raw) ?? .unset)
+        SAOnboardingContainer(vm: vm) {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text("Picture 30 Days of Showing Up.")
+                        .font(.largeTitle.weight(.bold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text("Choose a pace that feels sustainable. It can be changed anytime.")
+                        .font(.body)
+                        .foregroundColor(AppColors.slTextSecondary)
+
+                    LazyVGrid(
+                        columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 6),
+                        spacing: 8
+                    ) {
+                        ForEach(1...30, id: \.self) { day in
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(day <= 7 ? AppColors.slGreen : AppColors.slGreen.opacity(0.10))
+                                .frame(height: 34)
+                                .overlay(
+                                    Text("\(day)")
+                                        .font(.caption2.weight(.bold))
+                                        .foregroundColor(day <= 7 ? .white : AppColors.slDeepGreen)
+                                )
+                        }
+                    }
+                    .padding(14)
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(AppColors.slBorderDefault, lineWidth: 1))
+
+                    VStack(spacing: 10) {
+                        commitmentOption(
+                            title: "Strong structure",
+                            subtitle: "Persistent alarms and strict app blocking",
+                            level: .extremelyCommitted,
+                            strictness: .strict
+                        )
+                        commitmentOption(
+                            title: "Balanced support",
+                            subtitle: "Consistent reminders with a practical routine",
+                            level: .committed,
+                            strictness: .moderate
+                        )
+                        commitmentOption(
+                            title: "Gentle beginning",
+                            subtitle: "Start small and strengthen the habit over time",
+                            level: .startingJourney,
+                            strictness: .relaxed
+                        )
+                    }
+
+                    SLPrimaryButton(
+                        title: "create my plan",
+                        isEnabled: vm.profile.commitmentLevel != .unset
+                    ) {
+                        vm.advance()
+                    }
+                    .padding(.bottom, 20)
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
             }
-        )
+        }
+    }
+
+    private func commitmentOption(title: String, subtitle: String, level: CommitmentLevel, strictness: AlarmStrictness) -> some View {
+        SLOptionPill(
+            emoji: level.emoji,
+            title: title,
+            subtitle: subtitle,
+            isSelected: vm.profile.commitmentLevel == level
+        ) {
+            vm.setCommitment(level)
+            vm.setAlarmStrictness(strictness)
+        }
     }
 
     private var loaderScreen: some View {
@@ -346,7 +641,7 @@ struct SalahAlarmOnboardingView: View {
                 ProgressView()
                     .scaleEffect(1.8)
                     .tint(AppColors.slGreen)
-                Text("\(vm.profile.displayName.isEmpty ? "" : "\(vm.profile.displayName), ")We're Building\nYour Prayer Plan...")
+                Text(L10n.text("We're Building\nYour Prayer Plan..."))
                     .font(.system(size: 22, weight: .bold))
                     .multilineTextAlignment(.center)
                 VStack(alignment: .leading, spacing: 10) {
@@ -369,52 +664,108 @@ struct SalahAlarmOnboardingView: View {
 
     private var planReadyScreen: some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 18) {
-                Text("\(vm.profile.displayName.isEmpty ? "friend" : vm.profile.displayName), your plan is ready.")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(AppColors.slGold)
-                Text("Here's What We Set Up for You.")
-                    .font(.system(size: 28, weight: .bold))
-                SLStatCard(label: "alarms selected", value: "\(vm.profile.selectedAlarmPrayers.count) prayers", sublabel: vm.profile.selectedAlarmPrayers.map(\.displayName).joined(separator: ", "))
-                SLStatCard(label: "alarm mode", value: vm.profile.alarmStrictness.displayLabel, sublabel: vm.profile.alarmStrictness.detailText)
-                SLSummaryCard(sectionLabel: "your goal", content: vm.profile.goals.prefix(3).map(\.displayLabel))
-                Text("we see what you're working toward, \(vm.profile.displayName.isEmpty ? "friend" : vm.profile.displayName).\nlet's build this habit together —\none prayer at a time.")
-                    .font(.system(size: 15))
-                    .foregroundColor(AppColors.slTextSecondary)
-                Spacer()
-                SLPrimaryButton(title: "continue") {
-                    vm.advance()
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 18) {
+                    Label("PERSONALIZED PLAN READY", systemImage: "checkmark.seal.fill")
+                        .font(.caption.weight(.bold))
+                        .foregroundColor(AppColors.slDeepGreen)
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 7)
+                        .background(Capsule().fill(AppColors.slGreen.opacity(0.11)))
+
+                    Text("A Simpler Path Back to Every Salah.")
+                        .font(.largeTitle.weight(.bold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text("You can adjust these preferences after setup.")
+                        .font(.body)
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    VStack(spacing: 0) {
+                        planSummaryRow(
+                            icon: "bell.fill",
+                            title: "Prayer coverage",
+                            value: L10n.format("%d prayers", vm.profile.selectedAlarmPrayers.count),
+                            detail: vm.profile.selectedAlarmPrayers.map { L10n.text($0.displayName) }.joined(separator: " · ")
+                        )
+                        Divider().padding(.leading, 58)
+                        planSummaryRow(
+                            icon: "shield.lefthalf.filled",
+                            title: "Support level",
+                            value: vm.profile.alarmStrictness.displayLabel,
+                            detail: vm.profile.alarmStrictness.detailText
+                        )
+                        Divider().padding(.leading, 58)
+                        planSummaryRow(
+                            icon: "target",
+                            title: "Primary goal",
+                            value: vm.profile.goals.first?.displayLabel ?? "build prayer consistency",
+                            detail: "Your reminders and progress will reinforce this goal."
+                        )
+                    }
+                    .background(RoundedRectangle(cornerRadius: 24).fill(Color.white))
+                    .overlay(RoundedRectangle(cornerRadius: 24).stroke(AppColors.slBorderDefault, lineWidth: 1))
+
+                    HStack(spacing: 12) {
+                        outcomePill(icon: "lock.fill", title: "Pause distractions")
+                        outcomePill(icon: "camera.viewfinder", title: "Reach your mat")
+                        outcomePill(icon: "flame.fill", title: "Build the streak")
+                    }
+
+                    SLPrimaryButton(title: "continue with my plan") {
+                        vm.advance()
+                    }
+                    .padding(.bottom, 20)
                 }
-                .padding(.bottom, 24)
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
             }
-            .padding(24)
         }
     }
 
-    private var reviewRequestScreen: some View {
-        SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 18) {
-                Text("One Quick Favor?")
-                    .font(.system(size: 28, weight: .bold))
-                Text("we're a small team working hard to help Muslims stay consistent with their salah.\n\nplease take a second to leave us a 5-star review. it means the world to us and helps others find the app!")
-                    .font(.system(size: 16))
+    private func planSummaryRow(icon: String, title: String, value: String, detail: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: icon)
+                .font(.headline)
+                .foregroundColor(AppColors.slGreen)
+                .frame(width: 34, height: 34)
+                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.slGreen.opacity(0.10)))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(L10n.text(title))
+                    .font(.caption)
                     .foregroundColor(AppColors.slTextSecondary)
-                Spacer()
-                SLPrimaryButton(title: "leave a 5-star review") {
-                    if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                        SKStoreReviewController.requestReview(in: scene)
-                    }
-                    
-                    // Automatically advance after a brief moment so they don't get stuck
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        vm.advance()
-                    }
-                }
-                .padding(.bottom, 24)
+                Text(L10n.text(value))
+                    .font(.headline)
+                    .foregroundColor(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(L10n.text(detail))
+                    .font(.caption)
+                    .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 36)
+
+            Spacer(minLength: 0)
         }
+        .padding(14)
+    }
+
+    private func outcomePill(icon: String, title: String) -> some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.headline)
+                .foregroundColor(AppColors.slGreen)
+            Text(L10n.text(title))
+                .font(.caption2.weight(.semibold))
+                .foregroundColor(AppColors.slTextPrimary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(minHeight: 72)
+        .padding(8)
+        .background(RoundedRectangle(cornerRadius: 16).fill(AppColors.slGreen.opacity(0.08)))
     }
 
     private var notificationsScreen: some View {
@@ -500,7 +851,7 @@ struct SalahAlarmOnboardingView: View {
             HStack(alignment: .top, spacing: 14) {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 8) {
-                        Text(option.rawValue)
+                        Text(L10n.text(option.rawValue))
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(AppColors.slTextPrimary)
                         Text("LOUD")
@@ -511,7 +862,7 @@ struct SalahAlarmOnboardingView: View {
                             .background(AppColors.saAlarmRed)
                             .clipShape(Capsule())
                     }
-                    Text(option.description)
+                    Text(L10n.text(option.description))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                         .multilineTextAlignment(.leading)
@@ -571,12 +922,8 @@ struct SalahAlarmOnboardingView: View {
                     .font(.system(size: 13))
                     .foregroundColor(AppColors.slTextSecondary)
                 Spacer()
-                SLPrimaryButton(title: vm.isLoading ? "loading..." : "allow location", isEnabled: !vm.isLoading, isLoading: vm.isLoading) {
+                SLPrimaryButton(title: vm.isLoading ? "loading..." : "Continue", isEnabled: !vm.isLoading, isLoading: vm.isLoading) {
                     requestLocationPermission()
-                }
-                SLSecondaryButton(title: "skip for now") {
-                    vm.setLocationPermission(.skipped)
-                    vm.advance()
                 }
                 .padding(.bottom, 24)
             }
@@ -611,12 +958,8 @@ struct SalahAlarmOnboardingView: View {
                         .padding(24)
                     }
                 Spacer()
-                SLPrimaryButton(title: "allow camera") {
+                SLPrimaryButton(title: "Continue") {
                     requestCameraPermission()
-                }
-                SLSecondaryButton(title: "skip for now") {
-                    vm.setCameraPermission(.skipped)
-                    vm.advance()
                 }
                 .padding(.bottom, 24)
             }
@@ -657,23 +1000,106 @@ struct SalahAlarmOnboardingView: View {
         }
     }
 
+    private var lockIntroScreen: some View {
+        SAOnboardingContainer(vm: vm, showBack: false) {
+            VStack(alignment: .leading, spacing: 18) {
+                Text("pray first.")
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                Text("then unlock your apps.")
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundColor(AppColors.slGold)
+                Text("SalahLock is the strongest habit tool we have.\nyour most distracting apps stay locked\nuntil you confirm you've prayed.")
+                    .font(.system(size: 16))
+                    .foregroundColor(AppColors.slTextSecondary)
+
+                VStack(spacing: 0) {
+                    SLTimelineRow(number: 1, title: "prayer time arrives", isLast: false)
+                    SLTimelineRow(number: 2, title: "your chosen apps get locked", isLast: false)
+                    SLTimelineRow(number: 3, title: "you pray", isLast: false)
+                    SLTimelineRow(number: 4, title: "confirm prayer to unlock", isLast: true)
+                }
+
+                Text("SalahAlarm uses Apple's Screen Time to temporarily block selected apps. nothing is tracked, nothing leaves your phone.")
+                    .font(.system(size: 13))
+                    .foregroundColor(AppColors.slTextSecondary)
+
+                Spacer()
+
+                SLPrimaryButton(title: "set up my lock") {
+                    vm.advance()
+                }
+                .padding(.bottom, 24)
+            }
+            .padding(24)
+        }
+    }
+
+    private var lockSetupScreen: some View {
+        SAOnboardingContainer(vm: vm, showBack: false) {
+            VStack(alignment: .leading, spacing: 18) {
+                Text("Which Apps Distract You the Most?")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                Text("choose the apps you want locked until you've prayed. you can change them anytime in the Lock tab.")
+                    .font(.system(size: 16))
+                    .foregroundColor(AppColors.slTextSecondary)
+
+                VStack(spacing: 14) {
+                    SLFeatureRow(icon: "lock.fill", title: lockManager.hasSelection ? "Apps Selected" : "No Apps Selected Yet", description: lockManager.hasSelection ? lockManager.selectionSummary : "tap below to connect Screen Time and pick apps")
+                    SLFeatureRow(icon: "sunrise.fill", title: "Starts With Fajr", description: "apps lock at Fajr and unlock once you confirm you prayed")
+                }
+
+                Spacer()
+
+                SLPrimaryButton(title: lockManager.hasSelection ? "continue with these apps" : "choose apps to lock") {
+                    if lockManager.hasSelection {
+                        vm.profile.screenTimePermissionState = .granted
+                        vm.saveLocal()
+                        vm.advance()
+                    } else {
+                        Task {
+                            let authorized = await lockManager.requestAuthorization()
+                            if authorized {
+                                showOnboardingAppPicker = true
+                            } else {
+                                vm.profile.screenTimePermissionState = .denied
+                                vm.saveLocal()
+                                vm.advance()
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom, 24)
+            }
+            .padding(24)
+        }
+        .familyActivityPicker(isPresented: $showOnboardingAppPicker, selection: $lockManager.selection)
+        .onChange(of: showOnboardingAppPicker) { isPresented in
+            if !isPresented && lockManager.hasSelection {
+                vm.profile.screenTimePermissionState = .granted
+                vm.saveLocal()
+            }
+        }
+    }
+
     private var salahIsPowerfulScreen: some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
             VStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("some days, even\nprayer feels difficult")
+                    Text("everything you need\nto protect your salah")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
-                    Text("not because you don’t care\nlife just gets distracting")
+                    Text("one focused system for prayer, consistency, and returning to what matters")
                         .font(.system(size: 16))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 VStack(spacing: 12) {
-                    onboardingPoint(icon: "bell", text: "alarms that help you get up")
-                    onboardingPoint(icon: "calendar", text: "reminders before every prayer")
-                    onboardingPoint(icon: "chart.bar", text: "tools for consistency")
+                    onboardingPoint(icon: "bell", text: "persistent prayer alarms")
+                    onboardingPoint(icon: "viewfinder", text: "mat scan + distraction blocking")
+                    onboardingPoint(icon: "flame", text: "streaks, qibla, Quran + widgets")
                 }
 
                 HStack(spacing: 8) {
@@ -699,25 +1125,25 @@ struct SalahAlarmOnboardingView: View {
         SAOnboardingContainer(vm: vm, showBack: false) {
             VStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("SalahAlarm was\nbuilt for this")
+                    Text("help us keep\nbuilding SalahAlarm")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
-                    Text("to make returning to prayer feel easier,\ncalmer, and more consistent")
+                    Text("your subscription keeps these tools maintained, improving, and available every day")
                         .font(.system(size: 16))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 VStack(spacing: 12) {
-                    onboardingPoint(icon: "viewfinder", text: "mat-scan dismissal")
-                    onboardingPoint(icon: "flame", text: "streak tracking")
-                    onboardingPoint(icon: "location.north.circle", text: "qibla compass + widgets")
+                    onboardingPoint(icon: "lock.shield", text: "full access to every premium feature")
+                    onboardingPoint(icon: "sparkles", text: "new features and continued improvements")
+                    onboardingPoint(icon: "heart", text: "support the team behind SalahAlarm")
                 }
 
                 HStack(spacing: 10) {
                     Image(systemName: "heart")
                         .foregroundColor(AppColors.slGreen)
-                    Text("simple support for your daily salah")
+                    Text("we’d love your support in helping SalahAlarm grow")
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -752,7 +1178,7 @@ struct SalahAlarmOnboardingView: View {
                     .font(.system(size: 19, weight: .medium))
                     .foregroundColor(AppColors.slGreen)
             }
-            Text(text)
+            Text(L10n.text(text))
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(AppColors.slTextPrimary)
             Spacer()
@@ -767,21 +1193,29 @@ struct SalahAlarmOnboardingView: View {
         SAOnboardingContainer(vm: vm, showBack: false) {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 18) {
-                    Text("SalahAlarm Was Built\nfor Muslims Like You.")
+                    Text("Muslims Are Building a\nStronger Salah Habit.")
                         .font(.system(size: 30, weight: .bold))
 
-                    Text("🏆  #1 prayer alarm app   ⭐⭐⭐⭐⭐   trusted by Muslims worldwide")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(AppColors.slGold)
-                        .padding(14)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(AppColors.slCream)
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                    VStack(spacing: 8) {
+                        Text("★★★★★")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(AppColors.slGold)
+                        Text("4.8 on the App Store")
+                            .font(.system(size: 19, weight: .bold))
+                        Text("Real accountability for the prayers that matter most.")
+                            .font(.system(size: 14))
+                            .foregroundColor(AppColors.slTextSecondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(.vertical, 22)
+                    .frame(maxWidth: .infinity)
+                    .background(AppColors.slCream)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
 
-                    reviewCard(title: "I FINALLY PRAY FAJR.", body: "I've tried everything — alarms, apps, asking my family. This is the only thing that actually works. The alarm doesn't stop until I'm on my mat. That's the whole game.")
-                    reviewCard(title: "47 DAYS. ALL FIVE PRAYERS.", body: "I never thought I could do this. The streak kept me honest. The mat scan made it real.")
+                    ratingBenefitCard(icon: "alarm.waves.left.and.right.fill", title: "Wake up for Fajr", body: "Your alarm keeps you accountable until you're at your prayer mat.")
+                    ratingBenefitCard(icon: "checkmark.seal.fill", title: "Stay consistent", body: "Prayer tracking and streaks turn good intentions into a daily habit.")
 
-                    SLPrimaryButton(title: "join SalahAlarm 🤲") {
+                    SLPrimaryButton(title: "see my plan") {
                         vm.advance()
                     }
                     .padding(.top, 8)
@@ -802,13 +1236,13 @@ struct SalahAlarmOnboardingView: View {
                     Text("VS")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white.opacity(0.9))
-                    floatingValueCard(icon: "☕", title: "the cost of one coffee", body: "a month")
+                    floatingValueCard(icon: "🌙", title: "clear subscription choices", body: "shown before you subscribe")
                 }
 
                 (
-                    Text("SalahAlarm Is ").foregroundColor(.white)
-                    + Text("Free").foregroundColor(AppColors.slGold)
-                    + Text(" for You to Try.").foregroundColor(.white)
+                    Text("Make Room for ").foregroundColor(.white)
+                    + Text("Salah").foregroundColor(AppColors.slGold)
+                    + Text(" in Your Day.").foregroundColor(.white)
                 )
                 .font(.system(size: 30, weight: .bold))
 
@@ -852,7 +1286,7 @@ struct SalahAlarmOnboardingView: View {
                     .font(.system(size: 30, weight: .bold))
                     .multilineTextAlignment(.center)
 
-                Text("your selected plan starts right away.\n\nno surprise charges.\nno fine print tricks.\ncancel any time in Settings.")
+                Text("Review the price and billing period before subscribing.\n\nIf a free trial is available to you, its length and annual renewal price will be shown before you confirm.\n\nSubscriptions renew automatically unless cancelled in App Store subscription settings.")
                     .font(.system(size: 16))
                     .foregroundColor(AppColors.slTextSecondary)
                     .multilineTextAlignment(.center)
@@ -872,6 +1306,51 @@ struct SalahAlarmOnboardingView: View {
         }
     }
 
+    private var whyWeNeedSupportScreen: some View {
+        SAOnboardingContainer(vm: vm, showBack: false) {
+            VStack(alignment: .leading, spacing: 18) {
+                Spacer().frame(height: 24)
+
+                Text("Why We Need Your Support")
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+
+                Text("SalahAlarm is the most complete prayer app for Muslims.")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(AppColors.slGreen)
+                    .padding(.top, 8)
+
+                VStack(alignment: .leading, spacing: 14) {
+                    SLFeatureRow(icon: "clock.fill", title: "Accurate Prayer Times", description: "automatically calculated for your location, updated daily")
+                    SLFeatureRow(icon: "book.fill", title: "Complete Quran", description: "entire Quran with translations and detailed verse info")
+                    SLFeatureRow(icon: "location.fill", title: "Qibla Compass", description: "precise direction to Makkah using your device sensors")
+                    SLFeatureRow(icon: "lock.fill", title: "SalahLock", description: "keep distracting apps locked until you've prayed")
+                    SLFeatureRow(icon: "quote.bubble.fill", title: "Daily Duas", description: "99+ rotating duas from Quran and Hadith")
+                }
+                .padding(.top, 12)
+
+                Spacer()
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Building and maintaining this app takes real resources.")
+                        .font(.system(size: 14))
+                        .foregroundColor(AppColors.slTextSecondary)
+                    Text("Your subscription supports our small team, keeps servers running, and funds new features to help you stay accountable to your salah.")
+                        .font(.system(size: 14))
+                        .foregroundColor(AppColors.slTextSecondary)
+                }
+                .padding(14)
+                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.slCream))
+
+                SLPrimaryButton(title: "see our plans") {
+                    vm.advance()
+                }
+                .padding(.bottom, 24)
+            }
+            .padding(.horizontal, 24)
+        }
+    }
+
     private var soundChecklist: some View {
         VStack(spacing: 14) {
             SLFeatureRow(icon: "bell.slash.fill", title: "Turn Off Silent Mode", description: "silent phones bury alarms — especially at Fajr")
@@ -882,32 +1361,60 @@ struct SalahAlarmOnboardingView: View {
 
     private func messageScreen(eyebrow: String, title: String, body: String, cta: String) -> some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 18) {
-                Spacer().frame(height: 40)
-                Text(title)
-                    .font(.system(size: 34, weight: .bold))
-                    .foregroundColor(AppColors.slTextPrimary)
-                Rectangle()
-                    .fill(AppColors.slBorderDefault)
-                    .frame(width: 86, height: 1)
-                    .padding(.vertical, 8)
-                Text(body)
-                    .font(.system(size: 16))
-                    .foregroundColor(AppColors.slTextSecondary)
-                Spacer(minLength: 0)
-                Button(action: vm.advance) {
-                    HStack(spacing: 6) {
-                        Spacer()
-                        Text("tap to continue")
-                            .font(.system(size: 15, weight: .medium))
-                        Image(systemName: "arrow.right")
-                            .font(.system(size: 14, weight: .semibold))
+            VStack(alignment: .leading, spacing: 20) {
+                Spacer(minLength: 8)
+
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(AppColors.slGreen.opacity(0.09))
+                        .frame(height: 260)
+
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Color.white)
+                            .frame(width: 154, height: 214)
+                            .shadow(color: .black.opacity(0.08), radius: 16, x: 0, y: 10)
+
+                        VStack(spacing: 18) {
+                            Image(systemName: "bell.and.waves.left.and.right.fill")
+                                .font(.system(size: 42, weight: .semibold))
+                                .foregroundColor(AppColors.slGreen)
+                            Text("Prayer time")
+                                .font(.headline)
+                                .foregroundColor(AppColors.slTextPrimary)
+                            Label("Apps paused", systemImage: "lock.fill")
+                                .font(.caption.weight(.semibold))
+                                .foregroundColor(AppColors.slDeepGreen)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 7)
+                                .background(Capsule().fill(AppColors.slGreen.opacity(0.10)))
+                        }
                     }
-                    .foregroundColor(AppColors.slGold)
                 }
-                    .padding(.bottom, 24)
+
+                Text(L10n.text(eyebrow))
+                    .font(.caption.weight(.bold))
+                    .foregroundColor(AppColors.slGold)
+
+                Text(L10n.text(title))
+                    .font(.largeTitle.weight(.bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(L10n.text(body))
+                    .font(.body)
+                    .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: 0)
+
+                SLPrimaryButton(title: cta) {
+                    vm.advance()
+                }
+                .padding(.bottom, 20)
             }
             .padding(.horizontal, 24)
+            .padding(.top, 12)
         }
     }
 
@@ -920,10 +1427,10 @@ struct SalahAlarmOnboardingView: View {
     ) -> some View {
         SAOnboardingContainer(vm: vm) {
             VStack(alignment: .leading, spacing: 22) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 30, weight: .bold))
                 if let subtitle {
-                    Text(subtitle)
+                    Text(L10n.text(subtitle))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -959,11 +1466,12 @@ struct SalahAlarmOnboardingView: View {
         onToggle: @escaping (String) -> Void
     ) -> some View {
         SAOnboardingContainer(vm: vm) {
+            ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 30, weight: .bold))
                 if let subtitle {
-                    Text(subtitle)
+                    Text(L10n.text(subtitle))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -987,12 +1495,13 @@ struct SalahAlarmOnboardingView: View {
             }
             .padding(.horizontal, 24)
             .padding(.top, 36)
+            }
         }
     }
 
     private func presetPill(_ title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(isSelected ? .white : AppColors.slGreen)
                 .padding(.horizontal, 14)
@@ -1041,22 +1550,28 @@ struct SalahAlarmOnboardingView: View {
         }
     }
 
-    private func reviewCard(title: String, body: String) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("⭐⭐⭐⭐⭐")
-            Text(title)
-                .font(.system(size: 16, weight: .bold))
-            Text(body)
-                .font(.system(size: 14))
-                .foregroundColor(AppColors.slTextSecondary)
+    private func ratingBenefitCard(icon: String, title: String, body: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: icon)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(AppColors.slGreen)
+                .frame(width: 32, height: 32)
+            VStack(alignment: .leading, spacing: 5) {
+                Text(L10n.text(title))
+                    .font(.system(size: 16, weight: .bold))
+                Text(L10n.text(body))
+                    .font(.system(size: 14))
+                    .foregroundColor(AppColors.slTextSecondary)
+            }
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
         .shadow(color: .black.opacity(0.06), radius: 4, x: 0, y: 2)
     }
 
     private func offerPill(_ title: String) -> some View {
-        Text(title)
+        Text(L10n.text(title))
             .font(.system(size: 15, weight: .semibold))
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -1070,10 +1585,10 @@ struct SalahAlarmOnboardingView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(icon)
                 .font(.system(size: 20))
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(AppColors.slTextPrimary)
-            Text(body)
+            Text(L10n.text(body))
                 .font(.system(size: 11))
                 .foregroundColor(AppColors.slTextSecondary)
         }
@@ -1088,9 +1603,9 @@ struct SalahAlarmOnboardingView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(icon)
                 .font(.system(size: 22))
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 13, weight: .semibold))
-            Text(body)
+            Text(L10n.text(body))
                 .font(.system(size: 12))
                 .foregroundColor(AppColors.slTextSecondary)
         }
@@ -1136,14 +1651,17 @@ private struct SAOnboardingContainer<Content: View>: View {
                 HStack {
                     if showBack && !OnboardingRouter.noBackScreens.contains(vm.currentScreen) {
                         Button(action: vm.back) {
-                            Image(systemName: "chevron.left")
+                            Image(systemName: "chevron.backward")
                                 .font(.system(size: 18, weight: .semibold))
                                 .foregroundColor(AppColors.slTextPrimary)
+                                .frame(width: 44, height: 44)
                         }
+                        .accessibilityLabel(L10n.text("Back"))
                     } else {
                         Color.clear.frame(width: 18, height: 18)
                     }
                     Spacer()
+                    LanguagePickerButton()
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 18)

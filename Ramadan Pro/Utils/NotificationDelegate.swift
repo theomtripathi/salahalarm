@@ -29,6 +29,10 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         if userInfo["isAlarm"] as? Bool == true {
             // Trigger the in-app alarm screen right away (app is open)
             triggerInAppAlarm(from: userInfo)
+            // Prayer time just arrived — engage the SalahLock shield
+            Task { @MainActor in
+                AppLockManager.shared.evaluateFromSavedState()
+            }
             // Still play the banner sound so the user notices if they're on another screen
             completionHandler([.banner, .sound])
         } else {
@@ -51,6 +55,10 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             // Give the app a moment to fully launch before posting
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.triggerInAppAlarm(from: userInfo)
+            }
+            // App just launched from the prayer notification — sync the lock
+            Task { @MainActor in
+                AppLockManager.shared.evaluateFromSavedState()
             }
         } else {
             // Legacy reminder tap — navigate to prayer tab

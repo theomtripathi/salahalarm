@@ -64,7 +64,16 @@ final class PrayerLogViewModel: ObservableObject {
 
         await persistence.saveTodayLog(log, dateString: todayKey)
         await persistence.saveStreakData(updatedStreak)
+        if let confirmedAt = log.confirmedAt.last {
+            TrialJourneyTracker.shared.recordPrayerConfirmation(
+                status: RevenueCatService.shared.subscriptionStatus,
+                confirmedAt: confirmedAt
+            )
+            TrialJourneyTracker.shared.recordMeaningfulReturn(status: RevenueCatService.shared.subscriptionStatus)
+        }
         WidgetHelper.reloadAllWidgets()
+        // Confirming a prayer is what unlocks the SalahLock shield
+        AppLockManager.shared.refreshLog(log)
     }
 
     func log(for date: Date) -> DailyPrayerLog {

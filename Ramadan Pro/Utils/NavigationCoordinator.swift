@@ -16,6 +16,7 @@ class NavigationCoordinator: ObservableObject {
     // Navigation paths for different contexts
     @Published var homeNavigationPath: NavigationPath = NavigationPath()
     @Published var prayersNavigationPath: NavigationPath = NavigationPath()
+    @Published var lockNavigationPath: NavigationPath = NavigationPath()
     @Published var quranNavigationPath: NavigationPath = NavigationPath()
     @Published var qiblaNavigationPath: NavigationPath = NavigationPath()
     @Published var profileNavigationPath: NavigationPath = NavigationPath()
@@ -75,6 +76,8 @@ class NavigationCoordinator: ObservableObject {
             homeNavigationPath.removeLast(homeNavigationPath.count)
         case .prayers:
             prayersNavigationPath.removeLast(prayersNavigationPath.count)
+        case .lock:
+            lockNavigationPath.removeLast(lockNavigationPath.count)
         case .quran:
             quranNavigationPath.removeLast(quranNavigationPath.count)
         case .qibla:
@@ -88,6 +91,7 @@ class NavigationCoordinator: ObservableObject {
     func clearAllPaths() {
         homeNavigationPath = NavigationPath()
         prayersNavigationPath = NavigationPath()
+        lockNavigationPath = NavigationPath()
         quranNavigationPath = NavigationPath()
         qiblaNavigationPath = NavigationPath()
         profileNavigationPath = NavigationPath()
@@ -103,6 +107,10 @@ class NavigationCoordinator: ObservableObject {
         case .prayers:
             if !prayersNavigationPath.isEmpty {
                 prayersNavigationPath.removeLast()
+            }
+        case .lock:
+            if !lockNavigationPath.isEmpty {
+                lockNavigationPath.removeLast()
             }
         case .quran:
             if !quranNavigationPath.isEmpty {

@@ -23,11 +23,27 @@ class AppState: ObservableObject {
         }
     }
     @Published var shouldShowSadaqPrompt: Bool = false
+    @Published var isGuest: Bool {
+        didSet {
+            UserDefaults.standard.set(isGuest, forKey: AppConstants.UserDefaultsKeys.isGuest)
+        }
+    }
     private init() {
         self.onboardingComplete = UserDefaults.standard.bool(forKey: "sl_onboarding_complete")
+        self.isGuest = UserDefaults.standard.bool(forKey: AppConstants.UserDefaultsKeys.isGuest)
         setupNotificationObserver()
     }
     
+
+    func beginGuestSession() {
+        isGuest = true
+        onboardingComplete = true
+        shouldExitOnboarding = true
+    }
+
+    func endGuestSession() {
+        isGuest = false
+    }
     private func setupNotificationObserver() {
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name("NavigateToPrayer"),

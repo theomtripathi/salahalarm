@@ -1,7 +1,14 @@
 .DS_Store
 DerivedData/
 DerivedData-sim/
+DerivedData-*/
+Archives/
 build/
 SourcePackages/
 xcuserdata/
 *.xcworkspace/
+.claude/
+node_modules/
+.next/
+full_prompt*.txt
+remove_file.rb

@@ -8,16 +8,17 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseAnalytics
+import PostHog
 
 /// Screen 8: Main Paywall
 struct MainPaywallScreenView: View {
     @EnvironmentObject var onboardingState: OnboardingState
     @EnvironmentObject var appState: AppState
     @StateObject private var viewModel = SubscriptionViewModel()
-    @StateObject private var abandonmentTracker = PaywallAbandonmentTracker()
     @State private var selectedPlan: SubscriptionPlan = .yearly
     @State private var showError: Bool = false
     @State private var scrollOffset: CGFloat = 0
+    @State private var purchaseTaskRunning = false
     
     var body: some View {
         ZStack {
@@ -58,16 +59,22 @@ struct MainPaywallScreenView: View {
                         // Pricing Cards
                         VStack(spacing: 16) {
                             ForEach(SubscriptionPlan.allCases, id: \.self) { plan in
+                                let storePlan = viewModel.availablePlans.first {
+                                    $0.type == (plan == .yearly ? .yearly : .weekly)
+                                        && $0.productId != "yearlydiscounted"
+                                }
                                 PricingCard(
                                     plan: plan,
+                                    localizedPrice: storePlan?.priceString,
                                     isSelected: selectedPlan == plan,
-                                    isYearly: plan == .yearly
-                                ) {
-                                    abandonmentTracker.recordInteraction()
-                                    withAnimation(.spring(response: 0.3)) {
-                                        selectedPlan = plan
+                                    isYearly: plan == .yearly,
+                                    action: {
+                                        FunnelAnalytics.shared.track(.pricingPlanSelected, ["plan_id": storePlan?.productId ?? "", "plan_name": plan.rawValue, "billing_period": plan == .yearly ? "annual" : "weekly", "price_billed": storePlan?.priceString ?? ""])
+                                        withAnimation(.spring(response: 0.3)) {
+                                            selectedPlan = plan
+                                        }
                                     }
-                                }
+                                )
                             }
                         }
                         .padding(.horizontal, 32)
@@ -78,7 +85,6 @@ struct MainPaywallScreenView: View {
                                 title: viewModel.isProcessingPurchase ? "Processing..." : "Continue",
                                 style: .primary,
                                 action: {
-                                    abandonmentTracker.recordInteraction()
                                     handlePurchase()
                                 }
                             )
@@ -88,20 +94,6 @@ struct MainPaywallScreenView: View {
                         .padding(.horizontal, 32)
                         .padding(.top, 20)
                         .padding(.bottom, 50)
-                    }
-                    .background(
-                        GeometryReader { contentGeometry in
-                            Color.clear
-                                .preference(key: ScrollOffsetPreferenceKey.self, value: contentGeometry.frame(in: .named("scroll")).minY)
-                        }
-                    )
-                }
-                .coordinateSpace(name: "scroll")
-                .onPreferenceChange(ScrollOffsetPreferenceKey.self) { offset in
-                    scrollOffset = abs(offset)
-                    // If user scrolled significantly (more than 300 points), they're likely near bottom
-                    if abs(offset) > 300 && !abandonmentTracker.hasScrolledToBottom {
-                        abandonmentTracker.updateScrollOffset(abs(offset), contentHeight: geometry.size.height + abs(offset), screenHeight: geometry.size.height)
                     }
                 }
             }
@@ -115,15 +107,10 @@ struct MainPaywallScreenView: View {
                 "source": "onboarding" as NSString,
                 "view_count": onboardingState.paywallViewCount as NSNumber
             ])
-            
-            // Start abandonment tracking
-            abandonmentTracker.startTracking()
         }
-        .onDisappear {
-            abandonmentTracker.stopTracking()
-        }
+        .postHogNoMask()
         .loadingOverlay(isLoading: viewModel.isLoading || viewModel.isProcessingPurchase, message: viewModel.isProcessingPurchase ? "Processing purchase..." : "Loading...")
-        .alert("Error", isPresented: $showError) {
+        .alert(viewModel.purchaseErrorTitle, isPresented: $showError) {
             Button("OK") {
                 viewModel.errorMessage = nil
                 showError = false
@@ -139,6 +126,11 @@ struct MainPaywallScreenView: View {
         .task {
             // Load available plans when view appears
             await viewModel.loadAvailablePlans()
+            FunnelAnalytics.shared.track(.paywallViewed, [
+                "paywall_id": "legacy_main",
+                "paywall_placement": "post_onboarding",
+                "available_plan_ids": viewModel.availablePlans.compactMap(\.productId).joined(separator: ",")
+            ])
         }
     }
     
@@ -180,7 +172,7 @@ struct MainPaywallScreenView: View {
     }
     
     private func handlePurchase() {
-        abandonmentTracker.stopTracking()
+        guard !viewModel.isProcessingPurchase, !purchaseTaskRunning else { return }
         
         // Convert SubscriptionPlan to SubscriptionPlanType
         let planType: SubscriptionPlanType
@@ -202,7 +194,7 @@ struct MainPaywallScreenView: View {
         print("🛒 MainPaywallScreenView: Available plan types: \(viewModel.availablePlans.map { $0.type.rawValue })")
         
         // Find the plan details
-        guard let planDetails = viewModel.availablePlans.first(where: { $0.type == planType }) else {
+        guard let planDetails = viewModel.availablePlans.first(where: { $0.type == planType && $0.productId != "yearlydiscounted" }) else {
             print("❌ MainPaywallScreenView: Plan not found for \(planType)")
             print("❌ MainPaywallScreenView: Available plans: \(viewModel.availablePlans.map { "\($0.type.rawValue) - \($0.productId ?? "no ID")" })")
             return
@@ -211,10 +203,15 @@ struct MainPaywallScreenView: View {
         print("✅ MainPaywallScreenView: Found plan details for \(planType.rawValue) - Product ID: \(planDetails.productId ?? "none")")
         
         // Process purchase
+        purchaseTaskRunning = true
+        let attemptProperties: [String: Any] = ["paywall_id": "legacy_main", "purchase_attempt_id": UUID().uuidString, "plan_id": planDetails.productId ?? "", "billing_period": planType.rawValue, "price_billed": planDetails.priceString]
+        FunnelAnalytics.shared.track(.purchaseInitiated, attemptProperties)
         Task {
-            let success = await viewModel.purchasePlan(planDetails)
+            defer { purchaseTaskRunning = false }
+            let success = await viewModel.purchasePlan(planDetails, analyticsContext: attemptProperties)
             
             if success {
+                FunnelAnalytics.shared.track(.purchaseCompleted, attemptProperties)
                 // Purchase successful - reset abandonment tracking
                 onboardingState.resetPaywallTracking()
                 
@@ -229,14 +226,32 @@ struct MainPaywallScreenView: View {
                 print("✅ MainPaywallScreenView: Purchase successful → Navigating to home")
                 completeSubscriptionAndExitOnboarding()
             } else {
-                // Purchase failed - error is already set in viewModel
-                print("❌ MainPaywallScreenView: Purchase failed")
-                
-                // Firebase Analytics: purchase failure
-                Analytics.logEvent("subscription_purchase_failure", parameters: [
+                let event: FunnelEvent
+                let analyticsEvent: String
+                switch viewModel.lastPurchaseOutcome {
+                case .cancelled:
+                    event = .purchaseCancelled
+                    analyticsEvent = "subscription_purchase_cancelled"
+                case .pending:
+                    event = .purchasePending
+                    analyticsEvent = "subscription_purchase_pending"
+                case .notAllowed:
+                    event = .purchaseNotAllowed
+                    analyticsEvent = "subscription_purchase_not_allowed"
+                default:
+                    event = .purchaseFailed
+                    analyticsEvent = "subscription_purchase_failure"
+                }
+                var parameters: [String: Any] = [
                     "entry_point": "main_paywall" as NSString,
-                    "plan_type": planType.rawValue as NSString
-                ])
+                    "plan_type": planType.rawValue as NSString,
+                    "product_id": (planDetails.productId ?? "") as NSString
+                ]
+                viewModel.purchaseErrorProperties.forEach { parameters[$0.key] = $0.value as NSString }
+                Analytics.logEvent(analyticsEvent, parameters: parameters)
+                var properties = attemptProperties
+                viewModel.purchaseErrorProperties.forEach { properties[$0.key] = $0.value }
+                FunnelAnalytics.shared.track(event, properties)
             }
         }
     }
@@ -244,6 +259,7 @@ struct MainPaywallScreenView: View {
 
 struct PricingCard: View {
     let plan: SubscriptionPlan
+    let localizedPrice: String?
     let isSelected: Bool
     let isYearly: Bool
     let action: () -> Void
@@ -268,7 +284,7 @@ struct PricingCard: View {
                         }
                     }
                     
-                    Text(plan.price)
+                    Text(localizedPrice ?? "Unavailable")
                         .font(.canela(size: 24, weight: .bold))
                         .foregroundColor(AppColors.customButtonColor)
                 }
@@ -286,6 +302,7 @@ struct PricingCard: View {
             )
             .scaleEffect(isYearly ? 1.05 : 1.0)
         }
+        .disabled(localizedPrice == nil)
     }
 }
 

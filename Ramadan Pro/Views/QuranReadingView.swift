@@ -42,7 +42,7 @@ struct QuranReadingView: View {
                                     ProgressView()
                                         .scaleEffect(1.2)
                                         .tint(AppColors.customButtonColor)
-                                    Text("Loading verses...")
+                                    Text(L10n.text("Loading verses…"))
                                         .font(.canela(size: 14, weight: .regular))
                                         .foregroundColor(AppColors.customPlaceholderText)
                                 }
@@ -60,7 +60,7 @@ struct QuranReadingView: View {
                                 }
                                 .padding(.top, 100)
                             } else if viewModel.currentAyahs.isEmpty {
-                                Text("No verses available")
+                                Text(L10n.text("No verses available"))
                                     .font(.canela(size: 16, weight: .medium))
                                     .foregroundColor(AppColors.customPlaceholderText)
                                     .padding(.top, 100)
@@ -156,7 +156,7 @@ struct QuranReadingView: View {
         HStack {
             Spacer()
             
-            Text(viewModel.currentSurah?.englishName ?? surah ?? "Quran")
+            Text(viewModel.currentSurah?.englishName ?? surah ?? L10n.text("Quran"))
                 .font(.canela(size: 18, weight: .semibold))
                 .foregroundColor(AppColors.customTextColor)
             
@@ -289,7 +289,7 @@ struct QuranReadingView: View {
                     await viewModel.loadSurahPage(viewModel.currentPage - 1)
                 }
             }) {
-                Image(systemName: "chevron.left")
+                Image(systemName: "chevron.backward")
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor((viewModel.currentPage > 1) ? AppColors.customButtonColor : AppColors.customPlaceholderText.opacity(0.3))
             }
@@ -298,7 +298,7 @@ struct QuranReadingView: View {
             Spacer()
             
             // Page indicator
-            Text("\(viewModel.currentPage) of \(viewModel.totalPages)")
+            Text(L10n.format("%d of %d", viewModel.currentPage, viewModel.totalPages))
                 .font(.canela(size: 14, weight: .medium))
                 .foregroundColor(AppColors.customTextColor)
             
@@ -310,7 +310,7 @@ struct QuranReadingView: View {
                     await viewModel.loadNextSurahPage()
                 }
             }) {
-                Image(systemName: "chevron.right")
+                Image(systemName: "chevron.forward")
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(viewModel.hasNextPage ? AppColors.customButtonColor : AppColors.customPlaceholderText.opacity(0.3))
             }

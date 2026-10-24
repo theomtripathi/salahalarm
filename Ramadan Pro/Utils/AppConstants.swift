@@ -19,10 +19,15 @@ struct AppConstants {
     
     // MARK: - Pricing
     struct Pricing {
-        static let weekly = "$6.99"
-        static let yearly = "$29.99"
-        static let discountedYearly = "$29.99"
+        static let weekly = "$7.99"
+        static let monthly = "$24.99"
+        static let yearly = "$49.99"
+        static let discountedYearly = "$49.99"
         static let discountPercentage = 0
+
+        static let weeklyValue = 7.99
+        static let monthlyValue = 24.99
+        static let yearlyValue = 49.99
     }
     
     // MARK: - Widget
@@ -70,6 +75,7 @@ struct AppConstants {
         static let lastReadAyah = "lastReadAyah"
         static let totalDonations = "totalDonations"
         static let isSubscribed = "isSubscribed"
+        static let isGuest = "isGuest"
         /// Counts how many times the app has been launched while logged in,
         /// used to show the Sadaq prompt every Nth run when total donations are 0.
         static let sadaqPromptRunCount = "sadaqPromptRunCount"

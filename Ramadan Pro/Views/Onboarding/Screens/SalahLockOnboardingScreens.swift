@@ -6,6 +6,7 @@
 import SwiftUI
 import FirebaseAnalytics
 import CoreLocation
+import PostHog
 
 private struct SLScreenContainer<Content: View>: View {
     @ObservedObject var vm: OnboardingFlowViewModel
@@ -21,14 +22,16 @@ private struct SLScreenContainer<Content: View>: View {
                 HStack {
                     if showBack && !OnboardingRouter.noBackScreens.contains(vm.currentScreen) {
                         Button(action: vm.back) {
-                            Image(systemName: "chevron.left")
+                            Image(systemName: "chevron.backward")
                                 .font(.system(size: 18, weight: .semibold))
                                 .foregroundColor(AppColors.slTextPrimary)
+                                .frame(width: 44, height: 44)
                         }
                     } else {
-                        Color.clear.frame(width: 18, height: 18)
+                        Color.clear.frame(width: 44, height: 44)
                     }
                     Spacer()
+                    LanguagePickerButton()
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 18)
@@ -39,6 +42,35 @@ private struct SLScreenContainer<Content: View>: View {
         .onAppear {
             Analytics.logEvent("onboarding_screen_viewed", parameters: ["screen_id": vm.currentScreen.rawValue as NSString])
         }
+    }
+}
+
+/// Lightweight celebration used when the second-spin yearly offer is revealed.
+private struct SLConfettiView: View {
+    private let colors: [Color] = [AppColors.slGreen, AppColors.slGold, Color(hex: "#2E3A8C"), Color(hex: "#D84A5B")]
+
+    var body: some View {
+        TimelineView(.animation) { timeline in
+            Canvas { context, size in
+                let elapsed = timeline.date.timeIntervalSinceReferenceDate
+                for index in 0..<52 {
+                    let seed = Double(index)
+                    let progress = (elapsed * (0.34 + seed.truncatingRemainder(dividingBy: 5) * 0.035) + seed * 0.071)
+                        .truncatingRemainder(dividingBy: 1)
+                    let x = size.width * (0.04 + (seed * 0.137).truncatingRemainder(dividingBy: 0.92))
+                    let y = size.height * progress
+                    let rotation = Angle.degrees(seed * 41 + progress * 540)
+                    let rect = CGRect(x: x, y: y, width: 7, height: 12)
+
+                    context.opacity = 1 - progress * 0.35
+                    context.translateBy(x: rect.midX, y: rect.midY)
+                    context.rotate(by: rotation)
+                    context.fill(Path(CGRect(x: -3.5, y: -6, width: 7, height: 12)), with: .color(colors[index % colors.count]))
+                    context.translateBy(x: -rect.midX, y: -rect.midY)
+                }
+            }
+        }
+        .frame(height: 220)
     }
 }
 
@@ -58,7 +90,7 @@ struct SLScreen0SignUp: View {
     }
 
     private var postAuthScreen: OnboardingScreenID {
-        authMode == .signup ? .screen17A : .screen18
+        .screen18
     }
 
     var body: some View {
@@ -73,12 +105,12 @@ struct SLScreen0SignUp: View {
                         .foregroundColor(AppColors.slGreen)
                         .padding(.top, 12)
                     Spacer().frame(height: 32)
-                    Text("Never Miss a Prayer Again.")
+                    Text(L10n.text("A Simpler Path Back to Every Salah."))
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
-                    Text("join thousands of Muslims building\na consistent salah habit.")
+                    Text(L10n.text("Your plan is ready. Save it to keep your routine with you."))
                         .font(.system(size: 15))
                         .foregroundColor(AppColors.slTextSecondary)
                         .multilineTextAlignment(.center)
@@ -179,6 +211,13 @@ struct SLScreen0SignUp: View {
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(AppColors.slGreen)
                     .underline()
+                Button("continue without an account") {
+                    FunnelAnalytics.shared.track(.signupSkipped)
+                    vm.skipTo(.screen17A)
+                }
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(AppColors.slTextSecondary)
+                .padding(.top, 16)
                 if vm.authViewModel.showError, let message = vm.authViewModel.errorMessage {
                     Text(message)
                         .font(.system(size: 13))
@@ -208,6 +247,7 @@ struct SLScreen0SignUp: View {
             email = vm.authViewModel.email
             password = vm.authViewModel.password
             confirmPassword = vm.authViewModel.confirmPassword
+            FunnelAnalytics.shared.track(.signupStarted)
         }
     }
 
@@ -217,6 +257,8 @@ struct SLScreen0SignUp: View {
         isTransitioningAfterAuth = true
         print("✅ [ONBOARDING] Auth success for \(provider), moving to \(postAuthScreen.rawValue)")
         vm.mergeProfileAfterAuth()
+        if let userID = FirebaseAuthService.shared.currentUser?.userId { FunnelAnalytics.shared.identify(userID: userID) }
+        FunnelAnalytics.shared.signupCompleted(method: provider)
         try? await Task.sleep(nanoseconds: 500_000_000)
         vm.skipTo(postAuthScreen)
     }
@@ -1066,7 +1108,7 @@ struct SLLocationPermissionScreen: View {
                     .font(.system(size: 13))
                     .foregroundColor(AppColors.slTextSecondary)
                 Spacer()
-                SLPrimaryButton(title: vm.isLoading ? "loading..." : "allow location", isEnabled: !vm.isLoading, isLoading: vm.isLoading) {
+                SLPrimaryButton(title: vm.isLoading ? "loading..." : "Continue", isEnabled: !vm.isLoading, isLoading: vm.isLoading) {
                     Task {
                         vm.isLoading = true
                         LocationManager.shared.requestWhenInUseAuthorization()
@@ -1092,11 +1134,6 @@ struct SLLocationPermissionScreen: View {
                         vm.isLoading = false
                         vm.advance()
                     }
-                }
-                SLSecondaryButton(title: "skip for now") {
-                    vm.setLocationPermission(.skipped)
-                    Analytics.logEvent("onboarding_permission_result", parameters: ["permission": "location", "result": "skipped"])
-                    vm.advance()
                 }
                 .padding(.bottom, 24)
             }
@@ -1348,36 +1385,64 @@ struct SLSocialProofScreen: View {
 
     var body: some View {
         SLScreenContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("SalahAlarm Was Built\nfor Muslims Like You.")
-                    .font(.system(size: 24, weight: .bold))
+            VStack(alignment: .leading, spacing: 18) {
+                Spacer().frame(height: 20)
+
+                Text("Muslims Are Building a\nStronger Salah Habit.")
+                    .font(.system(size: 28, weight: .bold))
                     .foregroundColor(AppColors.slTextPrimary)
-                Text("🏆 #1 prayer alarm app   ⭐⭐⭐⭐⭐   trusted by Muslims worldwide")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(AppColors.slGold)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(RoundedRectangle(cornerRadius: 18).fill(AppColors.slCream))
-                reviewCard(title: "I FINALLY PRAY FAJR.", body: "I've tried everything — alarms, apps, asking my family.\nThis is the only thing that actually works.\nThe alarm doesn't stop until I'm on my mat.\nThat's the whole game.")
-                reviewCard(title: "47 DAYS. ALL FIVE PRAYERS.", body: "I never thought I could do this.\nThe streak kept me honest.\nThe mat scan made it real.")
+
+                VStack(spacing: 8) {
+                    Text("★★★★★")
+                        .font(.system(size: 28, weight: .bold))
+                        .foregroundColor(AppColors.slGold)
+                    Text("4.8 on the App Store")
+                        .font(.system(size: 19, weight: .bold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                    Text("Real accountability for the prayers that matter most.")
+                        .font(.system(size: 14))
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.vertical, 22)
+                .frame(maxWidth: .infinity)
+                .background(RoundedRectangle(cornerRadius: 20).fill(AppColors.slCream))
+
+                proofCard(
+                    icon: "alarm.waves.left.and.right.fill",
+                    title: "Wake up for Fajr",
+                    body: "Your alarm keeps you accountable until you're at your prayer mat."
+                )
+                proofCard(
+                    icon: "checkmark.seal.fill",
+                    title: "Stay consistent",
+                    body: "Prayer tracking and streaks turn good intentions into a daily habit."
+                )
                 Spacer()
-                SLPrimaryButton(title: "join SalahAlarm 🤲") { vm.advance() }
+                SLPrimaryButton(title: "see my plan") { vm.advance() }
                     .padding(.bottom, 24)
             }
             .padding(24)
         }
     }
 
-    private func reviewCard(title: String, body: String) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("⭐⭐⭐⭐⭐")
-            Text(title)
-                .font(.system(size: 16, weight: .bold))
-            Text(body)
-                .font(.system(size: 14))
-                .foregroundColor(AppColors.slTextSecondary)
+    private func proofCard(icon: String, title: String, body: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: icon)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(AppColors.slGreen)
+                .frame(width: 32, height: 32)
+            VStack(alignment: .leading, spacing: 5) {
+                Text(title)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                Text(body)
+                    .font(.system(size: 14))
+                    .foregroundColor(AppColors.slTextSecondary)
+            }
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
         .shadow(color: .black.opacity(0.06), radius: 4, x: 0, y: 2)
     }
@@ -1480,18 +1545,93 @@ struct SLReminderScreen: View {
 
 struct SLPaywallScreen: View {
     @ObservedObject var vm: OnboardingFlowViewModel
+    var onExit: (() -> Void)? = nil
     @EnvironmentObject private var appState: AppState
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var subscriptionVM = SubscriptionViewModel()
-    @State private var selectedPlan: SubscriptionPlanType = .yearly
+    @ObservedObject private var trialService = RevenueCatService.shared
+    @State private var selectedPlan: SubscriptionPlanType?
     @State private var errorMessage: String?
     @State private var hasAttemptedLoad = false
+    @State private var hasTrackedPaywallImpression = false
 
-    private var displayedPlans: [SubscriptionPlanDetails] {
-        subscriptionVM.availablePlans.isEmpty ? fallbackPlans : subscriptionVM.availablePlans
+    private let conversionPaywallID = "current_swiftui_paywall"
+
+    @State private var showWinBackModal = false
+    @State private var hasShownWinBackOfferForThisVisit = false
+    @State private var paywallViewID = UUID().uuidString
+    @State private var hasAttemptedPurchase = false
+    @State private var lastCheckoutOutcome = "not_attempted"
+    @State private var showExitFeedback = false
+    @State private var hasSubmittedExitFeedback = false
+    @State private var discountExitAction = "no_thanks"
+    @State private var purchaseTaskRunning = false
+    @State private var submittedExitReason = "not_provided"
+    @State private var showTrialOffer = false
+    @State private var isCheckingTrial = false
+    @State private var hasCheckedTrialForThisVisit = false
+    @State private var presentedTrialPlan: SubscriptionPlanDetails?
+    @State private var feedbackOfferStage = "final_discount"
+
+    private var currentOfferStage: String {
+        if showExitFeedback { return feedbackOfferStage }
+        return showTrialOffer || isCheckingTrial ? "final_trial" : (showWinBackModal ? "final_discount" : "main")
     }
 
-    private var selectedPlanDetails: SubscriptionPlanDetails {
-        displayedPlans.first(where: { $0.type == selectedPlan }) ?? displayedPlans.first ?? fallbackPlans[0]
+    private func paywallContext(stage: String = "main") -> [String: Any] {
+        ["paywall_id": conversionPaywallID,
+         "paywall_view_id": paywallViewID,
+         "paywall_placement": onExit == nil ? "post_onboarding" : "feature_gate",
+         "offer_stage": stage,
+         "final_offer_shown": hasShownWinBackOfferForThisVisit,
+         "offer_product_id": stage == "final_trial" ? (presentedTrialPlan?.productId ?? "") : (stage == "final_discount" ? (discountedYearlyPlanDetails?.productId ?? "") : (selectedPlanDetails?.productId ?? "")),
+         "had_purchase_attempt": hasAttemptedPurchase,
+         "last_checkout_outcome": lastCheckoutOutcome]
+    }
+
+    private var displayedPlans: [SubscriptionPlanDetails] {
+        subscriptionVM.availablePlans
+    }
+
+    /// Presents the live weekly plan and the regular yearly plan.
+    /// The monthly plan is intentionally not offered.
+    private var firstStagePlans: [SubscriptionPlanDetails] {
+        let plans = displayedPlans.filter { plan in
+            plan.type == .weekly || (plan.type == .yearly && !isDiscountedYearly(plan))
+        }
+        let orderedPlans = plans.sorted { first, second in
+            if first.type == second.type { return false }
+            return first.type == .yearly
+        }
+        return orderedPlans
+    }
+
+    private func isDiscountedYearly(_ plan: SubscriptionPlanDetails) -> Bool {
+        guard plan.type == .yearly else { return false }
+        return plan.productId?.lowercased().contains("discount") == true
+    }
+
+    private var discountedYearlyPlanDetails: SubscriptionPlanDetails? {
+        guard let regular = regularYearlyPlanDetails else { return nil }
+        return displayedPlans.first {
+            $0.productId == "yearlydiscounted" && $0.price > 0 && $0.price < regular.price
+                && $0.currencyCode == regular.currencyCode
+        }
+    }
+
+    private var regularYearlyPlanDetails: SubscriptionPlanDetails? {
+        firstStagePlans.first(where: { $0.type == .yearly })
+    }
+
+    private func winBackSavingsPercent(for plan: SubscriptionPlanDetails) -> Int? {
+        guard let regular = regularYearlyPlanDetails, regular.price > plan.price else { return nil }
+        return Int(((regular.price - plan.price) / regular.price * 100).rounded())
+    }
+
+
+    private var selectedPlanDetails: SubscriptionPlanDetails? {
+        guard let selectedPlan else { return nil }
+        return firstStagePlans.first(where: { $0.type == selectedPlan })
     }
 
     private var paywallTitle: String { "help us keep\nbuilding SalahAlarm" }
@@ -1502,27 +1642,19 @@ struct SLPaywallScreen: View {
 
     private var footerCopy: String { "cancel anytime" }
 
-    private var fallbackPlans: [SubscriptionPlanDetails] {
-        [
-            SubscriptionPlanDetails(
-                type: .weekly,
-                price: 6.99,
-                productId: "com.ramadanpro.weekly",
-                billingPeriodLabel: "week",
-                pricePerPeriodText: "$6.99 / week",
-                trialLabel: nil,
-                renewalDescription: "$6.99 / week. cancel anytime."
-            ),
-            SubscriptionPlanDetails(
-                type: .yearly,
-                price: 29.99,
-                productId: "com.ramadanpro.yearly",
-                billingPeriodLabel: "year",
-                pricePerPeriodText: "$29.99 / year",
-                trialLabel: nil,
-                renewalDescription: "$29.99 / year. cancel anytime."
-            )
-        ]
+    private func trackPlanSelection(_ plan: SubscriptionPlanDetails, source: String) {
+        var properties = paywallContext()
+        properties["plan_id"] = plan.productId ?? ""
+        properties["plan_name"] = plan.type.rawValue
+        properties["billing_period"] = plan.type.rawValue
+        properties["price_billed"] = plan.priceString
+        properties["price_amount"] = plan.price
+        properties["currency"] = plan.currencyCode ?? ""
+        properties["selection_source"] = source
+        if plan.type == .yearly {
+            properties["price_monthly_equivalent"] = plan.formatAmount(plan.price / 12)
+        }
+        FunnelAnalytics.shared.track(.pricingPlanSelected, properties)
     }
 
     var body: some View {
@@ -1540,84 +1672,885 @@ struct SLPaywallScreen: View {
                 .task {
                     Analytics.logEvent("onboarding_paywall_viewed", parameters: nil)
                     await subscriptionVM.loadAvailablePlans()
-                    if let preferredPlan = subscriptionVM.availablePlans.first(where: \.isBestValue) ?? subscriptionVM.availablePlans.first {
-                        selectedPlan = preferredPlan.type
+                    selectedPlan = firstStagePlans.first?.type
+                    if let selectedPlanDetails {
+                        trackPlanSelection(selectedPlanDetails, source: "default_on_load")
                     }
                     hasAttemptedLoad = true
+                    trackPaywallImpressionIfNeeded()
                 }
+            } else if firstStagePlans.isEmpty {
+                unavailablePlansStage
             } else {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(paywallTitle)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(AppColors.slTextPrimary)
-                    Text("your subscription supports the app,\nfuture updates, and continued improvements")
-                        .font(.system(size: 13))
-                        .foregroundColor(AppColors.slTextSecondary)
-                        .lineLimit(3)
-                        .fixedSize(horizontal: false, vertical: true)
-                    premiumFeaturesBlock
-                    choosePlanHeader
-                    HStack(spacing: 12) {
-                        ForEach(displayedPlans) { plan in
-                            planCard(
-                                title: plan.type.displayName,
-                                price: plan.priceString,
-                                subtitle: "/ \(plan.billingPeriodLabel)",
-                                badge: plan.type == .yearly ? "best value" : nil,
-                                isSelected: selectedPlan == plan.type
-                            ) {
-                                selectedPlan = plan.type
+                ZStack {
+                    plansStage
+                        .accessibilityHidden(showWinBackModal || showTrialOffer || isCheckingTrial)
+
+                    if showWinBackModal {
+                        winBackModalOverlay
+                            .accessibilityHidden(showTrialOffer || isCheckingTrial)
+                    }
+                    if showTrialOffer || isCheckingTrial {
+                        trialOfferOverlay
+                    }
+                }
+            }
+        }
+        // This screen contains public offer copy/pricing only, never account fields.
+        // All other screens retain the SDK's default masking.
+        .postHogNoMask()
+        .sheet(isPresented: $showExitFeedback, onDismiss: finishOfferExit) {
+            exitFeedbackSheet
+        }
+        .onChange(of: scenePhase) { phase in
+            guard phase == .background else { return }
+            var properties = paywallContext(stage: currentOfferStage)
+            properties["checkout_in_progress"] = purchaseTaskRunning || subscriptionVM.isProcessingPurchase
+            properties["reason_source"] = "not_inferred"
+            // Backgrounding includes system authentication; it is not a decline.
+            FunnelAnalytics.shared.track(.paywallBackgrounded, properties)
+        }
+    }
+
+    // MARK: - Stage 1: weekly + yearly
+
+    private var plansStage: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Spacer()
+                closeButton {
+                    guard !subscriptionVM.isProcessingPurchase else { return }
+                    var context = paywallContext()
+                    context["exit_action"] = "close_button"
+                    FunnelAnalytics.shared.track(.paywallCloseTapped, context)
+                    Analytics.logEvent("paywall_close_tapped", parameters: ["stage": "plans" as NSString])
+                    if !hasShownWinBackOfferForThisVisit && discountedYearlyPlanDetails != nil {
+                        hasShownWinBackOfferForThisVisit = true
+                        var offer = paywallContext(stage: "final_discount")
+                        offer["is_final_offer"] = true
+                        offer["price_billed"] = discountedYearlyPlanDetails?.priceString ?? ""
+                        offer["currency"] = discountedYearlyPlanDetails?.currencyCode ?? ""
+                        offer["trigger"] = "main_paywall_close"
+                        FunnelAnalytics.shared.track(.winBackModalShown, offer)
+                        withAnimation { showWinBackModal = true }
+                    } else {
+                        if !hasShownWinBackOfferForThisVisit {
+                            var properties = paywallContext(stage: "final_discount")
+                            let loadedOffer = displayedPlans.first { $0.productId == "yearlydiscounted" }
+                            properties["unavailable_reason"] = loadedOffer == nil ? "product_not_loaded" : "not_a_lower_price_in_same_currency"
+                            FunnelAnalytics.shared.track(.winBackOfferUnavailable, properties)
+                        }
+                        exitWithoutPurchase()
+                    }
+                }
+            }
+            Text(paywallTitle)
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(AppColors.slTextPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text("your subscription supports the app,\nfuture updates, and continued improvements")
+                .font(.system(size: 13))
+                .foregroundColor(AppColors.slTextSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            premiumFeaturesBlock
+            choosePlanHeader
+
+            VStack(spacing: 12) {
+                // Yearly plan first, selected by default.
+                if let yearly = firstStagePlans.first(where: { $0.type == .yearly }) {
+                    planCard(
+                        title: "Yearly plan",
+                        priceLine1: "\(yearly.formatAmount(yearly.price / 12))/mo",
+                        priceLine2: "Billed \(yearly.priceString) annually",
+                        badge: "BEST VALUE",
+                        isSelected: selectedPlan == .yearly
+                    ) {
+                        selectedPlan = .yearly
+                        trackPlanSelection(yearly, source: "user")
+                    }
+                }
+
+                // Weekly plan second
+                if let weekly = firstStagePlans.first(where: { $0.type == .weekly }) {
+                    planCard(
+                        title: "Weekly",
+                        priceLine1: "\(weekly.priceString)/week",
+                        priceLine2: "Billed \(weekly.priceString) weekly",
+                        isSelected: selectedPlan == .weekly
+                    ) {
+                        selectedPlan = .weekly
+                        trackPlanSelection(weekly, source: "user")
+                    }
+                }
+            }
+            SLPrimaryButton(title: ctaTitle, isEnabled: !subscriptionVM.isProcessingPurchase && selectedPlanDetails != nil, isLoading: subscriptionVM.isProcessingPurchase) {
+                if let selectedPlanDetails {
+                    purchase(selectedPlanDetails)
+                }
+            }
+            Text(footerCopy)
+                .font(.system(size: 13))
+                .foregroundColor(AppColors.slTextSecondary)
+                .frame(maxWidth: .infinity, alignment: .center)
+            HStack(spacing: 16) {
+                Button("restore") {
+                    restorePurchases()
+                }
+                Button("privacy") {
+                    openExternalURL("https://ramadan-pro.lovable.app/privacy")
+                }
+                Button("terms") {
+                    openExternalURL("https://ramadan-pro.lovable.app/terms")
+                }
+            }
+            .font(.system(size: 13, weight: .medium))
+            .foregroundColor(AppColors.slGreen)
+            if let errorMessage {
+                Text(errorMessage)
+                    .font(.system(size: 13))
+                    .foregroundColor(subscriptionVM.lastPurchaseOutcome == .pending ? AppColors.slTextSecondary : .red)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 4)
+        .padding(.bottom, 12)
+    }
+
+    private var winBackModalOverlay: some View {
+        ZStack {
+            Color.white.ignoresSafeArea()
+
+            if let plan = discountedYearlyPlanDetails {
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 14) {
+                        HStack {
+                            Spacer()
+                            closeButton {
+                                declineWinBackOffer(action: "close_button")
                             }
                         }
-                    }
-                    SLPrimaryButton(title: ctaTitle, isEnabled: !subscriptionVM.isProcessingPurchase, isLoading: subscriptionVM.isProcessingPurchase) {
-                        purchase()
-                    }
-                    Text(footerCopy)
-                        .font(.system(size: 13))
+
+                        VStack(spacing: 5) {
+                            (
+                                Text("Support ")
+                                    .foregroundColor(AppColors.slTextPrimary)
+                                + Text("SalahAlarm")
+                                    .foregroundColor(AppColors.slDeepGreen)
+                            )
+                            .font(.system(size: 27, weight: .bold))
+
+                            Text("Your subscription helps us keep improving the app\nand building more Islamic features you love. 💚")
+                                .font(.system(size: 12))
+                                .foregroundColor(AppColors.slTextSecondary)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+
+                        VStack(spacing: 12) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "crown.fill")
+                                    .font(.system(size: 17, weight: .bold))
+                                    .foregroundColor(AppColors.slGreen)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Unlock All Premium Features")
+                                        .font(.system(size: 14, weight: .bold))
+                                        .foregroundColor(AppColors.slTextPrimary)
+                                    Text("Get full access to everything in SalahAlarm")
+                                        .font(.system(size: 10))
+                                        .foregroundColor(AppColors.slTextSecondary)
+                                }
+                                Spacer()
+                            }
+
+                            LazyVGrid(
+                                columns: [
+                                    GridItem(.flexible(), spacing: 8),
+                                    GridItem(.flexible(), spacing: 8)
+                                ],
+                                spacing: 10
+                            ) {
+                                winBackFeature(icon: "lock.fill", title: "SalahLock", subtitle: "Stay focused on your salah")
+                                winBackFeature(icon: "clock.fill", title: "Accurate Times", subtitle: "Always on time")
+                                winBackFeature(icon: "book.fill", title: "Quran & Duas", subtitle: "Read, listen & reflect")
+                                winBackFeature(icon: "flame.fill", title: "Prayer Streaks", subtitle: "Build consistency")
+                                winBackFeature(icon: "square.grid.2x2.fill", title: "Premium Widgets", subtitle: "Beautiful at a glance")
+                                winBackFeature(icon: "location.north.fill", title: "Qibla Compass", subtitle: "Find the right direction")
+                            }
+                        }
+                        .padding(14)
+                        .background(
+                            RoundedRectangle(cornerRadius: 22)
+                                .fill(Color.white)
+                                .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
+                        )
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack(alignment: .top) {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Label("LIMITED TIME OFFER", systemImage: "sun.max.fill")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundColor(AppColors.slGold)
+                                        .padding(.horizontal, 9)
+                                        .padding(.vertical, 5)
+                                        .background(Capsule().fill(AppColors.slGold.opacity(0.12)))
+
+                                    Text("Special Annual Offer")
+                                        .font(.system(size: 21, weight: .bold))
+                                        .foregroundColor(AppColors.slTextPrimary)
+
+                                    Text("More value. Less cost. Strengthen your Deen daily.")
+                                        .font(.system(size: 11))
+                                        .foregroundColor(AppColors.slTextSecondary)
+                                }
+
+                                Spacer()
+
+                                if let savings = winBackSavingsPercent(for: plan) {
+                                    Text("\(savings)%\nOFF")
+                                        .font(.system(size: 14, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .frame(width: 58, height: 58)
+                                        .background(Circle().fill(AppColors.slGreen))
+                                }
+                            }
+
+                            Divider()
+
+                            VStack(alignment: .leading, spacing: 7) {
+                                Text("\(plan.formatAmount(plan.price / 12))/month")
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(AppColors.slTextPrimary)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.85)
+
+                                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                                    Text("Billed \(plan.priceString) annually")
+                                        .font(.system(size: 16, weight: .regular))
+                                        .foregroundColor(AppColors.slTextPrimary)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.85)
+
+                                    if let regular = regularYearlyPlanDetails {
+                                        Text(regular.priceString)
+                                            .font(.system(size: 13, weight: .regular))
+                                            .foregroundColor(AppColors.slTextSecondary)
+                                            .strikethrough()
+                                    }
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                            SLPrimaryButton(
+                                title: subscriptionVM.isProcessingPurchase ? "processing..." : "Get Premium Annual Access",
+                                isEnabled: !subscriptionVM.isProcessingPurchase,
+                                isLoading: subscriptionVM.isProcessingPurchase
+                            ) {
+                                var properties = paywallContext(stage: "final_discount")
+                                properties["plan_id"] = plan.productId ?? ""
+                                properties["price_billed"] = plan.priceString
+                                properties["currency"] = plan.currencyCode ?? ""
+                                properties["is_final_offer"] = true
+                                FunnelAnalytics.shared.track(.winBackOfferAccepted, properties)
+                                showWinBackModal = false
+                                purchase(plan)
+                            }
+
+                            HStack(spacing: 5) {
+                                Image(systemName: "shield.checkered")
+                                Text("Secure & private")
+                                Text("•")
+                                Text("Cancel anytime")
+                            }
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundColor(AppColors.slTextSecondary)
+                            .frame(maxWidth: .infinity)
+                        }
+                        .padding(15)
+                        .background(RoundedRectangle(cornerRadius: 22).fill(Color.white))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 22)
+                                .stroke(AppColors.slGreen.opacity(0.35), lineWidth: 1)
+                        )
+                        .shadow(color: AppColors.slGreen.opacity(0.08), radius: 10, x: 0, y: 5)
+
+                        Button("No thanks") {
+                            declineWinBackOffer()
+                        }
+                        .font(.system(size: 13, weight: .medium))
                         .foregroundColor(AppColors.slTextSecondary)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    HStack(spacing: 16) {
-                        Button("restore") {
-                            restorePurchases()
-                        }
-                        Button("privacy") {
-                            openExternalURL("https://ramadan-pro.lovable.app/privacy")
-                        }
-                        Button("terms") {
-                            openExternalURL("https://ramadan-pro.lovable.app/terms")
-                        }
                     }
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(AppColors.slGreen)
-                    if let errorMessage {
-                        Text(errorMessage)
-                            .font(.system(size: 13))
-                            .foregroundColor(.red)
-                    }
-                    Spacer(minLength: 0)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 22)
                 }
-                .padding(.horizontal, 24)
-                .padding(.top, 4)
-                .padding(.bottom, 12)
+            }
+        }
+        .transition(.opacity)
+    }
+
+    private func winBackFeature(icon: String, title: String, subtitle: String) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundColor(AppColors.slGreen)
+                .frame(width: 28, height: 28)
+                .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.slGreen.opacity(0.11)))
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                    .lineLimit(1)
+                Text(subtitle)
+                    .font(.system(size: 8))
+                    .foregroundColor(AppColors.slTextSecondary)
+                    .lineLimit(2)
+            }
+
+            Spacer(minLength: 0)
+        }
+    }
+
+    private func declineWinBackOffer(action: String = "no_thanks") {
+        guard !subscriptionVM.isProcessingPurchase else { return }
+        discountExitAction = action
+        var properties = paywallContext(stage: "final_discount")
+        properties["exit_action"] = action
+        properties["decline_type"] = "offer_declined"
+        properties["decline_reason"] = "not_provided"
+        properties["reason_source"] = "not_collected"
+        properties["is_final_offer"] = true
+        FunnelAnalytics.shared.track(.winBackOfferDeclined, properties)
+        showWinBackModal = false
+        errorMessage = nil
+        presentTrialAfterDiscountDecline()
+    }
+
+    private var exitFeedbackSheet: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("What stopped you?").font(.title2.bold())
+            Text("Optional—this helps us improve. You can skip.")
+                .foregroundColor(.secondary)
+            ForEach([
+                ("price_too_high", "The price is too high"),
+                ("not_ready", "I'm not ready to subscribe"),
+                ("want_to_try_first", "I want to try the app first"),
+                ("checkout_problem", "Checkout didn't work"),
+                ("other", "Another reason")
+            ], id: \.0) { reason, label in
+                Button(label) {
+                    submitExitFeedback(reason)
+                    showExitFeedback = false
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 8)
+            }
+            Button("Skip") { showExitFeedback = false }
+                .frame(maxWidth: .infinity)
+        }
+        .padding(24)
+        .presentationDetents([.medium, .large])
+        // Responses remain structured events; do not reveal survey choices in pixels.
+        .postHogMask()
+    }
+
+    private func submitExitFeedback(_ reason: String) {
+        guard !hasSubmittedExitFeedback else { return }
+        hasSubmittedExitFeedback = true
+        submittedExitReason = reason
+        var properties = paywallContext(stage: feedbackOfferStage)
+        properties["decline_reason"] = reason
+        properties["reason_source"] = reason == "not_provided" ? "skipped" : "user_reported"
+        properties["is_final_offer"] = true
+        // A user-reported checkout problem is not a verified bank decline.
+        FunnelAnalytics.shared.track(.paywallExitReasonSubmitted, properties)
+    }
+
+    private func finishOfferExit() {
+        submitExitFeedback("not_provided")
+        exitWithoutPurchase(stage: feedbackOfferStage, action: discountExitAction)
+    }
+
+    private func presentTrialAfterDiscountDecline() {
+        guard !hasCheckedTrialForThisVisit else {
+            showExitFeedback = true
+            return
+        }
+        hasCheckedTrialForThisVisit = true
+        isCheckingTrial = true
+        Task { @MainActor in
+            let plan = await trialService.refreshAnnualTrialEligibility()
+            isCheckingTrial = false
+            guard let plan else {
+                var properties = paywallContext(stage: "final_trial")
+                properties["unavailable_reason"] = trialService.annualTrialUnavailableReason
+                FunnelAnalytics.shared.track(.trialOfferUnavailable, properties)
+                showExitFeedback = true
+                return
+            }
+            presentedTrialPlan = plan
+            showTrialOffer = true
+            var properties = trialContext(plan)
+            properties["trigger"] = "discount_offer_declined"
+            FunnelAnalytics.shared.track(.trialOfferShown, properties)
+        }
+    }
+
+    private func trialContext(_ plan: SubscriptionPlanDetails) -> [String: Any] {
+        var properties = paywallContext(stage: "final_trial")
+        properties["trial_days"] = plan.introductoryTrialDays ?? 0
+        properties["auto_renews"] = true
+        properties["plan_id"] = plan.productId ?? ""
+        properties["price_amount"] = plan.price
+        properties["currency"] = plan.currencyCode ?? ""
+        properties["price_billed"] = plan.priceString
+        properties["price_monthly_equivalent"] = plan.formatAmount(plan.price / 12)
+        return properties
+    }
+
+    private func declineTrialOffer() {
+        guard !purchaseTaskRunning, !subscriptionVM.isProcessingPurchase else { return }
+        if let plan = presentedTrialPlan {
+            var properties = trialContext(plan)
+            properties["decline_type"] = "offer_declined"
+            properties["reason_source"] = "not_collected"
+            FunnelAnalytics.shared.track(.trialOfferDeclined, properties)
+        }
+        discountExitAction = "trial_no_thanks"
+        feedbackOfferStage = "final_trial"
+        showTrialOffer = false
+        errorMessage = nil
+        showExitFeedback = true
+    }
+
+    private var trialOfferOverlay: some View {
+        ZStack {
+            Color(uiColor: .systemBackground).ignoresSafeArea()
+            if isCheckingTrial {
+                VStack(spacing: 16) {
+                    ProgressView().tint(AppColors.slGreen)
+                    Text(L10n.text("Checking your free trial…")).font(.body)
+                }
+            } else if let plan = presentedTrialPlan {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        HStack {
+                            Spacer()
+                            Button(action: declineTrialOffer) {
+                                Image(systemName: "xmark")
+                                    .font(.body.bold())
+                                    .frame(width: 44, height: 44)
+                            }
+                            .accessibilityLabel(L10n.text("Decline free trial"))
+                            .disabled(purchaseTaskRunning || subscriptionVM.isProcessingPurchase)
+                        }
+                        Image(systemName: "moon.stars.fill")
+                            .font(.largeTitle)
+                            .foregroundStyle(AppColors.slGreen)
+                            .accessibilityHidden(true)
+                        Text(L10n.text("Take the first step, on us."))
+                            .font(.largeTitle.bold())
+                        Text(L10n.text("Enjoy 7 days of SalahAlarm as you build a routine around salah. Start with one prayer, one day at a time."))
+                            .font(.body)
+                            .foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text(L10n.text("7 days free")).font(.title.bold())
+                            Text(L10n.text("Then a yearly subscription"))
+                                .font(.headline)
+                            Text(L10n.format("%@ / month equivalent", plan.formatAmount(plan.price / 12)))
+                                .font(.title2.bold())
+                            Text(L10n.format("Billed %@ once a year after your trial.", plan.priceString))
+                                .font(.body.weight(.semibold))
+                            Text(L10n.text("Not a monthly plan. Renews automatically each year unless cancelled. Cancel in App Store subscription settings at least 24 hours before the trial ends to avoid being charged."))
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(20)
+                        .background(AppColors.slGreen.opacity(0.07), in: RoundedRectangle(cornerRadius: 24))
+                        .overlay(RoundedRectangle(cornerRadius: 24).stroke(AppColors.slGreen.opacity(0.6)))
+                        Button {
+                            guard !purchaseTaskRunning, !subscriptionVM.isProcessingPurchase else { return }
+                            FunnelAnalytics.shared.track(.trialOfferAccepted, trialContext(plan))
+                            purchase(plan)
+                        } label: {
+                            HStack {
+                                Spacer()
+                                if purchaseTaskRunning { ProgressView().tint(.white) }
+                                Text(L10n.text(purchaseTaskRunning ? "Processing…" : "Start my 7-day free trial"))
+                                    .font(.headline)
+                                Spacer()
+                            }
+                            .padding(.vertical, 17)
+                            .padding(.horizontal, 12)
+                            .foregroundStyle(.white)
+                            .background(AppColors.slGreen, in: RoundedRectangle(cornerRadius: 20))
+                        }
+                        .disabled(purchaseTaskRunning || subscriptionVM.isProcessingPurchase)
+                        if let errorMessage {
+                            Text(errorMessage).font(.body).foregroundStyle(.secondary)
+                        }
+                        Button(L10n.text("No thanks"), action: declineTrialOffer)
+                            .font(.body)
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .disabled(purchaseTaskRunning || subscriptionVM.isProcessingPurchase)
+                        HStack(spacing: 20) {
+                            Button(L10n.text("Restore")) { restorePurchases() }
+                            Button(L10n.text("Privacy")) { openExternalURL("https://ramadan-pro.lovable.app/privacy") }
+                            Button(L10n.text("Terms")) { openExternalURL("https://ramadan-pro.lovable.app/terms") }
+                        }
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity)
+                        .disabled(purchaseTaskRunning || subscriptionVM.isProcessingPurchase)
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(24)
+                }
+                .foregroundStyle(.primary)
             }
         }
     }
 
-    private func purchase() {
-        let plan = selectedPlanDetails
+    private var unavailablePlansStage: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "wifi.exclamationmark")
+                .font(.system(size: 34))
+                .foregroundColor(AppColors.slGreen)
+            Text("plans are unavailable")
+                .font(.system(size: 22, weight: .bold))
+                .foregroundColor(AppColors.slTextPrimary)
+            Text("We couldn't load your App Store pricing. Please try again.")
+                .font(.system(size: 14))
+                .foregroundColor(AppColors.slTextSecondary)
+                .multilineTextAlignment(.center)
+            SLPrimaryButton(title: "try again", isLoading: subscriptionVM.isLoading) {
+                Task {
+                    hasAttemptedLoad = false
+                }
+            }
+            Spacer()
+        }
+        .padding(24)
+    }
+
+    // MARK: - Stage 2: spin wheel
+    /* Deprecated multi-step offer flow removed for App Review 5.6.
+
+    private var spinStage: some View {
+        VStack(spacing: 20) {
+            Spacer().frame(height: 8)
+            Text("before you go...")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(AppColors.slGold)
+            Text("Spin the Wheel 🎡")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(AppColors.slTextPrimary)
+            Text("we want you closer to your faith,\nnot further from it.\neveryone wins something today.")
+                .font(.system(size: 15))
+                .foregroundColor(AppColors.slTextSecondary)
+                .multilineTextAlignment(.center)
+
+            SLSpinWheelView {
+                Analytics.logEvent("paywall_spin_won", parameters: nil)
+                withAnimation(.spring()) { stage = .deal }
+            }
+
+            Spacer()
+        }
+        .padding(24)
+        .frame(maxWidth: .infinity)
+    }
+
+    // MARK: - Stage 3: discounted yearly deal
+
+    private var dealStage: AnyView {
+        guard let discountedPlan = discountedYearlyPlanDetails else {
+            return AnyView(unavailablePlansStage)
+        }
+        let perMonth = discountedPlan.price / 12
+
+        return AnyView(VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Spacer()
+                closeButton {
+                    Analytics.logEvent("paywall_close_tapped", parameters: ["stage": "deal" as NSString])
+                    withAnimation { showDealFaithCheck = true }
+                }
+            }
+
+            Text("🎁 you unlocked your second-spin deal")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(AppColors.slGold)
+            Text(L10n.text("Discounted Yearly"))
+                .font(.system(size: 30, weight: .bold))
+                .foregroundColor(AppColors.slTextPrimary)
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(L10n.text("Monthly"))
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(AppColors.slTextSecondary)
+                        Text(discountedPlan.formatAmount(perMonth))
+                            .font(.system(size: 42, weight: .bold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                        Text(L10n.text("per month"))
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(AppColors.slTextSecondary)
+                    }
+                    Spacer(minLength: 0)
+                    VStack(alignment: .trailing, spacing: 4) {
+                        Text(L10n.text("Discounted Yearly"))
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                        Text(L10n.text("Billed annually"))
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(AppColors.slGreen)
+                        Text(discountedPlan.priceString)
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(AppColors.slTextPrimary)
+                        Text(L10n.text("per year"))
+                            .font(.system(size: 12))
+                            .foregroundColor(AppColors.slTextSecondary)
+                    }
+                }
+
+                Divider()
+                    .padding(.vertical, 8)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("your second-spin reward:")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(AppColors.slTextSecondary)
+                    if let discountedYearlySavings {
+                    Text(L10n.format("Save %@%%", String(discountedYearlySavings)))
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(AppColors.slGreen)
+                    }
+            Text(L10n.text("12 months of full access for one yearly payment."))
+                        .font(.system(size: 12))
+                        .foregroundColor(AppColors.slTextSecondary)
+                }
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.slGreen.opacity(0.06)))
+            }
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 22).fill(Color.white))
+            .overlay(RoundedRectangle(cornerRadius: 22).stroke(AppColors.slGreen, lineWidth: 2))
+            .shadow(color: AppColors.slGreen.opacity(0.18), radius: 12, x: 0, y: 6)
+
+            SLPrimaryButton(title: subscriptionVM.isProcessingPurchase ? "processing..." : "claim my second-spin deal 🎁", isEnabled: !subscriptionVM.isProcessingPurchase, isLoading: subscriptionVM.isProcessingPurchase) {
+                Analytics.logEvent("paywall_deal_claimed", parameters: nil)
+                purchase(discountedPlan)
+            }
+
+            Text(L10n.text("one payment. a full year of SalahLock, alarms, duas, and every future feature. cancel anytime."))
+                .font(.system(size: 12))
+                .foregroundColor(AppColors.slTextSecondary)
+
+            if let errorMessage {
+                Text(errorMessage)
+                    .font(.system(size: 13))
+                    .foregroundColor(.red)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(24)
+        .overlay(alignment: .top) {
+            SLConfettiView()
+                .allowsHitTesting(false)
+                .padding(.top, 12)
+        })
+    }
+
+    */
+    // MARK: - Loop helpers
+
+    private func savingsBadge(_ text: String) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: "tag.fill")
+                .font(.system(size: 11, weight: .bold))
+            Text(text)
+                .font(.system(size: 13, weight: .semibold))
+        }
+        .foregroundColor(AppColors.slGreen)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(Capsule().fill(AppColors.slGreen.opacity(0.10)))
+    }
+
+    private func closeButton(action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: "xmark")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(AppColors.slTextSecondary.opacity(0.6))
+                .frame(width: 32, height: 32)
+                .background(Circle().fill(AppColors.slCream))
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func faithCheckOverlay(
+        title: String,
+        message: String,
+        stayTitle: String,
+        leaveTitle: String,
+        onStay: @escaping () -> Void,
+        onLeave: @escaping () -> Void
+    ) -> some View {
+        ZStack {
+            Color.black.opacity(0.55).ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 16) {
+                Text(title)
+                    .font(.system(size: 21, weight: .bold))
+                    .foregroundColor(AppColors.slTextPrimary)
+                Text(message)
+                    .font(.system(size: 15))
+                    .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                SLPrimaryButton(title: stayTitle, action: onStay)
+                Button(action: onLeave) {
+                    Text(leaveTitle)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(24)
+            .background(RoundedRectangle(cornerRadius: 26).fill(Color.white))
+            .padding(.horizontal, 28)
+        }
+        .transition(.opacity)
+    }
+
+    private func exitWithoutPurchase(stage: String = "main", action: String = "close_button") {
+        var context = paywallContext(stage: stage)
+        context["plan_last_selected"] = selectedPlan?.rawValue ?? ""
+        context["exit_action"] = action
+        context["reason_source"] = "not_inferred"
+        if stage == "final_discount" || stage == "final_trial" {
+            context["decline_reason"] = submittedExitReason
+            context["reason_source"] = submittedExitReason == "not_provided" ? "skipped" : "user_reported"
+        }
+        FunnelAnalytics.shared.track(.paywallExited, context)
+        if let onExit {
+            onExit()
+            return
+        }
+        appState.onboardingComplete = false
+        vm.skipTo(.screen17)
+    }
+
+    /// Records the actual paywall impression once the plans have loaded and the
+    /// paywall is visible. RevenueCat records the resulting transaction; this
+    /// Firebase event supplies the denominator needed for paywall conversion.
+    private func trackPaywallImpressionIfNeeded() {
+        guard !hasTrackedPaywallImpression else { return }
+        hasTrackedPaywallImpression = true
+
+        Analytics.logEvent("paywall_impression", parameters: [
+            "paywall_id": conversionPaywallID as NSString,
+            "entry_point": (onExit == nil ? "onboarding" : "in_app") as NSString
+        ])
+        var context = paywallContext()
+        context["available_plan_ids"] = displayedPlans.compactMap(\.productId).joined(separator: ",")
+        context["final_offer_available"] = discountedYearlyPlanDetails != nil
+        context["plans_loaded"] = !firstStagePlans.isEmpty
+        FunnelAnalytics.shared.track(.paywallViewed, context)
+
+    }
+
+    private func purchase(_ plan: SubscriptionPlanDetails) {
+        guard !subscriptionVM.isProcessingPurchase, !purchaseTaskRunning else { return }
+        purchaseTaskRunning = true
+        hasAttemptedPurchase = true
+        let attemptID = UUID().uuidString
+        let isTrial = plan.productId == RevenueCatService.annualTrialProductIdentifier
+        let stage = isTrial ? "final_trial" : (plan.productId == "yearlydiscounted" ? "final_discount" : "main")
+        var attemptProperties = paywallContext(stage: stage)
+        attemptProperties["purchase_attempt_id"] = attemptID
+        attemptProperties["is_final_offer"] = stage != "main"
+        attemptProperties["trial_requested"] = isTrial
+        if isTrial { attemptProperties["trial_days"] = plan.introductoryTrialDays ?? 0 }
+        attemptProperties["price_amount"] = plan.price
+        attemptProperties["currency"] = plan.currencyCode ?? ""
+        attemptProperties["plan_id"] = plan.productId ?? ""
+        attemptProperties["billing_period"] = plan.type.rawValue
+        attemptProperties["price_billed"] = plan.priceString
+        let productID = plan.productId ?? ""
+        let parameters: [String: Any] = [
+            "paywall_id": conversionPaywallID as NSString,
+            "paywall_placement": (onExit == nil ? "post_onboarding" : "feature_gate") as NSString,
+            "plan_type": plan.type.rawValue as NSString,
+            "product_id": productID as NSString
+        ]
+        FunnelAnalytics.shared.track(.purchaseInitiated, attemptProperties)
+
+        Analytics.logEvent("paywall_cta_tapped", parameters: parameters)
+        Analytics.logEvent("paywall_purchase_started", parameters: parameters)
+
         Task {
-            let success = await subscriptionVM.purchasePlan(plan)
+            defer { purchaseTaskRunning = false }
+            let success = await subscriptionVM.purchasePlan(plan, analyticsContext: attemptProperties)
+            lastCheckoutOutcome = subscriptionVM.lastPurchaseOutcome.rawValue
+            var resultProperties = attemptProperties
+            resultProperties["last_checkout_outcome"] = lastCheckoutOutcome
             if success {
-                Analytics.logEvent("onboarding_purchase_started", parameters: ["plan_type": selectedPlan.rawValue as NSString])
+                let verifiedTrial = trialService.subscriptionStatus.isInTrial
+                resultProperties["subscription_period_type"] = verifiedTrial ? "trial" : "normal"
+                resultProperties["charge_status"] = verifiedTrial ? "free_trial" : "not_reported"
+                Analytics.logEvent("paywall_purchase_success", parameters: parameters)
+                FunnelAnalytics.shared.track(.purchaseCompleted, resultProperties)
+                if verifiedTrial {
+                    var trialProperties = resultProperties
+                    trialProperties["trial_end_at"] = trialService.subscriptionStatus.trialEndDate.map { ISO8601DateFormatter().string(from: $0) } ?? ""
+                    trialProperties["charge_status"] = "free_trial"
+                    FunnelAnalytics.shared.track(.trialStarted, trialProperties)
+                }
+                // A free trial is not paid annual revenue. Report conversion to
+                // paid through verified RevenueCat renewal/webhook events.
+                AppsFlyerService.shared.logEvent(verifiedTrial ? "af_start_trial" : "af_purchase", parameters: [
+                    "af_revenue": verifiedTrial ? 0 : plan.price,
+                    "af_currency": plan.currencyCode ?? "",
+                    "af_content_id": productID,
+                    "af_subscription": true
+                ])
                 vm.completeOnboarding()
                 UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
                 WidgetConfig.saveIsSubscribed(true)
                 appState.onboardingComplete = true
                 appState.shouldExitOnboarding = true
+                onExit?()
                 print("🏠 SLPaywallScreen: Purchase successful → exiting onboarding")
             } else {
-                errorMessage = subscriptionVM.errorMessage ?? "Purchase failed"
+                let event: FunnelEvent
+                let analyticsEvent: String
+                switch subscriptionVM.lastPurchaseOutcome {
+                case .cancelled:
+                    event = .purchaseCancelled
+                    analyticsEvent = "paywall_purchase_cancelled"
+                case .pending:
+                    event = .purchasePending
+                    analyticsEvent = "paywall_purchase_pending"
+                case .notAllowed:
+                    event = .purchaseNotAllowed
+                    analyticsEvent = "paywall_purchase_not_allowed"
+                default:
+                    event = .purchaseFailed
+                    analyticsEvent = "paywall_purchase_failed"
+                }
+                var outcomeProperties = resultProperties
+                subscriptionVM.purchaseErrorProperties.forEach { outcomeProperties[$0.key] = $0.value }
+                FunnelAnalytics.shared.track(event, outcomeProperties)
+                var outcomeParameters = parameters
+                subscriptionVM.purchaseErrorProperties.forEach { outcomeParameters[$0.key] = $0.value as NSString }
+                Analytics.logEvent(analyticsEvent, parameters: outcomeParameters)
+                errorMessage = subscriptionVM.lastPurchaseOutcome == .cancelled ? nil : subscriptionVM.errorMessage
             }
         }
     }
@@ -1631,6 +2564,7 @@ struct SLPaywallScreen: View {
                 WidgetConfig.saveIsSubscribed(true)
                 appState.onboardingComplete = true
                 appState.shouldExitOnboarding = true
+                onExit?()
                 print("🏠 SLPaywallScreen: Restore successful → exiting onboarding")
             } else {
                 errorMessage = subscriptionVM.errorMessage ?? "Restore failed"
@@ -1650,20 +2584,20 @@ struct SLPaywallScreen: View {
         VStack(spacing: 0) {
             paywallFeatureRow(
                 icon: "crown",
-                title: "unlock all premium features",
-                subtitle: "get full access to every tool in SalahAlarm"
+                title: L10n.text("unlock all premium features"),
+                subtitle: L10n.text("get full access to every tool in SalahAlarm")
             )
             Divider().padding(.leading, 64)
             paywallFeatureRow(
                 icon: "leaf",
-                title: "support future development",
-                subtitle: "your support helps us build new features"
+                title: L10n.text("support future development"),
+                subtitle: L10n.text("your support helps us build new features")
             )
             Divider().padding(.leading, 64)
             paywallFeatureRow(
                 icon: "heart",
-                title: "help us improve the experience",
-                subtitle: "so we can keep making the app better for you"
+                title: L10n.text("help us improve the experience"),
+                subtitle: L10n.text("so we can keep making the app better for you")
             )
         }
         .background(RoundedRectangle(cornerRadius: 26).fill(Color.white))
@@ -1671,13 +2605,14 @@ struct SLPaywallScreen: View {
     }
 
     private var choosePlanHeader: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 8) {
             Rectangle()
                 .fill(AppColors.slGreen.opacity(0.25))
                 .frame(height: 1)
-            Text("choose your plan")
+            Text(L10n.text("choose your plan"))
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(AppColors.slGreen)
+                .fixedSize(horizontal: true, vertical: false)
             Image(systemName: "lock.fill")
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(AppColors.slGreen)
@@ -1700,80 +2635,60 @@ struct SLPaywallScreen: View {
             }
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
                 Text(subtitle)
-                    .font(.system(size: 13))
+                    .font(.system(size: 12))
                     .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 0)
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 8)
-    }
-
-    private var monthlyValueText: String {
-        guard let yearly = displayedPlans.first(where: { $0.type == .yearly }),
-              yearly.price > 0 else { return "$4.17 / month" }
-        return String(format: "$%.2f / month", yearly.price / 12.0)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
     }
 
     private func timelineBlock(title: String, points: [String]) -> some View {
         EmptyView()
     }
 
-    private func planCard(title: String, price: String, subtitle: String?, badge: String? = nil, isSelected: Bool, action: @escaping () -> Void) -> some View {
+    private func planCard(title: String, priceLine1: String, priceLine2: String, badge: String? = nil, isSelected: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            VStack(alignment: .center, spacing: 10) {
-                if let badge {
-                    Text(badge)
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(Capsule().fill(AppColors.slGreen))
-                } else {
-                    Color.clear.frame(height: 21)
+            VStack(alignment: .leading, spacing: 7) {
+                HStack(spacing: 8) {
+                    Text(title)
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                    if let badge {
+                        Text(badge)
+                            .font(.system(size: 10, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Capsule().fill(AppColors.slGreen))
+                    }
                 }
 
-                ZStack {
-                    Circle()
-                        .fill(AppColors.slGreen.opacity(0.12))
-                        .frame(width: 42, height: 42)
-                    Image(systemName: "calendar")
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(AppColors.slGreen)
-                }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(priceLine1)
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(AppColors.slTextPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
 
-                Text(title)
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundColor(AppColors.slTextPrimary)
-                Text(price)
-                    .font(.system(size: 30, weight: .bold))
-                    .minimumScaleFactor(0.6)
-                    .foregroundColor(AppColors.slTextPrimary)
-
-                if let subtitle {
-                    Text(subtitle.replacingOccurrences(of: " ", with: ""))
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(AppColors.slTextSecondary)
-                }
-
-                if title == "Yearly" {
-                    Text(monthlyValueText)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(AppColors.slGreen)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(Capsule().fill(AppColors.slGreen.opacity(0.10)))
-                } else {
-                    Color.clear.frame(height: 32)
+                    Text(priceLine2)
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(AppColors.slTextPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
                 }
             }
-            .padding(12)
-            .frame(maxWidth: .infinity, minHeight: 196)
-            .background(RoundedRectangle(cornerRadius: 24).fill(Color.white))
-            .overlay(RoundedRectangle(cornerRadius: 24).stroke(isSelected ? AppColors.slGreen : AppColors.slBorderDefault, lineWidth: isSelected ? 2 : 1))
+            .padding(.horizontal, 20)
+            .padding(.vertical, 18)
+            .frame(maxWidth: .infinity, minHeight: 110, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 24).fill(isSelected ? AppColors.slGreen.opacity(0.06) : Color.white))
+            .overlay(RoundedRectangle(cornerRadius: 24).stroke(AppColors.slGreen, lineWidth: isSelected ? 2 : 1))
             .shadow(color: .black.opacity(isSelected ? 0.08 : 0.03), radius: isSelected ? 10 : 4, x: 0, y: isSelected ? 8 : 2)
         }
         .buttonStyle(.plain)

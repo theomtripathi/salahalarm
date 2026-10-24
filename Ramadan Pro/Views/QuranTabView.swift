@@ -48,10 +48,10 @@ struct QuranTabView: View {
                     .frame(width: 28, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 7))
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Quran")
+                    Text(L10n.text("Quran"))
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
-                    Text("Read with focus and resume where you left off.")
+                    Text(L10n.text("Read with focus and resume where you left off."))
                         .font(.system(size: 13))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -75,7 +75,7 @@ struct QuranTabView: View {
         HStack(spacing: 12) {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(AppColors.slTextSecondary)
-            TextField("Search surah", text: $viewModel.searchQuery)
+            TextField(L10n.text("Search surah"), text: $viewModel.searchQuery)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
             if !viewModel.searchQuery.isEmpty {
@@ -97,16 +97,16 @@ struct QuranTabView: View {
 
     private var lastReadCard: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Continue Reading")
+            Text(L10n.text("Continue Reading"))
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(AppColors.slTextSecondary)
             Text(viewModel.lastRead?.surahName ?? "Al-Fatihah")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(AppColors.slTextPrimary)
-            Text("Ayah \(viewModel.lastRead?.ayahNumber ?? 1)")
+            Text(L10n.format("Ayah %@", String(viewModel.lastRead?.ayahNumber ?? 1)))
                 .font(.system(size: 14))
                 .foregroundColor(AppColors.slTextSecondary)
-            SLPrimaryButton(title: "Resume") {
+            SLPrimaryButton(title: L10n.text("Resume")) {
                 let targetSurah = viewModel.lastRead?.surahName ?? "Al-Fatihah"
                 navigationCoordinator.navigateToQuranRoute(.quranReading(surah: targetSurah, juz: nil, page: nil))
             }
@@ -119,7 +119,7 @@ struct QuranTabView: View {
 
     private var bookmarksSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Bookmarks")
+            Text(L10n.text("Bookmarks"))
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(AppColors.slTextPrimary)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -134,7 +134,7 @@ struct QuranTabView: View {
                                 Text(getSurahName(for: bookmark.surahNumber) ?? "Surah \(bookmark.surahNumber)")
                                     .font(.system(size: 14, weight: .semibold))
                                     .foregroundColor(AppColors.slTextPrimary)
-                                Text("Ayah \(bookmark.ayahNumber)")
+                                Text(L10n.format("Ayah %@", String(bookmark.ayahNumber)))
                                     .font(.system(size: 12))
                                     .foregroundColor(AppColors.slTextSecondary)
                             }
@@ -154,7 +154,7 @@ struct QuranTabView: View {
     private var surahList: some View {
         let displaySurahs = viewModel.searchQuery.isEmpty ? viewModel.surahs : viewModel.filteredSurahs
         VStack(alignment: .leading, spacing: 12) {
-            Text("Surahs")
+            Text(L10n.text("Surahs"))
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(AppColors.slTextPrimary)
 
@@ -171,7 +171,7 @@ struct QuranTabView: View {
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
             } else if displaySurahs.isEmpty {
-                Text("No surahs found")
+                Text(L10n.text("No surahs found"))
                     .font(.system(size: 14))
                     .foregroundColor(AppColors.slTextSecondary)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -197,12 +197,12 @@ struct QuranTabView: View {
                                     Text(surah.arabicName)
                                         .font(.system(size: 18, weight: .bold))
                                         .foregroundColor(AppColors.slTextPrimary)
-                                    Text("\(surah.englishName) • \(surah.ayahCount) ayahs")
+                                    Text(L10n.format("%@ • %d ayahs", surah.englishName, surah.ayahCount))
                                         .font(.system(size: 13))
                                         .foregroundColor(AppColors.slTextSecondary)
                                 }
                                 Spacer()
-                                Image(systemName: "chevron.right")
+                                Image(systemName: "chevron.forward")
                                     .foregroundColor(AppColors.slTextSecondary)
                             }
                             .padding(16)

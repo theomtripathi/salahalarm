@@ -93,6 +93,10 @@ class BackgroundAudioKeepAlive: NSObject {
         let now = Date()
         let alarmVM = AlarmViewModel.shared
 
+        // Keep the SalahLock shield in sync while we're alive in the background —
+        // this is what flips the lock ON at prayer time even with the app backgrounded.
+        AppLockManager.shared.evaluateFromSavedState(now: now)
+
         guard alarmVM.hasAlarmAccess, alarmVM.settings.alarmsEnabled else { return }
 
         // Check both today and tomorrow schedules

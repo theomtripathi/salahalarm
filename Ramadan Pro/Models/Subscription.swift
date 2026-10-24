@@ -7,6 +7,25 @@
 
 import Foundation
 
+/// Pure validation shared with the RevenueCat adapter and standalone tests.
+enum AnnualTrialOfferPolicy {
+    enum Unit { case day, week, month, year, unknown }
+
+    static func isAnnual(unit: Unit, value: Int) -> Bool {
+        (unit == .year && value == 1) || (unit == .month && value == 12)
+    }
+
+    static func isSevenDayFreeTrial(unit: Unit, value: Int, periods: Int,
+                                    isFreeTrial: Bool, introductoryPrice: Decimal) -> Bool {
+        isFreeTrial && introductoryPrice == 0 && periods == 1
+            && ((unit == .day && value == 7) || (unit == .week && value == 1))
+    }
+
+    static func hasRenewalPrice(_ price: Double, currency: String?) -> Bool {
+        price.isFinite && price > 0 && currency?.isEmpty == false
+    }
+}
+
 /// Subscription plan type
 enum SubscriptionPlanType: String, Codable {
     case weekly = "weekly"
@@ -26,39 +45,66 @@ enum SubscriptionPlanType: String, Codable {
 struct SubscriptionPlanDetails: Identifiable, Codable {
     let id: UUID
     let type: SubscriptionPlanType
-    let price: Double // Price in dollars
-    let priceString: String // Formatted price string (e.g., "$9.99")
+    let price: Double // Price in the store's local currency
+    let priceString: String // Formatted price string (e.g., "$9.99" or "₱499.00")
+    let currencyCode: String? // ISO currency code from the store (e.g. "USD", "PHP")
     let features: [String]
     let isBestValue: Bool
     let productId: String? // App Store product ID
     let billingPeriodLabel: String
     let pricePerPeriodText: String
-    let trialLabel: String?
-    let renewalDescription: String?
-    
+    let introductoryTrialDays: Int?
+
+    var trialLabel: String? {
+        guard let introductoryTrialDays, introductoryTrialDays > 0 else { return nil }
+        return "\(introductoryTrialDays)-day free trial"
+    }
+
+    var renewalDescription: String? {
+        if let introductoryTrialDays, introductoryTrialDays > 0 {
+            return "Then \(priceString) / \(billingPeriodLabel). Cancel anytime."
+        }
+        return "\(pricePerPeriodText). Cancel anytime."
+    }
+
     init(id: UUID = UUID(),
          type: SubscriptionPlanType,
          price: Double,
          priceString: String? = nil,
+         currencyCode: String? = nil,
          features: [String] = [],
          isBestValue: Bool = false,
          productId: String? = nil,
          billingPeriodLabel: String? = nil,
          pricePerPeriodText: String? = nil,
          trialLabel: String? = nil,
-         renewalDescription: String? = nil) {
+         renewalDescription: String? = nil,
+         introductoryTrialDays: Int? = nil) {
         self.id = id
         self.type = type
         self.price = price
         self.priceString = priceString ?? String(format: "$%.2f", price)
+        self.currencyCode = currencyCode
         self.features = features
         self.isBestValue = isBestValue
         self.productId = productId
         let resolvedBillingPeriodLabel = billingPeriodLabel ?? type.rawValue
         self.billingPeriodLabel = resolvedBillingPeriodLabel
         self.pricePerPeriodText = pricePerPeriodText ?? "\(self.priceString) / \(resolvedBillingPeriodLabel)"
-        self.trialLabel = trialLabel
-        self.renewalDescription = renewalDescription
+        self.introductoryTrialDays = introductoryTrialDays
+        // Kept as source-compatible initializer parameters for existing callers.
+        // Trial copy is now derived only from verified introductoryTrialDays.
+        _ = trialLabel
+        _ = renewalDescription
+    }
+
+    /// Formats an arbitrary amount (e.g. a per-week breakdown) in this plan's
+    /// store currency, so computed prices match the store's localized display.
+    func formatAmount(_ value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = currencyCode ?? "USD"
+        return formatter.string(from: NSNumber(value: value)) ?? String(format: "%.2f", value)
     }
 }
 

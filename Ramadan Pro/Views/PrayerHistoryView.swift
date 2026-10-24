@@ -25,7 +25,7 @@ struct PrayerHistoryView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 HStack {
-                    Text("Prayer History")
+                    Text(L10n.text("Prayer History"))
                         .font(.system(size: 22, weight: .bold))
                     Spacer()
                     SLStreakBadge(streak: prayerLogViewModel.streakData.currentStreak, isActive: prayerLogViewModel.todayConfirmedCount > 0)
@@ -47,10 +47,10 @@ struct PrayerHistoryView: View {
     private var summaryCards: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                compactCard("🔥", "\(prayerLogViewModel.streakData.currentStreak)", "day streak")
-                compactCard("🕌", "\(prayerLogViewModel.streakData.totalPrayersConfirmed)", "prayers total")
-                compactCard("📅", "\(prayerLogViewModel.streakData.totalPrayerDays)", "full days")
-                compactCard("⏱", String(format: "%.1f", Double(prayerLogViewModel.streakData.totalPrayersConfirmed * 10) / 60.0), "hours in salah")
+                compactCard("🔥", "\(prayerLogViewModel.streakData.currentStreak)", L10n.text("day streak"))
+                compactCard("🕌", "\(prayerLogViewModel.streakData.totalPrayersConfirmed)", L10n.text("prayers total"))
+                compactCard("📅", "\(prayerLogViewModel.streakData.totalPrayerDays)", L10n.text("full days"))
+                compactCard("⏱", String(format: "%.1f", Double(prayerLogViewModel.streakData.totalPrayersConfirmed * 10) / 60.0), L10n.text("hours in salah"))
             }
         }
     }
@@ -58,9 +58,9 @@ struct PrayerHistoryView: View {
     private var weeklyOrMonthlySection: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
-                Picker("View", selection: $showingMonthly) {
-                    Text("Weekly").tag(false)
-                    Text("Monthly").tag(true)
+                Picker(L10n.text("View"), selection: $showingMonthly) {
+                    Text(L10n.text("Weekly")).tag(false)
+                    Text(L10n.text("Monthly")).tag(true)
                 }
                 .pickerStyle(.segmented)
 
@@ -69,12 +69,12 @@ struct PrayerHistoryView: View {
                 Button {
                     selectedWeekOffset -= 1
                 } label: {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: "chevron.backward")
                 }
                 Button {
                     selectedWeekOffset += 1
                 } label: {
-                    Image(systemName: "chevron.right")
+                    Image(systemName: "chevron.forward")
                 }
                 .disabled(selectedWeekOffset >= 0)
             }
@@ -131,7 +131,7 @@ struct PrayerHistoryView: View {
 
     private var prayerLogList: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Recent Prayer Log")
+            Text(L10n.text("Recent Prayer Log"))
                 .font(.system(size: 18, weight: .bold))
             ForEach(recentDates, id: \.self) { day in
                 let log = prayerLogViewModel.log(for: day)

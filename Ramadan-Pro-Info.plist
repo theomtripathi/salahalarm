@@ -17,14 +17,47 @@
 			</array>
 		</dict>
 	</array>
-	<key>KochavaAppGUID</key>
-	<string>kosalahalarm-db3nht</string>
 	<key>NSCameraUsageDescription</key>
 	<string>SalahAlarm uses your camera so you can scan your prayer mat when dismissing alarms.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This lets us measure which ads brought you to SalahAlarm so we can keep the app improving. It never affects prayer times or your personal data.</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>v9wttpbfk9.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>n38lu8286q.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>424m5254lk.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>4fzdc2evr5.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>2u9pt9hc89.skadnetwork</string>
+		</dict>
+	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>SalahAlarm uses your location to calculate accurate prayer times and show the correct Qibla direction.</string>
 	<key>RevenueCatAPIKey</key>
 	<string>test_tajeOGblNDJrBdEESJrRzsLNVDS</string>
+	<key>TikTokAccessToken</key>
+	<string></string>
+	<key>TikTokAppID</key>
+	<string></string>
+	<key>TikTokAppTikTokID</key>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Canela-Thin-Trial.otf</string>
@@ -46,5 +79,9 @@
 		<string>fetch</string>
 		<string>processing</string>
 	</array>
+	<key>PostHogAPIKey</key>
+	<string>phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX</string>
+	<key>PostHogHost</key>
+	<string>https://us.i.posthog.com</string>
 </dict>
 </plist>

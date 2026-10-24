@@ -96,6 +96,7 @@ final class AlarmViewModel: ObservableObject {
         guard ensureAlarmAccessForInteraction() || !isEnabled else { return }
         settings.alarmsEnabled = isEnabled
         saveSettings()
+        TrialJourneyTracker.shared.recordAlarmConfigured(status: subscriptionStatus, settings: settings)
         if !isEnabled {
             activeAlarm = nil
             audioService.stop()
@@ -125,6 +126,7 @@ final class AlarmViewModel: ObservableObject {
         guard ensureAlarmAccessForInteraction() || !isEnabled else { return }
         settings.setEnabled(isEnabled, for: prayer)
         saveSettings()
+        TrialJourneyTracker.shared.recordAlarmConfigured(status: subscriptionStatus, settings: settings)
         if let schedule = currentSchedule {
             rescheduleNotifications(schedule: schedule)
         }
@@ -146,6 +148,7 @@ final class AlarmViewModel: ObservableObject {
 
         settings.alarmsEnabled = !selectedPrayers.isEmpty
         saveSettings()
+        TrialJourneyTracker.shared.recordAlarmConfigured(status: subscriptionStatus, settings: settings)
         if let schedule = currentSchedule {
             rescheduleNotifications(schedule: schedule)
         }

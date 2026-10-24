@@ -43,6 +43,7 @@ private func logWidgetSuccess(_ message: String, file: String = #file, function:
 struct RamadanWidgetExtensionBundle: WidgetBundle {
     var body: some Widget {
         RamadanWidget()
+        DuaWidget()
     }
 }
 

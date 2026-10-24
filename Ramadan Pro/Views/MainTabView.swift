@@ -6,6 +6,7 @@
 import SwiftUI
 import UIKit
 import Combine
+import RevenueCat
 
 struct MainTabView: View {
     @EnvironmentObject var appState: AppState
@@ -26,7 +27,7 @@ struct MainTabView: View {
                     }
             }
             .tabItem {
-                Label("Home", systemImage: "house.fill")
+                Label(L10n.text("Home"), systemImage: "house.fill")
             }
             .tag(AppEnums.TabItem.home.rawValue)
 
@@ -37,10 +38,21 @@ struct MainTabView: View {
                     }
             }
             .tabItem {
-                Label("Prayers", systemImage: "sun.max.fill")
+                Label(L10n.text("Prayers"), systemImage: "sun.max.fill")
             }
             .badge(unconfirmedPrayerCount)
             .tag(AppEnums.TabItem.prayers.rawValue)
+
+            NavigationStack(path: $navigationCoordinator.lockNavigationPath) {
+                LockTabView(prayerTimesViewModel: prayerTimesViewModel)
+                    .navigationDestination(for: AppEnums.NavigationRoute.self) { route in
+                        destinationView(for: route)
+                    }
+            }
+            .tabItem {
+                Label(L10n.text("Lock"), systemImage: "lock.fill")
+            }
+            .tag(AppEnums.TabItem.lock.rawValue)
 
             NavigationStack(path: $navigationCoordinator.quranNavigationPath) {
                 QuranTabView()
@@ -49,32 +61,23 @@ struct MainTabView: View {
                     }
             }
             .tabItem {
-                Label("Quran", systemImage: "book.fill")
+                Label(L10n.text("Quran"), systemImage: "book.fill")
             }
             .tag(AppEnums.TabItem.quran.rawValue)
-
-            NavigationStack(path: $navigationCoordinator.qiblaNavigationPath) {
-                QiblaCompassView()
-                    .navigationDestination(for: AppEnums.NavigationRoute.self) { route in
-                        destinationView(for: route)
-                    }
-            }
-            .tabItem {
-                Label("Qibla", systemImage: "location.north.fill")
-            }
-            .tag(AppEnums.TabItem.qibla.rawValue)
 
             NavigationStack(path: $navigationCoordinator.profileNavigationPath) {
                 ProfileView()
             }
             .tabItem {
-                Label("Profile", systemImage: "person.fill")
+                Label(L10n.text("Profile"), systemImage: "person.fill")
             }
             .tag(AppEnums.TabItem.profile.rawValue)
         }
         .environmentObject(navigationCoordinator)
         .tint(AppColors.slGreen)
         .task {
+            // Existing users skip onboarding, so offer the ATT prompt here too
+            await AppsFlyerService.shared.requestTrackingAuthorizationIfNeeded()
             await prayerTimesViewModel.loadPrayerTimes()
             await prayerLogViewModel.load()
             alarmViewModel.syncSchedule(prayerTimesViewModel.activeSchedule)
@@ -82,6 +85,34 @@ struct MainTabView: View {
             keepAlive.updateSchedules(
                 today: prayerTimesViewModel.currentSchedule,
                 tomorrow: prayerTimesViewModel.tomorrowSchedule
+            )
+            AppLockManager.shared.update(
+                schedule: prayerTimesViewModel.currentSchedule,
+                log: prayerLogViewModel.todayLog
+            )
+        }
+        .task(id: scenePhase) {
+            // Establish the first eligible-use time without ever prompting on
+            // an unentitled launch. A first-use invocation only saves a baseline;
+            // later foreground transitions can pass the 24-hour gate.
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            guard !Task.isCancelled, scenePhase == .active,
+                  let scene = activeWindowScene() else { return }
+            let revenueCatUserID = Purchases.shared.appUserID
+            guard let customerInfo = try? await Purchases.shared.customerInfo() else { return }
+            guard !Task.isCancelled, scenePhase == .active,
+                  Purchases.shared.appUserID == revenueCatUserID else { return }
+            let hasActiveEntitlement = customerInfo.entitlements.active.values.contains {
+                $0.expirationDate.map { $0 > Date() } ?? true
+            }
+            RatingPromptManager.shared.recordFirstEligibleUseIfNeeded(
+                hasActiveEntitlement: hasActiveEntitlement
+            )
+            guard ratingPromptContextIsAvailable(in: scene) else { return }
+            RatingPromptManager.shared.considerForegroundReturn(
+                hasActiveEntitlement: hasActiveEntitlement,
+                scene: scene,
+                isModalPresented: false
             )
         }
         .onAppear {
@@ -108,6 +139,11 @@ struct MainTabView: View {
                 today: prayerTimesViewModel.currentSchedule,
                 tomorrow: prayerTimesViewModel.tomorrowSchedule
             )
+            AppLockManager.shared.update(
+                schedule: prayerTimesViewModel.currentSchedule,
+                log: prayerLogViewModel.todayLog,
+                now: now
+            )
         }
         .onChange(of: scenePhase) { newPhase in
             switch newPhase {
@@ -117,6 +153,11 @@ struct MainTabView: View {
                 }
             case .active:
                 keepAlive.stopSilentLoop()
+                AppLockManager.shared.refreshAuthorizationStatus()
+                AppLockManager.shared.update(
+                    schedule: prayerTimesViewModel.currentSchedule,
+                    log: prayerLogViewModel.todayLog
+                )
             default:
                 break
             }
@@ -125,8 +166,48 @@ struct MainTabView: View {
             SAActiveAlarmOverlay(alarmViewModel: alarmViewModel, alarm: alarm)
         }
         .fullScreenCover(isPresented: $alarmViewModel.showSubscriptionPaywall) {
-            SLPaywallScreen(vm: OnboardingFlowViewModel())
+            SLPaywallScreen(vm: OnboardingFlowViewModel(), onExit: {
+                alarmViewModel.showSubscriptionPaywall = false
+            })
         }
+    }
+
+    private func activeWindowScene() -> UIWindowScene? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }
+    }
+
+    private func hasPresentedModal(in scene: UIWindowScene) -> Bool {
+        guard let window = scene.windows.first(where: \.isKeyWindow),
+              let root = window.rootViewController else { return true }
+        return hasPresentedModal(from: root)
+    }
+
+    private func hasPresentedModal(from controller: UIViewController) -> Bool {
+        if controller.presentedViewController != nil { return true }
+        if let navigationController = controller as? UINavigationController,
+           let visible = navigationController.visibleViewController,
+           hasPresentedModal(from: visible) {
+            return true
+        }
+        if let tabController = controller as? UITabBarController,
+           let selected = tabController.selectedViewController,
+           hasPresentedModal(from: selected) {
+            return true
+        }
+        return controller.children.contains { hasPresentedModal(from: $0) }
+    }
+
+    private func ratingPromptContextIsAvailable(in scene: UIWindowScene) -> Bool {
+        scenePhase == .active
+            && scene.activationState == .foregroundActive
+            && appState.selectedTab != AppEnums.TabItem.profile.rawValue
+            && !alarmViewModel.showSubscriptionPaywall
+            && alarmViewModel.activeAlarm == nil
+            && !alarmViewModel.showSettingsSheet
+            && !alarmViewModel.showSoundSetupSheet
+            && !hasPresentedModal(in: scene)
     }
 
     @ViewBuilder
@@ -136,6 +217,8 @@ struct MainTabView: View {
             QuranReadingView(surah: surah, juz: juz, page: page)
         case .prayerDetail(let prayerType):
             Text(prayerType)
+        case .qibla:
+            QiblaCompassView()
         }
     }
 

@@ -53,45 +53,31 @@ class SadaqViewModel: ObservableObject {
         do {
             // Find or create consumable product for this amount
             let productId = "com.ramadanpro.donation.\(amount)"
-            var transactionId: String?
-            
-            // Try to purchase via RevenueCat if product exists
-            do {
-                // Fetch donation packages - search all offerings (avoids ambiguity when multiple offerings exist)
-                let donationPackages = await revenueCatService.fetchDonationProductPackages(offeringIdentifier: nil)
-                if let package = donationPackages.first(where: { $0.storeProduct.productIdentifier == productId }) {
-                    // Purchase the donation product via RevenueCat
-                    let success = try await revenueCatService.purchasePackage(package)
-                    if success {
-                        // Get transaction ID from RevenueCat customer info
-                        if let customerInfo = revenueCatService.customerInfo {
-                            // For consumable products, get the latest transaction
-                            // Transaction ID will be available in the purchase response
-                            transactionId = customerInfo.originalAppUserId + "_" + String(Int(Date().timeIntervalSince1970))
-                        }
-                        print("✅ SadaqViewModel: Donation payment processed via RevenueCat - $\(amount)")
-                    } else {
-                        errorMessage = "Payment was cancelled"
-                        isProcessingDonation = false
-                        return nil
-                    }
-                } else {
-                    // Product doesn't exist in RevenueCat - use direct Firebase donation (for testing/fallback)
-                    print("⚠️ SadaqViewModel: Donation product \(productId) not found in RevenueCat, using direct donation")
-                    transactionId = UUID().uuidString
-                }
-            } catch {
-                // RevenueCat purchase failed - fallback to direct donation
-                print("⚠️ SadaqViewModel: RevenueCat purchase failed, using direct donation: \(error.localizedDescription)")
-                transactionId = UUID().uuidString
+            // A donation is recorded only after StoreKit confirms the charge.
+            // Never turn a missing product or failed/cancelled payment into a
+            // completed Firebase donation.
+            let donationPackages = await revenueCatService.fetchDonationProductPackages(offeringIdentifier: nil)
+            guard let package = donationPackages.first(where: { $0.storeProduct.productIdentifier == productId }) else {
+                errorMessage = "This donation amount is temporarily unavailable. Please try another amount."
+                isProcessingDonation = false
+                return nil
             }
+
+            let purchase = try await revenueCatService.purchaseDonationPackage(package)
+            guard !purchase.userCancelled else {
+                errorMessage = "Payment was cancelled"
+                isProcessingDonation = false
+                return nil
+            }
+            let transactionId = purchase.transactionIdentifier
+            print("✅ SadaqViewModel: Donation payment processed via RevenueCat - $\(amount)")
             
             // Create donation record
             let donation = Donation(
                 amount: amount,
                 mealsProvided: amount,
                 timestamp: Date(),
-                transactionId: transactionId ?? UUID().uuidString,
+                transactionId: transactionId,
                 receiptId: UUID().uuidString,
                 status: .completed
             )

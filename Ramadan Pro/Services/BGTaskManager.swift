@@ -121,6 +121,10 @@ class BGTaskManager {
                 today: todaySchedule,
                 tomorrow: tomorrowSchedule
             )
+
+            // Re-apply or clear the SalahLock shield now that iOS woke us up —
+            // covers the case where the app was killed before prayer time.
+            AppLockManager.shared.evaluateFromSavedState()
         }
 
         print("✅ BGTaskManager: Rescheduled alarms for \(enabledPrayers.count) prayers at \(location.city)")

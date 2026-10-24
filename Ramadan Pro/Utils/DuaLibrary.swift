@@ -1,0 +1,372 @@
+//
+//  DuaLibrary.swift
+//  Ramadan Pro
+//
+//  Shared between the app and the widget extension.
+//  Duas and quotes from the Quran and Hadith, with rotating color themes.
+//
+
+import Foundation
+
+struct Dua: Identifiable, Hashable {
+    let english: String
+    let arabic: String
+    let reference: String
+
+    var id: String { english }
+}
+
+/// Simple color theme for the dua widget/cards. Hex strings so the file
+/// stays SwiftUI-free and can be shared with the widget target.
+struct DuaTheme: Hashable {
+    let topHex: String
+    let bottomHex: String
+    let accentHex: String
+}
+
+enum DuaLibrary {
+
+    // MARK: - Rotation
+
+    /// Deterministic pick that changes every 30 minutes.
+    static func dua(for date: Date = Date()) -> Dua {
+        all[index(for: date, count: all.count)]
+    }
+
+    static func theme(for date: Date = Date()) -> DuaTheme {
+        themes[index(for: date, count: themes.count, salt: 7)]
+    }
+
+    /// 30-minute bucket scrambled so consecutive buckets land far apart.
+    static func index(for date: Date, count: Int, salt: UInt64 = 0) -> Int {
+        let bucket = UInt64(max(0, date.timeIntervalSince1970)) / 1800
+        let scrambled = (bucket &+ salt) &* 2654435761
+        return Int(scrambled % UInt64(count))
+    }
+
+    /// A shuffled batch for widget timelines: one dua per 30-minute slot.
+    static func timelineDuas(from date: Date, slots: Int) -> [(date: Date, dua: Dua, theme: DuaTheme)] {
+        (0..<slots).map { slot in
+            let slotDate = date.addingTimeInterval(TimeInterval(slot) * 1800)
+            return (slotDate, dua(for: slotDate), theme(for: slotDate))
+        }
+    }
+
+    // MARK: - Themes (simple, calm palettes)
+
+    static let themes: [DuaTheme] = [
+        DuaTheme(topHex: "#1F7A44", bottomHex: "#0E4A27", accentHex: "#F5D56A"), // green
+        DuaTheme(topHex: "#1D3557", bottomHex: "#0E1D33", accentHex: "#F1C879"), // midnight blue
+        DuaTheme(topHex: "#4A2C6D", bottomHex: "#2A1741", accentHex: "#E8C9F5"), // plum
+        DuaTheme(topHex: "#0F6E6B", bottomHex: "#07403E", accentHex: "#BDEDE3"), // teal
+        DuaTheme(topHex: "#7A4A21", bottomHex: "#4A2A0E", accentHex: "#F5DFA8"), // warm sand
+        DuaTheme(topHex: "#701C33", bottomHex: "#3D0E1C", accentHex: "#F5C6C6"), // burgundy
+        DuaTheme(topHex: "#2E3A8C", bottomHex: "#161D4D", accentHex: "#C7D0FF"), // indigo
+        DuaTheme(topHex: "#33502F", bottomHex: "#1A2C18", accentHex: "#D9E8C5")  // forest
+    ]
+
+    // MARK: - Duas & quotes
+
+    static let all: [Dua] = [
+        Dua(english: "Our Lord, grant us good in this world and the Hereafter.",
+            arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+            reference: "Quran 2:201"),
+        Dua(english: "My Lord, increase me in knowledge.",
+            arabic: "رَبِّ زِدْنِي عِلْمًا",
+            reference: "Quran 20:114"),
+        Dua(english: "My Lord, forgive me and have mercy upon me.",
+            arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+            reference: "Quran 23:118"),
+        Dua(english: "My Lord, make me one who establishes prayer.",
+            arabic: "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ",
+            reference: "Quran 14:40"),
+        Dua(english: "My Lord, expand my chest.",
+            arabic: "رَبِّ اشْرَحْ لِي صَدْرِي",
+            reference: "Quran 20:25"),
+        Dua(english: "Ease my task for me.",
+            arabic: "وَيَسِّرْ لِي أَمْرِي",
+            reference: "Quran 20:26"),
+        Dua(english: "Untie the knot from my tongue.",
+            arabic: "وَاحْلُلْ عُقْدَةً مِن لِّسَانِي",
+            reference: "Quran 20:27"),
+        Dua(english: "Increase me in patience.",
+            arabic: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا",
+            reference: "Quran 2:250"),
+        Dua(english: "Our Lord, do not let our hearts deviate.",
+            arabic: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا",
+            reference: "Quran 3:8"),
+        Dua(english: "Our Lord, pour upon us patience and let us die as Muslims.",
+            arabic: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ",
+            reference: "Quran 7:126"),
+        Dua(english: "My Lord, forgive me, my parents, and the believers.",
+            arabic: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ",
+            reference: "Quran 14:41"),
+        Dua(english: "Our Lord, accept this from us.",
+            arabic: "رَبَّنَا تَقَبَّلْ مِنَّا",
+            reference: "Quran 2:127"),
+        Dua(english: "Our Lord, forgive us our sins.",
+            arabic: "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا",
+            reference: "Quran 3:16"),
+        Dua(english: "Our Lord, forgive us and have mercy on us.",
+            arabic: "رَبَّنَا اغْفِرْ لَنَا وَارْحَمْنَا",
+            reference: "Quran 23:109"),
+        Dua(english: "Our Lord, we have wronged ourselves.",
+            arabic: "رَبَّنَا ظَلَمْنَا أَنفُسَنَا",
+            reference: "Quran 7:23"),
+        Dua(english: "My Lord, forgive me.",
+            arabic: "رَبِّ اغْفِرْ لِي",
+            reference: "Quran 71:28"),
+        Dua(english: "My Lord, have mercy on them as they raised me when I was young.",
+            arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+            reference: "Quran 17:24"),
+        Dua(english: "My Lord, I am truly in need of whatever good You send me.",
+            arabic: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
+            reference: "Quran 28:24"),
+        Dua(english: "You are my Protector in this world and the Hereafter.",
+            arabic: "أَنتَ وَلِيِّي فِي الدُّنْيَا وَالْآخِرَةِ",
+            reference: "Quran 12:101"),
+        Dua(english: "My Lord, increase me in gratitude.",
+            arabic: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ",
+            reference: "Quran 27:19"),
+        Dua(english: "O Allah, forgive me.",
+            arabic: "اللَّهُمَّ اغْفِرْ لِي",
+            reference: "Sahih al-Bukhari"),
+        Dua(english: "O Allah, guide me.",
+            arabic: "اللَّهُمَّ اهْدِنِي",
+            reference: "Sahih Muslim"),
+        Dua(english: "O Allah, grant me well-being.",
+            arabic: "اللَّهُمَّ عَافِنِي",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "O Allah, You are Pardoning and love pardon, so pardon me.",
+            arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "O Turner of hearts, keep my heart firm upon Your religion.",
+            arabic: "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "O Allah, I ask You for Paradise.",
+            arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ",
+            reference: "Sunan Abi Dawud"),
+        Dua(english: "O Allah, I seek refuge in You from the Fire.",
+            arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ النَّارِ",
+            reference: "Sunan Abi Dawud"),
+        Dua(english: "O Allah, grant me beneficial knowledge.",
+            arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا",
+            reference: "Sunan Ibn Majah"),
+        Dua(english: "O Allah, help me remember You, thank You, and worship You well.",
+            arabic: "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+            reference: "Sunan Abi Dawud"),
+        Dua(english: "O Allah, make the Quran the spring of my heart.",
+            arabic: "اللَّهُمَّ اجْعَلِ الْقُرْآنَ رَبِيعَ قَلْبِي",
+            reference: "Musnad Ahmad"),
+        Dua(english: "O Allah, suffice me with what You have made lawful.",
+            arabic: "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "O Allah, enrich me by Your bounty.",
+            arabic: "وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "O Allah, make my affairs easy.",
+            arabic: "اللَّهُمَّ يَسِّرْ لِي أَمْرِي",
+            reference: "Based on Quran 20:26"),
+        Dua(english: "O Allah, bless me in my time.",
+            arabic: "اللَّهُمَّ بَارِكْ لِي فِي وَقْتِي",
+            reference: "Prophetic supplications"),
+        Dua(english: "O Allah, grant me patience.",
+            arabic: "اللَّهُمَّ ارْزُقْنِي الصَّبْرَ",
+            reference: "Prophetic supplications"),
+        Dua(english: "O Allah, increase my faith.",
+            arabic: "اللَّهُمَّ زِدْنِي إِيمَانًا",
+            reference: "Supplication of the early Muslims"),
+        Dua(english: "O Allah, purify my heart.",
+            arabic: "اللَّهُمَّ طَهِّرْ قَلْبِي",
+            reference: "Prophetic supplications"),
+        Dua(english: "O Allah, grant me sincerity.",
+            arabic: "اللَّهُمَّ ارْزُقْنِي الْإِخْلَاصَ",
+            reference: "Islamic supplication"),
+        Dua(english: "O Allah, make me among the grateful.",
+            arabic: "اللَّهُمَّ اجْعَلْنِي مِنَ الشَّاكِرِينَ",
+            reference: "Islamic supplication"),
+        Dua(english: "O Allah, make me among the patient.",
+            arabic: "اللَّهُمَّ اجْعَلْنِي مِنَ الصَّابِرِينَ",
+            reference: "Islamic supplication"),
+        Dua(english: "O Allah, grant me a righteous heart.",
+            arabic: "اللَّهُمَّ ارْزُقْنِي قَلْبًا سَلِيمًا",
+            reference: "Based on Quran 26:89"),
+        Dua(english: "O Allah, keep me steadfast.",
+            arabic: "اللَّهُمَّ ثَبِّتْنِي",
+            reference: "Prophetic supplications"),
+        Dua(english: "O Allah, forgive all my sins.",
+            arabic: "اللَّهُمَّ اغْفِرْ لِي ذُنُوبِي كُلَّهَا",
+            reference: "Sahih Muslim"),
+        Dua(english: "O Allah, make me among Your righteous servants.",
+            arabic: "اللَّهُمَّ اجْعَلْنِي مِنْ عِبَادِكَ الصَّالِحِينَ",
+            reference: "Islamic supplication"),
+        Dua(english: "O Allah, grant me a good ending.",
+            arabic: "اللَّهُمَّ اخْتِمْ لِي بِخَيْرٍ",
+            reference: "Islamic du'a"),
+        Dua(english: "O Allah, let me die as a Muslim.",
+            arabic: "تَوَفَّنِي مُسْلِمًا",
+            reference: "Quran 12:101"),
+        Dua(english: "O Allah, unite us in Paradise.",
+            arabic: "اللَّهُمَّ اجْمَعْنَا فِي الْجَنَّةِ",
+            reference: "Islamic supplication"),
+        Dua(english: "O Allah, accept my repentance.",
+            arabic: "اللَّهُمَّ تُبْ عَلَيَّ",
+            reference: "Sunan Abi Dawud"),
+        Dua(english: "O Allah, make the best of my deeds the last of them.",
+            arabic: "اللَّهُمَّ اجْعَلْ خَيْرَ عَمَلِي آخِرَهُ",
+            reference: "Musnad Ahmad"),
+        Dua(english: "O Allah, bless Muhammad and the family of Muhammad.",
+            arabic: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ",
+            reference: "Sahih al-Bukhari"),
+        Dua(english: "Do not lose hope in the mercy of Allah.",
+            arabic: "لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ",
+            reference: "Quran 39:53"),
+        Dua(english: "Allah is enough for us, and the best Trustee.",
+            arabic: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+            reference: "Quran 3:173"),
+        Dua(english: "Whoever fears Allah, He will make a way out.",
+            arabic: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا",
+            reference: "Quran 65:2"),
+        Dua(english: "And He will provide from where they never imagined.",
+            arabic: "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ",
+            reference: "Quran 65:3"),
+        Dua(english: "Whoever relies upon Allah, He is enough for them.",
+            arabic: "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ",
+            reference: "Quran 65:3"),
+        Dua(english: "My Lord is with me. He will guide me.",
+            arabic: "كَلَّا إِنَّ مَعِيَ رَبِّي سَيَهْدِينِ",
+            reference: "Quran 26:62"),
+        Dua(english: "Allah is the best Protector.",
+            arabic: "فَاللَّهُ خَيْرٌ حَافِظًا",
+            reference: "Quran 12:64"),
+        Dua(english: "Your Lord has not abandoned you.",
+            arabic: "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى",
+            reference: "Quran 93:3"),
+        Dua(english: "Your Lord will soon give you, and you will be satisfied.",
+            arabic: "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَى",
+            reference: "Quran 93:5"),
+        Dua(english: "Surely, Allah is with those who are mindful of Him.",
+            arabic: "إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوْا",
+            reference: "Quran 16:128"),
+        Dua(english: "Be patient. Indeed, the promise of Allah is true.",
+            arabic: "فَاصْبِرْ إِنَّ وَعْدَ اللَّهِ حَقٌّ",
+            reference: "Quran 30:60"),
+        Dua(english: "My success is only through Allah.",
+            arabic: "وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ",
+            reference: "Quran 11:88"),
+        Dua(english: "He knows what is in every heart.",
+            arabic: "عَلِيمٌ بِذَاتِ الصُّدُورِ",
+            reference: "Quran 67:13"),
+        Dua(english: "Allah is with the doers of good.",
+            arabic: "إِنَّ اللَّهَ مَعَ الْمُحْسِنِينَ",
+            reference: "Quran 29:69"),
+        Dua(english: "The Hereafter is better for you than this world.",
+            arabic: "وَلَلْآخِرَةُ خَيْرٌ لَّكَ مِنَ الْأُولَى",
+            reference: "Quran 93:4"),
+        Dua(english: "Remember Allah often so that you may succeed.",
+            arabic: "وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ",
+            reference: "Quran 62:10"),
+        Dua(english: "Allah loves those who purify themselves.",
+            arabic: "وَاللَّهُ يُحِبُّ الْمُطَّهِّرِينَ",
+            reference: "Quran 9:108"),
+        Dua(english: "Allah loves those who repent.",
+            arabic: "إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ",
+            reference: "Quran 2:222"),
+        Dua(english: "The patient will be rewarded without measure.",
+            arabic: "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ",
+            reference: "Quran 39:10"),
+        Dua(english: "Whoever does an atom's weight of good will see it.",
+            arabic: "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ",
+            reference: "Quran 99:7"),
+        Dua(english: "Every soul shall taste death.",
+            arabic: "كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ",
+            reference: "Quran 3:185"),
+        Dua(english: "Race toward forgiveness from your Lord.",
+            arabic: "سَابِقُوا إِلَىٰ مَغْفِرَةٍ مِّن رَّبِّكُمْ",
+            reference: "Quran 57:21"),
+        Dua(english: "So flee to Allah.",
+            arabic: "فَفِرُّوا إِلَى اللَّهِ",
+            reference: "Quran 51:50"),
+        Dua(english: "Call upon Me; I will answer you.",
+            arabic: "ادْعُونِي أَسْتَجِبْ لَكُمْ",
+            reference: "Quran 40:60"),
+        Dua(english: "We are closer to him than his jugular vein.",
+            arabic: "وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ",
+            reference: "Quran 50:16"),
+        Dua(english: "Indeed, Allah is with the patient.",
+            arabic: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+            reference: "Quran 2:153"),
+        Dua(english: "Allah does not waste the reward of the righteous.",
+            arabic: "إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ",
+            reference: "Quran 9:120"),
+        Dua(english: "Indeed, the honor belongs to Allah.",
+            arabic: "فَإِنَّ الْعِزَّةَ لِلَّهِ جَمِيعًا",
+            reference: "Quran 10:65"),
+        Dua(english: "Your Lord is never unjust.",
+            arabic: "وَمَا رَبُّكَ بِظَلَّامٍ لِّلْعَبِيدِ",
+            reference: "Quran 41:46"),
+        Dua(english: "Whoever is grateful, it is for their own good.",
+            arabic: "وَمَن شَكَرَ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِ",
+            reference: "Quran 31:12"),
+        Dua(english: "The strongest are those who control their anger.",
+            arabic: "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ وَلَكِنَّ الشَّدِيدَ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ",
+            reference: "Sahih al-Bukhari"),
+        Dua(english: "The most beloved deeds to Allah are those done consistently.",
+            arabic: "أَحَبُّ الْأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ",
+            reference: "Sahih al-Bukhari & Muslim"),
+        Dua(english: "Allah does not look at your appearance but at your hearts and deeds.",
+            arabic: "إِنَّ اللَّهَ لَا يَنْظُرُ إِلَى صُوَرِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ",
+            reference: "Sahih Muslim"),
+        Dua(english: "The best people are those most beneficial to others.",
+            arabic: "خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ",
+            reference: "Al-Mu'jam al-Awsat"),
+        Dua(english: "None of you truly believes until he loves for his brother what he loves for himself.",
+            arabic: "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+            reference: "Sahih al-Bukhari & Muslim"),
+        Dua(english: "Whoever remains silent is saved.",
+            arabic: "مَنْ صَمَتَ نَجَا",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "Be in this world as though you are a traveler.",
+            arabic: "كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ",
+            reference: "Sahih al-Bukhari"),
+        Dua(english: "Paradise lies beneath the feet of mothers.",
+            arabic: "الْجَنَّةُ تَحْتَ أَقْدَامِ الْأُمَّهَاتِ",
+            reference: "Islamic saying"),
+        Dua(english: "The believer is not one who insults others.",
+            arabic: "لَيْسَ الْمُؤْمِنُ بِالطَّعَّانِ وَلَا اللَّعَّانِ",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "The nearest to me on the Day of Judgment are those with the best character.",
+            arabic: "إِنَّ مِنْ أَحَبِّكُمْ إِلَيَّ أَحَاسِنَكُمْ أَخْلَاقًا",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "The world is a prison for the believer and a paradise for the disbeliever.",
+            arabic: "الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ",
+            reference: "Sahih Muslim"),
+        Dua(english: "Allah is Beautiful and loves beauty.",
+            arabic: "إِنَّ اللَّهَ جَمِيلٌ يُحِبُّ الْجَمَالَ",
+            reference: "Sahih Muslim"),
+        Dua(english: "Whoever humbles himself for Allah, Allah will raise him.",
+            arabic: "وَمَا تَوَاضَعَ أَحَدٌ لِلَّهِ إِلَّا رَفَعَهُ اللَّهُ",
+            reference: "Sahih Muslim"),
+        Dua(english: "Every act of kindness is charity.",
+            arabic: "كُلُّ مَعْرُوفٍ صَدَقَةٌ",
+            reference: "Sahih al-Bukhari"),
+        Dua(english: "Exchange gifts and you will love one another.",
+            arabic: "تَهَادُوا تَحَابُّوا",
+            reference: "Al-Adab al-Mufrad"),
+        Dua(english: "The most perfect believers are those with the best character.",
+            arabic: "أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا",
+            reference: "Jami' al-Tirmidhi"),
+        Dua(english: "Whoever eases another's hardship, Allah will ease theirs.",
+            arabic: "مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً نَفَّسَ اللَّهُ عَنْهُ",
+            reference: "Sahih Muslim"),
+        Dua(english: "The one who remembers Allah and the one who does not are like the living and the dead.",
+            arabic: "مَثَلُ الَّذِي يَذْكُرُ رَبَّهُ وَالَّذِي لَا يَذْكُرُهُ كَمَثَلِ الْحَيِّ وَالْمَيِّتِ",
+            reference: "Sahih al-Bukhari"),
+        Dua(english: "Whoever seeks forgiveness, Allah will make a way out for them.",
+            arabic: "مَنْ لَزِمَ الِاسْتِغْفَارَ جَعَلَ اللَّهُ لَهُ مِنْ كُلِّ هَمٍّ فَرَجًا",
+            reference: "Sunan Abi Dawud"),
+        Dua(english: "This world is provision, and the best provision is a righteous spouse.",
+            arabic: "الدُّنْيَا مَتَاعٌ وَخَيْرُ مَتَاعِ الدُّنْيَا الْمَرْأَةُ الصَّالِحَةُ",
+            reference: "Sahih Muslim")
+    ]
+}
