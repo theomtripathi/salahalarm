@@ -155,7 +155,7 @@ html[dir="rtl"] .link-arrow .icon, html[dir="rtl"] .card-more .icon { transform:
 
 /* Phone frame */
 .phone {
-  position: relative; width: 300px; aspect-ratio: 1290 / 2796;
+  position: relative; width: 300px; aspect-ratio: 71.5 / 146.5; /* real iPhone body */
   padding: 11px; border-radius: 52px;
   background: linear-gradient(145deg, #2c2f2e, #0c0d0d);
   box-shadow: 0 0 0 1.5px #3b3f3d inset, 0 40px 80px rgb(0 0 0 / 45%), 0 10px 20px rgb(0 0 0 / 25%);
@@ -163,7 +163,7 @@ html[dir="rtl"] .link-arrow .icon, html[dir="rtl"] .card-more .icon { transform:
 .phone::after { content: ""; position: absolute; top: 22px; left: 50%; width: 30%; height: 26px; transform: translateX(-50%); border-radius: 20px; background: #000; }
 .phone-screen { width: 100%; height: 100%; border-radius: 42px; overflow: hidden; background: #000; }
 .phone-screen img { width: 100%; height: 100%; object-fit: cover; }
-.phone-hero { width: min(320px, 72vw); transform: rotate(-3deg); }
+.phone-hero { width: min(300px, 72vw); transform: rotate(-3deg); }
 .phone-step { width: 62%; margin: 22px auto 0; }
 .phone-step::after { top: 14px; height: 16px; }
 .phone-aside { width: 150px; margin: 0 auto 18px; padding: 6px; border-radius: 28px; }
@@ -380,7 +380,7 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
   .prose { font-size: 17.5px; }
   .prose h2 { font-size: 24px; }
   .cta-inline { flex-direction: column; }
-  .phone-hero { width: 58vw; }
+  .phone-hero { width: min(230px, 56vw); }
 }
 
 /* Alarm screen drawn in HTML (container-relative units so it scales with the frame) */
@@ -391,10 +391,10 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
   color: #fff; font-family: -apple-system, BlinkMacSystemFont, var(--font); text-align: center;
 }
 .alarm-status { width: 100%; display: flex; justify-content: space-between; padding: 6cqw 10cqw 0; font-size: 5cqw; font-weight: 600; }
-.alarm-name { margin: 14cqw 0 0; font-size: 15cqw; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.alarm-name { margin: 11cqw 0 0; font-size: 15cqw; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
 .alarm-ar { margin: 3cqw 0 0; font-size: 8cqw; font-family: "Noto Naskh Arabic", serif; line-height: 1.2; }
 .alarm-time { margin: 1cqw 0 0; font-size: 6cqw; font-weight: 600; opacity: .9; }
-.alarm-pulse { position: relative; width: 48cqw; height: 48cqw; margin: 13cqw 0 0; display: grid; place-items: center; }
+.alarm-pulse { position: relative; width: 48cqw; height: 48cqw; margin: 9cqw 0 0; display: grid; place-items: center; }
 .alarm-pulse span { position: absolute; inset: 0; border-radius: 50%; border: .6cqw solid rgb(255 255 255 / 45%); animation: ring 3s ease-out infinite; }
 .alarm-pulse span:nth-child(2) { animation-delay: 1s; }
 .alarm-pulse span:nth-child(3) { animation-delay: 2s; }
