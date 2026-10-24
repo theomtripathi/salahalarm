@@ -110,7 +110,7 @@ final class OnboardingFlowViewModel: ObservableObject {
 
     private func nextScreen(after screen: OnboardingScreenID) -> OnboardingScreenID? {
         switch screen {
-        case .screen16: return FirebaseAuthService.shared.isAuthenticated ? .screen18 : .screen17
+        case .screen16: return .screen18
         case .screen17: return .screen18
         default: return OnboardingRouter.next(after: screen)
         }

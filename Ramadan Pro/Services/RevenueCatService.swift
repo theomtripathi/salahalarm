@@ -476,6 +476,22 @@ class RevenueCatService: ObservableObject {
         }
     }
     
+    /// Links purchases made before sign-up to the signed-in Firebase user and saves the subscription to Firestore.
+    /// RevenueCat moves the anonymous user's purchases to the identified user on logIn.
+    func linkPurchasesToSignedInUser() async {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        do {
+            try await setUserID(userId)
+            let customerInfo = try await Purchases.shared.customerInfo()
+            self.customerInfo = customerInfo
+            await updateSubscriptionStatus(from: customerInfo)
+            try await syncSubscriptionToFirebase(userId: userId, customerInfo: customerInfo)
+            print("✅ RevenueCatService: Linked purchases to user \(userId)")
+        } catch {
+            print("⚠️ RevenueCatService: Failed to link purchases to user - \(error.localizedDescription)")
+        }
+    }
+    
     // MARK: - Check Subscription Status
     
     /// Check current subscription status

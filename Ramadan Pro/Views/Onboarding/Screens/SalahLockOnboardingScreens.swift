@@ -93,6 +93,13 @@ struct SLScreen0SignUp: View {
         .screen18
     }
 
+    /// Set when the user already bought on the paywall and is here to save it to an account
+    private var isSavingPurchase: Bool {
+        AppState.shared.needsAccountAfterPurchase
+            && (RevenueCatService.shared.subscriptionStatus.isActive
+                || UserDefaults.standard.bool(forKey: AppConstants.UserDefaultsKeys.isSubscribed))
+    }
+
     var body: some View {
         SLScreenContainer(vm: vm, showBack: false) {
             // Small screens and long translations scroll instead of clipping.
@@ -131,13 +138,13 @@ struct SLScreen0SignUp: View {
                         .foregroundColor(AppColors.slGreen)
                         .padding(.top, 12)
                     Spacer().frame(height: 32)
-                    Text(L10n.text("A Simpler Path Back to Every Salah."))
+                    Text(L10n.text(isSavingPurchase ? "You're In. Save Your Subscription." : "A Simpler Path Back to Every Salah."))
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, 24)
-                    Text(L10n.text("Your plan is ready. Save it to keep your routine with you."))
+                    Text(L10n.text(isSavingPurchase ? "Create your account so your subscription, streaks and alarms stay with you on any device." : "Your plan is ready. Save it to keep your routine with you."))
                         .font(.system(size: 15))
                         .foregroundColor(AppColors.slTextSecondary)
                         .multilineTextAlignment(.center)
@@ -271,6 +278,15 @@ struct SLScreen0SignUp: View {
         vm.mergeProfileAfterAuth()
         if let userID = FirebaseAuthService.shared.currentUser?.userId { FunnelAnalytics.shared.identify(userID: userID) }
         FunnelAnalytics.shared.signupCompleted(method: provider)
+        // Attach a purchase made before sign-up (or an existing account's subscription) to this user
+        await RevenueCatService.shared.linkPurchasesToSignedInUser()
+        let alreadySubscribed = isSavingPurchase || RevenueCatService.shared.subscriptionStatus.isActive
+        AppState.shared.needsAccountAfterPurchase = false
+        if alreadySubscribed {
+            // RootRouterView shows the main app once the user is signed in and subscribed
+            vm.completeOnboarding()
+            return
+        }
         try? await Task.sleep(nanoseconds: 500_000_000)
         vm.skipTo(postAuthScreen)
     }
@@ -1491,9 +1507,9 @@ struct SLTrialOfferScreen: View {
                     }
                 }
                 (
-                    Text("SalahAlarm Is ").foregroundColor(.white)
-                    + Text("Free").foregroundColor(AppColors.slGold)
-                    + Text(" for You to Try.").foregroundColor(.white)
+                    Text("Make Room for ").foregroundColor(.white)
+                    + Text("Salah").foregroundColor(AppColors.slGold)
+                    + Text(" in Your Day.").foregroundColor(.white)
                 )
                 .font(.system(size: 24, weight: .bold))
                 .multilineTextAlignment(.center)
@@ -1539,7 +1555,7 @@ struct SLReminderScreen: View {
                     .font(.system(size: 26, weight: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(AppColors.slTextPrimary)
-                Text("your selected plan starts right away.\n\nno surprise charges.\nno fine print tricks.\ncancel any time in Settings.")
+                Text("Review the price and billing period before subscribing.\n\nIf a free trial is available to you, its length and annual renewal price will be shown before you confirm.\n\nSubscriptions renew automatically unless cancelled in App Store subscription settings.")
                     .font(.system(size: 16))
                     .multilineTextAlignment(.center)
                     .foregroundColor(AppColors.slTextSecondary)
@@ -2537,9 +2553,13 @@ struct SLPaywallScreen: View {
         Analytics.logEvent("paywall_cta_tapped", parameters: parameters)
         Analytics.logEvent("paywall_purchase_started", parameters: parameters)
 
+        // Set before checkout so RootRouterView keeps a new buyer on onboarding (for account creation)
+        // instead of switching to the main app as soon as the entitlement arrives.
+        let buyingBeforeSignUp = beginPurchaseBeforeSignUpIfNeeded()
         Task {
             defer { purchaseTaskRunning = false }
             let success = await subscriptionVM.purchasePlan(plan, analyticsContext: attemptProperties)
+            if !success && buyingBeforeSignUp { appState.needsAccountAfterPurchase = false }
             lastCheckoutOutcome = subscriptionVM.lastPurchaseOutcome.rawValue
             var resultProperties = attemptProperties
             resultProperties["last_checkout_outcome"] = lastCheckoutOutcome
@@ -2563,12 +2583,7 @@ struct SLPaywallScreen: View {
                     "af_content_id": productID,
                     "af_subscription": plan.type != .lifetime
                 ])
-                vm.completeOnboarding()
-                UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
-                WidgetConfig.saveIsSubscribed(true)
-                appState.onboardingComplete = true
-                appState.shouldExitOnboarding = true
-                onExit?()
+                finishPurchase()
                 print("🏠 SLPaywallScreen: Purchase successful → exiting onboarding")
             } else {
                 let event: FunnelEvent
@@ -2599,20 +2614,39 @@ struct SLPaywallScreen: View {
     }
 
     private func restorePurchases() {
+        let buyingBeforeSignUp = beginPurchaseBeforeSignUpIfNeeded()
         Task {
             let success = await subscriptionVM.restorePurchases()
+            if !success && buyingBeforeSignUp { appState.needsAccountAfterPurchase = false }
             if success {
-                vm.completeOnboarding()
-                UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
-                WidgetConfig.saveIsSubscribed(true)
-                appState.onboardingComplete = true
-                appState.shouldExitOnboarding = true
-                onExit?()
+                finishPurchase()
                 print("🏠 SLPaywallScreen: Restore successful → exiting onboarding")
             } else {
                 errorMessage = subscriptionVM.errorMessage ?? "Restore failed"
             }
         }
+    }
+
+    /// Unlocks access after a purchase or restore. Someone who bought before creating an
+    /// account goes to the account screen next, so the subscription is saved to their account.
+    private func finishPurchase() {
+        vm.completeOnboarding()
+        UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
+        WidgetConfig.saveIsSubscribed(true)
+        appState.onboardingComplete = true
+        appState.shouldExitOnboarding = true
+        if appState.needsAccountAfterPurchase && !FirebaseAuthService.shared.isAuthenticated {
+            vm.skipTo(.screen17)
+            return
+        }
+        onExit?()
+    }
+
+    /// Onboarding paywall only: marks that a signed-out user is buying, so they create an account afterwards.
+    private func beginPurchaseBeforeSignUpIfNeeded() -> Bool {
+        guard onExit == nil, !FirebaseAuthService.shared.isAuthenticated else { return false }
+        appState.needsAccountAfterPurchase = true
+        return true
     }
 
     private func openExternalURL(_ urlString: String) {

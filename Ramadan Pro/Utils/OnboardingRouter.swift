@@ -69,7 +69,8 @@ enum OnboardingVariant: String, CaseIterable {
 }
 
 enum OnboardingRouter {
-    static let quickStartRoute: [OnboardingScreenID] = [.screen1, .screen3, .screen6, .screen7A, .screen8, .screen10, .screen17, .screen18]
+    /// Account creation (screen17) is not in the route: it comes after purchase, or from the paywall's close/sign-in path.
+    static let quickStartRoute: [OnboardingScreenID] = [.screen1, .screen3, .screen6, .screen7A, .screen8, .screen10, .screen18]
 
     /// The guided variant inserts setup steps into the quick start, so any
     /// change to the quick start's tail (account, paywall) carries over.
