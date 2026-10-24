@@ -3,7 +3,7 @@ title: How to Wake Up for Fajr: 9 Steps That Actually Work
 description: Struggling to wake up for Fajr? Nine practical, Sunnah-based steps to fix your sleep, beat the snooze button and pray Fajr on time every day.
 keyword: how to wake up for fajr
 date: 2026-10-24
-status: draft
+status: published
 translationKey: wake-fajr
 faq:
   - q: What is the best time to sleep to wake up for Fajr? | a: Count back seven to eight hours from Fajr. If Fajr is at 5:30, aim to be asleep by 10:00 or 10:30. When Fajr is very early in summer, a short nap after Dhuhr helps make up the difference.

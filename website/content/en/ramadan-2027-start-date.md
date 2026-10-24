@@ -3,7 +3,7 @@ title: Ramadan 2027 Start Date: When Does Ramadan Begin?
 description: Ramadan 2027 is expected to begin on Monday 8 February 2027, with Eid al-Fitr on 9 or 10 March. Key dates, how the moon decides it, and how to prepare.
 keyword: ramadan 2027 start date
 date: 2026-10-24
-status: draft
+status: published
 translationKey: ramadan-2027-date
 faq:
   - q: When does Ramadan 2027 start? | a: Ramadan 1448 AH is expected to begin on Monday 8 February 2027 based on astronomical calculations. The first taraweeh would then be on the evening of Sunday 7 February. The final date depends on the moon sighting announced in each country.

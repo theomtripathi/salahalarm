@@ -3,7 +3,7 @@ title: Sabah Namazına Nasıl Uyanılır? İşe Yarayan 9 Adım
 description: Sabah namazına uyanmakta zorlanıyor musun? Uyku düzenini düzeltmek, alarmı ertelememek ve sabahı vaktinde kılmak için 9 pratik, sünnete uygun adım.
 keyword: sabah namazına nasıl uyanılır
 date: 2026-10-24
-status: draft
+status: published
 translationKey: wake-fajr
 faq:
   - q: Sabah namazına uyanmak için saat kaçta yatmalıyım? | a: Sabah vaktinden yedi ila sekiz saat geriye say. Sabah namazı 06.00'da ise 22.00 ile 22.30 arasında uyumaya çalış. Yazın vakit çok erken olduğunda öğleden sonra kısa bir kaylule eksik uykuyu telafi eder.

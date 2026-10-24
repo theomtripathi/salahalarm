@@ -3,7 +3,7 @@ title: Cara Bangun Subuh dengan Mudah: 9 Langkah yang Terbukti
 description: Susah bangun Subuh? Ini 9 langkah praktis sesuai sunnah untuk memperbaiki jam tidur, berhenti menekan snooze, dan sholat Subuh tepat waktu setiap hari.
 keyword: cara bangun subuh
 date: 2026-10-24
-status: draft
+status: published
 translationKey: wake-fajr
 faq:
   - q: Jam berapa sebaiknya tidur agar bisa bangun Subuh? | a: Hitung mundur tujuh sampai delapan jam dari waktu Subuh. Jika Subuh pukul 04.30, usahakan sudah tidur pukul 21.00 atau 21.30. Tidur siang sebentar setelah Dzuhur (qailulah) juga membantu menutup kekurangan tidur.

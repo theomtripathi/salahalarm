@@ -1,5 +1,5 @@
 id,lang,keyword,cluster,intent,geo,priority,deadline,translation_key,slug,status,published,volume,competition,cpc_high,metrics_date,gsc_position,gsc_clicks,gsc_impressions,notes
-en-001,en,how to wake up for fajr,fajr,info,"US,GB,CA,AU",5,,wake-fajr,how-to-wake-up-for-fajr,drafted,,,,,,,,,
+en-001,en,how to wake up for fajr,fajr,info,"US,GB,CA,AU",5,,wake-fajr,how-to-wake-up-for-fajr,published,2026-10-24,,,,,,,,
 en-002,en,fajr alarm app,fajr,tool,"US,GB,CA,AU",5,,fajr-alarm-app,fajr-alarm-app,todo,,,,,,,,,
 en-003,en,best azan app for iphone,apps,commercial,"US,GB,CA,AU",5,,azan-app-iphone,best-azan-app-iphone,todo,,,,,,,,,
 en-004,en,how to stop missing fajr,fajr,info,"US,GB,CA,AU",4,,,stop-missing-fajr,todo,,,,,,,,,
@@ -9,7 +9,7 @@ en-007,en,muslim prayer app with alarm,apps,commercial,"US,GB,CA,AU",4,,,muslim-
 en-008,en,salah tracker app,habit,commercial,"US,GB,CA,AU",4,,salah-tracker,salah-tracker-app,todo,,,,,,,,,
 en-009,en,how to be consistent with salah,habit,info,"US,GB,CA,AU",4,,consistent-salah,how-to-be-consistent-with-salah,todo,,,,,,,,,
 en-010,en,app that locks phone until you pray,habit,tool,"US,GB,CA,AU",4,,,app-that-locks-phone-until-you-pray,todo,,,,,,,,,SalahLock feature
-en-011,en,ramadan 2027 start date,ramadan,info,"US,GB,CA,AU",5,2026-12-01,ramadan-2027-date,ramadan-2027-start-date,drafted,,,,,,,,,Publish early so it ranks by January
+en-011,en,ramadan 2027 start date,ramadan,info,"US,GB,CA,AU",5,2026-12-01,ramadan-2027-date,ramadan-2027-start-date,published,2026-10-24,,,,,,,,Publish early so it ranks by January
 en-012,en,ramadan 2027 calendar,ramadan,info,"US,GB,CA,AU",5,2026-12-10,ramadan-2027-calendar,ramadan-2027-calendar,todo,,,,,,,,,
 en-013,en,suhoor alarm app,ramadan,tool,"US,GB,CA,AU",5,2026-12-15,suhoor-alarm,suhoor-alarm-app,todo,,,,,,,,,
 en-014,en,how to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,,how-to-wake-up-for-suhoor,todo,,,,,,,,,
@@ -23,7 +23,7 @@ en-021,en,dua after waking up,dua,info,"US,GB,CA,AU",3,,wake-dua,dua-after-wakin
 en-022,en,qibla direction app iphone,apps,tool,"US,GB,CA,AU",3,,qibla,qibla-direction-app-iphone,todo,,,,,,,,,
 en-023,en,2 rakat sunnah before fajr,fajr,info,"US,GB,CA,AU",3,,,sunnah-before-fajr,todo,,,,,,,,,
 en-024,en,fajr alarm not working iphone,apps,info,"US,GB,CA,AU",3,,,fajr-alarm-not-working-iphone,todo,,,,,,,,,"Focus mode, silent switch, background refresh"
-ar-025,ar,كيف أستيقظ لصلاة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",5,,wake-fajr,kayfa-astayqiz-lisalat-alfajr,drafted,,,,,,,,,
+ar-025,ar,كيف أستيقظ لصلاة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",5,,wake-fajr,kayfa-astayqiz-lisalat-alfajr,published,2026-10-24,,,,,,,,
 ar-026,ar,منبه الفجر,fajr,tool,"SA,AE,EG,KW,QA,JO,MA",5,,fajr-alarm-app,munabbih-alfajr,todo,,,,,,,,,
 ar-027,ar,تطبيق أذان للايفون,apps,commercial,"SA,AE,EG,KW,QA,JO,MA",5,,azan-app-iphone,tatbiq-adhan-iphone,todo,,,,,,,,,
 ar-028,ar,منبه الصلاة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",4,,,munabbih-alsalah,todo,,,,,,,,,
@@ -34,7 +34,7 @@ ar-032,ar,منبه السحور,ramadan,tool,"SA,AE,EG,KW,QA,JO,MA",4,2026-12-15
 ar-033,ar,دعاء الاستيقاظ من النوم,dua,info,"SA,AE,EG,KW,QA,JO,MA",3,,wake-dua,dua-alistiqaz-min-alnawm,todo,,,,,,,,,
 ar-034,ar,كيف أستيقظ لقيام الليل,fajr,info,"SA,AE,EG,KW,QA,JO,MA",3,,tahajjud,kayfa-astayqiz-liqiyam-allayl,todo,,,,,,,,,
 ar-035,ar,تطبيق اتجاه القبلة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,qibla,tatbiq-ittijah-alqibla,todo,,,,,,,,,
-tr-036,tr,sabah namazına nasıl uyanılır,fajr,info,"TR,DE,NL",5,,wake-fajr,sabah-namazina-nasil-uyanilir,drafted,,,,,,,,,
+tr-036,tr,sabah namazına nasıl uyanılır,fajr,info,"TR,DE,NL",5,,wake-fajr,sabah-namazina-nasil-uyanilir,published,2026-10-24,,,,,,,,
 tr-037,tr,ezan alarmı,apps,tool,"TR,DE,NL",5,,fajr-alarm-app,ezan-alarmi,todo,,,,,,,,,
 tr-038,tr,iphone ezan uygulaması,apps,commercial,"TR,DE,NL",5,,azan-app-iphone,iphone-ezan-uygulamasi,todo,,,,,,,,,
 tr-039,tr,namaz vakti alarmı,apps,tool,"TR,DE,NL",4,,,namaz-vakti-alarmi,todo,,,,,,,,,
@@ -45,7 +45,7 @@ tr-043,tr,2027 imsakiye,ramadan,info,"TR,DE,NL",5,2026-12-10,ramadan-2027-calend
 tr-044,tr,sahur alarmı,ramadan,tool,"TR,DE,NL",4,2026-12-15,suhoor-alarm,sahur-alarmi,todo,,,,,,,,,
 tr-045,tr,teheccüd namazına nasıl kalkılır,fajr,info,"TR,DE,NL",3,,tahajjud,teheccud-namazina-nasil-kalkilir,todo,,,,,,,,,
 tr-046,tr,kıble bulma uygulaması,apps,tool,"TR,DE,NL",3,,qibla,kible-bulma-uygulamasi,todo,,,,,,,,,
-id-047,id,cara bangun subuh,fajr,info,"ID,MY",5,,wake-fajr,cara-bangun-subuh,drafted,,,,,,,,,
+id-047,id,cara bangun subuh,fajr,info,"ID,MY",5,,wake-fajr,cara-bangun-subuh,published,2026-10-24,,,,,,,,
 id-048,id,alarm adzan subuh,fajr,tool,"ID,MY",5,,fajr-alarm-app,alarm-adzan-subuh,todo,,,,,,,,,
 id-049,id,aplikasi adzan iphone,apps,commercial,"ID,MY",5,,azan-app-iphone,aplikasi-adzan-iphone,todo,,,,,,,,,
 id-050,id,aplikasi pengingat sholat,apps,commercial,"ID,MY",4,,,aplikasi-pengingat-sholat,todo,,,,,,,,,
@@ -56,7 +56,7 @@ id-054,id,alarm sahur,ramadan,tool,"ID,MY",4,2026-12-15,suhoor-alarm,alarm-sahur
 id-055,id,doa bangun tidur,dua,info,"ID,MY",3,,wake-dua,doa-bangun-tidur,todo,,,,,,,,,
 id-056,id,cara bangun tahajud,fajr,info,"ID,MY",3,,tahajjud,cara-bangun-tahajud,todo,,,,,,,,,
 id-057,id,aplikasi arah kiblat iphone,apps,tool,"ID,MY",3,,qibla,aplikasi-arah-kiblat-iphone,todo,,,,,,,,,
-ur-058,ur,فجر کی نماز کے لیے کیسے اٹھیں,fajr,info,"PK,IN,GB",5,,wake-fajr,fajr-ki-namaz-ke-liye-kaise-uthein,drafted,,,,,,,,,Also targets Roman Urdu: fajr ke liye kaise uthe
+ur-058,ur,فجر کی نماز کے لیے کیسے اٹھیں,fajr,info,"PK,IN,GB",5,,wake-fajr,fajr-ki-namaz-ke-liye-kaise-uthein,published,2026-10-24,,,,,,,,Also targets Roman Urdu: fajr ke liye kaise uthe
 ur-059,ur,نماز کا الارم,apps,tool,"PK,IN,GB",5,,fajr-alarm-app,namaz-ka-alarm,todo,,,,,,,,,
 ur-060,ur,آئی فون کے لیے اذان ایپ,apps,commercial,"PK,IN,GB",4,,azan-app-iphone,iphone-azan-app,todo,,,,,,,,,
 ur-061,ur,نماز کی پابندی کیسے کریں,habit,info,"PK,IN,GB",4,,consistent-salah,namaz-ki-pabandi-kaise-karein,todo,,,,,,,,,
