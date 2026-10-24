@@ -102,15 +102,19 @@ enum OnboardingRouter {
             return activeRoute[index + 1]
         }
         if screen == .screen18 { return nil }
-        let screenOrder = screen.funnelIndex ?? 0
-        if let next = activeRoute.first(where: { ($0.funnelIndex ?? 0) > screenOrder }) { return next }
-        return activeRoute.last
+        // Off-route (legacy) IDs resume at the nearest route screen in declaration order.
+        let order = declarationOrder(screen)
+        return activeRoute.first { declarationOrder($0) > order } ?? activeRoute.last
     }
 
     static func previous(before screen: OnboardingScreenID) -> OnboardingScreenID? {
         if let index = activeRoute.firstIndex(of: screen), index > 0 { return activeRoute[index - 1] }
-        let screenOrder = screen.funnelIndex ?? 0
-        return activeRoute.last(where: { ($0.funnelIndex ?? 0) < screenOrder })
+        let order = declarationOrder(screen)
+        return activeRoute.last { declarationOrder($0) < order }
+    }
+
+    private static func declarationOrder(_ screen: OnboardingScreenID) -> Int {
+        OnboardingScreenID.allCases.firstIndex(of: screen) ?? 0
     }
 
     static func progress(for screen: OnboardingScreenID) -> Double? {
