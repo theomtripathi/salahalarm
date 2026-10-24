@@ -18,7 +18,7 @@ The answer is to make the experiment design do the work:
    format-level numbers, and Apple's own campaign data gives exact installs per
    format with no guessing.
 2. Inside an account, installs for a day are split across that day's videos in
-   proportion to their views (the sheet does this). Good enough to rank hooks.
+   proportion to their profile visits (views if none logged). Good enough to rank hooks.
 3. On Instagram, run comment-to-DM ("comment FAJR and I'll send the link", e.g.
    ManyChat) with a **per-video link**, which gives exact per-video clicks.
 
@@ -40,6 +40,19 @@ Notes:
 - The new build already ships AppsFlyer (+ RevenueCat link) and PostHog. When it is
   live, switching the redirect target to an AppsFlyer OneLink carrying the same
   `ct` adds install → trial → paid per link inside RevenueCat/AppsFlyer.
+
+## Search uplift and early scores
+
+Most TikTok-driven installs come through App Store Search (people close TikTok and
+search), not the bio link. The sheet's **Search** tab logs App Store Search installs
+per territory against a 14-day pre-test **Baseline**; uplift ÷ views gives installs
+per 1k views the bio links miss. Keep all format-test accounts on the same
+language and markets so the uplift is comparable, and have each video's end card
+say "search Salah Alarm on the App Store".
+
+Early scores, available within hours: **profile-view rate** (profile visits ÷ views)
+first, **(shares + saves) per 1k views** second. Likes are ignored. After ~4 days,
+check on the Formats tab that they rank formats the same way installs do.
 
 ## Link naming scheme
 
