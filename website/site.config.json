@@ -19,7 +19,14 @@
       "faq": "Frequently asked questions",
       "allArticles": "All articles",
       "home": "Home",
-      "contents": "In this article"
+      "contents": "In this article",
+      "getApp": "Get the app",
+      "badgeTop": "Download on the",
+      "readingTime": "{n} min read",
+      "related": "Keep reading",
+      "guides": "Guides",
+      "ctaBandTitle": "Wake up for Fajr tomorrow",
+      "ctaBandBody": "Exact prayer times for your city and an adhan alarm that only stops at your prayer mat."
     },
     "ar": {
       "name": "العربية",
@@ -34,7 +41,14 @@
       "faq": "أسئلة شائعة",
       "allArticles": "كل المقالات",
       "home": "الرئيسية",
-      "contents": "محتويات المقال"
+      "contents": "محتويات المقال",
+      "getApp": "حمّل التطبيق",
+      "badgeTop": "حمّله من",
+      "readingTime": "قراءة {n} دقائق",
+      "related": "اقرأ أيضًا",
+      "guides": "المقالات",
+      "ctaBandTitle": "استيقظ لصلاة الفجر غدًا",
+      "ctaBandBody": "مواقيت صلاة دقيقة لمدينتك ومنبه أذان لا يتوقف إلا عند سجادة الصلاة."
     },
     "tr": {
       "name": "Türkçe",
@@ -49,7 +63,14 @@
       "faq": "Sık sorulan sorular",
       "allArticles": "Tüm yazılar",
       "home": "Ana sayfa",
-      "contents": "Bu yazıda"
+      "contents": "Bu yazıda",
+      "getApp": "Uygulamayı indir",
+      "badgeTop": "Hemen indirin",
+      "readingTime": "{n} dk okuma",
+      "related": "Bunları da oku",
+      "guides": "Rehberler",
+      "ctaBandTitle": "Yarın sabah namazına uyan",
+      "ctaBandBody": "Şehrine göre tam namaz vakitleri ve ancak seccadede susan bir ezan alarmı."
     },
     "id": {
       "name": "Bahasa Indonesia",
@@ -64,7 +85,14 @@
       "faq": "Pertanyaan yang sering diajukan",
       "allArticles": "Semua artikel",
       "home": "Beranda",
-      "contents": "Isi artikel"
+      "contents": "Isi artikel",
+      "getApp": "Unduh aplikasi",
+      "badgeTop": "Unduh di",
+      "readingTime": "{n} menit baca",
+      "related": "Baca juga",
+      "guides": "Artikel",
+      "ctaBandTitle": "Bangun Subuh besok pagi",
+      "ctaBandBody": "Jadwal sholat akurat untuk kotamu dan alarm adzan yang baru berhenti di sajadah."
     },
     "ur": {
       "name": "اردو",
@@ -79,7 +107,18 @@
       "faq": "عام سوالات",
       "allArticles": "تمام مضامین",
       "home": "ہوم",
-      "contents": "اس مضمون میں"
+      "contents": "اس مضمون میں",
+      "getApp": "ایپ حاصل کریں",
+      "badgeTop": "ڈاؤن لوڈ کریں",
+      "readingTime": "{n} منٹ کا مطالعہ",
+      "related": "یہ بھی پڑھیں",
+      "guides": "مضامین",
+      "ctaBandTitle": "کل فجر کے لیے جاگیں",
+      "ctaBandBody": "آپ کے شہر کے صحیح نماز اوقات اور اذان کا الارم جو صرف جائے نماز پر بند ہوتا ہے۔"
     }
-  }
+  },
+  "privacyUrl": "https://ramadan-pro.lovable.app/privacy",
+  "termsUrl": "https://ramadan-pro.lovable.app/terms",
+  "supportUrl": "https://ramadan-pro.lovable.app/support",
+  "ramadanStart": "2027-02-08"
 }

@@ -7,6 +7,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { render, parseFrontmatter, escapeHtml as esc } from './lib/markdown.mjs';
+import { layout, ctaInline, ctaBand, appStoreBadge, alarmPhone } from './lib/ui.mjs';
+import { homePage, card } from './pages/home.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'site.config.json'), 'utf8'));
@@ -30,6 +32,8 @@ export function loadArticles({ drafts = includeDrafts } = {}) {
       const a = { ...data, lang, slug, body, file: `content/${lang}/${file}` };
       a.url = `/blog/${lang}/${slug}/`;
       a.faq = a.faq || [];
+      a.words = body.split(/\s+/).filter(Boolean).length;
+      a.minutes = Math.max(1, Math.round(a.words / 220));
       problems.push(...validate(a));
       if (a.status === 'draft' && !drafts) continue;
       articles.push(a);
@@ -58,74 +62,25 @@ export function validate(a) {
 
 const STRINGS = (lang) => config.langs[lang];
 
-function ctaBlock(lang, slug) {
-  const s = STRINGS(lang);
-  return `<aside class="cta">
-  <img src="/icon.png" alt="" width="64" height="64">
-  <div>
-    <p class="cta-title">${esc(s.ctaTitle)}</p>
-    <p>${esc(s.ctaBody)}</p>
-    <a class="button" href="${esc(ctaUrl(lang, slug))}" data-cta="${lang}-${slug}">${esc(s.ctaButton)}</a>
-  </div>
-</aside>`;
+function formatDate(date, lang) {
+  try {
+    return new Intl.DateTimeFormat(lang, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(date));
+  } catch {
+    return date;
+  }
 }
 
-function layout({ lang, title, description, canonical, alternates = [], body, jsonLd = [] }) {
-  const s = STRINGS(lang);
-  const alt = alternates
-    .map((x) => `<link rel="alternate" hreflang="${x.lang}" href="${config.baseUrl}${x.url}">`)
-    .join('\n');
-  const ld = jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
-  return `<!doctype html>
-<html lang="${lang}" dir="${s.dir}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${config.baseUrl}${canonical}">
-${alt}
-<meta name="apple-itunes-app" content="app-id=${config.appStoreId}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${config.baseUrl}${canonical}">
-<meta property="og:image" content="${config.baseUrl}/icon.png">
-<link rel="icon" href="/icon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/styles.css">
-${ld}
-</head>
-<body>
-<header class="site">
-  <a class="brand" href="/"><img src="/icon.png" alt="" width="32" height="32">${esc(config.appName)}</a>
-  <nav><a href="/blog/${lang}/">${esc(s.allArticles)}</a></nav>
-</header>
-<main>
-${body}
-</main>
-<footer class="site">
-  <nav class="langs">${Object.entries(config.langs)
-    .map(([code, l]) => `<a href="/blog/${code}/" lang="${code}">${esc(l.name)}</a>`)
-    .join(' ')}</nav>
-  <p>© ${new Date().getFullYear()} ${esc(config.appName)}</p>
-</footer>
-</body>
-</html>
-`;
-}
-
-function articlePage(a, siblings) {
+function articlePage(a, siblings, related) {
   const s = STRINGS(a.lang);
   const { html, headings } = render(a.body);
-  // One CTA before the second section, one at the end.
+  // One CTA before the second section.
   const parts = html.split(/(?=<h2 )/);
-  if (parts.length > 2) parts.splice(2, 0, ctaBlock(a.lang, a.slug));
-  const content = parts.join('\n') + '\n' + ctaBlock(a.lang, a.slug);
+  if (parts.length > 2) parts.splice(2, 0, ctaInline(config, a.lang, a.slug));
+  const content = parts.join('\n');
   const faqHtml = a.faq.length
-    ? `<section class="faq"><h2 id="faq">${esc(s.faq)}</h2>${a.faq
+    ? `<section class="article-faq"><h2 id="faq">${esc(s.faq)}</h2><div class="faq">${a.faq
         .map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`)
-        .join('')}</section>`
+        .join('')}</div></section>`
     : '';
   const toc = headings.length > 2
     ? `<details class="toc"><summary>${esc(s.contents)}</summary><ul>${headings
@@ -143,18 +98,18 @@ function articlePage(a, siblings) {
       datePublished: a.date,
       dateModified: updated,
       mainEntityOfPage: `${config.baseUrl}${a.url}`,
-      image: `${config.baseUrl}/icon.png`,
+      image: `${config.baseUrl}/img/og.png`,
       author: { '@type': 'Organization', name: config.appName, url: config.baseUrl },
       publisher: { '@type': 'Organization', name: config.appName, logo: { '@type': 'ImageObject', url: `${config.baseUrl}/icon.png` } },
     },
     {
       '@context': 'https://schema.org',
-      '@type': 'MobileApplication',
-      name: config.appName,
-      operatingSystem: 'iOS',
-      applicationCategory: 'LifestyleApplication',
-      downloadUrl: config.appStoreUrl,
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: config.appName, item: `${config.baseUrl}/` },
+        { '@type': 'ListItem', position: 2, name: s.blogTitle, item: `${config.baseUrl}/blog/${a.lang}/` },
+        { '@type': 'ListItem', position: 3, name: a.title, item: `${config.baseUrl}${a.url}` },
+      ],
     },
   ];
   if (a.faq.length) {
@@ -169,47 +124,54 @@ function articlePage(a, siblings) {
     const def = siblings.find((x) => x.lang === config.defaultLang) || siblings[0];
     alternates.push({ lang: 'x-default', url: def.url });
   }
-  const body = `<article>
-<p class="crumbs"><a href="/">${esc(s.home)}</a> › <a href="/blog/${a.lang}/">${esc(s.blogTitle)}</a></p>
-<h1>${esc(a.title)}</h1>
-<p class="meta">${esc(s.updated)}: <time datetime="${updated}">${updated}</time></p>
-${toc}
-${content}
-${faqHtml}
-</article>`;
-  return layout({ lang: a.lang, title: a.title, description: a.description, canonical: a.url, alternates, body, jsonLd });
-}
-
-function listItems(list) {
-  return `<ul class="list">${list
-    .map((a) => `<li lang="${a.lang}" dir="${STRINGS(a.lang).dir}"><a href="${a.url}">${esc(a.title)}</a><p>${esc(a.description)}</p></li>`)
-    .join('')}</ul>`;
+  const translations = siblings.length > 1
+    ? `<p class="translations">${siblings.map((x) => x.lang === a.lang ? '' : `<a href="${x.url}" lang="${x.lang}">${esc(STRINGS(x.lang).name)}</a>`).join('')}</p>`
+    : '';
+  const body = `<header class="article-hero">
+  <div class="wrap narrow">
+    <p class="crumbs"><a href="/">${esc(config.appName)}</a><span>/</span><a href="/blog/${a.lang}/">${esc(s.blogTitle)}</a></p>
+    <h1>${esc(a.title)}</h1>
+    <p class="lead">${esc(a.description)}</p>
+    <p class="meta"><time datetime="${updated}">${esc(formatDate(updated, a.lang))}</time> · ${esc(s.readingTime.replace('{n}', a.minutes))}</p>
+    ${translations}
+  </div>
+</header>
+<div class="wrap article-layout">
+  <article class="prose">
+    ${toc}
+    ${content}
+    ${faqHtml}
+  </article>
+  <aside class="article-aside">
+    <div class="aside-card">
+      ${alarmPhone('phone-aside')}
+      <p class="cta-title">${esc(s.ctaTitle)}</p>
+      <p>${esc(s.ctaBody)}</p>
+      ${appStoreBadge(s, ctaUrl(a.lang, a.slug), `${a.lang}-${a.slug}-aside`)}
+    </div>
+  </aside>
+</div>
+${related.length ? `<section class="section related"><div class="wrap"><h2 class="section-title">${esc(s.related)}</h2><div class="cards">${related.map((r) => card(config, r)).join('')}</div></div></section>` : ''}
+${ctaBand(config, a.lang, a.slug)}`;
+  return layout(config, { lang: a.lang, title: a.title, description: a.description, canonical: a.url, alternates, body, jsonLd, ogType: 'article', bodyClass: 'article-page' });
 }
 
 function blogIndex(lang, list) {
   const s = STRINGS(lang);
-  const body = `<h1>${esc(s.blogTitle)}</h1><p class="lead">${esc(s.blogIntro)}</p>${listItems(list)}${ctaBlock(lang, 'blog-index')}`;
-  return layout({ lang, title: s.blogTitle, description: s.blogIntro, canonical: `/blog/${lang}/`, body });
-}
-
-function homePage(latest) {
-  const s = STRINGS('en');
-  const body = `<section class="hero">
-  <img src="/icon.png" alt="${esc(config.appName)} app icon" width="96" height="96">
-  <h1>Salah Alarm: the Fajr alarm that gets you to the prayer mat</h1>
-  <p class="lead">Accurate prayer times for your city, an adhan alarm that only stops at your prayer mat, Qibla, Quran, duas and widgets. Built for Muslims who keep missing Fajr.</p>
-  <a class="button" href="${esc(ctaUrl('en', 'home'))}">${esc(s.ctaButton)}</a>
+  const body = `<header class="article-hero blog-hero">
+  <div class="wrap">
+    <h1>${esc(s.blogTitle)}</h1>
+    <p class="lead">${esc(s.blogIntro)}</p>
+    <nav class="lang-chips" aria-label="Languages">${Object.entries(config.langs)
+      .map(([code, l]) => `<a class="chip${code === lang ? ' active' : ''}" href="/blog/${code}/" lang="${code}">${esc(l.name)}</a>`)
+      .join('')}</nav>
+  </div>
+</header>
+<section class="section">
+  <div class="wrap"><div class="cards">${list.map((a) => card(config, a)).join('')}</div></div>
 </section>
-<h2>Latest guides</h2>
-${listItems(latest)}`;
-  return layout({
-    lang: 'en',
-    title: 'Salah Alarm: Fajr Alarm & Prayer Times App for iPhone',
-    description: 'Salah Alarm wakes you for Fajr at the exact prayer time and only stops at your prayer mat. Prayer times, Qibla, Quran and duas for iPhone.',
-    canonical: '/',
-    body,
-    jsonLd: [{ '@context': 'https://schema.org', '@type': 'MobileApplication', name: config.appName, operatingSystem: 'iOS', applicationCategory: 'LifestyleApplication', downloadUrl: config.appStoreUrl }],
-  });
+${ctaBand(config, lang, 'blog-index')}`;
+  return layout(config, { lang, title: `${s.blogTitle} | ${config.appName}`, description: s.blogIntro, canonical: `/blog/${lang}/`, body, bodyClass: 'blog-page' });
 }
 
 function sitemap(articles, byKey) {
@@ -253,10 +215,20 @@ export function build() {
   for (const a of articles) if (a.translationKey) (byKey[a.translationKey] ||= []).push(a);
   const newestFirst = [...articles].sort((x, y) => (y.date > x.date ? 1 : y.date < x.date ? -1 : 0));
 
-  for (const a of articles) write(path.join(a.url, 'index.html'), articlePage(a, a.translationKey ? byKey[a.translationKey] : [a]));
+  for (const a of articles) {
+    const related = newestFirst.filter((r) => r.lang === a.lang && r.slug !== a.slug).slice(0, 3);
+    write(path.join(a.url, 'index.html'), articlePage(a, a.translationKey ? byKey[a.translationKey] : [a], related));
+  }
   for (const lang of Object.keys(config.langs)) write(`blog/${lang}/index.html`, blogIndex(lang, newestFirst.filter((a) => a.lang === lang)));
   write('blog/index.html', `<!doctype html><meta http-equiv="refresh" content="0; url=/blog/en/"><link rel="canonical" href="${config.baseUrl}/blog/en/">`);
-  write('index.html', homePage(newestFirst.slice(0, 12)));
+  write('index.html', homePage(config, newestFirst.filter((a) => a.lang === 'en').slice(0, 3)));
+  write('404.html', layout(config, {
+    lang: 'en',
+    title: 'Page not found | Salah Alarm',
+    description: 'This page does not exist. Find guides on waking up for Fajr and prayer times, or download Salah Alarm.',
+    canonical: '/404.html',
+    body: `<header class="article-hero"><div class="wrap narrow"><h1>Page not found</h1><p class="lead">This page has moved or never existed.</p><p><a class="btn" href="/">Go to the home page</a></p></div></header>`,
+  }));
   write('sitemap.xml', sitemap(articles, byKey));
   write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /go/\n\nSitemap: ${config.baseUrl}/sitemap.xml\n`);
   console.log(`built ${articles.length} articles into dist/${includeDrafts ? ' (including drafts)' : ''}`);
