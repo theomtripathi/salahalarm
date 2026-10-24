@@ -32,7 +32,8 @@ class RevenueCatService: ObservableObject {
     private let productIds: [SubscriptionPlanType: String] = [
         .weekly: "com.ramadanpro.weekly",
         .monthly: "com.ramadanpro.monthly",
-        .yearly: "com.ramadanpro.yearly"
+        .yearly: "com.ramadanpro.yearly",
+        .lifetime: "com.ramadanpro.lifetime"
     ]
     
     private init() {
@@ -549,6 +550,8 @@ class RevenueCatService: ObservableObject {
             planType = .monthly
         } else if productId.contains("yearly") {
             planType = .yearly
+        } else if productId.contains("lifetime") {
+            planType = .lifetime
         } else {
             planType = nil
         }
@@ -646,6 +649,8 @@ class RevenueCatService: ObservableObject {
             planTypeString = "monthly"
         } else if productId.contains("yearly") {
             planTypeString = "yearly"
+        } else if productId.contains("lifetime") {
+            planTypeString = "lifetime"
         } else {
             planTypeString = nil
         }
@@ -727,6 +732,8 @@ class RevenueCatService: ObservableObject {
             planType = .monthly
         } else if productId == productIds[.yearly] {
             planType = .yearly
+        } else if productId == productIds[.lifetime] || package.packageType == .lifetime {
+            planType = .lifetime
         } else if productId.lowercased().contains("weekly") || package.identifier.lowercased().contains("weekly") {
             planType = .weekly
         } else if productId.lowercased().contains("monthly") || package.identifier.lowercased().contains("monthly") {
@@ -754,6 +761,9 @@ class RevenueCatService: ObservableObject {
             periodMatchesPlan = period.map { $0.unit == .month && $0.value == 1 } ?? false
         case .yearly:
             periodMatchesPlan = period.map { ($0.unit == .year && $0.value == 1) || ($0.unit == .month && $0.value == 12) } ?? false
+        case .lifetime:
+            // A lifetime unlock is a non-consumable, so it must not have a billing period
+            periodMatchesPlan = period == nil
         }
         guard periodMatchesPlan else {
             FunnelAnalytics.shared.track(.paywallProductRejected, [
@@ -767,7 +777,7 @@ class RevenueCatService: ObservableObject {
 
         print("✅ RevenueCatService: Converted package to plan type: \(type.rawValue)")
 
-        let billingPeriodLabel = package.storeProduct.subscriptionPeriod.map { formatSubscriptionPeriod($0) } ?? type.rawValue
+        let billingPeriodLabel = package.storeProduct.subscriptionPeriod.map { formatSubscriptionPeriod($0) } ?? (type == .lifetime ? "one-time" : type.rawValue)
 
         // A paywall must only display a real App Store price, localized by the
         // storefront. Do not substitute a hardcoded amount for an invalid product.

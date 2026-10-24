@@ -1605,17 +1605,17 @@ struct SLPaywallScreen: View {
         subscriptionVM.availablePlans
     }
 
-    /// Presents the live weekly plan and the regular yearly plan.
-    /// The monthly plan is intentionally not offered.
+    /// Presents the live weekly plan, the regular yearly plan and, when the
+    /// offering has one, the lifetime unlock. The monthly plan is intentionally not offered.
     private var firstStagePlans: [SubscriptionPlanDetails] {
         let plans = displayedPlans.filter { plan in
-            plan.type == .weekly || (plan.type == .yearly && !isDiscountedYearly(plan))
+            plan.type == .weekly || plan.type == .lifetime || (plan.type == .yearly && !isDiscountedYearly(plan))
         }
-        let orderedPlans = plans.sorted { first, second in
-            if first.type == second.type { return false }
-            return first.type == .yearly
+        // Yearly first (selected by default), then weekly, then lifetime
+        let order: [SubscriptionPlanType] = [.yearly, .weekly, .lifetime]
+        return plans.sorted { first, second in
+            (order.firstIndex(of: first.type) ?? Int.max) < (order.firstIndex(of: second.type) ?? Int.max)
         }
-        return orderedPlans
     }
 
     private func isDiscountedYearly(_ plan: SubscriptionPlanDetails) -> Bool {
@@ -1652,7 +1652,9 @@ struct SLPaywallScreen: View {
         subscriptionVM.isProcessingPurchase ? "processing..." : "continue"
     }
 
-    private var footerCopy: String { "cancel anytime" }
+    private var footerCopy: String {
+        selectedPlan == .lifetime ? "one-time payment · no subscription" : "cancel anytime"
+    }
 
     private func trackPlanSelection(_ plan: SubscriptionPlanDetails, source: String) {
         var properties = paywallContext()
@@ -1703,8 +1705,10 @@ struct SLPaywallScreen: View {
                 unavailablePlansStage
             } else {
                 ZStack {
-                    plansStage
-                        .accessibilityHidden(showWinBackModal || showTrialOffer || isCheckingTrial)
+                    ScrollView(showsIndicators: false) {
+                        plansStage
+                    }
+                    .accessibilityHidden(showWinBackModal || showTrialOffer || isCheckingTrial)
 
                     if showWinBackModal {
                         winBackModalOverlay
@@ -1806,6 +1810,19 @@ struct SLPaywallScreen: View {
                     ) {
                         selectedPlan = .weekly
                         trackPlanSelection(weekly, source: "user")
+                    }
+                }
+
+                // Lifetime last, only when the offering includes it
+                if let lifetime = firstStagePlans.first(where: { $0.type == .lifetime }) {
+                    planCard(
+                        title: "Lifetime",
+                        priceLine1: "\(lifetime.priceString) once",
+                        priceLine2: "Pay once, yours forever",
+                        isSelected: selectedPlan == .lifetime
+                    ) {
+                        selectedPlan = .lifetime
+                        trackPlanSelection(lifetime, source: "user")
                     }
                 }
             }
@@ -2544,7 +2561,7 @@ struct SLPaywallScreen: View {
                     "af_revenue": verifiedTrial ? 0 : plan.price,
                     "af_currency": plan.currencyCode ?? "",
                     "af_content_id": productID,
-                    "af_subscription": true
+                    "af_subscription": plan.type != .lifetime
                 ])
                 vm.completeOnboarding()
                 UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
