@@ -3,8 +3,9 @@ main = "src/worker.js"
 compatibility_date = "2026-10-01"
 
 # Route only /go/* so the rest of salahalarm.com keeps working.
-# routes = [{ pattern = "salahalarm.com/go/*", zone_name = "salahalarm.com" }]
+routes = [{ pattern = "salahalarm.com/go/*", zone_name = "salahalarm.com" }]
 
 [vars]
 POSTHOG_HOST = "https://us.i.posthog.com"
-# POSTHOG_KEY is the app's public PostHog project token: `wrangler secret put POSTHOG_KEY`
+# Public, write-only PostHog project token (same one the app ships with).
+POSTHOG_KEY = "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX"
