@@ -1,0 +1,28 @@
+{
+  "appStoreId": "6758457826",
+  "providerToken": "REPLACE_WITH_PT_FROM_APP_STORE_CONNECT",
+  "domain": "salahalarm.com",
+  "fallbackUrl": "https://apps.apple.com/app/id6758457826",
+  "formats": {
+    "whatif": "What-if story videos",
+    "anim": "Animated motion-graphic Muslim-niche topics",
+    "alarm": "Alarm / prayer-mat demo (product shown)",
+    "pov": "POV / relatable Fajr struggle",
+    "ramadan": "Ramadan challenge teasers",
+    "mixed": "Brand page, mixed formats"
+  },
+  "accounts": [
+    { "id": "ig1",  "platform": "instagram", "handle": "@salahalarm",       "testFormat": "mixed" },
+    { "id": "ig2",  "platform": "instagram", "handle": "@REPLACE_ME",       "testFormat": "anim" },
+    { "id": "tt01", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "whatif" },
+    { "id": "tt02", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "whatif" },
+    { "id": "tt03", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "anim" },
+    { "id": "tt04", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "anim" },
+    { "id": "tt05", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "alarm" },
+    { "id": "tt06", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "alarm" },
+    { "id": "tt07", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "pov" },
+    { "id": "tt08", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "pov" },
+    { "id": "tt09", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "ramadan" },
+    { "id": "tt10", "platform": "tiktok",    "handle": "@REPLACE_ME",       "testFormat": "ramadan" }
+  ]
+}
