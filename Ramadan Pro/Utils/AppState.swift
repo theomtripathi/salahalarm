@@ -28,8 +28,16 @@ class AppState: ObservableObject {
             UserDefaults.standard.set(isGuest, forKey: AppConstants.UserDefaultsKeys.isGuest)
         }
     }
+    /// True after someone buys before creating an account, until they sign up or sign in.
+    /// RootRouterView keeps them on the account screen so the purchase is saved to an account.
+    @Published var needsAccountAfterPurchase: Bool {
+        didSet {
+            UserDefaults.standard.set(needsAccountAfterPurchase, forKey: "sl_needs_account_after_purchase")
+        }
+    }
     private init() {
         self.onboardingComplete = UserDefaults.standard.bool(forKey: "sl_onboarding_complete")
+        self.needsAccountAfterPurchase = UserDefaults.standard.bool(forKey: "sl_needs_account_after_purchase")
         self.isGuest = UserDefaults.standard.bool(forKey: AppConstants.UserDefaultsKeys.isGuest)
         setupNotificationObserver()
     }

@@ -125,7 +125,7 @@ struct RootRouterView: View {
         Group {
             if let replayVerificationView {
                 replayVerificationView
-            } else if hasSubscription {
+            } else if hasSubscription && !(appState.needsAccountAfterPurchase && !authService.isAuthenticated) {
                 MainTabView()
                     .environmentObject(appState)
             } else if authService.isAuthenticated && appState.onboardingComplete {
