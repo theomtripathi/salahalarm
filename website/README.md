@@ -58,7 +58,7 @@ The build fails if an article breaks the rules in `scripts/build.mjs`
    of; Ramadan/Eid dates say "expected"; app claims match real features; the
    non-English text reads natively. If any check is in doubt, leave
    `status: draft` and flag it to Om instead of publishing.
-4. Set `status: published`, commit and push. Cloudflare Pages rebuilds on push.
+4. Set `status: published`, commit, push, and `npm run deploy`.
 5. `seo/gum/submit-sitemap.sh`.
 
 Weekly: `seo/gum/pull-rankings.sh` (Search Console positions written back into
@@ -67,12 +67,13 @@ Weekly: `seo/gum/pull-rankings.sh` (Search Console positions written back into
 
 ## One-time setup
 
-### Cloudflare Pages
+### Cloudflare
 
-Create a Pages project from this repo: root directory `website`, build command
-`npm run build`, output directory `dist`, Node 20. Attach `salahalarm.com`. The
-`/go/*` Worker route takes precedence over Pages for those paths, so the two
-coexist on one domain.
+The site runs as a Worker named `salahalarm` that serves `dist/` as static assets
+(`wrangler.jsonc`), on the routes `salahalarm.com/*` and `www.salahalarm.com/*`.
+The conversion-tracking Worker owns the more specific `salahalarm.com/go/*`
+route, which wins for `/go` links. Deploy with `npm run deploy` from `website/`
+(needs `npx wrangler login` on Om's Cloudflare account once).
 
 ### Google Search Console
 
