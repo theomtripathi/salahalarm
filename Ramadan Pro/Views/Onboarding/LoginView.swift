@@ -153,7 +153,7 @@ struct LoginView: View {
             }
         } message: {
             if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
+                Text(L10n.text(errorMessage))
             }
         }
         .sheet(isPresented: $showForgotPassword) {
@@ -216,7 +216,7 @@ struct LoginView: View {
                 }
                 .frame(width: 24)
 
-                Text(provider.title)
+                Text(L10n.text(provider.title))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(AppColors.slTextPrimary)
 
@@ -251,7 +251,7 @@ struct LoginView: View {
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             if let title {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(AppColors.slTextPrimary)
             }

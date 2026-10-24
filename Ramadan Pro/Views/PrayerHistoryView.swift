@@ -96,7 +96,7 @@ struct PrayerHistoryView: View {
         return VStack(spacing: 10) {
             ForEach(PrayerName.allCases, id: \.self) { prayer in
                 HStack {
-                    Text(prayer.shortLabel)
+                    Text(L10n.text(prayer.shortLabel))
                         .font(.system(size: 12, weight: .semibold))
                         .frame(width: 48, alignment: .leading)
                     ForEach(days, id: \.self) { day in
@@ -162,7 +162,7 @@ struct PrayerHistoryView: View {
             Text(emoji).font(.system(size: 24))
             Text(value)
                 .font(.system(size: 20, weight: .bold))
-            Text(label)
+            Text(L10n.text(label))
                 .font(.system(size: 11))
                 .foregroundColor(AppColors.slTextSecondary)
                 .multilineTextAlignment(.center)

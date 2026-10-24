@@ -13,6 +13,21 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
     case newAudio = "Funny Wake Up Bitch"
     case custom = "Custom Audio"
 
+    /// Sounds offered during onboarding (adhan and takbir only).
+    static let onboardingOptions: [AlarmSoundOption] = [.makkahLoud, .madinahLoud, .fajrLoud, .takbirLoud, .custom]
+
+    static func analyticsID(for soundName: String) -> String {
+        switch Self(rawValue: soundName) {
+        case .makkahLoud: return "makkah_loud"
+        case .madinahLoud: return "madinah_loud"
+        case .fajrLoud: return "fajr_loud"
+        case .takbirLoud: return "takbir_loud"
+        case .newAudio: return "wake_up_funny"
+        case .custom: return "custom"
+        case nil: return "other"
+        }
+    }
+
     var description: String {
         switch self {
         case .makkahLoud:

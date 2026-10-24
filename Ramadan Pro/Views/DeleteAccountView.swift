@@ -117,7 +117,7 @@ struct DeleteAccountView: View {
                 }
             } message: {
                 if let errorMessage = errorMessage {
-                    Text(errorMessage)
+                    Text(L10n.text(errorMessage))
                 }
             }
         }

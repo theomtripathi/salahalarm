@@ -65,7 +65,7 @@ struct SLPrayerConfirmationSheet: View {
             SalahLockBrandMark(size: 40)
 
             VStack(spacing: 6) {
-                Text("Did you pray \(prayer.displayName)?")
+                Text(L10n.format("Did you pray %@?", L10n.text(prayer.displayName)))
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(AppColors.slTextPrimary)
                 Text(prayer.arabicName)

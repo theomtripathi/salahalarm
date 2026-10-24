@@ -172,7 +172,7 @@ struct HomeView: View {
             Image(systemName: isComplete ? "checkmark.circle.fill" : "circle")
                 .foregroundStyle(isComplete ? AppColors.slGreen : AppColors.slTextSecondary)
                 .accessibilityHidden(true)
-            Text(title)
+            Text(L10n.text(title))
                 .font(.subheadline)
                 .foregroundStyle(AppColors.slTextPrimary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -186,7 +186,7 @@ struct HomeView: View {
         .padding(.vertical, 5)
         .contentShape(Rectangle())
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(title)
+        .accessibilityLabel(L10n.text(title))
         .accessibilityValue(L10n.text(isComplete ? "Complete" : "Not complete"))
         .accessibilityHint(action)
     }
@@ -194,12 +194,12 @@ struct HomeView: View {
     private func trialDateSummary(for status: SubscriptionStatus) -> String {
         let end = status.trialEndDate ?? status.expiryDate
         if let start = status.startDate, let end {
-            return "Trial: \(Self.trialDateFormatter.string(from: start)) – \(Self.trialDateFormatter.string(from: end))"
+            return L10n.format("Trial: %@ – %@", Self.trialDateFormatter.string(from: start), Self.trialDateFormatter.string(from: end))
         }
         if let end {
-            return "Your free trial ends \(Self.trialDateFormatter.string(from: end))."
+            return L10n.format("Your free trial ends %@.", Self.trialDateFormatter.string(from: end))
         }
-        return "Your free trial is active."
+        return L10n.text("Your free trial is active.")
     }
 
     private static let trialDateFormatter: DateFormatter = {
@@ -247,7 +247,7 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Assalamu Alaikum, \(displayName) 🌙")
+                        Text(L10n.format("Assalamu Alaikum, %@ 🌙", displayName))
                             .font(.system(size: 18, weight: .semibold))
                         Text(prayerTimesViewModel.currentLocation?.city ?? schedule?.city ?? L10n.text("Your city"))
                             .font(.system(size: 13))
@@ -257,14 +257,14 @@ struct HomeView: View {
                 }
 
                 if let next {
-                    Text(next.name)
+                    Text(L10n.text(next.name))
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(AppColors.slGreen)
                     Text(formatCountdown(next.time.timeIntervalSince(currentTime)))
                         .font(.system(size: 32, weight: .bold))
                         .foregroundColor(AppColors.slGold)
                         .monospacedDigit()
-                    Text("\(next.name) at \(next.time.timeString())")
+                    Text(L10n.format("%@ at %@", L10n.text(next.name), next.time.timeString()))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                 } else {
@@ -277,7 +277,7 @@ struct HomeView: View {
                     HStack(spacing: 10) {
                         ForEach(PrayerName.allCases, id: \.self) { prayer in
                             VStack(spacing: 6) {
-                                Text(prayer.shortLabel)
+                                Text(L10n.text(prayer.shortLabel))
                                     .font(.system(size: 11, weight: .semibold))
                                 Text(schedule.time(for: prayer)?.timeString() ?? "--")
                                     .font(.system(size: 11))
@@ -308,7 +308,7 @@ struct HomeView: View {
                     Image(systemName: lockManager.activeLockPrayer != nil ? "lock.fill" : "lock.open.fill")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(lockManager.activeLockPrayer != nil ? AppColors.saAlarmRed : AppColors.slGreen)
-                    Text(lockManager.activeLockPrayer.map { "apps locked — pray \($0.displayName) to unlock" } ?? "SalahLock armed · apps unlocked")
+                    Text(lockManager.activeLockPrayer.map { L10n.format("apps locked — pray %@ to unlock", L10n.text($0.displayName)) } ?? L10n.text("SalahLock armed · apps unlocked"))
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(AppColors.slTextPrimary)
                     Spacer()
@@ -481,13 +481,13 @@ struct HomeView: View {
                 } else if let nextAlarm {
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text(nextAlarm.prayer.displayName)
+                            Text(L10n.text(nextAlarm.prayer.displayName))
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(AppColors.slGreen)
                             Text(nextAlarm.scheduledTime.timeString())
                                 .font(.system(size: 28, weight: .bold))
                                 .foregroundColor(AppColors.slGold)
-                            Text("\(nextAlarm.prayer.displayName) · \(relativeAlarmCountdown(to: nextAlarm.scheduledTime))")
+                            Text(L10n.format("%@ · %@", L10n.text(nextAlarm.prayer.displayName), relativeAlarmCountdown(to: nextAlarm.scheduledTime)))
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(AppColors.slTextSecondary)
                         }
@@ -499,7 +499,7 @@ struct HomeView: View {
                             .foregroundColor(AppColors.slTextSecondary.opacity(0.7))
                     }
 
-                    Text(alarmModeDescription)
+                    Text(L10n.text(alarmModeDescription))
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(alarmModeColor)
                         .padding(.horizontal, 12)
@@ -540,7 +540,7 @@ struct HomeView: View {
                         Text(prayer.emoji)
                             .font(.system(size: 20))
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(prayer.displayName)
+                            Text(L10n.text(prayer.displayName))
                                 .font(.system(size: 16, weight: .semibold))
                             Text(schedule?.time(for: prayer)?.timeString() ?? "--")
                                 .font(.system(size: 13))
@@ -641,9 +641,9 @@ struct HomeView: View {
         let minutes = (Int(interval) / 60) % 60
 
         if hours > 0 {
-            return "in \(hours)h \(minutes)m"
+            return L10n.format("in %dh %dm", hours, minutes)
         }
-        return "in \(minutes)m"
+        return L10n.format("in %dm", minutes)
     }
 
     private var displayName: String {

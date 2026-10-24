@@ -219,7 +219,7 @@ struct SLScreen0SignUp: View {
                 .foregroundColor(AppColors.slTextSecondary)
                 .padding(.top, 16)
                 if vm.authViewModel.showError, let message = vm.authViewModel.errorMessage {
-                    Text(message)
+                    Text(L10n.text(message))
                         .font(.system(size: 13))
                         .foregroundColor(.red)
                         .padding(.top, 12)
@@ -275,7 +275,7 @@ struct SLScreen0SignUp: View {
     @ViewBuilder
     private func textField(title: String, text: Binding<String>, secure: Bool, keyboard: UIKeyboardType) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(AppColors.slTextPrimary)
             Group {
@@ -1744,7 +1744,7 @@ struct SLPaywallScreen: View {
                     }
                 }
             }
-            Text(paywallTitle)
+            Text(L10n.text(paywallTitle))
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(AppColors.slTextPrimary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -1760,8 +1760,8 @@ struct SLPaywallScreen: View {
                 if let yearly = firstStagePlans.first(where: { $0.type == .yearly }) {
                     planCard(
                         title: "Yearly plan",
-                        priceLine1: "\(yearly.formatAmount(yearly.price / 12))/mo",
-                        priceLine2: "Billed \(yearly.priceString) annually",
+                        priceLine1: L10n.format("%@/mo", yearly.formatAmount(yearly.price / 12)),
+                        priceLine2: L10n.format("Billed %@ annually", yearly.priceString),
                         badge: "BEST VALUE",
                         isSelected: selectedPlan == .yearly
                     ) {
@@ -1774,8 +1774,8 @@ struct SLPaywallScreen: View {
                 if let weekly = firstStagePlans.first(where: { $0.type == .weekly }) {
                     planCard(
                         title: "Weekly",
-                        priceLine1: "\(weekly.priceString)/week",
-                        priceLine2: "Billed \(weekly.priceString) weekly",
+                        priceLine1: L10n.format("%@/week", weekly.priceString),
+                        priceLine2: L10n.format("Billed %@ weekly", weekly.priceString),
                         isSelected: selectedPlan == .weekly
                     ) {
                         selectedPlan = .weekly
@@ -1788,7 +1788,7 @@ struct SLPaywallScreen: View {
                     purchase(selectedPlanDetails)
                 }
             }
-            Text(footerCopy)
+            Text(L10n.text(footerCopy))
                 .font(.system(size: 13))
                 .foregroundColor(AppColors.slTextSecondary)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -1806,7 +1806,7 @@ struct SLPaywallScreen: View {
             .font(.system(size: 13, weight: .medium))
             .foregroundColor(AppColors.slGreen)
             if let errorMessage {
-                Text(errorMessage)
+                Text(L10n.text(errorMessage))
                     .font(.system(size: 13))
                     .foregroundColor(subscriptionVM.lastPurchaseOutcome == .pending ? AppColors.slTextSecondary : .red)
             }
@@ -1919,14 +1919,14 @@ struct SLPaywallScreen: View {
                             Divider()
 
                             VStack(alignment: .leading, spacing: 7) {
-                                Text("\(plan.formatAmount(plan.price / 12))/month")
+                                Text(L10n.format("%@/month", plan.formatAmount(plan.price / 12)))
                                     .font(.system(size: 16, weight: .regular))
                                     .foregroundColor(AppColors.slTextPrimary)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.85)
 
                                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                                    Text("Billed \(plan.priceString) annually")
+                                    Text(L10n.format("Billed %@ annually", plan.priceString))
                                         .font(.system(size: 16, weight: .regular))
                                         .foregroundColor(AppColors.slTextPrimary)
                                         .lineLimit(1)
@@ -1998,11 +1998,11 @@ struct SLPaywallScreen: View {
                 .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.slGreen.opacity(0.11)))
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 10, weight: .bold))
                     .foregroundColor(AppColors.slTextPrimary)
                     .lineLimit(1)
-                Text(subtitle)
+                Text(L10n.text(subtitle))
                     .font(.system(size: 8))
                     .foregroundColor(AppColors.slTextSecondary)
                     .lineLimit(2)
@@ -2039,7 +2039,7 @@ struct SLPaywallScreen: View {
                 ("checkout_problem", "Checkout didn't work"),
                 ("other", "Another reason")
             ], id: \.0) { reason, label in
-                Button(label) {
+                Button(L10n.text(label)) {
                     submitExitFeedback(reason)
                     showExitFeedback = false
                 }
@@ -2189,7 +2189,7 @@ struct SLPaywallScreen: View {
                         }
                         .disabled(purchaseTaskRunning || subscriptionVM.isProcessingPurchase)
                         if let errorMessage {
-                            Text(errorMessage).font(.body).foregroundStyle(.secondary)
+                            Text(L10n.text(errorMessage)).font(.body).foregroundStyle(.secondary)
                         }
                         Button(L10n.text("No thanks"), action: declineTrialOffer)
                             .font(.body)
@@ -2351,7 +2351,7 @@ struct SLPaywallScreen: View {
                 .foregroundColor(AppColors.slTextSecondary)
 
             if let errorMessage {
-                Text(errorMessage)
+                Text(L10n.text(errorMessage))
                     .font(.system(size: 13))
                     .foregroundColor(.red)
             }
@@ -2373,7 +2373,7 @@ struct SLPaywallScreen: View {
         HStack(spacing: 6) {
             Image(systemName: "tag.fill")
                 .font(.system(size: 11, weight: .bold))
-            Text(text)
+            Text(L10n.text(text))
                 .font(.system(size: 13, weight: .semibold))
         }
         .foregroundColor(AppColors.slGreen)
@@ -2404,16 +2404,16 @@ struct SLPaywallScreen: View {
         ZStack {
             Color.black.opacity(0.55).ignoresSafeArea()
             VStack(alignment: .leading, spacing: 16) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 21, weight: .bold))
                     .foregroundColor(AppColors.slTextPrimary)
-                Text(message)
+                Text(L10n.text(message))
                     .font(.system(size: 15))
                     .foregroundColor(AppColors.slTextSecondary)
                     .fixedSize(horizontal: false, vertical: true)
                 SLPrimaryButton(title: stayTitle, action: onStay)
                 Button(action: onLeave) {
-                    Text(leaveTitle)
+                    Text(L10n.text(leaveTitle))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(AppColors.slTextSecondary)
                         .frame(maxWidth: .infinity)
@@ -2634,11 +2634,11 @@ struct SLPaywallScreen: View {
                     .foregroundColor(AppColors.slGreen)
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(AppColors.slTextPrimary)
                     .fixedSize(horizontal: false, vertical: true)
-                Text(subtitle)
+                Text(L10n.text(subtitle))
                     .font(.system(size: 12))
                     .foregroundColor(AppColors.slTextSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -2657,11 +2657,11 @@ struct SLPaywallScreen: View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 7) {
                 HStack(spacing: 8) {
-                    Text(title)
+                    Text(L10n.text(title))
                         .font(.system(size: 17, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
                     if let badge {
-                        Text(badge)
+                        Text(L10n.text(badge))
                             .font(.system(size: 10, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 8)
@@ -2671,13 +2671,13 @@ struct SLPaywallScreen: View {
                 }
 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(priceLine1)
+                    Text(L10n.text(priceLine1))
                         .font(.system(size: 16, weight: .regular))
                         .foregroundColor(AppColors.slTextPrimary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
 
-                    Text(priceLine2)
+                    Text(L10n.text(priceLine2))
                         .font(.system(size: 16, weight: .regular))
                         .foregroundColor(AppColors.slTextPrimary)
                         .lineLimit(1)
@@ -2698,18 +2698,18 @@ struct SLPaywallScreen: View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 8) {
                 if let badge {
-                    Text(badge)
+                    Text(L10n.text(badge))
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(AppColors.slGold)
                 }
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(AppColors.slTextPrimary)
                 Text(price)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(AppColors.slTextPrimary)
                 if let subtitle {
-                    Text(subtitle)
+                    Text(L10n.text(subtitle))
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(AppColors.slGreen)
                 }

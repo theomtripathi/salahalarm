@@ -100,7 +100,7 @@ struct ForgotPasswordView: View {
             }
         } message: {
             if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
+                Text(L10n.text(errorMessage))
             }
         }
         .onAppear {

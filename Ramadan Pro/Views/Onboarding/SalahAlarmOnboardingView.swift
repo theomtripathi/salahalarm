@@ -684,6 +684,30 @@ struct SalahAlarmOnboardingView: View {
                         .fixedSize(horizontal: false, vertical: true)
 
                     VStack(spacing: 0) {
+                        if let firstAlarm = vm.firstAlarm {
+                            HStack(alignment: .top, spacing: 14) {
+                                Image(systemName: "alarm.fill")
+                                    .font(.headline)
+                                    .foregroundColor(AppColors.slGreen)
+                                    .frame(width: 34, height: 34)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.slGreen.opacity(0.10)))
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(L10n.text("Your first alarm"))
+                                        .font(.caption)
+                                        .foregroundColor(AppColors.slTextSecondary)
+                                    Text(L10n.format("%@ at %@", L10n.text(firstAlarm.prayer.displayName), firstAlarm.time.formatted(Date.FormatStyle(date: .omitted, time: .shortened).locale(AppLanguage.current.locale))))
+                                        .font(.headline)
+                                        .foregroundColor(AppColors.slTextPrimary)
+                                    Text(L10n.text("Calculated for your location. It keeps ringing until you reach your mat."))
+                                        .font(.caption)
+                                        .foregroundColor(AppColors.slTextSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                                Spacer(minLength: 0)
+                            }
+                            .padding(14)
+                            Divider().padding(.leading, 58)
+                        }
                         planSummaryRow(
                             icon: "bell.fill",
                             title: "Prayer coverage",
@@ -782,14 +806,16 @@ struct SalahAlarmOnboardingView: View {
                 }
                 Spacer()
                 SLPrimaryButton(title: "allow") {
+                    FunnelAnalytics.shared.onboardingAction(action: "permission_requested", screen: vm.currentScreen)
                     Task {
                         let granted = await NotificationManager.shared.requestAuthorization()
                         vm.setNotificationsPermission(granted)
+                        if granted { vm.scheduleSelectedPrayerReminders() }
                         vm.advance()
                     }
                 }
                 SLSecondaryButton(title: "skip for now") {
-                    vm.setNotificationsPermission(false)
+                    vm.skipNotificationsPermission()
                     vm.advance()
                 }
                 .padding(.bottom, 24)
@@ -807,7 +833,7 @@ struct SalahAlarmOnboardingView: View {
                     .font(.system(size: 16))
                     .foregroundColor(AppColors.slTextSecondary)
                 VStack(spacing: 12) {
-                    ForEach(AlarmSoundOption.allCases, id: \.rawValue) { option in
+                    ForEach(AlarmSoundOption.onboardingOptions, id: \.rawValue) { option in
                         soundChoiceCard(option)
                     }
                 }
@@ -828,6 +854,7 @@ struct SalahAlarmOnboardingView: View {
                     try alarmAudioService.saveCustomAudio(from: url)
                     vm.setAlarmSound(AlarmSoundOption.custom.rawValue)
                     alarmAudioService.playPreview(soundName: AlarmSoundOption.custom.rawValue)
+                    FunnelAnalytics.shared.onboardingSoundPreviewed(sound: "custom")
                 } catch {
                     print("Failed to save custom audio: \(error)")
                 }
@@ -846,6 +873,7 @@ struct SalahAlarmOnboardingView: View {
             } else {
                 vm.setAlarmSound(option.rawValue)
                 alarmAudioService.playPreview(soundName: option.rawValue)
+                FunnelAnalytics.shared.onboardingSoundPreviewed(sound: AlarmSoundOption.analyticsID(for: option.rawValue))
             }
         } label: {
             HStack(alignment: .top, spacing: 14) {
@@ -1519,6 +1547,7 @@ struct SalahAlarmOnboardingView: View {
     }
 
     private func requestLocationPermission() {
+        FunnelAnalytics.shared.onboardingAction(action: "permission_requested", screen: vm.currentScreen)
         Task {
             vm.isLoading = true
             LocationManager.shared.requestWhenInUseAuthorization()

@@ -71,7 +71,7 @@ struct ProfileView: View {
                         set: { alarmViewModel.setStrictness($0) }
                     )) {
                         ForEach(AlarmStrictness.allCases, id: \.self) { strictness in
-                            Text(strictness.displayLabel).tag(strictness)
+                            Text(L10n.text(strictness.displayLabel)).tag(strictness)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -82,7 +82,7 @@ struct ProfileView: View {
                         set: { alarmViewModel.setSound($0) }
                     )) {
                         ForEach(AlarmSoundOption.allCases, id: \.rawValue) { sound in
-                            Text(sound.shortLabel).tag(sound.rawValue)
+                            Text(L10n.text(sound.shortLabel)).tag(sound.rawValue)
                         }
                     }
                     .pickerStyle(.menu)
@@ -179,10 +179,10 @@ struct ProfileView: View {
         } message: {
             Text("Are you sure you want to sign out?")
         }
-        .alert(infoAlertTitle, isPresented: $showInfoAlert) {
+        .alert(L10n.text(infoAlertTitle), isPresented: $showInfoAlert) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text(infoAlertMessage)
+            Text(L10n.text(infoAlertMessage))
         }
     }
 
@@ -202,7 +202,7 @@ struct ProfileView: View {
                 Text(authService.currentUser?.email ?? "")
                     .font(.system(size: 14))
                     .foregroundColor(AppColors.slTextSecondary)
-                Text("Member since \(memberSince)")
+                Text(L10n.format("Member since %@", memberSince))
                     .font(.system(size: 13))
                     .foregroundColor(AppColors.slTextSecondary)
             }
@@ -223,7 +223,7 @@ struct ProfileView: View {
             Text(emoji)
             Text(value)
                 .font(.system(size: 20, weight: .bold))
-            Text(label)
+            Text(L10n.text(label))
                 .font(.system(size: 11))
                 .foregroundColor(AppColors.slTextSecondary)
                 .multilineTextAlignment(.center)
@@ -252,10 +252,10 @@ struct ProfileView: View {
 
     private func settingRow(title: String, value: String) -> some View {
         HStack {
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 15, weight: .medium))
             Spacer()
-            Text(value)
+            Text(L10n.text(value))
                 .font(.system(size: 14))
                 .foregroundColor(AppColors.slTextSecondary)
         }
@@ -264,7 +264,7 @@ struct ProfileView: View {
     private func actionRow(_ title: String, role: ButtonRole? = nil, action: @escaping () -> Void) -> some View {
         Button(role: role, action: action) {
             HStack {
-                Text(title)
+                Text(L10n.text(title))
                 Spacer()
                 Image(systemName: "chevron.right")
             }
@@ -276,7 +276,7 @@ struct ProfileView: View {
     private func segmentedPicker(_ values: [String], selection: Binding<String>) -> some View {
         Picker("", selection: selection) {
             ForEach(values, id: \.self) { value in
-                Text(value).tag(value)
+                Text(L10n.text(value)).tag(value)
             }
         }
         .pickerStyle(.segmented)
@@ -312,7 +312,7 @@ struct ProfileView: View {
         Task {
             do {
                 try await FirebaseAuthService.shared.resetPassword(email: email)
-                presentInfoAlert(title: "Password Reset Sent", message: "A reset link was sent to \(email).")
+                presentInfoAlert(title: "Password Reset Sent", message: L10n.format("A reset link was sent to %@.", email))
             } catch {
                 presentInfoAlert(title: "Reset Failed", message: error.localizedDescription)
             }
