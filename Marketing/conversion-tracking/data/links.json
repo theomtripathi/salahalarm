@@ -6,7 +6,7 @@
     "format": "mixed",
     "video": null,
     "ct": "ig1-mixed-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=ig1-mixed-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=ig1-mixed-bio&mt=8"
   },
   "ig2": {
     "kind": "bio",
@@ -15,7 +15,7 @@
     "format": "anim",
     "video": null,
     "ct": "ig2-anim-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=ig2-anim-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=ig2-anim-bio&mt=8"
   },
   "tt01": {
     "kind": "bio",
@@ -24,7 +24,7 @@
     "format": "whatif",
     "video": null,
     "ct": "tt01-whatif-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt01-whatif-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt01-whatif-bio&mt=8"
   },
   "tt02": {
     "kind": "bio",
@@ -33,7 +33,7 @@
     "format": "whatif",
     "video": null,
     "ct": "tt02-whatif-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt02-whatif-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt02-whatif-bio&mt=8"
   },
   "tt03": {
     "kind": "bio",
@@ -42,7 +42,7 @@
     "format": "anim",
     "video": null,
     "ct": "tt03-anim-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt03-anim-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt03-anim-bio&mt=8"
   },
   "tt04": {
     "kind": "bio",
@@ -51,7 +51,7 @@
     "format": "anim",
     "video": null,
     "ct": "tt04-anim-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt04-anim-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt04-anim-bio&mt=8"
   },
   "tt05": {
     "kind": "bio",
@@ -60,7 +60,7 @@
     "format": "alarm",
     "video": null,
     "ct": "tt05-alarm-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt05-alarm-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt05-alarm-bio&mt=8"
   },
   "tt06": {
     "kind": "bio",
@@ -69,7 +69,7 @@
     "format": "alarm",
     "video": null,
     "ct": "tt06-alarm-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt06-alarm-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt06-alarm-bio&mt=8"
   },
   "tt07": {
     "kind": "bio",
@@ -78,7 +78,7 @@
     "format": "pov",
     "video": null,
     "ct": "tt07-pov-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt07-pov-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt07-pov-bio&mt=8"
   },
   "tt08": {
     "kind": "bio",
@@ -87,7 +87,7 @@
     "format": "pov",
     "video": null,
     "ct": "tt08-pov-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt08-pov-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt08-pov-bio&mt=8"
   },
   "tt09": {
     "kind": "bio",
@@ -96,7 +96,7 @@
     "format": "ramadan",
     "video": null,
     "ct": "tt09-ramadan-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt09-ramadan-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt09-ramadan-bio&mt=8"
   },
   "tt10": {
     "kind": "bio",
@@ -105,7 +105,7 @@
     "format": "ramadan",
     "video": null,
     "ct": "tt10-ramadan-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt10-ramadan-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt10-ramadan-bio&mt=8"
   },
   "seo-en": {
     "kind": "bio",
@@ -114,7 +114,7 @@
     "format": "seo",
     "video": null,
     "ct": "seo-en-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-en-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=seo-en-bio&mt=8"
   },
   "seo-ar": {
     "kind": "bio",
@@ -123,7 +123,7 @@
     "format": "seo",
     "video": null,
     "ct": "seo-ar-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-ar-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=seo-ar-bio&mt=8"
   },
   "seo-tr": {
     "kind": "bio",
@@ -132,7 +132,7 @@
     "format": "seo",
     "video": null,
     "ct": "seo-tr-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-tr-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=seo-tr-bio&mt=8"
   },
   "seo-id": {
     "kind": "bio",
@@ -141,7 +141,7 @@
     "format": "seo",
     "video": null,
     "ct": "seo-id-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-id-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=seo-id-bio&mt=8"
   },
   "seo-ur": {
     "kind": "bio",
@@ -150,7 +150,7 @@
     "format": "seo",
     "video": null,
     "ct": "seo-ur-bio",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=seo-ur-bio&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=seo-ur-bio&mt=8"
   },
   "v/tt01-1024-1": {
     "kind": "video",
@@ -160,7 +160,7 @@
     "video": "tt01-1024-1",
     "hook": "what-if-fajr-was-your-last",
     "ct": "tt01-whatif-1024-1",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=tt01-whatif-1024-1&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=tt01-whatif-1024-1&mt=8"
   },
   "v/ig1-1024-1": {
     "kind": "video",
@@ -170,6 +170,6 @@
     "video": "ig1-1024-1",
     "hook": "alarm-stops-at-prayer-mat",
     "ct": "ig1-alarm-1024-1",
-    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=REPLACE_WITH_PT_FROM_APP_STORE_CONNECT&ct=ig1-alarm-1024-1&mt=8"
+    "target": "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=ig1-alarm-1024-1&mt=8"
   }
 }
