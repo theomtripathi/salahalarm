@@ -95,8 +95,34 @@ struct SLScreen0SignUp: View {
 
     var body: some View {
         SLScreenContainer(vm: vm, showBack: false) {
+            // Small screens and long translations scroll instead of clipping.
+            GeometryReader { proxy in
+                ScrollView(showsIndicators: false) {
+                    signUpContent
+                        .frame(minHeight: proxy.size.height)
+                }
+            }
+        }
+        .loadingOverlay(
+            isLoading: vm.authViewModel.isLoading || isTransitioningAfterAuth,
+            message: isTransitioningAfterAuth ? "Redirecting to your plan..." : "Creating account..."
+        )
+        .onAppear {
+            authMode = .signup
+            showEmailForm = false
+            isTransitioningAfterAuth = false
+            vm.authViewModel.clearFields()
+            emailName = vm.authViewModel.name
+            email = vm.authViewModel.email
+            password = vm.authViewModel.password
+            confirmPassword = vm.authViewModel.confirmPassword
+            FunnelAnalytics.shared.track(.signupStarted)
+        }
+    }
+
+    private var signUpContent: some View {
             VStack(spacing: 0) {
-                Spacer()
+                Spacer(minLength: 12)
                 // Brand center section
                 VStack(spacing: 0) {
                     SalahLockBrandMark(size: 88)
@@ -109,16 +135,18 @@ struct SLScreen0SignUp: View {
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(AppColors.slTextPrimary)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, 24)
                     Text(L10n.text("Your plan is ready. Save it to keep your routine with you."))
                         .font(.system(size: 15))
                         .foregroundColor(AppColors.slTextSecondary)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
                 }
                 .frame(maxWidth: .infinity)
-                Spacer()
+                Spacer(minLength: 20)
                 // Auth buttons
                 VStack(spacing: 12) {
                     SLAuthButton(provider: .google) {
@@ -233,22 +261,6 @@ struct SLScreen0SignUp: View {
                 }
                 Spacer().frame(height: 24)
             }
-        }
-        .loadingOverlay(
-            isLoading: vm.authViewModel.isLoading || isTransitioningAfterAuth,
-            message: isTransitioningAfterAuth ? "Redirecting to your plan..." : "Creating account..."
-        )
-        .onAppear {
-            authMode = .signup
-            showEmailForm = false
-            isTransitioningAfterAuth = false
-            vm.authViewModel.clearFields()
-            emailName = vm.authViewModel.name
-            email = vm.authViewModel.email
-            password = vm.authViewModel.password
-            confirmPassword = vm.authViewModel.confirmPassword
-            FunnelAnalytics.shared.track(.signupStarted)
-        }
     }
 
     @MainActor
@@ -1671,6 +1683,14 @@ struct SLPaywallScreen: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .task {
                     Analytics.logEvent("onboarding_paywall_viewed", parameters: nil)
+                    // A stalled App Store request must not leave the paywall loading forever.
+                    // The retry state shows instead, and plans still appear if the request finishes.
+                    Task {
+                        try? await Task.sleep(nanoseconds: 12_000_000_000)
+                        guard !hasAttemptedLoad else { return }
+                        hasAttemptedLoad = true
+                        trackPaywallImpressionIfNeeded()
+                    }
                     await subscriptionVM.loadAvailablePlans()
                     selectedPlan = firstStagePlans.first?.type
                     if let selectedPlanDetails {
@@ -1715,6 +1735,12 @@ struct SLPaywallScreen: View {
     // MARK: - Stage 1: weekly + yearly
 
     private var plansStage: some View {
+        ScrollView(showsIndicators: false) {
+            plansContent
+        }
+    }
+
+    private var plansContent: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Spacer()

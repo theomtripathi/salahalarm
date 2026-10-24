@@ -98,6 +98,7 @@ struct LanguagePickerButton: View {
             }
             .environment(\.locale, AppLanguage.current.locale)
             .environment(\.layoutDirection, AppLanguage.current.isRightToLeft ? .rightToLeft : .leftToRight)
+            .appTypesetting(AppLanguage.current)
         }
     }
 }

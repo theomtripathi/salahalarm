@@ -115,6 +115,17 @@ struct SalahAlarmOnboardingView: View {
         .onAppear {
             guard !didRestoreProgress else { return }
             didRestoreProgress = true
+            #if DEBUG
+            // Screenshot/QA hook: launch with `-SAOnboardingScreen screen14` to open a step directly.
+            if let raw = UserDefaults.standard.string(forKey: "SAOnboardingScreen"),
+               let screen = OnboardingScreenID(rawValue: raw) {
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) { vm.currentScreen = screen }
+                vm.startAnalytics()
+                return
+            }
+            #endif
             if let savedScreen = vm.loadSavedProgress() {
                 let allowed: Set<OnboardingScreenID> = [
                     .screen0, .screen1, .screen2, .screen3, .screen4, .screen5, .screen6,
@@ -136,13 +147,6 @@ struct SalahAlarmOnboardingView: View {
             } else {
                 vm.currentScreen = .screen1
             }
-            #if DEBUG
-            // Screenshot/QA hook: launch with `-SAOnboardingScreen screen14` to open a step directly.
-            if let raw = UserDefaults.standard.string(forKey: "SAOnboardingScreen"),
-               let screen = OnboardingScreenID(rawValue: raw) {
-                vm.currentScreen = screen
-            }
-            #endif
             vm.startAnalytics()
         }
         .animation(.easeInOut(duration: 0.25), value: vm.currentScreen)
@@ -433,14 +437,16 @@ struct SalahAlarmOnboardingView: View {
 
     private var alarmPrayerSelectionScreen: some View {
         SAOnboardingContainer(vm: vm) {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 22) {
                 Text("Which Prayers Do You Want Alarms For?")
                     .font(.system(size: 30, weight: .bold))
                     .foregroundColor(AppColors.slTextPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
                 Text("choose the ones you miss most.\nwe'll only ring when you actually need it.")
                     .font(.system(size: 16))
                     .foregroundColor(AppColors.slTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 HStack(spacing: 10) {
                     presetPill("all five", isSelected: vm.profile.selectedAlarmPrayers.count == PrayerName.allCases.count) {
@@ -458,25 +464,38 @@ struct SalahAlarmOnboardingView: View {
                         SLOptionPill(
                             emoji: nil,
                             title: prayer.displayName,
-                            subtitle: prayer.arabicName,
+                            // The Arabic name would repeat the title in Arabic-script languages.
+                            subtitle: AppLanguage.current.isRightToLeft ? nil : prayer.arabicName,
                             isSelected: vm.profile.selectedAlarmPrayers.contains(prayer)
                         ) {
                             vm.toggleSelectedAlarmPrayer(prayer)
                         }
                     }
                 }
-
-                Spacer()
-
-                SLPrimaryButton(title: "continue", isEnabled: !vm.profile.selectedAlarmPrayers.isEmpty) {
-                    vm.advance()
-                }
-                .padding(.bottom, 24)
             }
             .padding(.horizontal, 24)
-            .padding(.top, 36)
+            .padding(.top, 28)
+            .padding(.bottom, 18)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                pinnedFooter {
+                    SLPrimaryButton(title: "continue", isEnabled: !vm.profile.selectedAlarmPrayers.isEmpty) {
+                        vm.advance()
+                    }
+                }
             }
         }
+    }
+
+    /// Bottom action bar that stays visible while the content above it scrolls.
+    private func pinnedFooter<Footer: View>(@ViewBuilder _ footer: () -> Footer) -> some View {
+        VStack(spacing: 8) {
+            footer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 12)
+        .padding(.bottom, 10)
+        .background(Color.white)
     }
 
     private var goalsScreen: some View {
@@ -574,6 +593,7 @@ struct SalahAlarmOnboardingView: View {
                     Text("Choose a pace that feels sustainable. It can be changed anytime.")
                         .font(.body)
                         .foregroundColor(AppColors.slTextSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     LazyVGrid(
                         columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 6),
@@ -614,17 +634,20 @@ struct SalahAlarmOnboardingView: View {
                             strictness: .relaxed
                         )
                     }
-
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
+                .padding(.bottom, 18)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                pinnedFooter {
                     SLPrimaryButton(
                         title: "create my plan",
                         isEnabled: vm.profile.commitmentLevel != .unset
                     ) {
                         vm.advance()
                     }
-                    .padding(.bottom, 20)
                 }
-                .padding(.horizontal, 24)
-                .padding(.top, 24)
             }
         }
     }
@@ -744,14 +767,17 @@ struct SalahAlarmOnboardingView: View {
                         outcomePill(icon: "camera.viewfinder", title: "Reach your mat")
                         outcomePill(icon: "flame.fill", title: "Build the streak")
                     }
-
-                    SLPrimaryButton(title: "continue with my plan") {
-                        vm.advance()
-                    }
-                    .padding(.bottom, 20)
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 24)
+                .padding(.bottom, 18)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                pinnedFooter {
+                    SLPrimaryButton(title: "continue with my plan") {
+                        vm.advance()
+                    }
+                }
             }
         }
     }
@@ -801,58 +827,73 @@ struct SalahAlarmOnboardingView: View {
 
     private var notificationsScreen: some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 18) {
-                Text("Allow SalahAlarm to Reach You")
-                    .font(.system(size: 28, weight: .bold))
-                Text("without notifications, your alarms can't ring.\n\nwe'll send two notifications per prayer:\na heads-up reminder, then the alarm itself.")
-                    .font(.system(size: 16))
-                    .foregroundColor(AppColors.slTextSecondary)
-                VStack(spacing: 10) {
-                    SLNotificationPreviewCard(title: "SalahAlarm", message: "Fajr is in 10 minutes. get ready.")
-                    SLNotificationPreviewCard(title: "🔔 SalahAlarm", message: "it's time for Fajr. scan your mat to confirm.")
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text("Allow SalahAlarm to Reach You")
+                        .font(.system(size: 28, weight: .bold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("without notifications, your alarms can't ring.\n\nwe'll send two notifications per prayer:\na heads-up reminder, then the alarm itself.")
+                        .font(.system(size: 16))
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    VStack(spacing: 10) {
+                        SLNotificationPreviewCard(title: "SalahAlarm", message: "Fajr is in 10 minutes. get ready.")
+                        SLNotificationPreviewCard(title: "🔔 SalahAlarm", message: "it's time for Fajr. scan your mat to confirm.")
+                    }
                 }
-                Spacer()
-                SLPrimaryButton(title: "allow") {
-                    FunnelAnalytics.shared.onboardingAction(action: "permission_requested", screen: vm.currentScreen)
-                    Task {
-                        let granted = await NotificationManager.shared.requestAuthorization()
-                        vm.setNotificationsPermission(granted)
-                        if granted { vm.scheduleSelectedPrayerReminders() }
+                .padding(.horizontal, 24)
+                .padding(.top, 24)
+                .padding(.bottom, 18)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                pinnedFooter {
+                    SLPrimaryButton(title: "allow") {
+                        FunnelAnalytics.shared.onboardingAction(action: "permission_requested", screen: vm.currentScreen)
+                        Task {
+                            let granted = await NotificationManager.shared.requestAuthorization()
+                            vm.setNotificationsPermission(granted)
+                            if granted { vm.scheduleSelectedPrayerReminders() }
+                            vm.advance()
+                        }
+                    }
+                    SLSecondaryButton(title: "skip for now") {
+                        vm.skipNotificationsPermission()
                         vm.advance()
                     }
                 }
-                SLSecondaryButton(title: "skip for now") {
-                    vm.skipNotificationsPermission()
-                    vm.advance()
-                }
-                .padding(.bottom, 24)
             }
-            .padding(24)
         }
     }
 
     private var soundSetupScreen: some View {
         SAOnboardingContainer(vm: vm, showBack: false) {
-            VStack(alignment: .leading, spacing: 18) {
-                Text("Choose your alarm sound")
-                    .font(.system(size: 28, weight: .bold))
-                Text("pick something you won't sleep through.\nthis matters most for Fajr.\nyou can change it later in settings.")
-                    .font(.system(size: 16))
-                    .foregroundColor(AppColors.slTextSecondary)
-                VStack(spacing: 12) {
-                    ForEach(AlarmSoundOption.onboardingOptions, id: \.rawValue) { option in
-                        soundChoiceCard(option)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text("Choose your alarm sound")
+                        .font(.system(size: 28, weight: .bold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("pick something you won't sleep through.\nthis matters most for Fajr.\nyou can change it later in settings.")
+                        .font(.system(size: 16))
+                        .foregroundColor(AppColors.slTextSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    VStack(spacing: 12) {
+                        ForEach(AlarmSoundOption.onboardingOptions, id: \.rawValue) { option in
+                            soundChoiceCard(option)
+                        }
                     }
                 }
-                Spacer()
-                SLPrimaryButton(title: "continue") {
-                    alarmAudioService.stop()
-                    vm.advance()
-                }
-                .padding(.bottom, 24)
+                .padding(.horizontal, 24)
+                .padding(.top, 28)
+                .padding(.bottom, 18)
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 36)
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                pinnedFooter {
+                    SLPrimaryButton(title: "continue") {
+                        alarmAudioService.stop()
+                        vm.advance()
+                    }
+                }
+            }
         }
         .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.audio]) { result in
             switch result {
@@ -889,18 +930,24 @@ struct SalahAlarmOnboardingView: View {
                         Text(L10n.text(option.displayName))
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(AppColors.slTextPrimary)
-                        Text("LOUD")
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(AppColors.saAlarmRed)
-                            .clipShape(Capsule())
+                            .fixedSize(horizontal: false, vertical: true)
+                        if option != .custom {
+                            Text("LOUD")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(.white)
+                                .lineLimit(1)
+                                .fixedSize()
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(AppColors.saAlarmRed)
+                                .clipShape(Capsule())
+                        }
                     }
                     Text(L10n.text(option.description))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
                         .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
                 Spacer()
@@ -1501,14 +1548,16 @@ struct SalahAlarmOnboardingView: View {
         onToggle: @escaping (String) -> Void
     ) -> some View {
         SAOnboardingContainer(vm: vm) {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 22) {
                 Text(L10n.text(title))
                     .font(.system(size: 30, weight: .bold))
+                    .fixedSize(horizontal: false, vertical: true)
                 if let subtitle {
                     Text(L10n.text(subtitle))
                         .font(.system(size: 14))
                         .foregroundColor(AppColors.slTextSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 VStack(spacing: 12) {
                     ForEach(options, id: \.2) { option in
@@ -1522,14 +1571,17 @@ struct SalahAlarmOnboardingView: View {
                         }
                     }
                 }
-                Spacer()
-                SLPrimaryButton(title: "continue", isEnabled: continueEnabled) {
-                    vm.advance()
-                }
-                .padding(.bottom, 24)
             }
             .padding(.horizontal, 24)
-            .padding(.top, 36)
+            .padding(.top, 28)
+            .padding(.bottom, 18)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                pinnedFooter {
+                    SLPrimaryButton(title: "continue", isEnabled: continueEnabled) {
+                        vm.advance()
+                    }
+                }
             }
         }
     }

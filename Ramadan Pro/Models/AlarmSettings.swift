@@ -46,8 +46,16 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
     }
 
     /// User-facing name. The raw value is persisted, so it never changes.
+    /// Loudness is shown as a separate badge, so it is left out of the name.
     var displayName: String {
-        self == .newAudio ? "Wake-Up Alarm" : rawValue
+        switch self {
+        case .makkahLoud: return "Makkah Adhan"
+        case .madinahLoud: return "Madinah Adhan"
+        case .fajrLoud: return "Fajr Adhan"
+        case .takbirLoud: return "Takbir Alarm"
+        case .newAudio: return "Wake-Up Alarm"
+        case .custom: return rawValue
+        }
     }
 
     var shortLabel: String {
