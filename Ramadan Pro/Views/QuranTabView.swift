@@ -163,7 +163,7 @@ struct QuranTabView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 40)
             } else if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
+                Text(L10n.text(errorMessage))
                     .font(.system(size: 14))
                     .foregroundColor(AppColors.slTextSecondary)
                     .frame(maxWidth: .infinity, alignment: .center)

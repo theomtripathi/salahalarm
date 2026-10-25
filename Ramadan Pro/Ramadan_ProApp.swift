@@ -84,6 +84,7 @@ struct Ramadan_ProApp: App {
             RootRouterView()
                 .environment(\.locale, (AppLanguage(rawValue: languageCode) ?? .current).locale)
                 .environment(\.layoutDirection, (AppLanguage(rawValue: languageCode) ?? .current).isRightToLeft ? .rightToLeft : .leftToRight)
+                .appTypesetting(AppLanguage(rawValue: languageCode) ?? .current)
                 .environmentObject(appState)
                 .environmentObject(onboardingState)
                 .environmentObject(authService)
@@ -397,6 +398,20 @@ struct SplashScreenWrapper: View {
             shouldShowOnboarding = false
             // Disable Sadaq donation prompt popup
             AppState.shared.shouldShowSadaqPrompt = false
+        }
+    }
+}
+
+extension View {
+    /// Plain-string Text carries no language, so Urdu otherwise mixes Nastaliq (localized
+    /// keys) with Naskh, and Nastaliq lines collide. Tagging all text as Urdu gives one
+    /// typeface and Nastaliq-sized line heights.
+    @ViewBuilder
+    func appTypesetting(_ language: AppLanguage) -> some View {
+        if #available(iOS 17.0, *), language == .urdu {
+            typesettingLanguage(Locale.Language(identifier: "ur"), isEnabled: true)
+        } else {
+            self
         }
     }
 }

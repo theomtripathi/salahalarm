@@ -115,9 +115,9 @@ struct SAAlarmSoundSetupSheet: View {
                 .foregroundColor(AppColors.slGreen)
                 .frame(width: 22)
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
+                Text(L10n.text(title))
                     .font(.system(size: 16, weight: .semibold))
-                Text(detail)
+                Text(L10n.text(detail))
                     .font(.system(size: 14))
                     .foregroundColor(AppColors.slTextSecondary)
             }
@@ -140,7 +140,7 @@ struct SAAlarmSettingsSheet: View {
                     ))
 
                     ForEach(PrayerName.allCases) { prayer in
-                        Toggle(prayer.displayName, isOn: Binding(
+                        Toggle(L10n.text(prayer.displayName), isOn: Binding(
                             get: { alarmViewModel.settings.isEnabled(for: prayer) },
                             set: { alarmViewModel.setPrayerEnabled($0, for: prayer) }
                         ))
@@ -153,12 +153,12 @@ struct SAAlarmSettingsSheet: View {
                         set: { alarmViewModel.setStrictness($0) }
                     )) {
                         ForEach(AlarmStrictness.allCases, id: \.self) { strictness in
-                            Text(strictness.displayLabel).tag(strictness)
+                            Text(L10n.text(strictness.displayLabel)).tag(strictness)
                         }
                     }
                     .pickerStyle(.segmented)
 
-                    Text(alarmViewModel.settings.strictness.detailText)
+                    Text(L10n.text(alarmViewModel.settings.strictness.detailText))
                         .font(.system(size: 13))
                         .foregroundColor(AppColors.slTextSecondary)
                 }
@@ -170,11 +170,11 @@ struct SAAlarmSettingsSheet: View {
                     )) {
                         ForEach(AlarmSoundOption.allCases, id: \.rawValue) { sound in
                             if sound == .custom {
-                                Button(sound.rawValue) {
+                                Button(L10n.text(sound.displayName)) {
                                     showFileImporter = true
                                 }.tag(sound.rawValue)
                             } else {
-                                Text(sound.rawValue).tag(sound.rawValue)
+                                Text(L10n.text(sound.displayName)).tag(sound.rawValue)
                             }
                         }
                     }
@@ -366,7 +366,7 @@ struct SAActiveAlarmOverlay: View {
 
             VStack(spacing: 28) {
                 VStack(spacing: 8) {
-                    Text(alarm.prayer.displayName)
+                    Text(L10n.text(alarm.prayer.displayName))
                         .font(.system(size: 42, weight: .bold))
                         .foregroundColor(.white)
                     Text(alarm.prayer.arabicName)

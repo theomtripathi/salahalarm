@@ -19,6 +19,9 @@ enum FunnelEvent: String {
     case onboardingSurfaceViewed = "onboarding_surface_viewed"
     case onboardingLanguageSelected = "onboarding_language_selected"
     case onboardingLanguageConfirmed = "onboarding_language_confirmed"
+    case onboardingVariantAssigned = "onboarding_variant_assigned"
+    case onboardingAnswerSubmitted = "onboarding_answer_submitted"
+    case onboardingSoundPreviewed = "onboarding_sound_previewed"
     case signupStarted = "signup_started"
     case signupCompleted = "signup_completed"
     case signupSkipped = "signup_skipped"
@@ -300,6 +303,46 @@ final class FunnelAnalytics {
         if action == "permission_result", let permissionReason, ["granted", "denied", "restricted", "not_determined", "unavailable"].contains(permissionReason) { properties["permission_reason"] = permissionReason }
         track(.onboardingAction, properties)
     }
+    /// Assigns the pre-paywall route once, at the first step where the variants
+    /// differ, so the experiment exposure is logged only for users who reach it.
+    /// PostHog flag variants: `control` (quick start) and `guided_setup`.
+    func assignOnboardingVariantIfNeeded() {
+        guard UserDefaults.standard.string(forKey: OnboardingVariant.storageKey) == nil else { return }
+        let flagValue = isConfigured ? PostHogSDK.shared.getFeatureFlag(OnboardingVariant.flagKey) as? String : nil
+        let variant: OnboardingVariant = ["guided_setup", "test"].contains(flagValue ?? "") ? .guidedSetup : .quickStart
+        UserDefaults.standard.set(variant.rawValue, forKey: OnboardingVariant.storageKey)
+        PostHogSDK.shared.register(["onboarding_variant": variant.rawValue])
+        track(.onboardingVariantAssigned, [
+            "onboarding_variant": variant.rawValue,
+            "flag_value": flagValue ?? "unavailable",
+            "assignment_source": flagValue == nil ? "fallback" : "feature_flag",
+            "journey_id": journey.journeyID
+        ])
+    }
+    /// Final answers for a step, sent when the user continues. Values are enum
+    /// identifiers only (never free text), and are also kept on the person so
+    /// funnels and paywall conversion can be broken down by answer.
+    func onboardingAnswerSubmitted(questionID: String, answers: [String]) {
+        let allowed = ["alarm_prayers", "goals", "support_pace", "alarm_strictness", "alarm_sound"]
+        guard trackingActive, allowed.contains(questionID) else { return }
+        let values = answers.map { $0.range(of: "^[A-Za-z0-9_]{1,40}$", options: .regularExpression) != nil ? $0 : "other" }
+        var properties: [String: Any] = [
+            "question_id": questionID,
+            "answers": values,
+            "answer_count": values.count,
+            "journey_id": journey.journeyID,
+            "$set": ["onboarding_\(questionID)": values]
+        ]
+        if let visit = journey.currentVisit {
+            properties["screen_name"] = visit.screen
+            properties["screen_index"] = visit.index
+        }
+        track(.onboardingAnswerSubmitted, properties)
+    }
+    func onboardingSoundPreviewed(sound: String) {
+        guard trackingActive else { return }
+        track(.onboardingSoundPreviewed, ["alarm_sound": sound, "journey_id": journey.journeyID])
+    }
     func onboardingLanguageSelected(languageCode: String, source: String) {
         let safeSource = ["language_picker", "onboarding"].contains(source) ? source : "onboarding"
         track(.onboardingLanguageSelected, ["language_code": safeLanguageCode(languageCode), "source": safeSource, "journey_id": journey.journeyID])
@@ -318,6 +361,8 @@ final class FunnelAnalytics {
         enrichedProperties["onboarding_version"] = enrichedProperties["onboarding_version"] ?? Self.onboardingVersion
         enrichedProperties["app_language"] = appLanguage
         enrichedProperties["layout_direction"] = layoutDirection
+        enrichedProperties["onboarding_variant"] = enrichedProperties["onboarding_variant"]
+            ?? UserDefaults.standard.string(forKey: OnboardingVariant.storageKey) ?? "unassigned"
         enrichedProperties["replay_capture_active"] = PostHogSDK.shared.isSessionReplayActive()
         // The event describes the purchase operation, not an inferred bank/card
         // verdict. In particular, an App Store error may leave charge status unknown.

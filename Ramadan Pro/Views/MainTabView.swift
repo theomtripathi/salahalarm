@@ -216,7 +216,7 @@ struct MainTabView: View {
         case .quranReading(let surah, let juz, let page):
             QuranReadingView(surah: surah, juz: juz, page: page)
         case .prayerDetail(let prayerType):
-            Text(prayerType)
+            Text(L10n.text(prayerType))
         case .qibla:
             QiblaCompassView()
         }

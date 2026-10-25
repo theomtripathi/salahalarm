@@ -13,6 +13,21 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
     case newAudio = "Funny Wake Up Bitch"
     case custom = "Custom Audio"
 
+    /// Sounds offered during onboarding (adhan and takbir only).
+    static let onboardingOptions: [AlarmSoundOption] = [.makkahLoud, .madinahLoud, .fajrLoud, .takbirLoud, .custom]
+
+    static func analyticsID(for soundName: String) -> String {
+        switch Self(rawValue: soundName) {
+        case .makkahLoud: return "makkah_loud"
+        case .madinahLoud: return "madinah_loud"
+        case .fajrLoud: return "fajr_loud"
+        case .takbirLoud: return "takbir_loud"
+        case .newAudio: return "wake_up_funny"
+        case .custom: return "custom"
+        case nil: return "other"
+        }
+    }
+
     var description: String {
         switch self {
         case .makkahLoud:
@@ -30,6 +45,19 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
         }
     }
 
+    /// User-facing name. The raw value is persisted, so it never changes.
+    /// Loudness is shown as a separate badge, so it is left out of the name.
+    var displayName: String {
+        switch self {
+        case .makkahLoud: return "Makkah Adhan"
+        case .madinahLoud: return "Madinah Adhan"
+        case .fajrLoud: return "Fajr Adhan"
+        case .takbirLoud: return "Takbir Alarm"
+        case .newAudio: return "Wake-Up Alarm"
+        case .custom: return rawValue
+        }
+    }
+
     var shortLabel: String {
         switch self {
         case .makkahLoud:
@@ -41,7 +69,7 @@ enum AlarmSoundOption: String, Codable, CaseIterable {
         case .takbirLoud:
             return "Takbir"
         case .newAudio:
-            return "Funny Wake Up Bitch"
+            return "Wake-Up"
         case .custom:
             return "Custom"
         }

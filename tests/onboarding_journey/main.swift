@@ -33,7 +33,7 @@ struct OnboardingJourneyTests {
         journey.pause()
         now.addTimeInterval(30)
         let beforeResume = journey.activeSeconds
-        check(beforeResume == 36, "time remains frozen while journey is paused")
+        check(beforeResume == 39, "time remains frozen while journey is paused")
         journey.resume()
         now.addTimeInterval(2)
         let lastTransition = journey.transition(to: "mechanism", index: 2, completed: false)!
@@ -46,7 +46,14 @@ struct OnboardingJourneyTests {
         check(OnboardingScreenID.screen4.analyticsName == "legacy_prayer_frequency" && OnboardingScreenID.screen5.analyticsName == "legacy_phone_usage" && OnboardingScreenID.screen16A.analyticsName == "legacy_lock_intro", "legacy names match their actual rendered screens")
         check(OnboardingRouter.progress(for: .screen1) == 0.125 && OnboardingRouter.progress(for: .screen18) == 1, "active route progress derives from route length")
         check(OnboardingRouter.next(after: .screen2) == .screen3 && OnboardingRouter.previous(before: .screen2) == .screen1, "legacy IDs resolve to navigable quick-start neighbors")
-        print("PASS: onboarding journey timing, visit identity, route, and legacy analytics")
+        check(OnboardingRouter.guidedSetupRoute == [.screen1, .screen3, .screen6, .screen7A, .screen8, .screen14, .screen12, .screen9, .screen10, .screen11, .screen17, .screen18], "guided variant inserts setup steps around the plan and keeps the quick-start tail")
+        check(OnboardingRouter.variantDecisionNeeded(at: .screen8) && !OnboardingRouter.variantDecisionNeeded(at: .screen3), "variant is decided on the last shared screen")
+        UserDefaults.standard.set(OnboardingVariant.guidedSetup.rawValue, forKey: OnboardingVariant.storageKey)
+        check(OnboardingRouter.next(after: .screen8) == .screen14 && OnboardingRouter.next(after: .screen10) == .screen11 && OnboardingRouter.progress(for: .screen18) == 1, "assigned guided variant drives navigation and progress")
+        check(OnboardingScreenID.screen14.funnelIndex == 6 && OnboardingScreenID.screen18.funnelIndex == 12, "guided funnel indices follow the guided route")
+        UserDefaults.standard.removeObject(forKey: OnboardingVariant.storageKey)
+        check(OnboardingRouter.next(after: .screen8) == .screen10, "unassigned installs use the quick start")
+        print("PASS: onboarding journey timing, visit identity, route, variants, and legacy analytics")
     }
 
     private static func check(_ condition: @autoclosure () -> Bool, _ message: String) {

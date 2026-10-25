@@ -51,35 +51,82 @@ enum OnboardingScreenID: String, CaseIterable, Codable {
     case screen30
 }
 
+/// Pre-paywall route variants, assigned once per install from the PostHog
+/// `onboarding-flow` experiment flag (see FunnelAnalytics.assignOnboardingVariant).
+enum OnboardingVariant: String, CaseIterable {
+    /// Control: the 8-step quick start.
+    case quickStart = "quick_start"
+    /// Adds location (real prayer times), a sound preview, a plan-building step
+    /// and notification priming around the personalized plan.
+    case guidedSetup = "guided_setup"
+
+    static let flagKey = "onboarding-flow"
+    static let storageKey = "sa_onboarding_variant"
+
+    static var current: OnboardingVariant {
+        UserDefaults.standard.string(forKey: storageKey).flatMap(Self.init(rawValue:)) ?? .quickStart
+    }
+}
+
 enum OnboardingRouter {
     static let quickStartRoute: [OnboardingScreenID] = [.screen1, .screen3, .screen6, .screen7A, .screen8, .screen10, .screen17, .screen18]
 
+    /// The guided variant inserts setup steps into the quick start, so any
+    /// change to the quick start's tail (account, paywall) carries over.
+    static let guidedSetupRoute: [OnboardingScreenID] = {
+        var route = quickStartRoute
+        if let plan = route.firstIndex(of: .screen10) {
+            route.insert(.screen11, at: plan + 1)
+            route.insert(contentsOf: [.screen14, .screen12, .screen9], at: plan)
+        }
+        return route
+    }()
+
+    static func route(for variant: OnboardingVariant) -> [OnboardingScreenID] {
+        variant == .guidedSetup ? guidedSetupRoute : quickStartRoute
+    }
+
+    static var activeRoute: [OnboardingScreenID] { route(for: .current) }
+
+    /// True on the last screen the variants share, where the variant must be known.
+    static func variantDecisionNeeded(at screen: OnboardingScreenID) -> Bool {
+        func following(_ route: [OnboardingScreenID]) -> OnboardingScreenID? {
+            guard let index = route.firstIndex(of: screen), route.indices.contains(index + 1) else { return nil }
+            return route[index + 1]
+        }
+        return following(quickStartRoute) != following(guidedSetupRoute)
+    }
+
     static func next(after screen: OnboardingScreenID) -> OnboardingScreenID? {
-        if let index = quickStartRoute.firstIndex(of: screen), quickStartRoute.indices.contains(index + 1) {
-            return quickStartRoute[index + 1]
+        if let index = activeRoute.firstIndex(of: screen), activeRoute.indices.contains(index + 1) {
+            return activeRoute[index + 1]
         }
         if screen == .screen18 { return nil }
-        let screenOrder = screen.funnelIndex ?? 0
-        if let next = quickStartRoute.first(where: { ($0.funnelIndex ?? 0) > screenOrder }) { return next }
-        return quickStartRoute.last
+        // Off-route (legacy) IDs resume at the nearest route screen in declaration order.
+        let order = declarationOrder(screen)
+        return activeRoute.first { declarationOrder($0) > order } ?? activeRoute.last
     }
 
     static func previous(before screen: OnboardingScreenID) -> OnboardingScreenID? {
-        if let index = quickStartRoute.firstIndex(of: screen), index > 0 { return quickStartRoute[index - 1] }
-        let screenOrder = screen.funnelIndex ?? 0
-        return quickStartRoute.last(where: { ($0.funnelIndex ?? 0) < screenOrder })
+        if let index = activeRoute.firstIndex(of: screen), index > 0 { return activeRoute[index - 1] }
+        let order = declarationOrder(screen)
+        return activeRoute.last { declarationOrder($0) < order }
+    }
+
+    private static func declarationOrder(_ screen: OnboardingScreenID) -> Int {
+        OnboardingScreenID.allCases.firstIndex(of: screen) ?? 0
     }
 
     static func progress(for screen: OnboardingScreenID) -> Double? {
-        if let index = quickStartRoute.firstIndex(of: screen) {
-            return Double(index + 1) / Double(quickStartRoute.count)
+        if let index = activeRoute.firstIndex(of: screen) {
+            return Double(index + 1) / Double(activeRoute.count)
         }
         if screen == .screen0 { return 0 }
         let order = OnboardingScreenID.allCases.firstIndex(of: screen) ?? 0
-        let previous = quickStartRoute.last { (OnboardingScreenID.allCases.firstIndex(of: $0) ?? 0) < order }
-        let next = quickStartRoute.first { (OnboardingScreenID.allCases.firstIndex(of: $0) ?? 0) > order }
-        let previousProgress = previous.flatMap { quickStartRoute.firstIndex(of: $0).map { Double($0 + 1) / Double(quickStartRoute.count) } } ?? 0
-        let nextProgress = next.flatMap { quickStartRoute.firstIndex(of: $0).map { Double($0 + 1) / Double(quickStartRoute.count) } } ?? 1
+        let previous = activeRoute.last { (OnboardingScreenID.allCases.firstIndex(of: $0) ?? 0) < order }
+        let next = activeRoute.first { (OnboardingScreenID.allCases.firstIndex(of: $0) ?? 0) > order }
+        let previousProgress = previous.flatMap { activeRoute.firstIndex(of: $0).map { Double($0 + 1) / Double(activeRoute.count) } } ?? 0
+        let nextProgress = next.flatMap { activeRoute.firstIndex(of: $0).map { Double($0 + 1) / Double(activeRoute.count) } } ?? 1
         return (previousProgress + nextProgress) / 2
     }
 
@@ -101,13 +148,13 @@ extension OnboardingScreenID {
         case .screen7A: return "goal_selection"
         case .screen7B: return "legacy_screen_time_insight"
         case .screen8: return "support_pace"
-        case .screen9: return "legacy_plan_loading"
+        case .screen9: return "plan_loading"
         case .screen10: return "personalized_plan"
         case .screen10A: return "legacy_plan_detail"
-        case .screen11: return "legacy_notifications_permission"
-        case .screen12: return "legacy_sound_setup"
+        case .screen11: return "notifications_permission"
+        case .screen12: return "sound_setup"
         case .screen13: return "legacy_silent_mode_setup"
-        case .screen14: return "legacy_location_permission"
+        case .screen14: return "location_permission"
         case .screen15: return "legacy_camera_permission"
         case .screen16: return "legacy_mat_setup"
         case .screen16A: return "legacy_lock_intro"
@@ -138,7 +185,7 @@ extension OnboardingScreenID {
     }
 
     var funnelIndex: Int? {
-        if let index = OnboardingRouter.quickStartRoute.firstIndex(of: self) { return index + 1 }
+        if let index = OnboardingRouter.activeRoute.firstIndex(of: self) { return index + 1 }
         return OnboardingScreenID.analyticsOrder.firstIndex(of: self).map { 100 + $0 }
     }
     private static let analyticsOrder: [OnboardingScreenID] = [.screen0, .screen1, .screen2, .screen3, .screen4, .screen5, .screen6, .screen7A, .screen7B, .screen8, .screen9, .screen10, .screen10A, .screen11, .screen12, .screen13, .screen14, .screen15, .screen16, .screen16A, .screen16B, .screen17, .screen17A, .screen17B, .screen17C, .screen17D, .screen17E, .screen17F, .screen18, .screen19, .screen20, .screen21, .screen22, .screen23, .screen24, .screen25A, .screen25B, .screen25, .screen26, .screen27, .screen28, .screen29, .screen30]

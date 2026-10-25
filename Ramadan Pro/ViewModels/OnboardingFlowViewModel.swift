@@ -42,8 +42,12 @@ final class OnboardingFlowViewModel: ObservableObject {
     }
 
     func advance() {
+        if OnboardingRouter.variantDecisionNeeded(at: currentScreen) {
+            FunnelAnalytics.shared.assignOnboardingVariantIfNeeded()
+        }
         guard let nextScreen = nextScreen(after: currentScreen) else { return }
         FunnelAnalytics.shared.onboardingAction(action: "continue_tapped", screen: currentScreen)
+        submitAnswers(for: currentScreen)
         AnalyticsLogger.logAnswerSubmitted(screen: currentScreen.rawValue)
         pendingTransitionCompleted = true
         if currentScreen == .screen10 { FunnelAnalytics.shared.onboardingQuestionnaireCompleted() }
@@ -67,6 +71,23 @@ final class OnboardingFlowViewModel: ObservableObject {
         if currentScreen == .screen10 { FunnelAnalytics.shared.onboardingQuestionnaireCompleted() }
         currentScreen = screen
         AnalyticsLogger.logScreenView(screenID: screen.rawValue)
+    }
+
+    private func submitAnswers(for screen: OnboardingScreenID) {
+        let analytics = FunnelAnalytics.shared
+        switch screen {
+        case .screen6:
+            analytics.onboardingAnswerSubmitted(questionID: "alarm_prayers", answers: profile.selectedAlarmPrayers.map(\.rawValue))
+        case .screen7A:
+            analytics.onboardingAnswerSubmitted(questionID: "goals", answers: profile.goals.map(\.rawValue))
+        case .screen8:
+            analytics.onboardingAnswerSubmitted(questionID: "support_pace", answers: [profile.commitmentLevel.rawValue])
+            analytics.onboardingAnswerSubmitted(questionID: "alarm_strictness", answers: [profile.alarmStrictness.rawValue])
+        case .screen12:
+            analytics.onboardingAnswerSubmitted(questionID: "alarm_sound", answers: [AlarmSoundOption.analyticsID(for: profile.alarmSoundName)])
+        default:
+            break
+        }
     }
 
     /// Call after saved-progress/auth resolution has selected the initial screen.
@@ -236,6 +257,54 @@ final class OnboardingFlowViewModel: ObservableObject {
         saveLocal()
     }
 
+    func skipNotificationsPermission() {
+        profile.notificationsPermissionState = .skipped
+        FunnelAnalytics.shared.onboardingAction(action: "skip_tapped", screen: currentScreen)
+        saveLocal()
+    }
+
+    /// The next selected prayer that can still ring, once location has loaded.
+    /// When every selected prayer has passed today, it is tomorrow's earliest one
+    /// (today's time shifted a day, which is within minutes of tomorrow's).
+    var firstAlarm: (prayer: PrayerName, time: Date)? {
+        guard let schedule = todaySchedule else { return nil }
+        let now = Date()
+        let alarms = profile.selectedAlarmPrayers
+            .map { prayer -> (prayer: PrayerName, time: Date) in
+                switch prayer {
+                case .fajr: return (prayer, schedule.fajr)
+                case .dhuhr: return (prayer, schedule.dhuhr)
+                case .asr: return (prayer, schedule.asr)
+                case .maghrib: return (prayer, schedule.maghrib)
+                case .isha: return (prayer, schedule.isha)
+                }
+            }
+        if let upcoming = alarms.filter({ $0.time > now }).min(by: { $0.time < $1.time }) {
+            return upcoming
+        }
+        guard let earliest = alarms.min(by: { $0.time < $1.time }),
+              let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: earliest.time) else { return nil }
+        return (earliest.prayer, tomorrow)
+    }
+
+    /// Re-schedules after notification permission is granted later in the flow.
+    func scheduleSelectedPrayerReminders() {
+        guard let schedule = todaySchedule else { return }
+        let selectedTypes = Set(profile.selectedAlarmPrayers.map { prayer -> PrayerType in
+            switch prayer {
+            case .fajr: return .fajr
+            case .dhuhr: return .dhuhr
+            case .asr: return .asr
+            case .maghrib: return .maghrib
+            case .isha: return .isha
+            }
+        })
+        let filteredTimes = schedule.allPrayerTimes.filter {
+            $0.type != .imsak && selectedTypes.contains($0.type)
+        }
+        NotificationManager.shared.scheduleFiveDailyPrayerReminders(times: filteredTimes)
+    }
+
     func setLocationPermission(_ state: PermissionState) {
         profile.locationPermissionState = state
         let reason: String
@@ -338,19 +407,7 @@ final class OnboardingFlowViewModel: ObservableObject {
                     self.todaySchedule = schedule
 
                     // Only schedule notifications for prayers the user selected
-                    let selectedTypes = Set(self.profile.selectedAlarmPrayers.map { prayer -> PrayerType in
-                        switch prayer {
-                        case .fajr: return .fajr
-                        case .dhuhr: return .dhuhr
-                        case .asr: return .asr
-                        case .maghrib: return .maghrib
-                        case .isha: return .isha
-                        }
-                    })
-                    let filteredTimes = schedule.allPrayerTimes.filter {
-                        $0.type != .imsak && selectedTypes.contains($0.type)
-                    }
-                    NotificationManager.shared.scheduleFiveDailyPrayerReminders(times: filteredTimes)
+                    self.scheduleSelectedPrayerReminders()
 
                     // Apply alarm preferences immediately so the alarm engine knows
                     // which prayers are enabled without waiting for completeOnboarding

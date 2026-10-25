@@ -132,7 +132,7 @@ struct QiblaCompassView: View {
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(AppColors.slGreen)
             } else {
-                Text(compassManager.turnDirection ?? "Move your phone slowly to calibrate.")
+                Text(compassManager.turnDirection ?? L10n.text("Move your phone slowly to calibrate."))
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(AppColors.slTextPrimary)
             }
@@ -153,7 +153,7 @@ struct QiblaCompassView: View {
                 .font(.system(size: 14))
                 .foregroundColor(AppColors.slTextSecondary)
             if let distance = compassManager.distanceToMakkah {
-                Text("\(Int(distance / 1000)) km to the Kaaba")
+                Text(L10n.format("%d km to the Kaaba", Int(distance / 1000)))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(AppColors.slGold)
             }
@@ -178,11 +178,11 @@ struct QiblaCompassView: View {
 
     private func infoRow(title: String, value: String) -> some View {
         HStack {
-            Text(title)
+            Text(L10n.text(title))
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(AppColors.slTextSecondary)
             Spacer()
-            Text(value)
+            Text(L10n.text(value))
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(AppColors.slTextPrimary)
         }
@@ -285,7 +285,7 @@ class CompassManager: NSObject, ObservableObject {
         isAligned = angleDifference <= alignmentThreshold
         if !isAligned {
             let degrees = Int(angleDifference.rounded())
-            turnDirection = angle > 0 ? "Turn right \(degrees)°" : "Turn left \(degrees)°"
+            turnDirection = angle > 0 ? L10n.format("Turn right %d°", degrees) : L10n.format("Turn left %d°", degrees)
         } else {
             turnDirection = nil
         }
