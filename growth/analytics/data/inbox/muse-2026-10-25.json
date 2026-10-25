@@ -1,0 +1,1888 @@
+[
+ {
+  "id": "ig_DctB1xMwm_e",
+  "platform": "instagram",
+  "url": "https://www.instagram.com/reel/DctB1xMwm_e/",
+  "creator": "@8tvnn",
+  "topic": "Islamic Reminders",
+  "metric": 160288,
+  "metric_type": "likes",
+  "likes": 160288,
+  "comments": 453,
+  "post_date": "2026-08-31",
+  "source_format": "instagram_reel",
+  "folder": "Reel",
+  "files": [
+   "Reel/Islamic Reminders/Islamic_Reminders_8tvnn_DctB1xMwm_e_Arabic.mp4"
+  ],
+  "note": "Om's CTA-study example: a 9-second resonant reminder with no pitch, whose comment section became the distribution engine. Model for comment-name CTA creative."
+ },
+ {
+  "id": "ig_DexCI2hugDQ",
+  "platform": "instagram",
+  "url": "https://www.instagram.com/reel/DexCI2hugDQ/",
+  "creator": "@verse.sakinah",
+  "topic": "Islamic Reminders",
+  "metric": 160062,
+  "metric_type": "likes",
+  "likes": 160062,
+  "comments": 305,
+  "post_date": null,
+  "source_format": "instagram_reel",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Islamic Reminders/Islamic_Reminders_verse.sakinah_DexCI2hugDQ_English.mp4"
+  ],
+  "note": "Om's generatable-format example: one ayah, one linguistic insight, one share prompt, CTA at the end. Prioritized format for this batch; audio saved to Audio folder."
+ },
+ {
+  "id": "yt_u7b72zXHpDo",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/u7b72zXHpDo",
+  "creator": "@TheFactualGuystory",
+  "topic": "Islamic Reminders",
+  "metric": 1284,
+  "metric_type": "views",
+  "views": 1284,
+  "likes": 91,
+  "post_date": "2026-10-24",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_TheFactualGuystory_u7b72zXHpDo_English.mp4"
+  ],
+  "note": "Problem-before-product shape: phone-checking first thing vs saying the waking dua first, then wudu and Fajr. Maps directly to SalaLam's phone-distraction problem and SalahLock angle."
+ },
+ {
+  "id": "yt_8PqR4_lYeNc",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/8PqR4_lYeNc",
+  "creator": "@inquirysoul",
+  "topic": "Islamic Reminders",
+  "metric": 2731,
+  "metric_type": "views",
+  "views": 2731,
+  "likes": 242,
+  "comments": 13,
+  "post_date": "2026-10-18",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_inquirysoul_8PqR4_lYeNc_English.mp4"
+  ],
+  "note": "Phone-reach habit reframed as a spiritual moment: wake, remember Allah, then dua. Same phone-distraction problem SalaLam's SalahLock addresses; teaching-first, CTA-ready."
+ },
+ {
+  "id": "tiktok_selwansfamily_7640794431876123912",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@selwansfamily/video/7640794431876123912",
+  "creator": "selwansfamily",
+  "topic": "Fajr Waking",
+  "metric": 1636,
+  "metric_type": "likes",
+  "likes": 1636,
+  "comments": 12,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_selwansfamily_tiktok_selwansfamily_7640794431876123912_ar-en.mp4"
+  ],
+  "note": "Couple-led Fajr story where the shared wake-up is the hook and the mat scan is the turning point, keeping the comedy gentle and the prayer itself respectful."
+ },
+ {
+  "id": "tiktok_christabelz03_7637816891913948419",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@christabelz03/video/7637816891913948419",
+  "creator": "christabelz03",
+  "topic": "Prayer Education",
+  "metric": 10800,
+  "metric_type": "likes",
+  "likes": 10800,
+  "comments": 2119,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Prayer Education/Prayer_Education_christabelz03_tiktok_christabelz03_7637816891913948419_en.mp4"
+  ],
+  "note": "Education-first reel where the checklist is the value and the app only appears as the on-time prompt and streak keeper, never as a shortcut to perfect prayer."
+ },
+ {
+  "id": "tiktok_islamicyouthsoundwaves_7649427303046352148",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@islamicyouthsoundwaves/video/7649427303046352148",
+  "creator": "islamicyouthsoundwaves",
+  "topic": "Islamic Reminders",
+  "metric": 7668,
+  "metric_type": "views",
+  "views": 7668,
+  "likes": 524,
+  "comments": 32,
+  "shares": 484,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Islamic Reminders/Islamic_Reminders_islamicyouthsoundwaves_tiktok_islamicyouthsoundwaves_7649427303046352148_en.mp4"
+  ],
+  "note": "One-dhikr teaching format where the reminder is the whole video and the app is only the prompt that protects those two minutes after Fajr."
+ },
+ {
+  "id": "tiktok_bymouadh_7638992478682647829",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@bymouadh/video/7638992478682647829",
+  "creator": "bymouadh",
+  "topic": "Islamic Reminders",
+  "metric": 38700,
+  "metric_type": "likes",
+  "likes": 38700,
+  "comments": 177,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Islamic Reminders/Islamic_Reminders_bymouadh_tiktok_bymouadh_7638992478682647829_en.mp4"
+  ],
+  "note": "Comeback framing where the message is return, not guilt, and the app is presented only as a waking aid, with no promise about reward or forgiveness."
+ },
+ {
+  "id": "tiktok_riyatkids_7613439860937968903",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@riyatkids/video/7613439860937968903",
+  "creator": "riyatkids",
+  "topic": "Morning Routine",
+  "metric": 16200,
+  "metric_type": "likes",
+  "likes": 16200,
+  "comments": 449,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Morning Routine/Morning_Routine_riyatkids_tiktok_riyatkids_7613439860937968903_en.mp4"
+  ],
+  "note": "Family morning sequence where the order is the teaching and the app only appears as the Fajr time prompt for the household."
+ },
+ {
+  "id": "tiktok_mustaphabahd1m6_7592761428025593099",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@mustaphabahd1m6/video/7592761428025593099",
+  "creator": "mustaphabahd1m6",
+  "topic": "Prayer Education",
+  "metric": 222,
+  "metric_type": "likes",
+  "likes": 222,
+  "comments": 17,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Prayer Education/Prayer_Education_mustaphabahd1m6_tiktok_mustaphabahd1m6_7592761428025593099_en.mp4"
+  ],
+  "note": "Long-form education piece where depth is the value; the app is only the prayer-times reference and streak tracker, not a teacher of the prayer itself."
+ },
+ {
+  "id": "tiktok_my.petsie_7581228868128754966",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@my.petsie/video/7581228868128754966",
+  "creator": "my.petsie",
+  "topic": "Humor",
+  "metric": 22500000,
+  "metric_type": "views",
+  "views": 22500000,
+  "likes": 768600,
+  "comments": 13800,
+  "shares": 177100,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Humor/Humor_my_petsie_tiktok_my.petsie_7581228868128754966_en.mp4"
+  ],
+  "note": "Pet-interruption humor where the joke is the cat, never the prayer, and the app only appears as the on-time prompt that gets the owner to the mat."
+ },
+ {
+  "id": "tiktok_fatimama___7627289220935109908",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@fatimama__/video/7627289220935109908",
+  "creator": "fatimama__",
+  "topic": "Humor",
+  "metric": 95500,
+  "metric_type": "likes",
+  "likes": 95500,
+  "comments": 190,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_fatimama_tiktok_fatimama___7627289220935109908_en.mp4"
+  ],
+  "note": "Streak-joke format where humor carries the hook and the mat scan is the punchline that solves the wake-up, with no claim the streak itself is guaranteed."
+ },
+ {
+  "id": "tiktok_sabrvibes11_7614588796688174338",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@sabrvibes11/video/7614588796688174338",
+  "creator": "sabrvibes11",
+  "topic": "Fajr Waking",
+  "metric": 52,
+  "metric_type": "likes",
+  "likes": 52,
+  "comments": 2,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_sabrvibes11_tiktok_sabrvibes11_7614588796688174338_en.mp4"
+  ],
+  "note": "Quiet reflective format where the question invites comments and the app is the unglamorous system behind the mornings that feel effortless."
+ },
+ {
+  "id": "tiktok_littlemuslimhabits_7642563822816972045",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@littlemuslimhabits/video/7642563822816972045",
+  "creator": "littlemuslimhabits",
+  "topic": "Prayer Education",
+  "metric": 2652,
+  "metric_type": "likes",
+  "likes": 2652,
+  "comments": 90,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Prayer Education/Prayer_Education_littlemuslimhabits_tiktok_littlemuslimhabits_7642563822816972045_en.mp4"
+  ],
+  "note": "Parent-child teaching story where the steps are the value and the app only appears as the family's Fajr prompt."
+ },
+ {
+  "id": "tiktok_syed.hasnat_7609608305958341896",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@syed.hasnat/video/7609608305958341896",
+  "creator": "syed.hasnat",
+  "topic": "Evening Routine",
+  "metric": 9330,
+  "metric_type": "likes",
+  "likes": 9330,
+  "comments": 241,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Evening Routine/Evening_Routine_syed_hasnat_tiktok_syed.hasnat_7609608305958341896_en.mp4"
+  ],
+  "note": "Evening-timing explainer; topic stretch noted: the source is a scholarly fasting-time explanation, not a routine vlog, so Evening Routine is the closest of the seven topics because it turns on Maghrib"
+ },
+ {
+  "id": "tiktok_nadirchen_7592518704038989074",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@nadirchen/video/7592518704038989074",
+  "creator": "nadirchen",
+  "topic": "Prayer Consistency",
+  "metric": 44200,
+  "metric_type": "likes",
+  "likes": 44200,
+  "comments": 941,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_nadirchen_tiktok_nadirchen_7592518704038989074_en.mp4"
+  ],
+  "note": "Full-day system framing where the five prayers are the structure; topic stretch noted: the source covers the whole day, so Prayer Consistency is the closest single topic rather than Morning Routine al"
+ },
+ {
+  "id": "tiktok_i_am_asfar_7647825613562121480",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@i_am_asfar/video/7647825613562121480",
+  "creator": "i_am_asfar",
+  "topic": "Prayer Consistency",
+  "metric": 1220,
+  "metric_type": "likes",
+  "likes": 1220,
+  "comments": 36,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Prayer Consistency/Prayer_Consistency_i_am_asfar_tiktok_i_am_asfar_7647825613562121480_en.mp4"
+  ],
+  "note": "Small-steps testimony where the streak survives imperfection; the app is only the tracker and prompt, with no claim that consistency guarantees any outcome."
+ },
+ {
+  "id": "tiktok_nurnestdigitalsislamic_7620443847025364247",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@nurnestdigitalsislamic/video/7620443847025364247",
+  "creator": "nurnestdigitalsislamic",
+  "topic": "Prayer Consistency",
+  "metric": 46,
+  "metric_type": "likes",
+  "likes": 46,
+  "comments": 4,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_nurnestdigitalsislamic_tiktok_nurnestdigitalsislamic_7620443847025364247_en.mp4"
+  ],
+  "note": "Transformation testimony where the journey, not the endpoint, is the usable format; the app appears only as the daily prompt and streak keeper."
+ },
+ {
+  "id": "tiktok_yaqeeninstitute_7617084518746295566",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@yaqeeninstitute/video/7617084518746295566",
+  "creator": "yaqeeninstitute",
+  "topic": "Islamic Reminders",
+  "metric": 1100,
+  "metric_type": "likes",
+  "likes": 1100,
+  "comments": 7,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Islamic Reminders/Islamic_Reminders_yaqeeninstitute_tiktok_yaqeeninstitute_7617084518746295566_en.mp4"
+  ],
+  "note": "Reflective reframe format where the idea is the hook and the app only appears as the pause prompt, with no claim about spiritual outcomes."
+ },
+ {
+  "id": "tiktok_echosofquran786_7625624091428506911",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@echosofquran786/video/7625624091428506911",
+  "creator": "echosofquran786",
+  "topic": "Morning Routine",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Morning Routine/Morning_Routine_echosofquran786_tiktok_echosofquran786_7625624091428506911_en.mp4"
+  ],
+  "note": "Calm morning adhkar format where the routine is the value; metrics were not visible in the search snippet, so likes, comments, views and shares are recorded as null."
+ },
+ {
+  "id": "tiktok_drhaifaayounis_7531039407898381586",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@drhaifaayounis/video/7531039407898381586",
+  "creator": "drhaifaayounis",
+  "topic": "Fajr Waking",
+  "metric": 53400,
+  "metric_type": "likes",
+  "likes": 53400,
+  "comments": 380,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_drhaifaayounis_tiktok_drhaifaayounis_7531039407898381586_en.mp4"
+  ],
+  "note": "Parent-mirror format where the question is the hook and the app is only the household wake-up aid, with no claim about children's outcomes."
+ },
+ {
+  "id": "tiktok__saadakhter_7611256991587257603",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@_saadakhter/video/7611256991587257603",
+  "creator": "_saadakhter",
+  "topic": "Morning Routine",
+  "metric": 1700000,
+  "metric_type": "views",
+  "views": 1700000,
+  "likes": 273200,
+  "comments": 1973,
+  "shares": 5091,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Morning Routine/Morning_Routine_saadakhter_tiktok__saadakhter_7611256991587257603_en.mp4"
+  ],
+  "note": "Travel morning routine where Fajr anchors an unfamiliar day; the app is only the prayer-times reference and wake-up aid on the road."
+ },
+ {
+  "id": "tiktok_eatai786_7616974708935838984",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@eatai786/video/7616974708935838984",
+  "creator": "eatai786",
+  "topic": "Morning Routine",
+  "metric": 5869,
+  "metric_type": "likes",
+  "likes": 5869,
+  "comments": 158,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Morning Routine/Morning_Routine_eatai786_tiktok_eatai786_7616974708935838984_en.mp4"
+  ],
+  "note": "Travel morning vlog where place anchors the routine; the app appears only as the prayer-times and mosque-time reference."
+ },
+ {
+  "id": "tiktok_toristeapp_7608339353688952094",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@toristeapp/video/7608339353688952094",
+  "creator": "toristeapp",
+  "topic": "Morning Routine",
+  "metric": 14600,
+  "metric_type": "likes",
+  "likes": 14600,
+  "comments": 1037,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Morning Routine/Morning_Routine_toristeapp_tiktok_toristeapp_7608339353688952094_en.mp4"
+  ],
+  "note": "Beginner Ramadan morning where honesty is the hook; the app is only the wake-up aid, with no claim about barakah or ease as outcomes."
+ },
+ {
+  "id": "tiktok_bangandri077_7609375463324142868",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@bangandri077/video/7609375463324142868",
+  "creator": "bangandri077",
+  "topic": "Fajr Waking",
+  "metric": 10100,
+  "metric_type": "likes",
+  "likes": 10100,
+  "comments": 504,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_bangandri077_tiktok_bangandri077_7609375463324142868_en.mp4"
+  ],
+  "note": "Music-cue wake-up format where the song is the hook; the app is only the alarm that cannot be snoozed away, demonstrated by the mat scan."
+ },
+ {
+  "id": "tiktok_ganjul_arsh_7634945826330037534",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@ganjul_arsh/video/7634945826330037534",
+  "creator": "ganjul_arsh",
+  "topic": "Fajr Waking",
+  "metric": 2472,
+  "metric_type": "likes",
+  "likes": 2472,
+  "comments": 78,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Fajr Waking/Fajr_Waking_ganjul_arsh_tiktok_ganjul_arsh_7634945826330037534_en.mp4"
+  ],
+  "note": "Provocation format where the argument is the hook and the mat scan answers it directly, with no claim that Fajr guarantees success."
+ },
+ {
+  "id": "tiktok_aimalifestyle_7611116629522418966",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@aimalifestyle/video/7611116629522418966",
+  "creator": "aimalifestyle",
+  "topic": "Humor",
+  "metric": 49800,
+  "metric_type": "likes",
+  "likes": 49800,
+  "comments": 373,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_aimalifestyle_tiktok_aimalifestyle_7611116629522418966_en.mp4"
+  ],
+  "note": "POV wait comedy where the relatable gap is the joke and the mat scan is the payoff that gets the creator to Fajr."
+ },
+ {
+  "id": "tiktok_unlockthepixels_7622942335407623446",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@unlockthepixels/video/7622942335407623446",
+  "creator": "unlockthepixels",
+  "topic": "Humor",
+  "metric": 1515,
+  "metric_type": "likes",
+  "likes": 1515,
+  "comments": 432,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_unlockthepixels_tiktok_unlockthepixels_7622942335407623446_en.mp4"
+  ],
+  "note": "Outsider-reaction humor where surprise is the hook; topic stretch noted: the source reacts to the adhan, not to praying itself, so Humor is the closest of the seven topics."
+ },
+ {
+  "id": "tiktok_minimuslimsadventures_7623114205247376672",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@minimuslimsadventures/video/7623114205247376672",
+  "creator": "minimuslimsadventures",
+  "topic": "Prayer Education",
+  "metric": 359,
+  "metric_type": "likes",
+  "likes": 359,
+  "comments": 9,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Education/Prayer_Education_minimuslimsadventures_tiktok_minimuslimsadventures_7623114205247376672_en.mp4"
+  ],
+  "note": "Children's animation explainer where the question is the format; the app appears only as the family's prayer-times reference."
+ },
+ {
+  "id": "tiktok_the_aminah1_7559653361260317959",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@the_aminah1/video/7559653361260317959",
+  "creator": "the_aminah1",
+  "topic": "Prayer Consistency",
+  "metric": 180000,
+  "metric_type": "likes",
+  "likes": 180000,
+  "comments": 3056,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_the_aminah1_tiktok_the_aminah1_7559653361260317959_en.mp4"
+  ],
+  "note": "Blunt accountability format where the challenge is the hook and the make-up steps are the value; the app is only the prompt and tracker."
+ },
+ {
+  "id": "tiktok_ghairatbaheer01_7609923553789496598",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@ghairatbaheer.01/video/7609923553789496598",
+  "creator": "ghairatbaheer.01",
+  "topic": "Islamic Reminders",
+  "metric": 4961,
+  "metric_type": "likes",
+  "likes": 4961,
+  "comments": 516,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Islamic Reminders/Islamic_Reminders_ghairatbaheer_01_tiktok_ghairatbaheer01_7609923553789496598_en.mp4"
+  ],
+  "note": "One-hour framing where proportion is the persuasion; the app appears only as the prayer-time prompt and the block that protects the hour, with no guaranteed outcomes."
+ },
+ {
+  "id": "tiktok_akdlifesolutions_islam_7631629258636512534",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@akdlifesolutions_islam/video/7631629258636512534",
+  "creator": "akdlifesolutions_islam",
+  "topic": "Fajr Waking",
+  "metric": 2845,
+  "metric_type": "likes",
+  "likes": 2845,
+  "comments": 21,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Fajr Waking/Fajr_Waking_akdlifesolutions_islam_tiktok_akdlifesolutions_islam_7631629258636512534_en.mp4"
+  ],
+  "note": "Night-prayer education; topic stretch noted: the source teaches tahajjud and qiyam, not Fajr itself, so Fajr Waking is the closest of the seven topics because it turns on waking in the night before Fa"
+ },
+ {
+  "id": "tiktok_talliedar_7630732049577446677",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@talliedar/video/7630732049577446677",
+  "creator": "talliedar",
+  "topic": "Prayer Consistency",
+  "metric": 647,
+  "metric_type": "likes",
+  "likes": 647,
+  "comments": 22,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_talliedar_tiktok_talliedar_7630732049577446677_en.mp4"
+  ],
+  "note": "Couple-consistency format where togetherness is the mechanism; the app appears only as the shared prayer-times prompt."
+ },
+ {
+  "id": "tiktok_bymouadh_7621857518850952468",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@bymouadh/video/7621857518850952468",
+  "creator": "bymouadh",
+  "topic": "Morning Routine",
+  "metric": 2500000,
+  "metric_type": "views",
+  "views": 2500000,
+  "likes": 452500,
+  "comments": 3173,
+  "shares": 69200,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Morning Routine/Morning_Routine_bymouadh_tiktok_bymouadh_7621857518850952468_en.mp4"
+  ],
+  "note": "Phone-first swap format where the replacement habit is the whole idea; the app appears only as the lock that keeps the phone closed until prayer, demonstrated, not claimed as a guarantee."
+ },
+ {
+  "id": "yt_X0v2GYmp8tA",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/X0v2GYmp8tA",
+  "creator": "Straight to Allah",
+  "topic": "Fajr Waking",
+  "metric": 582761,
+  "metric_type": "views",
+  "views": 582761,
+  "likes": 3334,
+  "comments": 10,
+  "post_date": "2026-10-18",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_Straight_to_Allah_yt_X0v2GYmp8tA_en.mp4"
+  ],
+  "note": "A quiet visual journey from bed to mosque makes Fajr feel peaceful rather than punishing, which is the tone a Fajr alarm creative needs."
+ },
+ {
+  "id": "yt_6J-SWIV7tas",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/6J-SWIV7tas",
+  "creator": "Deenie Storytime",
+  "topic": "Fajr Waking",
+  "metric": 10794,
+  "metric_type": "views",
+  "views": 10794,
+  "post_date": "2026-10-18",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_Deenie_Storytime_yt_6J-SWIV7tas_ur.mp4"
+  ],
+  "note": "A sleepy child who needs a parent's nudge shows the real Fajr obstacle is waking, not belief, and a family routine frame makes the alarm relatable."
+ },
+ {
+  "id": "yt_0yLDJ3ImuJs",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/0yLDJ3ImuJs",
+  "creator": "Light of Islam Daily",
+  "topic": "Fajr Waking",
+  "metric": 1729,
+  "metric_type": "views",
+  "views": 1729,
+  "likes": 281,
+  "comments": 10,
+  "post_date": "2026-02-22",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_Light_of_Islam_Daily_yt_0yLDJ3ImuJs_en.mp4"
+  ],
+  "note": "A short dua framed as strength for Fajr gives a pre-sleep ritual, which pairs naturally with setting an alarm the night before."
+ },
+ {
+  "id": "yt_j6YrHlXfPdo",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/j6YrHlXfPdo",
+  "creator": "Mizan EEE269",
+  "topic": "Fajr Waking",
+  "metric": 31648,
+  "metric_type": "views",
+  "views": 31648,
+  "likes": 534,
+  "comments": 1,
+  "post_date": "2026-10-21",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_Mizan_EEE269_yt_j6YrHlXfPdo_en.mp4"
+  ],
+  "note": "A cinematic village dawn makes Fajr feel beautiful and communal, a useful contrast to the usual guilt-led Fajr creative."
+ },
+ {
+  "id": "yt_XgI2CwULDB0",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/XgI2CwULDB0",
+  "creator": "Toward_allah",
+  "topic": "Prayer Consistency",
+  "metric": 938,
+  "metric_type": "views",
+  "views": 938,
+  "likes": 133,
+  "post_date": "2026-10-22",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_Toward_allah_yt_XgI2CwULDB0_en.mp4"
+  ],
+  "note": "A Quran-anchored 'never give up' reminder reframes missed prayers as a reason to return, not quit, which suits a streak-recovery angle."
+ },
+ {
+  "id": "yt_LTqnOYIhPXE",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/LTqnOYIhPXE",
+  "creator": "Tears &amp; Smiles Stories",
+  "topic": "Fajr Waking",
+  "metric": 249,
+  "metric_type": "views",
+  "views": 249,
+  "likes": 5,
+  "comments": 2,
+  "post_date": "2026-10-19",
+  "source_format": "youtube_short",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Fajr Waking/Fajr_Waking_Tears_Smiles_Stories_yt_LTqnOYIhPXE_hi.mp4"
+  ],
+  "note": "A story where a young man almost misses Fajr and then chooses the mosque dramatises the exact snooze-versus-prayer choice."
+ },
+ {
+  "id": "yt_yTSJJ948In8",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/yTSJJ948In8",
+  "creator": "Hidayah",
+  "topic": "Prayer Education",
+  "metric": 5904,
+  "metric_type": "views",
+  "views": 5904,
+  "likes": 935,
+  "comments": 83,
+  "post_date": "2026-10-23",
+  "source_format": "youtube_short",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Prayer Education/Prayer_Education_Hidayah_yt_yTSJJ948In8_en.mp4"
+  ],
+  "note": "A checklist of six common mistakes gives a clear, saveable structure, and a checklist is the easiest format to rebuild without copying the source."
+ },
+ {
+  "id": "yt_-mJKmjJdHBE",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/-mJKmjJdHBE",
+  "creator": "Legacy  of Islam",
+  "topic": "Prayer Education",
+  "metric": 937,
+  "metric_type": "views",
+  "views": 937,
+  "likes": 102,
+  "comments": 3,
+  "post_date": "2026-10-13",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Education/Prayer_Education_Legacy_of_Islam_yt_-mJKmjJdHBE_en.mp4"
+  ],
+  "note": "Naming the focus-stealer in salah gives viewers a reason for wandering minds and a simple, memorable cure."
+ },
+ {
+  "id": "yt_ThyWWfLxzsY",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/ThyWWfLxzsY",
+  "creator": "Sakinah Hour",
+  "topic": "Prayer Education",
+  "metric": 10,
+  "metric_type": "views",
+  "views": 10,
+  "likes": 1,
+  "post_date": "2026-10-19",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Education/Prayer_Education_Sakinah_Hour_yt_ThyWWfLxzsY_en.mp4"
+  ],
+  "note": "One surprising word-order detail in Al-Fatihah rewards slow attention, a pattern that works for short, thoughtful education reels."
+ },
+ {
+  "id": "yt_NWMDFgwdq5Y",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/NWMDFgwdq5Y",
+  "creator": "Ayran",
+  "topic": "Prayer Consistency",
+  "metric": 1992,
+  "metric_type": "views",
+  "views": 1992,
+  "likes": 136,
+  "comments": 1,
+  "post_date": "2026-10-14",
+  "source_format": "youtube_short",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Prayer Consistency/Prayer_Consistency_Ayran_yt_NWMDFgwdq5Y_en.mp4"
+  ],
+  "note": "A 'do not put prayer off' reminder uses urgency about tomorrow not being guaranteed, a strong but honest emotional lever."
+ },
+ {
+  "id": "yt_UCfHdPccZqQ",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/UCfHdPccZqQ",
+  "creator": "Raahe Hidayat",
+  "topic": "Prayer Consistency",
+  "metric": 1211,
+  "metric_type": "views",
+  "views": 1211,
+  "likes": 77,
+  "comments": 4,
+  "post_date": "2026-10-19",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_Raahe_Hidayat_yt_UCfHdPccZqQ_hi.mp4"
+  ],
+  "note": "A short hadith reminder to never abandon salah works because it is brief, authoritative, and easy to repeat."
+ },
+ {
+  "id": "yt_DAsbMdZa7hI",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/DAsbMdZa7hI",
+  "creator": "Aejaz mustafai",
+  "topic": "Prayer Consistency",
+  "metric": 1243,
+  "metric_type": "views",
+  "views": 1243,
+  "likes": 104,
+  "comments": 1,
+  "post_date": "2026-10-22",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_Aejaz_mustafai_yt_DAsbMdZa7hI_en.mp4"
+  ],
+  "note": "A calm 'find peace through consistent prayer' short sells the feeling of consistency, not the obligation, which is a softer entry point."
+ },
+ {
+  "id": "yt_60HnEp24PLo",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/60HnEp24PLo",
+  "creator": "ALLAH SE WADA",
+  "topic": "Prayer Consistency",
+  "metric": 9073,
+  "metric_type": "views",
+  "views": 9073,
+  "likes": 1979,
+  "comments": 22,
+  "post_date": "2026-10-17",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Prayer Consistency/Prayer_Consistency_ALLAH_SE_WADA_yt_60HnEp24PLo_en.mp4"
+  ],
+  "note": "A 'nothing stops his salah' clip uses admiration for someone who prays despite obstacles, a strong social-proof pattern."
+ },
+ {
+  "id": "yt_kNlgItPQjw8",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/kNlgItPQjw8",
+  "creator": "Collection of Dua10",
+  "topic": "Islamic Reminders",
+  "metric": 1377,
+  "metric_type": "views",
+  "views": 1377,
+  "likes": 101,
+  "comments": 3,
+  "post_date": "2026-10-15",
+  "source_format": "youtube_short",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Islamic Reminders/Islamic_Reminders_Collection_of_Dua10_yt_kNlgItPQjw8_en.mp4"
+  ],
+  "note": "The river-bathing analogy for five daily prayers makes return and forgiveness concrete and memorable."
+ },
+ {
+  "id": "yt_UcGBYLbwhnA",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/UcGBYLbwhnA",
+  "creator": "Roshan Ka safar",
+  "topic": "Fajr Waking",
+  "metric": 924,
+  "metric_type": "views",
+  "views": 924,
+  "likes": 39,
+  "post_date": "2026-10-19",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_Roshan_Ka_safar_yt_UcGBYLbwhnA_en.mp4"
+  ],
+  "note": "Contrasting worldly worry with forgotten Fajr names the trade-off viewers actually make at night and in the morning."
+ },
+ {
+  "id": "yt_bn830ciju6o",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/bn830ciju6o",
+  "creator": "আলোকিত বার্তা",
+  "topic": "Fajr Waking",
+  "metric": 2649,
+  "metric_type": "views",
+  "views": 2649,
+  "likes": 79,
+  "comments": 2,
+  "post_date": "2026-10-20",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_unknown_yt_bn830ciju6o_bn.mp4"
+  ],
+  "note": "The 'last call of Fajr' framing makes the adhan feel urgent and personal, not background noise."
+ },
+ {
+  "id": "yt_Kfota4_yWso",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/Kfota4_yWso",
+  "creator": "Nasira Mir Islamic",
+  "topic": "Morning Routine",
+  "metric": 1859,
+  "metric_type": "views",
+  "views": 1859,
+  "likes": 88,
+  "post_date": "2026-10-21",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Morning Routine/Morning_Routine_Nasira_Mir_Islamic_yt_Kfota4_yWso_bn.mp4"
+  ],
+  "note": "What to do after Fajr turns the post-prayer window into a routine, which is where a streak habit can actually stick."
+ },
+ {
+  "id": "yt_wQcgyB_HClA",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/wQcgyB_HClA",
+  "creator": "Muslim Kids World",
+  "topic": "Fajr Waking",
+  "metric": 109230,
+  "metric_type": "views",
+  "views": 109230,
+  "likes": 1240,
+  "comments": 62,
+  "post_date": "2026-10-15",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Fajr Waking/Fajr_Waking_Muslim_Kids_World_yt_wQcgyB_HClA_en.mp4"
+  ],
+  "note": "A kids short where a boy chooses prayer over sleep, despite a whisper to stay in bed, makes Fajr a brave choice, not a chore."
+ },
+ {
+  "id": "yt_4bTmpodHbcQ",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/4bTmpodHbcQ",
+  "creator": "Apon Academy",
+  "topic": "Evening Routine",
+  "metric": 1560,
+  "metric_type": "views",
+  "views": 1560,
+  "post_date": "2026-10-24",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_Apon_Academy_yt_4bTmpodHbcQ_bn.mp4"
+  ],
+  "note": "Sleeping after Isha and waking for Fajr frames the whole night as preparation, which is an evening-routine angle, with a stretch noted in the brief."
+ },
+ {
+  "id": "yt_EFkCgDNb35A",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/EFkCgDNb35A",
+  "creator": "Md. Murtuza Subhani (SK)",
+  "topic": "Fajr Waking",
+  "metric": 770,
+  "metric_type": "views",
+  "views": 770,
+  "likes": 11,
+  "comments": 1,
+  "post_date": "2026-10-23",
+  "source_format": "youtube_short",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Fajr Waking/Fajr_Waking_Md_Murtuza_Subhani_SK_yt_EFkCgDNb35A_hi.mp4"
+  ],
+  "note": "A 40-day Fajr jamaat challenge turns consistency into a public, day-counted journey, the closest format to a streak product."
+ },
+ {
+  "id": "yt_dyv1tjTOSss",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/dyv1tjTOSss",
+  "creator": "MS world",
+  "topic": "Humor",
+  "metric": 1251,
+  "metric_type": "views",
+  "views": 1251,
+  "likes": 41,
+  "post_date": "2026-10-13",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_MS_world_yt_dyv1tjTOSss_en.mp4"
+  ],
+  "note": "A right-versus-wrong salah skit uses gentle comedy to teach, because laughter lowers defensiveness about mistakes."
+ },
+ {
+  "id": "yt_L1oWHZ83UGA",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/L1oWHZ83UGA",
+  "creator": "Ummah Moments",
+  "topic": "Humor",
+  "metric": 7622224,
+  "metric_type": "views",
+  "views": 7622224,
+  "likes": 135417,
+  "comments": 4300,
+  "post_date": "2026-09-17",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_Ummah_Moments_yt_L1oWHZ83UGA_en.mp4"
+  ],
+  "note": "A boy making sure his toy dinosaur does not miss a rakah is funny because it is sincere, and sincerity is what makes it shareable."
+ },
+ {
+  "id": "yt_PJ2u7i9lIhs",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/PJ2u7i9lIhs",
+  "creator": "Islam practice BD",
+  "topic": "Humor",
+  "metric": 30435,
+  "metric_type": "views",
+  "views": 30435,
+  "comments": 15,
+  "post_date": "2026-10-12",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_Islam_practice_BD_yt_PJ2u7i9lIhs_en.mp4"
+  ],
+  "note": "A POV Muslim-life reel works because viewers recognise themselves in the small, shared moments of communal prayer."
+ },
+ {
+  "id": "yt_u28eA4w7F-I",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/u28eA4w7F-I",
+  "creator": "Mswahil",
+  "topic": "Humor",
+  "metric": 764837,
+  "metric_type": "views",
+  "views": 764837,
+  "likes": 16700,
+  "comments": 244,
+  "post_date": "2026-10-17",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_Mswahil_yt_u28eA4w7F-I_en.mp4"
+  ],
+  "note": "A comedy rule about saying MashaAllah when complimenting works because it is a shared social rule with a funny consequence."
+ },
+ {
+  "id": "yt_8moLinFYUWw",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/8moLinFYUWw",
+  "creator": "𝗔𝘁𝗮𝘂𝗹𝗵𝗮𝗾 𝗘𝗻𝘁𝗲𝗿𝘁𝗮𝗶𝗻𝗺𝗲𝗻𝘁",
+  "topic": "Humor",
+  "metric": 15725,
+  "metric_type": "views",
+  "views": 15725,
+  "likes": 1821,
+  "comments": 17,
+  "post_date": "2026-10-23",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_unknown_yt_8moLinFYUWw_en.mp4"
+  ],
+  "note": "A numbered comedy series with a dhikr theme uses repetition and familiarity, so viewers know the format before it starts."
+ },
+ {
+  "id": "yt_NvQf8RPPxX8",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/NvQf8RPPxX8",
+  "creator": "With Fun",
+  "topic": "Humor",
+  "metric": 4528,
+  "metric_type": "views",
+  "views": 4528,
+  "likes": 461,
+  "comments": 6,
+  "post_date": "2026-10-23",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_With_Fun_yt_NvQf8RPPxX8_en.mp4"
+  ],
+  "note": "A MashaAllah comedy short uses a familiar phrase as the punchline, which is easy to remake in any language or setting."
+ },
+ {
+  "id": "yt_PT7X6x6cYRE",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/PT7X6x6cYRE",
+  "creator": "Jaza Ali",
+  "topic": "Humor",
+  "metric": 520141,
+  "metric_type": "views",
+  "views": 520141,
+  "comments": 116,
+  "post_date": "2026-10-20",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_Jaza_Ali_yt_PT7X6x6cYRE_en.mp4"
+  ],
+  "note": "An elder brother teaching salah, with comedy, works because teaching is usually awkward and the humour makes it watchable."
+ },
+ {
+  "id": "yt_C9IA50do0tQ",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/C9IA50do0tQ",
+  "creator": "Guidance Hub channel",
+  "topic": "Evening Routine",
+  "metric": 22593,
+  "metric_type": "views",
+  "views": 22593,
+  "comments": 2,
+  "post_date": "2025-08-26",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_Guidance_Hub_channel_yt_C9IA50do0tQ_en.mp4"
+  ],
+  "note": "A step-by-step Tahajjud guide gives night prayer a clear, short structure, which is rare in evening content."
+ },
+ {
+  "id": "yt_QYU1D4uTcNU",
+  "platform": "youtube",
+  "url": "https://www.youtube.com/shorts/QYU1D4uTcNU",
+  "creator": "im queen girl ki video",
+  "topic": "Evening Routine",
+  "metric": 243231,
+  "metric_type": "views",
+  "views": 243231,
+  "likes": 4164,
+  "comments": 9,
+  "post_date": "2026-10-21",
+  "source_format": "youtube_short",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_im_queen_girl_ki_video_yt_QYU1D4uTcNU_hi.mp4"
+  ],
+  "note": "A calming night ritual with a short recitation before bed gives an evening wind-down that leads naturally to a better Fajr morning."
+ },
+ {
+  "id": "pin_838373286925869481",
+  "platform": "pinterest",
+  "url": "https://jp.pinterest.com/pin/838373286925869481/",
+  "creator": "Digital Servay",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_Digital_Servay_pin_838373286925869481_en.jpg"
+  ],
+  "note": "A calm Friday reminder card shows how a soft, non-urgent hook can open a morning routine story without lecturing; for SalaLam it matters because the product moment is the next morning, not the Friday "
+ },
+ {
+  "id": "pin_114419646775999588",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.ca/pin/tahajjud--114419646775999588/",
+  "creator": "Bushrak28",
+  "topic": "Evening Routine",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Evening Routine/Evening_Routine_Bushrak28_pin_114419646775999588_en.jpg"
+  ],
+  "note": "Night-time comfort copy shows why awake-at-night moments are a strong opening for a Fajr story: the viewer is already awake, and the gap is what they do next instead of scrolling."
+ },
+ {
+  "id": "pin_1098456165388980209",
+  "platform": "pinterest",
+  "url": "https://in.pinterest.com/pin/1098456165388980209/",
+  "creator": null,
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_unknown_pin_1098456165388980209_en.jpg"
+  ],
+  "note": "A one-line hope image proves a short visual line can carry a reminder; for SalaLam the lesson is to keep the hook short and put the waking mechanism, not more motivation, in the middle slides."
+ },
+ {
+  "id": "pin_747597606879243196",
+  "platform": "pinterest",
+  "url": "https://ie.pinterest.com/pin/747597606879243196/",
+  "creator": null,
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_unknown_pin_747597606879243196_en.jpg"
+  ],
+  "note": "A direct verse warning works because it names forgetting plainly; for SalaLam it maps to the morning version of forgetting, where the phone comes first and prayer slips."
+ },
+ {
+  "id": "pin_687080486872566293",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.co.uk/pin/687080486872566293/",
+  "creator": null,
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_unknown_pin_687080486872566293_en.png"
+  ],
+  "note": "A comfort verse is useful for restart content: it lowers the shame of a missed week, which is exactly the audience a streak-based Fajr alarm needs to re-engage."
+ },
+ {
+  "id": "pin_566538828111868456",
+  "platform": "pinterest",
+  "url": "https://it.pinterest.com/pin/566538828111868456/",
+  "creator": null,
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_unknown_pin_566538828111868456_ar.jpg"
+  ],
+  "note": "One Arabic word as the whole message shows minimal typography can outperform a paragraph; for SalaLam a one-word Fajr hook can carry a carousel that then explains the prayer-mat scan."
+ },
+ {
+  "id": "pin_625930048252540096",
+  "platform": "pinterest",
+  "url": "https://in.pinterest.com/pin/625930048252540096/",
+  "creator": null,
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_unknown_pin_625930048252540096_en.png"
+  ],
+  "note": "Friday framing plus everyday kindness shows occasion content can still point at personal consistency; for SalaLam the bridge is keeping a promise to yourself at Fajr, not only to others."
+ },
+ {
+  "id": "pin_67554063150285208",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/strongest-and-shortest-prayer-in-islam--67554063150285208/",
+  "creator": null,
+  "topic": "Prayer Education",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Education/Prayer_Education_unknown_pin_67554063150285208_en.jpg"
+  ],
+  "note": "A superlative curiosity hook (shortest and strongest) earns the swipe; for SalaLam it reframes the Fajr problem as waking, not praying, since the prayer itself is short."
+ },
+ {
+  "id": "pin_799389002636209388",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/799389002636209388/",
+  "creator": "kazipins",
+  "topic": "Prayer Consistency",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Consistency/Prayer_Consistency_kazipins_pin_799389002636209388_en.jpg"
+  ],
+  "note": "A handmade bead tracker proves visible progress motivates consistency; for SalaLam the phone streak is the same psychology in digital form, visible before the day starts."
+ },
+ {
+  "id": "pin_707698529001820527",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/707698529001820527/",
+  "creator": "fazeeff",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_fazeeff_pin_707698529001820527_en.jpg"
+  ],
+  "note": "Decor as a daily reminder shows environment cues work when seen every morning; for SalaLam the parallel is an alarm that requires action at the prayer mat rather than a reminder that can be ignored."
+ },
+ {
+  "id": "pin_944489353375922017",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/944489353375922017/",
+  "creator": "TrendyMindVibes",
+  "topic": "Prayer Consistency",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Consistency/Prayer_Consistency_TrendyMindVibes_pin_944489353375922017_en.webp"
+  ],
+  "note": "The adhan slogan as a mantra links prayer directly to success language; for SalaLam it gives a bold opening line that still needs a concrete waking mechanism behind it."
+ },
+ {
+  "id": "pin_926474954608790437",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/926474954608790437/",
+  "creator": "inspirebeautyheaven",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_inspirebeautyheaven_pin_926474954608790437_en.jpg"
+  ],
+  "note": "Occasion content works when it converts inspiration into a next-morning commitment; for SalaLam the useful move is setting the adhan alarm on the night of the occasion itself."
+ },
+ {
+  "id": "pin_550565123219861997",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/550565123219861997/",
+  "creator": "ruhinavirani",
+  "topic": "Fajr Waking",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Fajr Waking/Fajr_Waking_ruhinavirani_pin_550565123219861997_en.jpg"
+  ],
+  "note": "The Fajr and Isha hadith is the strongest waking hook in this batch because it names the difficulty honestly; for SalaLam it justifies leading with the mechanism, the prayer-mat scan, rather than more"
+ },
+ {
+  "id": "pin_13299761395093260",
+  "platform": "pinterest",
+  "url": "https://in.pinterest.com/pin/follow-me-for-more-islamic-post-01bw--13299761395093260/",
+  "creator": null,
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_unknown_pin_13299761395093260_ar-en.jpg"
+  ],
+  "note": "Extreme minimalism shows white space and one trust line can stop a scroll; for SalaLam the contrast with a noisy snooze loop makes the same line work as an opening slide."
+ },
+ {
+  "id": "pin_998039967435422251",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/998039967435422251/",
+  "creator": "spiritual1ummah",
+  "topic": "Morning Routine",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Morning Routine/Morning_Routine_spiritual1ummah_pin_998039967435422251_en.jpg"
+  ],
+  "note": "A five-small-habits list works because smallness, not intensity, is the promise; for SalaLam the first small habit, waking ten minutes before Fajr, is the natural product moment."
+ },
+ {
+  "id": "pin_966866613791711685",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/966866613791711685/",
+  "creator": "areebatariqtariq",
+  "topic": "Fajr Waking",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Fajr Waking/Fajr_Waking_areebatariqtariq_pin_966866613791711685_en.jpg"
+  ],
+  "note": "Calling framing makes the bed the antagonist and the call the invitation; for SalaLam that choice, comfort versus call, is the exact decision the prayer-mat scan is designed to force."
+ },
+ {
+  "id": "pin_824862488039517920",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/824862488039517920/",
+  "creator": "UmmeHani001",
+  "topic": "Prayer Education",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Education/Prayer_Education_UmmeHani001_pin_824862488039517920_en.jpg"
+  ],
+  "note": "A step-by-step guide structure teaches before it persuades; for SalaLam the guide order (timing, preparation, then waking) keeps the product demo in its proper late place."
+ },
+ {
+  "id": "pin_1076078904735842592",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/1076078904735842592/",
+  "creator": "pnytrainingsofficial",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_pnytrainingsofficial_pin_1076078904735842592_ur.jpg"
+  ],
+  "note": "A Roman Urdu Friday blessing shows warmth and community tone travel across languages; for SalaLam the same blessing can open a carousel that then addresses weekday Fajr misses."
+ },
+ {
+  "id": "pin_972073900858679595",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/972073900858679595/",
+  "creator": "shehzeenmehra9",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "saves": 6,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_shehzeenmehra9_pin_972073900858679595_ur.jpg"
+  ],
+  "note": "Appointed-time reassurance is a strong timing hook; for SalaLam it supports a night-before preparation message, setting the adhan alarm tonight for a prayer with a fixed time."
+ },
+ {
+  "id": "pin_1076078904730541415",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/1076078904730541415/",
+  "creator": "pnytrainingsofficial",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_pnytrainingsofficial_pin_1076078904730541415_ur.jpg"
+  ],
+  "note": "An answered-dua verse gives a warm, hopeful opening; for SalaLam it pairs naturally with waking for Fajr first and making dua after, rather than dua as a substitute for waking."
+ },
+ {
+  "id": "pin_972073900858679596",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/972073900858679596/",
+  "creator": "shehzeenmehra9",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "saves": 14,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_shehzeenmehra9_pin_972073900858679596_ur.jpg"
+  ],
+  "note": "Gratitude plus patience pairing is a saveable morning frame; for SalaLam the first grateful action of the day, Fajr on time, turns a sentiment into a streak."
+ },
+ {
+  "id": "pin_880946377161218268",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/880946377161218268/",
+  "creator": "DEENDOODLES",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_DEENDOODLES_pin_880946377161218268_en.jpg"
+  ],
+  "note": "A three-beat reassurance line is memorable because of rhythm; for SalaLam the rhythm can open a carousel that then names the one morning action, prayer before scrolling."
+ },
+ {
+  "id": "pin_634374297559699682",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/634374297559699682/",
+  "creator": "choujaak35",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_choujaak35_pin_634374297559699682_en.jpg"
+  ],
+  "note": "A visual dhikr image shows stillness can be the hook; for SalaLam the calm image contrasts with a noisy morning and supports a slow, unrushed prayer after a successful wake-up."
+ },
+ {
+  "id": "pin_850124867217644453",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/850124867217644453/",
+  "creator": "kkaa1996",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_kkaa1996_pin_850124867217644453_en.jpg"
+  ],
+  "note": "Minimalist calligraphy proves the surah itself can be the content; for SalaLam the daybreak link in Al-Falaq connects refuge at dawn directly to Fajr timing."
+ },
+ {
+  "id": "pin_789396640974400582",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/789396640974400582/",
+  "creator": "itstab18",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_itstab18_pin_789396640974400582_en.jpg"
+  ],
+  "note": "A voice-first post shows audio can be the experience while the image is only a cover; for SalaLam the honest adaptation is to describe recitation, not fake audio, and pair Quran in the app with a pray"
+ },
+ {
+  "id": "pin_278378820712347307",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/278378820712347307/",
+  "creator": "hooriasheikh",
+  "topic": "Prayer Consistency",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Consistency/Prayer_Consistency_hooriasheikh_pin_278378820712347307_en.jpg"
+  ],
+  "note": "Habit-identity framing is the strongest consistency argument in this batch: you become what you repeat; for SalaLam SalahLock and the streak are the mechanism that changes what gets repeated first thi"
+ },
+ {
+  "id": "pin_1130825787703795263",
+  "platform": "pinterest",
+  "url": "https://www.pinterest.com/pin/1130825787703795263/",
+  "creator": "UnseenUnshaken",
+  "topic": "Islamic Reminders",
+  "metric": null,
+  "metric_type": null,
+  "post_date": null,
+  "source_format": "pinterest_pin",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_UnseenUnshaken_pin_1130825787703795263_en.jpg"
+  ],
+  "note": "Slow, mindful dhikr contrasts with rushed prayer; for SalaLam the lesson is to wake early enough, via the adhan alarm, that prayer itself does not have to be rushed."
+ },
+ {
+  "id": "tc_awakpenn",
+  "platform": "topcarousels",
+  "url": "https://topcarousels.com/api/assets/import-8d04a5c7-d31c-4160-87f4-43a222c10469-0",
+  "creator": "awakpenn",
+  "topic": "Prayer Consistency",
+  "metric": 15200,
+  "metric_type": "likes",
+  "likes": 15200,
+  "post_date": null,
+  "source_format": "topcarousels_carousel",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide01.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide02.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide03.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide04.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide05.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide06.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide07.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide08.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide09.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide10.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide11.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide12.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide13.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide14.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide15.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide16.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide17.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide18.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide19.jpg",
+   "Carousel/Prayer Consistency/Prayer_Consistency_awakpenn_tc_awakpenn_en_slide20.jpg"
+  ],
+  "note": "A 20-slide comment-prompt carousel is the clearest comment-CTA structure in this batch: long value first, comment ask last; for SalaLam it models how to earn an ask-for-the-app-name comment without a "
+ },
+ {
+  "id": "tc_wegotnotaste",
+  "platform": "topcarousels",
+  "url": "https://topcarousels.com/api/assets/import-aeae1275-2b62-422b-9888-6c3123239625-0",
+  "creator": "wegotnotaste",
+  "topic": "Islamic Reminders",
+  "metric": 124200,
+  "metric_type": "likes",
+  "likes": 124200,
+  "post_date": null,
+  "source_format": "topcarousels_carousel",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide01.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide02.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide03.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide04.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide05.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide06.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide07.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide08.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide09.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide10.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide11.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide12.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide13.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide14.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide15.jpg",
+   "Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide16.jpg"
+  ],
+  "note": "A 16-slide visual sequence proves images alone can carry a story; for SalaLam a visual-first reminder carousel can show dawn, phone glow, and prayer mat in sequence before any product screen appears."
+ },
+ {
+  "id": "tc_calebralston",
+  "platform": "topcarousels",
+  "url": "https://topcarousels.com/api/assets/import-a5c45f47-d3a7-47cc-a210-a7c02ba5e462-0",
+  "creator": "calebralston",
+  "topic": "Prayer Education",
+  "metric": 18000,
+  "metric_type": "likes",
+  "likes": 18000,
+  "post_date": null,
+  "source_format": "topcarousels_carousel",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Education/Prayer_Education_calebralston_tc_calebralston_en_slide01.jpg",
+   "Carousel/Prayer Education/Prayer_Education_calebralston_tc_calebralston_en_slide02.jpg",
+   "Carousel/Prayer Education/Prayer_Education_calebralston_tc_calebralston_en_slide03.jpg"
+  ],
+  "note": "A three-slide comparison format teaches a distinction cleanly, one idea per slide; for SalaLam it maps to motivation versus mechanism, the distinction that explains why more alarms alone do not fix Fa"
+ },
+ {
+  "id": "tiktok_ganjul_arsh_7632370647863184671",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@ganjul_arsh/video/7632370647863184671",
+  "creator": "ganjul_arsh",
+  "topic": "Fajr Waking",
+  "metric": 24100,
+  "metric_type": "likes",
+  "likes": 24100,
+  "comments": 676,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Fajr Waking/Fajr_Waking_ganjul_arsh_tiktok_ganjul_arsh_7632370647863184671_english.mp4"
+  ],
+  "note": "Long-form (221s) affirmation hook: waking for Fajr as a sign of being loved. High raw likes (24.1K in one crawl; other crawls of the same ID differ, so no multiplier claimed)."
+ },
+ {
+  "id": "tiktok_okedairo_g_7589520123988430100",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@okedairo_g/video/7589520123988430100",
+  "creator": "okedairo_g",
+  "topic": "Humor",
+  "metric": 5832,
+  "metric_type": "likes",
+  "likes": 5832,
+  "comments": 97,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_okedairo_g_tiktok_okedairo_g_7589520123988430100_english.mp4"
+  ],
+  "note": "Comedy pray-with-me clip. Humor hook only; the brief keeps prayer itself respectful and the joke on everyday awkwardness, not on worship."
+ },
+ {
+  "id": "tiktok_sagacious.comedy_7638731382348467463",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@sagacious.comedy/video/7638731382348467463",
+  "creator": "sagacious.comedy",
+  "topic": "Humor",
+  "metric": 8565,
+  "metric_type": "likes",
+  "likes": 8565,
+  "comments": 147,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Humor/Humor_sagacious.comedy_tiktok_sagacious.comedy_7638731382348467463_english.mp4"
+  ],
+  "note": "Comedy clip titled Prayer is the key. Same guardrail as above: joke on the situation, not on salah."
+ },
+ {
+  "id": "tiktok_ishfaq.ishaq8_7638670590613736726",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@ishfaq.ishaq8/photo/7638670590613736726",
+  "creator": "ishfaq.ishaq8",
+  "topic": "Prayer Education",
+  "metric": 750,
+  "metric_type": "likes",
+  "likes": 750,
+  "comments": 4,
+  "post_date": null,
+  "source_format": "tiktok_photo_carousel",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Education/Prayer_Education_ishfaq.ishaq8_tiktok_ishfaq.ishaq8_7638670590613736726_english.jpg"
+  ],
+  "note": "Single image, not a carousel: one static list of the five prayers and their rakah counts. Useful as a reference frame, not as a slide sequence. Adaptation must not present it as a multi-slide carousel"
+ },
+ {
+  "id": "tiktok_islamisdeeen_7594369552314666241",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@islamisdeeen/photo/7594369552314666241",
+  "creator": "islamisdeeen",
+  "topic": "Prayer Education",
+  "metric": 53900,
+  "metric_type": "likes",
+  "likes": 53900,
+  "comments": 220,
+  "post_date": null,
+  "source_format": "tiktok_photo_carousel",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide01.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide02.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide03.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide04.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide05.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide06.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide07.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide08.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide09.jpg",
+   "Carousel/Prayer Education/Prayer_Education_islamisdeeen_tiktok_islamisdeeen_7594369552314666241_english_slide10.jpg"
+  ],
+  "note": "10-slide wudu and salah steps. Source itself notes its pictures were taken from Pinterest, so credit/attribution must be preserved and the adaptation must be original, not a copy of those images."
+ },
+ {
+  "id": "tiktok_rizqseeker_7617326817631915286",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@rizqseeker/photo/7617326817631915286",
+  "creator": "rizqseeker",
+  "topic": "Morning Routine",
+  "metric": 23700,
+  "metric_type": "likes",
+  "likes": 23700,
+  "comments": 374,
+  "post_date": null,
+  "source_format": "tiktok_photo_carousel",
+  "folder": "Carousel",
+  "files": [
+   "Carousel/Morning Routine/Morning_Routine_rizqseeker_tiktok_rizqseeker_7617326817631915286_english.jpg"
+  ],
+  "note": "Single image, not a carousel. A post-Fajr 20-minute routine (istighfar, dhikr, morning dua). Adaptation is a new reel, not a slide copy."
+ },
+ {
+  "id": "tiktok_theopenquran_7546861706690120968",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@theopenquran/video/7546861706690120968",
+  "creator": "theopenquran",
+  "topic": "Evening Routine",
+  "metric": 5810,
+  "metric_type": "likes",
+  "likes": 5810,
+  "comments": 105,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_theopenquran_tiktok_theopenquran_7546861706690120968_english.mp4"
+  ],
+  "note": "Morning and evening dua recited 7 times, protection and peace framing. Adaptation: a calm bookend routine, morning and evening, with the app only at the end."
+ },
+ {
+  "id": "tiktok_aljaamiamasjid_7588963629181979924",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@aljaamiamasjid/video/7588963629181979924",
+  "creator": "aljaamiamasjid",
+  "topic": "Evening Routine",
+  "metric": 691,
+  "metric_type": "likes",
+  "likes": 691,
+  "comments": 5,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_aljaamiamasjid_tiktok_aljaamiamasjid_7588963629181979924_english.mp4"
+  ],
+  "note": "Weekly Thursday night dhikr between Maghrib and Isha at a masjid. Community/routine angle: a fixed weekly slot, not a one-off push."
+ },
+ {
+  "id": "tiktok_abiha5533_7614049912510074134",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@abiha5533/video/7614049912510074134",
+  "creator": "abiha5533",
+  "topic": "Evening Routine",
+  "metric": 4944,
+  "metric_type": "likes",
+  "likes": 4944,
+  "comments": 319,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Evening Routine/Evening_Routine_abiha5533_tiktok_abiha5533_7614049912510074134_english.mp4"
+  ],
+  "note": "Pray before going to bed at night. Simple night-close hook; note the source caption asks TikTok not to under-review the video, which is not part of the creative."
+ },
+ {
+  "id": "tiktok_quran_recitation18_7622463134577577224",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@quran_recitation18/video/7622463134577577224",
+  "creator": "quran_recitation18",
+  "topic": "Morning Routine",
+  "metric": 2005,
+  "metric_type": "likes",
+  "likes": 2005,
+  "comments": 16,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Reel",
+  "files": [
+   "Reel/Morning Routine/Morning_Routine_quran_recitation18_tiktok_quran_recitation18_7622463134577577224_english.mp4"
+  ],
+  "note": "Golden Shield: 2-minute dhikr after Fajr and Maghrib, staying seated, citing Tirmidhi 3474 / Ibn Hibban 2023 as given by the source. Verify before reuse."
+ },
+ {
+  "id": "tiktok_nuraniquran1_7637905811062279438",
+  "platform": "tiktok",
+  "url": "https://www.tiktok.com/@nuraniquran1/video/7637905811062279438",
+  "creator": "nuraniquran1",
+  "topic": "Islamic Reminders",
+  "metric": 408000,
+  "metric_type": "likes",
+  "likes": 408000,
+  "comments": 10900,
+  "post_date": null,
+  "source_format": "tiktok_video",
+  "folder": "Full Video",
+  "files": [
+   "Full Video/Islamic Reminders/Islamic_Reminders_nuraniquran1_tiktok_nuraniquran1_7637905811062279438_arabic.mp4"
+  ],
+  "note": "Surah Al-Fajr recitation, 408K likes, high raw engagement. Audio-first value: a calm recitation opening can earn attention before any product mention; do not claim recitation effects."
+ }
+]
