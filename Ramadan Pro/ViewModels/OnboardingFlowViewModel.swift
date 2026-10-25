@@ -263,10 +263,13 @@ final class OnboardingFlowViewModel: ObservableObject {
         saveLocal()
     }
 
-    /// Today's time for the earliest selected prayer, once location has loaded.
+    /// The next selected prayer that can still ring, once location has loaded.
+    /// When every selected prayer has passed today, it is tomorrow's earliest one
+    /// (today's time shifted a day, which is within minutes of tomorrow's).
     var firstAlarm: (prayer: PrayerName, time: Date)? {
         guard let schedule = todaySchedule else { return nil }
-        return profile.selectedAlarmPrayers
+        let now = Date()
+        let alarms = profile.selectedAlarmPrayers
             .map { prayer -> (prayer: PrayerName, time: Date) in
                 switch prayer {
                 case .fajr: return (prayer, schedule.fajr)
@@ -276,7 +279,12 @@ final class OnboardingFlowViewModel: ObservableObject {
                 case .isha: return (prayer, schedule.isha)
                 }
             }
-            .min { $0.time < $1.time }
+        if let upcoming = alarms.filter({ $0.time > now }).min(by: { $0.time < $1.time }) {
+            return upcoming
+        }
+        guard let earliest = alarms.min(by: { $0.time < $1.time }),
+              let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: earliest.time) else { return nil }
+        return (earliest.prayer, tomorrow)
     }
 
     /// Re-schedules after notification permission is granted later in the flow.
