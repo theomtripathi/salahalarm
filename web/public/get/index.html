@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Get SalahAlarm</title>
+  <meta name="description" content="The prayer alarm you can't dismiss from bed. Get SalahAlarm for iPhone or Android.">
+  <meta name="theme-color" content="#1a9e3f">
+  <meta property="og:title" content="SalahAlarm: never miss Fajr again">
+  <meta property="og:description" content="The prayer alarm you can't dismiss from bed. For iPhone and Android.">
+  <meta property="og:image" content="https://salahalarm.com/assets/img/og.png">
+  <link rel="icon" href="/assets/img/icon.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/i18n.js" defer></script>
+</head>
+<body>
+  <main class="bio">
+    <div class="brand">
+      <img src="/assets/img/icon.png" alt="" width="52" height="52">
+      <div>
+        <b>SalahAlarm</b>
+        <span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span>
+        <span class="small" data-t="4.8 on the App Store">4.8 on the App Store</span>
+      </div>
+    </div>
+
+    <div>
+      <h1 data-t="Set an alarm you can't dismiss from bed.">Set an alarm you can't dismiss from bed.</h1>
+      <p class="lede" data-t="SalahAlarm keeps the reminder active until you get up and scan your prayer mat.">SalahAlarm keeps the reminder active until you get up and scan your prayer mat.</p>
+    </div>
+
+    <div id="choices" style="display:grid;gap:12px">
+      <a id="android" class="btn store-btn btn-primary" href="/android/">
+        <span class="ic"></span>
+        <span class="two"><small data-t="Get it for">Get it for</small><b>Android</b></span>
+      </a>
+      <a id="ios" class="btn store-btn btn-dark" href="https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&amp;ct=get-page&amp;mt=8">
+        <span class="ic"></span>
+        <span class="two"><small data-t="Download on the">Download on the</small><b>App Store</b></span>
+      </a>
+    </div>
+    <p id="inapp-hint" class="hint" hidden data-t="If Android doesn't open, tap ⋮ at the top and choose Open in browser.">If Android doesn't open, tap ⋮ at the top and choose Open in browser.</p>
+
+    <img class="phone" src="/assets/img/crop-01.webp" alt="SalahAlarm home screen with today's prayer times and streak" width="250" height="438">
+
+    <p class="hint">
+      <a href="/android/install/" data-t="Already subscribed on Android? Download the app">Already subscribed on Android? Download the app</a>
+    </p>
+  </main>
+
+  <script type="module">
+    import { initialLang, setLang, loadConfig, initAnalytics, capture, captureRef, device, chromeIntent, icons } from "/assets/common.js";
+
+    const ref = captureRef();
+    const params = new URLSearchParams(location.search);
+    const account = params.get("a");
+    const android = document.getElementById("android");
+    const ios = document.getElementById("ios");
+    android.querySelector(".ic").innerHTML = icons.android;
+    ios.querySelector(".ic").innerHTML = icons.apple;
+
+    // Bio links from the tracked accounts go through /go/<account> so App Store
+    // installs keep their campaign token (see conversion-tracking).
+    if (account && /^[a-z0-9-]{2,40}$/i.test(account)) ios.href = `/go/${account.toLowerCase()}`;
+    const androidUrl = `/android/${ref ? `?ref=${encodeURIComponent(ref)}` : ""}`;
+    android.href = androidUrl;
+
+    // Inside TikTok/Instagram on Android, Google sign-in and the APK download both
+    // fail, so the Android button reopens the onboarding in Chrome.
+    if (device.android && device.inApp) {
+      android.href = chromeIntent(new URL(androidUrl, location.href).href);
+      document.getElementById("inapp-hint").hidden = false;
+    }
+
+    // Put the visitor's own platform first and give it the primary style.
+    if (device.ios) {
+      ios.parentElement.prepend(ios);
+      ios.className = "btn store-btn btn-primary";
+      android.className = "btn store-btn btn-secondary";
+    }
+
+    setLang(initialLang(), { persist: false });
+    const config = await loadConfig();
+    setLang(initialLang(config.lang), { persist: false });
+    initAnalytics(config, { ref, page: "bio", country: config.geo?.country, price_tier: config.tier });
+    capture("bio_page_viewed", { account });
+    for (const [el, platform] of [[android, "android"], [ios, "ios"]]) {
+      el.addEventListener("click", () => capture("bio_option_tapped", { platform, account }));
+    }
+  </script>
+</body>
+</html>

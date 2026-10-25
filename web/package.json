@@ -1,0 +1,19 @@
+{
+  "name": "salahalarm-android-web",
+  "private": true,
+  "type": "module",
+  "description": "salahalarm.com/get bio link, Android web onboarding, Dodo Payments checkout and entitlement API (Cloudflare Worker)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "node --test test/*.test.js",
+    "i18n": "node scripts/build-i18n.mjs",
+    "deploy": "wrangler deploy",
+    "dodo:setup": "node scripts/dodo-setup.mjs"
+  },
+  "dependencies": {
+    "adhan": "4.4.6"
+  },
+  "devDependencies": {
+    "wrangler": "4.152.0"
+  }
+}

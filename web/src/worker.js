@@ -1,0 +1,428 @@
+// salahalarm.com Android funnel Worker.
+//
+//   /get                     bio-link page: App Store or Android (static)
+//   /android/                web onboarding → Google sign-in → paywall (static)
+//   /android/welcome/        after checkout: confirm payment, download APK, install guide (static)
+//   /android/install/        install guide on its own, for reinstalls (static)
+//   /api/config              geo, price tier, prayer times, public client config
+//   /api/profile             save onboarding answers to users/{uid} (same fields as iOS)
+//   /api/checkout            create a Dodo Payments checkout session
+//   /api/entitlement         is this Firebase user premium? (confirms a fresh checkout too)
+//   /api/portal              Dodo customer portal link (cancel, change card)
+//   /api/webhooks/dodo       Dodo Payments webhooks → entitlements/{uid}
+//   /api/android/latest      newest APK version, for the in-app update prompt
+//   /download/salahalarm.apk the APK, streamed from R2
+
+import { verifyIdToken, bearer, AuthError } from "./auth.js";
+import { Firestore, parseServiceAccount } from "./firestore.js";
+import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
+import { tierFor, productFor, parseProducts, displayPlans, PLANS } from "./pricing.js";
+import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
+import { scheduleFor } from "./prayer.js";
+import { sanitizeProfile } from "./profile.js";
+
+const APK_KEY = "salahalarm-latest.apk";
+const APK_META_KEY = "latest.json";
+const LANGS = ["en", "ar", "tr", "id", "ur"];
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    try {
+      if (request.method === "OPTIONS") return cors(new Response(null, { status: 204 }), request, env);
+      const res = await route(request, env, ctx, url);
+      return url.pathname.startsWith("/api/") ? cors(res, request, env) : res;
+    } catch (err) {
+      const status = err instanceof AuthError ? err.status : err.status && err.status < 500 ? 400 : 500;
+      if (status >= 500) console.error(err.stack || err);
+      const res = json({ error: err instanceof DodoError ? "payment provider error" : err.message }, status);
+      return url.pathname.startsWith("/api/") ? cors(res, request, env) : res;
+    }
+  },
+};
+
+async function route(request, env, ctx, url) {
+  const { pathname } = url;
+  const method = request.method;
+
+  if (pathname === "/api/config" && method === "GET") return config(request, env, ctx);
+  if (pathname === "/api/profile" && method === "POST") return saveProfile(request, env);
+  if (pathname === "/api/checkout" && method === "POST") return checkout(request, env, ctx, url);
+  if (pathname === "/api/entitlement" && method === "GET") return entitlement(request, env, url);
+  if (pathname === "/api/portal" && method === "POST") return portal(request, env);
+  if (pathname === "/api/webhooks/dodo" && method === "POST") return webhook(request, env, ctx);
+  if (pathname === "/api/android/latest" && method === "GET") return latest(env);
+  if (pathname === "/download/salahalarm.apk" && (method === "GET" || method === "HEAD")) return download(request, env, ctx);
+  if (pathname.startsWith("/api/")) return json({ error: "not found" }, 404);
+
+  if (pathname === "/get") return Response.redirect(`${url.origin}/get/${url.search}`, 301);
+  if (pathname === "/android") return Response.redirect(`${url.origin}/android/${url.search}`, 301);
+  if (env.ASSETS) return env.ASSETS.fetch(request);
+  return new Response("not found", { status: 404 });
+}
+
+// ---- helpers -------------------------------------------------------------
+
+function json(data, status = 200, headers = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...headers },
+  });
+}
+
+function cors(res, request, env) {
+  const origin = request.headers.get("origin");
+  const allowed = (env.ALLOWED_ORIGINS || "").split(",").map((s) => s.trim()).filter(Boolean);
+  if (origin && allowed.includes(origin)) {
+    const headers = new Headers(res.headers);
+    headers.set("access-control-allow-origin", origin);
+    headers.set("access-control-allow-headers", "authorization, content-type");
+    headers.set("access-control-allow-methods", "GET, POST, OPTIONS");
+    headers.set("vary", "origin");
+    return new Response(res.body, { status: res.status, headers });
+  }
+  return res;
+}
+
+function geo(request) {
+  const cf = request.cf || {};
+  return {
+    country: (cf.country || request.headers.get("cf-ipcountry") || "").toUpperCase() || null,
+    city: cf.city || null,
+    region: cf.region || null,
+    timezone: cf.timezone || null,
+    latitude: cf.latitude ? Number(cf.latitude) : null,
+    longitude: cf.longitude ? Number(cf.longitude) : null,
+  };
+}
+
+async function user(request, env) {
+  return verifyIdToken(bearer(request), env.FIREBASE_PROJECT_ID);
+}
+
+function firestore(env) {
+  const serviceAccount = parseServiceAccount(env.FIREBASE_SERVICE_ACCOUNT);
+  if (!serviceAccount) throw Object.assign(new Error("FIREBASE_SERVICE_ACCOUNT is not set"), { status: 503 });
+  return new Firestore({ projectId: env.FIREBASE_PROJECT_ID, serviceAccount });
+}
+
+function dodo(env) {
+  return new Dodo({ apiKey: env.DODO_PAYMENTS_API_KEY, environment: env.DODO_ENVIRONMENT || "test_mode" });
+}
+
+function trialDays(env) {
+  try {
+    return JSON.parse(env.TRIAL_DAYS || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function capture(env, ctx, event, distinctId, properties) {
+  if (!env.POSTHOG_KEY) return;
+  ctx.waitUntil(
+    fetch(`${env.POSTHOG_HOST || "https://us.i.posthog.com"}/capture/`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ api_key: env.POSTHOG_KEY, event, distinct_id: distinctId, properties }),
+    }).catch(() => {}),
+  );
+}
+
+async function readJson(request) {
+  try {
+    return await request.json();
+  } catch {
+    return {};
+  }
+}
+
+// ---- /api/config -----------------------------------------------------------
+
+async function config(request, env, ctx) {
+  const g = geo(request);
+  const tier = tierFor(g.country);
+  const plans = await localPrices(env, ctx, tier, g.country);
+  const schedule = g.latitude != null ? scheduleFor({ ...g, now: new Date() }) : null;
+  const lang = preferredLang(request.headers.get("accept-language"), g.country);
+  return json({
+    geo: { country: g.country, city: g.city, timezone: g.timezone },
+    tier,
+    plans,
+    schedule,
+    lang,
+    firebase: {
+      apiKey: env.FIREBASE_API_KEY,
+      authDomain: env.FIREBASE_AUTH_DOMAIN || `${env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
+      projectId: env.FIREBASE_PROJECT_ID,
+    },
+    posthog: env.POSTHOG_KEY ? { key: env.POSTHOG_KEY, host: env.POSTHOG_HOST || "https://us.i.posthog.com" } : null,
+    appStoreUrl: env.APP_STORE_URL,
+    checkoutEnabled: Boolean(env.DODO_PAYMENTS_API_KEY),
+  });
+}
+
+export function preferredLang(acceptLanguage, country) {
+  const first = String(acceptLanguage || "").split(",")[0].trim().split(/[-_;]/)[0].toLowerCase();
+  if (LANGS.includes(first)) return first;
+  if (first === "in") return "id";
+  if (first === "en" || !first) return "en";
+  const byCountry = { ID: "id", TR: "tr", PK: "ur", SA: "ar", AE: "ar", EG: "ar", QA: "ar", KW: "ar", JO: "ar", MA: "ar", DZ: "ar", IQ: "ar", OM: "ar", BH: "ar", YE: "ar", LY: "ar", TN: "ar", SD: "ar", SY: "ar", LB: "ar", PS: "ar" };
+  return byCountry[String(country || "").toUpperCase()] || "en";
+}
+
+// Ask Dodo what this country would actually pay, in local currency when adaptive
+// pricing is on. Cached per country for six hours; falls back to USD list prices.
+async function localPrices(env, ctx, tier, country) {
+  const fallback = displayPlans(tier, { trialDays: trialDays(env) });
+  if (!env.DODO_PAYMENTS_API_KEY || env.PRICE_PREVIEW === "off" || !country) return fallback;
+  const products = parseProducts(env.PRODUCTS);
+  const cache = typeof caches !== "undefined" ? caches.default : null;
+  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
+  if (cache) {
+    const hit = await cache.match(cacheKey);
+    if (hit) return hit.json();
+  }
+  try {
+    const client = dodo(env);
+    const plans = await Promise.all(
+      fallback.map(async (p) => {
+        const product = productFor(products, tier, p.plan);
+        if (!product) return p;
+        const preview = await client.previewCheckout({
+          product_cart: [{ product_id: product.productId, quantity: 1 }],
+          billing_address: { country },
+        });
+        const line = preview.product_cart?.[0];
+        const currency = line?.currency || preview.currency;
+        const recurring = line?.discounted_price ?? preview.recurring_breakup?.total_amount;
+        if (!currency || typeof recurring !== "number") return p;
+        const amount = recurring / minorUnits(currency);
+        return {
+          ...p,
+          currency,
+          amount,
+          monthlyEquivalent: p.plan === "yearly" ? amount / 12 : amount,
+          trialDays: preview.trial_period_days ?? p.trialDays,
+        };
+      }),
+    );
+    if (cache) {
+      ctx.waitUntil(cache.put(cacheKey, new Response(JSON.stringify(plans), { headers: { "cache-control": "max-age=21600" } })));
+    }
+    return plans;
+  } catch (err) {
+    console.warn("price preview failed", err.message);
+    return fallback;
+  }
+}
+
+const ZERO_DECIMAL = new Set(["JPY", "KRW", "VND", "CLP", "PYG", "UGX", "XAF", "XOF", "RWF", "KMF", "GNF", "DJF", "BIF", "MGA", "VUV", "XPF"]);
+const THREE_DECIMAL = new Set(["BHD", "KWD", "OMR", "JOD", "TND", "LYD", "IQD"]);
+function minorUnits(currency) {
+  const c = String(currency).toUpperCase();
+  if (ZERO_DECIMAL.has(c)) return 1;
+  if (THREE_DECIMAL.has(c)) return 1000;
+  return 100;
+}
+
+// ---- /api/profile ----------------------------------------------------------
+
+async function saveProfile(request, env) {
+  const u = await user(request, env);
+  const body = await readJson(request);
+  const { profile, plan } = sanitizeProfile(body);
+  const db = firestore(env);
+  await db.merge(`users/${u.uid}`, {
+    userId: u.uid,
+    email: u.email,
+    ...(u.name && { name: u.name }),
+    onboardingProfile: profile,
+    onboardingDerivedPlan: plan,
+    onboardingLastScreen: profile.lastCompletedScreen,
+    onboardingCompletedAt: new Date(),
+    onboardingPlatform: "android_web",
+  });
+  return json({ ok: true });
+}
+
+// ---- /api/checkout ---------------------------------------------------------
+
+async function checkout(request, env, ctx, url) {
+  const u = await user(request, env);
+  const body = await readJson(request);
+  const plan = PLANS.includes(body.plan) ? body.plan : "yearly";
+  const g = geo(request);
+  const tier = tierFor(g.country);
+  const product = productFor(parseProducts(env.PRODUCTS), tier, plan);
+  if (!product) return json({ error: "checkout is not configured yet" }, 503);
+
+  const db = firestore(env);
+  const existing = await db.get(`entitlements/${u.uid}`);
+  if (isActive(existing)) return json({ alreadyActive: true, entitlement: publicEntitlement(existing) });
+
+  const origin = env.PUBLIC_ORIGIN || url.origin;
+  const lang = LANGS.includes(body.lang) ? body.lang : "en";
+  const ref = String(body.ref || "").slice(0, 60);
+  const days = Number(trialDays(env)[plan] || 0);
+  const session = await dodo(env).createCheckout({
+    product_cart: [{ product_id: product.productId, quantity: 1 }],
+    customer: { email: u.email || undefined, name: String(body.name || u.name || "").slice(0, 80) || undefined },
+    ...(g.country && { billing_address: { country: g.country } }),
+    return_url: `${origin}/android/welcome/?plan=${plan}`,
+    cancel_url: `${origin}/android/?resume=paywall`,
+    metadata: { uid: u.uid, plan, tier: product.tier, country: g.country || "", ref, lang, source: "android_web" },
+    customization: { force_language: lang, theme: "light", show_order_details: true },
+    feature_flags: { redirect_immediately: true, allow_discount_code: true, allow_customer_editing_email: !u.email },
+    ...(days > 0 && { subscription_data: { trial_period_days: days } }),
+  });
+
+  await db.merge(`users/${u.uid}`, { lastWebCheckout: { sessionId: session.session_id, plan, tier: product.tier, at: new Date() } });
+  capture(env, ctx, "web_checkout_session_created", u.uid, { plan, tier: product.tier, country: g.country, ref, lang });
+  return json({ checkoutUrl: session.checkout_url, sessionId: session.session_id });
+}
+
+// ---- /api/entitlement --------------------------------------------------------
+
+async function entitlement(request, env, url) {
+  const u = await user(request, env);
+  const db = firestore(env);
+  let ent = await db.get(`entitlements/${u.uid}`);
+
+  // Right after checkout the webhook may still be in flight: confirm with Dodo directly.
+  if (!isActive(ent) && env.DODO_PAYMENTS_API_KEY) {
+    const confirmed = await confirmCheckout(env, db, u, url.searchParams);
+    if (confirmed) ent = confirmed;
+  }
+
+  // A purchase whose webhook had no uid (e.g. paid from a payment link) is parked by email.
+  if (!isActive(ent) && u.email && u.emailVerified) {
+    const pending = await db.get(`pendingEntitlements/${u.email}`);
+    if (isActive(pending)) {
+      ent = { ...pending, uid: u.uid, claimedAt: new Date().toISOString() };
+      await db.merge(`entitlements/${u.uid}`, ent);
+      await db.delete(`pendingEntitlements/${u.email}`);
+    }
+  }
+  return json({ entitlement: publicEntitlement(ent) });
+}
+
+async function confirmCheckout(env, db, u, params) {
+  const client = dodo(env);
+  let subscriptionId = params.get("subscription_id");
+  try {
+    if (!subscriptionId) {
+      let paymentId = params.get("payment_id");
+      const sessionId = params.get("session_id") || (await db.get(`users/${u.uid}`))?.lastWebCheckout?.sessionId;
+      if (!paymentId && sessionId) {
+        const session = await client.getCheckout(sessionId);
+        paymentId = session.payment_status === "succeeded" ? session.payment_id : null;
+      }
+      if (paymentId) {
+        const payment = await client.getPayment(paymentId);
+        if (payment.status === "succeeded") subscriptionId = payment.subscription_id || payment.subscription_ids?.[0] || null;
+      }
+    }
+    if (!subscriptionId) return null;
+    const sub = await client.getSubscription(subscriptionId);
+    const owner = sub.metadata?.uid;
+    const emailMatches = u.email && u.emailVerified && String(sub.customer?.email || "").toLowerCase() === u.email;
+    if (owner !== u.uid && !(owner == null && emailMatches)) return null;
+    const ent = entitlementFromSubscription(sub);
+    if (!ent.active) return null;
+    const current = await db.get(`entitlements/${u.uid}`);
+    if (!shouldReplace(current, ent)) return current;
+    await db.merge(`entitlements/${u.uid}`, { ...ent, uid: u.uid });
+    return ent;
+  } catch (err) {
+    if (err instanceof DodoError && err.status === 404) return null;
+    throw err;
+  }
+}
+
+// ---- /api/portal -----------------------------------------------------------
+
+async function portal(request, env) {
+  const u = await user(request, env);
+  const ent = await firestore(env).get(`entitlements/${u.uid}`);
+  if (!ent?.customerId) return json({ error: "no web subscription on this account" }, 404);
+  const session = await dodo(env).customerPortal(ent.customerId);
+  return json({ url: session.link });
+}
+
+// ---- /api/webhooks/dodo ----------------------------------------------------
+
+async function webhook(request, env, ctx) {
+  const body = await request.text();
+  try {
+    await verifyWebhook(env.DODO_WEBHOOK_SECRET, request.headers, body);
+  } catch (err) {
+    return json({ error: err.message }, 401);
+  }
+  const event = JSON.parse(body);
+  const result = await handleEvent(env, firestore(env), event);
+  if (result.uid || result.email) {
+    capture(env, ctx, `web_${event.type.replace(/\./g, "_")}`, result.uid || result.email, {
+      status: result.status, plan: result.plan, country: result.country, ref: result.ref, tier: result.tier,
+    });
+  }
+  return json({ ok: true, ...result });
+}
+
+export async function handleEvent(env, db, event) {
+  const type = String(event.type || "");
+  if (!type.startsWith("subscription.")) return { ignored: type };
+  const sub = event.data || {};
+  if (!sub.subscription_id) return { ignored: "no subscription id" };
+  const ent = entitlementFromSubscription(sub, { eventAt: event.timestamp });
+  const uid = sub.metadata?.uid || null;
+  if (uid) {
+    const current = await db.get(`entitlements/${uid}`);
+    if (!shouldReplace(current, ent)) return { uid, skipped: "older event" };
+    await db.merge(`entitlements/${uid}`, { ...ent, uid });
+    return { uid, status: ent.status, plan: ent.plan, country: ent.country, ref: ent.ref, tier: ent.tier };
+  }
+  if (ent.email) {
+    const current = await db.get(`pendingEntitlements/${ent.email}`);
+    if (shouldReplace(current, ent)) await db.merge(`pendingEntitlements/${ent.email}`, ent);
+    return { email: ent.email, status: ent.status, pending: true };
+  }
+  return { ignored: "no uid or email" };
+}
+
+// ---- APK -------------------------------------------------------------------
+
+async function latest(env) {
+  let meta = null;
+  if (env.APKS) {
+    const obj = await env.APKS.get(APK_META_KEY);
+    if (obj) meta = await obj.json();
+  }
+  meta ||= {
+    versionCode: Number(env.APK_VERSION_CODE || 0),
+    versionName: env.APK_VERSION_NAME || null,
+  };
+  return json({ ...meta, url: "/download/salahalarm.apk" }, 200, { "cache-control": "public, max-age=300" });
+}
+
+async function download(request, env, ctx) {
+  if (!env.APKS) return new Response("APK storage is not configured", { status: 503 });
+  const obj = request.method === "HEAD" ? await env.APKS.head(APK_KEY) : await env.APKS.get(APK_KEY);
+  if (!obj) return new Response("The Android app is being prepared. Please try again in a few minutes.", { status: 404 });
+  const ua = request.headers.get("user-agent") || "";
+  capture(env, ctx, "apk_downloaded", request.headers.get("cf-connecting-ip") || "anon", {
+    country: request.cf?.country || null,
+    android: /android/i.test(ua),
+    in_app_browser: /instagram|tiktok|musical_ly|bytedance|fban|fbav/i.test(ua),
+    $process_person_profile: false,
+  });
+  const headers = new Headers({
+    "content-type": "application/vnd.android.package-archive",
+    "content-disposition": 'attachment; filename="SalahAlarm.apk"',
+    "cache-control": "public, max-age=300",
+    "x-content-type-options": "nosniff",
+  });
+  if (obj.size != null) headers.set("content-length", String(obj.size));
+  if (obj.httpEtag) headers.set("etag", obj.httpEtag);
+  return new Response(request.method === "HEAD" ? null : obj.body, { headers });
+}

@@ -1,0 +1,43 @@
+name = "salahalarm-android"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+
+# Only these paths go to this Worker; the rest of salahalarm.com (SEO site on
+# Pages, /go/* tracking links) is untouched.
+routes = [
+  { pattern = "salahalarm.com/get*", zone_name = "salahalarm.com" },
+  { pattern = "salahalarm.com/android*", zone_name = "salahalarm.com" },
+  { pattern = "salahalarm.com/api/*", zone_name = "salahalarm.com" },
+  { pattern = "salahalarm.com/download/*", zone_name = "salahalarm.com" },
+]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*", "/download/*"]
+
+# APK + latest.json, uploaded by .github/workflows/android.yml
+[[r2_buckets]]
+binding = "APKS"
+bucket_name = "salahalarm-apks"
+
+[vars]
+PUBLIC_ORIGIN = "https://salahalarm.com"
+FIREBASE_PROJECT_ID = "ramadan-pro-684da"
+FIREBASE_AUTH_DOMAIN = "ramadan-pro-684da.firebaseapp.com"
+# Firebase web API key: public by design (it identifies the project, it is not a secret).
+FIREBASE_API_KEY = "AIzaSyABdJ9QWxrxu4GGs8hXqhgouMjE4B7TQlI"
+POSTHOG_HOST = "https://us.i.posthog.com"
+POSTHOG_KEY = "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX"
+APP_STORE_URL = "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&mt=8"
+# test_mode until the live products are created, then live_mode
+DODO_ENVIRONMENT = "test_mode"
+# Dodo product ids per price tier and plan (see src/pricing.js and scripts/dodo-setup.mjs)
+PRODUCTS = '{}'
+# Free-trial days per plan, e.g. '{"yearly":3}'. Empty means charge today.
+TRIAL_DAYS = '{}'
+
+# Secrets (wrangler secret put NAME):
+#   DODO_PAYMENTS_API_KEY      Dodo dashboard › Developer › API keys
+#   DODO_WEBHOOK_SECRET        Dodo dashboard › Developer › Webhooks (whsec_...)
+#   FIREBASE_SERVICE_ACCOUNT   Firebase console › Project settings › Service accounts › Generate key (whole JSON)
