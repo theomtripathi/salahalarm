@@ -65,7 +65,7 @@
 
     // Bio links from the tracked accounts go through /go/<account> so App Store
     // installs keep their campaign token (see conversion-tracking).
-    if (account && /^[a-z0-9-]{2,40}$/i.test(account)) ios.href = `/go/${account.toLowerCase()}`;
+    if (account && /^[a-z0-9-]{2,40}$/i.test(account)) ios.href = `/go/${account.toLowerCase()}?to=ios`;
     const androidUrl = `/android/${ref ? `?ref=${encodeURIComponent(ref)}` : ""}`;
     android.href = androidUrl;
 
