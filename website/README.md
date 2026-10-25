@@ -61,6 +61,13 @@ The build fails if an article breaks the rules in `scripts/build.mjs`
 4. Set `status: published`, commit, push, and `npm run deploy`.
 5. `seo/gum/submit-sitemap.sh`.
 
+Drafts from ChatGPT land in the project's `seo/inbox/`. Om chose a cap of
+**at most 5 published articles a day**: each day pick the 3-5 drafts that best
+match open keywords (Ramadan pages first while their deadlines are close),
+rewrite them to the brief, run the checks above, publish, and move the source to
+`inbox/done/`. Everything else stays in the inbox as backlog. The cap keeps the
+site clear of Google's scaled content abuse policy.
+
 Weekly: `seo/gum/pull-rankings.sh` (Search Console positions written back into
 `keywords.csv`, plus a list of page-two queries worth refreshing) and, monthly,
 `seo/gum/pull-keyword-metrics.sh` (volumes and new ideas).
