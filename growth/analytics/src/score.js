@@ -72,7 +72,9 @@ export function score(item, cfg = {}, now = Date.now()) {
 // because reach differs a lot; outliers from small accounts get in on a lower bar.
 export function qualifies(item, sc, cfg = {}) {
   const maxAge = cfg.maxAgeDays ?? 180;
-  if (sc.ageDays !== null && sc.ageDays > maxAge) return false;
+  // Hand-picked research batches are often evergreen hits, so they skip the age cap.
+  const research = String(item.source || '').startsWith('batch:');
+  if (!research && sc.ageDays !== null && sc.ageDays > maxAge) return false;
   if (item.own) return true; // always track our own posts
   if (item.unverified) return true; // hand-found, waiting for a scraper to confirm numbers
   const v = sc.views ?? 0;

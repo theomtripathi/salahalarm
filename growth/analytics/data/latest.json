@@ -206,19 +206,19 @@
  },
  "zernioDaily": null,
  "library": {
-  "total": 154,
+  "total": 202,
   "own": 0,
-  "external": 154,
+  "external": 202,
   "added": 0,
   "byPlatform": {
    "instagram": 42,
-   "tiktok": 53,
-   "youtube": 29,
+   "tiktok": 80,
+   "youtube": 50,
    "pinterest": 27,
    "topcarousels": 3
   },
   "byFormat": {
-   "reminder": 140,
+   "reminder": 188,
    "quran": 1,
    "carousel": 7,
    "alarm": 3,
@@ -226,6 +226,65 @@
   }
  },
  "clipQueue": [
+  {
+   "platform": "tiktok",
+   "id": "7608213744711142676",
+   "url": "https://www.tiktok.com/@thebeliefguide/video/7608213744711142676",
+   "author": "thebeliefguide",
+   "followers": null,
+   "text": "Evening Routine",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-18T00:00:00Z",
+   "metrics": {
+    "views": 41700,
+    "likes": 9116,
+    "comments": 684,
+    "shares": 6167,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Evening Routine/Evening_Routine_thebeliefguide_7608213744711142676_English.mp4"
+    ],
+    "adaptation": "'Do not sleep before saying this dua' with a type-Ameen comment prompt. A 30-second act plus one word of participation turns viewers into commenters, and the night slot makes the act immediate.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 41700
+    }
+   ],
+   "score": 79.8,
+   "views": 41700,
+   "viewsEstimated": false,
+   "shareRate": 0.1478896882494005,
+   "engagementRate": 0.38290167865707436,
+   "outlier": null,
+   "viewsPerDay": 166.8723543618159,
+   "ageDays": 249.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
   {
    "platform": "tiktok",
    "id": "7581228868128754966",
@@ -276,6 +335,183 @@
    "outlier": null,
    "viewsPerDay": null,
    "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7570029738337619232",
+   "url": "https://www.tiktok.com/@ismilezzzzzzz/video/7570029738337619232",
+   "author": "ismilezzzzzzz",
+   "followers": null,
+   "text": "Humor",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2025-11-07T00:00:00Z",
+   "metrics": {
+    "views": 3900000,
+    "likes": 555200,
+    "comments": 2192,
+    "shares": 117900,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_ismilezzzzzzz_7570029738337619232_English.mp4"
+    ],
+    "adaptation": "Six-second joke built on one blunt alarm voice that refuses to let the sleeper stay down. The comedy is the alarm itself: an ordinary snooze button loses to a voice with a job to do.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3900000
+    }
+   ],
+   "score": 78.6,
+   "views": 3900000,
+   "viewsEstimated": false,
+   "shareRate": 0.03023076923076923,
+   "engagementRate": 0.17315179487179488,
+   "outlier": null,
+   "viewsPerDay": 11051.55230476748,
+   "ageDays": 352.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7622778968634117383",
+   "url": "https://www.tiktok.com/@_lateephat/video/7622778968634117383",
+   "author": "_lateephat",
+   "followers": null,
+   "text": "Evening Routine",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-03-29T00:00:00Z",
+   "metrics": {
+    "views": 34400,
+    "likes": 6481,
+    "comments": 528,
+    "shares": 3179,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Evening Routine/Evening_Routine__lateephat_7622778968634117383_English.mp4"
+    ],
+    "adaptation": "Night dhikr piece: remember Allah before sleep, sleep with a heart full of peace, wake up with barakah. Comment-heavy for its views: the night moment invites confessional replies.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 34400
+    }
+   ],
+   "score": 76.7,
+   "views": 34400,
+   "viewsEstimated": false,
+   "shareRate": 0.09241279069767441,
+   "engagementRate": 0.2961627906976744,
+   "outlier": null,
+   "viewsPerDay": 163.1169740076414,
+   "ageDays": 210.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7464320098199735558",
+   "url": "https://www.tiktok.com/@islamicwisdomhub.1/video/7464320098199735558",
+   "author": "islamicwisdomhub.1",
+   "followers": null,
+   "text": "Fajr Waking",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2025-01-26T00:00:00Z",
+   "metrics": {
+    "views": 2800000,
+    "likes": 61700,
+    "comments": 381,
+    "shares": 79400,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Fajr Waking/Fajr_Waking_islamicwisdomhub_1_7464320098199735558_English.mp4"
+    ],
+    "adaptation": "Short alarm-sound Fajr wake clip: the sound itself is the hook. Directly transferable to a Fajr alarm creative where the adhan alarm, not a lecture, does the waking.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2800000
+    }
+   ],
+   "score": 76.6,
+   "views": 2800000,
+   "viewsEstimated": false,
+   "shareRate": 0.02835714285714286,
+   "engagementRate": 0.05052892857142857,
+   "outlier": null,
+   "viewsPerDay": 4389.460513659122,
+   "ageDays": 637.8916022337963,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -345,6 +581,124 @@
    "clipNotes": ""
   },
   {
+   "platform": "youtube",
+   "id": "Kuk6HgOH9yQ",
+   "url": "https://www.youtube.com/watch?v=Kuk6HgOH9yQ",
+   "author": "Islamic Media Australia",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2008-01-09T00:00:00Z",
+   "metrics": {
+    "views": 15801916,
+    "likes": 67452,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_IslamicMediaAustralia_Kuk6HgOH9yQ_ar.mp4"
+    ],
+    "adaptation": "Top-performing Fajr lecture/reminder: The Fajr Prayer. Adapted as a problem-before-product SalaLam short.",
+    "cta": "\"Want the app name? Ask in the comments.\" Name revealed in replies as SalaLam. No price, no booking link, no fabricated testimonials, no spiritual-reward guarantees.",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 15801916
+    }
+   ],
+   "score": 75.6,
+   "views": 15801916,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.004268596289209486,
+   "outlier": null,
+   "viewsPerDay": 2301.844940254868,
+   "ageDays": 6864.891602233796,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7590135926479752470",
+   "url": "https://www.tiktok.com/@mysalahmat/video/7590135926479752470",
+   "author": "mysalahmat",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2025-12-31T00:00:00Z",
+   "metrics": {
+    "views": 8200000,
+    "likes": 572100,
+    "comments": 3500,
+    "shares": 65700,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_mysalahmat_7590135926479752470_English.mp4"
+    ],
+    "adaptation": "Step-by-step how to pray Fajr video, the strongest education performer in this set. Demonstration beats explanation: viewers stay because each step is shown, not described.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 8200000
+    }
+   ],
+   "score": 75.2,
+   "views": 8200000,
+   "viewsEstimated": false,
+   "shareRate": 0.00801219512195122,
+   "engagementRate": 0.07820731707317073,
+   "outlier": null,
+   "viewsPerDay": 27434.6951828572,
+   "ageDays": 298.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
    "platform": "instagram",
    "id": "DeMtQ8LKy5h",
    "url": "https://www.instagram.com/p/DeMtQ8LKy5h/",
@@ -403,6 +757,65 @@
    "clipNotes": ""
   },
   {
+   "platform": "tiktok",
+   "id": "7608378679529426197",
+   "url": "https://www.tiktok.com/@hassantoqeer93/video/7608378679529426197",
+   "author": "hassantoqeer93",
+   "followers": null,
+   "text": "Humor",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-19T00:00:00Z",
+   "metrics": {
+    "views": 3600000,
+    "likes": 172700,
+    "comments": 2009,
+    "shares": 47600,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_hassantoqeer93_7608378679529426197_English.mp4"
+    ],
+    "adaptation": "Comedy beat: finish your salah and run, don't look back. The joke lands because it names a real post-prayer rush; humor earns the share, the routine message rides along.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3600000
+    }
+   ],
+   "score": 73.1,
+   "views": 3600000,
+   "viewsEstimated": false,
+   "shareRate": 0.013222222222222222,
+   "engagementRate": 0.0617525,
+   "outlier": null,
+   "viewsPerDay": 14464.128028788775,
+   "ageDays": 248.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
    "platform": "youtube",
    "id": "L1oWHZ83UGA",
    "url": "https://www.youtube.com/shorts/L1oWHZ83UGA",
@@ -450,8 +863,8 @@
    "shareRate": null,
    "engagementRate": 0.018330214383623467,
    "outlier": null,
-   "viewsPerDay": 199713.31241961784,
-   "ageDays": 38.16582834490741,
+   "viewsPerDay": 195986.37496468058,
+   "ageDays": 38.89160152777778,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -579,6 +992,124 @@
   },
   {
    "platform": "tiktok",
+   "id": "7611642363617856776",
+   "url": "https://www.tiktok.com/@alinoor.ahmed/video/7611642363617856776",
+   "author": "alinoor.ahmed",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-27T00:00:00Z",
+   "metrics": {
+    "views": 2400000,
+    "likes": 92400,
+    "comments": 240,
+    "shares": 19100,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Prayer Education/Prayer_Education_alinoor_ahmed_7611642363617856776_English.mp4"
+    ],
+    "adaptation": "Seven-second checklist on signs a salah may lack presence: absent heart, rushing, delaying without reason. The source itself stresses only Allah knows what is accepted; the adaptation keeps that humil",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2400000
+    }
+   ],
+   "score": 69.8,
+   "views": 2400000,
+   "viewsEstimated": false,
+   "shareRate": 0.007958333333333333,
+   "engagementRate": 0.046558333333333334,
+   "outlier": null,
+   "viewsPerDay": 9962.987409045045,
+   "ageDays": 240.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7611997866420112662",
+   "url": "https://www.tiktok.com/@4joykids/video/7611997866420112662",
+   "author": "4joykids",
+   "followers": null,
+   "text": "Islamic Reminders",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-28T00:00:00Z",
+   "metrics": {
+    "views": 2000000,
+    "likes": 136700,
+    "comments": 2413,
+    "shares": 18700,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Islamic Reminders/Islamic_Reminders_4joykids_7611997866420112662_Arabic_with_English_subtitles.mp4"
+    ],
+    "adaptation": "Learn Ayat al-Kursi in English, with clear translation and pronunciation, built for repetition until memorised. The learn-it format outperforms listen-only recitation because the viewer leaves with a ",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2000000
+    }
+   ],
+   "score": 69.4,
+   "views": 2000000,
+   "viewsEstimated": false,
+   "shareRate": 0.00935,
+   "engagementRate": 0.0789065,
+   "outlier": null,
+   "viewsPerDay": 8337.098845381079,
+   "ageDays": 239.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
    "id": "7692563730223090958",
    "url": "https://www.tiktok.com/@muslim/video/7692563730223090958",
    "author": "muslim",
@@ -624,6 +1155,65 @@
    "outlier": null,
    "viewsPerDay": 151576.95542783904,
    "ageDays": 21.111388541666667,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7596221351426379038",
+   "url": "https://www.tiktok.com/@sujdapp/video/7596221351426379038",
+   "author": "sujdapp",
+   "followers": null,
+   "text": "Islamic Reminders",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-01-17T00:00:00Z",
+   "metrics": {
+    "views": 519500,
+    "likes": 116000,
+    "comments": 818,
+    "shares": 13000,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Islamic Reminders/Islamic_Reminders_sujdapp_7596221351426379038_English.mp4"
+    ],
+    "adaptation": "Reframe piece: 'What if salah is not a routine, but a meeting?' The single reframe line does all the work. Note: source account is another prayer app; the adaptation uses the reframe only and names Sa",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 519500
+    }
+   ],
+   "score": 68.3,
+   "views": 519500,
+   "viewsEstimated": false,
+   "shareRate": 0.025024061597690085,
+   "engagementRate": 0.2498902791145332,
+   "outlier": null,
+   "viewsPerDay": 1842.9069751752845,
+   "ageDays": 281.8916022337963,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -691,6 +1281,65 @@
    "clipNotes": ""
   },
   {
+   "platform": "tiktok",
+   "id": "7369634634595962155",
+   "url": "https://www.tiktok.com/@saufiyahali/video/7369634634595962155",
+   "author": "saufiyahali",
+   "followers": null,
+   "text": "Morning Routine",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2024-05-16T00:00:00Z",
+   "metrics": {
+    "views": 761200,
+    "likes": 139400,
+    "comments": 3796,
+    "shares": 13300,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Morning Routine/Morning_Routine_saufiyahali_7369634634595962155_English.mp4"
+    ],
+    "adaptation": "'Connect the dots' self-improvement piece: intentions before every action, the five daily prayers as the day's structure, waking early after Fajr. Prayer is the scaffolding the whole day hangs on.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 761200
+    }
+   ],
+   "score": 67.7,
+   "views": 761200,
+   "viewsEstimated": false,
+   "shareRate": 0.0174724119810825,
+   "engagementRate": 0.2055911718339464,
+   "outlier": null,
+   "viewsPerDay": 852.5110977588588,
+   "ageDays": 892.8916022337963,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
    "platform": "instagram",
    "id": "DcyIwwtA2jb",
    "url": "https://www.instagram.com/reel/DcyIwwtA2jb/",
@@ -738,664 +1387,6 @@
    "outlier": null,
    "viewsPerDay": 47534.66471311019,
    "ageDays": 52.59319730324074,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "tiktok",
-   "id": "7559653361260317959",
-   "url": "https://www.tiktok.com/@the_aminah1/video/7559653361260317959",
-   "author": "the_aminah1",
-   "followers": null,
-   "text": "Prayer Consistency",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": null,
-   "metrics": {
-    "views": null,
-    "likes": 180000,
-    "comments": 3056,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Prayer Consistency/Prayer_Consistency_the_aminah1_tiktok_the_aminah1_7559653361260317959_en.mp4"
-    ],
-    "adaptation": "Blunt accountability format where the challenge is the hook and the make-up steps are the value; the app is only the prompt and tracker.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 2160000
-    }
-   ],
-   "score": 67,
-   "views": 2160000,
-   "viewsEstimated": true,
-   "shareRate": null,
-   "engagementRate": 0.08474814814814814,
-   "outlier": null,
-   "viewsPerDay": null,
-   "ageDays": null,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "tiktok",
-   "id": "7611256991587257603",
-   "url": "https://www.tiktok.com/@_saadakhter/video/7611256991587257603",
-   "author": "_saadakhter",
-   "followers": null,
-   "text": "Morning Routine",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": null,
-   "metrics": {
-    "views": 1700000,
-    "likes": 273200,
-    "comments": 1973,
-    "shares": 5091,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Morning Routine/Morning_Routine_saadakhter_tiktok__saadakhter_7611256991587257603_en.mp4"
-    ],
-    "adaptation": "Travel morning routine where Fajr anchors an unfamiliar day; the app is only the prayer-times reference and wake-up aid on the road.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 1700000
-    }
-   ],
-   "score": 66.8,
-   "views": 1700000,
-   "viewsEstimated": false,
-   "shareRate": 0.002994705882352941,
-   "engagementRate": 0.16486117647058823,
-   "outlier": null,
-   "viewsPerDay": null,
-   "ageDays": null,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "instagram",
-   "id": "DctB1xMwm_e",
-   "url": "https://www.instagram.com/reel/DctB1xMwm_e/",
-   "author": "8tvnn",
-   "followers": null,
-   "text": "Islamic Reminders",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-08-31T00:00:00Z",
-   "metrics": {
-    "views": null,
-    "likes": 160288,
-    "comments": 453,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Islamic Reminders/Islamic_Reminders_8tvnn_DctB1xMwm_e_Arabic.mp4"
-    ],
-    "adaptation": "Om's CTA-study example: a 9-second resonant reminder with no pitch, whose comment section became the distribution engine. Model for comment-name CTA creative.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 1923456
-    }
-   ],
-   "score": 66.5,
-   "views": 1923456,
-   "viewsEstimated": true,
-   "shareRate": null,
-   "engagementRate": 0.08356884690889732,
-   "outlier": null,
-   "viewsPerDay": 34866.80174498934,
-   "ageDays": 55.16582834490741,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "instagram",
-   "id": "DexCI2hugDQ",
-   "url": "https://www.instagram.com/reel/DexCI2hugDQ/",
-   "author": "verse.sakinah",
-   "followers": null,
-   "text": "Islamic Reminders",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": null,
-   "metrics": {
-    "views": null,
-    "likes": 160062,
-    "comments": 305,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Islamic Reminders/Islamic_Reminders_verse.sakinah_DexCI2hugDQ_English.mp4"
-    ],
-    "adaptation": "Om's generatable-format example: one ayah, one linguistic insight, one share prompt, CTA at the end. Prioritized format for this batch; audio saved to Audio folder.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:chatgpt",
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 1920744
-    }
-   ],
-   "score": 66.4,
-   "views": 1920744,
-   "viewsEstimated": true,
-   "shareRate": null,
-   "engagementRate": 0.08349212596785412,
-   "outlier": null,
-   "viewsPerDay": null,
-   "ageDays": null,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "youtube",
-   "id": "u28eA4w7F-I",
-   "url": "https://www.youtube.com/shorts/u28eA4w7F-I",
-   "author": "Mswahil",
-   "followers": null,
-   "text": "Humor",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-10-17T00:00:00Z",
-   "metrics": {
-    "views": 764837,
-    "likes": 16700,
-    "comments": 244,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_Mswahil_yt_u28eA4w7F-I_en.mp4"
-    ],
-    "adaptation": "A comedy rule about saying MashaAllah when complimenting works because it is a shared social rule with a funny consequence.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 764837
-    }
-   ],
-   "score": 66.4,
-   "views": 764837,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.02215373994720444,
-   "outlier": null,
-   "viewsPerDay": 93663.12487783168,
-   "ageDays": 8.165828344907407,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "tiktok",
-   "id": "7695547570596154655",
-   "url": "https://www.tiktok.com/@dassahlynnn/video/7695547570596154655",
-   "author": "dassahlynnn",
-   "followers": null,
-   "text": "Just Pray mat-scan alarm review; same creative as Instagram candidate",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-10-12T00:00:00Z",
-   "metrics": {
-    "views": 117900,
-    "likes": 10300,
-    "comments": null,
-    "shares": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [],
-    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": "failed: public extractor request rejected",
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:chatgpt"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 117900
-    }
-   ],
-   "score": 66.3,
-   "views": 117900,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.08736217133163698,
-   "outlier": null,
-   "viewsPerDay": 8992.182607152989,
-   "ageDays": 13.111388541666667,
-   "promo": true,
-   "competitor": "just pray",
-   "formats": [
-    "alarm"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "instagram",
-   "id": "CtzOOGIup7L",
-   "url": "https://www.instagram.com/p/CtzOOGIup7L/",
-   "author": "mydeenmysoul",
-   "followers": null,
-   "text": "Fajr peace reel",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": 8.5,
-   "sound": null,
-   "postedAt": null,
-   "metrics": {
-    "views": null,
-    "likes": 140000,
-    "comments": null,
-    "shares": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/mydeenmysoul__CtzOOGIup7L.mp4"
-    ],
-    "adaptation": "Original prayer-to-dawn visual sequence with app setup at end.",
-    "cta": null,
-    "visual": "caption and source UI reviewed; full creative review pending",
-    "downloadStatus": "downloaded",
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:chatgpt"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 1680000
-    }
-   ],
-   "score": 65.9,
-   "views": 1680000,
-   "viewsEstimated": true,
-   "shareRate": null,
-   "engagementRate": 0.08333333333333333,
-   "outlier": null,
-   "viewsPerDay": null,
-   "ageDays": null,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "youtube",
-   "id": "X0v2GYmp8tA",
-   "url": "https://www.youtube.com/shorts/X0v2GYmp8tA",
-   "author": "Straight to Allah",
-   "followers": null,
-   "text": "Fajr Waking",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-10-18T00:00:00Z",
-   "metrics": {
-    "views": 582761,
-    "likes": 3334,
-    "comments": 10,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Fajr Waking/Fajr_Waking_Straight_to_Allah_yt_X0v2GYmp8tA_en.mp4"
-    ],
-    "adaptation": "A quiet visual journey from bed to mosque makes Fajr feel peaceful rather than punishing, which is the tone a Fajr alarm creative needs.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 582761
-    }
-   ],
-   "score": 65.3,
-   "views": 582761,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.005738201423911346,
-   "outlier": null,
-   "viewsPerDay": 81325.00137463592,
-   "ageDays": 7.165828344907408,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "topcarousels",
-   "id": "topcarousels.com/api/assets/import-aeae1275-2b62-422b-9888-6c3123239625-0",
-   "url": "https://topcarousels.com/api/assets/import-aeae1275-2b62-422b-9888-6c3123239625-0",
-   "author": "wegotnotaste",
-   "followers": null,
-   "text": "Islamic Reminders",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "carousel",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": null,
-   "metrics": {
-    "views": null,
-    "likes": 124200,
-    "comments": null,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide01.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide02.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide03.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide04.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide05.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide06.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide07.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide08.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide09.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide10.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide11.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide12.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide13.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide14.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide15.jpg",
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Carousel/Islamic Reminders/Islamic_Reminders_wegotnotaste_tc_wegotnotaste_en_slide16.jpg"
-    ],
-    "adaptation": "A 16-slide visual sequence proves images alone can carry a story; for SalaLam a visual-first reminder carousel can show dawn, phone glow, and prayer mat in sequence before any product screen appears.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 1490400
-    }
-   ],
-   "score": 65.3,
-   "views": 1490400,
-   "viewsEstimated": true,
-   "shareRate": null,
-   "engagementRate": 0.08333333333333333,
-   "outlier": null,
-   "viewsPerDay": null,
-   "ageDays": null,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "carousel"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "tiktok",
-   "id": "7699157737942371616",
-   "url": "https://www.tiktok.com/@sana34593/video/7699157737942371616",
-   "author": "sana34593",
-   "followers": null,
-   "text": "Prayer app demonstration",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-10-21T00:00:00Z",
-   "metrics": {
-    "views": 84400,
-    "likes": 1711,
-    "comments": null,
-    "shares": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [],
-    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": "not attempted yet",
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:chatgpt"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 84400
-    }
-   ],
-   "score": 64.9,
-   "views": 84400,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.02027251184834123,
-   "outlier": null,
-   "viewsPerDay": 20528.34441324441,
-   "ageDays": 4.111388541666667,
-   "promo": true,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "youtube",
-   "id": "PT7X6x6cYRE",
-   "url": "https://www.youtube.com/shorts/PT7X6x6cYRE",
-   "author": "Jaza Ali",
-   "followers": null,
-   "text": "Humor",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-10-20T00:00:00Z",
-   "metrics": {
-    "views": 520141,
-    "likes": null,
-    "comments": 116,
-    "shares": null,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_Jaza_Ali_yt_PT7X6x6cYRE_en.mp4"
-    ],
-    "adaptation": "An elder brother teaching salah, with comedy, works because teaching is usually awkward and the humour makes it watchable.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 520141
-    }
-   ],
-   "score": 64.8,
-   "views": 520141,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.00022301645130839523,
-   "outlier": null,
-   "viewsPerDay": 100688.78895536026,
-   "ageDays": 5.165828344907408,
    "promo": false,
    "competitor": null,
    "formats": [

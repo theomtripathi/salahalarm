@@ -68,6 +68,8 @@ test('qualification bar: big, outlier, promo or own', () => {
   assert.equal(qualifies({ ...low, own: true }, score(low, cfg, NOW), cfg), true);
   const old = { ...low, metrics: { views: 1e6 }, postedAt: '2025-01-01T00:00:00Z' };
   assert.equal(qualifies(old, score(old, cfg, NOW), cfg), false);
+  const evergreen = { ...old, unverified: true, source: 'batch:muse' };
+  assert.equal(qualifies(evergreen, score(evergreen, cfg, NOW), cfg), true);
 });
 
 test('library merge keeps history, sources and growth', () => {
@@ -185,7 +187,7 @@ test('imports an assistant research batch from its manifests', async () => {
   assert.deepEqual(eight.research.localFiles, ['/Users/pc/CL/Reel/sub/8tvnn__DcbQy_nIafe.mp4']);
   const lib = {};
   const r = merge(lib, items, cfg, '2026-10-25', NOW);
-  assert.equal(r.added, 2); // the 2024 post is too old
+  assert.equal(r.added, 3); // research batches skip the age cap, so the 2024 post stays
   const jp = lib['instagram:DeXpTz7T4Q5'];
   assert.equal(jp.status, 'unverified');
   assert.equal(jp.viewsEstimated, true);

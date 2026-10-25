@@ -54,7 +54,7 @@ export function fromBatchEntry(e, { batchDir, manifestDir, macRoot, foundBy }) {
     research: {
       localFiles: files.map((f) => (macRoot ? `${macRoot}/${f}` : f)),
       adaptation: e.adaptation || e.note || null,
-      cta: e.cta_en || null,
+      cta: e.cta_en || e.cta || null,
       visual: e.visual_review || e.source_visual || null,
       downloadStatus: e.download_status || null,
       republish: e.republish_permission || 'not established',

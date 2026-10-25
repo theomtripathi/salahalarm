@@ -33,32 +33,32 @@ _SEO views are Google clicks to the site. App Store installs come from the campa
 
 _~ means views estimated from likes (Instagram hides plays). "Unverified" counts were read by an assistant and get re-checked by the scraper._
 
-154 posts in the library (154 from other accounts, 0 ours), 0 added today. Goal: 1,000 proven posts to clip from.
+202 posts in the library (202 from other accounts, 0 ours), 0 added today. Goal: 1,000 proven posts to clip from.
 
-By platform: instagram 42, tiktok 53, youtube 29, pinterest 27, topcarousels 3. By format: reminder 140, carousel 7, alarm 3, pov 3, quran 1.
+By platform: instagram 42, tiktok 80, youtube 50, pinterest 27, topcarousels 3. By format: reminder 188, carousel 7, alarm 3, pov 3, quran 1.
 
 **Clip next: best unclipped posts**
 
-1. [tiktok @my.petsie](https://www.tiktok.com/@my.petsie/video/7581228868128754966) 22.5M views (unverified), 0.8% pass-on, reminder: "Humor"
-2. [tiktok @bymouadh](https://www.tiktok.com/@bymouadh/video/7621857518850952468) 2.5M views (unverified), 2.8% pass-on, reminder: "Morning Routine"
-3. [instagram @journey_with_kacho](https://www.instagram.com/p/DeMtQ8LKy5h/) ~10.0M views (unverified), pov: "Relatable Fajr peace; AI label"
-4. [youtube @Ummah Moments](https://www.youtube.com/shorts/L1oWHZ83UGA) 7.6M views (unverified), reminder: "Humor"
-5. [instagram @8tvnn](https://www.instagram.com/reel/DcbQy_nIafe/) 5.4M views (unverified), reminder: "Hope during hardship: سيمضي ما أثقل قلبك ويبقى وعد الله #islam #muslim"
-6. [tiktok @nuraniquran1](https://www.tiktok.com/@nuraniquran1/video/7637905811062279438) ~4.9M views (unverified), reminder: "Islamic Reminders"
-7. [tiktok @muslim](https://www.tiktok.com/@muslim/video/7692563730223090958) 3.2M views (unverified), reminder: "Humor after two rakahs before Fajr"
-8. [instagram @8tvnn](https://www.instagram.com/reel/DcGf3Bjgb5V/) 2.8M views (unverified), reminder: "Prayer for a good ending: اللهم احسن ختامنا ولا تقبض روحي إلا وانت راض"
-9. [instagram @8tvnn](https://www.instagram.com/reel/DcyIwwtA2jb/) 2.5M views (unverified), reminder: "Gratitude and Alhamdulillah: الحمد لله حمدًا كثيرًا طيبًا مباركًا فيه "
-10. [tiktok @the_aminah1](https://www.tiktok.com/@the_aminah1/video/7559653361260317959) ~2.2M views (unverified), reminder: "Prayer Consistency"
-11. [tiktok @_saadakhter](https://www.tiktok.com/@_saadakhter/video/7611256991587257603) 1.7M views (unverified), 0.3% pass-on, reminder: "Morning Routine"
-12. [instagram @8tvnn](https://www.instagram.com/reel/DctB1xMwm_e/) ~1.9M views (unverified), reminder: "Islamic Reminders"
-13. [instagram @verse.sakinah](https://www.instagram.com/reel/DexCI2hugDQ/) ~1.9M views (unverified), reminder: "Islamic Reminders"
-14. [youtube @Mswahil](https://www.youtube.com/shorts/u28eA4w7F-I) 765K views (unverified), reminder: "Humor"
-15. [tiktok @dassahlynnn](https://www.tiktok.com/@dassahlynnn/video/7695547570596154655) 118K views (unverified), alarm: "Just Pray mat-scan alarm review; same creative as Instagram candidate"
-16. [instagram @mydeenmysoul](https://www.instagram.com/p/CtzOOGIup7L/) ~1.7M views (unverified), reminder: "Fajr peace reel"
-17. [youtube @Straight to Allah](https://www.youtube.com/shorts/X0v2GYmp8tA) 583K views (unverified), reminder: "Fajr Waking"
-18. [topcarousels @wegotnotaste](https://topcarousels.com/api/assets/import-aeae1275-2b62-422b-9888-6c3123239625-0) ~1.5M views (unverified), carousel: "Islamic Reminders"
-19. [tiktok @sana34593](https://www.tiktok.com/@sana34593/video/7699157737942371616) 84K views (unverified), reminder: "Prayer app demonstration"
-20. [youtube @Jaza Ali](https://www.youtube.com/shorts/PT7X6x6cYRE) 520K views (unverified), reminder: "Humor"
+1. [tiktok @thebeliefguide](https://www.tiktok.com/@thebeliefguide/video/7608213744711142676) 42K views (unverified), 15% pass-on, reminder: "Evening Routine"
+2. [tiktok @my.petsie](https://www.tiktok.com/@my.petsie/video/7581228868128754966) 22.5M views (unverified), 0.8% pass-on, reminder: "Humor"
+3. [tiktok @ismilezzzzzzz](https://www.tiktok.com/@ismilezzzzzzz/video/7570029738337619232) 3.9M views (unverified), 3.0% pass-on, reminder: "Humor"
+4. [tiktok @_lateephat](https://www.tiktok.com/@_lateephat/video/7622778968634117383) 34K views (unverified), 9.2% pass-on, reminder: "Evening Routine"
+5. [tiktok @islamicwisdomhub.1](https://www.tiktok.com/@islamicwisdomhub.1/video/7464320098199735558) 2.8M views (unverified), 2.8% pass-on, reminder: "Fajr Waking"
+6. [tiktok @bymouadh](https://www.tiktok.com/@bymouadh/video/7621857518850952468) 2.5M views (unverified), 2.8% pass-on, reminder: "Morning Routine"
+7. [youtube @Islamic Media Australia](https://www.youtube.com/watch?v=Kuk6HgOH9yQ) 15.8M views (unverified), reminder: "Prayer Education"
+8. [tiktok @mysalahmat](https://www.tiktok.com/@mysalahmat/video/7590135926479752470) 8.2M views (unverified), 0.8% pass-on, reminder: "Prayer Education"
+9. [instagram @journey_with_kacho](https://www.instagram.com/p/DeMtQ8LKy5h/) ~10.0M views (unverified), pov: "Relatable Fajr peace; AI label"
+10. [tiktok @hassantoqeer93](https://www.tiktok.com/@hassantoqeer93/video/7608378679529426197) 3.6M views (unverified), 1.3% pass-on, reminder: "Humor"
+11. [youtube @Ummah Moments](https://www.youtube.com/shorts/L1oWHZ83UGA) 7.6M views (unverified), reminder: "Humor"
+12. [instagram @8tvnn](https://www.instagram.com/reel/DcbQy_nIafe/) 5.4M views (unverified), reminder: "Hope during hardship: سيمضي ما أثقل قلبك ويبقى وعد الله #islam #muslim"
+13. [tiktok @nuraniquran1](https://www.tiktok.com/@nuraniquran1/video/7637905811062279438) ~4.9M views (unverified), reminder: "Islamic Reminders"
+14. [tiktok @alinoor.ahmed](https://www.tiktok.com/@alinoor.ahmed/video/7611642363617856776) 2.4M views (unverified), 0.8% pass-on, reminder: "Prayer Education"
+15. [tiktok @4joykids](https://www.tiktok.com/@4joykids/video/7611997866420112662) 2.0M views (unverified), 0.9% pass-on, reminder: "Islamic Reminders"
+16. [tiktok @muslim](https://www.tiktok.com/@muslim/video/7692563730223090958) 3.2M views (unverified), reminder: "Humor after two rakahs before Fajr"
+17. [tiktok @sujdapp](https://www.tiktok.com/@sujdapp/video/7596221351426379038) 520K views (unverified), 2.5% pass-on, reminder: "Islamic Reminders"
+18. [instagram @8tvnn](https://www.instagram.com/reel/DcGf3Bjgb5V/) 2.8M views (unverified), reminder: "Prayer for a good ending: اللهم احسن ختامنا ولا تقبض روحي إلا وانت راض"
+19. [tiktok @saufiyahali](https://www.tiktok.com/@saufiyahali/video/7369634634595962155) 761K views (unverified), 1.7% pass-on, reminder: "Morning Routine"
+20. [instagram @8tvnn](https://www.instagram.com/reel/DcyIwwtA2jb/) 2.5M views (unverified), reminder: "Gratitude and Alhamdulillah: الحمد لله حمدًا كثيرًا طيبًا مباركًا فيه "
 
 **Rising fastest since yesterday**
 
