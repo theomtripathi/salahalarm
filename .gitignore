@@ -13,3 +13,11 @@ node_modules/
 full_prompt*.txt
 remove_file.rb
 .wrangler/
+
+# Android
+android/.gradle/
+android/**/build/
+android/local.properties
+android/dist/
+*.jks
+*.keystore

@@ -16,6 +16,7 @@ let config = {};
 let user = null;
 let status = mode === "welcome" ? "checking" : "install"; // checking | active | pending | signin | install
 let apk = { versionName: null, sizeMb: null };
+let appLogin = null; // intent link that opens the installed app already signed in
 
 function svg(markup) {
   const span = document.createElement("span");
@@ -69,6 +70,21 @@ function autoDownload() {
     a.click();
     a.remove();
   }, 1200);
+}
+
+// A fresh one-time code is fetched ahead of the tap, because Chrome only follows
+// intent links straight from a user gesture.
+async function prepareAppLogin() {
+  if (!user || !device.android || device.inApp) return;
+  try {
+    const { code } = await api("/api/app-login", { method: "POST", token: await user.token() });
+    const fallback = encodeURIComponent(new URL("/android/install/", location.href).href);
+    appLogin = `intent://login?code=${code}#Intent;scheme=salahalarm;package=com.salahalarm.android;S.browser_fallback_url=${fallback};end`;
+    render();
+  } catch (err) {
+    console.warn("app login link unavailable", err);
+  }
+  setTimeout(prepareAppLogin, 20 * 60 * 1000);
 }
 
 // ---- rendering --------------------------------------------------------------------
@@ -148,7 +164,11 @@ function guide() {
       t("If Play Protect warns you, tap More details, then Install anyway. It appears because the app is new and not on Google Play yet."),
       mock(h("b", {}, t("Unsafe app blocked")), row(h("span", { class: "fake-btn hl" }, t("More details")), "→", h("span", { class: "fake-btn hl" }, t("Install anyway"))))),
     step("Open SalahAlarm and sign in",
-      email ? t("Use the same account: %@", email) : t("Use the same Google account or email you used here.")),
+      email ? t("Use the same account: %@", email) : t("Use the same Google account or email you used here."),
+      appLogin ? h("a", {
+        class: "btn btn-secondary", style: "margin-top:10px", href: appLogin,
+        onclick: () => capture("android_app_login_link_tapped", { mode }),
+      }, t("Open SalahAlarm, signed in")) : null),
     step("Finish the 1-minute setup",
       t("Allow notifications and alarms, and turn off battery optimization so Fajr always rings.")));
 }
@@ -208,6 +228,7 @@ async function boot() {
     console.warn("auth unavailable", err);
   }
 
+  prepareAppLogin();
   if (mode === "welcome") {
     if (!user) {
       status = "signin";

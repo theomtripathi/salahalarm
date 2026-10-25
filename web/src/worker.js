@@ -10,11 +10,13 @@
 //   /api/entitlement         is this Firebase user premium? (confirms a fresh checkout too)
 //   /api/portal              Dodo customer portal link (cancel, change card)
 //   /api/webhooks/dodo       Dodo Payments webhooks → entitlements/{uid}
+//   /api/app-login           one-time code that signs the installed app into this account
+//   /api/app-login/redeem    the app trades that code for a Firebase custom token
 //   /api/android/latest      newest APK version, for the in-app update prompt
 //   /download/salahalarm.apk the APK, streamed from R2
 
 import { verifyIdToken, bearer, AuthError } from "./auth.js";
-import { Firestore, parseServiceAccount } from "./firestore.js";
+import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
 import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
 import { tierFor, productFor, parseProducts, displayPlans, PLANS } from "./pricing.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
@@ -51,6 +53,8 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/entitlement" && method === "GET") return entitlement(request, env, url);
   if (pathname === "/api/portal" && method === "POST") return portal(request, env);
   if (pathname === "/api/webhooks/dodo" && method === "POST") return webhook(request, env, ctx);
+  if (pathname === "/api/app-login" && method === "POST") return createAppLogin(request, env);
+  if (pathname === "/api/app-login/redeem" && method === "POST") return redeemAppLogin(request, env, ctx);
   if (pathname === "/api/android/latest" && method === "GET") return latest(env);
   if (pathname === "/download/salahalarm.apk" && (method === "GET" || method === "HEAD")) return download(request, env, ctx);
   if (pathname.startsWith("/api/")) return json({ error: "not found" }, 404);
@@ -146,7 +150,7 @@ async function config(request, env, ctx) {
   const schedule = g.latitude != null ? scheduleFor({ ...g, now: new Date() }) : null;
   const lang = preferredLang(request.headers.get("accept-language"), g.country);
   return json({
-    geo: { country: g.country, city: g.city, timezone: g.timezone },
+    geo: { country: g.country, city: g.city, timezone: g.timezone, latitude: g.latitude, longitude: g.longitude },
     tier,
     plans,
     schedule,
@@ -338,6 +342,34 @@ async function confirmCheckout(env, db, u, params) {
     if (err instanceof DodoError && err.status === 404) return null;
     throw err;
   }
+}
+
+// ---- /api/app-login ----------------------------------------------------------
+// The welcome page hands the freshly installed app a one-time code in an
+// intent link, so people who just paid land in the app already signed in.
+
+const APP_LOGIN_TTL_MS = 30 * 60 * 1000;
+
+async function createAppLogin(request, env) {
+  const u = await user(request, env);
+  const bytes = crypto.getRandomValues(new Uint8Array(24));
+  const code = [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
+  const expiresAt = new Date(Date.now() + APP_LOGIN_TTL_MS).toISOString();
+  await firestore(env).merge(`appLoginCodes/${code}`, { uid: u.uid, email: u.email || null, expiresAt, createdAt: new Date() });
+  return json({ code, expiresAt });
+}
+
+async function redeemAppLogin(request, env, ctx) {
+  const { code } = await readJson(request);
+  if (typeof code !== "string" || !/^[0-9a-f]{48}$/.test(code)) return json({ error: "invalid code" }, 400);
+  const db = firestore(env);
+  const doc = await db.get(`appLoginCodes/${code}`);
+  if (!doc) return json({ error: "code not found or already used" }, 404);
+  await db.delete(`appLoginCodes/${code}`);
+  if (!doc.uid || Date.parse(doc.expiresAt) < Date.now()) return json({ error: "code expired" }, 410);
+  const token = await customToken(parseServiceAccount(env.FIREBASE_SERVICE_ACCOUNT), doc.uid);
+  capture(env, ctx, "android_app_login_link_used", doc.uid, {});
+  return json({ token });
 }
 
 // ---- /api/portal -----------------------------------------------------------

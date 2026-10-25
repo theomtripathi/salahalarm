@@ -289,3 +289,22 @@ test("APK download streams from R2 with the Android package type", async () => {
   const latest = await worker.fetch(request("/api/android/latest"), env({ APKS }), ctx);
   assert.deepEqual(await latest.json(), { versionCode: 3, versionName: "1.0.2", url: "/download/salahalarm.apk" });
 });
+
+test("an app login code signs the installed app in once, as the same user", async () => {
+  const token = idToken({ uid: "user-7" });
+  const created = await call("/api/app-login", { method: "POST", token });
+  assert.equal(created.status, 200);
+  assert.match(created.body.code, /^[0-9a-f]{48}$/);
+
+  const redeemed = await call("/api/app-login/redeem", { method: "POST", body: { code: created.body.code } });
+  assert.equal(redeemed.status, 200);
+  const [, payload] = redeemed.body.token.split(".");
+  const claims = JSON.parse(Buffer.from(payload, "base64url").toString());
+  assert.equal(claims.uid, "user-7");
+  assert.equal(claims.aud, "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit");
+
+  const again = await call("/api/app-login/redeem", { method: "POST", body: { code: created.body.code } });
+  assert.equal(again.status, 404);
+  assert.equal((await call("/api/app-login/redeem", { method: "POST", body: { code: "nope" } })).status, 400);
+  assert.equal((await call("/api/app-login", { method: "POST" })).status, 401);
+});

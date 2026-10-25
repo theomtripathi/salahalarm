@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green">#1A9E3F</color>
+    <color name="deep_green">#157832</color>
+    <color name="gold">#C9A028</color>
+    <color name="cream">#F9F7F2</color>
+    <color name="alarm_red">#E53935</color>
+    <color name="text_primary">#111111</color>
+    <color name="text_secondary">#666666</color>
+    <color name="icon_background">#05582F</color>
+</resources>

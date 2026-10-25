@@ -67,7 +67,8 @@
   "Download on the": "Download on the",
   "If Android doesn't open, tap ⋮ at the top and choose Open in browser.": "If Android doesn't open, tap ⋮ at the top and choose Open in browser.",
   "Already subscribed on Android? Download the app": "Already subscribed on Android? Download the app",
-  "Billed %@ monthly": "Billed %@ monthly"
+  "Billed %@ monthly": "Billed %@ monthly",
+  "Open SalahAlarm, signed in": "Open SalahAlarm, signed in"
  },
  "ar": {
   "Please enter a valid email address.": "يرجى إدخال بريد إلكتروني صحيح.",
@@ -137,7 +138,8 @@
   "Download on the": "نزّله من",
   "If Android doesn't open, tap ⋮ at the top and choose Open in browser.": "إذا لم يُفتح Android، اضغط ⋮ في الأعلى واختر «فتح في المتصفح».",
   "Already subscribed on Android? Download the app": "مشترك بالفعل على Android؟ نزّل التطبيق",
-  "Billed %@ monthly": "يُدفع %@ شهريًا"
+  "Billed %@ monthly": "يُدفع %@ شهريًا",
+  "Open SalahAlarm, signed in": "افتح SalahAlarm مسجّل الدخول"
  },
  "tr": {
   "Please enter a valid email address.": "Lütfen geçerli bir e-posta adresi gir.",
@@ -207,7 +209,8 @@
   "Download on the": "Şuradan indir:",
   "If Android doesn't open, tap ⋮ at the top and choose Open in browser.": "Android açılmazsa üstteki ⋮'e dokun ve Tarayıcıda aç'ı seç.",
   "Already subscribed on Android? Download the app": "Android'de zaten abone misin? Uygulamayı indir",
-  "Billed %@ monthly": "Aylık %@ faturalandırılır"
+  "Billed %@ monthly": "Aylık %@ faturalandırılır",
+  "Open SalahAlarm, signed in": "SalahAlarm'ı oturum açık olarak aç"
  },
  "id": {
   "Please enter a valid email address.": "Masukkan alamat email yang valid.",
@@ -277,7 +280,8 @@
   "Download on the": "Unduh di",
   "If Android doesn't open, tap ⋮ at the top and choose Open in browser.": "Jika Android tidak terbuka, ketuk ⋮ di atas lalu pilih Buka di browser.",
   "Already subscribed on Android? Download the app": "Sudah berlangganan di Android? Unduh aplikasinya",
-  "Billed %@ monthly": "Ditagih %@ per bulan"
+  "Billed %@ monthly": "Ditagih %@ per bulan",
+  "Open SalahAlarm, signed in": "Buka SalahAlarm dalam keadaan masuk"
  },
  "ur": {
   "Please enter a valid email address.": "براہ کرم درست ای میل ایڈریس درج کریں۔",
@@ -347,6 +351,7 @@
   "Download on the": "ڈاؤن لوڈ کریں",
   "If Android doesn't open, tap ⋮ at the top and choose Open in browser.": "اگر Android نہ کھلے تو اوپر ⋮ پر ٹیپ کریں اور Open in browser منتخب کریں۔",
   "Already subscribed on Android? Download the app": "Android پر پہلے سے سبسکرائبر ہیں؟ ایپ ڈاؤن لوڈ کریں",
-  "Billed %@ monthly": "ماہانہ %@ بل"
+  "Billed %@ monthly": "ماہانہ %@ بل",
+  "Open SalahAlarm, signed in": "SalahAlarm سائن اِن حالت میں کھولیں"
  }
 }

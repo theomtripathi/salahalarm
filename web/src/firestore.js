@@ -24,19 +24,10 @@ export function parseServiceAccount(raw) {
   return sa;
 }
 
-export async function accessToken(sa, { fetch: fetchImpl = fetch, now = Date.now() } = {}) {
-  if (cachedToken && cachedToken.email === sa.client_email && cachedToken.expires > now + 60_000) {
-    return cachedToken.token;
-  }
-  const iat = Math.floor(now / 1000);
+/** Signs a JWT as the service account (RS256). */
+export async function signServiceJwt(sa, claims) {
   const enc = (obj) => b64url(new TextEncoder().encode(JSON.stringify(obj)));
-  const unsigned = `${enc({ alg: "RS256", typ: "JWT" })}.${enc({
-    iss: sa.client_email,
-    scope: SCOPE,
-    aud: "https://oauth2.googleapis.com/token",
-    iat,
-    exp: iat + 3600,
-  })}`;
+  const unsigned = `${enc({ alg: "RS256", typ: "JWT" })}.${enc(claims)}`;
   const key = await crypto.subtle.importKey(
     "pkcs8",
     pemToPkcs8(sa.private_key),
@@ -45,13 +36,38 @@ export async function accessToken(sa, { fetch: fetchImpl = fetch, now = Date.now
     ["sign"],
   );
   const sig = new Uint8Array(await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, new TextEncoder().encode(unsigned)));
+  return `${unsigned}.${b64url(sig)}`;
+}
+
+/** A Firebase Auth custom token for `uid`, redeemed by the app with signInWithCustomToken. */
+export function customToken(sa, uid, now = Date.now()) {
+  const iat = Math.floor(now / 1000);
+  return signServiceJwt(sa, {
+    iss: sa.client_email,
+    sub: sa.client_email,
+    aud: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
+    iat,
+    exp: iat + 3600,
+    uid,
+  });
+}
+
+export async function accessToken(sa, { fetch: fetchImpl = fetch, now = Date.now() } = {}) {
+  if (cachedToken && cachedToken.email === sa.client_email && cachedToken.expires > now + 60_000) {
+    return cachedToken.token;
+  }
+  const iat = Math.floor(now / 1000);
+  const assertion = await signServiceJwt(sa, {
+    iss: sa.client_email,
+    scope: SCOPE,
+    aud: "https://oauth2.googleapis.com/token",
+    iat,
+    exp: iat + 3600,
+  });
   const res = await fetchImpl("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: `${unsigned}.${b64url(sig)}`,
-    }),
+    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion }),
   });
   if (!res.ok) throw new Error(`service account token failed (${res.status}): ${await res.text()}`);
   const json = await res.json();

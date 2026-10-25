@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SalahAlarm</string>
+    <string name="lock_service_label">SalahLock</string>
+    <string name="lock_service_description">SalahLock keeps the apps you choose closed during prayer time until you confirm you have prayed. It only reads which app is open. Nothing is recorded or sent anywhere.</string>
+    <string name="widget_prayer_label">SalahAlarm</string>
+    <string name="widget_prayer_description">See your streak and next prayer at a glance.</string>
+    <string name="widget_dua_label">Dua of the Moment</string>
+    <string name="widget_dua_description">A new dua from the Quran and Sunnah every 30 minutes.</string>
+</resources>
