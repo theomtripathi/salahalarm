@@ -36,7 +36,7 @@ APP_STORE_URL = "https://apps.apple.com/app/apple-store/id6758457826?pt=12848703
 # Live products in the maacki Dodo workspace (created 2026-10-26 by /api/admin/dodo-setup)
 DODO_ENVIRONMENT = "live_mode"
 # Dodo product ids per price tier and plan (see src/pricing.js and scripts/dodo-setup.mjs)
-PRODUCTS = '{"t1":{"yearly":"pdt_0NqZMOvdQyvPj38Qq4WFE","weekly":"pdt_0NqZMOzMccZkeY7Rrl7KP","weeklyOffer":"pdt_0NqZMP3sAaQh9cr5y6i5E"},"t2":{"yearly":"pdt_0NqZMP73JBseyAuiotrZe","weekly":"pdt_0NqZMPAAhuRCScxxmZNUG","weeklyOffer":"pdt_0NqZMPDTTplSRcxp1SCRV"},"t3":{"yearly":"pdt_0NqZMPGt0E3yubwso42L6","weekly":"pdt_0NqZMPK3RDNDZzgPNtAQI","weeklyOffer":"pdt_0NqZMPN9J4EcSHnY6olbW"}}'
+PRODUCTS = '{"t1":{"yearly":"pdt_0NqZUicJnBi6AvmOYWhBu","weekly":"pdt_0NqZUigw7ilRd63jSjtv9","weeklyOffer":"pdt_0NqZUikEtPFlvV5TxVVku"},"t2":{"yearly":"pdt_0NqZUicJnBi6AvmOYWhBu","weekly":"pdt_0NqZUigw7ilRd63jSjtv9","weeklyOffer":"pdt_0NqZUikEtPFlvV5TxVVku"},"t3":{"yearly":"pdt_0NqZUioLTdIMXl9FlqST3","weekly":"pdt_0NqZUirS6YE0EE5Inh0Vf","weeklyOffer":"pdt_0NqZUiwU8qDB2aT4EmJu3"}}'
 # Free-trial days per plan, e.g. '{"yearly":3}'. Empty means charge today.
 TRIAL_DAYS = '{}'
 
