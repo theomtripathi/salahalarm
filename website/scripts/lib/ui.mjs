@@ -26,8 +26,23 @@ export function icon(name, cls = 'icon') {
 
 const APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.16.77 1.1 1.68 2.34 2.87 2.3 1.15-.05 1.59-.75 2.98-.75 1.39 0 1.78.75 3 .72 1.24-.02 2.02-1.12 2.77-2.23.88-1.28 1.24-2.52 1.26-2.59-.03-.01-2.42-.93-2.44-3.66zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28z"/></svg>';
 
+const ANDROID = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.4 11.4 0 0 0 12 8.2c-1.75 0-3.4.37-4.92.94L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>';
+
 export function appStoreBadge(s, href, cta, cls = '') {
-  return `<a class="store-badge ${cls}" href="${esc(href)}" data-cta="${esc(cta)}">${APPLE}<span><small>${esc(s.badgeTop)}</small>App Store</span></a>`;
+  return `<a class="store-badge ${cls}" href="${esc(href)}" data-cta="${esc(cta)}">${APPLE}<span><small>${esc(s.getItFor || s.badgeTop)}</small>iOS</span></a>`;
+}
+
+// Android is sold on the web: the button starts the /android/ onboarding and checkout.
+export function androidBadge(s, href, cta, cls = '') {
+  return `<a class="store-badge store-badge-android ${cls}" href="${esc(href)}" data-cta="${esc(cta)}">${ANDROID}<span><small>${esc(s.getItFor || s.badgeTop)}</small>Android</span></a>`;
+}
+
+/** Both buttons, "Get it for iOS" and "Get it for Android", tracked per placement. */
+export function storeBadges(config, lang, slug, cls = '') {
+  const s = config.langs[lang];
+  const ios = config.ctaLinkPattern.replace('{lang}', lang).replace('{slug}', encodeURIComponent(slug));
+  const android = `${config.androidUrl || '/android/'}?ref=${encodeURIComponent(`seo-${lang}-${slug}`)}`;
+  return `<div class="store-badges">${appStoreBadge(s, ios, `${lang}-${slug}`, cls)}${androidBadge(s, android, `${lang}-${slug}-android`, cls)}</div>`;
 }
 
 export function phone(src, alt, cls = '') {
@@ -127,24 +142,23 @@ function footer(config, lang) {
       <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
       <p>The Fajr alarm that gets you to the prayer mat. Built for Muslims everywhere.</p>
     </div>
-    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a href="${esc(config.appStoreUrl)}">App Store</a></div>
+    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a href="${esc(config.appStoreUrl)}">iPhone</a><a href="${esc(config.androidUrl || '/android/')}?ref=footer">Android</a></div>
     <div><h2>Guides</h2>${langs}</div>
     <div><h2>Legal</h2><a href="${esc(config.privacyUrl)}">Privacy</a><a href="${esc(config.termsUrl)}">Terms</a><a href="${esc(config.supportUrl)}">Support</a></div>
   </div>
-  <div class="wrap footer-base"><p>© ${year} ${esc(config.appName)}</p><p>iPhone · English · العربية · Türkçe · Bahasa Indonesia · اردو</p></div>
+  <div class="wrap footer-base"><p>© ${year} ${esc(config.appName)}</p><p>iPhone · Android · English · العربية · Türkçe · Bahasa Indonesia · اردو</p></div>
 </footer>`;
 }
 
 // Inline CTA used inside articles.
 export function ctaInline(config, lang, slug) {
   const s = config.langs[lang];
-  const href = config.ctaLinkPattern.replace('{lang}', lang).replace('{slug}', encodeURIComponent(slug));
   return `<aside class="cta-inline">
   <img src="/icon.png" alt="" width="56" height="56">
   <div>
     <p class="cta-title">${esc(s.ctaTitle)}</p>
     <p>${esc(s.ctaBody)}</p>
-    ${appStoreBadge(s, href, `${lang}-${slug}`)}
+    ${storeBadges(config, lang, slug)}
   </div>
 </aside>`;
 }
@@ -152,13 +166,12 @@ export function ctaInline(config, lang, slug) {
 // Dark full-width band closing every page.
 export function ctaBand(config, lang, slug) {
   const s = config.langs[lang];
-  const href = config.ctaLinkPattern.replace('{lang}', lang).replace('{slug}', encodeURIComponent(slug));
   return `<section class="cta-band">
   <div class="wrap cta-band-inner">
     <div>
       <h2>${esc(s.ctaBandTitle)}</h2>
       <p>${esc(s.ctaBandBody)}</p>
-      ${appStoreBadge(s, href, `${lang}-${slug}-band`, 'badge-light')}
+      ${storeBadges(config, lang, `${slug}-band`, 'badge-light')}
     </div>
     ${alarmPhone('phone-tilt')}
   </div>

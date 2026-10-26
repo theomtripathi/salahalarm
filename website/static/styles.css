@@ -406,3 +406,15 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
 .alarm-card-btn { margin: 0; display: flex; align-items: center; justify-content: center; gap: 2cqw; padding: 3.6cqw; border-radius: 3.5cqw; background: #0d5a3c; color: #fff; font-weight: 700; font-size: 5cqw; }
 .alarm-card-btn .icon { width: 5.5cqw; height: 5.5cqw; }
 @media (prefers-reduced-motion: reduce) { .alarm-pulse span { animation: none; } }
+
+/* "Get it for iOS" + "Get it for Android" pairs */
+.store-badges { display: flex; flex-wrap: wrap; gap: 12px; }
+.store-badge-android svg { width: 26px; height: 26px; color: #3ddc84; }
+.section-cta { display: flex; justify-content: center; margin-top: 44px; }
+.section-cta .store-badges { justify-content: center; }
+.spotlight .section-cta { justify-content: flex-start; margin-top: 28px; }
+.spotlight .section-cta .store-badges { justify-content: flex-start; }
+@media (max-width: 560px) {
+  .store-badges { width: 100%; }
+  .store-badges .store-badge { flex: 1 1 0; justify-content: center; min-width: 0; padding-inline: 12px; font-size: 19px; }
+}
