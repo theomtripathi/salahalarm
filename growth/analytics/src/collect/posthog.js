@@ -18,7 +18,8 @@ export async function hogql(query, key, fetchImpl = fetch) {
 
 // Test users are excluded through the project's internal cohort (509939) and
 // the app's own internal_test_session flag.
-const NOT_TEST = `person_id NOT IN COHORT 509939 AND coalesce(toString(properties.internal_test_session), '') != 'true'`;
+// 8a9276eb… is Om's test iPhone (four yearly test purchases in Sweden, Oct 7–12).
+const NOT_TEST = `person_id NOT IN COHORT 509939 AND coalesce(toString(properties.internal_test_session), '') != 'true' AND toString(person_id) != '8a9276eb-000a-5f50-abb8-ccb8e0bb5271'`;
 
 export const QUERIES = {
   // One row per day for the last 15 days: the whole funnel, by unique people.
