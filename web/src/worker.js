@@ -197,12 +197,12 @@ export function preferredLang(acceptLanguage, country) {
 // Ask Dodo what this country would actually pay, in local currency when adaptive
 // pricing is on. Cached per country for six hours; falls back to USD list prices.
 async function localPrices(env, ctx, tier, country) {
-  const regular = displayOffer(tier);
-  const fallback = { plans: displayPlans(tier, { trialDays: trialDays(env) }), offer: regular };
+  const regular = displayOffer(tier, country);
+  const fallback = { plans: displayPlans(tier, { trialDays: trialDays(env), country }), offer: regular };
   if (!env.DODO_PAYMENTS_API_KEY || env.PRICE_PREVIEW === "off" || !country) return fallback;
   const products = parseProducts(env.PRODUCTS);
   const cache = typeof caches !== "undefined" ? caches.default : null;
-  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/v3/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
+  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/v4/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
   if (cache) {
     const hit = await cache.match(cacheKey);
     if (hit) return hit.json();
@@ -211,7 +211,7 @@ async function localPrices(env, ctx, tier, country) {
     const client = dodo(env);
     const [plans, [offerPlan]] = await Promise.all([fallback.plans, [fallback.offer]].map((list) => Promise.all(
       list.map(async (p) => {
-        const product = productFor(products, tier, p.plan);
+        const product = productFor(products, tier, p.plan, country);
         if (!product) return p;
         const preview = await client.previewCheckout({
           product_cart: [{ product_id: product.productId, quantity: 1 }],
@@ -235,7 +235,7 @@ async function localPrices(env, ctx, tier, country) {
     const weekly = plans.find((p) => p.plan === "weekly");
     const offer = weekly && weekly.currency === offerPlan.currency
       ? { ...offerPlan, regularAmount: weekly.amount, percentOff: Math.round((1 - offerPlan.amount / weekly.amount) * 100) }
-      : { ...regular, ...offerPlan, regularAmount: offerPlan.currency === "USD" ? regular.regularAmount : null };
+      : { ...regular, ...offerPlan, regularAmount: offerPlan.currency === regular.currency ? regular.regularAmount : null };
     const result = { plans, offer };
     if (cache) {
       ctx.waitUntil(cache.put(cacheKey, new Response(JSON.stringify(result), { headers: { "cache-control": "max-age=21600" } })));
@@ -284,7 +284,7 @@ async function checkout(request, env, ctx, url) {
   const plan = CHECKOUT_PLANS.includes(body.plan) ? body.plan : "yearly";
   const g = geo(request);
   const tier = tierFor(g.country);
-  const product = productFor(parseProducts(env.PRODUCTS), tier, plan);
+  const product = productFor(parseProducts(env.PRODUCTS), tier, plan, g.country);
   if (!product) return json({ error: "checkout is not configured yet" }, 503);
 
   const db = firestore(env);
@@ -322,7 +322,8 @@ async function startTrial(request, env, ctx) {
   const existing = await db.get(`entitlements/${u.uid}`);
   if (isActive(existing)) return json({ entitlement: publicEntitlement(existing), alreadyActive: true });
   const profile = await db.get(`users/${u.uid}`);
-  if (profile?.freeTrialStartedAt) return json({ error: "trial already used" }, 409);
+  // One trial per account, and none for someone who has already paid before.
+  if (profile?.freeTrialStartedAt || existing?.provider === "dodo") return json({ error: "trial already used" }, 409);
 
   const now = Date.now();
   const days = freeTrialDays(env);
@@ -385,10 +386,14 @@ async function adminPrices(request, env, ctx, url) {
 // New prices need new products; existing subscribers keep the ones they bought.
 async function adminDodoProducts(request, env) {
   if (!(await isAdmin(request, env))) return json({ error: "unauthorized" }, 401);
+  const { scope } = await readJson(request);
   const client = dodo(env);
   const log = [];
   try {
-    const { products } = await setupDodo((method, path, payload) => client.request(method, path, payload), { log: (line) => log.push(line) });
+    const { products } = await setupDodo((method, path, payload) => client.request(method, path, payload), {
+      log: (line) => log.push(line),
+      scope: scope === "local" ? "local" : "tiers",
+    });
     return json({ products, log });
   } catch (err) {
     return json({ error: err.message, detail: err.body ?? null, log }, 502);

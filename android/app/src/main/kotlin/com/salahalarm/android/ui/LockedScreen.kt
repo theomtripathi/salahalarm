@@ -49,7 +49,14 @@ fun LockedScreen() {
     var notFound by remember { mutableStateOf(false) }
     val unchecked = entitlement.checkedAt == null
     val trialEnded = entitlement.isTrial
-    val source = if (trialEnded) "trial_ended" else "no_plan"
+    // A paid plan that ran out or was cancelled; on_hold means a renewal payment failed.
+    val planEnded = !trialEnded && entitlement.status != null
+    val paymentFailed = planEnded && entitlement.manageable && entitlement.status in setOf("on_hold", "past_due", "failed")
+    val source = when {
+        trialEnded -> "trial_ended"
+        planEnded -> "plan_ended"
+        else -> "no_plan"
+    }
 
     // Right after sign-in nothing is known yet: ask the server before deciding.
     LaunchedEffect(unchecked) {
@@ -95,14 +102,27 @@ fun LockedScreen() {
             if (trialEnded) {
                 Text(t("Your free trial has ended"), fontSize = 26.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 Secondary(t("We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer."), align = TextAlign.Center)
+            } else if (planEnded) {
+                Text(t("Your plan has ended"), fontSize = 26.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Secondary(
+                    if (paymentFailed) t("Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.")
+                    else t("Renew to turn your prayer alarms back on. Your streaks and settings are saved."),
+                    align = TextAlign.Center,
+                )
             } else {
                 Text(t("Choose a plan to start"), fontSize = 26.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 Secondary(t("This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer."), align = TextAlign.Center)
             }
             Spacer(Modifier.height(8.dp))
-            PrimaryButton(t("Choose a plan")) {
+            PrimaryButton(t(if (planEnded) "Renew my plan" else "Choose a plan")) {
                 Analytics.capture("android_locked_choose_plan", mapOf("reason" to source))
                 openUrl(context, Api.paywallUrl(source))
+            }
+            if (paymentFailed) {
+                SecondaryButton(t("Update payment method")) {
+                    Analytics.capture("android_locked_update_payment")
+                    scope.launch { repo.portalLink()?.let { openUrl(context, it) } }
+                }
             }
             SecondaryButton(t("I've already paid")) {
                 scope.launch {

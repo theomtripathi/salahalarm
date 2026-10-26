@@ -78,7 +78,13 @@
   "Choose a plan": "Choose a plan",
   "Paid with another account?": "Paid with another account?",
   "Sign in with that account": "Sign in with that account",
-  "Preparing your download…": "Preparing your download…"
+  "Preparing your download…": "Preparing your download…",
+  "Your plan has ended. Renew to turn your prayer alarms back on.": "Your plan has ended. Renew to turn your prayer alarms back on.",
+  "Welcome back! Renew SalahAlarm": "Welcome back! Renew SalahAlarm",
+  "Your plan has ended": "Your plan has ended",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Renew to turn your prayer alarms back on. Your streaks and settings are saved.",
+  "Renew my plan": "Renew my plan",
+  "Already have an account? Download or renew": "Already have an account? Download or renew"
  },
  "ar": {
   "Please enter a valid email address.": "يرجى إدخال بريد إلكتروني صحيح.",
@@ -177,7 +183,13 @@
   "Choose a plan": "اختر خطة",
   "Paid with another account?": "دفعت بحساب آخر؟",
   "Sign in with that account": "سجّل الدخول بذلك الحساب",
-  "Preparing your download…": "جارٍ تجهيز التنزيل…"
+  "Preparing your download…": "جارٍ تجهيز التنزيل…",
+  "Your plan has ended. Renew to turn your prayer alarms back on.": "انتهت خطتك. جدّدها لتعود منبهات الصلاة إلى العمل.",
+  "Welcome back! Renew SalahAlarm": "أهلًا بعودتك! جدّد SalahAlarm",
+  "Your plan has ended": "انتهت خطتك",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "جدّد لتعود منبهات الصلاة إلى العمل. سلاسلك وإعداداتك محفوظة.",
+  "Renew my plan": "جدّد خطتي",
+  "Already have an account? Download or renew": "لديك حساب بالفعل؟ نزّل التطبيق أو جدّد"
  },
  "tr": {
   "Please enter a valid email address.": "Lütfen geçerli bir e-posta adresi gir.",
@@ -276,7 +288,13 @@
   "Choose a plan": "Plan seç",
   "Paid with another account?": "Başka bir hesapla mı ödedin?",
   "Sign in with that account": "O hesapla giriş yap",
-  "Preparing your download…": "İndirme hazırlanıyor…"
+  "Preparing your download…": "İndirme hazırlanıyor…",
+  "Your plan has ended. Renew to turn your prayer alarms back on.": "Planın sona erdi. Namaz alarmlarını yeniden açmak için yenile.",
+  "Welcome back! Renew SalahAlarm": "Tekrar hoş geldin! SalahAlarm'ı yenile",
+  "Your plan has ended": "Planın sona erdi",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Namaz alarmlarını yeniden açmak için yenile. Serilerin ve ayarların kayıtlı.",
+  "Renew my plan": "Planımı yenile",
+  "Already have an account? Download or renew": "Zaten hesabın var mı? İndir veya yenile"
  },
  "id": {
   "Please enter a valid email address.": "Masukkan alamat email yang valid.",
@@ -375,7 +393,13 @@
   "Choose a plan": "Pilih paket",
   "Paid with another account?": "Bayar dengan akun lain?",
   "Sign in with that account": "Masuk dengan akun itu",
-  "Preparing your download…": "Menyiapkan unduhan…"
+  "Preparing your download…": "Menyiapkan unduhan…",
+  "Your plan has ended. Renew to turn your prayer alarms back on.": "Paketmu sudah berakhir. Perpanjang untuk menyalakan lagi alarm salatmu.",
+  "Welcome back! Renew SalahAlarm": "Selamat datang kembali! Perpanjang SalahAlarm",
+  "Your plan has ended": "Paketmu sudah berakhir",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Perpanjang untuk menyalakan lagi alarm salatmu. Streak dan pengaturanmu tetap tersimpan.",
+  "Renew my plan": "Perpanjang paketku",
+  "Already have an account? Download or renew": "Sudah punya akun? Unduh atau perpanjang"
  },
  "ur": {
   "Please enter a valid email address.": "براہ کرم درست ای میل ایڈریس درج کریں۔",
@@ -474,6 +498,12 @@
   "Choose a plan": "پلان منتخب کریں",
   "Paid with another account?": "کسی اور اکاؤنٹ سے ادائیگی کی؟",
   "Sign in with that account": "اس اکاؤنٹ سے سائن ان کریں",
-  "Preparing your download…": "ڈاؤن لوڈ تیار ہو رہا ہے…"
+  "Preparing your download…": "ڈاؤن لوڈ تیار ہو رہا ہے…",
+  "Your plan has ended. Renew to turn your prayer alarms back on.": "آپ کا پلان ختم ہو گیا ہے۔ نماز کے الارم دوبارہ چالو کرنے کے لیے اسے تجدید کریں۔",
+  "Welcome back! Renew SalahAlarm": "خوش آمدید! SalahAlarm کی تجدید کریں",
+  "Your plan has ended": "آپ کا پلان ختم ہو گیا ہے",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "نماز کے الارم دوبارہ چالو کرنے کے لیے تجدید کریں۔ آپ کی اسٹریکس اور سیٹنگز محفوظ ہیں۔",
+  "Renew my plan": "میرا پلان تجدید کریں",
+  "Already have an account? Download or renew": "پہلے سے اکاؤنٹ ہے؟ ڈاؤن لوڈ یا تجدید کریں"
  }
 }

@@ -120,7 +120,7 @@ await page.fill("#f-password", "secret123");
 await page.locator("form .btn-primary").click();
 await page.waitForSelector(".close-btn");
 await page.goto(`${base}/android/install/`);
-await page.waitForSelector('a[href="/android/?resume=paywall"]');
+await page.waitForSelector('a[href^="/android/?resume=paywall"]');
 if (await page.locator("a[download]").count()) errors.push("unpaid account can see the download button");
 await shot("install-locked");
 

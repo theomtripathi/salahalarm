@@ -99,9 +99,12 @@ test("config returns tier, local prices and today's prayer times for the visitor
 });
 
 test("config falls back to USD list prices when the preview fails", async () => {
-  const r = await call("/api/config", { country: "IN" });
+  let r = await call("/api/config", { country: "PK" });
   assert.equal(r.body.plans[0].currency, "USD");
   assert.equal(r.body.plans[0].amount, 14.99);
+  r = await call("/api/config", { country: "IN" });
+  assert.equal(r.body.plans[0].currency, "INR");
+  assert.equal(r.body.plans[0].amount, 1249);
 });
 
 test("language comes from the browser first, then the country", () => {
@@ -260,6 +263,20 @@ test("signed webhooks grant and revoke access; unsigned ones are refused", async
   assert.equal(r.status, 401);
 });
 
+test("an expired subscriber renews from the paywall and cannot take the free trial", async () => {
+  await sendWebhook({ type: "subscription.active", timestamp: new Date(Date.now() - 2000).toISOString(), data: sub() });
+  await sendWebhook({ type: "subscription.expired", timestamp: new Date().toISOString(), data: sub({ status: "expired" }) });
+  const token = idToken({ uid: "user-1", email: "amina@example.com" });
+  let r = await call("/api/entitlement", { token });
+  assert.equal(r.body.entitlement.active, false);
+  assert.equal(r.body.entitlement.provider, "dodo");
+  r = await call("/api/trial", { method: "POST", token });
+  assert.equal(r.status, 409);
+  r = await call("/api/checkout", { method: "POST", token, body: { plan: "yearly" }, country: "ID" });
+  assert.equal(r.status, 200);
+  assert.ok(r.body.checkoutUrl);
+});
+
 test("an older webhook arriving late does not undo a newer one", async () => {
   await sendWebhook({ type: "subscription.cancelled", timestamp: "2026-10-25T10:00:00Z", data: sub({ status: "cancelled" }) });
   await sendWebhook({ type: "subscription.active", timestamp: "2026-10-25T09:00:00Z", data: sub() });
@@ -397,6 +414,34 @@ test("tiers with the same prices share one set of Dodo products", async () => {
   assert.deepEqual(products.t2, products.t1);
   assert.notEqual(products.t3.weekly, products.t1.weekly);
   assert.equal(created.find((b) => b.metadata.tier === "t3" && b.metadata.plan === "yearly").price.price, 1499);
+});
+
+test("India, Indonesia, Bangladesh, Egypt and Nigeria see and pay local-currency prices", async () => {
+  const [yearly, weekly] = displayPlans(tierFor("IN"), { country: "IN" });
+  assert.equal(yearly.currency, "INR");
+  assert.equal(yearly.amount, 1249);
+  assert.equal(weekly.amount, 169);
+  const offer = displayOffer(tierFor("IN"), "IN");
+  assert.equal(offer.amount, 129);
+  assert.equal(offer.regularAmount, 169);
+  // Pakistan has no local price and keeps the USD half price.
+  assert.equal(displayPlans(tierFor("PK"), { country: "PK" })[0].currency, "USD");
+
+  const products = { t3: { weekly: "w3" }, IN: { weekly: "w-inr" } };
+  assert.equal(productFor(products, "t3", "weekly", "IN").productId, "w-inr");
+  assert.equal(productFor(products, "t3", "weekly", "PK").productId, "w3");
+  // Until the local products exist, India falls back to the USD tier product.
+  assert.equal(productFor({ t3: { yearly: "y3" } }, "t3", "yearly", "IN").productId, "y3");
+
+  const created = [];
+  const { products: local } = await setupDodo(async (method, path, body) => {
+    created.push(body);
+    return { product_id: `pdt_${created.length}` };
+  }, { scope: "local" });
+  assert.deepEqual(Object.keys(local), ["IN", "ID", "BD", "EG", "NG"]);
+  const inrYearly = created.find((b) => b.metadata.country === "IN" && b.metadata.plan === "yearly");
+  assert.equal(inrYearly.price.currency, "INR");
+  assert.equal(inrYearly.price.price, 124900);
 });
 
 test("the admin routes need the Cloudflare token", async () => {

@@ -62,7 +62,8 @@ let config = { plans: [], geo: {} };
 let auth = null;
 let user = null;
 let ref = "";
-let trialUsed = false; // this account already had its free trial
+let trialUsed = false; // this account already had its free trial, or a paid plan
+let lapsed = false; // a paid plan that has ended: the paywall becomes "renew"
 let shownAt = Date.now();
 
 // ---- persistence ---------------------------------------------------------------
@@ -475,7 +476,8 @@ const SCREENS = {
         svg(icons.alarm),
         h("div", {}, h("div", { class: "k" }, t("Your first alarm")), h("div", { class: "big" }, t("%@ at %@", t(first.name), first.time)),
           config.geo?.city ? h("div", { class: "k" }, config.geo.city) : null)) : null,
-      h("h1", {}, t("Unlock SalahAlarm for Android")),
+      lapsed ? h("p", { class: "notice" }, t("Your plan has ended. Renew to turn your prayer alarms back on.")) : null,
+      h("h1", {}, t(lapsed ? "Welcome back! Renew SalahAlarm" : "Unlock SalahAlarm for Android")),
       h("ul", { class: "benefits" },
         ["persistent prayer alarms", "mat scan + distraction blocking", "Accurate Local Prayer Times", "streaks, qibla, Quran + widgets"]
           .map((b) => h("li", {}, svg(icons.check), t(b)))),
@@ -573,7 +575,9 @@ async function signedIn(u, method) {
 async function alreadySubscribed(token) {
   try {
     const { entitlement } = await api("/api/entitlement", { token });
-    trialUsed = entitlement?.status === "trial";
+    trialUsed = entitlement?.status === "trial" || entitlement?.provider === "dodo";
+    lapsed = entitlement?.provider === "dodo" && !entitlement.active;
+    if (lapsed) capture("web_renewal_paywall", { status: entitlement.status });
     if (entitlement?.active && entitlement.status !== "trial") {
       capture("web_returning_subscriber", {});
       location.href = "/android/welcome/";

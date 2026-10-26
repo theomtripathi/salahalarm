@@ -20,6 +20,10 @@ on:
         description: "Create a fresh set of live Dodo products at the prices in web/src/pricing.js"
         type: boolean
         default: false
+      dodo_local_products:
+        description: "Create live Dodo products in local currency (LOCAL in web/src/pricing.js)"
+        type: boolean
+        default: false
       price_table:
         description: "Print what each country is charged (Dodo checkout preview)"
         type: boolean
@@ -81,11 +85,14 @@ jobs:
           rm -f "$RUNNER_TEMP/dodo.json"
 
       - name: New Dodo products
-        if: ${{ inputs.dodo_products }}
+        if: ${{ inputs.dodo_products || inputs.dodo_local_products }}
+        env:
+          SCOPE: ${{ inputs.dodo_local_products && 'local' || 'tiers' }}
         run: |
           sleep 10
           curl -sS -X POST https://salahalarm.com/api/admin/dodo-products \
-            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -o "$RUNNER_TEMP/products.json" -w "HTTP %{http_code}\n"
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "content-type: application/json" \
+            -d "{\"scope\":\"$SCOPE\"}" -o "$RUNNER_TEMP/products.json" -w "HTTP %{http_code}\n"
           node -e '
             const r = require(process.argv[1]);
             for (const line of r.log || []) console.log(line);

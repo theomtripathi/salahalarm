@@ -23,6 +23,23 @@ export const TIERS = {
   t3: { weekly: { usd: 1.99 }, yearly: { usd: 14.99 }, weeklyOffer: { usd: 1.49 } },
 };
 
+// Where Dodo can charge in local currency, the half-price tier gets its own
+// products priced in that currency, so buyers see ₹169, not $1.99. Rounded from
+// the USD price at Oct 2026 exchange rates; change freely, then create new
+// products (scope "local") and update PRODUCTS. Pakistan stays in USD: Dodo
+// cannot charge PKR.
+export const LOCAL = {
+  IN: { currency: "INR", weekly: 169, yearly: 1249, weeklyOffer: 129 },
+  ID: { currency: "IDR", weekly: 32900, yearly: 244900, weeklyOffer: 24900 },
+  BD: { currency: "BDT", weekly: 239, yearly: 1799, weeklyOffer: 179 },
+  EG: { currency: "EGP", weekly: 99, yearly: 749, weeklyOffer: 75 },
+  NG: { currency: "NGN", weekly: 2999, yearly: 22999, weeklyOffer: 2299 },
+};
+
+function localFor(country) {
+  return LOCAL[String(country || "").toUpperCase()] || null;
+}
+
 const T1 = [
   "US", "CA", "GB", "IE", "AU", "NZ", "DE", "FR", "NL", "BE", "LU", "AT", "CH", "SE", "NO", "DK",
   "FI", "IS", "IT", "ES", "PT", "JP", "KR", "SG", "HK", "IL", "AE", "QA", "KW",
@@ -58,9 +75,12 @@ export function intervalFor(plan) {
   return plan === "yearly" ? "Year" : "Week";
 }
 
-// Products come from the PRODUCTS env var: {"t1":{"weekly":"pdt_..","yearly":"pdt_..","weeklyOffer":"pdt_.."},...}.
+// Products come from the PRODUCTS env var: {"t1":{"weekly":"pdt_..","yearly":"pdt_..","weeklyOffer":"pdt_.."},...},
+// plus local-currency products keyed by country ({"IN":{...}}), which win for that country.
 // A missing tier falls back to t2, then t1, so a partial setup still sells.
-export function productFor(products, tier, plan) {
+export function productFor(products, tier, plan, country) {
+  const c = String(country || "").toUpperCase();
+  if (localFor(c) && products?.[c]?.[plan]) return { tier, productId: products[c][plan], local: c };
   for (const t of [tier, "t2", "t1"]) {
     const id = products?.[t]?.[plan];
     if (id) return { tier: t, productId: id };
@@ -79,23 +99,25 @@ export function parseProducts(raw) {
 }
 
 // Plans as the paywall renders them, before any local-currency preview.
-export function displayPlans(tier, { trialDays = {}, plans = PLANS } = {}) {
+// `country` switches to the local-currency price where one is set.
+export function displayPlans(tier, { trialDays = {}, plans = PLANS, country } = {}) {
   const prices = TIERS[tier] || TIERS.t2;
+  const local = localFor(country);
   return plans.map((plan) => {
-    const usd = prices[plan].usd;
+    const amount = local ? local[plan] : prices[plan].usd;
     return {
       plan,
-      currency: "USD",
-      amount: usd,
-      weeklyEquivalent: plan === "yearly" ? Math.floor((usd / 52) * 100) / 100 : usd,
+      currency: local ? local.currency : "USD",
+      amount,
+      weeklyEquivalent: plan === "yearly" ? Math.floor((amount / 52) * 100) / 100 : amount,
       trialDays: Number(trialDays[plan] || 0),
     };
   });
 }
 
 /** The exit offer as the paywall shows it, with the regular weekly price for the strike-through. */
-export function displayOffer(tier) {
-  const prices = TIERS[tier] || TIERS.t2;
-  const [offer] = displayPlans(tier, { plans: ["weeklyOffer"] });
-  return { ...offer, regularAmount: prices.weekly.usd, percentOff: Math.round((1 - prices.weeklyOffer.usd / prices.weekly.usd) * 100) };
+export function displayOffer(tier, country) {
+  const [offer] = displayPlans(tier, { plans: ["weeklyOffer"], country });
+  const [weekly] = displayPlans(tier, { plans: ["weekly"], country });
+  return { ...offer, regularAmount: weekly.amount, percentOff: Math.round((1 - offer.amount / weekly.amount) * 100) };
 }

@@ -17,6 +17,7 @@ let user = null;
 let status = "checking";
 let apk = { versionName: null, sizeMb: null, url: null }; // url: signed, only for accounts with access
 let trialUntil = null; // set when the account is on the free trial
+let lapsed = false; // the account had a plan or trial that has ended
 let appLogin = null; // intent link that opens the installed app already signed in
 
 function svg(markup) {
@@ -72,7 +73,8 @@ async function checkAccess() {
       status = apk.url ? "install" : "locked";
     } else {
       status = "locked";
-      capture("install_locked_viewed", {});
+      lapsed = entitlement?.provider === "dodo" || entitlement?.status === "trial";
+      capture("install_locked_viewed", { lapsed });
     }
   } catch (err) {
     console.warn("entitlement check failed", err);
@@ -159,14 +161,16 @@ function header() {
   }
   if (status === "locked") {
     return [
-      h("h1", { style: "margin-top:12px" }, t("No plan on this account yet")),
-      h("p", { class: "lede" }, user?.email
-        ? t("%@ doesn't have an active plan. Pick one to download SalahAlarm.", user.email)
-        : t("Pick a plan to download SalahAlarm.")),
+      h("h1", { style: "margin-top:12px" }, t(lapsed ? "Your plan has ended" : "No plan on this account yet")),
+      h("p", { class: "lede" }, lapsed
+        ? t("Renew to turn your prayer alarms back on. Your streaks and settings are saved.")
+        : user?.email
+          ? t("%@ doesn't have an active plan. Pick one to download SalahAlarm.", user.email)
+          : t("Pick a plan to download SalahAlarm.")),
       h("a", {
-        class: "btn btn-primary", href: "/android/?resume=paywall",
-        onclick: () => capture("install_locked_choose_plan", {}),
-      }, t("Choose a plan")),
+        class: "btn btn-primary", href: "/android/?resume=paywall&src=renew",
+        onclick: () => capture("install_locked_choose_plan", { lapsed }),
+      }, t(lapsed ? "Renew my plan" : "Choose a plan")),
       h("p", { class: "small center", style: "margin-top:14px" },
         t("Paid with another account?"), " ",
         h("a", { href: "/android/?resume=account" }, t("Sign in with that account"))),

@@ -92,7 +92,12 @@
   "Couldn't reach salahalarm.com. Check your internet connection.": "Couldn't reach salahalarm.com. Check your internet connection.",
   "Try again": "Try again",
   "Choose a plan to start": "Choose a plan to start",
-  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer."
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.",
+  "Your plan has ended": "Your plan has ended",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Renew to turn your prayer alarms back on. Your streaks and settings are saved.",
+  "Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.": "Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.",
+  "Renew my plan": "Renew my plan",
+  "Update payment method": "Update payment method"
  },
  "ar": {
   "Snooze 5 min": "غفوة ٥ دقائق",
@@ -196,7 +201,12 @@
   "Couldn't reach salahalarm.com. Check your internet connection.": "تعذّر الوصول إلى salahalarm.com. تحقق من اتصالك بالإنترنت.",
   "Try again": "حاول مرة أخرى",
   "Choose a plan to start": "اختر خطة للبدء",
-  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "لا توجد خطة SalahAlarm في هذا الحساب بعد. اختر خطة على salahalarm.com وستبدأ منبهاتك بالرنين لكل صلاة."
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "لا توجد خطة SalahAlarm في هذا الحساب بعد. اختر خطة على salahalarm.com وستبدأ منبهاتك بالرنين لكل صلاة.",
+  "Your plan has ended": "انتهت خطتك",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "جدّد لتعود منبهات الصلاة إلى العمل. سلاسلك وإعداداتك محفوظة.",
+  "Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.": "لم تنجح عملية الدفع الأخيرة. حدّث بطاقتك أو جدّد خطتك لتعود منبهات الصلاة إلى العمل.",
+  "Renew my plan": "جدّد خطتي",
+  "Update payment method": "تحديث طريقة الدفع"
  },
  "tr": {
   "Snooze 5 min": "5 dk ertele",
@@ -300,7 +310,12 @@
   "Couldn't reach salahalarm.com. Check your internet connection.": "salahalarm.com'a ulaşılamadı. İnternet bağlantını kontrol et.",
   "Try again": "Tekrar dene",
   "Choose a plan to start": "Başlamak için bir plan seç",
-  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "Bu hesapta henüz SalahAlarm planı yok. salahalarm.com'dan bir plan seç, alarmların her namaz için çalmaya başlasın."
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "Bu hesapta henüz SalahAlarm planı yok. salahalarm.com'dan bir plan seç, alarmların her namaz için çalmaya başlasın.",
+  "Your plan has ended": "Planın sona erdi",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Namaz alarmlarını yeniden açmak için yenile. Serilerin ve ayarların kayıtlı.",
+  "Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.": "Son ödemen gerçekleşmedi. Namaz alarmlarını yeniden açmak için kartını güncelle veya planını yenile.",
+  "Renew my plan": "Planımı yenile",
+  "Update payment method": "Ödeme yöntemini güncelle"
  },
  "id": {
   "Snooze 5 min": "Tunda 5 menit",
@@ -404,7 +419,12 @@
   "Couldn't reach salahalarm.com. Check your internet connection.": "Tidak dapat menghubungi salahalarm.com. Periksa koneksi internetmu.",
   "Try again": "Coba lagi",
   "Choose a plan to start": "Pilih paket untuk mulai",
-  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "Akun ini belum punya paket SalahAlarm. Pilih paket di salahalarm.com dan alarmmu akan berbunyi untuk setiap salat."
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "Akun ini belum punya paket SalahAlarm. Pilih paket di salahalarm.com dan alarmmu akan berbunyi untuk setiap salat.",
+  "Your plan has ended": "Paketmu sudah berakhir",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Perpanjang untuk menyalakan lagi alarm salatmu. Streak dan pengaturanmu tetap tersimpan.",
+  "Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.": "Pembayaran terakhirmu gagal. Perbarui kartumu atau perpanjang paket untuk menyalakan lagi alarm salatmu.",
+  "Renew my plan": "Perpanjang paketku",
+  "Update payment method": "Perbarui metode pembayaran"
  },
  "ur": {
   "Snooze 5 min": "5 منٹ اسنوز",
@@ -508,6 +528,11 @@
   "Couldn't reach salahalarm.com. Check your internet connection.": "salahalarm.com تک رسائی نہیں ہو سکی۔ اپنا انٹرنیٹ کنکشن چیک کریں۔",
   "Try again": "دوبارہ کوشش کریں",
   "Choose a plan to start": "شروع کرنے کے لیے پلان منتخب کریں",
-  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "اس اکاؤنٹ پر ابھی SalahAlarm کا کوئی پلان نہیں ہے۔ salahalarm.com پر پلان منتخب کریں اور آپ کے الارم ہر نماز کے لیے بجنے لگیں گے۔"
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "اس اکاؤنٹ پر ابھی SalahAlarm کا کوئی پلان نہیں ہے۔ salahalarm.com پر پلان منتخب کریں اور آپ کے الارم ہر نماز کے لیے بجنے لگیں گے۔",
+  "Your plan has ended": "آپ کا پلان ختم ہو گیا ہے",
+  "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "نماز کے الارم دوبارہ چالو کرنے کے لیے تجدید کریں۔ آپ کی اسٹریکس اور سیٹنگز محفوظ ہیں۔",
+  "Your last payment didn't go through. Update your card or renew to turn your prayer alarms back on.": "آپ کی آخری ادائیگی نہیں ہو سکی۔ نماز کے الارم دوبارہ چالو کرنے کے لیے اپنا کارڈ اپڈیٹ کریں یا پلان کی تجدید کریں۔",
+  "Renew my plan": "میرا پلان تجدید کریں",
+  "Update payment method": "ادائیگی کا طریقہ اپڈیٹ کریں"
  }
 }
