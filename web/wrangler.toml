@@ -33,10 +33,10 @@ ADMIN_CF_ACCOUNT = "b937236acbd202c2fd6349d185631bef"
 POSTHOG_HOST = "https://us.i.posthog.com"
 POSTHOG_KEY = "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX"
 APP_STORE_URL = "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&mt=8"
-# Live products in the maacki Dodo workspace (created 2026-10-26 by /api/admin/dodo-setup)
+# Live products in the maacki Dodo workspace (USD tiers and local-currency products, created 2026-10-26)
 DODO_ENVIRONMENT = "live_mode"
 # Dodo product ids per price tier and plan (see src/pricing.js and scripts/dodo-setup.mjs)
-PRODUCTS = '{"t1":{"yearly":"pdt_0NqZUicJnBi6AvmOYWhBu","weekly":"pdt_0NqZUigw7ilRd63jSjtv9","weeklyOffer":"pdt_0NqZUikEtPFlvV5TxVVku"},"t2":{"yearly":"pdt_0NqZUicJnBi6AvmOYWhBu","weekly":"pdt_0NqZUigw7ilRd63jSjtv9","weeklyOffer":"pdt_0NqZUikEtPFlvV5TxVVku"},"t3":{"yearly":"pdt_0NqZUioLTdIMXl9FlqST3","weekly":"pdt_0NqZUirS6YE0EE5Inh0Vf","weeklyOffer":"pdt_0NqZUiwU8qDB2aT4EmJu3"}}'
+PRODUCTS = '{"t1":{"yearly":"pdt_0NqZUicJnBi6AvmOYWhBu","weekly":"pdt_0NqZUigw7ilRd63jSjtv9","weeklyOffer":"pdt_0NqZUikEtPFlvV5TxVVku"},"t2":{"yearly":"pdt_0NqZUicJnBi6AvmOYWhBu","weekly":"pdt_0NqZUigw7ilRd63jSjtv9","weeklyOffer":"pdt_0NqZUikEtPFlvV5TxVVku"},"t3":{"yearly":"pdt_0NqZUioLTdIMXl9FlqST3","weekly":"pdt_0NqZUirS6YE0EE5Inh0Vf","weeklyOffer":"pdt_0NqZUiwU8qDB2aT4EmJu3"},"IN":{"yearly":"pdt_0NqZwVrgWumAfCbsca9qB","weekly":"pdt_0NqZwVvsPxeurfd4tlGxY","weeklyOffer":"pdt_0NqZwVzgqPQWDM3DIJv1y"},"ID":{"yearly":"pdt_0NqZwW3hPmhubyfi16NBi","weekly":"pdt_0NqZwW8Ght0aaB8UadyT7","weeklyOffer":"pdt_0NqZwWBxaz2VpzBENF0HK"},"BD":{"yearly":"pdt_0NqZwWFrNYqEDDleg2uN2","weekly":"pdt_0NqZwWIlAkd9Wrhh4FC3r","weeklyOffer":"pdt_0NqZwWLexADcbWRcWC9It"},"EG":{"yearly":"pdt_0NqZwWPRwbHegcl7hT3EO","weekly":"pdt_0NqZwWTKAtIELgkjccdPa","weeklyOffer":"pdt_0NqZwWXSHdm8upIexoTMz"},"NG":{"yearly":"pdt_0NqZwWaUM7MkjhXAk0rXp","weekly":"pdt_0NqZwWeTPAkirgDtxriA3","weeklyOffer":"pdt_0NqZwWhanaDCqBoF8kYpL"}}'
 # Free-trial days per plan, e.g. '{"yearly":3}'. Empty means charge today.
 TRIAL_DAYS = '{}'
 

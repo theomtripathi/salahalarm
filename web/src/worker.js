@@ -527,10 +527,14 @@ async function webhook(request, env, ctx) {
   }
   const event = JSON.parse(body);
   const result = await handleEvent(env, firestore(env), event);
-  if (result.uid || result.email) {
-    capture(env, ctx, `web_${event.type.replace(/\./g, "_")}`, result.uid || result.email, {
-      status: result.status, plan: result.plan, country: result.country, ref: result.ref, tier: result.tier,
-    });
+  if ((result.uid || result.email) && !result.skipped) {
+    const who = result.uid || result.email;
+    // is_subscribed and email on the person drive the "didn't pay" email workflow.
+    const $set = { is_subscribed: Boolean(result.active), web_plan: result.plan || null, ...(result.email && { email: result.email }) };
+    const props = { status: result.status, plan: result.plan, country: result.country, ref: result.ref, tier: result.tier, $set };
+    capture(env, ctx, `web_${event.type.replace(/\./g, "_")}`, who, props);
+    // Same event name as iOS, so cross-platform funnels and workflows can stop on it.
+    if (event.type === "subscription.active") capture(env, ctx, "purchase_completed", who, { ...props, platform: "android_web" });
   }
   return json({ ok: true, ...result });
 }
@@ -546,12 +550,12 @@ export async function handleEvent(env, db, event) {
     const current = await db.get(`entitlements/${uid}`);
     if (!shouldReplace(current, ent)) return { uid, skipped: "older event" };
     await db.merge(`entitlements/${uid}`, { ...ent, uid });
-    return { uid, status: ent.status, plan: ent.plan, country: ent.country, ref: ent.ref, tier: ent.tier };
+    return { uid, email: ent.email, active: ent.active, status: ent.status, plan: ent.plan, country: ent.country, ref: ent.ref, tier: ent.tier };
   }
   if (ent.email) {
     const current = await db.get(`pendingEntitlements/${ent.email}`);
     if (shouldReplace(current, ent)) await db.merge(`pendingEntitlements/${ent.email}`, ent);
-    return { email: ent.email, status: ent.status, pending: true };
+    return { email: ent.email, active: ent.active, status: ent.status, pending: true };
   }
   return { ignored: "no uid or email" };
 }
