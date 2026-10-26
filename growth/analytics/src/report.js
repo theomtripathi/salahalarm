@@ -90,10 +90,13 @@ function section(L, title, items, line) {
 // A self-contained page; open it locally or publish it.
 export function html(s, md) {
   const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  // Links are set aside first so emphasis never rewrites underscores inside a URL.
+  const links = [];
   const body = esc(md)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, href) => `\u0000${links.push(`<a href="${href}" target="_blank" rel="noopener">${text}</a>`) - 1}\u0000`)
     .replace(/^# (.*)$/gm, '<h1>$1</h1>').replace(/^## (.*)$/gm, '<h2>$1</h2>')
     .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/_(.+?)_/g, '<i>$1</i>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\u0000(\d+)\u0000/g, (_, i) => links[i])
     .replace(/((?:^\|.*\|$\n?)+)/gm, (tbl) => {
       const rows = tbl.trim().split('\n').filter((r) => !/^\|[-| ]+\|$/.test(r));
       return '<table>' + rows.map((r, i) => `<tr>${r.slice(1, -1).split('|').map((c) => `<${i ? 'td' : 'th'}>${c.trim()}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('') + '</table>';

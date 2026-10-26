@@ -4,12 +4,12 @@ import { readFileSync } from 'node:fs';
 import { fromTikTok, fromInstagram, fromX, fromZernio } from '../src/normalize.js';
 import { score, qualifies, guessFormat } from '../src/score.js';
 import { merge, attachConversions, toCsv } from '../src/library.js';
-import { analyse, worstScreen } from '../src/funnel.js';
+import { analyse, worstScreen, windows } from '../src/funnel.js';
 import { scoreboard, channelOf } from '../src/channels.js';
 import { readInbox, idOf, platformOf } from '../src/collect/inbox.js';
 import { ascCampaigns } from '../src/collect/revenue.js';
 import { collect as apifyCollect } from '../src/collect/apify.js';
-import { markdown } from '../src/report.js';
+import { markdown, html } from '../src/report.js';
 
 const cfg = JSON.parse(readFileSync(new URL('../config/sources.json', import.meta.url)));
 const NOW = Date.parse('2026-10-25T00:00:00Z');
@@ -131,6 +131,20 @@ test('funnel alerts on the real 25 Oct snapshot', () => {
   assert.doesNotMatch(text, /Reach the paywall/); // last week's 115% is capped, no false drop
   const leak = worstScreen(ph.screens);
   assert.equal(leak.screen, 'screen2'); // 73 -> 64; screen17's resume bump is ignored
+});
+
+test('funnel windows follow the calendar when a day has no events', () => {
+  const days = ['2026-10-10', '2026-10-16', '2026-10-17', '2026-10-18', '2026-10-22', '2026-10-24', '2026-10-25'].map((day) => ({ day }));
+  const w = windows(days, '2026-10-25');
+  assert.deepEqual(w.cur.map((r) => r.day), ['2026-10-18', '2026-10-22', '2026-10-24']);
+  assert.deepEqual(w.prev.map((r) => r.day), ['2026-10-16', '2026-10-17']);
+  assert.equal(w.yesterday.day, '2026-10-24');
+});
+
+test('brief links keep underscores in the URL', () => {
+  const page = html({}, '[@fatimama__](https://www.tiktok.com/@fatimama__/video/7627289220935109908) and _note_');
+  assert.match(page, /href="https:\/\/www.tiktok.com\/@fatimama__\/video\/7627289220935109908"/);
+  assert.match(page, /<i>note<\/i>/);
 });
 
 test('channels and App Store campaign rows', () => {

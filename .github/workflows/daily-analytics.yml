@@ -16,7 +16,7 @@ jobs:
       - name: Bring back yesterday's library
         run: |
           git fetch origin analytics-data || exit 0
-          git checkout origin/analytics-data -- growth/analytics/data growth/analytics/reports 2>/dev/null || true
+          git checkout origin/analytics-data -- data reports 2>/dev/null || true
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: npm test

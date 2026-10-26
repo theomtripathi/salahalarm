@@ -14,10 +14,14 @@ const sum = (rows, k) => rows.reduce((s, r) => s + Number(r[k] || 0), 0);
 // Capped at 100%: people who installed last week can reach the paywall this week.
 const rate = (a, b) => (b > 0 ? Math.min(1, a / b) : null);
 
-// `daily` rows are sorted by day and the last one is today (partial), so it is dropped.
+// Windows are bounded by date, not row count: PostHog returns no row for a day
+// with no events. Today is partial, so it is left out.
+const daysBefore = (day, n) => new Date(Date.parse(day + 'T00:00:00Z') - n * 864e5).toISOString().slice(0, 10);
 export function windows(daily, today) {
-  const full = daily.filter((r) => r.day < today);
-  return { cur: full.slice(-7), prev: full.slice(-14, -7), yesterday: full.at(-1) || null };
+  const [d1, d7, d14] = [1, 7, 14].map((n) => daysBefore(today, n));
+  const cur = daily.filter((r) => r.day >= d7 && r.day < today);
+  const prev = daily.filter((r) => r.day >= d14 && r.day < d7);
+  return { cur, prev, yesterday: daily.find((r) => r.day === d1) || null };
 }
 
 export function analyse(daily, screens = [], today) {
