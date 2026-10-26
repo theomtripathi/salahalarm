@@ -22,6 +22,16 @@ export function markdown(s) {
     for (const st of steps) L.push(`| ${st.label} | ${pct(st.now)} | ${pct(st.before)} | ${st.n} |`);
     L.push('');
   }
+  if (s.android?.length) {
+    const cur = s.android.find((r) => r.period === 'this') || {};
+    const prev = s.android.find((r) => r.period === 'prev') || {};
+    const rows = [['Bio page views', 'bio_views'], ['Tapped Android', 'tapped_android'], ['Tapped iPhone', 'tapped_ios'], ['Web onboarding started', 'onboarding_started'],
+      ['Saw web paywall', 'paywall_viewed'], ['Exit offer shown', 'exit_offer_viewed'], ['Free trials started', 'trials'], ['Started checkout', 'checkout_started'],
+      ['Paid (Dodo)', 'paid'], ['APK taps', 'apk_taps'], ['APK downloads', 'apk_downloads'], ['First app opens', 'app_first_open']];
+    L.push('**Android web funnel (salahalarm.com/get), last 7 full days:**', '', '| Step | This week | Week before |', '|---|---|---|');
+    for (const [label, k] of rows) L.push(`| ${label} | ${fmt(cur[k] ?? 0)} | ${fmt(prev[k] ?? 0)} |`);
+    L.push('');
+  } else if (s.android) L.push('**Android web funnel:** no events yet.', '');
   if (s.revenue) {
     const v = s.revenue;
     L.push(`**RevenueCat:** MRR $${fmt(v.mrr)}, revenue last 28 days $${fmt(v.revenue)}, active trials ${fmt(v.active_trials)}, active subscriptions ${fmt(v.active_subscriptions)}, new customers ${fmt(v.new_customers)}.`, '');

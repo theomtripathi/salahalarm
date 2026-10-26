@@ -55,6 +55,25 @@ export const QUERIES = {
     FROM events
     WHERE event = 'link_clicked' AND timestamp >= today() - 7 AND toString(properties.is_bot) != 'true'
     GROUP BY account, format, video ORDER BY clicks DESC`,
+  // Android web funnel (salahalarm.com/get): this week and the week before, by unique people.
+  android: `
+    SELECT if(timestamp >= today() - 7, 'this', 'prev') AS period,
+      uniqIf(person_id, event = 'bio_page_viewed') AS bio_views,
+      uniqIf(person_id, event = 'bio_option_tapped' AND toString(properties.option) = 'android') AS tapped_android,
+      uniqIf(person_id, event = 'bio_option_tapped' AND toString(properties.option) = 'ios') AS tapped_ios,
+      uniqIf(person_id, event = 'web_onboarding_started') AS onboarding_started,
+      uniqIf(person_id, event = 'web_paywall_viewed') AS paywall_viewed,
+      uniqIf(person_id, event = 'web_exit_offer_viewed') AS exit_offer_viewed,
+      uniqIf(person_id, event = 'web_free_trial_started') AS trials,
+      uniqIf(person_id, event = 'web_checkout_started') AS checkout_started,
+      uniqIf(person_id, event = 'web_subscription_active') AS paid,
+      uniqIf(person_id, event IN ('apk_download_tapped', 'apk_download_auto_started')) AS apk_taps,
+      countIf(event = 'apk_downloaded') AS apk_downloads,
+      uniqIf(person_id, event = 'android_app_first_open') AS app_first_open
+    FROM events
+    WHERE timestamp >= today() - 14 AND timestamp < today()
+      AND (startsWith(event, 'web_') OR startsWith(event, 'bio_') OR startsWith(event, 'apk_') OR startsWith(event, 'android_'))
+    GROUP BY period ORDER BY period DESC`,
   // Why people leave the paywall, when they tell us.
   exitReasons: `
     SELECT toString(properties.reason) AS reason, count() AS n

@@ -105,6 +105,7 @@ const countBy = (xs, f) => xs.reduce((m, x) => { for (const k of [].concat(f(x))
 const snapshot = {
   date: today,
   funnel,
+  android: ph?.android || null,
   revenue,
   channels,
   zernioDaily: zDaily?.platformBreakdown || null,
