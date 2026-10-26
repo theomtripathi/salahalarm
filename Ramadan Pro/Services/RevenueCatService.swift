@@ -88,6 +88,11 @@ class RevenueCatService: ObservableObject {
         print("👤 RevenueCatService: Setting user ID: \(userID)")
         try await Purchases.shared.logIn(userID)
         print("✅ RevenueCatService: User ID set successfully")
+        FunnelAnalytics.shared.identify(userID: userID)
+        if let email = Auth.auth().currentUser?.email {
+            Purchases.shared.attribution.setEmail(email)
+            FunnelAnalytics.shared.setEmail(email)
+        }
     }
     
     // MARK: - Fetch Offerings
@@ -525,6 +530,7 @@ class RevenueCatService: ObservableObject {
             // Clear subscription status from UserDefaults
             UserDefaults.standard.set(false, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
             WidgetConfig.saveIsSubscribed(false)
+            FunnelAnalytics.shared.setSubscribed(false)
             print("ℹ️ RevenueCatService: No active subscription")
             return
         }
@@ -577,6 +583,7 @@ class RevenueCatService: ObservableObject {
         // Save subscription status to UserDefaults and App Group (widget)
         UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
         WidgetConfig.saveIsSubscribed(true)
+        FunnelAnalytics.shared.setSubscribed(true)
         print("✅ RevenueCatService: Subscription status updated - Active: true, Plan: \(planType?.rawValue ?? "unknown")")
         print("✅ RevenueCatService: Saved subscription status to UserDefaults")
     }
