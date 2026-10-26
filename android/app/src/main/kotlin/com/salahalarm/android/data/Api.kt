@@ -55,7 +55,9 @@ object Api {
         request(site("/api/app-login/redeem"), "POST", body = JSONObject().put("code", code)).getString("token")
     suspend fun latest(): JSONObject = request(site("/api/android/latest"))
 
-    val downloadUrl: String get() = site("/download/salahalarm.apk")
+    /** A 30-minute APK link; the server only gives one to accounts with a plan or trial. */
+    suspend fun downloadLink(token: String): String =
+        site(request(site("/api/android/download"), "POST", token, JSONObject()).getString("url"))
     fun paywallUrl(source: String): String = site("/android/?resume=paywall&src=$source")
     val installGuideUrl: String get() = site("/android/install/")
     const val SUPPORT_URL = "https://ramadan-pro.lovable.app/support"

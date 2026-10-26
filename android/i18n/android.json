@@ -87,7 +87,12 @@
   "Mat scan": "Mat scan",
   "Manual": "Manual",
   "Snoozed": "Snoozed",
-  "Ringing": "Ringing"
+  "Ringing": "Ringing",
+  "Checking your plan…": "Checking your plan…",
+  "Couldn't reach salahalarm.com. Check your internet connection.": "Couldn't reach salahalarm.com. Check your internet connection.",
+  "Try again": "Try again",
+  "Choose a plan to start": "Choose a plan to start",
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer."
  },
  "ar": {
   "Snooze 5 min": "غفوة ٥ دقائق",
@@ -186,7 +191,12 @@
   "Your free trial has ended": "انتهت تجربتك المجانية",
   "I've already paid": "لقد دفعت بالفعل",
   "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "نرجو أن يكون SalahAlarm قد ساعدك على الصلاة في وقتها. اختر خطة على salahalarm.com ليبقى منبهك يرن لكل صلاة.",
-  "Choose a plan": "اختر خطة"
+  "Choose a plan": "اختر خطة",
+  "Checking your plan…": "جارٍ التحقق من خطتك…",
+  "Couldn't reach salahalarm.com. Check your internet connection.": "تعذّر الوصول إلى salahalarm.com. تحقق من اتصالك بالإنترنت.",
+  "Try again": "حاول مرة أخرى",
+  "Choose a plan to start": "اختر خطة للبدء",
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "لا توجد خطة SalahAlarm في هذا الحساب بعد. اختر خطة على salahalarm.com وستبدأ منبهاتك بالرنين لكل صلاة."
  },
  "tr": {
   "Snooze 5 min": "5 dk ertele",
@@ -285,7 +295,12 @@
   "Your free trial has ended": "Ücretsiz denemen sona erdi",
   "I've already paid": "Zaten ödedim",
   "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "Umarız SalahAlarm namazlarını vaktinde kılmana yardımcı olmuştur. Alarmlarının her namazda çalmaya devam etmesi için salahalarm.com'da bir plan seç.",
-  "Choose a plan": "Bir plan seç"
+  "Choose a plan": "Bir plan seç",
+  "Checking your plan…": "Planın kontrol ediliyor…",
+  "Couldn't reach salahalarm.com. Check your internet connection.": "salahalarm.com'a ulaşılamadı. İnternet bağlantını kontrol et.",
+  "Try again": "Tekrar dene",
+  "Choose a plan to start": "Başlamak için bir plan seç",
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "Bu hesapta henüz SalahAlarm planı yok. salahalarm.com'dan bir plan seç, alarmların her namaz için çalmaya başlasın."
  },
  "id": {
   "Snooze 5 min": "Tunda 5 menit",
@@ -384,7 +399,12 @@
   "Your free trial has ended": "Uji coba gratismu sudah berakhir",
   "I've already paid": "Saya sudah bayar",
   "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "Semoga SalahAlarm membantumu salat tepat waktu. Pilih paket di salahalarm.com agar alarmmu tetap berbunyi di setiap salat.",
-  "Choose a plan": "Pilih paket"
+  "Choose a plan": "Pilih paket",
+  "Checking your plan…": "Memeriksa paketmu…",
+  "Couldn't reach salahalarm.com. Check your internet connection.": "Tidak dapat menghubungi salahalarm.com. Periksa koneksi internetmu.",
+  "Try again": "Coba lagi",
+  "Choose a plan to start": "Pilih paket untuk mulai",
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "Akun ini belum punya paket SalahAlarm. Pilih paket di salahalarm.com dan alarmmu akan berbunyi untuk setiap salat."
  },
  "ur": {
   "Snooze 5 min": "5 منٹ اسنوز",
@@ -483,6 +503,11 @@
   "Your free trial has ended": "آپ کا مفت ٹرائل ختم ہو گیا",
   "I've already paid": "میں ادائیگی کر چکا ہوں",
   "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "امید ہے SalahAlarm نے آپ کو وقت پر نماز پڑھنے میں مدد دی۔ ہر نماز کے لیے الارم بجتے رہیں، اس کے لیے salahalarm.com پر پلان منتخب کریں۔",
-  "Choose a plan": "پلان منتخب کریں"
+  "Choose a plan": "پلان منتخب کریں",
+  "Checking your plan…": "آپ کا پلان چیک ہو رہا ہے…",
+  "Couldn't reach salahalarm.com. Check your internet connection.": "salahalarm.com تک رسائی نہیں ہو سکی۔ اپنا انٹرنیٹ کنکشن چیک کریں۔",
+  "Try again": "دوبارہ کوشش کریں",
+  "Choose a plan to start": "شروع کرنے کے لیے پلان منتخب کریں",
+  "This account doesn't have a SalahAlarm plan yet. Pick one on salahalarm.com and your alarms start ringing for every prayer.": "اس اکاؤنٹ پر ابھی SalahAlarm کا کوئی پلان نہیں ہے۔ salahalarm.com پر پلان منتخب کریں اور آپ کے الارم ہر نماز کے لیے بجنے لگیں گے۔"
  }
 }

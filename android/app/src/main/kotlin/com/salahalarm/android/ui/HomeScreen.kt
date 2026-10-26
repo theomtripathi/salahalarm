@@ -41,6 +41,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -70,6 +71,7 @@ import com.salahalarm.core.DuaLibrary
 import com.salahalarm.core.PrayerCalculator
 import com.salahalarm.core.PrayerLogic
 import com.salahalarm.core.PrayerName
+import kotlinx.coroutines.launch
 
 private val emoji = mapOf(
     PrayerName.FAJR to "🌅", PrayerName.DHUHR to "☀️", PrayerName.ASR to "🌤",
@@ -85,6 +87,7 @@ fun openUrl(context: android.content.Context, url: String) {
 fun HomeScreen() {
     val context = LocalContext.current
     val repo = Graph.repo
+    val scope = rememberCoroutineScope()
     val now by rememberNow()
     val user by repo.user.collectAsState()
     val logs by repo.logs.collectAsState()
@@ -133,7 +136,7 @@ fun HomeScreen() {
                     action = t("Update"),
                     background = Palette.green.copy(alpha = 0.08f),
                     border = Palette.green.copy(alpha = 0.3f),
-                ) { openUrl(context, Api.downloadUrl) }
+                ) { scope.launch { openUrl(context, repo.apkLink() ?: Api.installGuideUrl) } }
             }
 
             val trialLeft = entitlement.trialDaysLeft(now)

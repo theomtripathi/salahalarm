@@ -117,8 +117,8 @@ private fun App() {
 
     when {
         user == null -> LoginScreen()
-        // When the free trial runs out, the app sends them to the website to pick a plan.
-        entitlement.trialEnded(now) -> TrialEndedScreen()
+        // No plan (trial over, or an APK passed on without paying): the website sells plans.
+        !entitlement.isActive(now) -> LockedScreen()
         !setupDone -> SetupScreen(onDone = {
             Graph.store.setFlag("setup_done")
             setupDone = true

@@ -251,6 +251,12 @@ class Repo(private val context: Context, private val store: Store) {
         return runCatching { Api.portal(token) }.getOrNull()
     }
 
+    /** Signed APK link for the update prompt; null without a plan or connection. */
+    suspend fun apkLink(): String? {
+        val token = user.value?.getIdToken(false)?.await()?.token ?: return null
+        return runCatching { Api.downloadLink(token) }.getOrNull()
+    }
+
     // ---- SalahLock -----------------------------------------------------------------------
 
     fun updateLock(f: (LockSettings) -> LockSettings) {
