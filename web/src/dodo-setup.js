@@ -12,10 +12,21 @@ export const WEBHOOK_EVENTS = [
   "subscription.unpaused", "subscription.updated", "subscription.plan_changed",
 ];
 
-/** `call(method, path, body)` talks to the Dodo API; `log` reports progress. */
+/**
+ * `call(method, path, body)` talks to the Dodo API; `log` reports progress.
+ * Tiers with the same prices share one set of products.
+ */
 export async function setupDodo(call, { webhookUrl, log = () => {} } = {}) {
   const products = {};
+  const byPrices = new Map();
   for (const [tier, plans] of Object.entries(TIERS)) {
+    const same = byPrices.get(JSON.stringify(plans));
+    if (same) {
+      products[tier] = { ...products[same] };
+      log(`${tier} shares ${same}'s products`);
+      continue;
+    }
+    byPrices.set(JSON.stringify(plans), tier);
     for (const plan of CHECKOUT_PLANS) {
       const { usd } = plans[plan];
       const interval = intervalFor(plan);

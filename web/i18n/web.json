@@ -68,7 +68,17 @@
   "If Android doesn't open, tap ⋮ at the top and choose Open in browser.": "If Android doesn't open, tap ⋮ at the top and choose Open in browser.",
   "Already subscribed on Android? Download the app": "Already subscribed on Android? Download the app",
   "Billed %@ monthly": "Billed %@ monthly",
-  "Open SalahAlarm, signed in": "Open SalahAlarm, signed in"
+  "Open SalahAlarm, signed in": "Open SalahAlarm, signed in",
+  "Your payment is still processing": "Your payment is still processing",
+  "The download unlocks as soon as it clears. This can take a few minutes.": "The download unlocks as soon as it clears. This can take a few minutes.",
+  "Check again": "Check again",
+  "No plan on this account yet": "No plan on this account yet",
+  "%@ doesn't have an active plan. Pick one to download SalahAlarm.": "%@ doesn't have an active plan. Pick one to download SalahAlarm.",
+  "Pick a plan to download SalahAlarm.": "Pick a plan to download SalahAlarm.",
+  "Choose a plan": "Choose a plan",
+  "Paid with another account?": "Paid with another account?",
+  "Sign in with that account": "Sign in with that account",
+  "Preparing your download…": "Preparing your download…"
  },
  "ar": {
   "Please enter a valid email address.": "يرجى إدخال بريد إلكتروني صحيح.",
@@ -157,7 +167,17 @@
   "Nothing is charged when it ends": "لن يُخصم أي مبلغ عند انتهائها",
   "See plans instead": "عرض الخطط بدلًا من ذلك",
   "This account has already used its free trial. Pick a plan to keep going.": "استخدم هذا الحساب تجربته المجانية من قبل. اختر خطة للمتابعة.",
-  "Free until %@. Install the app now and your first alarm is set in two minutes.": "مجانًا حتى %@. ثبّت التطبيق الآن وسيُضبط أول منبه لك خلال دقيقتين."
+  "Free until %@. Install the app now and your first alarm is set in two minutes.": "مجانًا حتى %@. ثبّت التطبيق الآن وسيُضبط أول منبه لك خلال دقيقتين.",
+  "Your payment is still processing": "لا يزال الدفع قيد المعالجة",
+  "The download unlocks as soon as it clears. This can take a few minutes.": "سيُفتح التنزيل فور اكتمال الدفع. قد يستغرق ذلك بضع دقائق.",
+  "Check again": "تحقق مرة أخرى",
+  "No plan on this account yet": "لا توجد خطة في هذا الحساب بعد",
+  "%@ doesn't have an active plan. Pick one to download SalahAlarm.": "لا توجد خطة فعّالة في %@. اختر خطة لتنزيل SalahAlarm.",
+  "Pick a plan to download SalahAlarm.": "اختر خطة لتنزيل SalahAlarm.",
+  "Choose a plan": "اختر خطة",
+  "Paid with another account?": "دفعت بحساب آخر؟",
+  "Sign in with that account": "سجّل الدخول بذلك الحساب",
+  "Preparing your download…": "جارٍ تجهيز التنزيل…"
  },
  "tr": {
   "Please enter a valid email address.": "Lütfen geçerli bir e-posta adresi gir.",
@@ -246,7 +266,17 @@
   "Nothing is charged when it ends": "Bittiğinde hiçbir ücret alınmaz",
   "See plans instead": "Bunun yerine planları gör",
   "This account has already used its free trial. Pick a plan to keep going.": "Bu hesap ücretsiz denemesini zaten kullandı. Devam etmek için bir plan seç.",
-  "Free until %@. Install the app now and your first alarm is set in two minutes.": "%@ tarihine kadar ücretsiz. Uygulamayı şimdi yükle, ilk alarmın iki dakikada kurulsun."
+  "Free until %@. Install the app now and your first alarm is set in two minutes.": "%@ tarihine kadar ücretsiz. Uygulamayı şimdi yükle, ilk alarmın iki dakikada kurulsun.",
+  "Your payment is still processing": "Ödemeniz hâlâ işleniyor",
+  "The download unlocks as soon as it clears. This can take a few minutes.": "Ödeme tamamlanınca indirme açılır. Bu birkaç dakika sürebilir.",
+  "Check again": "Tekrar kontrol et",
+  "No plan on this account yet": "Bu hesapta henüz bir plan yok",
+  "%@ doesn't have an active plan. Pick one to download SalahAlarm.": "%@ hesabında aktif bir plan yok. SalahAlarm'ı indirmek için bir plan seç.",
+  "Pick a plan to download SalahAlarm.": "SalahAlarm'ı indirmek için bir plan seç.",
+  "Choose a plan": "Plan seç",
+  "Paid with another account?": "Başka bir hesapla mı ödedin?",
+  "Sign in with that account": "O hesapla giriş yap",
+  "Preparing your download…": "İndirme hazırlanıyor…"
  },
  "id": {
   "Please enter a valid email address.": "Masukkan alamat email yang valid.",
@@ -335,7 +365,17 @@
   "Nothing is charged when it ends": "Tidak ada tagihan saat berakhir",
   "See plans instead": "Lihat paket saja",
   "This account has already used its free trial. Pick a plan to keep going.": "Akun ini sudah memakai uji coba gratisnya. Pilih paket untuk lanjut.",
-  "Free until %@. Install the app now and your first alarm is set in two minutes.": "Gratis sampai %@. Pasang aplikasinya sekarang dan alarm pertamamu siap dalam dua menit."
+  "Free until %@. Install the app now and your first alarm is set in two minutes.": "Gratis sampai %@. Pasang aplikasinya sekarang dan alarm pertamamu siap dalam dua menit.",
+  "Your payment is still processing": "Pembayaranmu masih diproses",
+  "The download unlocks as soon as it clears. This can take a few minutes.": "Unduhan terbuka begitu pembayaran selesai. Ini bisa memakan beberapa menit.",
+  "Check again": "Periksa lagi",
+  "No plan on this account yet": "Belum ada paket di akun ini",
+  "%@ doesn't have an active plan. Pick one to download SalahAlarm.": "%@ belum punya paket aktif. Pilih paket untuk mengunduh SalahAlarm.",
+  "Pick a plan to download SalahAlarm.": "Pilih paket untuk mengunduh SalahAlarm.",
+  "Choose a plan": "Pilih paket",
+  "Paid with another account?": "Bayar dengan akun lain?",
+  "Sign in with that account": "Masuk dengan akun itu",
+  "Preparing your download…": "Menyiapkan unduhan…"
  },
  "ur": {
   "Please enter a valid email address.": "براہ کرم درست ای میل ایڈریس درج کریں۔",
@@ -424,6 +464,16 @@
   "Nothing is charged when it ends": "ختم ہونے پر کوئی رقم نہیں کٹے گی",
   "See plans instead": "اس کے بجائے پلانز دیکھیں",
   "This account has already used its free trial. Pick a plan to keep going.": "یہ اکاؤنٹ اپنا مفت ٹرائل استعمال کر چکا ہے۔ جاری رکھنے کے لیے پلان منتخب کریں۔",
-  "Free until %@. Install the app now and your first alarm is set in two minutes.": "%@ تک مفت۔ ابھی ایپ انسٹال کریں اور دو منٹ میں آپ کا پہلا الارم سیٹ ہو جائے گا۔"
+  "Free until %@. Install the app now and your first alarm is set in two minutes.": "%@ تک مفت۔ ابھی ایپ انسٹال کریں اور دو منٹ میں آپ کا پہلا الارم سیٹ ہو جائے گا۔",
+  "Your payment is still processing": "آپ کی ادائیگی ابھی پروسیس ہو رہی ہے",
+  "The download unlocks as soon as it clears. This can take a few minutes.": "ادائیگی مکمل ہوتے ہی ڈاؤن لوڈ کھل جائے گا۔ اس میں چند منٹ لگ سکتے ہیں۔",
+  "Check again": "دوبارہ چیک کریں",
+  "No plan on this account yet": "اس اکاؤنٹ پر ابھی کوئی پلان نہیں ہے",
+  "%@ doesn't have an active plan. Pick one to download SalahAlarm.": "%@ پر کوئی فعال پلان نہیں ہے۔ SalahAlarm ڈاؤن لوڈ کرنے کے لیے پلان منتخب کریں۔",
+  "Pick a plan to download SalahAlarm.": "SalahAlarm ڈاؤن لوڈ کرنے کے لیے پلان منتخب کریں۔",
+  "Choose a plan": "پلان منتخب کریں",
+  "Paid with another account?": "کسی اور اکاؤنٹ سے ادائیگی کی؟",
+  "Sign in with that account": "اس اکاؤنٹ سے سائن ان کریں",
+  "Preparing your download…": "ڈاؤن لوڈ تیار ہو رہا ہے…"
  }
 }

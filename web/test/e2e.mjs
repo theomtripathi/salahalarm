@@ -75,10 +75,22 @@ await page.locator("#pay").click();
 await page.waitForURL(/\/android\/welcome\//);
 await page.waitForSelector(".success-mark", { timeout: 15000 });
 await shot("welcome-paid");
+const signedApk = async () => {
+  const href = await page.locator("a[download]").first().getAttribute("href");
+  if (!/^\/download\/salahalarm\.apk\?t=/.test(href)) errors.push(`download link is not signed: ${href}`);
+  const res = await page.request.head(`${base}${href}`, { maxRedirects: 0 });
+  if (res.status() !== 200) errors.push(`signed download returned ${res.status()}`);
+};
+await signedApk();
 
 await page.goto(`${base}/android/install/`);
 await page.waitForSelector(".guide");
+await signedApk();
 await shot("install");
+
+// Without a signed link the APK is not served.
+const bare = await page.request.get(`${base}/download/salahalarm.apk`, { maxRedirects: 0 });
+if (bare.status() !== 302) errors.push(`unsigned download returned ${bare.status()}`);
 
 // A second visitor takes the free trial.
 await context.clearCookies();
@@ -97,6 +109,20 @@ await page.locator("#start-trial").click();
 await page.waitForURL(/\/android\/welcome\//);
 await page.waitForSelector(".success-mark", { timeout: 15000 });
 await shot("welcome-trial");
+
+// A third visitor signs up but never pays: the install page has no download.
+await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); sessionStorage.setItem("sa_fakeauth", "1"); });
+await page.goto(`${base}/android/?fakeauth=1&resume=account&lang=${lang}`);
+await page.waitForSelector(".google-btn");
+await page.locator(".footer .btn-secondary, .btn-secondary").first().click();
+await page.fill("#f-email", "free.rider@example.com");
+await page.fill("#f-password", "secret123");
+await page.locator("form .btn-primary").click();
+await page.waitForSelector(".close-btn");
+await page.goto(`${base}/android/install/`);
+await page.waitForSelector('a[href="/android/?resume=paywall"]');
+if (await page.locator("a[download]").count()) errors.push("unpaid account can see the download button");
+await shot("install-locked");
 
 console.log(JSON.stringify({ lang, screens: n, errors }, null, 2));
 await browser.close();

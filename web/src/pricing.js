@@ -10,13 +10,17 @@
 
 // `weeklyOffer` is the discounted weekly plan shown when someone closes the
 // paywall without buying. It is never listed on the paywall itself.
+//
+// Om's pricing (Oct 2026): $3.99/week and $29.99/year, half price for India and
+// other lower-income countries. Dodo charges in the buyer's local currency.
+const FULL = { weekly: { usd: 3.99 }, yearly: { usd: 29.99 }, weeklyOffer: { usd: 2.99 } };
 export const TIERS = {
   // High-income markets
-  t1: { weekly: { usd: 4.99 }, yearly: { usd: 29.99 }, weeklyOffer: { usd: 2.99 } },
-  // Middle-income markets and the default for anything unlisted
-  t2: { weekly: { usd: 2.99 }, yearly: { usd: 17.99 }, weeklyOffer: { usd: 1.99 } },
-  // Price-sensitive markets with the largest Android-only Muslim audiences
-  t3: { weekly: { usd: 1.99 }, yearly: { usd: 9.99 }, weeklyOffer: { usd: 0.99 } },
+  t1: FULL,
+  // Everything unlisted: same as t1 for now, kept separate so it can be tuned later
+  t2: FULL,
+  // Half price: the largest Android-only Muslim audiences
+  t3: { weekly: { usd: 1.99 }, yearly: { usd: 14.99 }, weeklyOffer: { usd: 1.49 } },
 };
 
 const T1 = [

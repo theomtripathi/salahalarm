@@ -10,12 +10,12 @@ import { initAuth } from "/assets/auth.js";
 
 const mode = document.body.dataset.mode; // "welcome" | "install"
 const app = document.getElementById("app");
-const APK = "/download/salahalarm.apk";
 
 let config = {};
 let user = null;
-let status = mode === "welcome" ? "checking" : "install"; // checking | active | pending | signin | install
-let apk = { versionName: null, sizeMb: null };
+// checking | active | pending | signin | install | locked
+let status = "checking";
+let apk = { versionName: null, sizeMb: null, url: null }; // url: signed, only for accounts with access
 let trialUntil = null; // set when the account is on the free trial
 let appLogin = null; // intent link that opens the installed app already signed in
 
@@ -47,6 +47,7 @@ async function confirmPayment() {
           capture("web_purchase_confirmed", { plan: entitlement.plan, seconds_to_confirm: Math.round((Date.now() - started) / 1000) });
         }
         store.del("sa_checkout");
+        await prepareDownload();
         render();
         autoDownload();
         return;
@@ -61,13 +62,45 @@ async function confirmPayment() {
   render();
 }
 
+// The install page (reinstalls, the app's update prompt) checks the account once.
+async function checkAccess() {
+  try {
+    const { entitlement } = await api("/api/entitlement", { token: await user.token() });
+    if (entitlement?.active) {
+      trialUntil = entitlement.status === "trial" ? entitlement.accessUntil : null;
+      await prepareDownload();
+      status = apk.url ? "install" : "locked";
+    } else {
+      status = "locked";
+      capture("install_locked_viewed", {});
+    }
+  } catch (err) {
+    console.warn("entitlement check failed", err);
+    status = "locked";
+  }
+  render();
+}
+
+// The APK link is signed per account and lasts 30 minutes, so it is renewed every 20.
+async function prepareDownload() {
+  try {
+    const link = await api("/api/android/download", { method: "POST", token: await user.token() });
+    apk.url = link.url;
+    if (link.size) apk.sizeMb = (link.size / 1048576).toFixed(1);
+    setTimeout(() => prepareDownload().then(render), 20 * 60 * 1000);
+  } catch (err) {
+    console.warn("download link unavailable", err);
+    apk.url = null;
+  }
+}
+
 function autoDownload() {
   // Start the download once, right after payment, as long as Chrome can take it.
-  if (!device.android || device.inApp || store.get("sa_auto_downloaded")) return;
+  if (!apk.url || !device.android || device.inApp || store.get("sa_auto_downloaded")) return;
   store.set("sa_auto_downloaded", "1");
   capture("apk_download_auto_started", { mode });
   setTimeout(() => {
-    const a = h("a", { href: APK, download: "SalahAlarm.apk", hidden: true });
+    const a = h("a", { href: apk.url, download: "SalahAlarm.apk", hidden: true });
     document.body.append(a);
     a.click();
     a.remove();
@@ -116,8 +149,27 @@ function header() {
   }
   if (status === "pending") {
     return [
-      h("h1", { style: "margin-top:12px" }, t("Install SalahAlarm for Android")),
-      h("p", { class: "notice" }, t("Your payment is still processing. You can install the app now; it unlocks as soon as the payment clears.")),
+      h("h1", { style: "margin-top:12px" }, t("Your payment is still processing")),
+      h("p", { class: "lede" }, t("The download unlocks as soon as it clears. This can take a few minutes.")),
+      h("button", {
+        class: "btn btn-primary",
+        onclick: () => { status = "checking"; render(); confirmPayment(); },
+      }, t("Check again")),
+    ];
+  }
+  if (status === "locked") {
+    return [
+      h("h1", { style: "margin-top:12px" }, t("No plan on this account yet")),
+      h("p", { class: "lede" }, user?.email
+        ? t("%@ doesn't have an active plan. Pick one to download SalahAlarm.", user.email)
+        : t("Pick a plan to download SalahAlarm.")),
+      h("a", {
+        class: "btn btn-primary", href: "/android/?resume=paywall",
+        onclick: () => capture("install_locked_choose_plan", {}),
+      }, t("Choose a plan")),
+      h("p", { class: "small center", style: "margin-top:14px" },
+        t("Paid with another account?"), " ",
+        h("a", { href: "/android/?resume=account" }, t("Sign in with that account"))),
     ];
   }
   return [
@@ -141,10 +193,11 @@ function downloadBlock() {
         onclick: () => capture("web_open_in_chrome_tapped", { from: device.inApp, page: mode }),
       }, t("Open in Chrome")));
   }
+  if (!apk.url) return h("p", { class: "notice" }, t("Preparing your download…"));
   const label = apk.sizeMb ? t("Download SalahAlarm (%@ MB)", apk.sizeMb) : t("Download SalahAlarm");
   return h("div", {},
     h("a", {
-      class: "btn btn-primary", href: APK, download: "SalahAlarm.apk",
+      class: "btn btn-primary", href: apk.url, download: "SalahAlarm.apk",
       onclick: () => capture("apk_download_tapped", { mode, status }),
     }, svg(icons.download), label),
     apk.versionName ? h("p", { class: "small center", style: "margin:6px 0 0" }, t("Version %@ · Android 8 or newer", apk.versionName)) : null);
@@ -194,7 +247,7 @@ function render() {
   app.replaceChildren(
     h("div", { class: "screen-body" },
       header(),
-      status === "checking" || status === "signin" ? null : [
+      status === "checking" || status === "signin" || status === "locked" || status === "pending" ? null : [
         h("div", { style: "margin:18px 0 22px" }, downloadBlock()),
         guide(),
         brandTips(),
@@ -216,11 +269,8 @@ async function boot() {
   initAnalytics(config, { ref, page: `android_${mode}`, country: config.geo?.country, funnel: "android_web" });
   capture(mode === "welcome" ? "web_checkout_returned" : "install_guide_viewed", {});
 
-  api("/api/android/latest").then(async (latest) => {
+  api("/api/android/latest").then((latest) => {
     apk.versionName = latest.versionName;
-    const head = await fetch(APK, { method: "HEAD" }).catch(() => null);
-    const bytes = Number(head?.headers.get("content-length") || 0);
-    if (bytes) apk.sizeMb = (bytes / 1048576).toFixed(1);
     render();
   }).catch(() => {});
 
@@ -232,17 +282,14 @@ async function boot() {
     console.warn("auth unavailable", err);
   }
 
-  prepareAppLogin();
-  if (mode === "welcome") {
-    if (!user) {
-      status = "signin";
-      render();
-      return;
-    }
-    confirmPayment();
-  } else {
+  if (!user) {
+    status = "signin";
     render();
+    return;
   }
+  prepareAppLogin();
+  if (mode === "welcome") confirmPayment();
+  else checkAccess();
 }
 
 boot();

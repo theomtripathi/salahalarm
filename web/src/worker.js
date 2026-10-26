@@ -14,8 +14,11 @@
 //   /api/app-login           one-time code that signs the installed app into this account
 //   /api/app-login/redeem    the app trades that code for a Firebase custom token
 //   /api/android/latest      newest APK version, for the in-app update prompt
+//   /api/android/download    a 30-minute APK link, only for accounts with an active plan or trial
 //   /api/admin/dodo-setup    one-time: create the Dodo products + webhook (Cloudflare token holders only)
-//   /download/salahalarm.apk the APK, streamed from R2
+//   /api/admin/dodo-products create a fresh set of products at the current TIERS prices (same auth)
+//   /api/admin/prices        what each country is charged (Cloudflare token holders only)
+//   /download/salahalarm.apk the APK, streamed from R2; needs a link from /api/android/download
 
 import { verifyIdToken, bearer, AuthError } from "./auth.js";
 import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
@@ -60,7 +63,10 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/app-login" && method === "POST") return createAppLogin(request, env);
   if (pathname === "/api/app-login/redeem" && method === "POST") return redeemAppLogin(request, env, ctx);
   if (pathname === "/api/android/latest" && method === "GET") return latest(env);
+  if (pathname === "/api/android/download" && method === "POST") return downloadLink(request, env);
   if (pathname === "/api/admin/dodo-setup" && method === "POST") return adminDodoSetup(request, env, url);
+  if (pathname === "/api/admin/dodo-products" && method === "POST") return adminDodoProducts(request, env);
+  if (pathname === "/api/admin/prices" && method === "GET") return adminPrices(request, env, ctx, url);
   if (pathname === "/download/salahalarm.apk" && (method === "GET" || method === "HEAD")) return download(request, env, ctx);
   if (pathname.startsWith("/api/")) return json({ error: "not found" }, 404);
 
@@ -196,7 +202,7 @@ async function localPrices(env, ctx, tier, country) {
   if (!env.DODO_PAYMENTS_API_KEY || env.PRICE_PREVIEW === "off" || !country) return fallback;
   const products = parseProducts(env.PRODUCTS);
   const cache = typeof caches !== "undefined" ? caches.default : null;
-  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/v2/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
+  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/v3/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
   if (cache) {
     const hit = await cache.match(cacheKey);
     if (hit) return hit.json();
@@ -352,15 +358,45 @@ export function trialEntitlement(u, days, now = Date.now()) {
 // The caller must hold a Cloudflare API token for this Worker's own account:
 // whoever has one can redeploy the Worker anyway, so this grants nothing new.
 
-async function adminDodoSetup(request, env, url) {
+// Admin routes accept the deploy's Cloudflare API token, so only GitHub Actions can call them.
+async function isAdmin(request, env) {
   const token = bearer(request);
   const account = env.ADMIN_CF_ACCOUNT;
-  if (!token || !account) return json({ error: "unauthorized" }, 401);
+  if (!token || !account) return false;
   const check = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/tokens/verify`, {
     headers: { authorization: `Bearer ${token}` },
   });
   const verified = check.ok ? await check.json().catch(() => null) : null;
-  if (!verified?.success || verified.result?.status !== "active") return json({ error: "unauthorized" }, 401);
+  return Boolean(verified?.success && verified.result?.status === "active");
+}
+
+async function adminPrices(request, env, ctx, url) {
+  if (!(await isAdmin(request, env))) return json({ error: "unauthorized" }, 401);
+  const countries = (url.searchParams.get("countries") || "US,AE,SA,QA,KW,GB,TR,MY,IN,PK,ID,BD,EG,NG")
+    .split(",").map((c) => c.trim().toUpperCase()).filter(Boolean).slice(0, 40);
+  const rows = await Promise.all(countries.map(async (country) => {
+    const tier = tierFor(country);
+    const { plans, offer } = await localPrices(env, ctx, tier, country);
+    return { country, tier, plans: plans.map((p) => ({ plan: p.plan, currency: p.currency, amount: p.amount })), offer: { currency: offer.currency, amount: offer.amount } };
+  }));
+  return json({ rows });
+}
+
+// New prices need new products; existing subscribers keep the ones they bought.
+async function adminDodoProducts(request, env) {
+  if (!(await isAdmin(request, env))) return json({ error: "unauthorized" }, 401);
+  const client = dodo(env);
+  const log = [];
+  try {
+    const { products } = await setupDodo((method, path, payload) => client.request(method, path, payload), { log: (line) => log.push(line) });
+    return json({ products, log });
+  } catch (err) {
+    return json({ error: err.message, detail: err.body ?? null, log }, 502);
+  }
+}
+
+async function adminDodoSetup(request, env, url) {
+  if (!(await isAdmin(request, env))) return json({ error: "unauthorized" }, 401);
 
   if (Object.keys(parseProducts(env.PRODUCTS)).length) return json({ error: "products already configured" }, 409);
   const body = await readJson(request);
@@ -530,7 +566,52 @@ async function latest(env) {
   return json({ ...meta, url: "/download/salahalarm.apk" }, 200, { "cache-control": "public, max-age=300" });
 }
 
+// The APK is only for paying (or trialling) accounts. The site and the app ask
+// /api/android/download for a signed link that works for 30 minutes.
+const DOWNLOAD_TTL_SECONDS = 30 * 60;
+
+async function downloadKey(env) {
+  const secret = env.DOWNLOAD_SECRET || env.FIREBASE_SERVICE_ACCOUNT;
+  if (!secret) throw Object.assign(new Error("download signing is not configured"), { status: 503 });
+  const material = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`apk-download:${secret}`));
+  return crypto.subtle.importKey("raw", material, { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]);
+}
+
+function b64url(bytes) {
+  return btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+export async function signDownload(env, uid, now = Date.now()) {
+  const exp = Math.floor(now / 1000) + DOWNLOAD_TTL_SECONDS;
+  const payload = `${b64url(new TextEncoder().encode(uid))}.${exp}`;
+  const sig = await crypto.subtle.sign("HMAC", await downloadKey(env), new TextEncoder().encode(payload));
+  return `${payload}.${b64url(sig)}`;
+}
+
+export async function verifyDownload(env, token, now = Date.now()) {
+  const [uid64, exp, sig] = String(token || "").split(".");
+  if (!uid64 || !exp || !sig || Number(exp) * 1000 < now) return false;
+  const expected = await crypto.subtle.sign("HMAC", await downloadKey(env), new TextEncoder().encode(`${uid64}.${exp}`));
+  const a = b64url(expected);
+  if (a.length !== sig.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ sig.charCodeAt(i);
+  return diff === 0;
+}
+
+async function downloadLink(request, env) {
+  const u = await user(request, env);
+  const ent = await firestore(env).get(`entitlements/${u.uid}`);
+  if (!isActive(ent)) return json({ error: "no active plan", paywall: "/android/?resume=paywall" }, 402);
+  let size = null;
+  if (env.APKS) size = (await env.APKS.head(APK_KEY))?.size ?? null;
+  return json({ url: `/download/salahalarm.apk?t=${await signDownload(env, u.uid)}`, size });
+}
+
 async function download(request, env, ctx) {
+  if (!(await verifyDownload(env, new URL(request.url).searchParams.get("t")))) {
+    return Response.redirect(new URL("/android/install/", request.url).href, 302);
+  }
   if (!env.APKS) return new Response("APK storage is not configured", { status: 503 });
   const obj = request.method === "HEAD" ? await env.APKS.head(APK_KEY) : await env.APKS.get(APK_KEY);
   if (!obj) return new Response("The Android app is being prepared. Please try again in a few minutes.", { status: 404 });
@@ -544,7 +625,7 @@ async function download(request, env, ctx) {
   const headers = new Headers({
     "content-type": "application/vnd.android.package-archive",
     "content-disposition": 'attachment; filename="SalahAlarm.apk"',
-    "cache-control": "public, max-age=300",
+    "cache-control": "private, no-store",
     "x-content-type-options": "nosniff",
   });
   if (obj.size != null) headers.set("content-length", String(obj.size));

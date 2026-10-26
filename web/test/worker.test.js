@@ -1,8 +1,9 @@
 import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import worker, { handleEvent, preferredLang } from "../src/worker.js";
+import worker, { handleEvent, preferredLang, signDownload, verifyDownload } from "../src/worker.js";
 import { signWebhook, verifyWebhook } from "../src/dodo.js";
 import { tierFor, productFor, displayPlans, displayOffer } from "../src/pricing.js";
+import { setupDodo } from "../src/dodo-setup.js";
 import { entitlementFromSubscription, shouldReplace, accessUntilFor } from "../src/entitlement.js";
 import { scheduleFor, methodFor, madhabFor } from "../src/prayer.js";
 import { verifyIdToken, resetKeyCache } from "../src/auth.js";
@@ -46,8 +47,8 @@ test("a tier without products falls back to t2 then t1", () => {
 test("display plans put yearly first with a weekly equivalent", () => {
   const plans = displayPlans("t3", { trialDays: { yearly: 3 } });
   assert.equal(plans[0].plan, "yearly");
-  assert.equal(plans[0].amount, 9.99);
-  assert.equal(plans[0].weeklyEquivalent, 0.19);
+  assert.equal(plans[0].amount, 14.99);
+  assert.equal(plans[0].weeklyEquivalent, 0.28);
   assert.equal(plans[0].trialDays, 3);
   assert.equal(plans[1].plan, "weekly");
   assert.equal(plans.length, 2);
@@ -57,8 +58,8 @@ test("the exit offer is a cheaper weekly plan with its discount", () => {
   const offer = displayOffer("t1");
   assert.equal(offer.plan, "weeklyOffer");
   assert.equal(offer.amount, 2.99);
-  assert.equal(offer.regularAmount, 4.99);
-  assert.equal(offer.percentOff, 40);
+  assert.equal(offer.regularAmount, 3.99);
+  assert.equal(offer.percentOff, 25);
 });
 
 // ---- auth ------------------------------------------------------------------
@@ -100,7 +101,7 @@ test("config returns tier, local prices and today's prayer times for the visitor
 test("config falls back to USD list prices when the preview fails", async () => {
   const r = await call("/api/config", { country: "IN" });
   assert.equal(r.body.plans[0].currency, "USD");
-  assert.equal(r.body.plans[0].amount, 9.99);
+  assert.equal(r.body.plans[0].amount, 14.99);
 });
 
 test("language comes from the browser first, then the country", () => {
@@ -334,18 +335,73 @@ test("portal returns a Dodo link for web subscribers only", async () => {
   assert.equal(r.body.url, "https://test.customer.dodopayments.com/cus_9");
 });
 
-test("APK download streams from R2 with the Android package type", async () => {
+test("the APK only downloads through a signed link, and only for an account with access", async () => {
   const bytes = new Uint8Array([80, 75, 3, 4]);
   const APKS = {
     get: async (key) => (key === "salahalarm-latest.apk" ? { body: new Blob([bytes]).stream(), size: 4, httpEtag: '"e"' } : key === "latest.json" ? { json: async () => ({ versionCode: 3, versionName: "1.0.2" }) } : null),
     head: async () => ({ size: 4 }),
   };
-  const res = await worker.fetch(request("/download/salahalarm.apk"), env({ APKS }), ctx);
+  const e = env({ APKS });
+
+  // No link: sent to the install page, which asks them to sign in or pay.
+  let res = await worker.fetch(request("/download/salahalarm.apk"), e, ctx);
+  assert.equal(res.status, 302);
+  assert.match(res.headers.get("location"), /\/android\/install\/$/);
+  res = await worker.fetch(request("/download/salahalarm.apk?t=abc.9999999999.forged"), e, ctx);
+  assert.equal(res.status, 302);
+
+  // Signed in but never paid: no link.
+  const token = idToken({ uid: "apk-user" });
+  let r = await call("/api/android/download", { method: "POST", token, env: e });
+  assert.equal(r.status, 402);
+  r = await call("/api/android/download", { method: "POST", env: e });
+  assert.equal(r.status, 401);
+
+  // With the free trial (or a paid plan) the link works.
+  assert.equal((await call("/api/trial", { method: "POST", token, env: e })).status, 200);
+  r = await call("/api/android/download", { method: "POST", token, env: e });
+  assert.equal(r.status, 200);
+  assert.equal(r.body.size, 4);
+  res = await worker.fetch(request(r.body.url), e, ctx);
+  assert.equal(res.status, 200);
   assert.equal(res.headers.get("content-type"), "application/vnd.android.package-archive");
   assert.match(res.headers.get("content-disposition"), /SalahAlarm\.apk/);
   assert.equal((await res.arrayBuffer()).byteLength, 4);
-  const latest = await worker.fetch(request("/api/android/latest"), env({ APKS }), ctx);
+
+  // A tampered or expired link is refused.
+  const [uid64, exp, sig] = new URL(r.body.url, "https://x").searchParams.get("t").split(".");
+  res = await worker.fetch(request(`/download/salahalarm.apk?t=${uid64}.${Number(exp) + 60}.${sig}`), e, ctx);
+  assert.equal(res.status, 302);
+  assert.equal(await verifyDownload(e, `${uid64}.${exp}.${sig}`, (Number(exp) + 1) * 1000), false);
+  assert.equal(await verifyDownload(e, await signDownload(e, "apk-user")), true);
+
+  const latest = await worker.fetch(request("/api/android/latest"), e, ctx);
   assert.deepEqual(await latest.json(), { versionCode: 3, versionName: "1.0.2", url: "/download/salahalarm.apk" });
+});
+
+test("India and other price-sensitive countries pay half", () => {
+  const full = displayPlans(tierFor("US"));
+  const half = displayPlans(tierFor("IN"));
+  assert.deepEqual(full.map((p) => p.amount), [29.99, 3.99]);
+  assert.deepEqual(displayPlans(tierFor("SA")).map((p) => p.amount), [29.99, 3.99]);
+  for (const [i, p] of half.entries()) assert.ok(Math.abs(p.amount - full[i].amount / 2) < 0.02, `${p.plan} ${p.amount}`);
+});
+
+test("tiers with the same prices share one set of Dodo products", async () => {
+  const created = [];
+  const { products } = await setupDodo(async (method, path, body) => {
+    created.push(body);
+    return { product_id: `pdt_${created.length}` };
+  });
+  assert.equal(created.length, 6);
+  assert.deepEqual(products.t2, products.t1);
+  assert.notEqual(products.t3.weekly, products.t1.weekly);
+  assert.equal(created.find((b) => b.metadata.tier === "t3" && b.metadata.plan === "yearly").price.price, 1499);
+});
+
+test("the admin routes need the Cloudflare token", async () => {
+  assert.equal((await call("/api/admin/prices", { token: "nope" })).status, 401);
+  assert.equal((await call("/api/admin/dodo-products", { method: "POST", token: "nope" })).status, 401);
 });
 
 test("an app login code signs the installed app in once, as the same user", async () => {

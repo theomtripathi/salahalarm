@@ -16,6 +16,14 @@ on:
         description: "Also create the live Dodo products and webhook (once)"
         type: boolean
         default: false
+      dodo_products:
+        description: "Create a fresh set of live Dodo products at the prices in web/src/pricing.js"
+        type: boolean
+        default: false
+      price_table:
+        description: "Print what each country is charged (Dodo checkout preview)"
+        type: boolean
+        default: false
       homepage_ref:
         description: "Also deploy the salahalarm.com homepage (website/) from this branch or commit"
         type: string
@@ -71,6 +79,35 @@ jobs:
           secret=$(node -e 'process.stdout.write(require(process.argv[1]).webhook?.secret || "")' "$RUNNER_TEMP/dodo.json")
           if [ -n "$secret" ]; then printf %s "$secret" | npx wrangler secret put DODO_WEBHOOK_SECRET; fi
           rm -f "$RUNNER_TEMP/dodo.json"
+
+      - name: New Dodo products
+        if: ${{ inputs.dodo_products }}
+        run: |
+          sleep 10
+          curl -sS -X POST https://salahalarm.com/api/admin/dodo-products \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -o "$RUNNER_TEMP/products.json" -w "HTTP %{http_code}\n"
+          node -e '
+            const r = require(process.argv[1]);
+            for (const line of r.log || []) console.log(line);
+            if (r.error) { console.log("::error::" + r.error + " " + JSON.stringify(r.detail)); process.exit(1); }
+            console.log("PRODUCTS = \x27" + JSON.stringify(r.products) + "\x27");
+          ' "$RUNNER_TEMP/products.json"
+
+      - name: Price table
+        if: ${{ inputs.price_table }}
+        run: |
+          sleep 5
+          curl -sS "https://salahalarm.com/api/admin/prices?countries=US,GB,AE,SA,QA,KW,OM,BH,TR,MY,IN,PK,ID,BD,EG,NG,MA" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -o "$RUNNER_TEMP/prices.json" -w "HTTP %{http_code}\n"
+          node -e '
+            const { rows = [], error } = require(process.argv[1]);
+            if (error) { console.log("::error::" + error); process.exit(1); }
+            const f = (p) => p ? `${p.currency} ${p.amount}` : "-";
+            for (const r of rows) {
+              const by = Object.fromEntries(r.plans.map((p) => [p.plan, p]));
+              console.log(`${r.country} ${r.tier} | weekly ${f(by.weekly)} | yearly ${f(by.yearly)} | offer ${f(r.offer)}`);
+            }
+          ' "$RUNNER_TEMP/prices.json"
 
       - name: Check
         run: |
