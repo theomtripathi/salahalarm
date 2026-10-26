@@ -30,6 +30,22 @@ export function appStoreBadge(s, href, cta, cls = '') {
   return `<a class="store-badge ${cls}" href="${esc(href)}" data-cta="${esc(cta)}">${APPLE}<span><small>${esc(s.badgeTop)}</small>App Store</span></a>`;
 }
 
+const ANDROID = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.6 9.48 19.44 6.3a.38.38 0 0 0-.66-.38l-1.87 3.23a11.43 11.43 0 0 0-9.82 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>';
+
+export function linkFor(config, platform, lang, slug) {
+  const pattern = platform === 'android' ? config.androidLinkPattern : config.ctaLinkPattern;
+  return pattern.replace('{lang}', lang).replace('{slug}', encodeURIComponent(slug));
+}
+
+// The Android + iOS button pair used in every CTA. `from` tells the /go and
+// /android funnels which section the click came from.
+export function storeButtons(config, lang, slug, cls = '') {
+  const s = config.langs[lang];
+  const btn = (platform, logo, name) =>
+    `<a class="store-badge store-${platform}" href="${esc(linkFor(config, platform, lang, slug))}" data-cta="${esc(`${lang}-${slug}-${platform}`)}">${logo}<span><small>${esc(s.getItFor)}</small>${name}</span></a>`;
+  return `<div class="store-buttons ${cls}">${btn('android', ANDROID, 'Android')}${btn('ios', APPLE, 'iOS')}</div>`;
+}
+
 export function phone(src, alt, cls = '') {
   return `<div class="phone ${cls}"><div class="phone-screen"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></div></div>`;
 }
@@ -111,7 +127,10 @@ function header(config, lang) {
   <div class="wrap header-inner">
     <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
     <nav class="header-nav" aria-label="Main">${homeNav}<a href="/blog/${lang}/">${esc(s.guides)}</a></nav>
-    <a class="btn btn-small" href="${esc(config.ctaLinkPattern.replace('{lang}', lang).replace('{slug}', 'header'))}" data-cta="${lang}-header">${esc(s.getApp)}</a>
+    <div class="header-cta">
+      <a class="btn btn-small" href="${esc(linkFor(config, 'android', lang, 'header'))}" data-cta="${lang}-header-android" aria-label="${esc(s.getItFor)} Android">${ANDROID}<span>Android</span></a>
+      <a class="btn btn-small" href="${esc(linkFor(config, 'ios', lang, 'header'))}" data-cta="${lang}-header-ios" aria-label="${esc(s.getItFor)} iOS">${APPLE}<span>iOS</span></a>
+    </div>
   </div>
 </header>`;
 }
@@ -127,24 +146,23 @@ function footer(config, lang) {
       <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
       <p>The Fajr alarm that gets you to the prayer mat. Built for Muslims everywhere.</p>
     </div>
-    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a href="${esc(config.appStoreUrl)}">App Store</a></div>
+    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
     <div><h2>Guides</h2>${langs}</div>
     <div><h2>Legal</h2><a href="${esc(config.privacyUrl)}">Privacy</a><a href="${esc(config.termsUrl)}">Terms</a><a href="${esc(config.supportUrl)}">Support</a></div>
   </div>
-  <div class="wrap footer-base"><p>© ${year} ${esc(config.appName)}</p><p>iPhone · English · العربية · Türkçe · Bahasa Indonesia · اردو</p></div>
+  <div class="wrap footer-base"><p>© ${year} ${esc(config.appName)}</p><p>Android · iPhone · English · العربية · Türkçe · Bahasa Indonesia · اردو</p></div>
 </footer>`;
 }
 
 // Inline CTA used inside articles.
 export function ctaInline(config, lang, slug) {
   const s = config.langs[lang];
-  const href = config.ctaLinkPattern.replace('{lang}', lang).replace('{slug}', encodeURIComponent(slug));
   return `<aside class="cta-inline">
   <img src="/icon.png" alt="" width="56" height="56">
   <div>
     <p class="cta-title">${esc(s.ctaTitle)}</p>
     <p>${esc(s.ctaBody)}</p>
-    ${appStoreBadge(s, href, `${lang}-${slug}`)}
+    ${storeButtons(config, lang, slug, 'buttons-light')}
   </div>
 </aside>`;
 }
@@ -152,13 +170,12 @@ export function ctaInline(config, lang, slug) {
 // Dark full-width band closing every page.
 export function ctaBand(config, lang, slug) {
   const s = config.langs[lang];
-  const href = config.ctaLinkPattern.replace('{lang}', lang).replace('{slug}', encodeURIComponent(slug));
   return `<section class="cta-band">
   <div class="wrap cta-band-inner">
     <div>
       <h2>${esc(s.ctaBandTitle)}</h2>
       <p>${esc(s.ctaBandBody)}</p>
-      ${appStoreBadge(s, href, `${lang}-${slug}-band`, 'badge-light')}
+      ${storeButtons(config, lang, `${slug}-band`, 'buttons-light')}
     </div>
     ${alarmPhone('phone-tilt')}
   </div>

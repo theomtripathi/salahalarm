@@ -1,7 +1,7 @@
 // The salahalarm.com landing page (English).
 
 import { escapeHtml as esc } from '../lib/markdown.mjs';
-import { icon, appStoreBadge, alarmPhone, layout, ctaBand } from '../lib/ui.mjs';
+import { icon, storeButtons, alarmPhone, layout, ctaBand } from '../lib/ui.mjs';
 
 const FEATURES = [
   ['clock', 'Exact prayer times', 'Calculated for your location every day, with Muslim World League, Umm al-Qura, Egyptian, ISNA, Diyanet and other methods.'],
@@ -21,11 +21,11 @@ const STEPS = [
 ];
 
 const FAQ = [
-  ['How does the prayer mat scan work?', 'When the alarm rings, point your iPhone camera at your prayer mat and confirm the scan. That stops the alarm and logs the prayer, so you have to get out of bed to switch it off.'],
+  ['How does the prayer mat scan work?', 'When the alarm rings, point your phone camera at your prayer mat and confirm the scan. That stops the alarm and logs the prayer, so you have to get out of bed to switch it off.'],
   ['Is Salah Alarm free?', 'Salah Alarm is free to download. Some features, such as SalahLock and advanced alarms, are part of an optional Premium subscription.'],
   ['Which prayer time calculation methods are supported?', 'Muslim World League, Umm al-Qura (Makkah), Egyptian General Authority, ISNA (North America), Diyanet (Turkey), Kuwait, Qatar, Dubai, Singapore and more. Choose the one your local mosque follows.'],
   ['Can I use it as a suhoor alarm in Ramadan?', 'Yes. Set your alarm before Fajr so you have time to eat, and the adhan alarm at Fajr makes sure you still pray on time.'],
-  ['Is there an Android version?', 'Not yet. Salah Alarm is available for iPhone on the App Store.'],
+  ['Is there an Android version?', 'Yes. Salah Alarm is available for Android and for iPhone. Tap Get it for Android to set up your account and start, or get the iPhone app from the App Store.'],
   ['Which languages does the app support?', 'English, Arabic, Turkish, Indonesian and Urdu.'],
 ];
 
@@ -34,19 +34,19 @@ function daysUntil(date) {
 }
 
 export function homePage(config, latest) {
-  const s = config.langs.en;
-  const cta = (slug) => config.ctaLinkPattern.replace('{lang}', 'en').replace('{slug}', slug);
+  // The Android + iOS pair closing a section; light buttons on dark sections.
+  const cta = (slug, dark = false) => `<div class="section-cta">${storeButtons(config, 'en', slug, dark ? 'buttons-light' : '')}</div>`;
   const days = daysUntil(config.ramadanStart);
 
   const body = `
 <section class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <p class="pill">${icon('moon', 'icon icon-sm')} The Fajr alarm for iPhone</p>
+      <p class="pill">${icon('moon', 'icon icon-sm')} The Fajr alarm for Android and iPhone</p>
       <h1>Never miss Fajr again.</h1>
       <p class="hero-lead">The adhan alarm that only stops when you reach your prayer mat. Exact prayer times for your city, SalahLock, streaks, Quran and Qibla in one app.</p>
       <div class="hero-actions">
-        ${appStoreBadge(s, cta('hero'), 'en-hero', 'badge-light')}
+        ${storeButtons(config, 'en', 'hero', 'buttons-light')}
         <p class="rating">${icon('star', 'icon icon-star')}${icon('star', 'icon icon-star')}${icon('star', 'icon icon-star')}${icon('star', 'icon icon-star')}${icon('star', 'icon icon-star')}<span>Rated 4.8 on the App Store</span></p>
       </div>
     </div>
@@ -80,6 +80,7 @@ export function homePage(config, latest) {
         </ol>
       </div>
     </div>
+    ${cta('compare')}
   </div>
 </section>
 
@@ -95,6 +96,7 @@ export function homePage(config, latest) {
         <p>${esc(text)}</p>
       </article>`).join('')}
     </div>
+    ${cta('how-it-works')}
   </div>
 </section>
 
@@ -110,6 +112,7 @@ export function homePage(config, latest) {
         <li>${icon('check', 'icon icon-sm')} Strict mode keeps them locked until you scan your mat</li>
         <li>${icon('check', 'icon icon-sm')} Works with every one of the five daily prayers</li>
       </ul>
+      ${storeButtons(config, 'en', 'salahlock', 'buttons-light')}
     </div>
   </div>
 </section>
@@ -121,6 +124,7 @@ export function homePage(config, latest) {
     <div class="features">
       ${FEATURES.map(([ic, title, text]) => `<div class="feature">${icon(ic)}<h3>${esc(title)}</h3><p>${esc(text)}</p></div>`).join('')}
     </div>
+    ${cta('features')}
   </div>
 </section>
 
@@ -128,6 +132,7 @@ export function homePage(config, latest) {
   <div class="gallery">
     ${[1, 2, 3, 4, 5, 6, 7, 8].map((n) => `<img src="/img/store-0${n}.webp" alt="Salah Alarm App Store screenshot ${n}" width="270" height="584" decoding="async">`).join('')}
   </div>
+  <div class="wrap">${cta('screenshots')}</div>
 </section>
 
 <section class="section" id="ramadan">
@@ -138,6 +143,7 @@ export function homePage(config, latest) {
         <h2>Ramadan is expected to begin on Monday 8 February 2027.</h2>
         <p>Suhoor is won or lost the same way Fajr is: in the first minute after the alarm. Build the habit now and the month will feel easy.</p>
         <a class="link-arrow" href="/blog/en/ramadan-2027-start-date/">Ramadan 2027 dates and how to prepare ${icon('arrow', 'icon icon-sm')}</a>
+        ${storeButtons(config, 'en', 'ramadan', 'buttons-light')}
       </div>
       <div class="countdown" data-target="${config.ramadanStart}">
         <span class="countdown-num" data-days>${days}</span>
@@ -154,6 +160,7 @@ export function homePage(config, latest) {
     <div class="lang-chips">
       ${Object.entries(config.langs).map(([code, l]) => `<a class="chip" href="/blog/${code}/" lang="${code}" dir="${l.dir}">${esc(l.name)}</a>`).join('')}
     </div>
+    ${cta('languages')}
   </div>
 </section>
 
@@ -161,6 +168,7 @@ ${latest.length ? `<section class="section">
   <div class="wrap">
     <div class="section-head"><div><p class="eyebrow">Guides</p><h2 class="section-title">Read before you sleep</h2></div><a class="link-arrow" href="/blog/en/">All guides ${icon('arrow', 'icon icon-sm')}</a></div>
     <div class="cards">${latest.map((a) => card(config, a)).join('')}</div>
+    ${cta('guides')}
   </div>
 </section>` : ''}
 
@@ -169,6 +177,7 @@ ${latest.length ? `<section class="section">
     <p class="eyebrow">Questions</p>
     <h2 class="section-title">Frequently asked questions</h2>
     <div class="faq">${FAQ.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>
+    ${cta('faq')}
   </div>
 </section>
 
@@ -185,13 +194,13 @@ ${ctaBand(config, 'en', 'home')}
 
   return layout(config, {
     lang: 'en',
-    title: 'Salah Alarm: Fajr Alarm & Prayer Times App for iPhone',
-    description: 'Salah Alarm wakes you for Fajr at the exact prayer time and only stops at your prayer mat. Prayer times, SalahLock, Qibla, Quran and duas for iPhone.',
+    title: 'Salah Alarm: Fajr Alarm & Prayer Times App for Android & iPhone',
+    description: 'Salah Alarm wakes you for Fajr at the exact prayer time and only stops at your prayer mat. Prayer times, SalahLock, Qibla, Quran and duas for Android and iPhone.',
     canonical: '/',
     body,
     bodyClass: 'home',
     jsonLd: [
-      { '@context': 'https://schema.org', '@type': 'MobileApplication', name: config.appName, operatingSystem: 'iOS', applicationCategory: 'LifestyleApplication', downloadUrl: config.appStoreUrl, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+      { '@context': 'https://schema.org', '@type': 'MobileApplication', name: config.appName, operatingSystem: 'iOS, Android', applicationCategory: 'LifestyleApplication', downloadUrl: config.appStoreUrl, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
     ],
   });

@@ -87,6 +87,18 @@ html[dir="rtl"] .link-arrow .icon, html[dir="rtl"] .card-more .icon { transform:
 .store-badge small { display: block; font-size: 11.5px; font-weight: 500; letter-spacing: .02em; }
 .store-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(0 0 0 / 25%); }
 .badge-light { background: #fff; color: #000; border-color: #fff; }
+.store-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+.store-buttons .store-badge { min-width: 168px; }
+.buttons-light .store-badge { background: #fff; color: #000; border-color: #fff; }
+.buttons-light .store-android { background: transparent; color: #fff; border-color: rgb(255 255 255 / 55%); }
+.buttons-light .store-android:hover { background: rgb(255 255 255 / 10%); }
+.buttons-stack { flex-direction: column; }
+.buttons-stack .store-badge { justify-content: center; }
+.section-cta { display: flex; justify-content: center; margin-top: 44px; }
+.spotlight-copy .store-buttons, .ramadan-copy .store-buttons { margin-top: 28px; }
+.header-cta { display: flex; gap: 8px; }
+.header-cta .btn { gap: 6px; padding: 8px 14px; font-family: var(--font); }
+.header-cta svg { width: 17px; height: 17px; }
 
 /* Header */
 .site-header {
@@ -112,7 +124,9 @@ html[dir="rtl"] .link-arrow .icon, html[dir="rtl"] .card-more .icon { transform:
 }
 @media (max-width: 400px) {
   .header-nav { display: none; }
-  .site-header .btn { margin-inline-start: auto; }
+  .header-cta { margin-inline-start: auto; }
+  .brand span { display: none; }
+  .header-cta .btn { padding: 8px 11px; font-size: 14px; }
 }
 
 /* Hero */
@@ -338,7 +352,6 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
 .cta-inline img { border-radius: 14px; flex: none; }
 .cta-inline p { margin: 0 0 14px; color: rgb(255 255 255 / 80%); font-size: 16px; }
 .cta-inline .cta-title { color: #fff; font-weight: 800; font-size: 19px; margin-bottom: 4px; }
-.cta-inline .store-badge { background: #fff; color: #000; border-color: #fff; }
 .related { background: var(--bg-tint); padding: 64px 0; }
 .blog-hero { padding-bottom: 32px; }
 .blog-hero .lang-chips { margin-top: 8px; }
@@ -352,6 +365,7 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
 @media (max-width: 860px) {
   .hero-inner { grid-template-columns: 1fr; padding-top: 44px; padding-bottom: 110px; text-align: center; }
   .hero-actions { justify-content: center; }
+  .hero-actions .store-buttons, .cta-band .store-buttons { justify-content: center; }
   .hero-lead { margin-inline: auto; }
   .steps, .cards { grid-template-columns: 1fr; }
   .step-visual { height: 320px; }
@@ -380,6 +394,9 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
   .prose { font-size: 17.5px; }
   .prose h2 { font-size: 24px; }
   .cta-inline { flex-direction: column; }
+  .store-buttons { justify-content: center; }
+  .store-buttons .store-badge { flex: 1 1 0; min-width: 0; max-width: 220px; padding: 9px 14px; font-size: 19px; justify-content: center; }
+  .cta-inline .store-buttons, .buttons-stack { justify-content: flex-start; }
   .phone-hero { width: min(230px, 56vw); }
 }
 

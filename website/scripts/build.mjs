@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { render, parseFrontmatter, escapeHtml as esc } from './lib/markdown.mjs';
-import { layout, ctaInline, ctaBand, appStoreBadge, alarmPhone } from './lib/ui.mjs';
+import { layout, ctaInline, ctaBand, storeButtons, alarmPhone } from './lib/ui.mjs';
 import { homePage, card } from './pages/home.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -147,7 +147,7 @@ function articlePage(a, siblings, related) {
       ${alarmPhone('phone-aside')}
       <p class="cta-title">${esc(s.ctaTitle)}</p>
       <p>${esc(s.ctaBody)}</p>
-      ${appStoreBadge(s, ctaUrl(a.lang, a.slug), `${a.lang}-${a.slug}-aside`)}
+      ${storeButtons(config, a.lang, `${a.slug}-aside`, 'buttons-stack')}
     </div>
   </aside>
 </div>

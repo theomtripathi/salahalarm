@@ -4,6 +4,7 @@
   "appStoreId": "6758457826",
   "appStoreUrl": "https://apps.apple.com/app/id6758457826",
   "ctaLinkPattern": "https://salahalarm.com/go/seo-{lang}?from={slug}",
+  "androidLinkPattern": "https://salahalarm.com/android/?a=seo-{lang}&from={slug}",
   "defaultLang": "en",
   "langs": {
     "en": {
@@ -26,7 +27,8 @@
       "related": "Keep reading",
       "guides": "Guides",
       "ctaBandTitle": "Wake up for Fajr tomorrow",
-      "ctaBandBody": "Exact prayer times for your city and an adhan alarm that only stops at your prayer mat."
+      "ctaBandBody": "Exact prayer times for your city and an adhan alarm that only stops at your prayer mat.",
+      "getItFor": "Get it for"
     },
     "ar": {
       "name": "العربية",
@@ -48,7 +50,8 @@
       "related": "اقرأ أيضًا",
       "guides": "المقالات",
       "ctaBandTitle": "استيقظ لصلاة الفجر غدًا",
-      "ctaBandBody": "مواقيت صلاة دقيقة لمدينتك ومنبه أذان لا يتوقف إلا عند سجادة الصلاة."
+      "ctaBandBody": "مواقيت صلاة دقيقة لمدينتك ومنبه أذان لا يتوقف إلا عند سجادة الصلاة.",
+      "getItFor": "حمّله على"
     },
     "tr": {
       "name": "Türkçe",
@@ -70,7 +73,8 @@
       "related": "Bunları da oku",
       "guides": "Rehberler",
       "ctaBandTitle": "Yarın sabah namazına uyan",
-      "ctaBandBody": "Şehrine göre tam namaz vakitleri ve ancak seccadede susan bir ezan alarmı."
+      "ctaBandBody": "Şehrine göre tam namaz vakitleri ve ancak seccadede susan bir ezan alarmı.",
+      "getItFor": "Hemen indir"
     },
     "id": {
       "name": "Bahasa Indonesia",
@@ -92,7 +96,8 @@
       "related": "Baca juga",
       "guides": "Artikel",
       "ctaBandTitle": "Bangun Subuh besok pagi",
-      "ctaBandBody": "Jadwal sholat akurat untuk kotamu dan alarm adzan yang baru berhenti di sajadah."
+      "ctaBandBody": "Jadwal sholat akurat untuk kotamu dan alarm adzan yang baru berhenti di sajadah.",
+      "getItFor": "Dapatkan untuk"
     },
     "ur": {
       "name": "اردو",
@@ -114,7 +119,8 @@
       "related": "یہ بھی پڑھیں",
       "guides": "مضامین",
       "ctaBandTitle": "کل فجر کے لیے جاگیں",
-      "ctaBandBody": "آپ کے شہر کے صحیح نماز اوقات اور اذان کا الارم جو صرف جائے نماز پر بند ہوتا ہے۔"
+      "ctaBandBody": "آپ کے شہر کے صحیح نماز اوقات اور اذان کا الارم جو صرف جائے نماز پر بند ہوتا ہے۔",
+      "getItFor": "ڈاؤن لوڈ کریں"
     }
   },
   "privacyUrl": "https://ramadan-pro.lovable.app/privacy",
