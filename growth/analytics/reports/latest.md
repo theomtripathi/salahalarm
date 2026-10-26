@@ -33,9 +33,9 @@ _SEO views are Google clicks to the site. App Store installs come from the campa
 
 _~ means views estimated from likes (Instagram hides plays). "Unverified" counts were read by an assistant and get re-checked by the scraper._
 
-202 posts in the library (202 from other accounts, 0 ours), 0 added today. Goal: 1,000 proven posts to clip from.
+261 posts in the library (261 from other accounts, 0 ours), 0 added today. Goal: 1,000 proven posts to clip from.
 
-By platform: instagram 42, tiktok 80, youtube 50, pinterest 27, topcarousels 3. By format: reminder 188, carousel 7, alarm 3, pov 3, quran 1.
+By platform: instagram 79, tiktok 80, youtube 65, pinterest 27, topcarousels 3, web 3, x 4. By format: reminder 236, carousel 10, quran 6, pov 4, alarm 3, dua 1, ramadan 1.
 
 **Clip next: best unclipped posts**
 
@@ -44,21 +44,21 @@ By platform: instagram 42, tiktok 80, youtube 50, pinterest 27, topcarousels 3. 
 3. [tiktok @ismilezzzzzzz](https://www.tiktok.com/@ismilezzzzzzz/video/7570029738337619232) 3.9M views (unverified), 3.0% pass-on, reminder: "Humor"
 4. [tiktok @_lateephat](https://www.tiktok.com/@_lateephat/video/7622778968634117383) 34K views (unverified), 9.2% pass-on, reminder: "Evening Routine"
 5. [tiktok @islamicwisdomhub.1](https://www.tiktok.com/@islamicwisdomhub.1/video/7464320098199735558) 2.8M views (unverified), 2.8% pass-on, reminder: "Fajr Waking"
-6. [tiktok @bymouadh](https://www.tiktok.com/@bymouadh/video/7621857518850952468) 2.5M views (unverified), 2.8% pass-on, reminder: "Morning Routine"
-7. [youtube @Islamic Media Australia](https://www.youtube.com/watch?v=Kuk6HgOH9yQ) 15.8M views (unverified), reminder: "Prayer Education"
-8. [tiktok @mysalahmat](https://www.tiktok.com/@mysalahmat/video/7590135926479752470) 8.2M views (unverified), 0.8% pass-on, reminder: "Prayer Education"
-9. [instagram @journey_with_kacho](https://www.instagram.com/p/DeMtQ8LKy5h/) ~10.0M views (unverified), pov: "Relatable Fajr peace; AI label"
-10. [tiktok @hassantoqeer93](https://www.tiktok.com/@hassantoqeer93/video/7608378679529426197) 3.6M views (unverified), 1.3% pass-on, reminder: "Humor"
-11. [youtube @Ummah Moments](https://www.youtube.com/shorts/L1oWHZ83UGA) 7.6M views (unverified), reminder: "Humor"
-12. [instagram @8tvnn](https://www.instagram.com/reel/DcbQy_nIafe/) 5.4M views (unverified), reminder: "Hope during hardship: سيمضي ما أثقل قلبك ويبقى وعد الله #islam #muslim"
-13. [tiktok @nuraniquran1](https://www.tiktok.com/@nuraniquran1/video/7637905811062279438) ~4.9M views (unverified), reminder: "Islamic Reminders"
-14. [tiktok @alinoor.ahmed](https://www.tiktok.com/@alinoor.ahmed/video/7611642363617856776) 2.4M views (unverified), 0.8% pass-on, reminder: "Prayer Education"
-15. [tiktok @4joykids](https://www.tiktok.com/@4joykids/video/7611997866420112662) 2.0M views (unverified), 0.9% pass-on, reminder: "Islamic Reminders"
-16. [tiktok @muslim](https://www.tiktok.com/@muslim/video/7692563730223090958) 3.2M views (unverified), reminder: "Humor after two rakahs before Fajr"
-17. [tiktok @sujdapp](https://www.tiktok.com/@sujdapp/video/7596221351426379038) 520K views (unverified), 2.5% pass-on, reminder: "Islamic Reminders"
-18. [instagram @8tvnn](https://www.instagram.com/reel/DcGf3Bjgb5V/) 2.8M views (unverified), reminder: "Prayer for a good ending: اللهم احسن ختامنا ولا تقبض روحي إلا وانت راض"
-19. [tiktok @saufiyahali](https://www.tiktok.com/@saufiyahali/video/7369634634595962155) 761K views (unverified), 1.7% pass-on, reminder: "Morning Routine"
-20. [instagram @8tvnn](https://www.instagram.com/reel/DcyIwwtA2jb/) 2.5M views (unverified), reminder: "Gratitude and Alhamdulillah: الحمد لله حمدًا كثيرًا طيبًا مباركًا فيه "
+6. [youtube @Adam - Islamic Animation](https://www.youtube.com/watch?v=WuiLWYlEuew) 19.6M views (unverified), reminder: "Prayer Education"
+7. [tiktok @bymouadh](https://www.tiktok.com/@bymouadh/video/7621857518850952468) 2.5M views (unverified), 2.8% pass-on, reminder: "Morning Routine"
+8. [youtube @Islamic Media Australia](https://www.youtube.com/watch?v=Kuk6HgOH9yQ) 15.8M views (unverified), reminder: "Prayer Education"
+9. [tiktok @mysalahmat](https://www.tiktok.com/@mysalahmat/video/7590135926479752470) 8.2M views (unverified), 0.8% pass-on, reminder: "Prayer Education"
+10. [instagram @journey_with_kacho](https://www.instagram.com/p/DeMtQ8LKy5h/) ~10.0M views (unverified), pov: "Relatable Fajr peace; AI label"
+11. [tiktok @hassantoqeer93](https://www.tiktok.com/@hassantoqeer93/video/7608378679529426197) 3.6M views (unverified), 1.3% pass-on, reminder: "Humor"
+12. [youtube @Ummah Moments](https://www.youtube.com/shorts/L1oWHZ83UGA) 7.6M views (unverified), reminder: "Humor"
+13. [instagram @dunya_on_mute](https://www.instagram.com/reel/DM7ZbHTNGbx/) ~5.4M views (unverified), reminder: "Islamic reminder discovered under Fajr"
+14. [instagram @8tvnn](https://www.instagram.com/reel/DcbQy_nIafe/) 5.4M views (unverified), reminder: "Hope during hardship: سيمضي ما أثقل قلبك ويبقى وعد الله #islam #muslim"
+15. [tiktok @nuraniquran1](https://www.tiktok.com/@nuraniquran1/video/7637905811062279438) ~4.9M views (unverified), reminder: "Islamic Reminders"
+16. [tiktok @alinoor.ahmed](https://www.tiktok.com/@alinoor.ahmed/video/7611642363617856776) 2.4M views (unverified), 0.8% pass-on, reminder: "Prayer Education"
+17. [instagram @verse.sakinah](https://www.instagram.com/reel/DexCI2hugDQ/) ~1.9M views (unverified), 1.0% pass-on, quran: "Animated Quran reflection explainer: There’s a sentence in the Quran t"
+18. [tiktok @4joykids](https://www.tiktok.com/@4joykids/video/7611997866420112662) 2.0M views (unverified), 0.9% pass-on, reminder: "Islamic Reminders"
+19. [instagram @reminding_guy](https://www.instagram.com/reel/DeS8lfgMjXe/) 3.3M views (unverified), reminder: "Islamic reflection with outdoor/cemetery imagery"
+20. [tiktok @muslim](https://www.tiktok.com/@muslim/video/7692563730223090958) 3.2M views (unverified), reminder: "Humor after two rakahs before Fajr"
 
 **Rising fastest since yesterday**
 
@@ -66,11 +66,16 @@ _None yet._
 
 **App promos that worked (copy the structure)**
 
-1. [tiktok @dassahlynnn](https://www.tiktok.com/@dassahlynnn/video/7695547570596154655) 118K views, just pray: "Just Pray mat-scan alarm review; same creative as Instagram candidate"
-2. [tiktok @sana34593](https://www.tiktok.com/@sana34593/video/7699157737942371616) 84K views: "Prayer app demonstration"
-3. [instagram @_thefajr](https://www.instagram.com/p/Deu1BwCt2WI/) 145K views: "Comment HOODIE for link"
-4. [tiktok @hisaabalarm](https://www.tiktok.com/@hisaabalarm/video/7699479603320065302) 12K views: "Somewhere in the world Fajr is beginning; app reveal"
-5. [tiktok @westernmuslim1](https://www.tiktok.com/@westernmuslim1/video/7700206097948232973) 972 views, deenly: "Deenly app review; low engagement comparison"
+1. [instagram @bestlookingmoroccanguy](https://www.instagram.com/reel/Db35L4uhR1h/) 415K views, just pray: "Cultural-country debate; Just Pray collaboration"
+2. [instagram @dassahlynnn](https://www.instagram.com/reel/DdzNUTCTUgp/) 327K views, just pray: "Learning prayer with an app; Just Pray collaboration"
+3. [tiktok @sana34593](https://www.tiktok.com/@sana34593/video/7699157737942371616) 84K views: "Prayer app demonstration"
+4. [instagram @_thefajr](https://www.instagram.com/p/Deu1BwCt2WI/) 145K views: "Comment HOODIE for link"
+5. [instagram @fayeoush](https://www.instagram.com/reel/DZAffnYsqnE/) 140K views: "Fajr discipline with explicit competitor-app caption"
+6. [instagram @bestlookingmoroccanguy](https://www.instagram.com/reel/DY0Npkqsfwd/) 134K views: "Eid seasonal three-item list; app caption mention"
+7. [instagram @bestlookingmoroccanguy](https://www.instagram.com/reel/DZQwYwXvMAY/) 128K views: "Critical list about Muslim trends; app caption mention"
+8. [tiktok @dassahlynnn](https://www.tiktok.com/@dassahlynnn/video/7695547570596154655) 118K views, just pray: "Just Pray mat-scan alarm review; same creative as Instagram candidate"
+9. [instagram @akhialtamash](https://www.instagram.com/reel/DYNRZ2MuV31/) 94K views, just pray: "Celebrity-faith curiosity question; Just Pray caption mention"
+10. [instagram @ummahunite1](https://www.instagram.com/reel/DXj7AS_ifHp/) 89K views, just pray: "Paid online creator-event promotion with Just Pray sponsor mention"
 
 **Ads still running longest** (Meta Ad Library, captured 2026-10-25, 780 ads). Months of spend on one creative is a sign it works for them; copy the structure, not the ad.
 

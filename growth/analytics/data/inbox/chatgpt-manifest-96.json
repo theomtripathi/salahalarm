@@ -1,0 +1,3029 @@
+[
+  {
+    "id": "DCS0gUWTfsQ",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DCS0gUWTfsQ/",
+    "creator": "aqill_typist",
+    "topic": "Fajr dawn aesthetic",
+    "metric": 106000,
+    "metric_type": "likes",
+    "post_date_observed": "2024-11-13",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Recreate with original dawn imagery and a gentle reminder to prepare the alarm tonight.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DdXqtySoeNU",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdXqtySoeNU/",
+    "creator": "reminding_guy",
+    "topic": "Fajr reminder",
+    "metric": null,
+    "metric_type": "unavailable",
+    "post_date_observed": "2026-09-17",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Review video and reload metrics before shortlisting.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DdXqtySoeNU.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 8653534,
+    "sha256": "78e1105a04c2ef490543eb8ebdbd3fb9c29f2732a1940abd938f75b8d58ab1f0",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "20.100000"
+      }
+    }
+  },
+  {
+    "id": "DeNuD9BSUg4",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DeNuD9BSUg4/",
+    "creator": "__enha__modesty",
+    "topic": "Starting the day with Allah",
+    "metric": null,
+    "metric_type": "unavailable",
+    "post_date_observed": "2026-10-08",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Original morning routine ending with prayer mat scan.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/__enha__modesty__DeNuD9BSUg4.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 2677584,
+    "sha256": "18fe1743a0397bcebce04d92fd82d45ae3fa1f3da84b563cc4c9038fd1a1678a",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "9.867029"
+      }
+    }
+  },
+  {
+    "id": "C36XWTzydXp",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/C36XWTzydXp/",
+    "creator": "ay.at8116",
+    "topic": "Begin the day with Fajr",
+    "metric": null,
+    "metric_type": "unavailable",
+    "post_date_observed": "2024-02-29",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original Urdu morning reminder; verify metrics.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DSDJqiRCCFc",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DSDJqiRCCFc/",
+    "creator": "islam_0n1y",
+    "topic": "Benefits of the five prayers",
+    "metric": null,
+    "metric_type": "unavailable",
+    "post_date_observed": "unknown",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Use a daily prayer preparation checklist; do not repeat unsourced benefit claims.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DdEWj45OFhU",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdEWj45OFhU/",
+    "creator": "shefaalquran",
+    "topic": "Five prayer windows",
+    "metric": null,
+    "metric_type": "unavailable",
+    "post_date_observed": "2026-09-09",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Create five original time-of-day panels tied to prayer reminders.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DFWXfVfByHF",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DFWXfVfByHF/",
+    "creator": "way.2.paradise",
+    "topic": "Fajr reminder",
+    "metric": 598,
+    "metric_type": "likes",
+    "post_date_observed": "2025-01-28",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Saveable evening preparation checklist.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "De3l0WcIbHz",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/De3l0WcIbHz/",
+    "creator": "baitulamanmosque / thmosques",
+    "topic": "UK clock change reminder",
+    "metric": 35,
+    "metric_type": "likes",
+    "post_date_observed": "2026-10-24",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Timely clock-change guide; use location-specific verified times.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "CweBEYbvFIZ",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/CweBEYbvFIZ/",
+    "creator": "al_.falaq",
+    "topic": "Fajr prayer reminder",
+    "metric": 21000,
+    "metric_type": "likes",
+    "post_date_observed": "Exact post date not captured; recheck source",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original Fajr visual with a soft alarm setup CTA.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "CJKzOxmhTth",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/CJKzOxmhTth/",
+    "creator": "murattal.quran",
+    "topic": "Surah Al Fajr 89:27-30 recitation",
+    "metric": 46168,
+    "metric_type": "views",
+    "post_date_observed": "Exact post date not captured; recheck source",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Reference only: recitation is distinct from waking-for-Fajr content; verify audio rights and context.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/murattal.quran__CJKzOxmhTth.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 1059905,
+    "sha256": "e6f257aac994cfa06ef443d78b99e4805185702e3a0488998e4ddb0a328b74b6",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 720
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "51.037460"
+      }
+    }
+  },
+  {
+    "id": "DdRIX4Jgz1c",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdRIX4Jgz1c/",
+    "creator": "islam4_life",
+    "topic": "Five prayer windows",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2026-09",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Same visual concept as another result: exclude from unique creative count until compared.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DVGXJSLjwwm",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DVGXJSLjwwm/",
+    "creator": "jaehan9192",
+    "topic": "POV me after Fajr",
+    "metric": 96700,
+    "metric_type": "likes",
+    "post_date_observed": "2026-02-23",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Original relatable post-Fajr skit; reveal the alarm-to-mat sequence before the payoff.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/jaehan9192__DVGXJSLjwwm.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 1425497,
+    "sha256": "94f7dc2da440662f3ab623feb1579d03ec2372df059fe5b5bc491bb42022db15",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "7.133333"
+      }
+    }
+  },
+  {
+    "id": "DekkgN8lI3e",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DekkgN8lI3e/",
+    "creator": "fajrglobal.en",
+    "topic": "School fundraising",
+    "metric": 72,
+    "metric_type": "likes",
+    "post_date_observed": "2026-10-17",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Carousel",
+    "adaptation": "Reject: hashtag match is school brand, not Fajr prayer marketing.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "Ct2XtrYBEV8",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/Ct2XtrYBEV8/",
+    "creator": "heyfizzahere",
+    "topic": "Prayer is better than sleep",
+    "metric": 3227,
+    "metric_type": "likes",
+    "post_date_observed": "Exact post date not captured; recheck source",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "adaptation": "Film original dawn alarm and getting-up sequence; avoid copying the creator's audio.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "Ddl6onAoCkC",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/Ddl6onAoCkC/",
+    "creator": "sukoonandsabr07",
+    "topic": "Quiet morning mini-vlog",
+    "metric": 49600,
+    "metric_type": "likes",
+    "post_date_observed": "2026-09",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Three-shot original mini-vlog: alarm, prayer mat, dawn; show the actual app.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/sukoonandsabr07__Ddl6onAoCkC.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 4789409,
+    "sha256": "b88428483abf8f721c6a4280911a2d104dbfe98a935872dd210ad28216551d31",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "35.640000"
+      }
+    }
+  },
+  {
+    "id": "DeXpTz7T4Q5",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DeXpTz7T4Q5/",
+    "creator": "dassahlynnn / justpray.app",
+    "topic": "Creator review of mat-scan alarm",
+    "metric": 59300,
+    "metric_type": "likes",
+    "post_date_observed": "2026-10; UI says 1w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Priority: real creator demonstrates Salah Alarm ringing, getting up and scanning mat. Clearly identify app. No invented testimonial.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/dassahlynnn__DeXpTz7T4Q5.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "Downloaded frame inspected: creator in bed, on-screen Fajr wake-up struggle hook; source caption describes Just Pray mat-scan alarm",
+    "bytes": 1803083,
+    "sha256": "f60694da09bf30a46b6a71ceebadb3283ac7231819706e97bdebc1474852d2ad",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "8.473832"
+      }
+    },
+    "publisher_listing_views_observed": 2400000,
+    "publisher_listing_views_observed_at": "2026-10-25T13:25:58.924700+00:00",
+    "publisher_baseline_file": "JUST_PRAY_CREATOR_BASELINE.json"
+  },
+  {
+    "id": "DeCxPvDsNZV",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DeCxPvDsNZV/",
+    "creator": "fajreholic",
+    "topic": "Relatable Fajr reel",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2026-10-09",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Inspect visual before adapting; no performance claim.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/fajreholic__DeCxPvDsNZV.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 3427394,
+    "sha256": "8dfab19bd6f3d950f640cab91eb1062079ecd766604183865a79b50bb422bbae",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "15.021859"
+      }
+    }
+  },
+  {
+    "id": "DSsARJ5jCeH",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DSsARJ5jCeH/",
+    "creator": "irfan_writes",
+    "topic": "Start the day with Allah",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2025-12-25",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Gentle original reminder plus evening setup CTA.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DeMtQ8LKy5h",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DeMtQ8LKy5h/",
+    "creator": "journey_with_kacho",
+    "topic": "Relatable Fajr peace; AI label",
+    "metric": 830000,
+    "metric_type": "likes",
+    "post_date_observed": "2026-10; UI says 2w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Priority: original relatable contrast between waking reluctantly and feeling calm after prayer. Inspect full video before scripting.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/journey_with_kacho__DeMtQ8LKy5h.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 6030723,
+    "sha256": "b071f3945daa0f7a193518050a87a84ffea1df4a428afb0cbef4d1dbb03a9162",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "19.363991"
+      }
+    }
+  },
+  {
+    "id": "Dd5oeevxkX4",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/Dd5oeevxkX4/",
+    "creator": "nasheediocalm",
+    "topic": "Wake together for Fajr; AI label",
+    "metric": 10100,
+    "metric_type": "likes",
+    "post_date_observed": "2026-10; UI says 3w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original couple or family wake-up concept; use willing actors and real app demo.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DdA4nv-sfqD",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdA4nv-sfqD/",
+    "creator": "betul.journal",
+    "topic": "Fajr favorite prayer",
+    "metric": 62600,
+    "metric_type": "likes",
+    "post_date_observed": "2026-09; UI says 6w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Original cozy morning sequence ending with tomorrow's alarm setup.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/betul.journal__DdA4nv-sfqD.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 737728,
+    "sha256": "af9a2a99d730485c7f19624a673a7675b49313d6a7d3ac756f510df215fefd0a",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 576,
+          "height": 1024
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "8.900000"
+      }
+    }
+  },
+  {
+    "id": "DPZgZJOko6l",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DPZgZJOko6l/",
+    "creator": "allaboutislam.learning.backup",
+    "topic": "Fajr reminder with request-for-phone comment",
+    "metric": 373,
+    "metric_type": "likes",
+    "post_date_observed": "2025-10-05",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Interesting demand language but low engagement; original reminder wallpaper plus app CTA.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "Dbqel0TT6C-",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/Dbqel0TT6C-/",
+    "creator": "callmeeshifa",
+    "topic": "Two rakahs of Fajr reminder",
+    "metric": 65900,
+    "metric_type": "likes",
+    "post_date_observed": "2026-08-05",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Verify Muslim 725 and distinguish the two Sunnah rakahs before Fajr from obligatory Fajr; original educational carousel.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DcIARGLILGa",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DcIARGLILGa/",
+    "creator": "islam_0n1y",
+    "topic": "Fajr protection reminder",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2026-08; UI says 9w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Verify Muslim 657 context before quoting; avoid app-linked spiritual guarantees.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DLDOC6pIs8M",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DLDOC6pIs8M/",
+    "creator": "islam_0n1y",
+    "topic": "Fajr aesthetic",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2025-06-18",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original morning visual; verify performance.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DBXiKj4om9u",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DBXiKj4om9u/",
+    "creator": "aqill_typist",
+    "topic": "Fajr dawn aesthetic; AI label",
+    "metric": 75200,
+    "metric_type": "likes",
+    "post_date_observed": "2024-10-21",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Second successful aesthetic example; recreate with original assets, not identical text/art.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "C-6r1tLSE9g",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/C-6r1tLSE9g/",
+    "creator": "ponderbyrahma",
+    "topic": "Fajr is love",
+    "metric": 99400,
+    "metric_type": "likes",
+    "post_date_observed": "2024-08-21",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original calm dawn visual; save-for-tonight setup CTA.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "C0sgytaP-Ho",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/C0sgytaP-Ho/",
+    "creator": "al_.falaq",
+    "topic": "Fajr reminder",
+    "metric": 4186,
+    "metric_type": "likes",
+    "post_date_observed": "Exact post date not captured; recheck source",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Compare creator baseline before calling an outlier.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "C6Lm4Q5OS2O",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/C6Lm4Q5OS2O/",
+    "creator": "fahimswife1 / nykevin1",
+    "topic": "Do not miss Fajr",
+    "metric": 516,
+    "metric_type": "likes",
+    "post_date_observed": "2024-04-25",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Replace guilt-led wording with supportive preparation steps.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "C4trYeVvtNg",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/C4trYeVvtNg/",
+    "creator": "_.al.ahad",
+    "topic": "Fajr reminder",
+    "metric": 1491,
+    "metric_type": "likes",
+    "post_date_observed": "2024-03-20",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original saveable reminder; weaker engagement than strongest candidates.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DdFHz1cA1c3",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdFHz1cA1c3/",
+    "creator": "glidedhijabi",
+    "topic": "Best feeling after Fajr",
+    "metric": 53,
+    "metric_type": "likes",
+    "post_date_observed": "2026-09-10",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Reject from high-engagement shortlist.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DT-U9sEkh0H",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DT-U9sEkh0H/",
+    "creator": "the_beautyofislam____",
+    "topic": "Sweetness of Fajr",
+    "metric": 78,
+    "metric_type": "likes",
+    "post_date_observed": "2026-01-26",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Reject from high-engagement shortlist.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DdhGtnCsU-Y",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdhGtnCsU-Y/",
+    "creator": "ayah.hadith_daily",
+    "topic": "Prayer in the darkness",
+    "metric": 721,
+    "metric_type": "likes",
+    "post_date_observed": "2026-09-20",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Original dawn reminder; performance insufficient for top shortlist.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DbcH0gZqjjp",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DbcH0gZqjjp/",
+    "creator": "sacred.system",
+    "topic": "Fajr preparation starts the night before",
+    "metric": 10500,
+    "metric_type": "likes",
+    "post_date_observed": "2026-07; UI says 12w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Priority: evening phone habit checklist leading to SalahLock and tomorrow's alarm setup.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DaIXKqBs-nt",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DaIXKqBs-nt/",
+    "creator": "islam_estic",
+    "topic": "Wakes for work but misses Fajr",
+    "metric": 13800,
+    "metric_type": "likes",
+    "post_date_observed": "June 28 (displayed in browser)",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Adapt into a compassionate habit comparison, with practical setup rather than shaming.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DNofPT6gVgP",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DNofPT6gVgP/",
+    "creator": "exti_gang_yt",
+    "topic": "French Fajr wake-up reminder",
+    "metric": null,
+    "metric_type": "unavailable",
+    "post_date_observed": "unknown",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "French adaptation candidate; verify quotations and performance.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DWwN9IPiDSO",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DWwN9IPiDSO/",
+    "creator": "nooor_naaama",
+    "topic": "Personal Fajr consistency story",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "unknown",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Original honest personal routine; do not invent a testimonial.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DPJjppeAdOk",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DPJjppeAdOk/",
+    "creator": "islamtics",
+    "topic": "Winning the Fajr struggle",
+    "metric": 1472,
+    "metric_type": "likes",
+    "post_date_observed": "2025-09-28",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Practical wake-up support; verify religious claims.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DRyW-TQE04Q",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DRyW-TQE04Q/",
+    "creator": "striving_islam",
+    "topic": "Gratitude reminder; AI label",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "unknown",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Original gratitude concept; performance unverified.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DY7BdeSx6KJ",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DY7BdeSx6KJ/",
+    "creator": "ell.saar",
+    "topic": "Rich after two Sunnah rakahs",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "unknown",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Verify Muslim 725 context before educational adaptation.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "Dd9VQIzoG9E",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/Dd9VQIzoG9E/",
+    "creator": "mahpara_munir",
+    "topic": "Honest struggle to leave bed; AI label",
+    "metric": 934,
+    "metric_type": "likes",
+    "post_date_observed": "unknown",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Compassionate struggle-to-action story; modest engagement.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/mahpara_munir__Dd9VQIzoG9E.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 666054,
+    "sha256": "bacce07d0aa6845739b27a680117e500a5f6fa556dd3e10310bde395c3a2a116",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1076,
+          "height": 1914
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "14.744671"
+      }
+    }
+  },
+  {
+    "id": "DekQ3lhBW20",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DekQ3lhBW20/",
+    "creator": "hadistixx",
+    "topic": "Fajr reminder",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2026-10-17",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Inspect media and metrics first.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DbS3-LdKB8H",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DbS3-LdKB8H/",
+    "creator": "maimai_house.g",
+    "topic": "Relatable screenshot",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2026-07-27",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Visual needs contextual review; not yet shortlisted.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DermYC7OqQZ",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DermYC7OqQZ/",
+    "creator": "momin.vibes_7",
+    "topic": "Movie caption using Fajr hashtag",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "UI says 5d",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "adaptation": "Reject from shortlist: movie-related caption and ambiguous Fajr relevance.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DewDJ2pII_m",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DewDJ2pII_m/",
+    "creator": "saha.rfajr",
+    "topic": "French product link CTA",
+    "metric": 1626,
+    "metric_type": "likes",
+    "post_date_observed": "UI says 3d",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Inspect original product demonstration; French-language CTA structure.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/saha.rfajr__DewDJ2pII_m.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 4271265,
+    "sha256": "a95df1636efcf8167b19d1f8c5a4bf448facdce18b2ee16871ac6624179efcc1",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "10.168889"
+      }
+    }
+  },
+  {
+    "id": "Deu1BwCt2WI",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/Deu1BwCt2WI/",
+    "creator": "_thefajr",
+    "topic": "Comment HOODIE for link",
+    "metric": 12100,
+    "metric_type": "likes",
+    "post_date_observed": "UI says 4d",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Adjacent Islamic commerce CTA: show real app benefit, ask Comment SALAH for app link; only promise delivery if reply process exists.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/_thefajr__Deu1BwCt2WI.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 3445077,
+    "sha256": "960342dc2629d0a4cefa144e6639013c4be58988a5e0097a81a35763b369fa0c",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "12.374785"
+      }
+    }
+  },
+  {
+    "id": "CtzOOGIup7L",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/CtzOOGIup7L/",
+    "creator": "mydeenmysoul",
+    "topic": "Fajr peace reel",
+    "metric": 140000,
+    "metric_type": "likes",
+    "post_date_observed": "UI says 174w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel/video; exact placement from source UI",
+    "adaptation": "Original prayer-to-dawn visual sequence with app setup at end.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/mydeenmysoul__CtzOOGIup7L.mp4"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 603071,
+    "sha256": "d88b9e7e14d0df0b7d730307eb0c709e5bc7628e707c870000527637dd76b7de",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "8.500000"
+      }
+    }
+  },
+  {
+    "id": "DaRT1qUI-3h",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DaRT1qUI-3h/",
+    "creator": "islam_0n1y",
+    "topic": "Fajr calmness save/share",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "UI says 16w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Original saveable reminder; metrics unavailable.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DdAm8PbIp7Z",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DdAm8PbIp7Z/",
+    "creator": "islam_0n1y",
+    "topic": "Early morning barakah reminder",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "UI says 6w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Verify Tirmidhi reference before quoting; no app-linked spiritual promise.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DZJaSrOMahG",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DZJaSrOMahG/",
+    "creator": "islamic_asetheic",
+    "topic": "Fajr aesthetic",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "UI says 20w",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Unknown",
+    "adaptation": "Inspect visual and metrics before production.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "not downloaded",
+    "files": [],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending"
+  },
+  {
+    "id": "DVj5VUek_Xp",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/p/DVj5VUek_Xp/",
+    "creator": "_.al.ahad",
+    "topic": "A beautiful day starts with Fajr",
+    "metric": null,
+    "metric_type": "hidden",
+    "post_date_observed": "2026-03-07",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Static reference",
+    "adaptation": "Single image successfully downloaded; use as reference for original carousel design.",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Carousel/DVj5VUek_Xp__al-ahad__fajr-single-image-reference.jpg"
+    ],
+    "republish_permission": "not established",
+    "visual_review": "caption and source UI reviewed; full creative review pending",
+    "bytes": 16437,
+    "sha256": "840c0b891b592e04afbf7dd3509db0e2b596bed39ef924329e2561cdc406953b"
+  },
+  {
+    "id": "7699157737942371616",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@sana34593/video/7699157737942371616",
+    "creator": "sana34593",
+    "topic": "Prayer app demonstration",
+    "metric": 84400,
+    "metric_type": "views",
+    "likes": 1711,
+    "post_date_observed": "2026-10-21",
+    "duration_observed": "00:12",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266559+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7699157737942371616: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7677340278688058655",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@shahra.ss/video/7677340278688058655",
+    "creator": "shahra.ss",
+    "topic": "Fajr Islamic reminder",
+    "metric": 104100,
+    "metric_type": "views",
+    "likes": 26600,
+    "post_date_observed": "2026-08-24",
+    "duration_observed": "01:26",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Full Video",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266777+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7677340278688058655: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7692463444523519254",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@zainab.yaps/video/7692463444523519254",
+    "creator": "zainab.yaps",
+    "topic": "Get your Fajr consistency up",
+    "metric": 13300,
+    "metric_type": "views",
+    "likes": 1806,
+    "post_date_observed": "2026-10-03",
+    "duration_observed": "00:18",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266782+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7692463444523519254: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7695547570596154655",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@dassahlynnn/video/7695547570596154655",
+    "creator": "dassahlynnn",
+    "topic": "Just Pray mat-scan alarm review; same creative as Instagram candidate",
+    "metric": 117900,
+    "metric_type": "views",
+    "likes": 10300,
+    "post_date_observed": "2026-10-12",
+    "duration_observed": "00:08",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public extractor request rejected",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "7698193072651373856",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@qadajourney/video/7698193072651373856",
+    "creator": "qadajourney",
+    "topic": "Prayer progress journey; 2165 followers observed, not a creator-view baseline",
+    "metric": 439100,
+    "metric_type": "views",
+    "likes": 39600,
+    "post_date_observed": "2026-10-19",
+    "duration_observed": "00:49",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266786+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7698193072651373856: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7700164589366840597",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@bymouadh/video/7700164589366840597",
+    "creator": "bymouadh",
+    "topic": "What to do after missing Fajr; verify religious guidance",
+    "metric": 19700,
+    "metric_type": "views",
+    "likes": 3949,
+    "post_date_observed": "2026-10-24",
+    "duration_observed": "00:45",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266790+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7700164589366840597: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7692650509664095494",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@majidalamry/video/7692650509664095494",
+    "creator": "majidalamry",
+    "topic": "Fajr prayer",
+    "metric": 167400,
+    "metric_type": "views",
+    "likes": 10400,
+    "post_date_observed": "2026-10-04",
+    "duration_observed": "00:51",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266794+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7692650509664095494: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7692563730223090958",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@muslim/video/7692563730223090958",
+    "creator": "muslim",
+    "topic": "Humor after two rakahs before Fajr",
+    "metric": 3200000,
+    "metric_type": "views",
+    "likes": 640000,
+    "post_date_observed": "2026-10-04",
+    "duration_observed": "00:09",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266805+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7692563730223090958: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7700206097948232973",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@westernmuslim1/video/7700206097948232973",
+    "creator": "westernmuslim1",
+    "topic": "Deenly app review; low engagement comparison",
+    "metric": 972,
+    "metric_type": "views",
+    "likes": 68,
+    "post_date_observed": "2026-10-24",
+    "duration_observed": "00:09",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266809+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7700206097948232973: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7699370013341371678",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@maxrl19/video/7699370013341371678",
+    "creator": "maxrl19",
+    "topic": "Alarm stops at mat or sink",
+    "metric": 36500,
+    "metric_type": "views",
+    "likes": 1577,
+    "post_date_observed": "2026-10-22",
+    "duration_observed": "00:06",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266814+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7699370013341371678: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7693328711222889780",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@abdullahi.aar/video/7693328711222889780",
+    "creator": "abdullahi.aar",
+    "topic": "Importance of Fajr prayer",
+    "metric": 41000,
+    "metric_type": "views",
+    "likes": 8024,
+    "post_date_observed": "2026-10-06",
+    "duration_observed": "01:27",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Full Video",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266818+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7693328711222889780: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "7699479603320065302",
+    "platform": "TikTok",
+    "url": "https://www.tiktok.com/@hisaabalarm/video/7699479603320065302",
+    "creator": "hisaabalarm",
+    "topic": "Somewhere in the world Fajr is beginning; app reveal",
+    "metric": 12400,
+    "metric_type": "views",
+    "likes": 1072,
+    "post_date_observed": "2026-10-22",
+    "duration_observed": "00:31",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "source_format": "Reel",
+    "outlier_status": "Not established: no creator baseline captured",
+    "download_status": "failed: public download unavailable",
+    "files": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "republish_permission": "not established",
+    "download_attempt_utc": "2026-10-25T11:10:10.266822+00:00",
+    "download_access_limitation": "WARNING: [TikTok] The extractor is attempting impersonation, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies\nERROR: [TikTok] 7699479603320065302: Unexpected response from webpage request; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U\n"
+  },
+  {
+    "id": "DcbQy_nIafe",
+    "creator": "8tvnn",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DcbQy_nIafe/",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "observed_grid_views_rounded": 5400000,
+    "likes_from_public_extractor": 476159,
+    "comments_from_public_extractor": 597,
+    "source_caption": "⁨\t⁨\tسيمضي ما أثقل قلبك ويبقى وعد الله \n\n#islam #muslim #alhamdulillah #viral #explorepage⁩⁩",
+    "published_utc": "2026-08-24T15:01:08+00:00",
+    "source_visual": "A night-sky view through a car roof, with Quranic text about ease with hardship.",
+    "topic": "Hope during hardship",
+    "filename": "8tvnn__DcbQy_nIafe.mp4",
+    "bytes": 5310355,
+    "sha256": "6e4d624727e53a5cb7f84913ae4d32bb964100a7f6cbacc4c360cfc58bc183ed",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1440,
+          "height": 2560
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "11.950000",
+        "size": "5310355"
+      }
+    },
+    "download_status": "downloaded",
+    "cta_en": "Take this reminder into your next salah 🤍 If getting up for Fajr is the hard part, comment FAJR for the Salah Alarm link.",
+    "cta_ar": "خذ هذا التذكير معك للصلاة القادمة 🤍 وإذا كان الاستيقاظ للفجر صعبًا عليك، اكتب «فجر» لرابط تطبيق Salah Alarm.",
+    "cta_soft_en": "If waking up for Fajr is the hard part, Salah Alarm helps you get out of bed and over to your prayer mat. App link in bio.",
+    "cta_rationale": "Relief and reassurance → one manageable action → practical wake-up support. Keep the app out of the recitation itself; put the bridge in the caption or pinned comment.",
+    "publishing_status": "draft only; no social comments posted",
+    "cta_video_edit": "not applied; comment/caption suggestions supplied separately",
+    "outlier_status": "not established; views not normalized by post age",
+    "republish_permission": "not established",
+    "files": [
+      "Reel/8tvnn-Top-3/8tvnn__DcbQy_nIafe.mp4"
+    ],
+    "metric": 5400000,
+    "metric_type": "rounded views",
+    "source_format": "Reel"
+  },
+  {
+    "id": "DcGf3Bjgb5V",
+    "creator": "8tvnn",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DcGf3Bjgb5V/",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "observed_grid_views_rounded": 2800000,
+    "likes_from_public_extractor": 240885,
+    "comments_from_public_extractor": 405,
+    "source_caption": "⁨\t⁨\tاللهم احسن ختامنا ولا تقبض روحي إلا وانت راضٍ عني يارب \n\n#explore #viral #reels #islam #foryoupage⁩⁩",
+    "published_utc": "2026-08-16T13:06:15+00:00",
+    "source_visual": "Warm night footage overlooking parked cars, with Arabic and English subtitles about a good death.",
+    "topic": "Prayer for a good ending",
+    "filename": "8tvnn__DcGf3Bjgb5V.mp4",
+    "bytes": 4643245,
+    "sha256": "c73d330837ef3ef1cdfc56804e9902fd5874fe2d52c9c05b2c1004771f66e8e5",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1440,
+          "height": 2560
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "12.003265",
+        "size": "4643245"
+      }
+    },
+    "download_status": "downloaded",
+    "cta_en": "One small step today: make time for your next salah 🤍 Need help with Fajr? Comment FAJR for the Salah Alarm link.",
+    "cta_ar": "خطوة بسيطة اليوم: حافظ على صلاتك القادمة 🤍 تحتاج مساعدة للاستيقاظ للفجر؟ اكتب «فجر» لرابط تطبيق Salah Alarm.",
+    "cta_soft_en": "Start with your next salah 🤍 Salah Alarm is a practical reminder for prayer time and a little help getting up for Fajr. Link in bio.",
+    "cta_rationale": "Reflection → present-day prayer habit. Keep the comment gentle; avoid linking the purchase/download to a good death, salvation or divine approval.",
+    "publishing_status": "draft only; no social comments posted",
+    "cta_video_edit": "not applied; comment/caption suggestions supplied separately",
+    "outlier_status": "not established; views not normalized by post age",
+    "republish_permission": "not established",
+    "files": [
+      "Reel/8tvnn-Top-3/8tvnn__DcGf3Bjgb5V.mp4"
+    ],
+    "metric": 2800000,
+    "metric_type": "rounded views",
+    "source_format": "Reel"
+  },
+  {
+    "id": "DcyIwwtA2jb",
+    "creator": "8tvnn",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DcyIwwtA2jb/",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "observed_grid_views_rounded": 2500000,
+    "likes_from_public_extractor": 139889,
+    "comments_from_public_extractor": 235,
+    "source_caption": "⁨\t⁨\t⁨\tالحمد لله حمدًا كثيرًا طيبًا مباركًا فيه \nاللهم لك الحمد حتى ترضى، ولك الحمد إذا رضيت، ولك الحمد بعد الرضا.\n\n#alhamdulillah #Islam #muslim #explore #fypシ⁩⁩⁩",
+    "published_utc": "2026-09-02T11:53:59+00:00",
+    "source_visual": "Quiet night-sky, flowers and park footage, with Arabic remembrance and English translation.",
+    "topic": "Gratitude and Alhamdulillah",
+    "filename": "8tvnn__DcyIwwtA2jb.mp4",
+    "bytes": 11633538,
+    "sha256": "25bcc14320c06fc1ed347e906d5bf2c3fa886ae3862ab8a89183b6a6f11055ea",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1440,
+          "height": 2560
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "13.651882",
+        "size": "11633538"
+      }
+    },
+    "download_status": "downloaded",
+    "cta_en": "Alhamdulillah for another morning 🤍 Want a little help getting up for Fajr? Comment FAJR for the Salah Alarm link.",
+    "cta_ar": "الحمد لله على صباح جديد 🤍 تحتاج مساعدة للاستيقاظ للفجر؟ اكتب «فجر» لرابط تطبيق Salah Alarm.",
+    "cta_soft_en": "A small plan for tomorrow morning: set your Fajr alarm tonight 🤍 The app is Salah Alarm. Link in bio.",
+    "cta_rationale": "Gratitude → tomorrow morning → set the alarm tonight. The closest natural product bridge of these three.",
+    "publishing_status": "draft only; no social comments posted",
+    "cta_video_edit": "not applied; comment/caption suggestions supplied separately",
+    "outlier_status": "not established; views not normalized by post age",
+    "republish_permission": "not established",
+    "files": [
+      "Reel/8tvnn-Top-3/8tvnn__DcyIwwtA2jb.mp4"
+    ],
+    "metric": 2500000,
+    "metric_type": "rounded views",
+    "source_format": "Reel"
+  },
+  {
+    "id": "DexCI2hugDQ",
+    "platform": "Instagram",
+    "creator": "verse.sakinah",
+    "url": "https://www.instagram.com/reel/DexCI2hugDQ/",
+    "observed_on": "2026-10-25 Asia/Kolkata",
+    "metric": 159896,
+    "metric_type": "likes from public extractor",
+    "browser_likes_rounded": 159000,
+    "comments": 305,
+    "browser_reposts_rounded": 18700,
+    "source_format": "Reel",
+    "topic": "Animated Quran reflection explainer",
+    "files": [
+      "Reel/Generatable-Format-References/verse.sakinah__DexCI2hugDQ.mp4"
+    ],
+    "download_status": "downloaded",
+    "bytes": 11712525,
+    "sha256": "0af6f4ab1020227d044f09bc3afaca7678b19d833b26b4d92d7b460e45aaffca",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "100.833333",
+        "size": "11712525"
+      }
+    },
+    "source_caption": "There’s a sentence in the Quran that is said twice. Back to back. 🤍\n\nOne tiny word explains why:\nal-ʿusr is THE hardship — the same one, both times.\nyusr is AN ease — a new one, each time.\n\nOne hardship. Two eases.\n\n“So surely, with hardship comes ease. Surely, with hardship comes ease.”\n— Surah Ash-Sharh 94:5–6\n\nSend this to someone who’s carrying something heavy.\n\n#quran #islam #muslim #quranreflection #surahashsharh",
+    "adaptation": "Original animated lesson with final5–7second Salah Alarm CTA; see brief",
+    "outlier_status": "not established",
+    "rights_status": "unverified",
+    "publishing_status": "not published",
+    "rounded_views_observed_in_creator_listing": 2200000,
+    "views_observed_at": "2026-10-25T15:30:05.511316+00:00",
+    "baseline_file": "VERSE_SAKINAH_BASELINE.json"
+  },
+  {
+    "id": "-vWbx0hMvb4",
+    "platform": "YouTube",
+    "url": "https://www.youtube.com/watch?v=-vWbx0hMvb4",
+    "creator": "Bliifee - Muslim Life Hacks",
+    "title": "HOW TO WAKE UP EARLY TO PRAY FAJR ON TIME | Bliifee",
+    "topic": "Practical Fajr wake-up routine",
+    "metric": 57026,
+    "metric_type": "views",
+    "likes": 3574,
+    "comments": 234,
+    "observed_on": "2026-10-25T11:12:26.597280+00:00",
+    "post_date_observed": "20200207",
+    "source_format": "Full Video",
+    "outlier_status": "Not established: no comparable creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Full Video/YouTube__-vWbx0hMvb4.mp4"
+    ],
+    "bytes": 54254422,
+    "sha256": "5537cb9be01ab0d8d80aa6555487f04e914b91a0768134e5c95774bebd770fda",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "350.054000"
+      }
+    },
+    "adaptation": "An original animated checklist: 1. Decide bedtime before setting an alarm. 2. Put the phone beyond arm’s reach. 3. Prepare the place you will pray. Close with a real Salah Alarm screen and “Plan tomorrow’s Fajr tonight. Salah Alarm · salahalarm.com.” This proposed checklist is an original adaptation; individual source recommendations have not been transcribed or verified.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "republish_permission": "not established",
+    "visual_review": "Metadata and stream validation complete; full creative/language review pending",
+    "qualification_status": "Downloaded research reference with observed engagement; not a verified outlier"
+  },
+  {
+    "id": "MA0RX1ecPN4",
+    "platform": "YouTube",
+    "url": "https://www.youtube.com/watch?v=MA0RX1ecPN4",
+    "creator": "Humble Servant of Allah",
+    "title": "You’ll Never Miss Fajr After This! | Ustadh Mohamad Baajour",
+    "topic": "Fajr motivation and routine",
+    "metric": 377829,
+    "metric_type": "views",
+    "likes": 8737,
+    "comments": 314,
+    "observed_on": "2026-10-25T11:12:26.597280+00:00",
+    "post_date_observed": "20240916",
+    "source_format": "Full Video",
+    "outlier_status": "Not established: no comparable creator baseline captured",
+    "download_status": "downloaded",
+    "files": [
+      "Full Video/YouTube__MA0RX1ecPN4.mp4"
+    ],
+    "bytes": 86082919,
+    "sha256": "0af3f01e20d4c6f78f81f6016b4cf94b0bd23f291d9227df98b5ad2c387950d2",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1276,
+          "height": 720
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "1559.114000"
+      }
+    },
+    "adaptation": "Create an original 25-second problem-to-plan story: a person notices repeated late mornings, makes one small evening preparation, then sets their Fajr alarm. End with “Give your intention a plan. Set your Fajr alarm tonight with Salah Alarm · salahalarm.com.” Avoid the source title’s absolute “never miss” promise. Do not imply the scholar endorses the app or reuse his voice without permission.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "republish_permission": "not established",
+    "visual_review": "Metadata and stream validation complete; full creative/language review pending",
+    "qualification_status": "Downloaded research reference with observed engagement; not a verified outlier"
+  },
+  {
+    "id": "DZAffnYsqnE",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DZAffnYsqnE/",
+    "creator": "fayeoush",
+    "topic": "Fajr discipline with explicit competitor-app caption",
+    "metric": 11651,
+    "metric_type": "likes",
+    "comments": 155,
+    "observed_on": "2026-10-25T12:22:15.328315+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Not established: creator baseline unavailable",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/fayeoush__DZAffnYsqnE.mp4"
+    ],
+    "bytes": 21455927,
+    "sha256": "04fb6663e15add74988f53cbf6d38c154fa542afea217ac722c14775f57d96e6",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "89.300000"
+      }
+    },
+    "adaptation": "Original talking-head story: describe one real preparation that helps you get up for Fajr, show the preparation, then show a real Salah Alarm screen. Close: “My Fajr alarm is Salah Alarm — salahalarm.com.” Use a genuine creator experience, without implying spiritual practice guarantees business success.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Browser video frame and caption reviewed. 11.6K rounded likes visible; extractor recorded 11,651 likes and 155 comments.",
+    "republish_permission": "not established",
+    "qualification_status": "Relevant downloaded research reference with observed engagement; no verified creator outlier"
+  },
+  {
+    "id": "DM7ZbHTNGbx",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DM7ZbHTNGbx/",
+    "creator": "dunya_on_mute",
+    "topic": "Islamic reminder discovered under Fajr",
+    "metric": 451501,
+    "metric_type": "likes",
+    "comments": 559,
+    "observed_on": "2026-10-25T12:22:15.328315+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Not established: creator baseline unavailable",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/Instagram__DM7ZbHTNGbx.mp4"
+    ],
+    "bytes": 756788,
+    "sha256": "1b7bb499b591d639709c21dd215aa734e9b4fbcb773de4ebd43875189ac88404",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1916,
+          "height": 1080,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "7.707574"
+      }
+    },
+    "adaptation": "Original quiet-dawn reel: one practical evening preparation, a short pause, then a clear next step. End card: “Set your intention. Set your Fajr alarm. Salah Alarm · salahalarm.com.” Confirm the actual source message and any religious citation before adapting.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Discovered in Instagram Fajr results; caption and public download metadata reviewed. Full visual/spoken-content review pending.",
+    "republish_permission": "not established",
+    "qualification_status": "Relevant downloaded research reference with observed engagement; no verified creator outlier"
+  },
+  {
+    "id": "DdzNUTCTUgp",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DdzNUTCTUgp/",
+    "creator": "dassahlynnn",
+    "topic": "Learning prayer with an app; Just Pray collaboration",
+    "metric": 27260,
+    "metric_type": "likes",
+    "comments": 374,
+    "observed_on": "2026-10-25T12:22:15.328315+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Not established: creator baseline unavailable",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/Instagram__DdzNUTCTUgp.mp4"
+    ],
+    "bytes": 1893088,
+    "sha256": "5f86ec115b54d1909ebae78fd01d63652dca492e04b113d0cb5b8be017757d72",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "12.421224"
+      }
+    },
+    "adaptation": "Original beginner-friendly story: admit a real routine difficulty, show a small preparation, then introduce Salah Alarm as a tool for the alarm routine. Close: “The alarm app is Salah Alarm — salahalarm.com.” Do not suggest Salah Alarm teaches prayer unless that feature is independently verified. No invented user testimonial or imitation of this creator’s identity.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Browser caption and collaboration header reviewed; video area remained black. 27.3K likes, 374 comments and 1.3K reposts visible; full visual/spoken review pending.",
+    "republish_permission": "not established",
+    "qualification_status": "Relevant downloaded research reference with observed engagement; no verified creator outlier",
+    "reposts_rounded_visible": 1300,
+    "collaboration_header_observed": "dassahlynnn and justpray.app",
+    "publisher_listing_views_observed": 670000,
+    "publisher_listing_views_observed_at": "2026-10-25T13:25:58.924700+00:00",
+    "publisher_baseline_file": "JUST_PRAY_CREATOR_BASELINE.json"
+  },
+  {
+    "id": "Db35L4uhR1h",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/Db35L4uhR1h/",
+    "creator": "bestlookingmoroccanguy",
+    "publisher_listing": "justpray.app",
+    "topic": "Cultural-country debate; Just Pray collaboration",
+    "metric": 415000,
+    "metric_type": "rounded visible views",
+    "likes": 8985,
+    "comments": 862,
+    "observed_on": "2026-10-25T13:25:58.924700+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Exploratory publisher-listing comparison only; individual creator/age-matched outlier not established",
+    "baseline_file": "JUST_PRAY_CREATOR_BASELINE.json",
+    "baseline_sample_size": 15,
+    "baseline_median_rounded_views": 48700,
+    "multiple_of_publisher_listing_sample_median": 8.52,
+    "download_status": "downloaded",
+    "files": [
+      "Reel/justpray.app__Db35L4uhR1h.mp4"
+    ],
+    "bytes": 20054971,
+    "sha256": "607bcf309cd770523370bc42841edf4f216e23805033df294bfc421764d3f6b0",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "68.659955"
+      }
+    },
+    "adaptation": "Framework research only. Borrow a clear numbered structure, not national/religious ranking or provocation. Original idea: “3 things to prepare before your Fajr alarm”: prayer space, phone position, tomorrow’s alarm. Finish with “Prepare tonight. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Browser caption, collaboration header and video frame reviewed; country debate comments observed.",
+    "qualification_status": "supplementary_framework_only",
+    "counts_toward_100_qualified": false,
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DZQwYwXvMAY",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DZQwYwXvMAY/",
+    "creator": "bestlookingmoroccanguy",
+    "publisher_listing": "justpray.app",
+    "topic": "Critical list about Muslim trends; app caption mention",
+    "metric": 128000,
+    "metric_type": "rounded visible views",
+    "likes": 4678,
+    "comments": 96,
+    "observed_on": "2026-10-25T13:25:58.924700+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Exploratory publisher-listing comparison only; individual creator/age-matched outlier not established",
+    "baseline_file": "JUST_PRAY_CREATOR_BASELINE.json",
+    "baseline_sample_size": 15,
+    "baseline_median_rounded_views": 48700,
+    "multiple_of_publisher_listing_sample_median": 2.63,
+    "download_status": "downloaded",
+    "files": [
+      "Reel/justpray.app__DZQwYwXvMAY.mp4"
+    ],
+    "bytes": 21532352,
+    "sha256": "449d3705d906b74ab756c975587c49f9ceb39dd277bb5fa494e91aa00196fa51",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "72.833333"
+      }
+    },
+    "adaptation": "Original numbered explainer: “3 small changes for tomorrow’s Fajr.” Each item gets one real-world demonstration. Keep a helpful tone and a real app screen at the end: “Set your Fajr alarm with Salah Alarm · salahalarm.com.” Do not reuse insults or shame viewers.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Downloaded opening frame shows a three-item critical-trends hook. Full spoken-content review pending.",
+    "qualification_status": "supplementary_framework_only",
+    "counts_toward_100_qualified": false,
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DY0Npkqsfwd",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DY0Npkqsfwd/",
+    "creator": "bestlookingmoroccanguy",
+    "publisher_listing": "justpray.app",
+    "topic": "Eid seasonal three-item list; app caption mention",
+    "metric": 134000,
+    "metric_type": "rounded visible views",
+    "likes": 5852,
+    "comments": 109,
+    "observed_on": "2026-10-25T13:25:58.924700+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Exploratory publisher-listing comparison only; individual creator/age-matched outlier not established",
+    "baseline_file": "JUST_PRAY_CREATOR_BASELINE.json",
+    "baseline_sample_size": 15,
+    "baseline_median_rounded_views": 48700,
+    "multiple_of_publisher_listing_sample_median": 2.75,
+    "download_status": "downloaded",
+    "files": [
+      "Reel/justpray.app__DY0Npkqsfwd.mp4"
+    ],
+    "bytes": 15887218,
+    "sha256": "574de714abab200649669c045d65649a3d2cdd1b5a03b7b5629dfc5a154089b0",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "62.344127"
+      }
+    },
+    "adaptation": "Use the seasonal list structure for an original Eid/routine transition story: “3 preparations that make tomorrow morning easier.” Connect only the alarm-related step to a verified Salah Alarm demonstration. End with app name and salahalarm.com.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Downloaded opening frame shows a three-item Eid list. Full spoken-content review pending.",
+    "qualification_status": "supplementary_framework_only",
+    "counts_toward_100_qualified": false,
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DYNRZ2MuV31",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DYNRZ2MuV31/",
+    "creator": "akhialtamash",
+    "publisher_listing": "justpray.app",
+    "topic": "Celebrity-faith curiosity question; Just Pray caption mention",
+    "metric": 94100,
+    "metric_type": "rounded visible views",
+    "likes": 4016,
+    "comments": 66,
+    "observed_on": "2026-10-25T13:25:58.924700+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Exploratory publisher-listing comparison only; individual creator/age-matched outlier not established",
+    "baseline_file": "JUST_PRAY_CREATOR_BASELINE.json",
+    "baseline_sample_size": 15,
+    "baseline_median_rounded_views": 48700,
+    "multiple_of_publisher_listing_sample_median": 1.93,
+    "download_status": "downloaded",
+    "files": [
+      "Reel/justpray.app__DYNRZ2MuV31.mp4"
+    ],
+    "bytes": 24150556,
+    "sha256": "a6471474ffdca2f72bd38972a286dfb2e48abdea8e09793064f2c3e099327df4",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "74.450000"
+      }
+    },
+    "adaptation": "Not shortlisted as primary Fajr content. Transfer only a question-to-answer structure: “Why do I wake up for work but struggle with Fajr?” Answer with an original practical preparation; close with “Plan tomorrow’s Fajr tonight. Salah Alarm · salahalarm.com.” Do not repeat unverified claims about a celebrity’s faith.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Downloaded opening frame and caption reviewed; full argument not independently checked.",
+    "qualification_status": "not_primary_fajr_qualified",
+    "counts_toward_100_qualified": false,
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DXj7AS_ifHp",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DXj7AS_ifHp/",
+    "creator": "ummahunite1",
+    "publisher_listing": "justpray.app",
+    "topic": "Paid online creator-event promotion with Just Pray sponsor mention",
+    "metric": 88700,
+    "metric_type": "rounded visible views",
+    "likes": 1464,
+    "comments": 16,
+    "observed_on": "2026-10-25T13:25:58.924700+00:00",
+    "source_format": "Reel",
+    "outlier_status": "Exploratory publisher-listing comparison only; individual creator/age-matched outlier not established",
+    "baseline_file": "JUST_PRAY_CREATOR_BASELINE.json",
+    "baseline_sample_size": 15,
+    "baseline_median_rounded_views": 48700,
+    "multiple_of_publisher_listing_sample_median": 1.82,
+    "download_status": "downloaded",
+    "files": [
+      "Reel/justpray.app__DXj7AS_ifHp.mp4"
+    ],
+    "bytes": 7425063,
+    "sha256": "3a625daec47a8c568094fae9ad5deb8dbe6e2d8d5ef7bc7f7454340b5c97bd1d",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "53.266576"
+      }
+    },
+    "adaptation": "Not shortlisted as primary Fajr content. Study the visual emphasis on key words, then create an original routine explainer with one useful action before an app-name end card. No ticket CTA or event claim should be reused.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Caption advertises a paid online event; downloaded opening frame reviewed.",
+    "qualification_status": "not_primary_fajr_qualified",
+    "counts_toward_100_qualified": false,
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DeS8lfgMjXe",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DeS8lfgMjXe/",
+    "creator": "reminding_guy",
+    "topic": "Islamic reflection with outdoor/cemetery imagery",
+    "metric": 3300000,
+    "metric_type": "rounded visible views",
+    "likes": 312233,
+    "comments": 278,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DeS8lfgMjXe.mp4"
+    ],
+    "bytes": 19263001,
+    "sha256": "8fe0072695117092a6a36a4b2e18a9af52a35d5ac598c46d7d8c21325ab059a3",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "27.080207"
+      }
+    },
+    "adaptation": "Original quiet reflection on using the next morning well. Show present-day preparation and hopeful dawn footage; avoid fear-based claims. Final card: “Make room for tomorrow’s Fajr. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Outdoor/cemetery footage, rotated within the source composition; full spoken message not verified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 242.65,
+    "pinned_in_source_listing": true,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DdlSZKFstxH",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DdlSZKFstxH/",
+    "creator": "reminding_guy",
+    "topic": "Salah and congregation routine",
+    "metric": 152000,
+    "metric_type": "rounded visible views",
+    "likes": 17769,
+    "comments": 19,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DdlSZKFstxH.mp4"
+    ],
+    "bytes": 2955766,
+    "sha256": "24a8b78e56571a7b208dab5a8c5ce6b99826286d867f5c3323689bda32f36558",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "10.083333"
+      }
+    },
+    "adaptation": "Original three-shot journey: put the phone down, prepare to leave, join the prayer routine. Explain one practical preparation before showing the app name. Close: “Set tomorrow’s Fajr alarm. Salah Alarm · salahalarm.com.” Verify the source’s hadith reference before any quotation.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame shows a congregation inside a mosque; caption concerns prayer.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 11.18,
+    "pinned_in_source_listing": true,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DdSgKGvI57w",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DdSgKGvI57w/",
+    "creator": "reminding_guy",
+    "topic": "Life after Fajr; dawn routine montage",
+    "metric": 670000,
+    "metric_type": "rounded visible views",
+    "likes": 115618,
+    "comments": 132,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DdSgKGvI57w.mp4"
+    ],
+    "bytes": 29995072,
+    "sha256": "93b71928b3beaa515bb868cdc2cd4a244aac194db5f9a0c9829b2bd566ce03ba",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1916,
+          "height": 1078
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "33.343855"
+      }
+    },
+    "adaptation": "Create original dawn-walk, quiet-street and personal reading footage. Let the calm payoff land, then add a final3–5second card: “Start with Fajr. Set your alarm tonight with Salah Alarm · salahalarm.com.” A genuine own-account caption can name the app; do not invent a user recommendation.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Browser video, caption and creator collaboration reviewed. Quiet street and Quran-reading montage observed; original footage uses horizontal framing within a vertical container.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 49.26,
+    "pinned_in_source_listing": true,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established",
+    "collaboration_header_observed": "reminding_guy and sheikh_farhan_haneef",
+    "audio_attribution_visible": "Muhammad Al Muqit · A Clarification"
+  },
+  {
+    "id": "DXZF3N7DC8o",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DXZF3N7DC8o/",
+    "creator": "reminding_guy",
+    "topic": "Quran-translation reminder in mosque setting",
+    "metric": 3000000,
+    "metric_type": "rounded visible views",
+    "likes": 488806,
+    "comments": 619,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DXZF3N7DC8o.mp4"
+    ],
+    "bytes": 9610093,
+    "sha256": "ef52e81b261cf65311da0ead7b0b7610240bb1006de1d0a6d3d50e09b0c9ba98",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "24.482989"
+      }
+    },
+    "adaptation": "Use original quiet mosque/prayer-space footage with a short independently checked translation, then finish the teaching before introducing Salah Alarm on a separate card. CTA: “Prepare for your next salah. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame shows a mosque/prayer area with text; translation and audio unverified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 220.59,
+    "pinned_in_source_listing": true,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DRKBhazjKmD",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DRKBhazjKmD/",
+    "creator": "reminding_guy",
+    "topic": "Prayer-space faith reminder",
+    "metric": 1600000,
+    "metric_type": "rounded visible views",
+    "likes": 250239,
+    "comments": 865,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DRKBhazjKmD.mp4"
+    ],
+    "bytes": 1560290,
+    "sha256": "6bca780d3b8c42f4ce92183598b23203f528f28d20f0c8e8d83a0a98e7042c6b",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "17.050000"
+      }
+    },
+    "adaptation": "Build an original quiet-prayer-space sequence with one useful evening-preparation tip. Pause, then show a truthful app-name/end-card CTA. Do not imply using an alarm establishes spiritual status.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame shows a person in a dim prayer setting with Urdu-script text; spoken language unverified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 117.65,
+    "pinned_in_source_listing": true,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DRw-u24jO6x",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DRw-u24jO6x/",
+    "creator": "reminding_guy",
+    "topic": "Personal-change identity hook",
+    "metric": 77400,
+    "metric_type": "rounded visible views",
+    "likes": 5551,
+    "comments": 37,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DRw-u24jO6x.mp4"
+    ],
+    "bytes": 5157869,
+    "sha256": "8d6db8058743f03cf0dbfaf2e9216568e804ab40e6c8c1c55d3f0ed84f6c59a9",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "26.029569"
+      }
+    },
+    "adaptation": "Original “one small change” story: move from late-night scrolling to preparing the next morning. Demonstrate an actual alarm setup only after the useful habit. Close: “Start with tomorrow’s Fajr. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame uses a brief English personal-change question over dark imagery; full content unverified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 5.69,
+    "pinned_in_source_listing": true,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "De3E_1_shPt",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/De3E_1_shPt/",
+    "creator": "reminding_guy",
+    "topic": "Night-street Islamic reminder",
+    "metric": 904000,
+    "metric_type": "rounded visible views",
+    "likes": 152061,
+    "comments": 214,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__De3E_1_shPt.mp4"
+    ],
+    "bytes": 2808788,
+    "sha256": "0cc11904ceb68b637390d5cef6b3b9d5e6c6c81b120fbe7fa139a3f051b21dfb",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "38.666667"
+      }
+    },
+    "adaptation": "Original quiet street sequence explaining one concrete preparation for tomorrow’s Fajr. Use original English narration rather than reusing an unverified religious quotation. End with Salah Alarm and salahalarm.com.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame shows a night street and Urdu-script text; full message and spoken language unverified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 66.47,
+    "pinned_in_source_listing": false,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DezLKqfsK-i",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DezLKqfsK-i/",
+    "creator": "reminding_guy",
+    "topic": "Forgiveness and return-to-prayer reminder",
+    "metric": 309000,
+    "metric_type": "rounded visible views",
+    "likes": 41078,
+    "comments": 45,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__DezLKqfsK-i.mp4"
+    ],
+    "bytes": 1458417,
+    "sha256": "b30aa0d2eee95ad89e0e5c00e0df277377643188f2b6934517f88a8ef26ffe02",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "35.333333"
+      }
+    },
+    "adaptation": "Original gentle restart story after a disrupted routine: prepare a space, set an alarm, return to one next action. Close: “Prepare for the next prayer. Salah Alarm · salahalarm.com.” Do not promise forgiveness from using the app.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame shows a person in a prayer space; caption flags forgiveness. Full religious message unverified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 22.72,
+    "pinned_in_source_listing": false,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "Det_MLJR96w",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/Det_MLJR96w/",
+    "creator": "reminding_guy",
+    "topic": "Islamic spoken reminder in mosque setting",
+    "metric": 74800,
+    "metric_type": "rounded visible views",
+    "likes": 9839,
+    "comments": 23,
+    "observed_on": "2026-10-25T14:32:12.523727+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/reminding_guy__Det_MLJR96w.mp4"
+    ],
+    "bytes": 2099629,
+    "sha256": "1ff6eb6c650383647efcf3440f505993c2ff941b2fae387794dd6bad2e9fa704",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "side_data_list": [
+            {}
+          ]
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "41.066667"
+      }
+    },
+    "adaptation": "Recreate the calm setting with original narration about one practical preparation. Preserve a clear pause before the product card. End: “Set your Fajr alarm tonight. Salah Alarm · salahalarm.com.” Confirm religious wording before adapting any quotation.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual_review": "Opening frame shows a mosque prayer area; caption names Maulana Tariq Jameel. Speaker identity and language not independently verified.",
+    "audio_language_independently_verified": false,
+    "creator_baseline_file": "REMINDING_GUY_BASELINE.json",
+    "creator_baseline_sample_size": 9,
+    "creator_baseline_median_rounded_views": 13600,
+    "multiple_of_creator_sample_median": 5.5,
+    "pinned_in_source_listing": false,
+    "outlier_status": "Sample-relative outlier candidate; rounded lifetime views and nine visible unpinned peers. Age/format matching and collaboration effects not resolved.",
+    "qualification_status": "Relevant downloaded Islamic/prayer research with documented engagement and sampled visuals; full spoken/religious interpretation review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "De4z3vIsZs-",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/De4z3vIsZs-/",
+    "creator": "verse.sakinah",
+    "topic": "Repentance/mercy illustrated Quran explainer",
+    "metric": 285000,
+    "metric_type": "rounded visible views",
+    "likes": 22650,
+    "comments": 82,
+    "observed_on": "2026-10-25T15:30:05.511316+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/verse.sakinah__De4z3vIsZs-.mp4"
+    ],
+    "bytes": 12340985,
+    "sha256": "528309dcdd2ee219fefcbccfd52af43e7a461b0668536ff3b653c1de3a1997b5",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "177.033333"
+      }
+    },
+    "visual_review": "Observed frame: illustrated character, scroll and a numbered verse transition, with English subtitle below.",
+    "adaptation": "Use an original illustration system and a question→explanation→reflection structure. If using25:70, independently verify translation and interpretation first. End the religious explanation fully, then add a separate5-second card: “Make time for your next salah. Salah Alarm · salahalarm.com.” Do not suggest an app grants forgiveness.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "creator_baseline_file": "VERSE_SAKINAH_BASELINE.json",
+    "outlier_status": "Not established: only4displayedposts total; threeotherpeerposts per target and unmatched upload ages",
+    "qualification_status": "Relevant illustrated Islamic research with engagement evidence and sampled visuals; religious interpretation/full spoken review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "De2XrBjOmdf",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/De2XrBjOmdf/",
+    "creator": "verse.sakinah",
+    "topic": "Gratitude illustrated Quran explainer",
+    "metric": 553000,
+    "metric_type": "rounded visible views",
+    "likes": 38605,
+    "comments": 233,
+    "observed_on": "2026-10-25T15:30:05.511316+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/verse.sakinah__De2XrBjOmdf.mp4"
+    ],
+    "bytes": 13689748,
+    "sha256": "cab87410f0152fd38137fd50e41f9b25ac2e71d84177fc16c21f2ddb79945b46",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "157.300000"
+      }
+    },
+    "visual_review": "Observed frame: illustrated running horse/desert scene and English subtitle below.",
+    "adaptation": "Create original illustrated scenes and explain one independently verified concept about gratitude. Give one practical reflection before the product card. End with “Prepare for your next prayer. Salah Alarm · salahalarm.com.” Verify Surah100 translation/tafsir and avoid copying the source’s exact art, phrasing or voice.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "creator_baseline_file": "VERSE_SAKINAH_BASELINE.json",
+    "outlier_status": "Not established: only4displayedposts total; threeotherpeerposts per target and unmatched upload ages",
+    "qualification_status": "Relevant illustrated Islamic research with engagement evidence and sampled visuals; religious interpretation/full spoken review pending",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DLf_dJIt64X",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DLf_dJIt64X/",
+    "creator": "mydeenmysoul",
+    "topic": "Prayer-and-trust reminder",
+    "metric": 898000,
+    "metric_type": "rounded visible views",
+    "likes_public_extractor_reported": 115877,
+    "comments_public_extractor_reported": 138,
+    "observed_on": "2026-10-25T15:33:04.222260+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/mydeenmysoul__DLf_dJIt64X.mp4"
+    ],
+    "bytes": 396579,
+    "sha256": "2c14fed06012cc08353ed1a8fb870f5e538c5e6f7bd868aac15657c1d68ca838",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1278
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "12.004717"
+      }
+    },
+    "visual_review": "Night rooftop/prayer-space scene with a short English prayer/trust line. Sampled downloaded frame reviewed; full spoken/religious context pending.",
+    "adaptation": "Original rooftop or quiet-room footage with one concrete preparation for the next prayer. Finish the reflection, then show “Make time for your next salah. Salah Alarm · salahalarm.com.” Do not copy the source text or imply an app guarantees outcomes.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "creator_baseline_file": "MYDEENMYSOUL_BASELINE.json",
+    "baseline_median_rounded_views": 1112,
+    "baseline_sample_size": 13,
+    "pinned_in_creator_listing": true,
+    "multiple_of_baseline_sample": 807.55,
+    "outlier_status": "Exploratory creator-sample comparison; upload-age/format matching and pinning effects unresolved",
+    "qualification_status": "primary_research_reference",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DCmu6uytGBp",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DCmu6uytGBp/",
+    "creator": "mydeenmysoul",
+    "topic": "Dua and care for others",
+    "metric": 598000,
+    "metric_type": "rounded visible views",
+    "likes_public_extractor_reported": 61187,
+    "comments_public_extractor_reported": 190,
+    "observed_on": "2026-10-25T15:33:04.222260+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/mydeenmysoul__DCmu6uytGBp.mp4"
+    ],
+    "bytes": 693037,
+    "sha256": "e58127c17725d56bca93e6f76d8d52c004202291d1d809de2d3b955f32481dc7",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "15.686096"
+      }
+    },
+    "visual_review": "Night city footage with a brief English dua-related message. Sampled downloaded frame reviewed; full spoken/religious context pending.",
+    "adaptation": "Original evening city sequence about remembering someone in dua, followed by a gentle transition to preparing one’s own next prayer. Separate end card: “Prepare for your next prayer. Salah Alarm · salahalarm.com.” No invented testimonial.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "creator_baseline_file": "MYDEENMYSOUL_BASELINE.json",
+    "baseline_median_rounded_views": 1112,
+    "baseline_sample_size": 13,
+    "pinned_in_creator_listing": true,
+    "multiple_of_baseline_sample": 537.77,
+    "outlier_status": "Exploratory creator-sample comparison; upload-age/format matching and pinning effects unresolved",
+    "qualification_status": "primary_research_reference",
+    "republish_permission": "not established"
+  },
+  {
+    "id": "DXMmdcHDaa7",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DXMmdcHDaa7/",
+    "creator": "mydeenmysoul",
+    "topic": "Madinah and devotional Arabic text",
+    "metric": 9420,
+    "metric_type": "rounded visible views",
+    "likes_public_extractor_reported": 3,
+    "comments_public_extractor_reported": 8,
+    "observed_on": "2026-10-25T15:33:04.222260+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/mydeenmysoul__DXMmdcHDaa7.mp4"
+    ],
+    "bytes": 1548897,
+    "sha256": "d8684c4f5bb791bc28d9b49922a77d02508b0e883cfcbc080e979f2bf19aaaf8",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "11.833333"
+      }
+    },
+    "visual_review": "Madinah mosque/minaret footage with Arabic devotional text. Sampled downloaded frame reviewed; full spoken/religious context pending.",
+    "adaptation": "Create original or properly licensed mosque footage with independently checked devotional text. Keep the reflection and product card separate. End: “Make time for your next salah. Salah Alarm · salahalarm.com.” Do not imply official affiliation with the mosque.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "creator_baseline_file": "MYDEENMYSOUL_BASELINE.json",
+    "baseline_median_rounded_views": 1112,
+    "baseline_sample_size": 13,
+    "pinned_in_creator_listing": false,
+    "multiple_of_baseline_sample": 8.47,
+    "outlier_status": "Exploratory creator-sample comparison; upload-age/format matching and pinning effects unresolved",
+    "qualification_status": "small_sample_relative_candidate_only",
+    "republish_permission": "not established",
+    "counts_toward_100_qualified": false,
+    "metric_limitations": "Extractor reported only3likes; not independently confirmed in browser. Do not treat low-absolute-view clips as verified viral successes. Sample-relative view comparison only."
+  },
+  {
+    "id": "DTbQzEJjP9v",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/reel/DTbQzEJjP9v/",
+    "creator": "mydeenmysoul",
+    "topic": "Ramadan wellbeing prayer",
+    "metric": 3100,
+    "metric_type": "rounded visible views",
+    "likes_public_extractor_reported": 3,
+    "comments_public_extractor_reported": 0,
+    "observed_on": "2026-10-25T15:33:04.222260+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/mydeenmysoul__DTbQzEJjP9v.mp4"
+    ],
+    "bytes": 411705,
+    "sha256": "38477908a3b89897c5f4fe0208a88b5810952e539e417dc94c6aaae07df86fe0",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "15.972472"
+      }
+    },
+    "visual_review": "Dark floral footage with a short English Ramadan prayer. Sampled downloaded frame reviewed; full spoken/religious context pending.",
+    "adaptation": "Original Ramadan routine checklist with an honest seasonal framing. Teach one practical evening preparation before a separate Salah Alarm end card and salahalarm.com. Avoid medical or spiritual-healing promises from using the app.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "creator_baseline_file": "MYDEENMYSOUL_BASELINE.json",
+    "baseline_median_rounded_views": 1112,
+    "baseline_sample_size": 13,
+    "pinned_in_creator_listing": false,
+    "multiple_of_baseline_sample": 2.79,
+    "outlier_status": "Exploratory creator-sample comparison; upload-age/format matching and pinning effects unresolved",
+    "qualification_status": "small_sample_relative_candidate_only",
+    "republish_permission": "not established",
+    "counts_toward_100_qualified": false,
+    "metric_limitations": "Extractor reported only3likes; not independently confirmed in browser. Do not treat low-absolute-view clips as verified viral successes. Sample-relative view comparison only."
+  },
+  {
+    "id": "1781214667399958990",
+    "platform": "X",
+    "url": "https://x.com/7signxx/status/1781214667399958990",
+    "creator": "7signxx",
+    "original_media_author_verified": false,
+    "topic": "Fajr wake-up motivation",
+    "metric": 69401,
+    "metric_type": "browser-visible views",
+    "likes": 2542,
+    "reposts": 596,
+    "replies": 11,
+    "bookmarks": 251,
+    "observed_on": "2026-10-25T17:27:27.933437+00:00",
+    "indexed_at_utc": "2026-10-25T21:40:35.735868+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/X__7signxx__1781214667399958990.mp4"
+    ],
+    "bytes": 3197858,
+    "sha256": "8ef55db252efa6ac1bd8539371fcd3775edb0690bea466d7e6d871da928499ff",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "34.249433"
+      }
+    },
+    "visual_review": "Sampled video: speaker at microphone with English captions; @4thehereafter watermark visible.",
+    "adaptation": "Original practical Fajr preparation explainer: show one bedtime decision, put the phone beyond reach, then prepare the alarm. Close: “Prepare for tomorrow’s Fajr. Salah Alarm · salahalarm.com.” Do not equate struggling to wake with weak faith or imply the source speaker endorses the app.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "outlier_status": "Not established: no creator baseline captured",
+    "qualification_status": "Relevant downloaded Fajr research with observed engagement; full source/religious/rights review pending",
+    "republish_permission": "not established",
+    "acquisition_day_Asia_Kolkata": "2026-10-25"
+  },
+  {
+    "id": "2106597588191375699",
+    "platform": "X",
+    "url": "https://x.com/7signxx/status/2106597588191375699",
+    "creator": "7signxx",
+    "original_media_author_verified": false,
+    "topic": "Post-Fajr devotional instruction; religious claim unverified",
+    "metric": 52351,
+    "metric_type": "browser-visible views",
+    "likes": 3300,
+    "reposts": 833,
+    "replies": 11,
+    "bookmarks": 1081,
+    "observed_on": "2026-10-25T17:27:27.934164+00:00",
+    "indexed_at_utc": "2026-10-25T21:40:35.735868+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/X__7signxx__2106597588191375699.mp4"
+    ],
+    "bytes": 2564296,
+    "sha256": "18807386eec76ced121077bea287422a0c37668b5d78a98933926d15a917a3ee",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "24.497052"
+      }
+    },
+    "visual_review": "Sampled video: speaker with tablet/microphone and English after-Fajr caption; original speaker identity not verified.",
+    "adaptation": "Borrow only a clear after-prayer checklist structure. Teach one independently checked practical routine, finish it, then show a separate Salah Alarm end card. Do not repeat the source’s salvation claim without reliable religious verification and never connect salvation to app use.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "outlier_status": "Not established: no creator baseline captured",
+    "qualification_status": "Relevant downloaded Fajr research with observed engagement; full source/religious/rights review pending",
+    "republish_permission": "not established",
+    "acquisition_day_Asia_Kolkata": "2026-10-25"
+  },
+  {
+    "id": "1960032424949432644",
+    "platform": "X",
+    "url": "https://x.com/Alhamdhulillaah/status/1960032424949432644",
+    "creator": "Alhamdhulillaah",
+    "original_media_author_verified": false,
+    "topic": "People of Fajr montage",
+    "metric": 60319,
+    "metric_type": "browser-visible views",
+    "likes": 12837,
+    "reposts": 1183,
+    "replies": 12,
+    "bookmarks": 391,
+    "observed_on": "2026-10-25T17:27:27.934172+00:00",
+    "indexed_at_utc": "2026-10-25T21:40:35.735868+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/X__Alhamdhulillaah__1960032424949432644.mp4"
+    ],
+    "bytes": 1472054,
+    "sha256": "109adc1dc7d70c0ef2b91e9722d79a88cb5f1640b08d31de54482f3f444190cb",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 720,
+          "height": 1280
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "14.837551"
+      }
+    },
+    "visual_review": "Browser playback and downloaded frame reviewed: dawn path, trees and people walking; simple Fajr text overlay.",
+    "adaptation": "Create an original quiet dawn-walk montage. Show the calm morning first, then an end card: “Start with Fajr. Set your alarm tonight. Salah Alarm · salahalarm.com.” Use original/licensed footage and audio.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "outlier_status": "Not established: no creator baseline captured",
+    "qualification_status": "Relevant downloaded Fajr research with observed engagement; full source/religious/rights review pending",
+    "republish_permission": "not established",
+    "acquisition_day_Asia_Kolkata": "2026-10-25"
+  },
+  {
+    "id": "1965267890967642230",
+    "platform": "X",
+    "url": "https://x.com/Quranconnect_/status/1965267890967642230",
+    "creator": "Quranconnect_",
+    "original_media_author_verified": false,
+    "topic": "Fajr journey to mosque; recitation audio",
+    "metric": 91770,
+    "metric_type": "browser-visible views",
+    "likes": 10316,
+    "reposts": 1331,
+    "replies": 40,
+    "bookmarks": 595,
+    "observed_on": "2026-10-25T17:27:27.934178+00:00",
+    "indexed_at_utc": "2026-10-25T21:40:35.735868+00:00",
+    "source_format": "Reel",
+    "download_status": "downloaded",
+    "files": [
+      "Reel/X__Quranconnect___1965267890967642230.mp4"
+    ],
+    "bytes": 3987121,
+    "sha256": "24df4b3e83ac322d95346d30bdd96493cb97b2186e74bd4ae4a8b1b01adacee1",
+    "media_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 576,
+          "height": 1024
+        },
+        {
+          "codec_type": "audio"
+        }
+      ],
+      "format": {
+        "duration": "54.102494"
+      }
+    },
+    "visual_review": "Sampled video: mosque/minaret at night with Arabic overlay; complete Arabic interpretation/audio rights not verified.",
+    "adaptation": "Create an original walk-to-prayer sound-led reel with licensed/original audio. Let the audio and useful morning preparation lead, then name Salah Alarm on a final separate card. Verify any Arabic text before production; do not assume permission to reuse this recitation.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "outlier_status": "Not established: no creator baseline captured",
+    "qualification_status": "Relevant downloaded Fajr research with observed engagement; full source/religious/rights review pending",
+    "republish_permission": "not established",
+    "acquisition_day_Asia_Kolkata": "2026-10-25"
+  }
+]

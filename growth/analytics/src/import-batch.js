@@ -14,6 +14,8 @@ import { fileURLToPath } from 'node:url';
 import { load, save, merge, ranked, toCsv } from './library.js';
 import { idOf, platformOf } from './collect/inbox.js';
 
+// Muse's briefs say "SalaLam"; the product is Salah Alarm (salahalarm.com).
+const brand = (t) => (t ? String(t).replace(/Sala[- ]?Lam/gi, 'Salah Alarm') : t);
 const num = (v) => (v === null || v === undefined || v === '' || Number.isNaN(Number(v)) ? null : Number(v));
 
 function findManifests(dir) {
@@ -53,8 +55,8 @@ export function fromBatchEntry(e, { batchDir, manifestDir, macRoot, foundBy }) {
     source: `batch:${foundBy}`,
     research: {
       localFiles: files.map((f) => (macRoot ? `${macRoot}/${f}` : f)),
-      adaptation: e.adaptation || e.note || null,
-      cta: e.cta_en || e.cta || null,
+      adaptation: brand(e.adaptation || e.note) || null,
+      cta: brand(e.cta_en || e.cta) || null,
       visual: e.visual_review || e.source_visual || null,
       downloadStatus: e.download_status || null,
       republish: e.republish_permission || 'not established',

@@ -206,23 +206,27 @@
  },
  "zernioDaily": null,
  "library": {
-  "total": 202,
+  "total": 261,
   "own": 0,
-  "external": 202,
+  "external": 261,
   "added": 0,
   "byPlatform": {
-   "instagram": 42,
+   "instagram": 79,
    "tiktok": 80,
-   "youtube": 50,
+   "youtube": 65,
    "pinterest": 27,
-   "topcarousels": 3
+   "topcarousels": 3,
+   "web": 3,
+   "x": 4
   },
   "byFormat": {
-   "reminder": 188,
-   "quran": 1,
-   "carousel": 7,
+   "reminder": 236,
+   "quran": 6,
+   "carousel": 10,
    "alarm": 3,
-   "pov": 3
+   "pov": 4,
+   "dua": 1,
+   "ramadan": 1
   }
  },
  "clipQueue": [
@@ -252,7 +256,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Evening Routine/Evening_Routine_thebeliefguide_7608213744711142676_English.mp4"
     ],
     "adaptation": "'Do not sleep before saying this dua' with a type-Ameen comment prompt. A 30-second act plus one word of participation turns viewers into commenters, and the night slot makes the act immediate.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -274,8 +278,8 @@
    "shareRate": 0.1478896882494005,
    "engagementRate": 0.38290167865707436,
    "outlier": null,
-   "viewsPerDay": 166.8723543618159,
-   "ageDays": 249.8916022337963,
+   "viewsPerDay": 166.67119915168877,
+   "ageDays": 250.1931960185185,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -370,7 +374,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_ismilezzzzzzz_7570029738337619232_English.mp4"
     ],
     "adaptation": "Six-second joke built on one blunt alarm voice that refuses to let the sleeper stay down. The comedy is the alarm itself: an ordinary snooze button loses to a voice with a job to do.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -392,8 +396,8 @@
    "shareRate": 0.03023076923076923,
    "engagementRate": 0.17315179487179488,
    "outlier": null,
-   "viewsPerDay": 11051.55230476748,
-   "ageDays": 352.8916022337963,
+   "viewsPerDay": 11042.11531808647,
+   "ageDays": 353.1931960185185,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -429,7 +433,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Evening Routine/Evening_Routine__lateephat_7622778968634117383_English.mp4"
     ],
     "adaptation": "Night dhikr piece: remember Allah before sleep, sleep with a heart full of peace, wake up with barakah. Comment-heavy for its views: the night moment invites confessional replies.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -451,8 +455,8 @@
    "shareRate": 0.09241279069767441,
    "engagementRate": 0.2961627906976744,
    "outlier": null,
-   "viewsPerDay": 163.1169740076414,
-   "ageDays": 210.8916022337963,
+   "viewsPerDay": 162.88403532178012,
+   "ageDays": 211.1931960185185,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -488,7 +492,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Fajr Waking/Fajr_Waking_islamicwisdomhub_1_7464320098199735558_English.mp4"
     ],
     "adaptation": "Short alarm-sound Fajr wake clip: the sound itself is the hook. Directly transferable to a Fajr alarm creative where the adhan alarm, not a lecture, does the waking.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -510,8 +514,67 @@
    "shareRate": 0.02835714285714286,
    "engagementRate": 0.05052892857142857,
    "outlier": null,
-   "viewsPerDay": 4389.460513659122,
-   "ageDays": 637.8916022337963,
+   "viewsPerDay": 4387.386166866549,
+   "ageDays": 638.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "youtube",
+   "id": "WuiLWYlEuew",
+   "url": "https://www.youtube.com/watch?v=WuiLWYlEuew",
+   "author": "Adam - Islamic Animation",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2022-11-23T00:00:00Z",
+   "metrics": {
+    "views": 19615643,
+    "likes": 182944,
+    "comments": 4900,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_AdamIslamicAnimation_WuiLWYlEuew_ar.mp4"
+    ],
+    "adaptation": "How to pray Fajr for woman (beginners) - with Subtitle",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 19615643
+    }
+   ],
+   "score": 76.5,
+   "views": 19615643,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.009576234640893496,
+   "outlier": null,
+   "viewsPerDay": 13686.670509066143,
+   "ageDays": 1433.1931923842592,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -605,8 +668,8 @@
     "localFiles": [
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_IslamicMediaAustralia_Kuk6HgOH9yQ_ar.mp4"
     ],
-    "adaptation": "Top-performing Fajr lecture/reminder: The Fajr Prayer. Adapted as a problem-before-product SalaLam short.",
-    "cta": "\"Want the app name? Ask in the comments.\" Name revealed in replies as SalaLam. No price, no booking link, no fabricated testimonials, no spiritual-reward guarantees.",
+    "adaptation": "Top-performing Fajr lecture/reminder: The Fajr Prayer. Adapted as a problem-before-product Salah Alarm short.",
+    "cta": "\"Want the app name? Ask in the comments.\" Name revealed in replies as Salah Alarm. No price, no booking link, no fabricated testimonials, no spiritual-reward guarantees.",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -628,8 +691,8 @@
    "shareRate": null,
    "engagementRate": 0.004268596289209486,
    "outlier": null,
-   "viewsPerDay": 2301.844940254868,
-   "ageDays": 6864.891602233796,
+   "viewsPerDay": 2301.743818245982,
+   "ageDays": 6865.193196018518,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -665,7 +728,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_mysalahmat_7590135926479752470_English.mp4"
     ],
     "adaptation": "Step-by-step how to pray Fajr video, the strongest education performer in this set. Demonstration beats explanation: viewers stay because each step is shown, not described.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -687,8 +750,8 @@
    "shareRate": 0.00801219512195122,
    "engagementRate": 0.07820731707317073,
    "outlier": null,
-   "viewsPerDay": 27434.6951828572,
-   "ageDays": 298.8916022337963,
+   "viewsPerDay": 27407.04036428844,
+   "ageDays": 299.1931960185185,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -715,7 +778,8 @@
     "views": null,
     "likes": 830000,
     "comments": null,
-    "shares": null
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
@@ -782,7 +846,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_hassantoqeer93_7608378679529426197_English.mp4"
     ],
     "adaptation": "Comedy beat: finish your salah and run, don't look back. The joke lands because it names a real post-prayer rush; humor earns the share, the routine message rides along.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -804,8 +868,8 @@
    "shareRate": 0.013222222222222222,
    "engagementRate": 0.0617525,
    "outlier": null,
-   "viewsPerDay": 14464.128028788775,
-   "ageDays": 248.8916022337963,
+   "viewsPerDay": 14446.622369787618,
+   "ageDays": 249.1931960185185,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -863,8 +927,67 @@
    "shareRate": null,
    "engagementRate": 0.018330214383623467,
    "outlier": null,
-   "viewsPerDay": 195986.37496468058,
-   "ageDays": 38.89160152777778,
+   "viewsPerDay": 194478.2541856094,
+   "ageDays": 39.193194282407404,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DM7ZbHTNGbx",
+   "url": "https://www.instagram.com/reel/DM7ZbHTNGbx/",
+   "author": "dunya_on_mute",
+   "followers": null,
+   "text": "Islamic reminder discovered under Fajr",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 7.7,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 451501,
+    "comments": 559,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/Instagram__DM7ZbHTNGbx.mp4"
+    ],
+    "adaptation": "Original quiet-dawn reel: one practical evening preparation, a short pause, then a clear next step. End card: “Set your intention. Set your Fajr alarm. Salah Alarm · salahalarm.com.” Confirm the actual source message and any religious citation before adapting.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Discovered in Instagram Fajr results; caption and public download metadata reviewed. Full visual/spoken-content review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 5418012
+    }
+   ],
+   "score": 71,
+   "views": 5418012,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08343650770799327,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -890,7 +1013,9 @@
    "metrics": {
     "views": 5400000,
     "likes": 476159,
-    "comments": 597
+    "comments": 597,
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
@@ -920,8 +1045,8 @@
    "shareRate": null,
    "engagementRate": 0.08828814814814814,
    "outlier": null,
-   "viewsPerDay": 87857.40388274554,
-   "ageDays": 61.463232025462965,
+   "viewsPerDay": 86306.91316735497,
+   "ageDays": 62.56740974537037,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -1016,7 +1141,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Prayer Education/Prayer_Education_alinoor_ahmed_7611642363617856776_English.mp4"
     ],
     "adaptation": "Seven-second checklist on signs a salah may lack presence: absent heart, rushing, delaying without reason. The source itself stresses only Allah knows what is accepted; the adaptation keeps that humil",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -1038,12 +1163,72 @@
    "shareRate": 0.007958333333333333,
    "engagementRate": 0.046558333333333334,
    "outlier": null,
-   "viewsPerDay": 9962.987409045045,
-   "ageDays": 240.8916022337963,
+   "viewsPerDay": 9950.529449494632,
+   "ageDays": 241.1931960185185,
    "promo": false,
    "competitor": null,
    "formats": [
     "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DexCI2hugDQ",
+   "url": "https://www.instagram.com/reel/DexCI2hugDQ/",
+   "author": "verse.sakinah",
+   "followers": null,
+   "text": "Animated Quran reflection explainer: There’s a sentence in the Quran that is said twice. Back to back. 🤍\n\nOne tiny word explains why:\nal-ʿusr is THE hardship — the same one, both times.\nyusr is AN ease — a new one, each time.\n\nOne hardship. Two eases.\n\n“So surely, with hardship comes ease. Surely, with hardship comes ease.”\n— Surah Ash-Sharh 94:5–6\n\nSend this to someone who’s carrying something heavy.\n\n#quran #islam #muslim #quranreflection #surahashsharh",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 100.8,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 159896,
+    "comments": 305,
+    "shares": 18700,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/Generatable-Format-References/verse.sakinah__DexCI2hugDQ.mp4"
+    ],
+    "adaptation": "Original animated lesson with final5–7second Salah Alarm CTA; see brief",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt",
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 1918752
+    }
+   ],
+   "score": 69.4,
+   "views": 1918752,
+   "viewsEstimated": true,
+   "shareRate": 0.00974591818015043,
+   "engagementRate": 0.09323820900251831,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "quran"
    ],
    "growth": null,
    "status": "unverified",
@@ -1075,7 +1260,7 @@
      "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Islamic Reminders/Islamic_Reminders_4joykids_7611997866420112662_Arabic_with_English_subtitles.mp4"
     ],
     "adaptation": "Learn Ayat al-Kursi in English, with clear translation and pronunciation, built for repetition until memorised. The learn-it format outperforms listen-only recitation because the viewer leaves with a ",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
     "visual": null,
     "downloadStatus": null,
     "republish": "not established"
@@ -1097,8 +1282,67 @@
    "shareRate": 0.00935,
    "engagementRate": 0.0789065,
    "outlier": null,
-   "viewsPerDay": 8337.098845381079,
-   "ageDays": 239.8916022337963,
+   "viewsPerDay": 8326.630533888243,
+   "ageDays": 240.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DeS8lfgMjXe",
+   "url": "https://www.instagram.com/reel/DeS8lfgMjXe/",
+   "author": "reminding_guy",
+   "followers": null,
+   "text": "Islamic reflection with outdoor/cemetery imagery",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 27.1,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 3300000,
+    "likes": 312233,
+    "comments": 278,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/reminding_guy__DeS8lfgMjXe.mp4"
+    ],
+    "adaptation": "Original quiet reflection on using the next morning well. Show present-day preparation and hopeful dawn footage; avoid fear-based claims. Final card: “Make room for tomorrow’s Fajr. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Outdoor/cemetery footage, rotated within the source composition; full spoken message not verified.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3300000
+    }
+   ],
+   "score": 68.8,
+   "views": 3300000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.09470030303030302,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -1125,7 +1369,8 @@
     "views": 3200000,
     "likes": 640000,
     "comments": null,
-    "shares": null
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
@@ -1133,7 +1378,7 @@
     "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
     "cta": null,
     "visual": null,
-    "downloadStatus": "not attempted yet",
+    "downloadStatus": "failed: public download unavailable",
     "republish": "not established"
    },
    "sources": [
@@ -1153,240 +1398,8 @@
    "shareRate": null,
    "engagementRate": 0.2,
    "outlier": null,
-   "viewsPerDay": 151576.95542783904,
-   "ageDays": 21.111388541666667,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "tiktok",
-   "id": "7596221351426379038",
-   "url": "https://www.tiktok.com/@sujdapp/video/7596221351426379038",
-   "author": "sujdapp",
-   "followers": null,
-   "text": "Islamic Reminders",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2026-01-17T00:00:00Z",
-   "metrics": {
-    "views": 519500,
-    "likes": 116000,
-    "comments": 818,
-    "shares": 13000,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Islamic Reminders/Islamic_Reminders_sujdapp_7596221351426379038_English.mp4"
-    ],
-    "adaptation": "Reframe piece: 'What if salah is not a routine, but a meeting?' The single reframe line does all the work. Note: source account is another prayer app; the adaptation uses the reframe only and names Sa",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 519500
-    }
-   ],
-   "score": 68.3,
-   "views": 519500,
-   "viewsEstimated": false,
-   "shareRate": 0.025024061597690085,
-   "engagementRate": 0.2498902791145332,
-   "outlier": null,
-   "viewsPerDay": 1842.9069751752845,
-   "ageDays": 281.8916022337963,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "instagram",
-   "id": "DcGf3Bjgb5V",
-   "url": "https://www.instagram.com/reel/DcGf3Bjgb5V/",
-   "author": "8tvnn",
-   "followers": null,
-   "text": "Prayer for a good ending: اللهم احسن ختامنا ولا تقبض روحي إلا وانت راضٍ عني يارب \n\n#explore #viral #reels #islam #foryoupage",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": 12,
-   "sound": null,
-   "postedAt": "2026-08-16T13:06:15+00:00",
-   "metrics": {
-    "views": 2800000,
-    "likes": 240885,
-    "comments": 405
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/8tvnn-Top-3/8tvnn__DcGf3Bjgb5V.mp4"
-    ],
-    "adaptation": null,
-    "cta": "One small step today: make time for your next salah 🤍 Need help with Fajr? Comment FAJR for the Salah Alarm link.",
-    "visual": "Warm night footage overlooking parked cars, with Arabic and English subtitles about a good death.",
-    "downloadStatus": "downloaded",
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:chatgpt"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 2800000
-    }
-   ],
-   "score": 68.1,
-   "views": 2800000,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.086175,
-   "outlier": null,
-   "viewsPerDay": 40262.85193466666,
-   "ageDays": 69.54301211805556,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "tiktok",
-   "id": "7369634634595962155",
-   "url": "https://www.tiktok.com/@saufiyahali/video/7369634634595962155",
-   "author": "saufiyahali",
-   "followers": null,
-   "text": "Morning Routine",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": null,
-   "sound": null,
-   "postedAt": "2024-05-16T00:00:00Z",
-   "metrics": {
-    "views": 761200,
-    "likes": 139400,
-    "comments": 3796,
-    "shares": 13300,
-    "saves": null
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Morning Routine/Morning_Routine_saufiyahali_7369634634595962155_English.mp4"
-    ],
-    "adaptation": "'Connect the dots' self-improvement piece: intentions before every action, the five daily prayers as the day's structure, waking early after Fajr. Prayer is the scaffolding the whole day hangs on.",
-    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment SalaLam and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
-    "visual": null,
-    "downloadStatus": null,
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:muse"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 761200
-    }
-   ],
-   "score": 67.7,
-   "views": 761200,
-   "viewsEstimated": false,
-   "shareRate": 0.0174724119810825,
-   "engagementRate": 0.2055911718339464,
-   "outlier": null,
-   "viewsPerDay": 852.5110977588588,
-   "ageDays": 892.8916022337963,
-   "promo": false,
-   "competitor": null,
-   "formats": [
-    "reminder"
-   ],
-   "growth": null,
-   "status": "unverified",
-   "clipNotes": ""
-  },
-  {
-   "platform": "instagram",
-   "id": "DcyIwwtA2jb",
-   "url": "https://www.instagram.com/reel/DcyIwwtA2jb/",
-   "author": "8tvnn",
-   "followers": null,
-   "text": "Gratitude and Alhamdulillah: الحمد لله حمدًا كثيرًا طيبًا مباركًا فيه \nاللهم لك الحمد حتى ترضى، ولك الحمد إذا رضيت، ولك الحمد بعد الرضا.\n\n#alhamdulillah #Islam #muslim #explore #fypシ",
-   "lang": null,
-   "hashtags": [],
-   "mediaType": "video",
-   "durationSec": 13.7,
-   "sound": null,
-   "postedAt": "2026-09-02T11:53:59+00:00",
-   "metrics": {
-    "views": 2500000,
-    "likes": 139889,
-    "comments": 235
-   },
-   "unverified": true,
-   "research": {
-    "localFiles": [
-     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/8tvnn-Top-3/8tvnn__DcyIwwtA2jb.mp4"
-    ],
-    "adaptation": null,
-    "cta": "Alhamdulillah for another morning 🤍 Want a little help getting up for Fajr? Comment FAJR for the Salah Alarm link.",
-    "visual": "Quiet night-sky, flowers and park footage, with Arabic remembrance and English translation.",
-    "downloadStatus": "downloaded",
-    "republish": "not established"
-   },
-   "sources": [
-    "batch:chatgpt"
-   ],
-   "firstSeen": "2026-10-25",
-   "lastSeen": "2026-10-25",
-   "history": [
-    {
-     "d": "2026-10-25",
-     "v": 2500000
-    }
-   ],
-   "score": 67.6,
-   "views": 2500000,
-   "viewsEstimated": false,
-   "shareRate": null,
-   "engagementRate": 0.0560496,
-   "outlier": null,
-   "viewsPerDay": 47534.66471311019,
-   "ageDays": 52.59319730324074,
+   "viewsPerDay": 144188.3308373423,
+   "ageDays": 22.19319678240741,
    "promo": false,
    "competitor": null,
    "formats": [
@@ -1400,31 +1413,34 @@
  "rising": [],
  "promos": [
   {
-   "platform": "tiktok",
-   "id": "7695547570596154655",
-   "url": "https://www.tiktok.com/@dassahlynnn/video/7695547570596154655",
-   "author": "dassahlynnn",
+   "platform": "instagram",
+   "id": "Db35L4uhR1h",
+   "url": "https://www.instagram.com/reel/Db35L4uhR1h/",
+   "author": "bestlookingmoroccanguy",
    "followers": null,
-   "text": "Just Pray mat-scan alarm review; same creative as Instagram candidate",
+   "text": "Cultural-country debate; Just Pray collaboration",
    "lang": null,
    "hashtags": [],
    "mediaType": "video",
-   "durationSec": null,
+   "durationSec": 68.7,
    "sound": null,
-   "postedAt": "2026-10-12T00:00:00Z",
+   "postedAt": null,
    "metrics": {
-    "views": 117900,
-    "likes": 10300,
-    "comments": null,
-    "shares": null
+    "views": 415000,
+    "likes": 8985,
+    "comments": 862,
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
-    "localFiles": [],
-    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": "failed: public extractor request rejected",
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__Db35L4uhR1h.mp4"
+    ],
+    "adaptation": "Framework research only. Borrow a clear numbered structure, not national/religious ranking or provocation. Original idea: “3 things to prepare before your Fajr alarm”: prayer space, phone position, tomorrow’s alarm. Finish with “Prepare tonight. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Browser caption, collaboration header and video frame reviewed; country debate comments observed.",
+    "downloadStatus": "downloaded",
     "republish": "not established"
    },
    "sources": [
@@ -1435,21 +1451,80 @@
    "history": [
     {
      "d": "2026-10-25",
-     "v": 117900
+     "v": 415000
     }
    ],
-   "score": 66.3,
-   "views": 117900,
+   "score": 67.8,
+   "views": 415000,
    "viewsEstimated": false,
    "shareRate": null,
-   "engagementRate": 0.08736217133163698,
+   "engagementRate": 0.023727710843373495,
    "outlier": null,
-   "viewsPerDay": 8992.182607152989,
-   "ageDays": 13.111388541666667,
+   "viewsPerDay": null,
+   "ageDays": null,
    "promo": true,
    "competitor": "just pray",
    "formats": [
-    "alarm"
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DdzNUTCTUgp",
+   "url": "https://www.instagram.com/reel/DdzNUTCTUgp/",
+   "author": "dassahlynnn",
+   "followers": null,
+   "text": "Learning prayer with an app; Just Pray collaboration",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 12.4,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 27260,
+    "comments": 374,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/Instagram__DdzNUTCTUgp.mp4"
+    ],
+    "adaptation": "Original beginner-friendly story: admit a real routine difficulty, show a small preparation, then introduce Salah Alarm as a tool for the alarm routine. Close: “The alarm app is Salah Alarm — salahalarm.com.” Do not suggest Salah Alarm teaches prayer unless that feature is independently verified. No invented user testimonial or imitation of this creator’s identity.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Browser caption and collaboration header reviewed; video area remained black. 27.3K likes, 374 comments and 1.3K reposts visible; full visual/spoken review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 327120
+    }
+   ],
+   "score": 66.8,
+   "views": 327120,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.0844766446563952,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "reminder"
    ],
    "growth": null,
    "status": "unverified",
@@ -1472,7 +1547,8 @@
     "views": 84400,
     "likes": 1711,
     "comments": null,
-    "shares": null
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
@@ -1480,7 +1556,7 @@
     "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
     "cta": null,
     "visual": null,
-    "downloadStatus": "not attempted yet",
+    "downloadStatus": "failed: public download unavailable",
     "republish": "not established"
    },
    "sources": [
@@ -1500,8 +1576,8 @@
    "shareRate": null,
    "engagementRate": 0.02027251184834123,
    "outlier": null,
-   "viewsPerDay": 20528.34441324441,
-   "ageDays": 4.111388541666667,
+   "viewsPerDay": 16252.031944161132,
+   "ageDays": 5.193196782407408,
    "promo": true,
    "competitor": null,
    "formats": [
@@ -1528,7 +1604,8 @@
     "views": null,
     "likes": 12100,
     "comments": null,
-    "shares": null
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
@@ -1570,31 +1647,34 @@
    "clipNotes": ""
   },
   {
-   "platform": "tiktok",
-   "id": "7699479603320065302",
-   "url": "https://www.tiktok.com/@hisaabalarm/video/7699479603320065302",
-   "author": "hisaabalarm",
+   "platform": "instagram",
+   "id": "DZAffnYsqnE",
+   "url": "https://www.instagram.com/reel/DZAffnYsqnE/",
+   "author": "fayeoush",
    "followers": null,
-   "text": "Somewhere in the world Fajr is beginning; app reveal",
+   "text": "Fajr discipline with explicit competitor-app caption",
    "lang": null,
    "hashtags": [],
    "mediaType": "video",
-   "durationSec": null,
+   "durationSec": 89.3,
    "sound": null,
-   "postedAt": "2026-10-22T00:00:00Z",
+   "postedAt": null,
    "metrics": {
-    "views": 12400,
-    "likes": 1072,
-    "comments": null,
-    "shares": null
+    "views": null,
+    "likes": 11651,
+    "comments": 155,
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
-    "localFiles": [],
-    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
-    "cta": null,
-    "visual": null,
-    "downloadStatus": "not attempted yet",
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/fayeoush__DZAffnYsqnE.mp4"
+    ],
+    "adaptation": "Original talking-head story: describe one real preparation that helps you get up for Fajr, show the preparation, then show a real Salah Alarm screen. Close: “My Fajr alarm is Salah Alarm — salahalarm.com.” Use a genuine creator experience, without implying spiritual practice guarantees business success.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Browser video frame and caption reviewed. 11.6K rounded likes visible; extractor recorded 11,651 likes and 155 comments.",
+    "downloadStatus": "downloaded",
     "republish": "not established"
    },
    "sources": [
@@ -1605,17 +1685,135 @@
    "history": [
     {
      "d": "2026-10-25",
-     "v": 12400
+     "v": 139812
     }
    ],
-   "score": 56.5,
-   "views": 12400,
+   "score": 63.1,
+   "views": 139812,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08444196492432696,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DY0Npkqsfwd",
+   "url": "https://www.instagram.com/reel/DY0Npkqsfwd/",
+   "author": "bestlookingmoroccanguy",
+   "followers": null,
+   "text": "Eid seasonal three-item list; app caption mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 62.3,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 134000,
+    "likes": 5852,
+    "comments": 109,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DY0Npkqsfwd.mp4"
+    ],
+    "adaptation": "Use the seasonal list structure for an original Eid/routine transition story: “3 preparations that make tomorrow morning easier.” Connect only the alarm-related step to a verified Salah Alarm demonstration. End with app name and salahalarm.com.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Downloaded opening frame shows a three-item Eid list. Full spoken-content review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 134000
+    }
+   ],
+   "score": 62.9,
+   "views": 134000,
    "viewsEstimated": false,
    "shareRate": null,
-   "engagementRate": 0.08645161290322581,
+   "engagementRate": 0.04448507462686567,
    "outlier": null,
-   "viewsPerDay": 3985.35889489319,
-   "ageDays": 3.1113885416666665,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DZQwYwXvMAY",
+   "url": "https://www.instagram.com/reel/DZQwYwXvMAY/",
+   "author": "bestlookingmoroccanguy",
+   "followers": null,
+   "text": "Critical list about Muslim trends; app caption mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 72.8,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 128000,
+    "likes": 4678,
+    "comments": 96,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DZQwYwXvMAY.mp4"
+    ],
+    "adaptation": "Original numbered explainer: “3 small changes for tomorrow’s Fajr.” Each item gets one real-world demonstration. Keep a helpful tone and a real app screen at the end: “Set your Fajr alarm with Salah Alarm · salahalarm.com.” Do not reuse insults or shame viewers.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Downloaded opening frame shows a three-item critical-trends hook. Full spoken-content review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 128000
+    }
+   ],
+   "score": 62.7,
+   "views": 128000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.037296875,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
    "promo": true,
    "competitor": null,
    "formats": [
@@ -1627,22 +1825,23 @@
   },
   {
    "platform": "tiktok",
-   "id": "7700206097948232973",
-   "url": "https://www.tiktok.com/@westernmuslim1/video/7700206097948232973",
-   "author": "westernmuslim1",
+   "id": "7695547570596154655",
+   "url": "https://www.tiktok.com/@dassahlynnn/video/7695547570596154655",
+   "author": "dassahlynnn",
    "followers": null,
-   "text": "Deenly app review; low engagement comparison",
+   "text": "Just Pray mat-scan alarm review; same creative as Instagram candidate",
    "lang": null,
    "hashtags": [],
    "mediaType": "video",
    "durationSec": null,
    "sound": null,
-   "postedAt": "2026-10-24T00:00:00Z",
+   "postedAt": "2026-10-12T00:00:00Z",
    "metrics": {
-    "views": 972,
-    "likes": 68,
+    "views": 117900,
+    "likes": 10300,
     "comments": null,
-    "shares": null
+    "shares": null,
+    "saves": null
    },
    "unverified": true,
    "research": {
@@ -1650,7 +1849,7 @@
     "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
     "cta": null,
     "visual": null,
-    "downloadStatus": "not attempted yet",
+    "downloadStatus": "failed: public extractor request rejected",
     "republish": "not established"
    },
    "sources": [
@@ -1661,19 +1860,137 @@
    "history": [
     {
      "d": "2026-10-25",
-     "v": 972
+     "v": 117900
     }
    ],
-   "score": 45.5,
-   "views": 972,
+   "score": 62.3,
+   "views": 117900,
    "viewsEstimated": false,
    "shareRate": null,
-   "engagementRate": 0.06995884773662552,
+   "engagementRate": 0.08736217133163698,
    "outlier": null,
-   "viewsPerDay": 874.5816278997837,
-   "ageDays": 1.1113885416666667,
+   "viewsPerDay": 8306.796686292555,
+   "ageDays": 14.193196782407407,
    "promo": true,
-   "competitor": "deenly",
+   "competitor": "just pray",
+   "formats": [
+    "alarm"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DYNRZ2MuV31",
+   "url": "https://www.instagram.com/reel/DYNRZ2MuV31/",
+   "author": "akhialtamash",
+   "followers": null,
+   "text": "Celebrity-faith curiosity question; Just Pray caption mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 74.5,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 94100,
+    "likes": 4016,
+    "comments": 66,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DYNRZ2MuV31.mp4"
+    ],
+    "adaptation": "Not shortlisted as primary Fajr content. Transfer only a question-to-answer structure: “Why do I wake up for work but struggle with Fajr?” Answer with an original practical preparation; close with “Plan tomorrow’s Fajr tonight. Salah Alarm · salahalarm.com.” Do not repeat unverified claims about a celebrity’s faith.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Downloaded opening frame and caption reviewed; full argument not independently checked.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 94100
+    }
+   ],
+   "score": 61.3,
+   "views": 94100,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.04337938363443146,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DXj7AS_ifHp",
+   "url": "https://www.instagram.com/reel/DXj7AS_ifHp/",
+   "author": "ummahunite1",
+   "followers": null,
+   "text": "Paid online creator-event promotion with Just Pray sponsor mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 53.3,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 88700,
+    "likes": 1464,
+    "comments": 16,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DXj7AS_ifHp.mp4"
+    ],
+    "adaptation": "Not shortlisted as primary Fajr content. Study the visual emphasis on key words, then create an original routine explainer with one useful action before an app-name end card. No ticket CTA or event claim should be reused.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Caption advertises a paid online event; downloaded opening frame reviewed.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 88700
+    }
+   ],
+   "score": 61.1,
+   "views": 88700,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.01668545659526494,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
    "formats": [
     "reminder"
    ],
