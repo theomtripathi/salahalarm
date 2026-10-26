@@ -13,9 +13,13 @@ on:
   workflow_dispatch:
     inputs:
       dodo_setup:
-        description: "Also create the live Dodo products and webhook (once; needs the DODO_PAYMENTS_API_KEY secret)"
+        description: "Also create the live Dodo products and webhook (once)"
         type: boolean
         default: false
+      homepage_ref:
+        description: "Also deploy the salahalarm.com homepage (website/) from this branch or commit"
+        type: string
+        default: ""
 
 concurrency:
   group: web-deploy
@@ -47,31 +51,59 @@ jobs:
       - name: Deploy
         run: npx wrangler deploy
 
+      # The Dodo key only exists as a Worker secret, so the Worker creates the
+      # products itself; this step stores the webhook secret it hands back.
       - name: Dodo products and webhook
         if: ${{ inputs.dodo_setup }}
-        env:
-          DODO_PAYMENTS_API_KEY: ${{ secrets.DODO_PAYMENTS_API_KEY }}
-          DODO_ENVIRONMENT: live_mode
-          WEBHOOK_URL: https://salahalarm.com/api/webhooks/dodo
         run: |
-          if ! grep -q "^PRODUCTS = '{}'" wrangler.toml; then
-            echo "::error::PRODUCTS is already set in wrangler.toml; refusing to create duplicate products"; exit 1
-          fi
-          node scripts/dodo-setup.mjs | tee "$RUNNER_TEMP/dodo.txt"
-          hook=$(sed -n 's/^webhook \([^ ]*\) created.*/\1/p' "$RUNNER_TEMP/dodo.txt")
-          if [ -n "$hook" ]; then
-            secret=$(curl -sf -H "Authorization: Bearer $DODO_PAYMENTS_API_KEY" \
-              "https://live.dodopayments.com/webhooks/$hook/secret" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{process.stdout.write(JSON.parse(s).secret||"")}catch{}})')
-            if [ -n "$secret" ]; then
-              echo "::add-mask::$secret"
-              printf %s "$secret" | npx wrangler secret put DODO_WEBHOOK_SECRET
-            else
-              echo "::warning::Could not read the webhook signing secret; copy it from the Dodo dashboard into DODO_WEBHOOK_SECRET"
-            fi
-          fi
+          sleep 10
+          curl -sS -X POST https://salahalarm.com/api/admin/dodo-setup \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "content-type: application/json" \
+            -d '{"environment":"live_mode"}' -o "$RUNNER_TEMP/dodo.json" -w "HTTP %{http_code}\n"
+          node -e '
+            const r = require(process.argv[1]);
+            if (r.webhook?.secret) console.log("::add-mask::" + r.webhook.secret);
+            for (const line of r.log || []) console.log(line);
+            if (r.error) { console.log("::error::" + r.error + " " + JSON.stringify(r.detail)); process.exit(1); }
+            console.log("PRODUCTS = \x27" + JSON.stringify(r.products) + "\x27");
+            console.log("webhook " + (r.webhook?.id || "none") + (r.webhook?.secret ? " (secret stored)" : " (no secret returned)"));
+          ' "$RUNNER_TEMP/dodo.json"
+          secret=$(node -e 'process.stdout.write(require(process.argv[1]).webhook?.secret || "")' "$RUNNER_TEMP/dodo.json")
+          if [ -n "$secret" ]; then printf %s "$secret" | npx wrangler secret put DODO_WEBHOOK_SECRET; fi
+          rm -f "$RUNNER_TEMP/dodo.json"
 
       - name: Check
         run: |
           for p in /get/ /android/ /api/config; do
+            echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://salahalarm.com$p)"
+          done
+
+  homepage:
+    if: ${{ inputs.homepage_ref != '' }}
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: website
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.homepage_ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm test
+      - run: npm run build
+      - run: npx --yes wrangler@4.152.0 deploy
+
+      - name: Check
+        run: |
+          for p in / /blog/en/ /get/ /android/ /go/ig1; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://salahalarm.com$p)"
           done

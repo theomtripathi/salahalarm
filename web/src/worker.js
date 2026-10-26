@@ -14,11 +14,13 @@
 //   /api/app-login           one-time code that signs the installed app into this account
 //   /api/app-login/redeem    the app trades that code for a Firebase custom token
 //   /api/android/latest      newest APK version, for the in-app update prompt
+//   /api/admin/dodo-setup    one-time: create the Dodo products + webhook (Cloudflare token holders only)
 //   /download/salahalarm.apk the APK, streamed from R2
 
 import { verifyIdToken, bearer, AuthError } from "./auth.js";
 import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
 import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
+import { setupDodo } from "./dodo-setup.js";
 import { tierFor, productFor, parseProducts, displayPlans, displayOffer, CHECKOUT_PLANS } from "./pricing.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
@@ -58,6 +60,7 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/app-login" && method === "POST") return createAppLogin(request, env);
   if (pathname === "/api/app-login/redeem" && method === "POST") return redeemAppLogin(request, env, ctx);
   if (pathname === "/api/android/latest" && method === "GET") return latest(env);
+  if (pathname === "/api/admin/dodo-setup" && method === "POST") return adminDodoSetup(request, env, url);
   if (pathname === "/download/salahalarm.apk" && (method === "GET" || method === "HEAD")) return download(request, env, ctx);
   if (pathname.startsWith("/api/")) return json({ error: "not found" }, 404);
 
@@ -341,6 +344,39 @@ export function trialEntitlement(u, days, now = Date.now()) {
     lastEventAt: iso,
     updatedAt: iso,
   };
+}
+
+// ---- /api/admin/dodo-setup ---------------------------------------------------
+//
+// The Dodo key lives only in this Worker's secrets, so product setup runs here.
+// The caller must hold a Cloudflare API token for this Worker's own account:
+// whoever has one can redeploy the Worker anyway, so this grants nothing new.
+
+async function adminDodoSetup(request, env, url) {
+  const token = bearer(request);
+  const account = env.ADMIN_CF_ACCOUNT;
+  if (!token || !account) return json({ error: "unauthorized" }, 401);
+  const check = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/tokens/verify`, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+  const verified = check.ok ? await check.json().catch(() => null) : null;
+  if (!verified?.success || verified.result?.status !== "active") return json({ error: "unauthorized" }, 401);
+
+  if (Object.keys(parseProducts(env.PRODUCTS)).length) return json({ error: "products already configured" }, 409);
+  const body = await readJson(request);
+  const environment = body.environment === "live_mode" ? "live_mode" : "test_mode";
+  const client = new Dodo({ apiKey: env.DODO_PAYMENTS_API_KEY, environment });
+  const log = [];
+  try {
+    const result = await setupDodo((method, path, payload) => client.request(method, path, payload), {
+      webhookUrl: `${env.PUBLIC_ORIGIN || url.origin}/api/webhooks/dodo`,
+      log: (line) => log.push(line),
+    });
+    return json({ environment, ...result, log });
+  } catch (err) {
+    // Products created before the failure are in the log.
+    return json({ error: err.message, detail: err.body ?? null, log }, 502);
+  }
 }
 
 // ---- /api/entitlement --------------------------------------------------------

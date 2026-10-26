@@ -205,6 +205,13 @@ test("FREE_TRIAL_DAYS sets the trial length", async () => {
   assert.ok(days > 13.9 && days <= 14, String(days));
 });
 
+test("Dodo setup needs a Cloudflare token for the Worker's own account", async () => {
+  let r = await call("/api/admin/dodo-setup", { method: "POST", body: { environment: "live_mode" }, env: env({ ADMIN_CF_ACCOUNT: "acc" }) });
+  assert.equal(r.status, 401);
+  r = await call("/api/admin/dodo-setup", { method: "POST", token: "not-a-cloudflare-token", body: {}, env: env({ ADMIN_CF_ACCOUNT: "" }) });
+  assert.equal(r.status, 401);
+});
+
 test("someone else's subscription id does not unlock an account", async () => {
   const c = await call("/api/checkout", { method: "POST", token: idToken({ uid: "owner", email: "owner@example.com" }), body: { plan: "yearly" } });
   const sub = backend.pay(c.body.sessionId);

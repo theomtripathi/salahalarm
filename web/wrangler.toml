@@ -27,6 +27,8 @@ FIREBASE_PROJECT_ID = "ramadan-pro-684da"
 FIREBASE_AUTH_DOMAIN = "ramadan-pro-684da.firebaseapp.com"
 # Firebase web API key: public by design (it identifies the project, it is not a secret).
 FIREBASE_API_KEY = "AIzaSyABdJ9QWxrxu4GGs8hXqhgouMjE4B7TQlI"
+# Cloudflare account that owns this Worker; its API tokens may run /api/admin/dodo-setup (not a secret).
+ADMIN_CF_ACCOUNT = "b937236acbd202c2fd6349d185631bef"
 POSTHOG_HOST = "https://us.i.posthog.com"
 POSTHOG_KEY = "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX"
 APP_STORE_URL = "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&mt=8"
