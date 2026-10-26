@@ -270,6 +270,7 @@ struct SLScreen0SignUp: View {
         print("✅ [ONBOARDING] Auth success for \(provider), moving to \(postAuthScreen.rawValue)")
         vm.mergeProfileAfterAuth()
         if let userID = FirebaseAuthService.shared.currentUser?.userId { FunnelAnalytics.shared.identify(userID: userID) }
+        FunnelAnalytics.shared.setEmail(FirebaseAuthService.shared.currentUser?.email)
         FunnelAnalytics.shared.signupCompleted(method: provider)
         try? await Task.sleep(nanoseconds: 500_000_000)
         vm.skipTo(postAuthScreen)
