@@ -1,0 +1,3010 @@
+{
+ "date": "2026-10-25",
+ "funnel": {
+  "steps": [
+   {
+    "from": "installs",
+    "to": "onboarding_completed",
+    "label": "Onboarding completion",
+    "floor": 0.6,
+    "now": 0.6585365853658537,
+    "before": 0.7222222222222222,
+    "n": 82,
+    "change": -0.0881801125703564
+   },
+   {
+    "from": "installs",
+    "to": "paywall_viewed",
+    "label": "Reach the paywall",
+    "floor": 0.55,
+    "now": 0.7804878048780488,
+    "before": 1,
+    "n": 82,
+    "change": -0.2195121951219512
+   },
+   {
+    "from": "paywall_viewed",
+    "to": "buy_tapped",
+    "label": "Tap buy on the paywall",
+    "floor": 0.15,
+    "now": 0.40625,
+    "before": 0.3387096774193548,
+    "n": 64,
+    "change": 0.19940476190476208
+   },
+   {
+    "from": "buy_tapped",
+    "to": "purchased",
+    "label": "Finish checkout after tapping buy",
+    "floor": 0.35,
+    "now": 0,
+    "before": 0.047619047619047616,
+    "n": 26,
+    "change": -1
+   },
+   {
+    "from": "installs",
+    "to": "purchased",
+    "label": "Install to paid",
+    "floor": 0.02,
+    "now": 0,
+    "before": 0.018518518518518517,
+    "n": 82,
+    "change": -1
+   }
+  ],
+  "alerts": [
+   {
+    "level": "red",
+    "text": "85% of people who tapped buy then cancelled on Apple's payment sheet (22 of 26). The price or \"charged today\" on the sheet is a surprise: show the real price and billing date on the paywall, or add a free trial."
+   },
+   {
+    "level": "red",
+    "text": "No purchase recorded in PostHog from 82 installs this week. Check RevenueCat: either nobody is paying or purchase_completed isn't firing in this build."
+   },
+   {
+    "level": "amber",
+    "text": "Onboarding screen \"screen2\" loses 12% of people who reach the screen before it (73 → 64 this week)."
+   }
+  ],
+  "yesterday": {
+   "day": "2026-10-24",
+   "installs": 19,
+   "onboarding_started": 14,
+   "onboarding_completed": 9,
+   "signup_completed": 7,
+   "paywall_viewed": 15,
+   "buy_tapped": 4,
+   "sheet_cancelled": 4,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 2,
+   "final_offer_accepted": 0,
+   "link_clicks": 28
+  },
+  "totals": {
+   "cur": {
+    "installs": 82,
+    "onboarding_completed": 54,
+    "paywall_viewed": 64,
+    "buy_tapped": 26,
+    "sheet_cancelled": 22,
+    "purchase_errors": 0,
+    "purchased": 0,
+    "link_clicks": 28
+   },
+   "prev": {
+    "installs": 54,
+    "onboarding_completed": 39,
+    "paywall_viewed": 62,
+    "buy_tapped": 21,
+    "sheet_cancelled": 19,
+    "purchase_errors": 0,
+    "purchased": 1,
+    "link_clicks": 0
+   }
+  },
+  "leak": {
+   "screen": "screen2",
+   "from": 73,
+   "to": 64,
+   "loss": 0.12328767123287676
+  }
+ },
+ "android": null,
+ "revenue": null,
+ "channels": {
+  "tiktok": {
+   "posts": 0,
+   "views": 0,
+   "passOn": 0,
+   "profileViews": 0,
+   "follows": 0,
+   "clicks": 1,
+   "impressions": 0,
+   "pageViews": 0,
+   "installs": 0,
+   "proceeds": 0,
+   "clicksPer1k": null,
+   "installsPer1k": null,
+   "profileRate": null
+  },
+  "instagram": {
+   "posts": 0,
+   "views": 0,
+   "passOn": 0,
+   "profileViews": 0,
+   "follows": 0,
+   "clicks": 0,
+   "impressions": 0,
+   "pageViews": 0,
+   "installs": 0,
+   "proceeds": 0,
+   "clicksPer1k": null,
+   "installsPer1k": null,
+   "profileRate": null
+  },
+  "x": {
+   "posts": 0,
+   "views": 0,
+   "passOn": 0,
+   "profileViews": 0,
+   "follows": 0,
+   "clicks": 0,
+   "impressions": 0,
+   "pageViews": 0,
+   "installs": 0,
+   "proceeds": 0,
+   "clicksPer1k": null,
+   "installsPer1k": null,
+   "profileRate": null
+  },
+  "seo": {
+   "posts": 0,
+   "views": 0,
+   "passOn": 0,
+   "profileViews": 0,
+   "follows": 0,
+   "clicks": 46,
+   "impressions": 0,
+   "pageViews": 0,
+   "installs": 0,
+   "proceeds": 0,
+   "clicksPer1k": null,
+   "installsPer1k": null,
+   "profileRate": null
+  },
+  "clipping": {
+   "posts": 0,
+   "views": 0,
+   "passOn": 0,
+   "profileViews": 0,
+   "follows": 0,
+   "clicks": 0,
+   "impressions": 0,
+   "pageViews": 0,
+   "installs": 0,
+   "proceeds": 0,
+   "clicksPer1k": null,
+   "installsPer1k": null,
+   "profileRate": null
+  },
+  "ads": {
+   "posts": 0,
+   "views": 0,
+   "passOn": 0,
+   "profileViews": 0,
+   "follows": 0,
+   "clicks": 0,
+   "impressions": 0,
+   "pageViews": 0,
+   "installs": 0,
+   "proceeds": 0,
+   "clicksPer1k": null,
+   "installsPer1k": null,
+   "profileRate": null
+  }
+ },
+ "zernioDaily": null,
+ "library": {
+  "total": 261,
+  "own": 0,
+  "external": 261,
+  "added": 0,
+  "byPlatform": {
+   "instagram": 79,
+   "tiktok": 80,
+   "youtube": 65,
+   "pinterest": 27,
+   "topcarousels": 3,
+   "web": 3,
+   "x": 4
+  },
+  "byFormat": {
+   "reminder": 236,
+   "quran": 6,
+   "carousel": 10,
+   "alarm": 3,
+   "pov": 4,
+   "dua": 1,
+   "ramadan": 1
+  }
+ },
+ "clipQueue": [
+  {
+   "platform": "tiktok",
+   "id": "7608213744711142676",
+   "url": "https://www.tiktok.com/@thebeliefguide/video/7608213744711142676",
+   "author": "thebeliefguide",
+   "followers": null,
+   "text": "Evening Routine",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-18T00:00:00Z",
+   "metrics": {
+    "views": 41700,
+    "likes": 9116,
+    "comments": 684,
+    "shares": 6167,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Evening Routine/Evening_Routine_thebeliefguide_7608213744711142676_English.mp4"
+    ],
+    "adaptation": "'Do not sleep before saying this dua' with a type-Ameen comment prompt. A 30-second act plus one word of participation turns viewers into commenters, and the night slot makes the act immediate.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 41700
+    }
+   ],
+   "score": 79.8,
+   "views": 41700,
+   "viewsEstimated": false,
+   "shareRate": 0.1478896882494005,
+   "engagementRate": 0.38290167865707436,
+   "outlier": null,
+   "viewsPerDay": 166.67119915168877,
+   "ageDays": 250.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7581228868128754966",
+   "url": "https://www.tiktok.com/@my.petsie/video/7581228868128754966",
+   "author": "my.petsie",
+   "followers": null,
+   "text": "Humor",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 22500000,
+    "likes": 768600,
+    "comments": 13800,
+    "shares": 177100,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Humor/Humor_my_petsie_tiktok_my.petsie_7581228868128754966_en.mp4"
+    ],
+    "adaptation": "Pet-interruption humor where the joke is the cat, never the prayer, and the app only appears as the on-time prompt that gets the owner to the mat.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 22500000
+    }
+   ],
+   "score": 79.5,
+   "views": 22500000,
+   "viewsEstimated": false,
+   "shareRate": 0.007871111111111112,
+   "engagementRate": 0.04264444444444444,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7570029738337619232",
+   "url": "https://www.tiktok.com/@ismilezzzzzzz/video/7570029738337619232",
+   "author": "ismilezzzzzzz",
+   "followers": null,
+   "text": "Humor",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2025-11-07T00:00:00Z",
+   "metrics": {
+    "views": 3900000,
+    "likes": 555200,
+    "comments": 2192,
+    "shares": 117900,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_ismilezzzzzzz_7570029738337619232_English.mp4"
+    ],
+    "adaptation": "Six-second joke built on one blunt alarm voice that refuses to let the sleeper stay down. The comedy is the alarm itself: an ordinary snooze button loses to a voice with a job to do.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3900000
+    }
+   ],
+   "score": 78.6,
+   "views": 3900000,
+   "viewsEstimated": false,
+   "shareRate": 0.03023076923076923,
+   "engagementRate": 0.17315179487179488,
+   "outlier": null,
+   "viewsPerDay": 11042.11531808647,
+   "ageDays": 353.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7622778968634117383",
+   "url": "https://www.tiktok.com/@_lateephat/video/7622778968634117383",
+   "author": "_lateephat",
+   "followers": null,
+   "text": "Evening Routine",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-03-29T00:00:00Z",
+   "metrics": {
+    "views": 34400,
+    "likes": 6481,
+    "comments": 528,
+    "shares": 3179,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Evening Routine/Evening_Routine__lateephat_7622778968634117383_English.mp4"
+    ],
+    "adaptation": "Night dhikr piece: remember Allah before sleep, sleep with a heart full of peace, wake up with barakah. Comment-heavy for its views: the night moment invites confessional replies.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 34400
+    }
+   ],
+   "score": 76.7,
+   "views": 34400,
+   "viewsEstimated": false,
+   "shareRate": 0.09241279069767441,
+   "engagementRate": 0.2961627906976744,
+   "outlier": null,
+   "viewsPerDay": 162.88403532178012,
+   "ageDays": 211.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7464320098199735558",
+   "url": "https://www.tiktok.com/@islamicwisdomhub.1/video/7464320098199735558",
+   "author": "islamicwisdomhub.1",
+   "followers": null,
+   "text": "Fajr Waking",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2025-01-26T00:00:00Z",
+   "metrics": {
+    "views": 2800000,
+    "likes": 61700,
+    "comments": 381,
+    "shares": 79400,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Fajr Waking/Fajr_Waking_islamicwisdomhub_1_7464320098199735558_English.mp4"
+    ],
+    "adaptation": "Short alarm-sound Fajr wake clip: the sound itself is the hook. Directly transferable to a Fajr alarm creative where the adhan alarm, not a lecture, does the waking.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2800000
+    }
+   ],
+   "score": 76.6,
+   "views": 2800000,
+   "viewsEstimated": false,
+   "shareRate": 0.02835714285714286,
+   "engagementRate": 0.05052892857142857,
+   "outlier": null,
+   "viewsPerDay": 4387.386166866549,
+   "ageDays": 638.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "youtube",
+   "id": "WuiLWYlEuew",
+   "url": "https://www.youtube.com/watch?v=WuiLWYlEuew",
+   "author": "Adam - Islamic Animation",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2022-11-23T00:00:00Z",
+   "metrics": {
+    "views": 19615643,
+    "likes": 182944,
+    "comments": 4900,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_AdamIslamicAnimation_WuiLWYlEuew_ar.mp4"
+    ],
+    "adaptation": "How to pray Fajr for woman (beginners) - with Subtitle",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 19615643
+    }
+   ],
+   "score": 76.5,
+   "views": 19615643,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.009576234640893496,
+   "outlier": null,
+   "viewsPerDay": 13686.670509066143,
+   "ageDays": 1433.1931923842592,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7621857518850952468",
+   "url": "https://www.tiktok.com/@bymouadh/video/7621857518850952468",
+   "author": "bymouadh",
+   "followers": null,
+   "text": "Morning Routine",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 2500000,
+    "likes": 452500,
+    "comments": 3173,
+    "shares": 69200,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Morning Routine/Morning_Routine_bymouadh_tiktok_bymouadh_7621857518850952468_en.mp4"
+    ],
+    "adaptation": "Phone-first swap format where the replacement habit is the whole idea; the app appears only as the lock that keeps the phone closed until prayer, demonstrated, not claimed as a guarantee.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2500000
+    }
+   ],
+   "score": 75.9,
+   "views": 2500000,
+   "viewsEstimated": false,
+   "shareRate": 0.02768,
+   "engagementRate": 0.2099492,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "youtube",
+   "id": "Kuk6HgOH9yQ",
+   "url": "https://www.youtube.com/watch?v=Kuk6HgOH9yQ",
+   "author": "Islamic Media Australia",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2008-01-09T00:00:00Z",
+   "metrics": {
+    "views": 15801916,
+    "likes": 67452,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_IslamicMediaAustralia_Kuk6HgOH9yQ_ar.mp4"
+    ],
+    "adaptation": "Top-performing Fajr lecture/reminder: The Fajr Prayer. Adapted as a problem-before-product Salah Alarm short.",
+    "cta": "\"Want the app name? Ask in the comments.\" Name revealed in replies as Salah Alarm. No price, no booking link, no fabricated testimonials, no spiritual-reward guarantees.",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 15801916
+    }
+   ],
+   "score": 75.6,
+   "views": 15801916,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.004268596289209486,
+   "outlier": null,
+   "viewsPerDay": 2301.743818245982,
+   "ageDays": 6865.193196018518,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7590135926479752470",
+   "url": "https://www.tiktok.com/@mysalahmat/video/7590135926479752470",
+   "author": "mysalahmat",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2025-12-31T00:00:00Z",
+   "metrics": {
+    "views": 8200000,
+    "likes": 572100,
+    "comments": 3500,
+    "shares": 65700,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Prayer Education/Prayer_Education_mysalahmat_7590135926479752470_English.mp4"
+    ],
+    "adaptation": "Step-by-step how to pray Fajr video, the strongest education performer in this set. Demonstration beats explanation: viewers stay because each step is shown, not described.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 8200000
+    }
+   ],
+   "score": 75.2,
+   "views": 8200000,
+   "viewsEstimated": false,
+   "shareRate": 0.00801219512195122,
+   "engagementRate": 0.07820731707317073,
+   "outlier": null,
+   "viewsPerDay": 27407.04036428844,
+   "ageDays": 299.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DeMtQ8LKy5h",
+   "url": "https://www.instagram.com/p/DeMtQ8LKy5h/",
+   "author": "journey_with_kacho",
+   "followers": null,
+   "text": "Relatable Fajr peace; AI label",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 19.4,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 830000,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/journey_with_kacho__DeMtQ8LKy5h.mp4"
+    ],
+    "adaptation": "Priority: original relatable contrast between waking reluctantly and feeling calm after prayer. Inspect full video before scripting.",
+    "cta": null,
+    "visual": "caption and source UI reviewed; full creative review pending",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 9960000
+    }
+   ],
+   "score": 73.6,
+   "views": 9960000,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08333333333333333,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "pov"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7608378679529426197",
+   "url": "https://www.tiktok.com/@hassantoqeer93/video/7608378679529426197",
+   "author": "hassantoqeer93",
+   "followers": null,
+   "text": "Humor",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-19T00:00:00Z",
+   "metrics": {
+    "views": 3600000,
+    "likes": 172700,
+    "comments": 2009,
+    "shares": 47600,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_hassantoqeer93_7608378679529426197_English.mp4"
+    ],
+    "adaptation": "Comedy beat: finish your salah and run, don't look back. The joke lands because it names a real post-prayer rush; humor earns the share, the routine message rides along.",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3600000
+    }
+   ],
+   "score": 73.1,
+   "views": 3600000,
+   "viewsEstimated": false,
+   "shareRate": 0.013222222222222222,
+   "engagementRate": 0.0617525,
+   "outlier": null,
+   "viewsPerDay": 14446.622369787618,
+   "ageDays": 249.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "youtube",
+   "id": "L1oWHZ83UGA",
+   "url": "https://www.youtube.com/shorts/L1oWHZ83UGA",
+   "author": "Ummah Moments",
+   "followers": null,
+   "text": "Humor",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-09-17T00:00:00Z",
+   "metrics": {
+    "views": 7622224,
+    "likes": 135417,
+    "comments": 4300,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Humor/Humor_Ummah_Moments_yt_L1oWHZ83UGA_en.mp4"
+    ],
+    "adaptation": "A boy making sure his toy dinosaur does not miss a rakah is funny because it is sincere, and sincerity is what makes it shareable.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 7622224
+    }
+   ],
+   "score": 72.4,
+   "views": 7622224,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.018330214383623467,
+   "outlier": null,
+   "viewsPerDay": 194478.2541856094,
+   "ageDays": 39.193194282407404,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DM7ZbHTNGbx",
+   "url": "https://www.instagram.com/reel/DM7ZbHTNGbx/",
+   "author": "dunya_on_mute",
+   "followers": null,
+   "text": "Islamic reminder discovered under Fajr",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 7.7,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 451501,
+    "comments": 559,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/Instagram__DM7ZbHTNGbx.mp4"
+    ],
+    "adaptation": "Original quiet-dawn reel: one practical evening preparation, a short pause, then a clear next step. End card: “Set your intention. Set your Fajr alarm. Salah Alarm · salahalarm.com.” Confirm the actual source message and any religious citation before adapting.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Discovered in Instagram Fajr results; caption and public download metadata reviewed. Full visual/spoken-content review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 5418012
+    }
+   ],
+   "score": 71,
+   "views": 5418012,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08343650770799327,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DcbQy_nIafe",
+   "url": "https://www.instagram.com/reel/DcbQy_nIafe/",
+   "author": "8tvnn",
+   "followers": null,
+   "text": "Hope during hardship: سيمضي ما أثقل قلبك ويبقى وعد الله \n\n#islam #muslim #alhamdulillah #viral #explorepage",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 12,
+   "sound": null,
+   "postedAt": "2026-08-24T15:01:08+00:00",
+   "metrics": {
+    "views": 5400000,
+    "likes": 476159,
+    "comments": 597,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/8tvnn-Top-3/8tvnn__DcbQy_nIafe.mp4"
+    ],
+    "adaptation": null,
+    "cta": "Take this reminder into your next salah 🤍 If getting up for Fajr is the hard part, comment FAJR for the Salah Alarm link.",
+    "visual": "A night-sky view through a car roof, with Quranic text about ease with hardship.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 5400000
+    }
+   ],
+   "score": 70.9,
+   "views": 5400000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.08828814814814814,
+   "outlier": null,
+   "viewsPerDay": 86306.91316735497,
+   "ageDays": 62.56740974537037,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7637905811062279438",
+   "url": "https://www.tiktok.com/@nuraniquran1/video/7637905811062279438",
+   "author": "nuraniquran1",
+   "followers": null,
+   "text": "Islamic Reminders",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 408000,
+    "comments": 10900,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Full Video/Islamic Reminders/Islamic_Reminders_nuraniquran1_tiktok_nuraniquran1_7637905811062279438_arabic.mp4"
+    ],
+    "adaptation": "Surah Al-Fajr recitation, 408K likes, high raw engagement. Audio-first value: a calm recitation opening can earn attention before any product mention; do not claim recitation effects.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 4896000
+    }
+   ],
+   "score": 70.5,
+   "views": 4896000,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08555964052287582,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7611642363617856776",
+   "url": "https://www.tiktok.com/@alinoor.ahmed/video/7611642363617856776",
+   "author": "alinoor.ahmed",
+   "followers": null,
+   "text": "Prayer Education",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-27T00:00:00Z",
+   "metrics": {
+    "views": 2400000,
+    "likes": 92400,
+    "comments": 240,
+    "shares": 19100,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Prayer Education/Prayer_Education_alinoor_ahmed_7611642363617856776_English.mp4"
+    ],
+    "adaptation": "Seven-second checklist on signs a salah may lack presence: absent heart, rushing, delaying without reason. The source itself stresses only Allah knows what is accepted; the adaptation keeps that humil",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2400000
+    }
+   ],
+   "score": 69.8,
+   "views": 2400000,
+   "viewsEstimated": false,
+   "shareRate": 0.007958333333333333,
+   "engagementRate": 0.046558333333333334,
+   "outlier": null,
+   "viewsPerDay": 9950.529449494632,
+   "ageDays": 241.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DexCI2hugDQ",
+   "url": "https://www.instagram.com/reel/DexCI2hugDQ/",
+   "author": "verse.sakinah",
+   "followers": null,
+   "text": "Animated Quran reflection explainer: There’s a sentence in the Quran that is said twice. Back to back. 🤍\n\nOne tiny word explains why:\nal-ʿusr is THE hardship — the same one, both times.\nyusr is AN ease — a new one, each time.\n\nOne hardship. Two eases.\n\n“So surely, with hardship comes ease. Surely, with hardship comes ease.”\n— Surah Ash-Sharh 94:5–6\n\nSend this to someone who’s carrying something heavy.\n\n#quran #islam #muslim #quranreflection #surahashsharh",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 100.8,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 159896,
+    "comments": 305,
+    "shares": 18700,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/Generatable-Format-References/verse.sakinah__DexCI2hugDQ.mp4"
+    ],
+    "adaptation": "Original animated lesson with final5–7second Salah Alarm CTA; see brief",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt",
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 1918752
+    }
+   ],
+   "score": 69.4,
+   "views": 1918752,
+   "viewsEstimated": true,
+   "shareRate": 0.00974591818015043,
+   "engagementRate": 0.09323820900251831,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "quran"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7611997866420112662",
+   "url": "https://www.tiktok.com/@4joykids/video/7611997866420112662",
+   "author": "4joykids",
+   "followers": null,
+   "text": "Islamic Reminders",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-02-28T00:00:00Z",
+   "metrics": {
+    "views": 2000000,
+    "likes": 136700,
+    "comments": 2413,
+    "shares": 18700,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Muse/Reel/Islamic Reminders/Islamic_Reminders_4joykids_7611997866420112662_Arabic_with_English_subtitles.mp4"
+    ],
+    "adaptation": "Learn Ayat al-Kursi in English, with clear translation and pronunciation, built for repetition until memorised. The learn-it format outperforms listen-only recitation because the viewer leaves with a ",
+    "cta": "Natural ask-for-the-name CTA only, for example: \"Want the name of the app? Comment Salah Alarm and I will reply with it.\" No hard feature pitch up front, no link, no invented testimonials, usage experienc",
+    "visual": null,
+    "downloadStatus": null,
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:muse"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 2000000
+    }
+   ],
+   "score": 69.4,
+   "views": 2000000,
+   "viewsEstimated": false,
+   "shareRate": 0.00935,
+   "engagementRate": 0.0789065,
+   "outlier": null,
+   "viewsPerDay": 8326.630533888243,
+   "ageDays": 240.1931960185185,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DeS8lfgMjXe",
+   "url": "https://www.instagram.com/reel/DeS8lfgMjXe/",
+   "author": "reminding_guy",
+   "followers": null,
+   "text": "Islamic reflection with outdoor/cemetery imagery",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 27.1,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 3300000,
+    "likes": 312233,
+    "comments": 278,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/reminding_guy__DeS8lfgMjXe.mp4"
+    ],
+    "adaptation": "Original quiet reflection on using the next morning well. Show present-day preparation and hopeful dawn footage; avoid fear-based claims. Final card: “Make room for tomorrow’s Fajr. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Outdoor/cemetery footage, rotated within the source composition; full spoken message not verified.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3300000
+    }
+   ],
+   "score": 68.8,
+   "views": 3300000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.09470030303030302,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7692563730223090958",
+   "url": "https://www.tiktok.com/@muslim/video/7692563730223090958",
+   "author": "muslim",
+   "followers": null,
+   "text": "Humor after two rakahs before Fajr",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-10-04T00:00:00Z",
+   "metrics": {
+    "views": 3200000,
+    "likes": 640000,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": "failed: public download unavailable",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 3200000
+    }
+   ],
+   "score": 68.7,
+   "views": 3200000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.2,
+   "outlier": null,
+   "viewsPerDay": 144188.3308373423,
+   "ageDays": 22.19319678240741,
+   "promo": false,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  }
+ ],
+ "rising": [],
+ "promos": [
+  {
+   "platform": "instagram",
+   "id": "Db35L4uhR1h",
+   "url": "https://www.instagram.com/reel/Db35L4uhR1h/",
+   "author": "bestlookingmoroccanguy",
+   "followers": null,
+   "text": "Cultural-country debate; Just Pray collaboration",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 68.7,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 415000,
+    "likes": 8985,
+    "comments": 862,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__Db35L4uhR1h.mp4"
+    ],
+    "adaptation": "Framework research only. Borrow a clear numbered structure, not national/religious ranking or provocation. Original idea: “3 things to prepare before your Fajr alarm”: prayer space, phone position, tomorrow’s alarm. Finish with “Prepare tonight. Salah Alarm · salahalarm.com.”",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Browser caption, collaboration header and video frame reviewed; country debate comments observed.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 415000
+    }
+   ],
+   "score": 67.8,
+   "views": 415000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.023727710843373495,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DdzNUTCTUgp",
+   "url": "https://www.instagram.com/reel/DdzNUTCTUgp/",
+   "author": "dassahlynnn",
+   "followers": null,
+   "text": "Learning prayer with an app; Just Pray collaboration",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 12.4,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 27260,
+    "comments": 374,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/Instagram__DdzNUTCTUgp.mp4"
+    ],
+    "adaptation": "Original beginner-friendly story: admit a real routine difficulty, show a small preparation, then introduce Salah Alarm as a tool for the alarm routine. Close: “The alarm app is Salah Alarm — salahalarm.com.” Do not suggest Salah Alarm teaches prayer unless that feature is independently verified. No invented user testimonial or imitation of this creator’s identity.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Browser caption and collaboration header reviewed; video area remained black. 27.3K likes, 374 comments and 1.3K reposts visible; full visual/spoken review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 327120
+    }
+   ],
+   "score": 66.8,
+   "views": 327120,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.0844766446563952,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7699157737942371616",
+   "url": "https://www.tiktok.com/@sana34593/video/7699157737942371616",
+   "author": "sana34593",
+   "followers": null,
+   "text": "Prayer app demonstration",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-10-21T00:00:00Z",
+   "metrics": {
+    "views": 84400,
+    "likes": 1711,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": "failed: public download unavailable",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 84400
+    }
+   ],
+   "score": 64.9,
+   "views": 84400,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.02027251184834123,
+   "outlier": null,
+   "viewsPerDay": 16252.031944161132,
+   "ageDays": 5.193196782407408,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "Deu1BwCt2WI",
+   "url": "https://www.instagram.com/p/Deu1BwCt2WI/",
+   "author": "_thefajr",
+   "followers": null,
+   "text": "Comment HOODIE for link",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 12.4,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 12100,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/_thefajr__Deu1BwCt2WI.mp4"
+    ],
+    "adaptation": "Adjacent Islamic commerce CTA: show real app benefit, ask Comment SALAH for app link; only promise delivery if reply process exists.",
+    "cta": null,
+    "visual": "caption and source UI reviewed; full creative review pending",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 145200
+    }
+   ],
+   "score": 63.2,
+   "views": 145200,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08333333333333333,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DZAffnYsqnE",
+   "url": "https://www.instagram.com/reel/DZAffnYsqnE/",
+   "author": "fayeoush",
+   "followers": null,
+   "text": "Fajr discipline with explicit competitor-app caption",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 89.3,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": null,
+    "likes": 11651,
+    "comments": 155,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/fayeoush__DZAffnYsqnE.mp4"
+    ],
+    "adaptation": "Original talking-head story: describe one real preparation that helps you get up for Fajr, show the preparation, then show a real Salah Alarm screen. Close: “My Fajr alarm is Salah Alarm — salahalarm.com.” Use a genuine creator experience, without implying spiritual practice guarantees business success.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Browser video frame and caption reviewed. 11.6K rounded likes visible; extractor recorded 11,651 likes and 155 comments.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 139812
+    }
+   ],
+   "score": 63.1,
+   "views": 139812,
+   "viewsEstimated": true,
+   "shareRate": null,
+   "engagementRate": 0.08444196492432696,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DY0Npkqsfwd",
+   "url": "https://www.instagram.com/reel/DY0Npkqsfwd/",
+   "author": "bestlookingmoroccanguy",
+   "followers": null,
+   "text": "Eid seasonal three-item list; app caption mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 62.3,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 134000,
+    "likes": 5852,
+    "comments": 109,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DY0Npkqsfwd.mp4"
+    ],
+    "adaptation": "Use the seasonal list structure for an original Eid/routine transition story: “3 preparations that make tomorrow morning easier.” Connect only the alarm-related step to a verified Salah Alarm demonstration. End with app name and salahalarm.com.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Downloaded opening frame shows a three-item Eid list. Full spoken-content review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 134000
+    }
+   ],
+   "score": 62.9,
+   "views": 134000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.04448507462686567,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DZQwYwXvMAY",
+   "url": "https://www.instagram.com/reel/DZQwYwXvMAY/",
+   "author": "bestlookingmoroccanguy",
+   "followers": null,
+   "text": "Critical list about Muslim trends; app caption mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 72.8,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 128000,
+    "likes": 4678,
+    "comments": 96,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DZQwYwXvMAY.mp4"
+    ],
+    "adaptation": "Original numbered explainer: “3 small changes for tomorrow’s Fajr.” Each item gets one real-world demonstration. Keep a helpful tone and a real app screen at the end: “Set your Fajr alarm with Salah Alarm · salahalarm.com.” Do not reuse insults or shame viewers.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Downloaded opening frame shows a three-item critical-trends hook. Full spoken-content review pending.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 128000
+    }
+   ],
+   "score": 62.7,
+   "views": 128000,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.037296875,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": null,
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "tiktok",
+   "id": "7695547570596154655",
+   "url": "https://www.tiktok.com/@dassahlynnn/video/7695547570596154655",
+   "author": "dassahlynnn",
+   "followers": null,
+   "text": "Just Pray mat-scan alarm review; same creative as Instagram candidate",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": null,
+   "sound": null,
+   "postedAt": "2026-10-12T00:00:00Z",
+   "metrics": {
+    "views": 117900,
+    "likes": 10300,
+    "comments": null,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [],
+    "adaptation": "Create original content-led hook, useful teaching/comparison/story/problem, then real Salah Alarm demonstration and truthful app CTA.",
+    "cta": null,
+    "visual": null,
+    "downloadStatus": "failed: public extractor request rejected",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 117900
+    }
+   ],
+   "score": 62.3,
+   "views": 117900,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.08736217133163698,
+   "outlier": null,
+   "viewsPerDay": 8306.796686292555,
+   "ageDays": 14.193196782407407,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "alarm"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DYNRZ2MuV31",
+   "url": "https://www.instagram.com/reel/DYNRZ2MuV31/",
+   "author": "akhialtamash",
+   "followers": null,
+   "text": "Celebrity-faith curiosity question; Just Pray caption mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 74.5,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 94100,
+    "likes": 4016,
+    "comments": 66,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DYNRZ2MuV31.mp4"
+    ],
+    "adaptation": "Not shortlisted as primary Fajr content. Transfer only a question-to-answer structure: “Why do I wake up for work but struggle with Fajr?” Answer with an original practical preparation; close with “Plan tomorrow’s Fajr tonight. Salah Alarm · salahalarm.com.” Do not repeat unverified claims about a celebrity’s faith.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Downloaded opening frame and caption reviewed; full argument not independently checked.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 94100
+    }
+   ],
+   "score": 61.3,
+   "views": 94100,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.04337938363443146,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  },
+  {
+   "platform": "instagram",
+   "id": "DXj7AS_ifHp",
+   "url": "https://www.instagram.com/reel/DXj7AS_ifHp/",
+   "author": "ummahunite1",
+   "followers": null,
+   "text": "Paid online creator-event promotion with Just Pray sponsor mention",
+   "lang": null,
+   "hashtags": [],
+   "mediaType": "video",
+   "durationSec": 53.3,
+   "sound": null,
+   "postedAt": null,
+   "metrics": {
+    "views": 88700,
+    "likes": 1464,
+    "comments": 16,
+    "shares": null,
+    "saves": null
+   },
+   "unverified": true,
+   "research": {
+    "localFiles": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Reel/justpray.app__DXj7AS_ifHp.mp4"
+    ],
+    "adaptation": "Not shortlisted as primary Fajr content. Study the visual emphasis on key words, then create an original routine explainer with one useful action before an app-name end card. No ticket CTA or event claim should be reused.",
+    "cta": "Salah Alarm · salahalarm.com",
+    "visual": "Caption advertises a paid online event; downloaded opening frame reviewed.",
+    "downloadStatus": "downloaded",
+    "republish": "not established"
+   },
+   "sources": [
+    "batch:chatgpt"
+   ],
+   "firstSeen": "2026-10-25",
+   "lastSeen": "2026-10-25",
+   "history": [
+    {
+     "d": "2026-10-25",
+     "v": 88700
+    }
+   ],
+   "score": 61.1,
+   "views": 88700,
+   "viewsEstimated": false,
+   "shareRate": null,
+   "engagementRate": 0.01668545659526494,
+   "outlier": null,
+   "viewsPerDay": null,
+   "ageDays": null,
+   "promo": true,
+   "competitor": "just pray",
+   "formats": [
+    "reminder"
+   ],
+   "growth": null,
+   "status": "unverified",
+   "clipNotes": ""
+  }
+ ],
+ "own": [],
+ "ads": {
+  "capturedOn": "2026-10-25",
+  "total": 780,
+  "niche": [
+   {
+    "advertiser": "Salams",
+    "group": "niche",
+    "advertiser_page_id": "1535113670109201",
+    "page_name": "Salams",
+    "library_id": "1026672596692570",
+    "library_url": "https://www.facebook.com/ads/library/?id=1026672596692570",
+    "status": "active",
+    "start_date": "2026-05-14",
+    "end_date": null,
+    "days_running": 165,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": true,
+    "primary_text": "Ton application de mariage musulman.",
+    "hook": "Ton application de mariage musulman.",
+    "headline": "Trouve ton âme sœur",
+    "link_caption": "SALAMS.APP",
+    "cta": "Download",
+    "media_type": "video",
+    "video_duration": "0:29",
+    "video_urls": [
+     "https://video-bom2-4.xx.fbcdn.net/o1/v/t2/f2/m412/AQNzSPgbYnPtgSKJjeq6kbFggBkj4pfbV_jiif7_BNrg4Gwklt4YD6r0LFcQG_hJt8iB4QVDcggEJ28tBwqApLI.mp4?_nc_cat=106&_nc_sid=ef5aa3&_nc_ht=video-bom2-4.xx.fbcdn.net&_nc_ohc=5r-WVUrzuW0Q7kNvwGL3kHU&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MjA2MTcyMTk2MDk4NjUwNSwiYXNzZXRfYWdlX2RheXMiOjQ4NSwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjI4LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=sjbt_EaYysuuH2YTGbRfLA&_nc_ss=79289&_nc_zt=28&oh=00_AQP75rYgke-a58rzN0h_sqB5PIwRZUANiqCLV_YFUHranA&oe=6AE344DC"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/699874776_2513081272458861_3501288456344195216_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=MfK7iLuytlIQ7kNvwHf7t4W&_nc_oc=AdqMN1KbW9IZhiXNGOYvzInkZlRCIpNuCxH5PL59LSiF3VddDvCJcW3HP3YLfk3yc_LxdZYgSyCT4MsVgWdHmbmv&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=sjbt_EaYysuuH2YTGbRfLA&_nc_ss=79289&oh=00_AQNsm-xu9oJo86-U0N3usYawhYxDgdleHpNBupxUoL3bUg&oe=6AE34C2E"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=1535113670109201",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Salams/creatives/1026672596692570_active_165d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Salams/videos/1026672596692570_165d.mp4"
+   },
+   {
+    "advertiser": "Salams",
+    "group": "niche",
+    "advertiser_page_id": "1535113670109201",
+    "page_name": "Salams",
+    "library_id": "955968160584923",
+    "library_url": "https://www.facebook.com/ads/library/?id=955968160584923",
+    "status": "active",
+    "start_date": "2026-05-29",
+    "end_date": null,
+    "days_running": 150,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": true,
+    "primary_text": "✨Platz 1 für muslimische Heirat gerankt.✨",
+    "hook": "✨Platz 1 für muslimische Heirat gerankt.✨",
+    "headline": "Finde deinen Seelenverwandten.",
+    "link_caption": null,
+    "cta": "Install Now",
+    "media_type": "image",
+    "video_duration": null,
+    "video_urls": [],
+    "poster_urls": [],
+    "image_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/710745560_1308872204062606_1804352168175710139_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=T8YcU2yi2P8Q7kNvwH-AA9D&_nc_oc=AdqofCMVIKcPWxIK6LhdORky9LUfnVGQflSAIJdmYJtvW0jQ-C6Ym9PyaxVNkVAQVSfl4on1yPN8y6fUFcjGxndu&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=sjbt_EaYysuuH2YTGbRfLA&_nc_ss=79289&oh=00_AQMpNhXV3Y6Ih92MKQg_wpU_PzmDCEuBvI5-jwH-WNmR7g&oe=6AE324F1"
+    ],
+    "found_in_passes": [
+     "active_all",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=1535113670109201",
+    "rank_in_pass": 4,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Salams/creatives/955968160584923_active_150d.jpg"
+    ],
+    "video_file": null
+   },
+   {
+    "advertiser": "Tarteel",
+    "group": "niche",
+    "advertiser_page_id": "202170160719323",
+    "page_name": "Tarteel",
+    "library_id": "2555163908238069",
+    "library_url": "https://www.facebook.com/ads/library/?id=2555163908238069",
+    "status": "active",
+    "start_date": "2026-08-07",
+    "end_date": null,
+    "days_running": 80,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "حفظ القرآن صار أسهل\n\n📖 اقرا بصوت عالي.. التطبيق يسمعك تلاوتك ويتبع معاك\n✅ يوريك الغلط ويصححه لك فورًا\n🎯 يتابع تقدّمك وما تضيّع مكانك\n\nالملايين يستخدمون ترتيل في رحلتهم مع القرآن عشان يضبطون قراءتهم\nحمّل ترتيل اليوم اقرَأ وارقَ ورتِّل!",
+    "hook": "حفظ القرآن صار أسهل",
+    "headline": "تقدر تقرأ هل اية صح من أول مرة بدون غلط?",
+    "link_caption": "ITUNES.APPLE.COM",
+    "cta": "Install now",
+    "media_type": "video",
+    "video_duration": "0:39",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m366/AQM4I48bmvEue0vr8h8CYwtFx6Tdum4WydJxvdxh43VuUjL8PYoe7x1VtVOuNLYAltajHVaF4U_CKFo2ZsXDDrjztJ7vQNNjAQL1vYPfaw.mp4?_nc_cat=110&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=nPQgZcjkR-UQ7kNvwHJQr9V&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTc4NjAwNTA3OTQ1OTY2MSwiYXNzZXRfYWdlX2RheXMiOjQwNiwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjM5LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=2SQwIUaCZ4R_lE67VTcKqQ&_nc_ss=79289&_nc_zt=28&oh=00_AQMmbdQT7ZnIcsdIOeWRbKRwy73lJZcBwYeoYyAtXJOnZg&oe=6AE34314"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/736065677_1566770978364728_6673443898170106683_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=OhpWBIEHMpIQ7kNvwFAnaUT&_nc_oc=AdrIC4mKIkdq9ilHoxHRQTu7sZHSJjtGjNVvQu-NjCHvVXh7ZZxjjnxhXTLTsCD2BIF7NJ9dD3cp6jTFbGxqsrhY&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=2SQwIUaCZ4R_lE67VTcKqQ&_nc_ss=79289&oh=00_AQPKy9IijV-F5GorhKYOtk3iXi83VOQMXY4cxpeh9EunDg&oe=6AE3237C"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=202170160719323",
+    "rank_in_pass": 2,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Tarteel/creatives/2555163908238069_active_80d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Tarteel/videos/2555163908238069_80d.mp4"
+   },
+   {
+    "advertiser": "Fajr Buddy",
+    "group": "niche",
+    "advertiser_page_id": "834703519737401",
+    "page_name": "Reyhann.memon with Fajr Buddy",
+    "library_id": "1953020382028486",
+    "library_url": "https://www.facebook.com/ads/library/?id=1953020382028486",
+    "status": "active",
+    "start_date": "2026-08-28",
+    "end_date": null,
+    "days_running": 59,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "What if your Fajr alarm couldn't be stopped from bed? 👀\n\nThat's Fajr Buddy.\n\nAlarm rings → you get up → scan the Tag near wudu → alarm stops.",
+    "hook": "What if your Fajr alarm couldn't be stopped from bed? 👀",
+    "headline": "Never miss Fajr | Your sleepy self shouldn't be allowed to make the Fajr decision. 😴 That's why Fajr Buddy takes the stop button away from your bedside.",
+    "link_caption": "WWW.FAJRBUDDY.COM",
+    "cta": "Order now",
+    "media_type": "video",
+    "video_duration": "0:35",
+    "video_urls": [
+     "https://video-bom5-2.xx.fbcdn.net/o1/v/t2/f2/m412/AQN5DplhzeiNwDPRBbtp-R-1c9EA30xHuOs3XtfOby4Ro8-r3cuOqxd23r2X4_SPterM7j1r7e7VSxo_GeTZwB9pjRI2SAZTWkkgw9cKJA.mp4?_nc_cat=104&_nc_sid=ef5aa3&_nc_ht=video-bom5-2.xx.fbcdn.net&_nc_ohc=tUfH1U_Kl3IQ7kNvwHpREZD&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6NDQzMjk4NTE2MzYzNzIxNSwiYXNzZXRfYWdlX2RheXMiOjU2LCJ2aV91c2VjYXNlX2lkIjoxMDEzOSwiZHVyYXRpb25fcyI6MzQsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=7M9xluK3qgnAwu60AaatWg&_nc_ss=79289&_nc_zt=28&oh=00_AQOUvwp7t0kIsOFab2cRJ4AuTynXafFOn172K00vZkRUNA&oe=6AE34582"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/788528521_1881263076582052_5275680023749296724_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=It-nRtNLv5sQ7kNvwHmwTuO&_nc_oc=AdqE8_VwPT58ZHLwaK2UPf3Ydwq6sS7TmZksSgMbUszc7f6m2ESg-ys8mS1LEN06XHi-rFGXF53ADwwKgcaPvgQ3&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=7M9xluK3qgnAwu60AaatWg&_nc_ss=79289&oh=00_AQPjIQs2WiqQjQm4T9snAoPUfzfCo8fMExH_Hrpk9U3t0w&oe=6AE34E0B"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=834703519737401",
+    "rank_in_pass": 1,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Fajr_Buddy/creatives/1953020382028486_active_59d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Fajr_Buddy/videos/1953020382028486_59d.mp4"
+   },
+   {
+    "advertiser": "Fajr Buddy",
+    "group": "niche",
+    "advertiser_page_id": "834703519737401",
+    "page_name": "Bros in Deen with Fajr Buddy",
+    "library_id": "1086500373761458",
+    "library_url": "https://www.facebook.com/ads/library/?id=1086500373761458",
+    "status": "active",
+    "start_date": "2026-09-06",
+    "end_date": null,
+    "days_running": 50,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Still snoozing through Fajr? 🌙\n\nFajr Buddy is an alarm designed to get you out of bed.\n\nWhen the alarm rings, you can’t simply stop it from your bedside. You have to get up and interact with your Fajr Buddy Tag placed away from your bed.\n\nBy the time the alarm stops, you’re already up and ready to start your morning.",
+    "hook": "Still snoozing through Fajr? 🌙",
+    "headline": "The Fajr Alarm That Gets You Out of Bed | No bedside snooze. Get up. Stop the alarm.",
+    "link_caption": "WWW.FAJRBUDDY.COM",
+    "cta": "Order now",
+    "media_type": "video",
+    "video_duration": "0:40",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQMbFFSRqQuwYE5Vd9Og0aWHBYo-GjvEIId4SbLcN4gCT9uiH-vwNDaqNDzoXa63EA5EwCy-jK_7_av_8rNVpG9DvbKnyGNqtxfBkyELIQ.mp4?_nc_cat=105&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=zixtF2jfw68Q7kNvwFFWjL_&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTYxNTQ0OTY5MzM3MjY5NiwiYXNzZXRfYWdlX2RheXMiOjQ4LCJ2aV91c2VjYXNlX2lkIjoxMDEzOSwiZHVyYXRpb25fcyI6MzksInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=7M9xluK3qgnAwu60AaatWg&_nc_ss=79289&_nc_zt=28&oh=00_AQMdFp0X9NMbwd_k8SVD0CoIjU_Rc3I8xG6451z3NlaoZQ&oe=6AE354C5"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/799170658_1075982461888938_7100481294524397600_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=MsT50YsaOrUQ7kNvwHAHqOp&_nc_oc=AdoahC1Lm1MVx6YaLa_qJ0Y2Q6fgANMzup4SFrTUcduej6Nr3QhZ8Lu9ERsEH_gVPTv2Dss72HWJTLeNiWyJjjjW&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=7M9xluK3qgnAwu60AaatWg&_nc_ss=79289&oh=00_AQMtFzHX7iYNRDZJb6JvxtZpfhXUf3GexB4FXodOGUyv8w&oe=6AE33B66"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=834703519737401",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Fajr_Buddy/creatives/1086500373761458_active_50d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Fajr_Buddy/videos/1086500373761458_50d.mp4"
+   },
+   {
+    "advertiser": "Muslim Pro",
+    "group": "niche",
+    "advertiser_page_id": "244196442342820",
+    "page_name": "Muslim Pro",
+    "library_id": "2071551660148182",
+    "library_url": "https://www.facebook.com/ads/library/?id=2071551660148182",
+    "status": "active",
+    "start_date": "2026-10-07",
+    "end_date": null,
+    "days_running": 19,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "whatsapp_or_messenger_alt",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "सहानुभूति अच्छी है, गरमागरम खाना उससे भी बेहतर। गाज़ा की विधवाओं और अनाथों का पेट भरने में मदद करें।",
+    "hook": "सहानुभूति अच्छी है, गरमागरम खाना उससे भी बेहतर। गाज़ा की विधवाओं और अनाथों का पेट भरने में मदद करें।",
+    "headline": "गाज़ा में सजी एक थाली | Food, clean water, Badal Umrah and more, fulfilled in full on your behalf. Join thousands giving through Muslim Pro.",
+    "link_caption": "MUSLIMPRO.COM/GAZA-SADAQAH",
+    "cta": "Order now",
+    "media_type": "image",
+    "video_duration": null,
+    "video_urls": [],
+    "poster_urls": [],
+    "image_urls": [
+     "https://scontent-bom2-4.xx.fbcdn.net/v/t39.35426-6/840824828_1132753852515190_6142031820183644818_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=DNcBlYwhQuYQ7kNvwExKNep&_nc_oc=AdpxxQc4w3CBuiMgWvy2-2xahJIdkVowcvrznXH0zWbF1_0zIsNYZ5F7LDrFZ2tJPDWx6ie7vm-Y5SwYdBskU2uK&_nc_zt=14&_nc_ht=scontent-bom2-4.xx&_nc_gid=97sbsB3_MRqE8t1i9SZIig&_nc_ss=79289&oh=00_AQN7Ou34fXZTHINie-c7PG8Xmh5_IwL3COce78i1LSjvGw&oe=6AE31DA8"
+    ],
+    "found_in_passes": [
+     "active_all",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=244196442342820",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Muslim_Pro/creatives/2071551660148182_active_19d.jpg"
+    ],
+    "video_file": null
+   },
+   {
+    "advertiser": "Muslim Pro",
+    "group": "niche",
+    "advertiser_page_id": "244196442342820",
+    "page_name": "Muslim Pro",
+    "library_id": "1491767096401088",
+    "library_url": "https://www.facebook.com/ads/library/?id=1491767096401088",
+    "status": "active",
+    "start_date": "2026-10-07",
+    "end_date": null,
+    "days_running": 19,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "whatsapp_or_messenger_alt",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "साफ़ पानी हर भोजन का ख़ामोश नायक है। गाज़ा के परिवार के लिए 30 लीटर, ₹3,400 से शुरू। उनकी सेहत बचाएँ।",
+    "hook": "साफ़ पानी हर भोजन का ख़ामोश नायक है। गाज़ा के परिवार के लिए 30 लीटर, ₹3,400 से शुरू। उनकी सेहत बचाएँ।",
+    "headline": "गाज़ा के लिए 30 लीटर पानी | Ongoing conflict and damage to Gaza's water infrastructure have left many families with limited access to clean and safe drinking water. Disruptions to water sy",
+    "link_caption": "MUSLIMPRO.COM/GAZA-SADAQAH",
+    "cta": "Order now",
+    "media_type": "image",
+    "video_duration": null,
+    "video_urls": [],
+    "poster_urls": [],
+    "image_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/840962368_1759853178604732_5471483772324995515_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=3GmrhT-MHlwQ7kNvwH_t6wY&_nc_oc=AdrrJEaLmoTI32vWc8Ggwu95zPfocxgv5uIo7KPWm_eKfYVYjmYNkX_W4D-zSTtYLnoG9s6Zg2R-nvo1oPoBG9Vz&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=97sbsB3_MRqE8t1i9SZIig&_nc_ss=79289&oh=00_AQPQ-MOQHe8j4N0QoOWMQmTsiMKPGEwTl0gsM-tmWaqqtw&oe=6AE33388"
+    ],
+    "found_in_passes": [
+     "active_all",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=244196442342820",
+    "rank_in_pass": 6,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Muslim_Pro/creatives/1491767096401088_active_19d.jpg"
+    ],
+    "video_file": null
+   },
+   {
+    "advertiser": "Tarteel",
+    "group": "niche",
+    "advertiser_page_id": "202170160719323",
+    "page_name": "Tarteel",
+    "library_id": "1139179288798153",
+    "library_url": "https://www.facebook.com/ads/library/?id=1139179288798153",
+    "status": "active",
+    "start_date": "2026-10-08",
+    "end_date": null,
+    "days_running": 18,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": true,
+    "primary_text": "Know your Quran by heart, not just in order.\n\n📖 Recite out loud, the app listens in real time.\n✅ Instantly see and correct mistakes.\n🧭 Spot Testing starts you anywhere in your memorisation, with no cue, so you find the ayahs you didn't know you were forgetting.\n🎯 Track your progress and revise where it matters.\n\nJoin millions strengthening their Hifz with Tarteel.",
+    "hook": "Know your Quran by heart, not just in order.",
+    "headline": "You Memorised It. Can You Start From Anywhere?",
+    "link_caption": null,
+    "cta": "Install Now",
+    "media_type": "image",
+    "video_duration": null,
+    "video_urls": [],
+    "poster_urls": [],
+    "image_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/839232069_2946268399046280_7396852734439241982_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=1HkCcQuhCYwQ7kNvwFrYoUC&_nc_oc=AdqGUz69CYgtq0MCbXwpvVIxHsN2HOLuhLdrrskLzp2edxGuyatKsFLQIAFb8Ok8rYfI1aPY9LYS4YCR0fkWzkwh&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=2SQwIUaCZ4R_lE67VTcKqQ&_nc_ss=79289&oh=00_AQOVRxR_tWFVEHAuMgdNaSiSumaec-vZuNHbp4symJfKLA&oe=6AE3525A"
+    ],
+    "found_in_passes": [
+     "active_all",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=202170160719323",
+    "rank_in_pass": 10,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Tarteel/creatives/1139179288798153_active_18d.jpg"
+    ],
+    "video_file": null
+   }
+  ],
+  "outside": [
+   {
+    "advertiser": "Alarmy",
+    "group": "outside_niche",
+    "advertiser_page_id": "372426729494194",
+    "page_name": "Alarmy - My Daily Success Habits",
+    "library_id": "861765246631859",
+    "library_url": "https://www.facebook.com/ads/library/?id=861765246631859",
+    "status": "active",
+    "start_date": "2026-01-10",
+    "end_date": null,
+    "days_running": 289,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "이거 들으면 일어날 수 밖에 없음ㅋㅋㅋ",
+    "hook": "이거 들으면 일어날 수 밖에 없음ㅋㅋㅋ",
+    "headline": "알라미 - 무조건 깨워주는 알람앱",
+    "link_caption": "PLAY.GOOGLE.COM",
+    "cta": "Install now",
+    "media_type": "video",
+    "video_duration": "0:19",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQPWCD6R5SYAfB3xpnOBeVfJsxHH0hOKW_Y2GzSR8LGJ79vadVawHlpcx-wnLewZdSzVO71zRML4dD76DPBSJlSucbbtVfCqiIj7QDsSAg.mp4?_nc_cat=109&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=HyNMgD_ZlpYQ7kNvwEgIxHc&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTMyNTUzNDEyNTk5NTQxNiwiYXNzZXRfYWdlX2RheXMiOjI5NywidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjE5LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=WMAJnZaMFWVGaORg6TRS3Q&_nc_ss=79289&_nc_zt=28&oh=00_AQP09GB3-2OLIFFh8GMx7O7enn9ewMNmz9mbr1JeTnkkag&oe=6AE32BC9"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/608928745_1974579963438943_4455984195465037893_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=bHvE8c809mkQ7kNvwEQDa33&_nc_oc=AdoK23w9wbQC8jgl9WSHGVxhROju1JDyHXZO-By2OyS17t83hchum4wZQ33yTkv2PAwGtAWmBtBgffm-hJpcVpph&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=WMAJnZaMFWVGaORg6TRS3Q&_nc_ss=79289&oh=00_AQNjj3cba0ab0Nam7bG_2zBnTVBzsNMJIkyME2kwJasVBw&oe=6AE34746"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=372426729494194",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Alarmy/creatives/861765246631859_active_289d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Alarmy/videos/861765246631859_289d.mp4"
+   },
+   {
+    "advertiser": "Finch",
+    "group": "outside_niche",
+    "advertiser_page_id": "112516667335834",
+    "page_name": "Finch",
+    "library_id": "1321379806684073",
+    "library_url": "https://www.facebook.com/ads/library/?id=1321379806684073",
+    "status": "active",
+    "start_date": "2026-02-06",
+    "end_date": null,
+    "days_running": 262,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "OF COURSE I needed to take care of a pet to take care of myself 😂 #finchapp",
+    "hook": "OF COURSE I needed to take care of a pet to take care of myself 😂 #finchapp",
+    "headline": "Self Care Pet Game",
+    "link_caption": "FINCHCARE.COM",
+    "cta": "Learn more",
+    "media_type": "image",
+    "video_duration": null,
+    "video_urls": [],
+    "poster_urls": [],
+    "image_urls": [
+     "https://scontent-bom2-3.xx.fbcdn.net/v/t39.35426-6/637215423_4266402200293126_8462146723573955274_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=101&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=kP47PqCtb7gQ7kNvwGa0TtA&_nc_oc=AdrAV8GTe62t0fUlVkEUQiQY6YtwiiZlIhcIZwrnx3hAS9JgSkP7iJDx_RjxBF5VxayS5w7zp1vbc-gYbuX2soOy&_nc_zt=14&_nc_ht=scontent-bom2-3.xx&_nc_gid=bDXuiS5-4ueg4sqwZLz3lA&_nc_ss=79289&oh=00_AQNPZehjU4azMkgmiZiLgRn0FTlAkPobx2qubAmHsTs9jQ&oe=6AE354A0"
+    ],
+    "found_in_passes": [
+     "active_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=112516667335834",
+    "rank_in_pass": 17,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Finch/creatives/1321379806684073_active_262d.jpg"
+    ],
+    "video_file": null
+   },
+   {
+    "advertiser": "Finch",
+    "group": "outside_niche",
+    "advertiser_page_id": "112516667335834",
+    "page_name": "Finch",
+    "library_id": "928099899870593",
+    "library_url": "https://www.facebook.com/ads/library/?id=928099899870593",
+    "status": "active",
+    "start_date": "2026-02-26",
+    "end_date": null,
+    "days_running": 242,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Self Care Pet Game",
+    "hook": "Self Care Pet Game",
+    "headline": "OF COURSE I needed to take care of a pet to take care of myself 😂 #finchapp",
+    "link_caption": "FINCHCARE.COM",
+    "cta": "Learn more",
+    "media_type": "video",
+    "video_duration": "0:47",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQML-ybSSaA2H7zHr16LmKqmzx-g9BhsfQii2s1fgE-1T9alpymgNosFc7UnRTE5MvidGIP3ySq4UUS6kwhs7BzCdvWszmhGVeL-H3OxOA.mp4?_nc_cat=105&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=oWxDJad9sOkQ7kNvwGPctFN&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTU4MTk1MTU4NjQxMzQwMSwiYXNzZXRfYWdlX2RheXMiOjI1MywidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjQ2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=i-GGsIxZPsze7FqLUizkrg&_nc_ss=79289&_nc_zt=28&oh=00_AQO-GNevV5N26Z8ayNsPe0ehTgx31sbv9lFVj6WVdiuKgg&oe=6AE32571"
+    ],
+    "poster_urls": [
+     "https://scontent-bom2-4.xx.fbcdn.net/v/t39.35426-6/633964515_1311328644351053_96919625132366958_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=-Si_B5Iv1vYQ7kNvwHRARAj&_nc_oc=AdquGXJhrTsjzegZNOwW-I9DmAyirwuzcnmj-lR5yJJhEFLq4-91YZczPlImOc_r6Nb2JfPvkoCt3cYY3yQ3ZAPb&_nc_zt=14&_nc_ht=scontent-bom2-4.xx&_nc_gid=i-GGsIxZPsze7FqLUizkrg&_nc_ss=79289&oh=00_AQNsTA0Cegojmwcqvudgfgxz5x8E-cbcVqo0fNkTH3lGQQ&oe=6AE32CB4"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_video"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=video&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=112516667335834",
+    "rank_in_pass": 16,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Finch/creatives/928099899870593_active_242d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Finch/videos/928099899870593_242d.mp4"
+   },
+   {
+    "advertiser": "Ladder",
+    "group": "outside_niche",
+    "advertiser_page_id": "1622022488076753",
+    "page_name": "Kelly Matthews with Ladder",
+    "library_id": "1283409179875847",
+    "library_url": "https://www.facebook.com/ads/library/?id=1283409179875847",
+    "status": "active",
+    "start_date": "2026-04-22",
+    "end_date": null,
+    "days_running": 187,
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Ladder keeps Hilary consistent. Strength training changed how she feels, moves, and performs.\n\nStart your 7-day free trial today! No credit card required.",
+    "hook": "Ladder keeps Hilary consistent. Strength training changed how she feels, moves, and performs.",
+    "headline": "Start Your Free Trial, No Credit Card",
+    "link_caption": "JOINLADDER.COM",
+    "cta": "Learn more",
+    "media_type": "video",
+    "video_duration": "0:09",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQOvKWfhIZMWnlGcf8zzdJoTDcGE3kLfD6JENxTKfGMC-Y-q3fZtSzG08_-Dp_aPrSCf8wOzgl2vvknZ6BZ5i4GlwQ9CwHFhbXFwLpjVAw.mp4?_nc_cat=111&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=eQ2fnnJydIgQ7kNvwHzBxHH&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MjE2MDA3NzQ2ODA3NjIyMCwiYXNzZXRfYWdlX2RheXMiOjE4NSwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjksInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=cQJiKIQUfNgHx3FJVyA0qg&_nc_ss=79289&_nc_zt=28&oh=00_AQPJV4aaQ7lPZkZW5NSLKEL--5HZZVZvzD8vPtQS_-E0rQ&oe=6AE357AB"
+    ],
+    "poster_urls": [
+     "https://scontent-bom2-3.xx.fbcdn.net/v/t39.35426-6/676627975_2452866831851741_7001728494955160318_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=SerCYXnCjAkQ7kNvwEdr1bv&_nc_oc=Adqv3tUT9rKyA-YP2v_gJZk76JyjqoY0RgBwt2uVrJD-TCWFRTSmbCzB2nG1f0h5iQMpbOvHdZHX2xD-gQ6P9IEf&_nc_zt=14&_nc_ht=scontent-bom2-3.xx&_nc_gid=cQJiKIQUfNgHx3FJVyA0qg&_nc_ss=79289&oh=00_AQPyr1zubVL-qKkYMTHymTUviI3fu0PkfGTgbSwg6nd-0Q&oe=6AE3386F"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=1622022488076753",
+    "rank_in_pass": 3,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Ladder/creatives/1283409179875847_active_187d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Ladder/videos/1283409179875847_187d.mp4"
+   },
+   {
+    "advertiser": "Ladder",
+    "group": "outside_niche",
+    "advertiser_page_id": "1622022488076753",
+    "page_name": "Nicole Winter with Ladder",
+    "library_id": "1859795351377105",
+    "library_url": "https://www.facebook.com/ads/library/?id=1859795351377105",
+    "status": "active",
+    "start_date": "2026-04-23",
+    "end_date": null,
+    "days_running": 186,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Strength training that helps you take the next step in your fitness journey. This is the app for you!\n🔥 2025 Apple App of the Year Finalist 4.9⭐️ +100K reviews\nStart your 7-day free trial today! No credit card required.",
+    "hook": "Strength training that helps you take the next step in your fitness journey. This is the app for you!",
+    "headline": "Start Your Free Trial, No Credit Card",
+    "link_caption": "JOINLADDER.COM",
+    "cta": "Learn more",
+    "media_type": "video",
+    "video_duration": "0:15",
+    "video_urls": [
+     "https://video-bom2-4.xx.fbcdn.net/o1/v/t2/f2/m412/AQO4P0OUilHdVmr4z3WZGh66xyMFvJ9zDvQyS4F1XF5-LUwZnGgF567KAw_L0-e5i0PvfLuHjS9fTiwrK1b8ngBrvw7NxFR-RiImF2xkJQ.mp4?_nc_cat=106&_nc_sid=ef5aa3&_nc_ht=video-bom2-4.xx.fbcdn.net&_nc_ohc=Hs4lcbCykrcQ7kNvwEnS4jZ&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6OTY2MTQ3NjA5NDgyNzA5LCJhc3NldF9hZ2VfZGF5cyI6MTk0LCJ2aV91c2VjYXNlX2lkIjoxMDc5OSwiZHVyYXRpb25fcyI6MTQsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=cQJiKIQUfNgHx3FJVyA0qg&_nc_ss=79289&_nc_zt=28&oh=00_AQNIg9h4j2-mTo1eUGbNyeBj6srI2rYHSrd8_0hyulMUdQ&oe=6AE34D2C"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/669646021_1979958239574596_8664992889397262212_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=zQ_nTVs4zCMQ7kNvwG6V4VH&_nc_oc=AdpVvzlixxmvH7dFTz722GMA5CoWY7PawXjTx0-PfPELqZT5btqQc7OWYY0q2r3d4xoFjYxB9oAsfD-c5cjQJf56&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=cQJiKIQUfNgHx3FJVyA0qg&_nc_ss=79289&oh=00_AQPJzrnSqoSIwOW9oaDpJk02Yrwcvi4wX5L8s5-hR3e16Q&oe=6AE33B38"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=1622022488076753",
+    "rank_in_pass": 4,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Ladder/creatives/1859795351377105_active_186d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Ladder/videos/1859795351377105_186d.mp4"
+   },
+   {
+    "advertiser": "Cal AI",
+    "group": "outside_niche",
+    "advertiser_page_id": "311353912066626",
+    "page_name": "Cal AI",
+    "library_id": "2922821464729858",
+    "library_url": "https://www.facebook.com/ads/library/?id=2922821464729858",
+    "status": "active",
+    "start_date": "2026-06-03",
+    "end_date": null,
+    "days_running": 145,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": 6,
+    "multiple_versions": false,
+    "primary_text": "AI can now count your calories—just from a photo.\nCal AI turns your camera into a smart tracker, giving you instant nutritional breakdowns so you can hit your goals without wasting time on manual logging.",
+    "hook": "AI can now count your calories—just from a photo.",
+    "headline": null,
+    "link_caption": null,
+    "cta": null,
+    "media_type": "video",
+    "video_duration": "0:09",
+    "video_urls": [
+     "https://video-bom5-2.xx.fbcdn.net/o1/v/t2/f2/m412/AQPM9O83GhzaXlWKOeTyatqaayp8e0C4H5BrDrp-4fxwjVGOjdVf9OmGMcIkWaYnFbwHnMd-qCynHDJsQlVCtgfRFyy8BvXHn2Lno05KWg.mp4?_nc_cat=104&_nc_sid=ef5aa3&_nc_ht=video-bom5-2.xx.fbcdn.net&_nc_ohc=NCgnpfAk6k4Q7kNvwFFT6yl&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6Mjg2NzkwNTM1MDIwODc2OCwiYXNzZXRfYWdlX2RheXMiOjE1OSwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjgsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=gvmO8_8QHpIakUB2_PEMHA&_nc_ss=79289&_nc_zt=28&oh=00_AQORrTGIwd8DY4gD1JjFn879JDM5BroguSv7RsAak3M4Tw&oe=6AE3347A"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/710098306_1762255954975728_8192178478092631554_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=y7sjjlj6iYkQ7kNvwGE89i5&_nc_oc=AdqzWnQ1bfro5KQr0kPjtZ3t5h2QWBxO3Ln-9XeRHcoJzuMzHes1tfwr_pctLB9Wt0GLvcdwkJA1ShEk9e4wjpox&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=gvmO8_8QHpIakUB2_PEMHA&_nc_ss=79289&oh=00_AQNU_YlIa_8qfkt6Cd0zKGjXQZz-iLfLy8kzO4ZPu1ha9w&oe=6AE349F6"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=311353912066626",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Cal_AI/creatives/2922821464729858_active_145d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Cal_AI/videos/2922821464729858_145d.mp4"
+   },
+   {
+    "advertiser": "Rise",
+    "group": "outside_niche",
+    "advertiser_page_id": "1023599077769643",
+    "page_name": "Rise Science",
+    "library_id": "1423793733127870",
+    "library_url": "https://www.facebook.com/ads/library/?id=1423793733127870",
+    "status": "active",
+    "start_date": "2026-06-06",
+    "end_date": null,
+    "days_running": 142,
+    "platforms": [
+     "facebook",
+     "instagram"
+    ],
+    "variations_same_creative": 5,
+    "multiple_versions": true,
+    "primary_text": "⛅️ Hey busy bees! 🤔\nFeeling the weight of sleep debt? \nTake a minute to uncover your hidden sleep score and start fresh!\nGet ready for a rested & refreshed you, every day. Start your free trial now! #SleepBetter",
+    "hook": "⛅️ Hey busy bees! 🤔",
+    "headline": "How Much Do You Owe?",
+    "link_caption": "RISESCIENCE.COM/QUIZ",
+    "cta": "Learn More",
+    "media_type": "video",
+    "video_duration": "0:59",
+    "video_urls": [
+     "https://video-bom2-3.xx.fbcdn.net/o1/v/t2/f2/m412/AQPLteHF7X5sRBpO1_l8Jst4QBbp76gwn_ClqrnrCVVnyOrCWvQ_Jr0AHQoYRM2hvpVVeNLV8PdWLjWn_aDu3d6AFIv0fj0mfb5X065qtA.mp4?_nc_cat=101&_nc_sid=ef5aa3&_nc_ht=video-bom2-3.xx.fbcdn.net&_nc_ohc=1FJPnjJdzssQ7kNvwHEsGQD&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTk3OTI3ODkzOTM2MDg4NCwiYXNzZXRfYWdlX2RheXMiOjE0MSwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjU4LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=Uho9VYN5wftgggGJcYk0tA&_nc_ss=79289&_nc_zt=28&oh=00_AQNP-G04YM8bLnJ56tNEd6DoUiRvi-mCMhrSgGJoDXDnOQ&oe=6AE326C1"
+    ],
+    "poster_urls": [
+     "https://scontent-bom2-3.xx.fbcdn.net/v/t39.35426-6/715376264_1515163320260967_1740429196828229244_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=yIyMOgcvaNQQ7kNvwFW8QM8&_nc_oc=AdrlndAvTzxCQ72scnM6kO63N7PLCxP1hmsg8hEnAuwyIqNkiO7ibr1aDp0k4kseJZA6T3fpPJflg7x-dR3awpjU&_nc_zt=14&_nc_ht=scontent-bom2-3.xx&_nc_gid=Uho9VYN5wftgggGJcYk0tA&_nc_ss=79289&oh=00_AQPOmGeGTks-Hw9EfmWN5tKvR93ohdauZjxAsZ1_OYWJqw&oe=6AE3554D"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=1023599077769643",
+    "rank_in_pass": 14,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Rise/creatives/1423793733127870_active_142d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Rise/videos/1423793733127870_142d.mp4"
+   },
+   {
+    "advertiser": "Opal",
+    "group": "outside_niche",
+    "advertiser_page_id": "111491020374567",
+    "page_name": "Opal・#1 Screen Time App",
+    "library_id": "902191879561520",
+    "library_url": "https://www.facebook.com/ads/library/?id=902191879561520",
+    "status": "active",
+    "start_date": "2026-06-19",
+    "end_date": null,
+    "days_running": 129,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": 6,
+    "multiple_versions": false,
+    "primary_text": "You keep telling yourself \"just five more minutes.\" It's never five.\n\n📵 Opal blocks the apps pulling you in so you actually stop.\n\n⚔️ People spend ~5 hours a day on their phone. Opal helps cut that down.\n\n🎯 Schedule your day, block distracting apps, get the time back.",
+    "hook": "You keep telling yourself \"just five more minutes.\" It's never five.",
+    "headline": null,
+    "link_caption": null,
+    "cta": null,
+    "media_type": "video",
+    "video_duration": "0:12",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQNAmzf784ChACJz9UiwWtsRqklw_gYR3wjyEpaqPKalpjhOQaZJ16-BQtMv8M95E_gnZu2ESsxoVzO4CK-ErzHDUHEpAPqKFSjGMxsmrg.mp4?_nc_cat=110&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=rowYEORUmSMQ7kNvwFCsxJZ&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTMyMDgxMjIwNjc4Mzk4MywiYXNzZXRfYWdlX2RheXMiOjEzMCwidmlfdXNlY2FzZV9pZCI6MTAxMzksImR1cmF0aW9uX3MiOjExLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=gLYg0fEVliur7xMlTRj0hQ&_nc_ss=79289&_nc_zt=28&oh=00_AQNKRC-XhD32LMJiLla-nnZ57LCi9XL9BJui1v-gl5FcqA&oe=6AE34814"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/724706261_1016934694180806_4084758084783532758_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=eTW_a9hlX8IQ7kNvwECzF2s&_nc_oc=AdofdmhxpyzkB9H8x4QZUE6aUgkxG-LwvwzMrdV611O2kvEKQ4WeBhiMyUpCT0h0g7HFtT4g64MyPYdavVRQ0MY0&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=gLYg0fEVliur7xMlTRj0hQ&_nc_ss=79289&oh=00_AQOyhbIfp9E1D8resn9I4kWqTL-qZ4t06hK8cdRmk95h7Q&oe=6AE32F6B"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=111491020374567",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Opal/creatives/902191879561520_active_129d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Opal/videos/902191879561520_129d.mp4"
+   }
+  ],
+  "faith": [
+   {
+    "advertiser": "Hallow",
+    "group": "faith_adjacent",
+    "advertiser_page_id": "531203563996048",
+    "page_name": "Hallow",
+    "library_id": "1245219114179838",
+    "library_url": "https://www.facebook.com/ads/library/?id=1245219114179838",
+    "status": "active",
+    "start_date": "2025-11-24",
+    "end_date": null,
+    "days_running": 336,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Vive el Reto de Desapego\n\nDescubre el Reto de Desapego: 12 días para soltar, confiar y vivir en paz con Dios",
+    "hook": "Vive el Reto de Desapego",
+    "headline": "Isabel Rojas Estapè en Hallow | Este reto de 12 días, guiado por Isabel Rojas Estapé y el Padre Matías, te invita a recorrer un camino de libertad interior a través del desapego. No se trata de indiferencia, escrúpulos ante lo material, ni frialdad, sino de soltar con amor aquello que genera ansiedad, dependencia o insatisfac...",
+    "link_caption": "TRY.HALLOW.COM",
+    "cta": "Learn more",
+    "media_type": "image",
+    "video_duration": null,
+    "video_urls": [],
+    "poster_urls": [],
+    "image_urls": [
+     "https://scontent-bom5-1.xx.fbcdn.net/v/t39.35426-6/581455255_853531897366291_832182324009562819_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=109&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=nBexblE5peAQ7kNvwHlastG&_nc_oc=AdpTVam-JccSeeQdLb9YR_zTU2Xb7hOCxWEsFpmGtdryI-4PH8KCwNUm3SPAYFIxhufht6yNoX4rlRIZsV7bgX7b&_nc_zt=14&_nc_ht=scontent-bom5-1.xx&_nc_gid=GxYeOUzxO86xID0AoX--MA&_nc_ss=79289&oh=00_AQO0PwHg4vwOiBdnsUpShnGuTNg4libSgIZRfKnVx8-sbg&oe=6AE32F01"
+    ],
+    "found_in_passes": [
+     "active_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=531203563996048",
+    "rank_in_pass": 27,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Hallow/creatives/1245219114179838_active_336d.jpg"
+    ],
+    "video_file": null
+   },
+   {
+    "advertiser": "Glorify",
+    "group": "faith_adjacent",
+    "advertiser_page_id": "100547544858805",
+    "page_name": "Glorify",
+    "library_id": "1871387683479242",
+    "library_url": "https://www.facebook.com/ads/library/?id=1871387683479242",
+    "status": "active",
+    "start_date": "2026-01-05",
+    "end_date": null,
+    "days_running": 294,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": true,
+    "primary_text": "Stressed and overwhelmed? \nImagine finding peace in just 10 minutes a day...\nWith Glorify, grow your faith and unwind in HIS word. Start now!",
+    "hook": "Stressed and overwhelmed?",
+    "headline": "Find Peace in 10 Mins a Day",
+    "link_caption": null,
+    "cta": "Install Now",
+    "media_type": "video",
+    "video_duration": "0:18",
+    "video_urls": [
+     "https://video-bom5-1.xx.fbcdn.net/o1/v/t2/f2/m412/AQNdrjSLekMIKgLggq5Z9LM3pk4I3HTei7prK6nZv3QPqBYmA2KKjfsrXVjD5tNsveQOnBhQ638p7vrPnlCLqR_5.mp4?_nc_cat=111&_nc_sid=ef5aa3&_nc_ht=video-bom5-1.xx.fbcdn.net&_nc_ohc=x4QcWCiDb74Q7kNvwHclhcH&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6ODg4NDk0OTg5ODAzMDY4LCJhc3NldF9hZ2VfZGF5cyI6NjY2LCJ2aV91c2VjYXNlX2lkIjoxMDEzOSwiZHVyYXRpb25fcyI6MTcsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=LjZX_5udAkqaCFaR7NwAgg&_nc_ss=79289&_nc_zt=28&oh=00_AQNait_6bcyBYogfVw_RuBbPEwDufHMmJuNlnmRZ8IdpXQ&oe=6AE34498"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/608506818_4122296901326205_9036619000075657643_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=itpJgyWAoH0Q7kNvwG4v_Wa&_nc_oc=AdqaMgYjCaxsZsbBJY3y5DqjtbAAnamACTmqb7XiAv_BFyTF1hUFLoVC_vmHxmf_TMeZjUjHCQk15KAtmjCqizrK&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=LjZX_5udAkqaCFaR7NwAgg&_nc_ss=79289&oh=00_AQN3L17bkzTPdh3VilUxTaz32qV9z4jhp-w2ZVP9h1J2zQ&oe=6AE3201C"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=100547544858805",
+    "rank_in_pass": 3,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Glorify/creatives/1871387683479242_active_294d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Glorify/videos/1871387683479242_294d.mp4"
+   },
+   {
+    "advertiser": "Glorify",
+    "group": "faith_adjacent",
+    "advertiser_page_id": "100547544858805",
+    "page_name": "Glorify",
+    "library_id": "2108037956676934",
+    "library_url": "https://www.facebook.com/ads/library/?id=2108037956676934",
+    "status": "active",
+    "start_date": "2026-01-26",
+    "end_date": null,
+    "days_running": 273,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Beautifully narrated Biblical Sleep Stories that calm your mind and draw you closer to God.",
+    "hook": "Beautifully narrated Biblical Sleep Stories that calm your mind and draw you closer to God.",
+    "headline": "Calm Your Mind with God’s Word",
+    "link_caption": "ITUNES.APPLE.COM",
+    "cta": "Listen now",
+    "media_type": "video",
+    "video_duration": "0:30",
+    "video_urls": [
+     "https://video-bom2-4.xx.fbcdn.net/o1/v/t2/f2/m412/AQNHLTQ0z9kWZnGRaCqcjjKP8hoBqoESe-4OY2up5rYbjUKQWBLIKlFNAizrs_86CrYz9FakS-n6ytG1MhzbGc0ZnmaLhVIdek9u0ZQabg.mp4?_nc_cat=107&_nc_sid=ef5aa3&_nc_ht=video-bom2-4.xx.fbcdn.net&_nc_ohc=I1UJ1-Qe6J4Q7kNvwGSfyHt&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTU0NTQ5NzgwMzEzNTY1MCwiYXNzZXRfYWdlX2RheXMiOjMzOCwidmlfdXNlY2FzZV9pZCI6MTA3OTksImR1cmF0aW9uX3MiOjMwLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&_nc_gid=LjZX_5udAkqaCFaR7NwAgg&_nc_ss=79289&_nc_zt=28&oh=00_AQPL2VaqechTz0gnrgCiyLfEl-0C1-zDi_Qr9ZCwMLbb6Q&oe=6AE32CAF"
+    ],
+    "poster_urls": [
+     "https://scontent-bom2-4.xx.fbcdn.net/v/t39.35426-6/622385202_1558297525451221_691005719346812329_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=-afDrkKRHPgQ7kNvwEjCktz&_nc_oc=AdprqlcdAXZpvqDIInM1lcLgmpStvazgv0wDBZU9LGdWD8e3nIS7f3Nq-HcBv-hxgu7Uirn5GatbThdX2bfzDOvM&_nc_zt=14&_nc_ht=scontent-bom2-4.xx&_nc_gid=LjZX_5udAkqaCFaR7NwAgg&_nc_ss=79289&oh=00_AQPGLJOYPv3O5XuN8Y22gt3CC75sqSbznYdLVqC-C0OMqg&oe=6AE3324D"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=100547544858805",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Glorify/creatives/2108037956676934_active_273d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Glorify/videos/2108037956676934_273d.mp4"
+   },
+   {
+    "advertiser": "Hallow",
+    "group": "faith_adjacent",
+    "advertiser_page_id": "531203563996048",
+    "page_name": "Hallow",
+    "library_id": "977606784707632",
+    "library_url": "https://www.facebook.com/ads/library/?id=977606784707632",
+    "status": "active",
+    "start_date": "2026-04-17",
+    "end_date": null,
+    "days_running": 192,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "audience_network",
+     "messenger",
+     "threads"
+    ],
+    "variations_same_creative": 5,
+    "multiple_versions": true,
+    "primary_text": "Find time to pray every day, download Hallow the #1 prayer app today.",
+    "hook": "Find time to pray every day, download Hallow the #1 prayer app today.",
+    "headline": "Try Hallow for Free",
+    "link_caption": "HALLOW.COM",
+    "cta": "Learn More",
+    "media_type": "video",
+    "video_duration": "0:35",
+    "video_urls": [
+     "https://video-bom2-3.xx.fbcdn.net/o1/v/t2/f2/m412/AQPCLa7qWFv6qY__bBVw3RUxrx_AlatwKteuUiJU2eT5_VPrWXdwTMsPpAJ-BgqPlfLPbv4qHkVumGeKeGE1-sEhDLwSQEI2HoPQG3v56w.mp4?_nc_cat=101&_nc_sid=ef5aa3&_nc_ht=video-bom2-3.xx.fbcdn.net&_nc_ohc=O7TzJnfsK_wQ7kNvwHNgzMB&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5WSV9VU0VDQVNFX1BST0RVQ1RfVFlQRS4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6OTQyNTE5NjMxODUzMTc1LCJhc3NldF9hZ2VfZGF5cyI6MTkyLCJ2aV91c2VjYXNlX2lkIjoxMDc5OSwiZHVyYXRpb25fcyI6MzUsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=GxYeOUzxO86xID0AoX--MA&_nc_ss=79289&_nc_zt=28&oh=00_AQPKECBLwRrl6vE17Cfsqft--hB1y_dRFuCxtvmnRJseAA&oe=6AE33171"
+    ],
+    "poster_urls": [
+     "https://scontent-bom2-4.xx.fbcdn.net/v/t39.35426-6/672681458_1268106092111176_2277598744567959605_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=roCbwygv5Y0Q7kNvwEvsAL_&_nc_oc=Ado1_xDoX759ty7iBbwegXzgtqPIl1q3pfo-ZZbqx2-HhV5VlsjAtGswbrbruvEVGiVNs03yhOX7bSwdGqD6yEpc&_nc_zt=14&_nc_ht=scontent-bom2-4.xx&_nc_gid=GxYeOUzxO86xID0AoX--MA&_nc_ss=79289&oh=00_AQOJAIooGBajgAaeg_LKBNxg1jVzY626bt-TvMd6yjlLlw&oe=6AE356E5"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=531203563996048",
+    "rank_in_pass": 8,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Hallow/creatives/977606784707632_active_192d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Hallow/videos/977606784707632_192d.mp4"
+   },
+   {
+    "advertiser": "Bible Chat",
+    "group": "faith_adjacent",
+    "advertiser_page_id": "142979542221369",
+    "page_name": "Bible Chat",
+    "library_id": "1015721907763748",
+    "library_url": "https://www.facebook.com/ads/library/?id=1015721907763748",
+    "status": "active",
+    "start_date": "2026-07-28",
+    "end_date": null,
+    "days_running": 90,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Su Palabra cada día",
+    "hook": "Su Palabra cada día",
+    "headline": "Un versículo te espera",
+    "link_caption": "ITUNES.APPLE.COM",
+    "cta": "Install now",
+    "media_type": "video",
+    "video_duration": "0:14",
+    "video_urls": [
+     "https://video-bom2-3.xx.fbcdn.net/o1/v/t2/f2/m412/AQOlCVMfji1ap4eveOpA0ZxLm9InJLWkTO7z22TtEHRYqcUrPPLVkVx6roP4ZIcBZPS0FksoYD6eMb_xpNcmzfjnWKYNXayHoS_pJZaLcw.mp4?_nc_cat=103&_nc_sid=8bf8fe&_nc_ht=video-bom2-3.xx.fbcdn.net&_nc_ohc=PS57UpwvA9gQ7kNvwH6RtnS&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5GQUNFQk9PSy4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MzU0MjM4NTI3MjU4NjEzNCwiYXNzZXRfYWdlX2RheXMiOjg4LCJ2aV91c2VjYXNlX2lkIjoxMDEzOSwiZHVyYXRpb25fcyI6MTMsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=bi5WABx_2Vlwt8-TKk4ciw&_nc_ss=79289&_nc_zt=28&oh=00_AQMHzBXTqTBTlYvQd4Hfx_0c4aw9QgO1cMBaLIwtNqmK3Q&oe=6AE3489B&bitrate=190873&tag=sve_sd"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/758288799_1408130837795647_898995473016354404_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=-nVE9NGrKBwQ7kNvwERilQt&_nc_oc=AdpD9-KKV1swMggabDUj5iDyahDUmNlM6GBMC1IZ1h8nv4KW4DbqYt79R_1M2RI5cmxi1-pw9-iPXzOSFPKJ40vM&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=bi5WABx_2Vlwt8-TKk4ciw&_nc_ss=79289&oh=00_AQOtuBoyDYwGLhgjy4xLMbGk20pUxwfMVDediudVXogfTg&oe=6AE32904"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video",
+     "all_all"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=142979542221369",
+    "rank_in_pass": 0,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Bible_Chat/creatives/1015721907763748_active_90d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Bible_Chat/videos/1015721907763748_90d.mp4"
+   },
+   {
+    "advertiser": "Bible Chat",
+    "group": "faith_adjacent",
+    "advertiser_page_id": "142979542221369",
+    "page_name": "Bible Chat",
+    "library_id": "1757933411877007",
+    "library_url": "https://www.facebook.com/ads/library/?id=1757933411877007",
+    "status": "active",
+    "start_date": "2026-07-28",
+    "end_date": null,
+    "days_running": 90,
+    "platforms": [
+     "facebook",
+     "instagram",
+     "messenger"
+    ],
+    "variations_same_creative": null,
+    "multiple_versions": false,
+    "primary_text": "Paz en su Palabra",
+    "hook": "Paz en su Palabra",
+    "headline": "Calma para tu corazón",
+    "link_caption": "ITUNES.APPLE.COM",
+    "cta": "Install now",
+    "media_type": "video",
+    "video_duration": "0:35",
+    "video_urls": [
+     "https://video-bom5-2.xx.fbcdn.net/o1/v/t2/f2/m412/AQMQYegMIsh1qMsjyifyKHOZ9A628OodKzthc1cLKh7yI03sGPs8-GQ4w1DO6EgO0-OhXkJtRVUtw-npDmpM2C6bBYvTlL0LkPzfu_IzvA.mp4?_nc_cat=100&_nc_sid=8bf8fe&_nc_ht=video-bom5-2.xx.fbcdn.net&_nc_ohc=sTsiIGLnviQQ7kNvwF-L_88&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5GQUNFQk9PSy4uQzMuMzYwLnN2ZV9zZCIsInhwdl9hc3NldF9pZCI6MTU4MDQ5MDQ5MzYwMjc0NywiYXNzZXRfYWdlX2RheXMiOjg4LCJ2aV91c2VjYXNlX2lkIjoxMDEzOSwiZHVyYXRpb25fcyI6MzUsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&_nc_gid=bi5WABx_2Vlwt8-TKk4ciw&_nc_ss=79289&_nc_zt=28&oh=00_AQPi2JJU9Iqx25K05huA_xaMdZRnKcvwVAaGmAUmnNzOJA&oe=6AE3321A&bitrate=282742&tag=sve_sd"
+    ],
+    "poster_urls": [
+     "https://scontent-bom5-2.xx.fbcdn.net/v/t39.35426-6/757507477_1999781697334893_7685837212136448794_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=ypimra57jVAQ7kNvwH_YFox&_nc_oc=AdorB72TE4FskB6nastOE2q7XGnEKhFX4fWvnm8aFvjQSthFuzLr2LVq7sZNoWRkXZqGZAiIPU1NKqGnd0-EeNe0&_nc_zt=14&_nc_ht=scontent-bom5-2.xx&_nc_gid=bi5WABx_2Vlwt8-TKk4ciw&_nc_ss=79289&oh=00_AQMtTLfINtQ6C5kS0KymIZhAVmwR6tDJk4rAdMkKYyKWdw&oe=6AE3539D"
+    ],
+    "image_urls": [],
+    "found_in_passes": [
+     "active_all",
+     "active_video"
+    ],
+    "source_url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&is_targeted_country=false&media_type=all&search_type=page&sort_data[mode]=total_impressions&sort_data[direction]=desc&view_all_page_id=142979542221369",
+    "rank_in_pass": 1,
+    "duplicate_creative_of": null,
+    "creative_files": [
+     "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Bible_Chat/creatives/1757933411877007_active_90d.jpg"
+    ],
+    "video_file": "/Users/pc/Documents/Salah Alarm/Content Library/2026-10-25/Meta-Ad-Library/Bible_Chat/videos/1757933411877007_90d.mp4"
+   }
+  ]
+ },
+ "errors": [
+  "Discovery: skipped (--no-discovery)",
+  "Own posts (Zernio): ZERNIO_API_KEY not set",
+  "SEO (Search Console): GSC_SERVICE_ACCOUNT_JSON not set",
+  "Revenue (RevenueCat): REVENUECAT_API_KEY / REVENUECAT_PROJECT_ID not set",
+  "App Store installs per link: no rows in data/inbox/asc-campaigns.csv for the last 7 days"
+ ]
+}

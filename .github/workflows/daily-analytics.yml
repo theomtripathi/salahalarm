@@ -1,0 +1,40 @@
+# Runs the daily analytics at 05:00 UTC (after Fajr in the Gulf, before work in
+# India/Pakistan) and commits the library and the brief to the
+# `analytics-data` branch, so the app's main branch stays clean.
+name: Daily analytics
+on:
+  schedule: [{ cron: '0 5 * * *' }]
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: growth/analytics } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bring back yesterday's library
+        run: |
+          git fetch origin analytics-data || exit 0
+          git checkout origin/analytics-data -- data reports 2>/dev/null || true
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm test
+      - run: npm run daily
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          REVENUECAT_API_KEY: ${{ secrets.REVENUECAT_API_KEY }}
+          REVENUECAT_PROJECT_ID: ${{ secrets.REVENUECAT_PROJECT_ID }}
+      - name: Save to analytics-data
+        run: |
+          git config user.name "salahalarm-analytics"
+          git config user.email "actions@users.noreply.github.com"
+          git stash push --include-untracked -- data reports
+          git fetch origin analytics-data && git checkout analytics-data || git checkout --orphan analytics-data
+          git stash pop || true
+          git add data reports
+          git commit -m "Daily analytics $(date -u +%F)" || exit 0
+          git push origin analytics-data

@@ -1,0 +1,39 @@
+{
+  "_note": "What the daily discovery run searches. Edit freely. Each run spends Apify credits roughly in proportion to perQuery x number of queries.",
+  "perQuery": 40,
+  "maxAgeDays": 180,
+  "tiktok": {
+    "hashtags": [
+      "fajr", "fajrprayer", "salat", "namaz", "islamicreminders", "muslimtiktok", "prayerapp",
+      "صلاة_الفجر", "الفجر", "fajrkinamaz", "namazkivaqt", "sholatsubuh", "subuh", "sabahnamazi"
+    ],
+    "searches": [
+      "fajr alarm app", "prayer app alarm", "app that wakes you for fajr", "muslim app",
+      "what if you missed fajr", "pov fajr", "day of not missing fajr", "ramadan challenge app"
+    ],
+    "profiles": [
+      "muslim", "qadajourney", "justpray.app", "justprayarabic", "salmajabarbique",
+      "rafiq.salahalarm", "deen.salahalarm"
+    ]
+  },
+  "instagram": {
+    "hashtags": [
+      "fajr", "fajrprayer", "salat", "namaz", "islamicreminders", "muslimreminders",
+      "islamicquotes", "sunnah", "ramadan", "صلاة_الفجر", "sholat"
+    ]
+  },
+  "x": {
+    "searches": [
+      "fajr app min_faves:200", "muslim app downloads min_faves:100", "islamic app revenue",
+      "prayer app tiktok min_faves:100", "faith app mrr", "bible app tiktok slideshow"
+    ]
+  },
+  "competitors": [
+    "just pray", "justpray", "prayr", "hisaab", "deenly", "fajr buddy", "tahajjud",
+    "muslim pro", "athan pro", "pillars", "salah alarm", "salahalarm", "bible chat"
+  ],
+  "appSignals": [
+    "app", "download", "link in bio", "app store", "for everybody asking", "what app",
+    "comment", "تطبيق", "ایپ", "aplikasi", "uygulama"
+  ]
+}
