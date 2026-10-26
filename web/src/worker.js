@@ -17,6 +17,7 @@
 //   /api/android/download    a 30-minute APK link, only for accounts with an active plan or trial
 //   /api/admin/dodo-setup    one-time: create the Dodo products + webhook (Cloudflare token holders only)
 //   /api/admin/dodo-products create a fresh set of products at the current TIERS prices (same auth)
+//   /api/admin/dodo-discount create a Dodo discount from DISCOUNTS in pricing.js (same auth)
 //   /api/admin/prices        what each country is charged (Cloudflare token holders only)
 //   /download/salahalarm.apk the APK, streamed from R2; needs a link from /api/android/download
 
@@ -24,7 +25,7 @@ import { verifyIdToken, bearer, AuthError } from "./auth.js";
 import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
 import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
 import { setupDodo } from "./dodo-setup.js";
-import { tierFor, productFor, parseProducts, displayPlans, displayOffer, CHECKOUT_PLANS } from "./pricing.js";
+import { tierFor, productFor, parseProducts, displayPlans, displayOffer, CHECKOUT_PLANS, discountFor, discounted, DISCOUNTS } from "./pricing.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
 import { sanitizeProfile } from "./profile.js";
@@ -66,6 +67,7 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/android/download" && method === "POST") return downloadLink(request, env);
   if (pathname === "/api/admin/dodo-setup" && method === "POST") return adminDodoSetup(request, env, url);
   if (pathname === "/api/admin/dodo-products" && method === "POST") return adminDodoProducts(request, env);
+  if (pathname === "/api/admin/dodo-discount" && method === "POST") return adminDodoDiscount(request, env);
   if (pathname === "/api/admin/prices" && method === "GET") return adminPrices(request, env, ctx, url);
   if (pathname === "/download/salahalarm.apk" && (method === "GET" || method === "HEAD")) return download(request, env, ctx);
   if (pathname.startsWith("/api/")) return json({ error: "not found" }, 404);
@@ -164,6 +166,10 @@ async function config(request, env, ctx) {
   const g = geo(request);
   const tier = tierFor(g.country);
   const { plans, offer } = await localPrices(env, ctx, tier, g.country);
+  // A discount link (?discount=CODE): the price after the code, for the paywall to show.
+  const d = discountFor(new URL(request.url).searchParams.get("discount"));
+  const target = d && plans.find((p) => p.plan === d.plan);
+  const discount = target ? { code: d.code, plan: d.plan, percentOff: d.percentOff, cycles: d.cycles, currency: target.currency, amount: discounted(target.amount, d) } : null;
   const schedule = g.latitude != null ? scheduleFor({ ...g, now: new Date() }) : null;
   const lang = preferredLang(request.headers.get("accept-language"), g.country);
   return json({
@@ -171,6 +177,7 @@ async function config(request, env, ctx) {
     tier,
     plans,
     offer,
+    discount,
     freeTrialDays: freeTrialDays(env),
     schedule,
     lang,
@@ -296,6 +303,7 @@ async function checkout(request, env, ctx, url) {
   const lang = LANGS.includes(body.lang) ? body.lang : "en";
   const ref = String(body.ref || "").slice(0, 60);
   const days = Number(trialDays(env)[plan] || 0);
+  const discount = discountFor(body.discount, plan);
   const session = await dodo(env).createCheckout({
     product_cart: [{ product_id: product.productId, quantity: 1 }],
     customer: { email: u.email || undefined, name: String(body.name || u.name || "").slice(0, 80) || undefined },
@@ -303,14 +311,15 @@ async function checkout(request, env, ctx, url) {
     return_url: `${origin}/android/welcome/?plan=${plan}`,
     // Backing out of checkout counts as closing the paywall: show the next exit offer.
     cancel_url: `${origin}/android/?resume=paywall&exit=${plan === "weeklyOffer" ? "trial" : "offer"}`,
-    metadata: { uid: u.uid, plan, tier: product.tier, country: g.country || "", ref, lang, source: "android_web" },
+    metadata: { uid: u.uid, plan, tier: product.tier, country: g.country || "", ref, lang, source: "android_web", ...(discount && { discount: discount.code }) },
+    ...(discount && { discount_codes: [discount.code] }),
     customization: { force_language: lang, theme: "light", show_order_details: true },
     feature_flags: { redirect_immediately: true, allow_discount_code: true, allow_customer_editing_email: !u.email },
     ...(days > 0 && { subscription_data: { trial_period_days: days } }),
   });
 
   await db.merge(`users/${u.uid}`, { lastWebCheckout: { sessionId: session.session_id, plan, tier: product.tier, at: new Date() } });
-  capture(env, ctx, "web_checkout_session_created", u.uid, { plan, tier: product.tier, country: g.country, ref, lang });
+  capture(env, ctx, "web_checkout_session_created", u.uid, { plan, tier: product.tier, country: g.country, ref, lang, discount: discount?.code || null });
   return json({ checkoutUrl: session.checkout_url, sessionId: session.session_id });
 }
 
@@ -397,6 +406,31 @@ async function adminDodoProducts(request, env) {
     return json({ products, log });
   } catch (err) {
     return json({ error: err.message, detail: err.body ?? null, log }, 502);
+  }
+}
+
+// Creates (once) the Dodo discount for a DISCOUNTS entry, limited to that plan's products.
+async function adminDodoDiscount(request, env) {
+  if (!(await isAdmin(request, env))) return json({ error: "unauthorized" }, 401);
+  const { code } = await readJson(request);
+  const d = discountFor(code);
+  if (!d) return json({ error: `unknown code; add it to DISCOUNTS first (${Object.keys(DISCOUNTS).join(", ")})` }, 400);
+  const products = parseProducts(env.PRODUCTS);
+  const restricted = [...new Set(Object.values(products).map((p) => p?.[d.plan]).filter(Boolean))];
+  try {
+    const created = await dodo(env).request("POST", "/discounts", {
+      type: "percentage",
+      amount: d.bp,
+      code: d.code,
+      name: `${d.code}: ${d.percentOff}% off the first ${d.cycles === 1 ? "payment" : `${d.cycles} payments`} (${d.plan})`,
+      restricted_to: restricted,
+      subscription_cycles: d.cycles,
+      per_customer_usage_limit: 1,
+      metadata: { app: "salahalarm-android" },
+    });
+    return json({ discount: { id: created.discount_id, code: created.code, amount: created.amount, restricted_to: restricted.length } });
+  } catch (err) {
+    return json({ error: err.message, detail: err.body ?? null }, 502);
   }
 }
 

@@ -121,3 +121,24 @@ export function displayOffer(tier, country) {
   const [weekly] = displayPlans(tier, { plans: ["weekly"], country });
   return { ...offer, regularAmount: weekly.amount, percentOff: Math.round((1 - offer.amount / weekly.amount) * 100) };
 }
+
+// Discount codes the funnel may auto-apply from a link (?discount=CODE). Each is
+// a Dodo discount created by /api/admin/dodo-discount with the same code.
+// `bp` is basis points off (3334 = 33.34%), `plan` the only plan it applies to,
+// `cycles` how many billing cycles it covers.
+export const DISCOUNTS = {
+  // Comeback email: the first year at $19.99 instead of $29.99 (₹833 instead of ₹1,249).
+  COMEBACK33: { bp: 3334, plan: "yearly", cycles: 1 },
+};
+
+export function discountFor(code, plan) {
+  const key = String(code || "").trim().toUpperCase();
+  const d = DISCOUNTS[key];
+  if (!d || (plan && d.plan !== plan)) return null;
+  return { code: key, ...d, percentOff: Math.round(d.bp / 100) };
+}
+
+/** What the discounted plan costs for its first cycles, rounded like Dodo (to the minor unit). */
+export function discounted(amount, d) {
+  return Math.round(amount * (1 - d.bp / 10000) * 100) / 100;
+}

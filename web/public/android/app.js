@@ -158,7 +158,7 @@ function render() {
   window.scrollTo(0, 0);
   shownAt = Date.now();
   capture("web_onboarding_screen_viewed", { screen: state.screen, step_index: index + 1, step_count: route.length });
-  if (state.screen === "paywall") capture("web_paywall_viewed", { plans: config.plans.map((p) => `${p.plan}:${p.currency}${p.amount}`).join(",") });
+  if (state.screen === "paywall") capture("web_paywall_viewed", { plans: config.plans.map((p) => `${p.plan}:${p.currency}${p.amount}`).join(","), discount: config.discount?.code || null });
   if (EXITS.includes(state.screen)) {
     if (!state.exitsSeen.includes(state.screen)) state.exitsSeen.push(state.screen);
     save();
@@ -450,6 +450,7 @@ const SCREENS = {
     const planCard = (p) => {
       const isYearly = p.plan === "yearly";
       const price = money(p.amount, p.currency);
+      const deal = config.discount?.plan === p.plan ? config.discount : null;
       const savePct = isYearly && weekly && weekly.currency === p.currency ? Math.round((1 - p.amount / (weekly.amount * 52)) * 100) : 0;
       return h("button", {
         class: "plan", type: "button", role: "radio", "aria-checked": String(p.plan === state.plan),
@@ -465,7 +466,8 @@ const SCREENS = {
       h("span", {},
         h("span", { class: "name" }, t(isYearly ? "Yearly plan" : "Weekly")),
         h("span", { class: "meta", style: "display:block" },
-          p.trialDays > 0 ? t("%d days free, then %@", p.trialDays, price) : t(isYearly ? "Billed %@ annually" : "Billed %@ weekly", price))),
+          deal ? t("First year %@, then %@ yearly", money(deal.amount, deal.currency), price)
+            : p.trialDays > 0 ? t("%d days free, then %@", p.trialDays, price) : t(isYearly ? "Billed %@ annually" : "Billed %@ weekly", price))),
       h("span", { class: "price" },
         t("%@/week", money(isYearly ? p.weeklyEquivalent : p.amount, p.currency))));
     };
@@ -477,6 +479,7 @@ const SCREENS = {
         h("div", {}, h("div", { class: "k" }, t("Your first alarm")), h("div", { class: "big" }, t("%@ at %@", t(first.name), first.time)),
           config.geo?.city ? h("div", { class: "k" }, config.geo.city) : null)) : null,
       lapsed ? h("p", { class: "notice" }, t("Your plan has ended. Renew to turn your prayer alarms back on.")) : null,
+      config.discount ? h("p", { class: "notice" }, t("Your %d% discount is applied to the yearly plan.", config.discount.percentOff)) : null,
       h("h1", {}, t(lapsed ? "Welcome back! Renew SalahAlarm" : "Unlock SalahAlarm for Android")),
       h("ul", { class: "benefits" },
         ["persistent prayer alarms", "mat scan + distraction blocking", "Accurate Local Prayer Times", "streaks, qibla, Quran + widgets"]
@@ -602,7 +605,7 @@ async function startCheckout(btn, error, planId) {
     const res = await api("/api/checkout", {
       method: "POST",
       token,
-      body: { plan: plan.plan, lang: currentLang(), ref, name: user.name || "" },
+      body: { plan: plan.plan, lang: currentLang(), ref, name: user.name || "", discount: config.discount?.code },
     });
     if (res.alreadyActive) {
       location.href = "/android/welcome/";
@@ -653,6 +656,7 @@ async function boot() {
   restore();
 
   config = await loadConfig();
+  if (config.discount) state.plan = config.discount.plan;
   setLang(initialLang(config.lang), { persist: false });
   document.getElementById("lang").replaceWith(langSelect(() => render()));
   initAnalytics(config, { ref, page: "android_onboarding", country: config.geo?.country, price_tier: config.tier, funnel: "android_web" });

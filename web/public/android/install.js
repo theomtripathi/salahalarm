@@ -48,6 +48,7 @@ async function confirmPayment() {
           capture("web_purchase_confirmed", { plan: entitlement.plan, seconds_to_confirm: Math.round((Date.now() - started) / 1000) });
         }
         store.del("sa_checkout");
+        store.del("sa_discount");
         await prepareDownload();
         render();
         autoDownload();

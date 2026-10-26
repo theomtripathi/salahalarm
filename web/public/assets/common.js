@@ -112,6 +112,9 @@ export function captureRef() {
   // Which button sent them (e.g. the homepage section), for per-CTA conversion.
   const from = params.get("from");
   if (from) store.set("sa_from", from.slice(0, 60));
+  // A discount link (e.g. from the comeback email); the server decides if the code is real.
+  const discount = params.get("discount");
+  if (discount) store.set("sa_discount", discount.slice(0, 40).toUpperCase());
   return store.get("sa_ref") || "";
 }
 
@@ -184,7 +187,8 @@ export async function api(path, { method = "GET", token, body } = {}) {
 
 let configPromise = null;
 export function loadConfig() {
-  configPromise ||= api("/api/config").catch(() => ({ plans: [], geo: {}, lang: "en" }));
+  const discount = store.get("sa_discount");
+  configPromise ||= api(`/api/config${discount ? `?discount=${encodeURIComponent(discount)}` : ""}`).catch(() => ({ plans: [], geo: {}, lang: "en" }));
   return configPromise;
 }
 

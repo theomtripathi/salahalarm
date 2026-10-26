@@ -24,6 +24,10 @@ on:
         description: "Create live Dodo products in local currency (LOCAL in web/src/pricing.js)"
         type: boolean
         default: false
+      dodo_discount:
+        description: "Create this Dodo discount code (must be in DISCOUNTS in web/src/pricing.js)"
+        type: string
+        default: ""
       price_table:
         description: "Print what each country is charged (Dodo checkout preview)"
         type: boolean
@@ -99,6 +103,16 @@ jobs:
             if (r.error) { console.log("::error::" + r.error + " " + JSON.stringify(r.detail)); process.exit(1); }
             console.log("PRODUCTS = \x27" + JSON.stringify(r.products) + "\x27");
           ' "$RUNNER_TEMP/products.json"
+
+      - name: Dodo discount
+        if: ${{ inputs.dodo_discount != '' }}
+        env:
+          CODE: ${{ inputs.dodo_discount }}
+        run: |
+          sleep 5
+          curl -sS -X POST https://salahalarm.com/api/admin/dodo-discount \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "content-type: application/json" \
+            -d "$(node -e 'process.stdout.write(JSON.stringify({ code: process.env.CODE }))')" -w "\nHTTP %{http_code}\n"
 
       - name: Price table
         if: ${{ inputs.price_table }}

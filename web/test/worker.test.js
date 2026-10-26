@@ -2,7 +2,7 @@ import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import worker, { handleEvent, preferredLang, signDownload, verifyDownload } from "../src/worker.js";
 import { signWebhook, verifyWebhook } from "../src/dodo.js";
-import { tierFor, productFor, displayPlans, displayOffer } from "../src/pricing.js";
+import { tierFor, productFor, displayPlans, displayOffer, discountFor, discounted } from "../src/pricing.js";
 import { setupDodo } from "../src/dodo-setup.js";
 import { entitlementFromSubscription, shouldReplace, accessUntilFor } from "../src/entitlement.js";
 import { scheduleFor, methodFor, madhabFor } from "../src/prayer.js";
@@ -144,6 +144,22 @@ test("checkout creates a Dodo session for the visitor's tier with the uid in met
   assert.equal(req.cancel_url, "https://salahalarm.com/android/?resume=paywall&exit=offer");
   assert.equal(req.customization.force_language, "id");
   assert.equal(backend.docs.get("users/user-1").lastWebCheckout.sessionId, r.body.sessionId);
+});
+
+test("a discount link applies its code to the yearly checkout and shows the first-year price", async () => {
+  let r = await call("/api/config?discount=comeback33", { country: "US" });
+  assert.deepEqual(r.body.discount, { code: "COMEBACK33", plan: "yearly", percentOff: 33, cycles: 1, currency: "USD", amount: 19.99 });
+  r = await call("/api/config?discount=NOPE", { country: "US" });
+  assert.equal(r.body.discount, null);
+
+  await call("/api/checkout", { method: "POST", token: idToken(), body: { plan: "yearly", discount: "COMEBACK33" }, country: "US" });
+  assert.deepEqual(backend.dodo.created.at(-1).discount_codes, ["COMEBACK33"]);
+  // Only on the plan it was made for, and unknown codes are dropped.
+  await call("/api/checkout", { method: "POST", token: idToken({ uid: "w" }), body: { plan: "weekly", discount: "COMEBACK33" }, country: "US" });
+  assert.equal(backend.dodo.created.at(-1).discount_codes, undefined);
+  await call("/api/checkout", { method: "POST", token: idToken({ uid: "x" }), body: { plan: "yearly", discount: "FREE100" }, country: "US" });
+  assert.equal(backend.dodo.created.at(-1).discount_codes, undefined);
+  assert.equal(discounted(1249, discountFor("COMEBACK33")), 832.58);
 });
 
 test("a trial configured in TRIAL_DAYS is passed to Dodo", async () => {
@@ -447,6 +463,7 @@ test("India, Indonesia, Bangladesh, Egypt and Nigeria see and pay local-currency
 test("the admin routes need the Cloudflare token", async () => {
   assert.equal((await call("/api/admin/prices", { token: "nope" })).status, 401);
   assert.equal((await call("/api/admin/dodo-products", { method: "POST", token: "nope" })).status, 401);
+  assert.equal((await call("/api/admin/dodo-discount", { method: "POST", token: "nope" })).status, 401);
 });
 
 test("an app login code signs the installed app in once, as the same user", async () => {

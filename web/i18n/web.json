@@ -84,7 +84,9 @@
   "Your plan has ended": "Your plan has ended",
   "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Renew to turn your prayer alarms back on. Your streaks and settings are saved.",
   "Renew my plan": "Renew my plan",
-  "Already have an account? Download or renew": "Already have an account? Download or renew"
+  "Already have an account? Download or renew": "Already have an account? Download or renew",
+  "First year %@, then %@ yearly": "First year %@, then %@ yearly",
+  "Your %d% discount is applied to the yearly plan.": "Your %d% discount is applied to the yearly plan."
  },
  "ar": {
   "Please enter a valid email address.": "يرجى إدخال بريد إلكتروني صحيح.",
@@ -189,7 +191,9 @@
   "Your plan has ended": "انتهت خطتك",
   "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "جدّد لتعود منبهات الصلاة إلى العمل. سلاسلك وإعداداتك محفوظة.",
   "Renew my plan": "جدّد خطتي",
-  "Already have an account? Download or renew": "لديك حساب بالفعل؟ نزّل التطبيق أو جدّد"
+  "Already have an account? Download or renew": "لديك حساب بالفعل؟ نزّل التطبيق أو جدّد",
+  "First year %@, then %@ yearly": "السنة الأولى بـ %@، ثم %@ سنويًا",
+  "Your %d% discount is applied to the yearly plan.": "تم تطبيق خصمك %d% على الخطة السنوية."
  },
  "tr": {
   "Please enter a valid email address.": "Lütfen geçerli bir e-posta adresi gir.",
@@ -294,7 +298,9 @@
   "Your plan has ended": "Planın sona erdi",
   "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Namaz alarmlarını yeniden açmak için yenile. Serilerin ve ayarların kayıtlı.",
   "Renew my plan": "Planımı yenile",
-  "Already have an account? Download or renew": "Zaten hesabın var mı? İndir veya yenile"
+  "Already have an account? Download or renew": "Zaten hesabın var mı? İndir veya yenile",
+  "First year %@, then %@ yearly": "İlk yıl %@, sonra yıllık %@",
+  "Your %d% discount is applied to the yearly plan.": "%d% indirimin yıllık plana uygulandı."
  },
  "id": {
   "Please enter a valid email address.": "Masukkan alamat email yang valid.",
@@ -399,7 +405,9 @@
   "Your plan has ended": "Paketmu sudah berakhir",
   "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "Perpanjang untuk menyalakan lagi alarm salatmu. Streak dan pengaturanmu tetap tersimpan.",
   "Renew my plan": "Perpanjang paketku",
-  "Already have an account? Download or renew": "Sudah punya akun? Unduh atau perpanjang"
+  "Already have an account? Download or renew": "Sudah punya akun? Unduh atau perpanjang",
+  "First year %@, then %@ yearly": "Tahun pertama %@, lalu %@ per tahun",
+  "Your %d% discount is applied to the yearly plan.": "Diskon %d% kamu sudah diterapkan ke paket tahunan."
  },
  "ur": {
   "Please enter a valid email address.": "براہ کرم درست ای میل ایڈریس درج کریں۔",
@@ -504,6 +512,8 @@
   "Your plan has ended": "آپ کا پلان ختم ہو گیا ہے",
   "Renew to turn your prayer alarms back on. Your streaks and settings are saved.": "نماز کے الارم دوبارہ چالو کرنے کے لیے تجدید کریں۔ آپ کی اسٹریکس اور سیٹنگز محفوظ ہیں۔",
   "Renew my plan": "میرا پلان تجدید کریں",
-  "Already have an account? Download or renew": "پہلے سے اکاؤنٹ ہے؟ ڈاؤن لوڈ یا تجدید کریں"
+  "Already have an account? Download or renew": "پہلے سے اکاؤنٹ ہے؟ ڈاؤن لوڈ یا تجدید کریں",
+  "First year %@, then %@ yearly": "پہلا سال %@، پھر %@ سالانہ",
+  "Your %d% discount is applied to the yearly plan.": "آپ کی %d% رعایت سالانہ پلان پر لاگو ہو گئی ہے۔"
  }
 }

@@ -124,6 +124,19 @@ await page.waitForSelector('a[href^="/android/?resume=paywall"]');
 if (await page.locator("a[download]").count()) errors.push("unpaid account can see the download button");
 await shot("install-locked");
 
+// A comeback-email link: the yearly plan shows the discounted first year.
+await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); sessionStorage.setItem("sa_fakeauth", "1"); });
+await page.goto(`${base}/android/?fakeauth=1&resume=account&ref=email&discount=COMEBACK33&lang=${lang}`);
+await page.waitForSelector(".google-btn");
+await page.locator(".footer .btn-secondary, .btn-secondary").first().click();
+await page.fill("#f-email", "comeback@example.com");
+await page.fill("#f-password", "secret123");
+await page.locator("form .btn-primary").click();
+await page.waitForSelector(".close-btn");
+if (!(await page.locator(".notice").filter({ hasText: "33" }).count())) errors.push("discount notice missing");
+if (!(await page.locator('.plan[aria-checked="true"]').filter({ hasText: /First year|السنة الأولى/ }).count())) errors.push("yearly plan does not show the discounted first year");
+await shot("paywall-discount");
+
 console.log(JSON.stringify({ lang, screens: n, errors }, null, 2));
 await browser.close();
 if (errors.length) process.exit(1);
