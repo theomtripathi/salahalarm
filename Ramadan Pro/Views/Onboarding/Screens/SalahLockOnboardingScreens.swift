@@ -1583,6 +1583,7 @@ struct SLPaywallScreen: View {
     @State private var isCheckingTrial = false
     @State private var hasCheckedTrialForThisVisit = false
     @State private var presentedTrialPlan: SubscriptionPlanDetails?
+    @State private var trialTrigger = "discount_offer_declined"
     @State private var feedbackOfferStage = "final_discount"
 
     private var currentOfferStage: String {
@@ -2051,7 +2052,7 @@ struct SLPaywallScreen: View {
         FunnelAnalytics.shared.track(.winBackOfferDeclined, properties)
         showWinBackModal = false
         errorMessage = nil
-        presentTrialAfterDiscountDecline()
+        presentTrialOffer(trigger: "discount_offer_declined")
     }
 
     private var exitFeedbackSheet: some View {
@@ -2099,12 +2100,18 @@ struct SLPaywallScreen: View {
         exitWithoutPurchase(stage: feedbackOfferStage, action: discountExitAction)
     }
 
-    private func presentTrialAfterDiscountDecline() {
+    /// Shows the seven-day trial once per paywall visit.
+    /// After a declined discount, refusing or missing the trial ends the visit.
+    /// After cancelling Apple's payment sheet on a main plan, the customer
+    /// returns to the plans instead, so a cancel never ends the visit.
+    private func presentTrialOffer(trigger: String) {
+        let endsVisit = trigger != "checkout_cancelled"
         guard !hasCheckedTrialForThisVisit else {
-            showExitFeedback = true
+            if endsVisit { showExitFeedback = true }
             return
         }
         hasCheckedTrialForThisVisit = true
+        trialTrigger = trigger
         isCheckingTrial = true
         Task { @MainActor in
             let plan = await trialService.refreshAnnualTrialEligibility()
@@ -2112,14 +2119,15 @@ struct SLPaywallScreen: View {
             guard let plan else {
                 var properties = paywallContext(stage: "final_trial")
                 properties["unavailable_reason"] = trialService.annualTrialUnavailableReason
+                properties["trigger"] = trigger
                 FunnelAnalytics.shared.track(.trialOfferUnavailable, properties)
-                showExitFeedback = true
+                if endsVisit { showExitFeedback = true }
                 return
             }
             presentedTrialPlan = plan
             showTrialOffer = true
             var properties = trialContext(plan)
-            properties["trigger"] = "discount_offer_declined"
+            properties["trigger"] = trigger
             FunnelAnalytics.shared.track(.trialOfferShown, properties)
         }
     }
@@ -2142,7 +2150,13 @@ struct SLPaywallScreen: View {
             var properties = trialContext(plan)
             properties["decline_type"] = "offer_declined"
             properties["reason_source"] = "not_collected"
+            properties["trigger"] = trialTrigger
             FunnelAnalytics.shared.track(.trialOfferDeclined, properties)
+        }
+        if trialTrigger == "checkout_cancelled" {
+            showTrialOffer = false
+            errorMessage = nil
+            return
         }
         discountExitAction = "trial_no_thanks"
         feedbackOfferStage = "final_trial"
@@ -2578,6 +2592,11 @@ struct SLPaywallScreen: View {
                 subscriptionVM.purchaseErrorProperties.forEach { outcomeParameters[$0.key] = $0.value as NSString }
                 Analytics.logEvent(analyticsEvent, parameters: outcomeParameters)
                 errorMessage = subscriptionVM.lastPurchaseOutcome == .cancelled ? nil : subscriptionVM.errorMessage
+                // Most buyers cancel on Apple's sheet once they see the full charge.
+                // Offer the free week while their intent is highest.
+                if subscriptionVM.lastPurchaseOutcome == .cancelled && stage == "main" {
+                    presentTrialOffer(trigger: "checkout_cancelled")
+                }
             }
         }
     }
