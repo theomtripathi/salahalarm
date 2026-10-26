@@ -9,6 +9,7 @@ routes = [
   { pattern = "salahalarm.com/android*", zone_name = "salahalarm.com" },
   { pattern = "salahalarm.com/api/*", zone_name = "salahalarm.com" },
   { pattern = "salahalarm.com/download/*", zone_name = "salahalarm.com" },
+  { pattern = "salahalarm.com/assets/*", zone_name = "salahalarm.com" },
 ]
 
 [assets]
