@@ -336,6 +336,12 @@ html[lang="ur"] .prose { font-size: 18px; }
 .prose ol li::marker { color: var(--green-600); font-weight: 800; }
 .prose blockquote { margin: 28px 0; padding: 18px 22px; border-inline-start: 4px solid var(--gold); background: var(--surface); border-radius: 0 14px 14px 0; }
 html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
+.table-wrap { overflow-x: auto; margin: 0 0 24px; border: 1px solid var(--border); border-radius: 14px; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 520px; }
+.prose th, .prose td { padding: 11px 14px; text-align: start; vertical-align: top; border-bottom: 1px solid var(--border); }
+.prose thead th { background: var(--green-900); color: #fff; font-weight: 700; }
+.prose tbody th { font-weight: 700; background: var(--surface); }
+.prose tbody tr:last-child > * { border-bottom: 0; }
 .prose em { color: var(--green-600); font-style: italic; }
 .toc { margin-bottom: 36px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); padding: 4px 22px; }
 .toc summary { cursor: pointer; padding: 14px 0; font-weight: 700; }

@@ -79,7 +79,9 @@ Weekly: `seo/gum/pull-rankings.sh` (Search Console positions written back into
 The site runs as a Worker named `salahalarm` that serves `dist/` as static assets
 (`wrangler.jsonc`), on the routes `salahalarm.com/*` and `www.salahalarm.com/*`.
 The conversion-tracking Worker owns the more specific `salahalarm.com/go/*`
-route, which wins for `/go` links. Deploy with `npm run deploy` from `website/`
+route, which wins for `/go` links. The Android funnel Worker owns `/get*`,
+`/android*`, `/api/*`, `/download/*` and `/assets/*`, so never put site files
+under `/assets/`. Deploy with `npm run deploy` from `website/`
 (needs `npx wrangler login` on Om's Cloudflare account once).
 
 ### Google Search Console

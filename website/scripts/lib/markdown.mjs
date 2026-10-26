@@ -1,5 +1,5 @@
 // Small Markdown subset for articles: headings, paragraphs, lists, blockquotes,
-// bold, italic, links and inline code. Kept dependency-free so the Cloudflare
+// pipe tables, bold, italic, links and inline code. Kept dependency-free so the Cloudflare
 // Pages build needs nothing but Node.
 
 const escapeHtml = (s) =>
@@ -35,7 +35,18 @@ export function render(md) {
   let para = [];
   let list = null; // { tag, items }
   let quote = [];
+  let table = [];
 
+  const flushTable = () => {
+    if (!table.length) return;
+    const cells = (row) => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+    const [head, ...rest] = table;
+    const body = rest.filter((r) => !/^\|?[\s:|-]+\|?$/.test(r));
+    html.push(`<div class="table-wrap"><table><thead><tr>${cells(head).map((c) => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${body
+      .map((r) => `<tr>${cells(r).map((c, i) => (i === 0 ? `<th scope="row">${inline(c)}</th>` : `<td>${inline(c)}</td>`)).join('')}</tr>`)
+      .join('')}</tbody></table></div>`);
+    table = [];
+  };
   const flushPara = () => {
     if (para.length) html.push(`<p>${inline(para.join(' '))}</p>`);
     para = [];
@@ -52,6 +63,7 @@ export function render(md) {
     flushPara();
     flushList();
     flushQuote();
+    flushTable();
   };
 
   for (const raw of lines) {
@@ -59,6 +71,11 @@ export function render(md) {
     let m;
     if (!line.trim()) {
       flushAll();
+    } else if (line.trim().startsWith('|')) {
+      flushPara();
+      flushList();
+      flushQuote();
+      table.push(line.trim());
     } else if ((m = line.match(/^(#{2,4})\s+(.*)$/))) {
       flushAll();
       const level = m[1].length;
