@@ -108,7 +108,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun App() {
     val user by Graph.repo.user.collectAsState()
+    val entitlement by Graph.repo.entitlement.collectAsState()
+    val now by rememberNow(60_000)
     var setupDone by rememberSaveable { mutableStateOf(Graph.store.flag("setup_done")) }
+    // "Continue without alarms" on the trial-ended screen lasts until the app is closed.
+    var continueFree by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) { Graph.repo.refreshLocation() }
 
@@ -118,6 +122,10 @@ private fun App() {
             Graph.store.setFlag("setup_done")
             setupDone = true
         })
+        entitlement.trialEnded(now) && !continueFree -> TrialEndedScreen(entitlement) {
+            Analytics.capture("android_trial_ended_continue_free")
+            continueFree = true
+        }
         else -> MainTabs()
     }
 

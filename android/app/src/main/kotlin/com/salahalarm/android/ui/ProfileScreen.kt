@@ -172,6 +172,8 @@ fun ProfileScreen() {
 
             Section(t("Account")) {
                 val status = when {
+                    premium && entitlement.trial -> tf("Free trial · ends %@", dateString(entitlement.accessUntil))
+                    entitlement.trialEnded(now) -> t("Free trial ended")
                     premium && entitlement.cancelAtPeriodEnd -> tf("Premium until %@", dateString(entitlement.accessUntil))
                     premium -> tf("Premium · renews %@", dateString(entitlement.currentPeriodEnd ?: entitlement.accessUntil))
                     else -> t("No active subscription")

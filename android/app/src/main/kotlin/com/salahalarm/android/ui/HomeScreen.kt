@@ -63,6 +63,7 @@ import com.salahalarm.android.alarm.Notifications
 import com.salahalarm.android.data.Api
 import com.salahalarm.android.lock.SalahLock
 import com.salahalarm.android.t
+import com.salahalarm.android.data.Analytics
 import com.salahalarm.android.tf
 import com.salahalarm.core.AlarmPlanner
 import com.salahalarm.core.AlarmStrictness
@@ -134,6 +135,20 @@ fun HomeScreen() {
                     background = Palette.green.copy(alpha = 0.08f),
                     border = Palette.green.copy(alpha = 0.3f),
                 ) { openUrl(context, Api.downloadUrl) }
+            }
+
+            entitlement.trialDaysLeft(now)?.let { days ->
+                Banner(
+                    icon = { Text("🌙", fontSize = 20.sp) },
+                    title = if (days <= 1) t("Last day of your free trial") else tf("%d days left in your free trial", days),
+                    body = t("Choose a plan on salahalarm.com to keep your prayer alarms after the trial."),
+                    action = t("Choose a plan"),
+                    background = Palette.warningBg,
+                    border = Palette.gold,
+                ) {
+                    Analytics.capture("android_trial_banner_tapped", mapOf("days_left" to days))
+                    openUrl(context, Api.paywallUrl("home_trial_banner"))
+                }
             }
 
             if (needsAttention) {
