@@ -21,3 +21,4 @@ android/local.properties
 android/dist/
 *.jks
 *.keystore
+website/dist/
