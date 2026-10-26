@@ -1,0 +1,77 @@
+name: Android funnel deploy
+
+# Deploys web/ (salahalarm.com/get, /android, /api, /download) to Cloudflare.
+# Worker secrets (FIREBASE_SERVICE_ACCOUNT, DODO_PAYMENTS_API_KEY, DODO_WEBHOOK_SECRET)
+# live on the Worker and survive deploys.
+
+on:
+  push:
+    branches: [main, claude/project-thread-7o1a8e]
+    paths:
+      - "web/**"
+      - ".github/workflows/web.yml"
+  workflow_dispatch:
+    inputs:
+      dodo_setup:
+        description: "Also create the live Dodo products and webhook (once; needs the DODO_PAYMENTS_API_KEY secret)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: web-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+      - run: npm test
+
+      - name: APK bucket
+        run: npx wrangler r2 bucket create salahalarm-apks || echo "bucket already exists"
+
+      - name: Deploy
+        run: npx wrangler deploy
+
+      - name: Dodo products and webhook
+        if: ${{ inputs.dodo_setup }}
+        env:
+          DODO_PAYMENTS_API_KEY: ${{ secrets.DODO_PAYMENTS_API_KEY }}
+          DODO_ENVIRONMENT: live_mode
+          WEBHOOK_URL: https://salahalarm.com/api/webhooks/dodo
+        run: |
+          if ! grep -q "^PRODUCTS = '{}'" wrangler.toml; then
+            echo "::error::PRODUCTS is already set in wrangler.toml; refusing to create duplicate products"; exit 1
+          fi
+          node scripts/dodo-setup.mjs | tee "$RUNNER_TEMP/dodo.txt"
+          hook=$(sed -n 's/^webhook \([^ ]*\) created.*/\1/p' "$RUNNER_TEMP/dodo.txt")
+          if [ -n "$hook" ]; then
+            secret=$(curl -sf -H "Authorization: Bearer $DODO_PAYMENTS_API_KEY" \
+              "https://live.dodopayments.com/webhooks/$hook/secret" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{process.stdout.write(JSON.parse(s).secret||"")}catch{}})')
+            if [ -n "$secret" ]; then
+              echo "::add-mask::$secret"
+              printf %s "$secret" | npx wrangler secret put DODO_WEBHOOK_SECRET
+            else
+              echo "::warning::Could not read the webhook signing secret; copy it from the Dodo dashboard into DODO_WEBHOOK_SECRET"
+            fi
+          fi
+
+      - name: Check
+        run: |
+          for p in /get/ /android/ /api/config; do
+            echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://salahalarm.com$p)"
+          done
