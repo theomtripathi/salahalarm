@@ -59,7 +59,16 @@ await page.locator(".google-btn").click();
 await page.waitForSelector(".plans");
 await shot("paywall");
 await page.locator(".plan").nth(1).click();
-await shot("paywall-monthly");
+await shot("paywall-weekly");
+// Closing the paywall: discounted weekly offer, then the free trial, then back to the plans.
+await click(".close-x");
+await page.waitForSelector(".offer-card");
+await shot("offer");
+await click(".close-x");
+await page.waitForSelector("#start-trial");
+await shot("trial");
+await click(".close-x");
+await page.waitForSelector(".plans");
 await page.locator("#checkout").click();
 await page.waitForURL(/mock-checkout/);
 await page.locator("#pay").click();
@@ -70,6 +79,29 @@ await shot("welcome-paid");
 await page.goto(`${base}/android/install/`);
 await page.waitForSelector(".guide");
 await shot("install");
+
+// A second visitor leaves checkout twice and takes the free trial.
+const trialPage = await (await browser.newContext({ ...devices["Pixel 7"], locale: lang === "en" ? "en-US" : lang })).newPage();
+trialPage.on("pageerror", (e) => errors.push(e.message));
+await trialPage.goto(`${base}/android/?fakeauth=1&resume=account&lang=${lang}`);
+await trialPage.locator(".btn-secondary").click();
+await trialPage.fill("#f-email", `trial.${lang}@example.com`);
+await trialPage.fill("#f-password", "secret123");
+await trialPage.locator("form .btn-primary").click();
+await trialPage.waitForSelector(".plans");
+await trialPage.locator("#checkout").click();
+await trialPage.waitForURL(/mock-checkout/);
+await trialPage.locator("#cancel").click();
+await trialPage.waitForSelector(".offer-card");
+await trialPage.locator("#checkout-offer").click();
+await trialPage.waitForURL(/mock-checkout/);
+await trialPage.locator("#cancel").click();
+await trialPage.waitForSelector("#start-trial");
+await trialPage.locator("#start-trial").click();
+await trialPage.waitForURL(/\/android\/welcome\/\?trial=1/);
+await trialPage.waitForSelector(".success-mark", { timeout: 15000 });
+await trialPage.waitForTimeout(350);
+await trialPage.screenshot({ path: `${out}/${String(++n).padStart(2, "0")}-${lang}-welcome-trial.png`, fullPage: true });
 
 console.log(JSON.stringify({ lang, screens: n, errors }, null, 2));
 await browser.close();

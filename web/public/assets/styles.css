@@ -402,3 +402,17 @@ details.brand-tip summary { font-weight: 700; cursor: pointer; }
 details.brand-tip p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
 .status-line { display: flex; align-items: center; gap: 10px; justify-content: center; color: var(--muted); }
 .mini-ring { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--green-tint-2); border-top-color: var(--green); animation: spin 1s linear infinite; }
+
+/* Paywall close, discounted offer and free-trial screens */
+.close-x {
+  display: block; margin: -10px -10px 0 auto; width: 44px; height: 40px;
+  border: 0; background: none; color: var(--muted); font-size: 28px; line-height: 1; cursor: pointer;
+}
+[dir="rtl"] .close-x { margin: -10px auto 0 -10px; }
+.offer-card { text-align: center; padding: 22px 16px; border: 2px solid var(--green); background: var(--green-tint); margin-bottom: 18px; }
+.offer-card .k { font-weight: 700; color: var(--muted); font-size: 14px; }
+.offer-price { display: flex; justify-content: center; align-items: baseline; gap: 10px; margin-top: 6px; }
+.offer-price s { color: var(--muted); font-size: 20px; }
+.offer-price b { font-size: 44px; font-weight: 800; color: var(--text); }
+.offer-price span { color: var(--muted); font-weight: 600; }
+.moon-hero { font-size: 52px; line-height: 1; margin: 4px 0 14px; }

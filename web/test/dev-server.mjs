@@ -62,7 +62,8 @@ createServer(async (req, res) => {
       res.writeHead(200, { "content-type": "text/html" });
       return res.end(`<!doctype html><meta name=viewport content="width=device-width"><body style="font:16px system-ui;padding:24px">
         <h2>Dodo Payments (mock)</h2><p>${session.req.product_cart[0].product_id} for ${session.req.customer?.email}</p>
-        <a id=pay href="/mock-checkout?session=${session.id}&pay=1" style="display:block;padding:16px;background:#111;color:#fff;text-align:center;border-radius:12px">Pay</a></body>`);
+        <a id=pay href="/mock-checkout?session=${session.id}&pay=1" style="display:block;padding:16px;background:#111;color:#fff;text-align:center;border-radius:12px">Pay</a>
+        <a id=cancel href="${session.req.cancel_url.replace("https://salahalarm.com", "")}" style="display:block;padding:16px;text-align:center">Back</a></body>`);
     }
 
     if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/download/")) {

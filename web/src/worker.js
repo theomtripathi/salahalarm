@@ -8,6 +8,7 @@
 //   /api/profile             save onboarding answers to users/{uid} (same fields as iOS)
 //   /api/checkout            create a Dodo Payments checkout session
 //   /api/entitlement         is this Firebase user premium? (confirms a fresh checkout too)
+//   /api/trial               start the one-time free trial (no card) for this account
 //   /api/portal              Dodo customer portal link (cancel, change card)
 //   /api/webhooks/dodo       Dodo Payments webhooks → entitlements/{uid}
 //   /api/app-login           one-time code that signs the installed app into this account
@@ -18,8 +19,8 @@
 import { verifyIdToken, bearer, AuthError } from "./auth.js";
 import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
 import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
-import { tierFor, productFor, parseProducts, displayPlans, PLANS } from "./pricing.js";
-import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
+import { tierFor, productFor, parseProducts, displayPlans, weeklyEquivalent, yearlySavings, PLANS, OFFER_PLAN, ALL_PLANS } from "./pricing.js";
+import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement, trialEntitlement, DEFAULT_FREE_TRIAL_DAYS } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
 import { sanitizeProfile } from "./profile.js";
 
@@ -51,6 +52,7 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/profile" && method === "POST") return saveProfile(request, env);
   if (pathname === "/api/checkout" && method === "POST") return checkout(request, env, ctx, url);
   if (pathname === "/api/entitlement" && method === "GET") return entitlement(request, env, url);
+  if (pathname === "/api/trial" && method === "POST") return startTrial(request, env, ctx);
   if (pathname === "/api/portal" && method === "POST") return portal(request, env);
   if (pathname === "/api/webhooks/dodo" && method === "POST") return webhook(request, env, ctx);
   if (pathname === "/api/app-login" && method === "POST") return createAppLogin(request, env);
@@ -122,6 +124,11 @@ function trialDays(env) {
   }
 }
 
+function freeTrialDays(env) {
+  const days = Number(env.FREE_TRIAL_DAYS ?? DEFAULT_FREE_TRIAL_DAYS);
+  return Number.isFinite(days) && days > 0 ? Math.min(days, 60) : 0;
+}
+
 function capture(env, ctx, event, distinctId, properties) {
   if (!env.POSTHOG_KEY) return;
   ctx.waitUntil(
@@ -146,13 +153,19 @@ async function readJson(request) {
 async function config(request, env, ctx) {
   const g = geo(request);
   const tier = tierFor(g.country);
-  const plans = await localPrices(env, ctx, tier, g.country);
+  const [plans, offers] = await Promise.all([
+    localPrices(env, ctx, tier, g.country, PLANS),
+    localPrices(env, ctx, tier, g.country, [OFFER_PLAN]),
+  ]);
   const schedule = g.latitude != null ? scheduleFor({ ...g, now: new Date() }) : null;
   const lang = preferredLang(request.headers.get("accept-language"), g.country);
   return json({
     geo: { country: g.country, city: g.city, timezone: g.timezone, latitude: g.latitude, longitude: g.longitude },
     tier,
     plans,
+    offer: offers[0] || null,
+    yearlySavings: yearlySavings(tier),
+    freeTrialDays: freeTrialDays(env),
     schedule,
     lang,
     firebase: {
@@ -177,12 +190,12 @@ export function preferredLang(acceptLanguage, country) {
 
 // Ask Dodo what this country would actually pay, in local currency when adaptive
 // pricing is on. Cached per country for six hours; falls back to USD list prices.
-async function localPrices(env, ctx, tier, country) {
-  const fallback = displayPlans(tier, { trialDays: trialDays(env) });
+async function localPrices(env, ctx, tier, country, planIds = PLANS) {
+  const fallback = displayPlans(tier, { trialDays: trialDays(env), plans: planIds });
   if (!env.DODO_PAYMENTS_API_KEY || env.PRICE_PREVIEW === "off" || !country) return fallback;
   const products = parseProducts(env.PRODUCTS);
   const cache = typeof caches !== "undefined" ? caches.default : null;
-  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
+  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}/${planIds.join("+")}`);
   if (cache) {
     const hit = await cache.match(cacheKey);
     if (hit) return hit.json();
@@ -206,7 +219,7 @@ async function localPrices(env, ctx, tier, country) {
           ...p,
           currency,
           amount,
-          monthlyEquivalent: p.plan === "yearly" ? amount / 12 : amount,
+          weeklyEquivalent: weeklyEquivalent(p.plan, amount),
           trialDays: preview.trial_period_days ?? p.trialDays,
         };
       }),
@@ -255,7 +268,7 @@ async function saveProfile(request, env) {
 async function checkout(request, env, ctx, url) {
   const u = await user(request, env);
   const body = await readJson(request);
-  const plan = PLANS.includes(body.plan) ? body.plan : "yearly";
+  const plan = ALL_PLANS.includes(body.plan) ? body.plan : "yearly";
   const g = geo(request);
   const tier = tierFor(g.country);
   const product = productFor(parseProducts(env.PRODUCTS), tier, plan);
@@ -263,7 +276,8 @@ async function checkout(request, env, ctx, url) {
 
   const db = firestore(env);
   const existing = await db.get(`entitlements/${u.uid}`);
-  if (isActive(existing)) return json({ alreadyActive: true, entitlement: publicEntitlement(existing) });
+  // People on the free trial can still subscribe; only a paid plan blocks a second checkout.
+  if (isActive(existing) && existing.provider !== "trial") return json({ alreadyActive: true, entitlement: publicEntitlement(existing) });
 
   const origin = env.PUBLIC_ORIGIN || url.origin;
   const lang = LANGS.includes(body.lang) ? body.lang : "en";
@@ -274,7 +288,9 @@ async function checkout(request, env, ctx, url) {
     customer: { email: u.email || undefined, name: String(body.name || u.name || "").slice(0, 80) || undefined },
     ...(g.country && { billing_address: { country: g.country } }),
     return_url: `${origin}/android/welcome/?plan=${plan}`,
-    cancel_url: `${origin}/android/?resume=paywall`,
+    // Leaving checkout without paying counts as a "no": the paywall plans lead to
+    // the discounted weekly offer, and the offer leads to the free trial.
+    cancel_url: `${origin}/android/?resume=${plan === OFFER_PLAN ? "trial" : "offer"}`,
     metadata: { uid: u.uid, plan, tier: product.tier, country: g.country || "", ref, lang, source: "android_web" },
     customization: { force_language: lang, theme: "light", show_order_details: true },
     feature_flags: { redirect_immediately: true, allow_discount_code: true, allow_customer_editing_email: !u.email },
@@ -294,7 +310,7 @@ async function entitlement(request, env, url) {
   let ent = await db.get(`entitlements/${u.uid}`);
 
   // Right after checkout the webhook may still be in flight: confirm with Dodo directly.
-  if (!isActive(ent) && env.DODO_PAYMENTS_API_KEY) {
+  if ((!isActive(ent) || ent.provider === "trial") && env.DODO_PAYMENTS_API_KEY) {
     const confirmed = await confirmCheckout(env, db, u, url.searchParams);
     if (confirmed) ent = confirmed;
   }
@@ -308,7 +324,36 @@ async function entitlement(request, env, url) {
       await db.delete(`pendingEntitlements/${u.email}`);
     }
   }
-  return json({ entitlement: publicEntitlement(ent) });
+  const trialEligible = !isActive(ent) && freeTrialDays(env) > 0 && (await trialAvailable(db, u, ent));
+  return json({ entitlement: publicEntitlement(ent), trialEligible });
+}
+
+// ---- /api/trial ----------------------------------------------------------------
+// One free trial per account and per email, no card. The app treats it like any
+// other entitlement until accessUntil, then sends the user back to the paywall.
+
+async function trialAvailable(db, u, ent) {
+  if (ent) return false; // already trialled or subscribed on this account
+  if (!u.email) return true;
+  return !(await db.get(`trials/${u.email}`));
+}
+
+async function startTrial(request, env, ctx) {
+  const u = await user(request, env);
+  const days = freeTrialDays(env);
+  if (!days) return json({ error: "free trial is not available" }, 404);
+  const db = firestore(env);
+  const ent = await db.get(`entitlements/${u.uid}`);
+  if (isActive(ent)) return json({ alreadyActive: true, entitlement: publicEntitlement(ent) });
+  if (!(await trialAvailable(db, u, ent))) return json({ error: "free trial already used", entitlement: publicEntitlement(ent) }, 409);
+
+  const body = await readJson(request);
+  const g = geo(request);
+  const trial = trialEntitlement({ uid: u.uid, email: u.email, days, country: g.country, ref: String(body.ref || "").slice(0, 60) });
+  await db.merge(`entitlements/${u.uid}`, trial);
+  if (u.email) await db.merge(`trials/${u.email}`, { uid: u.uid, startedAt: trial.trialStartedAt, endsAt: trial.accessUntil });
+  capture(env, ctx, "web_free_trial_started", u.uid, { days, country: g.country, tier: tierFor(g.country), ref: trial.ref });
+  return json({ entitlement: publicEntitlement(trial) });
 }
 
 async function confirmCheckout(env, db, u, params) {

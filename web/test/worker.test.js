@@ -2,7 +2,7 @@ import { test, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import worker, { handleEvent, preferredLang } from "../src/worker.js";
 import { signWebhook, verifyWebhook } from "../src/dodo.js";
-import { tierFor, productFor, displayPlans } from "../src/pricing.js";
+import { tierFor, productFor, displayPlans, yearlySavings } from "../src/pricing.js";
 import { entitlementFromSubscription, shouldReplace, accessUntilFor } from "../src/entitlement.js";
 import { scheduleFor, methodFor, madhabFor } from "../src/prayer.js";
 import { verifyIdToken, resetKeyCache } from "../src/auth.js";
@@ -39,17 +39,21 @@ test("countries map to price tiers, unknown countries to the middle tier", () =>
 
 test("a tier without products falls back to t2 then t1", () => {
   assert.deepEqual(productFor({ t2: { yearly: "y2" } }, "t3", "yearly"), { tier: "t2", productId: "y2" });
-  assert.deepEqual(productFor({ t1: { monthly: "m1" } }, "t3", "monthly"), { tier: "t1", productId: "m1" });
-  assert.equal(productFor({}, "t3", "monthly"), null);
+  assert.deepEqual(productFor({ t1: { weekly: "w1" } }, "t3", "weekly"), { tier: "t1", productId: "w1" });
+  assert.equal(productFor({}, "t3", "weekly"), null);
 });
 
-test("display plans put yearly first with a monthly equivalent", () => {
+test("display plans put yearly first with a weekly equivalent, then weekly", () => {
   const plans = displayPlans("t3", { trialDays: { yearly: 3 } });
   assert.equal(plans[0].plan, "yearly");
   assert.equal(plans[0].amount, 9.99);
-  assert.equal(plans[0].monthlyEquivalent, 0.83);
+  assert.equal(plans[0].weeklyEquivalent, 0.19);
   assert.equal(plans[0].trialDays, 3);
-  assert.equal(plans[1].plan, "monthly");
+  assert.equal(plans[1].plan, "weekly");
+  assert.equal(plans[1].weeklyEquivalent, 1.99);
+  assert.equal(plans.length, 2);
+  assert.equal(displayPlans("t1", { plans: ["weekly_offer"] })[0].amount, 2.99);
+  assert.ok(yearlySavings("t1") > 80);
 });
 
 // ---- auth ------------------------------------------------------------------
@@ -119,15 +123,15 @@ test("prayer methods follow the country", () => {
 // ---- checkout → entitlement ------------------------------------------------
 
 test("checkout creates a Dodo session for the visitor's tier with the uid in metadata", async () => {
-  const r = await call("/api/checkout", { method: "POST", token: idToken(), body: { plan: "monthly", lang: "id", ref: "tt03" }, country: "ID" });
+  const r = await call("/api/checkout", { method: "POST", token: idToken(), body: { plan: "weekly", lang: "id", ref: "tt03" }, country: "ID" });
   assert.equal(r.status, 200);
   assert.match(r.body.checkoutUrl, /checkout\.dodopayments\.com/);
   const req = backend.dodo.created[0];
-  assert.equal(req.product_cart[0].product_id, "pdt_t3_m");
+  assert.equal(req.product_cart[0].product_id, "pdt_t3_w");
   assert.equal(req.metadata.uid, "user-1");
   assert.equal(req.metadata.ref, "tt03");
   assert.equal(req.customer.email, "amina@example.com");
-  assert.equal(req.return_url, "https://salahalarm.com/android/welcome/?plan=monthly");
+  assert.equal(req.return_url, "https://salahalarm.com/android/welcome/?plan=weekly");
   assert.equal(req.customization.force_language, "id");
   assert.equal(backend.docs.get("users/user-1").lastWebCheckout.sessionId, r.body.sessionId);
 });
@@ -150,7 +154,7 @@ test("after paying, entitlement is confirmed with Dodo even before the webhook a
   assert.equal(backend.docs.get("entitlements/user-1").subscriptionId, `sub_${c.body.sessionId}`);
 
   // A second checkout attempt short-circuits
-  const again = await call("/api/checkout", { method: "POST", token, body: { plan: "monthly" } });
+  const again = await call("/api/checkout", { method: "POST", token, body: { plan: "weekly" } });
   assert.equal(again.body.alreadyActive, true);
 });
 
@@ -159,6 +163,77 @@ test("someone else's subscription id does not unlock an account", async () => {
   const sub = backend.pay(c.body.sessionId);
   const r = await call(`/api/entitlement?subscription_id=${sub.subscription_id}`, { token: idToken({ uid: "thief", email: "thief@example.com" }) });
   assert.equal(r.body.entitlement.active, false);
+});
+
+// ---- decline flow: discounted offer and free trial --------------------------------
+
+test("config offers the discounted weekly plan and the free trial length", async () => {
+  const r = await call("/api/config", { country: "US", env: env({ PRICE_PREVIEW: "off" }) });
+  assert.deepEqual(r.body.plans.map((p) => p.plan), ["yearly", "weekly"]);
+  assert.equal(r.body.offer.plan, "weekly_offer");
+  assert.equal(r.body.offer.amount, 2.99);
+  assert.equal(r.body.freeTrialDays, 7);
+  const custom = await call("/api/config", { env: env({ PRICE_PREVIEW: "off", FREE_TRIAL_DAYS: "14" }) });
+  assert.equal(custom.body.freeTrialDays, 14);
+});
+
+test("leaving checkout leads to the offer, and leaving the offer leads to the trial", async () => {
+  await call("/api/checkout", { method: "POST", token: idToken(), body: { plan: "yearly" } });
+  await call("/api/checkout", { method: "POST", token: idToken(), body: { plan: "weekly_offer" } });
+  const [regular, offer] = backend.dodo.created;
+  assert.equal(regular.cancel_url, "https://salahalarm.com/android/?resume=offer");
+  assert.equal(offer.cancel_url, "https://salahalarm.com/android/?resume=trial");
+  assert.equal(offer.product_cart[0].product_id, "pdt_t3_wo");
+});
+
+test("the free trial unlocks the account for 7 days, once per account and email", async () => {
+  const token = idToken();
+  let r = await call("/api/entitlement", { token });
+  assert.equal(r.body.trialEligible, true);
+
+  r = await call("/api/trial", { method: "POST", token, body: { ref: "ig1" } });
+  assert.equal(r.status, 200);
+  assert.equal(r.body.entitlement.active, true);
+  assert.equal(r.body.entitlement.trial, true);
+  const days = (Date.parse(r.body.entitlement.accessUntil) - Date.now()) / 86400000;
+  assert.ok(days > 6.9 && days <= 7, String(days));
+
+  r = await call("/api/entitlement", { token });
+  assert.equal(r.body.entitlement.active, true);
+  assert.equal(r.body.trialEligible, false);
+
+  // Same email on a new account: no second trial
+  const other = idToken({ uid: "user-2", email: "amina@example.com" });
+  r = await call("/api/trial", { method: "POST", token: other });
+  assert.equal(r.status, 409);
+});
+
+test("an expired trial reports trial_expired, and paying replaces it", async () => {
+  const token = idToken();
+  await call("/api/trial", { method: "POST", token });
+  backend.docs.get("entitlements/user-1").accessUntil = new Date(Date.now() - 1000).toISOString();
+  let r = await call("/api/entitlement", { token });
+  assert.equal(r.body.entitlement.active, false);
+  assert.equal(r.body.entitlement.status, "trial_expired");
+  assert.equal(r.body.trialEligible, false);
+
+  const c = await call("/api/checkout", { method: "POST", token, body: { plan: "weekly" } });
+  backend.pay(c.body.sessionId);
+  r = await call("/api/entitlement", { token });
+  assert.equal(r.body.entitlement.active, true);
+  assert.equal(r.body.entitlement.trial, false);
+  assert.equal(r.body.entitlement.plan, "weekly");
+});
+
+test("people on an active trial can still buy a plan", async () => {
+  const token = idToken();
+  await call("/api/trial", { method: "POST", token });
+  const c = await call("/api/checkout", { method: "POST", token, body: { plan: "yearly" } });
+  assert.ok(c.body.checkoutUrl);
+  backend.pay(c.body.sessionId);
+  const r = await call("/api/entitlement", { token });
+  assert.equal(r.body.entitlement.trial, false);
+  assert.equal(r.body.entitlement.plan, "yearly");
 });
 
 // ---- webhooks --------------------------------------------------------------

@@ -17,6 +17,7 @@ let user = null;
 let status = mode === "welcome" ? "checking" : "install"; // checking | active | pending | signin | install
 let apk = { versionName: null, sizeMb: null };
 let appLogin = null; // intent link that opens the installed app already signed in
+let trial = null; // the free-trial entitlement, when this visit started one
 
 function svg(markup) {
   const span = document.createElement("span");
@@ -38,9 +39,11 @@ async function confirmPayment() {
     try {
       const token = await user.token();
       const { entitlement } = await api(`/api/entitlement?${query}`, { token });
-      if (entitlement?.active) {
+      // After a checkout, a free trial that is still active means the payment hasn't landed yet.
+      if (entitlement?.active && (!entitlement.trial || params.get("trial"))) {
         status = "active";
-        if (!store.get(`sa_purchase_${user.uid}`)) {
+        trial = entitlement.trial ? entitlement : null;
+        if (!trial && !store.get(`sa_purchase_${user.uid}`)) {
           store.set(`sa_purchase_${user.uid}`, "1");
           capture("web_purchase_confirmed", { plan: entitlement.plan, seconds_to_confirm: Math.round((Date.now() - started) / 1000) });
         }
@@ -106,8 +109,10 @@ function header() {
   if (status === "active") {
     return [
       h("div", { class: "success-mark" }, svg(icons.check)),
-      h("h1", { class: "center" }, t("You're in! Let's install SalahAlarm")),
-      h("p", { class: "lede center" }, t("Payment confirmed. Two minutes from now your first alarm is set.")),
+      h("h1", { class: "center" }, trial ? t("Your free trial has started!") : t("You're in! Let's install SalahAlarm")),
+      h("p", { class: "lede center" }, trial
+        ? t("Full access until %@. Install SalahAlarm and your first alarm is set in two minutes.", new Date(trial.accessUntil).toLocaleDateString(document.documentElement.lang || undefined, { day: "numeric", month: "long" }))
+        : t("Payment confirmed. Two minutes from now your first alarm is set.")),
     ];
   }
   if (status === "pending") {

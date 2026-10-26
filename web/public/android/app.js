@@ -1,7 +1,8 @@
 // Web onboarding for SalahAlarm on Android. Mirrors the iOS quick-start route
 // (OnboardingRouter.quickStartRoute): welcome → mechanism → prayers → goals →
 // pace → plan → account → paywall, plus the plan-building step from the guided
-// variant. Answers are saved to users/{uid} in the iOS format so the Android app
+// variant. Closing the paywall leads to a discounted weekly offer, and closing
+// that leads to a one-time free trial (no card). Answers are saved to users/{uid} in the iOS format so the Android app
 // starts with the same alarms.
 
 import {
@@ -11,6 +12,9 @@ import {
 import { initAuth, authErrorMessage } from "/assets/auth.js";
 
 const ROUTE = ["welcome", "mechanism", "prayers", "goals", "pace", "loading", "plan", "account", "paywall"];
+// Shown only after someone says no to the paywall, in this order.
+const DECLINE = ["offer", "trial"];
+const SCREENS_ALL = [...ROUTE, ...DECLINE];
 const NO_BACK = new Set(["welcome", "loading", "plan"]);
 const PRAYERS = [
   { id: "fajr", name: "Fajr", ar: "الفجر" },
@@ -55,6 +59,7 @@ const state = {
   plan: "yearly",
 };
 let config = { plans: [], geo: {} };
+let trialEligible = false;
 let auth = null;
 let user = null;
 let ref = "";
@@ -79,7 +84,7 @@ function restore() {
   if (saved?.profile) Object.assign(state.profile, saved.profile);
   if (saved?.plan) state.plan = saved.plan;
   const resume = params.get("resume") || (carried ? saved?.screen : null) || saved?.screen;
-  if (resume && ROUTE.includes(resume) && resume !== "loading") state.screen = resume;
+  if (resume && SCREENS_ALL.includes(resume) && resume !== "loading") state.screen = resume;
   if (carried || params.get("resume")) history.replaceState(null, "", location.pathname + (ref ? `?ref=${encodeURIComponent(ref)}` : ""));
 }
 
@@ -106,7 +111,17 @@ function next() {
   go(route[Math.min(i + 1, route.length - 1)]);
 }
 
+// Saying no moves down the offers instead of back through onboarding:
+// paywall → discounted weekly → free trial → paywall.
+function decline() {
+  capture("web_paywall_declined", { screen: state.screen });
+  if (state.screen === "paywall") return go(config.offer ? "offer" : trialEligible ? "trial" : "paywall");
+  if (state.screen === "offer") return go(trialEligible ? "trial" : "paywall");
+  return go("paywall");
+}
+
 function back() {
+  if (state.screen === "paywall" || DECLINE.includes(state.screen)) return decline();
   const route = routeNow();
   let i = route.indexOf(state.screen) - 1;
   while (i > 0 && (route[i] === "loading")) i--;
@@ -115,7 +130,9 @@ function back() {
 
 window.addEventListener("popstate", (e) => {
   const target = e.state?.screen;
-  if (target && ROUTE.includes(target) && target !== "loading") {
+  if (state.screen === "paywall" || DECLINE.includes(state.screen)) {
+    decline();
+  } else if (target && SCREENS_ALL.includes(target) && target !== "loading") {
     state.screen = target;
     save();
     render();
@@ -128,7 +145,7 @@ window.addEventListener("popstate", (e) => {
 
 function render() {
   const route = routeNow();
-  const index = Math.max(0, route.indexOf(state.screen));
+  const index = DECLINE.includes(state.screen) ? route.length - 1 : Math.max(0, route.indexOf(state.screen));
   bar.style.width = `${Math.round(((index + 1) / route.length) * 100)}%`;
   bar.parentElement.setAttribute("aria-valuenow", String(Math.round(((index + 1) / route.length) * 100)));
   backBtn.style.visibility = NO_BACK.has(state.screen) ? "hidden" : "visible";
@@ -136,6 +153,8 @@ function render() {
   window.scrollTo(0, 0);
   shownAt = Date.now();
   capture("web_onboarding_screen_viewed", { screen: state.screen, step_index: index + 1, step_count: route.length });
+  if (state.screen === "offer") capture("web_offer_viewed", { plan: config.offer?.plan, price: config.offer?.amount, currency: config.offer?.currency });
+  if (state.screen === "trial") capture("web_trial_offer_viewed", { days: config.freeTrialDays, eligible: trialEligible });
   if (state.screen === "paywall") capture("web_paywall_viewed", { plans: config.plans.map((p) => `${p.plan}:${p.currency}${p.amount}`).join(",") });
 }
 
@@ -430,14 +449,13 @@ const SCREENS = {
           render();
         },
       },
-      isYearly ? h("span", { class: "flag" }, t("BEST VALUE")) : null,
+      isYearly ? h("span", { class: "flag" }, config.yearlySavings > 0 ? t("SAVE %d%", config.yearlySavings) : t("BEST VALUE")) : null,
       h("span", { class: "radio" }),
       h("span", {},
-        h("span", { class: "name" }, t(isYearly ? "Yearly plan" : "Monthly")),
+        h("span", { class: "name" }, t(isYearly ? "Yearly plan" : "Weekly")),
         h("span", { class: "meta", style: "display:block" },
-          p.trialDays > 0 ? t("%d days free, then %@", p.trialDays, price) : t(isYearly ? "Billed %@ annually" : "Billed %@ monthly", price))),
-      h("span", { class: "price" },
-        t(isYearly ? "%@/mo" : "%@/month", money(isYearly ? p.monthlyEquivalent : p.amount, p.currency))));
+          p.trialDays > 0 ? t("%d days free, then %@", p.trialDays, price) : t(isYearly ? "Billed %@ annually" : "Billed %@ weekly", price))),
+      h("span", { class: "price" }, t("%@/week", money(p.weeklyEquivalent ?? p.amount, p.currency))));
     };
 
     return screen([
@@ -445,6 +463,7 @@ const SCREENS = {
         svg(icons.alarm),
         h("div", {}, h("div", { class: "k" }, t("Your first alarm")), h("div", { class: "big" }, t("%@ at %@", t(first.name), first.time)),
           config.geo?.city ? h("div", { class: "k" }, config.geo.city) : null)) : null,
+      h("button", { class: "close-x", type: "button", "aria-label": t("Not now"), onclick: decline }, "×"),
       h("h1", {}, t("Unlock SalahAlarm for Android")),
       h("ul", { class: "benefits" },
         ["persistent prayer alarms", "mat scan + distraction blocking", "Accurate Local Prayer Times", "streaks, qibla, Quran + widgets"]
@@ -463,6 +482,64 @@ const SCREENS = {
         h("a", { href: "https://ramadan-pro.lovable.app/terms", target: "_blank", rel: "noopener" }, t("terms"))),
     ]);
   },
+};
+
+// The discounted weekly plan, shown once someone closes the paywall.
+SCREENS.offer = function offer() {
+  const o = config.offer;
+  const weekly = config.plans?.find((p) => p.plan === "weekly");
+  const error = h("p", { class: "error", hidden: true, role: "alert" });
+  const cta = primary("Claim my offer", () => startCheckout(cta, error, o.plan, "Claim my offer"), { id: "checkout-offer" });
+  const off = weekly && weekly.currency === o.currency && weekly.amount > o.amount ? Math.round((1 - o.amount / weekly.amount) * 100) : 0;
+  return screen([
+    h("button", { class: "close-x", type: "button", "aria-label": t("No thanks"), onclick: decline }, "×"),
+    h("span", { class: "badge" }, svg(icons.seal), off ? t("%d% OFF, JUST FOR YOU", off) : t("A SPECIAL OFFER, JUST FOR YOU")),
+    h("h1", {}, t("Wait! Don't miss your next Fajr.")),
+    h("p", { class: "lede" }, t("We get it, committing is hard. So here's SalahAlarm at a lower weekly price.")),
+    h("div", { class: "card offer-card" },
+      h("div", { class: "k" }, t("Weekly plan")),
+      h("div", { class: "offer-price" },
+        weekly && off ? h("s", {}, money(weekly.amount, weekly.currency)) : null,
+        h("b", {}, money(o.amount, o.currency)),
+        h("span", {}, t("/week"))),
+      h("p", { class: "small", style: "margin:6px 0 0" }, t("Billed %@ weekly. Cancel anytime.", money(o.amount, o.currency)))),
+    h("ul", { class: "benefits" },
+      ["persistent prayer alarms", "mat scan + distraction blocking", "streaks, qibla, Quran + widgets"]
+        .map((b) => h("li", {}, svg(icons.check), t(b)))),
+  ], [
+    error,
+    cta,
+    h("button", { class: "btn-link", type: "button", onclick: decline }, t("No thanks")),
+  ]);
+};
+
+// The last step: a free trial with no card, timed for Ramadan.
+SCREENS.trial = function trial() {
+  const days = config.freeTrialDays || 7;
+  const error = h("p", { class: "error", hidden: true, role: "alert" });
+  const cta = primary("Start my free trial", () => startTrial(cta, error), { id: "start-trial" });
+  cta.textContent = t("Start my %d-day free trial", days);
+  if (!trialEligible) {
+    return screen([
+      h("h1", {}, t("You have already used your free trial")),
+      h("p", { class: "lede" }, t("Choose a plan to keep your prayer alarms ringing.")),
+    ], primary("see plans", () => go("paywall")));
+  }
+  return screen([
+    h("button", { class: "close-x", type: "button", "aria-label": t("Not now"), onclick: decline }, "×"),
+    h("div", { class: "moon-hero", "aria-hidden": "true" }, "🌙"),
+    h("p", { class: "eyebrow" }, t("RAMADAN IS COMING")),
+    h("h1", {}, t("Okay, try it free for %d days.", days)),
+    h("p", { class: "lede" }, t("Ramadan is almost here, and we'd love for you to walk into it with every salah on time. So the next %d days are on us: full access, no card, no catch.", days)),
+    h("div", { class: "card tint steps", style: "padding:0 16px" },
+      h("div", { class: "step-row" }, h("div", { class: "step-icon" }, svg(icons.check)), h("div", {}, h("div", { class: "step-title" }, t("Today")), h("div", { class: "step-detail" }, t("Every prayer alarm, mat scan and app blocking unlocked")))),
+      h("div", { class: "step-row" }, h("div", { class: "step-icon" }, svg(icons.flame)), h("div", {}, h("div", { class: "step-title" }, t("Day 1 to %d", days)), h("div", { class: "step-detail" }, t("Build the streak: Fajr, Dhuhr, Asr, Maghrib, Isha")))),
+      h("div", { class: "step-row" }, h("div", { class: "step-icon" }, svg(icons.bell)), h("div", {}, h("div", { class: "step-title" }, t("Day %d", days)), h("div", { class: "step-detail" }, t("Your trial ends. Nothing is charged; pick a plan only if it helped."))))),
+  ], [
+    error,
+    cta,
+    h("p", { class: "small center", style: "margin:0" }, t("No payment needed. One free trial per account.")),
+  ]);
 };
 
 // ---- plan helpers ----------------------------------------------------------------
@@ -491,8 +568,10 @@ async function signedIn(u, method) {
   api("/api/profile", { method: "POST", token, body: { profile: { ...state.profile, displayName: u.name || "", lastCompletedScreen: "screen17" } } })
     .catch((err) => console.warn("profile save failed", err));
   try {
-    const { entitlement } = await api("/api/entitlement", { token });
-    if (entitlement?.active) {
+    const res = await api("/api/entitlement", { token });
+    const entitlement = res.entitlement;
+    trialEligible = Boolean(res.trialEligible);
+    if (entitlement?.active && !entitlement.trial) {
       capture("web_returning_subscriber", {});
       location.href = "/android/welcome/";
       return;
@@ -503,10 +582,10 @@ async function signedIn(u, method) {
   go("paywall");
 }
 
-async function startCheckout(btn, error) {
+async function startCheckout(btn, error, planId = state.plan, label = "continue") {
   error.hidden = true;
   if (!user) return go("account");
-  const plan = config.plans.find((p) => p.plan === state.plan) || config.plans[0];
+  const plan = planId === config.offer?.plan ? config.offer : config.plans.find((p) => p.plan === planId) || config.plans[0];
   btn.disabled = true;
   btn.replaceChildren(h("span", { class: "spinner" }), t("processing..."));
   capture("web_checkout_started", { plan: plan?.plan, price: plan?.amount, currency: plan?.currency, trial_days: plan?.trialDays || 0 });
@@ -530,7 +609,30 @@ async function startCheckout(btn, error) {
       : navigator.onLine === false ? t("No internet connection. Please try again.") : t("Something went wrong. Please try again.");
     error.hidden = false;
     btn.disabled = false;
-    btn.replaceChildren(t("continue"));
+    btn.replaceChildren(t(label));
+  }
+}
+
+async function startTrial(btn, error) {
+  error.hidden = true;
+  if (!user) return go("account");
+  btn.disabled = true;
+  btn.replaceChildren(h("span", { class: "spinner" }), t("processing..."));
+  capture("web_free_trial_tapped", { days: config.freeTrialDays });
+  try {
+    await api("/api/trial", { method: "POST", token: await user.token(), body: { ref } });
+    location.href = "/android/welcome/?trial=1";
+  } catch (err) {
+    capture("web_free_trial_failed", { status: err.status || 0 });
+    if (err.status === 409) {
+      trialEligible = false;
+      render();
+      return;
+    }
+    error.textContent = navigator.onLine === false ? t("No internet connection. Please try again.") : t("Something went wrong. Please try again.");
+    error.hidden = false;
+    btn.disabled = false;
+    btn.replaceChildren(t("Start my %d-day free trial", config.freeTrialDays || 7));
   }
 }
 
@@ -556,7 +658,15 @@ async function boot() {
   try {
     auth = await initAuth(config.firebase);
     user = await auth.ready;
-    if (user) identify(user.uid, user.email);
+    if (user) {
+      identify(user.uid, user.email);
+      try {
+        const res = await api("/api/entitlement", { token: await user.token() });
+        trialEligible = Boolean(res.trialEligible);
+      } catch (err) {
+        console.warn("entitlement check failed", err);
+      }
+    }
     // Returning from a redirect sign-in lands on the account screen while signed in.
     if (user && state.screen === "account") {
       await signedIn(user, user.provider === "password" ? "email" : "google");
@@ -565,7 +675,8 @@ async function boot() {
   } catch (err) {
     console.warn("auth unavailable", err);
   }
-  if (state.screen === "paywall" && !user) state.screen = "account";
+  if ((state.screen === "paywall" || DECLINE.includes(state.screen)) && !user) state.screen = "account";
+  if (state.screen === "offer" && !config.offer) state.screen = "paywall";
   history.replaceState({ screen: state.screen }, "");
   render();
 }

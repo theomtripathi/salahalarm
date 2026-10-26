@@ -8,13 +8,17 @@
 // `display` prices are what the paywall shows when Dodo's checkout preview is
 // unavailable. Keep them equal to the Dodo product prices.
 
+//
+// `weekly_offer` is the discounted weekly plan shown once to people who close
+// the paywall without choosing a plan.
+
 export const TIERS = {
   // High-income markets
-  t1: { monthly: { usd: 4.99 }, yearly: { usd: 29.99 } },
+  t1: { yearly: { usd: 29.99 }, weekly: { usd: 4.99 }, weekly_offer: { usd: 2.99 } },
   // Middle-income markets and the default for anything unlisted
-  t2: { monthly: { usd: 2.99 }, yearly: { usd: 17.99 } },
+  t2: { yearly: { usd: 17.99 }, weekly: { usd: 2.99 }, weekly_offer: { usd: 1.99 } },
   // Price-sensitive markets with the largest Android-only Muslim audiences
-  t3: { monthly: { usd: 1.99 }, yearly: { usd: 9.99 } },
+  t3: { yearly: { usd: 9.99 }, weekly: { usd: 1.99 }, weekly_offer: { usd: 0.99 } },
 };
 
 const T1 = [
@@ -43,7 +47,15 @@ export function tierFor(country) {
   return COUNTRY_TIER.get(String(country || "").toUpperCase()) || "t2";
 }
 
-export const PLANS = ["yearly", "monthly"];
+// Plans on the paywall, in order. OFFER_PLAN is only sold from the "wait" screen.
+export const PLANS = ["yearly", "weekly"];
+export const OFFER_PLAN = "weekly_offer";
+export const ALL_PLANS = [...PLANS, OFFER_PLAN];
+
+/** Billing interval of a plan id: "Year" or "Week". */
+export function intervalFor(plan) {
+  return plan === "yearly" ? "Year" : "Week";
+}
 
 // Products come from the PRODUCTS env var: {"t1":{"monthly":"pdt_..","yearly":"pdt_.."},...}.
 // A missing tier falls back to t2, then t1, so a partial setup still sells.
@@ -66,16 +78,27 @@ export function parseProducts(raw) {
 }
 
 // Plans as the paywall renders them, before any local-currency preview.
-export function displayPlans(tier, { trialDays = {} } = {}) {
+export function displayPlans(tier, { trialDays = {}, plans = PLANS } = {}) {
   const prices = TIERS[tier] || TIERS.t2;
-  return PLANS.map((plan) => {
+  return plans.map((plan) => {
     const usd = prices[plan].usd;
     return {
       plan,
       currency: "USD",
       amount: usd,
-      monthlyEquivalent: plan === "yearly" ? Math.floor((usd / 12) * 100) / 100 : usd,
+      weeklyEquivalent: weeklyEquivalent(plan, usd),
       trialDays: Number(trialDays[plan] || 0),
     };
   });
+}
+
+/** What a plan costs per week, rounded down to the cent, for "only $0.58/week". */
+export function weeklyEquivalent(plan, amount) {
+  return plan === "yearly" ? Math.floor((amount / 52) * 100) / 100 : amount;
+}
+
+/** How much the yearly plan saves against paying weekly for a year, in whole percent. */
+export function yearlySavings(tier) {
+  const prices = TIERS[tier] || TIERS.t2;
+  return Math.round((1 - prices.yearly.usd / (prices.weekly.usd * 52)) * 100);
 }
