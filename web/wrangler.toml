@@ -32,10 +32,10 @@ ADMIN_CF_ACCOUNT = "b937236acbd202c2fd6349d185631bef"
 POSTHOG_HOST = "https://us.i.posthog.com"
 POSTHOG_KEY = "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX"
 APP_STORE_URL = "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&mt=8"
-# test_mode until the live products are created, then live_mode
-DODO_ENVIRONMENT = "test_mode"
+# Live products in the maacki Dodo workspace (created 2026-10-26 by /api/admin/dodo-setup)
+DODO_ENVIRONMENT = "live_mode"
 # Dodo product ids per price tier and plan (see src/pricing.js and scripts/dodo-setup.mjs)
-PRODUCTS = '{}'
+PRODUCTS = '{"t1":{"yearly":"pdt_0NqZMOvdQyvPj38Qq4WFE","weekly":"pdt_0NqZMOzMccZkeY7Rrl7KP","weeklyOffer":"pdt_0NqZMP3sAaQh9cr5y6i5E"},"t2":{"yearly":"pdt_0NqZMP73JBseyAuiotrZe","weekly":"pdt_0NqZMPAAhuRCScxxmZNUG","weeklyOffer":"pdt_0NqZMPDTTplSRcxp1SCRV"},"t3":{"yearly":"pdt_0NqZMPGt0E3yubwso42L6","weekly":"pdt_0NqZMPK3RDNDZzgPNtAQI","weeklyOffer":"pdt_0NqZMPN9J4EcSHnY6olbW"}}'
 # Free-trial days per plan, e.g. '{"yearly":3}'. Empty means charge today.
 TRIAL_DAYS = '{}'
 
