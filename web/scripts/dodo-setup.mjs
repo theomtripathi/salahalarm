@@ -1,10 +1,11 @@
-// Creates the Dodo Payments subscription products for every price tier and
+// Creates the Dodo Payments subscription products (yearly, weekly and the
+// discounted weekly exit offer) for every price tier and
 // prints the PRODUCTS value for wrangler.toml.
 //
 //   DODO_PAYMENTS_API_KEY=... DODO_ENVIRONMENT=test_mode node scripts/dodo-setup.mjs
 //   add WEBHOOK_URL=https://salahalarm.com/api/webhooks/dodo to also register the webhook
 
-import { TIERS } from "../src/pricing.js";
+import { TIERS, CHECKOUT_PLANS, intervalFor } from "../src/pricing.js";
 
 const key = process.env.DODO_PAYMENTS_API_KEY;
 const base = process.env.DODO_ENVIRONMENT === "live_mode" ? "https://live.dodopayments.com" : "https://test.dodopayments.com";
@@ -25,11 +26,13 @@ async function call(method, path, body) {
 }
 
 const products = {};
+const NAMES = { yearly: "Yearly", weekly: "Weekly", weeklyOffer: "Weekly, special offer" };
 for (const [tier, plans] of Object.entries(TIERS)) {
-  for (const [plan, { usd }] of Object.entries(plans)) {
-    const interval = plan === "yearly" ? "Year" : "Month";
+  for (const plan of CHECKOUT_PLANS) {
+    const { usd } = plans[plan];
+    const interval = intervalFor(plan);
     const product = await call("POST", "/products", {
-      name: `SalahAlarm Premium (${plan === "yearly" ? "Yearly" : "Monthly"})`,
+      name: `SalahAlarm Premium (${NAMES[plan]})`,
       description: "Prayer alarms, mat scan, prayer lock, Quran, Qibla and streaks for Android.",
       tax_category: "saas",
       metadata: { tier, plan, app: "salahalarm-android" },
@@ -41,7 +44,7 @@ for (const [tier, plans] of Object.entries(TIERS)) {
         purchasing_power_parity: false,
         payment_frequency_count: 1,
         payment_frequency_interval: interval,
-        subscription_period_count: plan === "yearly" ? 10 : 120,
+        subscription_period_count: plan === "yearly" ? 10 : 520,
         subscription_period_interval: interval,
         tax_inclusive: true,
       },

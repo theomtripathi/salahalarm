@@ -172,6 +172,8 @@ fun ProfileScreen() {
 
             Section(t("Account")) {
                 val status = when {
+                    premium && entitlement.isTrial -> tf("Free trial · ends %@", dateString(entitlement.accessUntil))
+                    entitlement.trialEnded(now) -> t("Your free trial has ended")
                     premium && entitlement.cancelAtPeriodEnd -> tf("Premium until %@", dateString(entitlement.accessUntil))
                     premium -> tf("Premium · renews %@", dateString(entitlement.currentPeriodEnd ?: entitlement.accessUntil))
                     else -> t("No active subscription")
@@ -180,7 +182,7 @@ fun ProfileScreen() {
                 ActionRow(t("Manage Subscription"), null) {
                     scope.launch {
                         busy = true
-                        val link = if (entitlement.manageable) repo.portalLink() else null
+                        val link = if (entitlement.manageable && !entitlement.isTrial) repo.portalLink() else null
                         busy = false
                         if (link != null) openUrl(context, link) else openUrl(context, Api.paywallUrl("profile_manage"))
                     }

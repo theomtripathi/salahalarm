@@ -402,3 +402,16 @@ details.brand-tip summary { font-weight: 700; cursor: pointer; }
 details.brand-tip p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
 .status-line { display: flex; align-items: center; gap: 10px; justify-content: center; color: var(--muted); }
 .mini-ring { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--green-tint-2); border-top-color: var(--green); animation: spin 1s linear infinite; }
+
+/* Paywall close button and the exit offers */
+.close-row { display: flex; justify-content: flex-end; margin: -10px -8px 2px; }
+.close-btn {
+  width: 36px; height: 36px;
+  border: 0; border-radius: 50%; background: transparent; color: #9a9a9a; font-size: 26px; line-height: 1; cursor: pointer;
+}
+.close-btn:focus-visible { outline: 2px solid var(--green); }
+.offer-card { text-align: center; padding: 22px 16px; border: 2px solid var(--gold); background: var(--gold-tint); }
+.offer-off { display: inline-block; background: var(--alarm); color: #fff; font-weight: 800; font-size: 13px; letter-spacing: .04em; border-radius: 999px; padding: 4px 12px; margin-bottom: 10px; }
+.offer-price { font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 6px; }
+.offer-price s { color: var(--muted); font-weight: 600; font-size: 20px; }
+.moon { font-size: 54px; line-height: 1; margin: 8px 0 14px; }

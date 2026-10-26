@@ -179,4 +179,16 @@ class MiscTest {
         assertTrue(e.needsRefresh(now.plusSeconds(13 * 3600)))
         assertFalse(Entitlement.fromMap(null, now).isActive(now))
     }
+
+    @Test fun freeTrialCountsDownAndEnds() {
+        val now = Instant.parse("2026-10-26T06:00:00Z")
+        val trial = Entitlement.fromMap(mapOf("active" to true, "status" to "trial", "accessUntil" to "2026-10-28T05:00:00Z"), now)
+        assertTrue(trial.isTrial)
+        assertEquals(2L, trial.trialDaysLeft(now))
+        assertFalse(trial.trialEnded(now))
+        assertTrue(trial.trialEnded(Instant.parse("2026-10-28T05:00:01Z")))
+        val paid = Entitlement.fromMap(mapOf("active" to false, "status" to "expired", "accessUntil" to "2026-10-20T00:00:00Z"), now)
+        assertFalse(paid.trialEnded(now))
+        assertEquals(0L, paid.trialDaysLeft(now))
+    }
 }

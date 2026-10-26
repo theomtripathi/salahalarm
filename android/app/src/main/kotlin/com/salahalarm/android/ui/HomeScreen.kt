@@ -136,6 +136,18 @@ fun HomeScreen() {
                 ) { openUrl(context, Api.downloadUrl) }
             }
 
+            val trialLeft = entitlement.trialDaysLeft(now)
+            if (trialLeft in 1..2) {
+                Banner(
+                    icon = { Icon(Icons.Filled.Warning, null, tint = Palette.gold) },
+                    title = if (trialLeft == 1L) t("Your free trial ends tomorrow") else tf("Your free trial ends in %d days", trialLeft.toInt()),
+                    body = t("Pick a plan to keep your alarms ringing for every prayer."),
+                    action = t("Choose a plan ->"),
+                    background = Palette.warningBg,
+                    border = Palette.gold,
+                ) { openUrl(context, Api.paywallUrl("trial_ending")) }
+            }
+
             if (needsAttention) {
                 Banner(
                     icon = { Icon(Icons.Filled.Warning, null, tint = Palette.gold) },

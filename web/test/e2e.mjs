@@ -58,8 +58,17 @@ await shot("account");
 await page.locator(".google-btn").click();
 await page.waitForSelector(".plans");
 await shot("paywall");
+// Closing the paywall walks the exit offers: discounted weekly, then the free trial.
+await page.locator(".close-btn").click();
+await page.waitForSelector(".offer-card");
+await shot("exit-offer");
+await page.locator(".footer .btn-link").click();
+await page.waitForSelector("#start-trial");
+await shot("exit-trial");
+await page.locator(".footer .btn-link").click();
+await page.waitForSelector(".plans");
 await page.locator(".plan").nth(1).click();
-await shot("paywall-monthly");
+await shot("paywall-weekly");
 await page.locator("#checkout").click();
 await page.waitForURL(/mock-checkout/);
 await page.locator("#pay").click();
@@ -70,6 +79,24 @@ await shot("welcome-paid");
 await page.goto(`${base}/android/install/`);
 await page.waitForSelector(".guide");
 await shot("install");
+
+// A second visitor takes the free trial.
+await context.clearCookies();
+await page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); sessionStorage.setItem("sa_fakeauth", "1"); });
+await page.goto(`${base}/android/?fakeauth=1&resume=paywall&lang=${lang}`);
+await page.waitForSelector(".google-btn");
+await page.locator(".footer .btn-secondary, .btn-secondary").first().click();
+await page.fill("#f-email", "trial.user@example.com");
+await page.fill("#f-password", "secret123");
+await page.locator("form .btn-primary").click();
+await page.waitForSelector(".close-btn");
+await page.locator(".close-btn").click();
+await page.waitForSelector(".offer-card");
+await page.locator(".footer .btn-link").click();
+await page.locator("#start-trial").click();
+await page.waitForURL(/\/android\/welcome\//);
+await page.waitForSelector(".success-mark", { timeout: 15000 });
+await shot("welcome-trial");
 
 console.log(JSON.stringify({ lang, screens: n, errors }, null, 2));
 await browser.close();

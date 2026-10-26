@@ -112,8 +112,13 @@ private fun App() {
 
     LaunchedEffect(Unit) { Graph.repo.refreshLocation() }
 
+    val entitlement by Graph.repo.entitlement.collectAsState()
+    val now by rememberNow(60_000)
+
     when {
         user == null -> LoginScreen()
+        // When the free trial runs out, the app sends them to the website to pick a plan.
+        entitlement.trialEnded(now) -> TrialEndedScreen()
         !setupDone -> SetupScreen(onDone = {
             Graph.store.setFlag("setup_done")
             setupDone = true

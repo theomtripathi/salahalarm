@@ -15,7 +15,7 @@ Entitlements live in Firestore `entitlements/{uid}` (written only by the Worker 
 account). The Android app asks `/api/entitlement` with its Firebase ID token.
 
 ## Pricing
-Country → tier in `src/pricing.js` (t1 $4.99/mo · $29.99/yr, t2 $2.99 · $17.99, t3 $1.99 · $9.99).
+Country → tier in `src/pricing.js`: weekly · yearly · discounted weekly exit offer (t1 $4.99 · $29.99 · $2.99, t2 $2.99 · $17.99 · $1.99, t3 $1.99 · $9.99 · $0.99). Closing the paywall shows the discounted weekly plan, then a no-card free trial (`FREE_TRIAL_DAYS`, default 7, once per account via `/api/trial`).
 Each tier has its own Dodo products, listed in `PRODUCTS` in `wrangler.toml`.
 
 ## Setup

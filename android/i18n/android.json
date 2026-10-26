@@ -177,7 +177,16 @@
   "Mat scan": "مسح السجادة",
   "Manual": "يدوي",
   "Snoozed": "مؤجل",
-  "Ringing": "يرن"
+  "Ringing": "يرن",
+  "Your free trial ends tomorrow": "تنتهي تجربتك المجانية غدًا",
+  "Your free trial ends in %d days": "تنتهي تجربتك المجانية خلال %d أيام",
+  "Pick a plan to keep your alarms ringing for every prayer.": "اختر خطة ليبقى منبهك يرن لكل صلاة.",
+  "Choose a plan ->": "اختر خطة ←",
+  "Free trial · ends %@": "تجربة مجانية · تنتهي %@",
+  "Your free trial has ended": "انتهت تجربتك المجانية",
+  "I've already paid": "لقد دفعت بالفعل",
+  "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "نرجو أن يكون SalahAlarm قد ساعدك على الصلاة في وقتها. اختر خطة على salahalarm.com ليبقى منبهك يرن لكل صلاة.",
+  "Choose a plan": "اختر خطة"
  },
  "tr": {
   "Snooze 5 min": "5 dk ertele",
@@ -267,7 +276,16 @@
   "Mat scan": "Seccade tarama",
   "Manual": "Elle",
   "Snoozed": "Ertelendi",
-  "Ringing": "Çalıyor"
+  "Ringing": "Çalıyor",
+  "Your free trial ends tomorrow": "Ücretsiz denemen yarın bitiyor",
+  "Your free trial ends in %d days": "Ücretsiz denemen %d gün içinde bitiyor",
+  "Pick a plan to keep your alarms ringing for every prayer.": "Alarmlarının her namazda çalmaya devam etmesi için bir plan seç.",
+  "Choose a plan ->": "Bir plan seç ->",
+  "Free trial · ends %@": "Ücretsiz deneme · %@ bitiyor",
+  "Your free trial has ended": "Ücretsiz denemen sona erdi",
+  "I've already paid": "Zaten ödedim",
+  "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "Umarız SalahAlarm namazlarını vaktinde kılmana yardımcı olmuştur. Alarmlarının her namazda çalmaya devam etmesi için salahalarm.com'da bir plan seç.",
+  "Choose a plan": "Bir plan seç"
  },
  "id": {
   "Snooze 5 min": "Tunda 5 menit",
@@ -357,7 +375,16 @@
   "Mat scan": "Pindai sajadah",
   "Manual": "Manual",
   "Snoozed": "Ditunda",
-  "Ringing": "Berbunyi"
+  "Ringing": "Berbunyi",
+  "Your free trial ends tomorrow": "Uji coba gratismu berakhir besok",
+  "Your free trial ends in %d days": "Uji coba gratismu berakhir dalam %d hari",
+  "Pick a plan to keep your alarms ringing for every prayer.": "Pilih paket agar alarmmu tetap berbunyi di setiap salat.",
+  "Choose a plan ->": "Pilih paket ->",
+  "Free trial · ends %@": "Uji coba gratis · berakhir %@",
+  "Your free trial has ended": "Uji coba gratismu sudah berakhir",
+  "I've already paid": "Saya sudah bayar",
+  "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "Semoga SalahAlarm membantumu salat tepat waktu. Pilih paket di salahalarm.com agar alarmmu tetap berbunyi di setiap salat.",
+  "Choose a plan": "Pilih paket"
  },
  "ur": {
   "Snooze 5 min": "5 منٹ اسنوز",
@@ -447,6 +474,15 @@
   "Mat scan": "جائے نماز اسکین",
   "Manual": "دستی",
   "Snoozed": "اسنوز کیا گیا",
-  "Ringing": "بج رہا ہے"
+  "Ringing": "بج رہا ہے",
+  "Your free trial ends tomorrow": "آپ کا مفت ٹرائل کل ختم ہو رہا ہے",
+  "Your free trial ends in %d days": "آپ کا مفت ٹرائل %d دن میں ختم ہو جائے گا",
+  "Pick a plan to keep your alarms ringing for every prayer.": "ہر نماز کے لیے الارم بجتے رہیں، اس کے لیے پلان منتخب کریں۔",
+  "Choose a plan ->": "پلان منتخب کریں ←",
+  "Free trial · ends %@": "مفت ٹرائل · %@ کو ختم",
+  "Your free trial has ended": "آپ کا مفت ٹرائل ختم ہو گیا",
+  "I've already paid": "میں ادائیگی کر چکا ہوں",
+  "We hope SalahAlarm helped you pray on time. Pick a plan on salahalarm.com to keep your alarms ringing for every prayer.": "امید ہے SalahAlarm نے آپ کو وقت پر نماز پڑھنے میں مدد دی۔ ہر نماز کے لیے الارم بجتے رہیں، اس کے لیے salahalarm.com پر پلان منتخب کریں۔",
+  "Choose a plan": "پلان منتخب کریں"
  }
 }

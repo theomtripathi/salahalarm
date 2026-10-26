@@ -20,6 +20,16 @@ data class Entitlement(
 ) {
     fun isActive(now: Instant): Boolean = accessUntil?.let { it > now } ?: false
 
+    /** The no-card free trial from the website's last exit offer. */
+    val isTrial: Boolean get() = status == "trial"
+
+    /** Whole days of trial left, rounded up; 0 once it has ended. */
+    fun trialDaysLeft(now: Instant): Long =
+        if (!isTrial || accessUntil == null || accessUntil <= now) 0 else (java.time.Duration.between(now, accessUntil).toHours() + 23) / 24
+
+    /** The trial ran out and nothing replaced it: time to send them to the website. */
+    fun trialEnded(now: Instant): Boolean = isTrial && !isActive(now)
+
     /** Re-check with the server at most this often while premium looks active. */
     fun needsRefresh(now: Instant, maxAgeHours: Long = 12): Boolean =
         checkedAt == null || checkedAt.plusSeconds(maxAgeHours * 3600) < now || !isActive(now)

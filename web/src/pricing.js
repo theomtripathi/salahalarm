@@ -8,13 +8,15 @@
 // `display` prices are what the paywall shows when Dodo's checkout preview is
 // unavailable. Keep them equal to the Dodo product prices.
 
+// `weeklyOffer` is the discounted weekly plan shown when someone closes the
+// paywall without buying. It is never listed on the paywall itself.
 export const TIERS = {
   // High-income markets
-  t1: { monthly: { usd: 4.99 }, yearly: { usd: 29.99 } },
+  t1: { weekly: { usd: 4.99 }, yearly: { usd: 29.99 }, weeklyOffer: { usd: 2.99 } },
   // Middle-income markets and the default for anything unlisted
-  t2: { monthly: { usd: 2.99 }, yearly: { usd: 17.99 } },
+  t2: { weekly: { usd: 2.99 }, yearly: { usd: 17.99 }, weeklyOffer: { usd: 1.99 } },
   // Price-sensitive markets with the largest Android-only Muslim audiences
-  t3: { monthly: { usd: 1.99 }, yearly: { usd: 9.99 } },
+  t3: { weekly: { usd: 1.99 }, yearly: { usd: 9.99 }, weeklyOffer: { usd: 0.99 } },
 };
 
 const T1 = [
@@ -43,9 +45,16 @@ export function tierFor(country) {
   return COUNTRY_TIER.get(String(country || "").toUpperCase()) || "t2";
 }
 
-export const PLANS = ["yearly", "monthly"];
+// Plans on the paywall, in display order.
+export const PLANS = ["yearly", "weekly"];
+// Everything that can be checked out, including the exit offer.
+export const CHECKOUT_PLANS = [...PLANS, "weeklyOffer"];
 
-// Products come from the PRODUCTS env var: {"t1":{"monthly":"pdt_..","yearly":"pdt_.."},...}.
+export function intervalFor(plan) {
+  return plan === "yearly" ? "Year" : "Week";
+}
+
+// Products come from the PRODUCTS env var: {"t1":{"weekly":"pdt_..","yearly":"pdt_..","weeklyOffer":"pdt_.."},...}.
 // A missing tier falls back to t2, then t1, so a partial setup still sells.
 export function productFor(products, tier, plan) {
   for (const t of [tier, "t2", "t1"]) {
@@ -66,16 +75,23 @@ export function parseProducts(raw) {
 }
 
 // Plans as the paywall renders them, before any local-currency preview.
-export function displayPlans(tier, { trialDays = {} } = {}) {
+export function displayPlans(tier, { trialDays = {}, plans = PLANS } = {}) {
   const prices = TIERS[tier] || TIERS.t2;
-  return PLANS.map((plan) => {
+  return plans.map((plan) => {
     const usd = prices[plan].usd;
     return {
       plan,
       currency: "USD",
       amount: usd,
-      monthlyEquivalent: plan === "yearly" ? Math.floor((usd / 12) * 100) / 100 : usd,
+      weeklyEquivalent: plan === "yearly" ? Math.floor((usd / 52) * 100) / 100 : usd,
       trialDays: Number(trialDays[plan] || 0),
     };
   });
+}
+
+/** The exit offer as the paywall shows it, with the regular weekly price for the strike-through. */
+export function displayOffer(tier) {
+  const prices = TIERS[tier] || TIERS.t2;
+  const [offer] = displayPlans(tier, { plans: ["weeklyOffer"] });
+  return { ...offer, regularAmount: prices.weekly.usd, percentOff: Math.round((1 - prices.weeklyOffer.usd / prices.weekly.usd) * 100) };
 }

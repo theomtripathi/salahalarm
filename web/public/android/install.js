@@ -16,6 +16,7 @@ let config = {};
 let user = null;
 let status = mode === "welcome" ? "checking" : "install"; // checking | active | pending | signin | install
 let apk = { versionName: null, sizeMb: null };
+let trialUntil = null; // set when the account is on the free trial
 let appLogin = null; // intent link that opens the installed app already signed in
 
 function svg(markup) {
@@ -40,6 +41,7 @@ async function confirmPayment() {
       const { entitlement } = await api(`/api/entitlement?${query}`, { token });
       if (entitlement?.active) {
         status = "active";
+        trialUntil = entitlement.status === "trial" ? entitlement.accessUntil : null;
         if (!store.get(`sa_purchase_${user.uid}`)) {
           store.set(`sa_purchase_${user.uid}`, "1");
           capture("web_purchase_confirmed", { plan: entitlement.plan, seconds_to_confirm: Math.round((Date.now() - started) / 1000) });
@@ -106,8 +108,10 @@ function header() {
   if (status === "active") {
     return [
       h("div", { class: "success-mark" }, svg(icons.check)),
-      h("h1", { class: "center" }, t("You're in! Let's install SalahAlarm")),
-      h("p", { class: "lede center" }, t("Payment confirmed. Two minutes from now your first alarm is set.")),
+      h("h1", { class: "center" }, t(trialUntil ? "Your free trial has started" : "You're in! Let's install SalahAlarm")),
+      h("p", { class: "lede center" }, trialUntil
+        ? t("Free until %@. Install the app now and your first alarm is set in two minutes.", new Date(trialUntil).toLocaleDateString(document.documentElement.lang || undefined, { day: "numeric", month: "long" }))
+        : t("Payment confirmed. Two minutes from now your first alarm is set.")),
     ];
   }
   if (status === "pending") {

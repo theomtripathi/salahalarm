@@ -109,6 +109,9 @@ export function captureRef() {
   const params = new URLSearchParams(location.search);
   const ref = params.get("ref") || params.get("a") || params.get("utm_campaign");
   if (ref) store.set("sa_ref", ref.slice(0, 60));
+  // Which button sent them (e.g. the homepage section), for per-CTA conversion.
+  const from = params.get("from");
+  if (from) store.set("sa_from", from.slice(0, 60));
   return store.get("sa_ref") || "";
 }
 
@@ -124,7 +127,7 @@ const superProps = {};
 
 export function initAnalytics(config, props = {}) {
   posthog = config?.posthog || null;
-  Object.assign(superProps, props);
+  Object.assign(superProps, store.get("sa_from") ? { from: store.get("sa_from") } : {}, props);
 }
 
 export function capture(event, properties = {}) {
