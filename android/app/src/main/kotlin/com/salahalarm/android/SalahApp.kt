@@ -7,6 +7,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.salahalarm.android.alarm.AlarmScheduler
 import com.salahalarm.android.alarm.Notifications
+import com.salahalarm.android.data.DailySyncWorker
 import com.salahalarm.android.data.Repo
 import com.salahalarm.android.data.Store
 import kotlinx.coroutines.CoroutineScope
@@ -31,6 +32,7 @@ class SalahApp : Application() {
         Graph.init(this)
         Notifications.createChannels(this)
         AlarmScheduler.reschedule(this)
+        DailySyncWorker.schedule(this)
     }
 }
 
