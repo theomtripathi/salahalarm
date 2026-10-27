@@ -1,0 +1,447 @@
+{
+ "daily": [
+  {
+   "day": "2026-10-10",
+   "installs": 11,
+   "onboarding_started": 11,
+   "onboarding_completed": 10,
+   "signup_completed": 7,
+   "paywall_viewed": 9,
+   "buy_tapped": 5,
+   "sheet_cancelled": 2,
+   "purchase_errors": 0,
+   "purchased": 1,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-11",
+   "installs": 8,
+   "onboarding_started": 8,
+   "onboarding_completed": 4,
+   "signup_completed": 3,
+   "paywall_viewed": 8,
+   "buy_tapped": 2,
+   "sheet_cancelled": 2,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-12",
+   "installs": 12,
+   "onboarding_started": 12,
+   "onboarding_completed": 10,
+   "signup_completed": 8,
+   "paywall_viewed": 14,
+   "buy_tapped": 5,
+   "sheet_cancelled": 4,
+   "purchase_errors": 0,
+   "purchased": 1,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-13",
+   "installs": 10,
+   "onboarding_started": 10,
+   "onboarding_completed": 8,
+   "signup_completed": 7,
+   "paywall_viewed": 11,
+   "buy_tapped": 2,
+   "sheet_cancelled": 2,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-14",
+   "installs": 3,
+   "onboarding_started": 3,
+   "onboarding_completed": 3,
+   "signup_completed": 2,
+   "paywall_viewed": 4,
+   "buy_tapped": 1,
+   "sheet_cancelled": 1,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-15",
+   "installs": 6,
+   "onboarding_started": 6,
+   "onboarding_completed": 4,
+   "signup_completed": 5,
+   "paywall_viewed": 8,
+   "buy_tapped": 4,
+   "sheet_cancelled": 4,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-16",
+   "installs": 11,
+   "onboarding_started": 12,
+   "onboarding_completed": 8,
+   "signup_completed": 6,
+   "paywall_viewed": 13,
+   "buy_tapped": 6,
+   "sheet_cancelled": 5,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-17",
+   "installs": 4,
+   "onboarding_started": 4,
+   "onboarding_completed": 2,
+   "signup_completed": 2,
+   "paywall_viewed": 4,
+   "buy_tapped": 1,
+   "sheet_cancelled": 1,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-18",
+   "installs": 10,
+   "onboarding_started": 10,
+   "onboarding_completed": 3,
+   "signup_completed": 1,
+   "paywall_viewed": 3,
+   "buy_tapped": 0,
+   "sheet_cancelled": 0,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-19",
+   "installs": 8,
+   "onboarding_started": 8,
+   "onboarding_completed": 7,
+   "signup_completed": 5,
+   "paywall_viewed": 6,
+   "buy_tapped": 4,
+   "sheet_cancelled": 4,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-20",
+   "installs": 7,
+   "onboarding_started": 7,
+   "onboarding_completed": 5,
+   "signup_completed": 3,
+   "paywall_viewed": 8,
+   "buy_tapped": 2,
+   "sheet_cancelled": 2,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-21",
+   "installs": 9,
+   "onboarding_started": 9,
+   "onboarding_completed": 5,
+   "signup_completed": 6,
+   "paywall_viewed": 8,
+   "buy_tapped": 3,
+   "sheet_cancelled": 2,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-22",
+   "installs": 11,
+   "onboarding_started": 11,
+   "onboarding_completed": 11,
+   "signup_completed": 10,
+   "paywall_viewed": 12,
+   "buy_tapped": 4,
+   "sheet_cancelled": 3,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-23",
+   "installs": 18,
+   "onboarding_started": 18,
+   "onboarding_completed": 14,
+   "signup_completed": 12,
+   "paywall_viewed": 12,
+   "buy_tapped": 9,
+   "sheet_cancelled": 7,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 0
+  },
+  {
+   "day": "2026-10-24",
+   "installs": 19,
+   "onboarding_started": 14,
+   "onboarding_completed": 9,
+   "signup_completed": 7,
+   "paywall_viewed": 15,
+   "buy_tapped": 4,
+   "sheet_cancelled": 4,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 2,
+   "final_offer_accepted": 0,
+   "link_clicks": 28
+  },
+  {
+   "day": "2026-10-25",
+   "installs": 0,
+   "onboarding_started": 0,
+   "onboarding_completed": 0,
+   "signup_completed": 0,
+   "paywall_viewed": 0,
+   "buy_tapped": 0,
+   "sheet_cancelled": 0,
+   "purchase_errors": 0,
+   "purchased": 0,
+   "final_offer_shown": 0,
+   "final_offer_accepted": 0,
+   "link_clicks": 3
+  }
+ ],
+ "screens": [
+  {
+   "screen": "screen1",
+   "idx": 1,
+   "this_week": 73,
+   "last_week": 49
+  },
+  {
+   "screen": "welcome",
+   "idx": 1,
+   "this_week": 3,
+   "last_week": 0
+  },
+  {
+   "screen": "screen2",
+   "idx": 2,
+   "this_week": 64,
+   "last_week": 45
+  },
+  {
+   "screen": "mechanism",
+   "idx": 2,
+   "this_week": 5,
+   "last_week": 0
+  },
+  {
+   "screen": "screen3",
+   "idx": 3,
+   "this_week": 64,
+   "last_week": 44
+  },
+  {
+   "screen": "prayer_selection",
+   "idx": 3,
+   "this_week": 5,
+   "last_week": 0
+  },
+  {
+   "screen": "screen4",
+   "idx": 4,
+   "this_week": 60,
+   "last_week": 46
+  },
+  {
+   "screen": "goal_selection",
+   "idx": 4,
+   "this_week": 5,
+   "last_week": 0
+  },
+  {
+   "screen": "screen5",
+   "idx": 5,
+   "this_week": 56,
+   "last_week": 41
+  },
+  {
+   "screen": "support_pace",
+   "idx": 5,
+   "this_week": 5,
+   "last_week": 0
+  },
+  {
+   "screen": "screen6",
+   "idx": 6,
+   "this_week": 55,
+   "last_week": 40
+  },
+  {
+   "screen": "personalized_plan",
+   "idx": 6,
+   "this_week": 6,
+   "last_week": 0
+  },
+  {
+   "screen": "location_permission",
+   "idx": 6,
+   "this_week": 2,
+   "last_week": 0
+  },
+  {
+   "screen": "screen7A",
+   "idx": 7,
+   "this_week": 55,
+   "last_week": 40
+  },
+  {
+   "screen": "sound_setup",
+   "idx": 7,
+   "this_week": 4,
+   "last_week": 0
+  },
+  {
+   "screen": "paywall",
+   "idx": 7,
+   "this_week": 5,
+   "last_week": 0
+  },
+  {
+   "screen": "screen7B",
+   "idx": 8,
+   "this_week": 55,
+   "last_week": 39
+  },
+  {
+   "screen": "plan_loading",
+   "idx": 8,
+   "this_week": 2,
+   "last_week": 0
+  },
+  {
+   "screen": "screen8",
+   "idx": 9,
+   "this_week": 55,
+   "last_week": 40
+  },
+  {
+   "screen": "screen10",
+   "idx": 10,
+   "this_week": 54,
+   "last_week": 39
+  },
+  {
+   "screen": "notifications_permission",
+   "idx": 10,
+   "this_week": 3,
+   "last_week": 0
+  },
+  {
+   "screen": "screen17",
+   "idx": 11,
+   "this_week": 69,
+   "last_week": 60
+  },
+  {
+   "screen": "account",
+   "idx": 11,
+   "this_week": 5,
+   "last_week": 0
+  },
+  {
+   "screen": "screen17A",
+   "idx": 12,
+   "this_week": 53,
+   "last_week": 43
+  },
+  {
+   "screen": "screen17B",
+   "idx": 13,
+   "this_week": 49,
+   "last_week": 40
+  },
+  {
+   "screen": "screen18",
+   "idx": 14,
+   "this_week": 54,
+   "last_week": 47
+  }
+ ],
+ "links": [
+  {
+   "account": "seo-en",
+   "format": "seo",
+   "video": "(null)",
+   "clicks": 31,
+   "clicks_yesterday": 28
+  },
+  {
+   "account": "seo-tr",
+   "format": "seo",
+   "video": "(null)",
+   "clicks": 5,
+   "clicks_yesterday": 5
+  },
+  {
+   "account": "seo-ar",
+   "format": "seo",
+   "video": "(null)",
+   "clicks": 4,
+   "clicks_yesterday": 4
+  },
+  {
+   "account": "seo-ur",
+   "format": "seo",
+   "video": "(null)",
+   "clicks": 3,
+   "clicks_yesterday": 3
+  },
+  {
+   "account": "seo-id",
+   "format": "seo",
+   "video": "(null)",
+   "clicks": 3,
+   "clicks_yesterday": 3
+  },
+  {
+   "account": "tt03",
+   "format": "anim",
+   "video": "(null)",
+   "clicks": 1,
+   "clicks_yesterday": 1
+  }
+ ],
+ "errors": []
+}

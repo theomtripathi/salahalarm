@@ -1,0 +1,119 @@
+{
+  "appStoreId": "6758457826",
+  "providerToken": "128487036",
+  "domain": "salahalarm.com",
+  "fallbackUrl": "https://apps.apple.com/app/id6758457826",
+  "formats": {
+    "whatif": "What-if story videos",
+    "anim": "Animated motion-graphic Muslim-niche topics",
+    "alarm": "Alarm / prayer-mat demo (product shown)",
+    "pov": "POV / relatable Fajr struggle",
+    "ramadan": "Ramadan challenge teasers",
+    "mixed": "Brand page, mixed formats",
+    "seo": "SEO blog articles on salahalarm.com (one account per language)"
+  },
+  "accounts": [
+    {
+      "id": "ig1",
+      "platform": "instagram",
+      "handle": "@salahalarm",
+      "testFormat": "mixed"
+    },
+    {
+      "id": "ig2",
+      "platform": "instagram",
+      "handle": "@REPLACE_ME",
+      "testFormat": "anim"
+    },
+    {
+      "id": "tt01",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "whatif"
+    },
+    {
+      "id": "tt02",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "whatif"
+    },
+    {
+      "id": "tt03",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "anim"
+    },
+    {
+      "id": "tt04",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "anim"
+    },
+    {
+      "id": "tt05",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "alarm"
+    },
+    {
+      "id": "tt06",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "alarm"
+    },
+    {
+      "id": "tt07",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "pov"
+    },
+    {
+      "id": "tt08",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "pov"
+    },
+    {
+      "id": "tt09",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "ramadan"
+    },
+    {
+      "id": "tt10",
+      "platform": "tiktok",
+      "handle": "@REPLACE_ME",
+      "testFormat": "ramadan"
+    },
+    {
+      "id": "seo-en",
+      "platform": "web",
+      "handle": "salahalarm.com/blog/en/",
+      "testFormat": "seo"
+    },
+    {
+      "id": "seo-ar",
+      "platform": "web",
+      "handle": "salahalarm.com/blog/ar/",
+      "testFormat": "seo"
+    },
+    {
+      "id": "seo-tr",
+      "platform": "web",
+      "handle": "salahalarm.com/blog/tr/",
+      "testFormat": "seo"
+    },
+    {
+      "id": "seo-id",
+      "platform": "web",
+      "handle": "salahalarm.com/blog/id/",
+      "testFormat": "seo"
+    },
+    {
+      "id": "seo-ur",
+      "platform": "web",
+      "handle": "salahalarm.com/blog/ur/",
+      "testFormat": "seo"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "salahalarm-fajr-screenshots",
+  "private": true,
+  "scripts": {"dev":"next dev","build":"next build","start":"next start"},
+  "dependencies": {"@types/node":"latest","@types/react":"latest","@types/react-dom":"latest","html-to-image":"^1.11.13","next":"latest","react":"latest","react-dom":"latest","typescript":"latest"}
+}

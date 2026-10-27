@@ -1,0 +1,14 @@
+{
+  "name": "salahalarm-daily-analytics",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "daily": "node src/daily.js",
+    "test": "node --test test/*.test.js",
+    "import": "node src/import-batch.js",
+    "import-ads": "node src/import-ads.js"
+  }
+}
