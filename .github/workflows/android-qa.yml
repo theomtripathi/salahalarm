@@ -92,9 +92,8 @@ jobs:
         if: always()
         working-directory: .
         run: |
-          sudo apt-get install -y -qq imagemagick > /dev/null
           out="android/qa-results/$GITHUB_RUN_ID"; mkdir -p "$out"
-          for f in android/qa-out/*.png; do [ -e "$f" ] && convert "$f" -resize 420x -quality 70 "$out/$(basename "${f%.png}").jpg"; done
+          for f in android/qa-out/*.png; do [ -e "$f" ] && ffmpeg -loglevel error -y -i "$f" -vf scale=420:-1 -q:v 5 "$out/$(basename "${f%.png}").jpg"; done
           cp android/qa-out/summary.json "$out/" 2>/dev/null || true
           grep -E "FATAL|AndroidRuntime|salahalarm" android/qa-out/logcat.txt 2>/dev/null | tail -300 > "$out/logcat-app.txt" || true
           git add "$out"
