@@ -1,0 +1,43 @@
+name: Bio links deploy
+
+# Deploys Marketing/conversion-tracking (the salahalarm.com/go/* short-link Worker).
+
+on:
+  push:
+    branches: [main, claude/project-thread-7o1a8e]
+    paths:
+      - "Marketing/conversion-tracking/**"
+      - ".github/workflows/links.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: links-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: Marketing/conversion-tracking
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm test
+      - run: node scripts/gen-links.mjs
+      - run: npx --yes wrangler@4.152.0 deploy
+
+      - name: Check
+        run: |
+          sleep 5
+          for p in /go/ig1 "/go/ig1?to=ios"; do
+            echo "$p -> $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "https://salahalarm.com$p")"
+          done
