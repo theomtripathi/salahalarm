@@ -93,7 +93,10 @@ jobs:
         working-directory: .
         run: |
           out="android/qa-results/$GITHUB_RUN_ID"; mkdir -p "$out"
-          for f in android/qa-out/*.png; do [ -e "$f" ] && ffmpeg -loglevel error -y -i "$f" -vf scale=420:-1 -q:v 5 "$out/$(basename "${f%.png}").jpg"; done
+          python3 -m pip install --quiet --user --break-system-packages pillow
+          python3 -c 'import sys, pathlib; from PIL import Image
+          for f in sorted(pathlib.Path("android/qa-out").glob("*.png")):
+              im = Image.open(f).convert("RGB"); im.thumbnail((420, 2000)); im.save(pathlib.Path(sys.argv[1]) / (f.stem + ".jpg"), quality=70)' "$out"
           cp android/qa-out/summary.json "$out/" 2>/dev/null || true
           grep -E "FATAL|AndroidRuntime|salahalarm" android/qa-out/logcat.txt 2>/dev/null | tail -300 > "$out/logcat-app.txt" || true
           git add "$out"
