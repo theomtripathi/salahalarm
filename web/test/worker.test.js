@@ -464,6 +464,7 @@ test("the admin routes need the Cloudflare token", async () => {
   assert.equal((await call("/api/admin/prices", { token: "nope" })).status, 401);
   assert.equal((await call("/api/admin/dodo-products", { method: "POST", token: "nope" })).status, 401);
   assert.equal((await call("/api/admin/dodo-discount", { method: "POST", token: "nope" })).status, 401);
+  assert.equal((await call("/api/admin/test-entitlement", { method: "POST", token: "nope", body: { uid: "user-1", action: "expire" } })).status, 401);
 });
 
 test("an app login code signs the installed app in once, as the same user", async () => {

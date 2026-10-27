@@ -28,6 +28,10 @@ on:
         description: "Create this Dodo discount code (must be in DISCOUNTS in web/src/pricing.js)"
         type: string
         default: ""
+      test_entitlement:
+        description: "Testing renewals: show|expire|restore:<firebase uid>"
+        type: string
+        default: ""
       price_table:
         description: "Print what each country is charged (Dodo checkout preview)"
         type: boolean
@@ -113,6 +117,17 @@ jobs:
           curl -sS -X POST https://salahalarm.com/api/admin/dodo-discount \
             -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "content-type: application/json" \
             -d "$(node -e 'process.stdout.write(JSON.stringify({ code: process.env.CODE }))')" -w "\nHTTP %{http_code}\n"
+
+      - name: Test entitlement
+        if: ${{ inputs.test_entitlement != '' }}
+        env:
+          SPEC: ${{ inputs.test_entitlement }}
+        run: |
+          sleep 5
+          body=$(node -e 'const [action, uid] = process.env.SPEC.split(":"); process.stdout.write(JSON.stringify({ action, uid }))')
+          curl -sS -X POST https://salahalarm.com/api/admin/test-entitlement \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "content-type: application/json" \
+            -d "$body" -w "\nHTTP %{http_code}\n"
 
       - name: Price table
         if: ${{ inputs.price_table }}

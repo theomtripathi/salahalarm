@@ -18,6 +18,7 @@
 //   /api/admin/dodo-setup    one-time: create the Dodo products + webhook (Cloudflare token holders only)
 //   /api/admin/dodo-products create a fresh set of products at the current TIERS prices (same auth)
 //   /api/admin/dodo-discount create a Dodo discount from DISCOUNTS in pricing.js (same auth)
+//   /api/admin/test-entitlement show, expire or restore one account's access, for testing renewals (same auth)
 //   /api/admin/prices        what each country is charged (Cloudflare token holders only)
 //   /download/salahalarm.apk the APK, streamed from R2; needs a link from /api/android/download
 
@@ -68,6 +69,7 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/admin/dodo-setup" && method === "POST") return adminDodoSetup(request, env, url);
   if (pathname === "/api/admin/dodo-products" && method === "POST") return adminDodoProducts(request, env);
   if (pathname === "/api/admin/dodo-discount" && method === "POST") return adminDodoDiscount(request, env);
+  if (pathname === "/api/admin/test-entitlement" && method === "POST") return adminTestEntitlement(request, env);
   if (pathname === "/api/admin/prices" && method === "GET") return adminPrices(request, env, ctx, url);
   if (pathname === "/download/salahalarm.apk" && (method === "GET" || method === "HEAD")) return download(request, env, ctx);
   if (pathname.startsWith("/api/")) return json({ error: "not found" }, 404);
@@ -432,6 +434,28 @@ async function adminDodoDiscount(request, env) {
   } catch (err) {
     return json({ error: err.message, detail: err.body ?? null }, 502);
   }
+}
+
+// Expiring keeps the real end date in testAccessUntil, so restore puts it back.
+// The next Dodo webhook for that subscription overwrites both anyway.
+async function adminTestEntitlement(request, env) {
+  if (!(await isAdmin(request, env))) return json({ error: "unauthorized" }, 401);
+  const { uid, action } = await readJson(request);
+  if (!uid || !/^[\w-]{6,128}$/.test(uid)) return json({ error: "uid required" }, 400);
+  const db = firestore(env);
+  const path = `entitlements/${uid}`;
+  const ent = await db.get(path);
+  if (!ent) return json({ error: "no entitlement for this uid" }, 404);
+  const now = new Date().toISOString();
+  if (action === "expire" && isActive(ent)) {
+    await db.merge(path, { testAccessUntil: ent.accessUntil, accessUntil: now, active: false, updatedAt: now });
+  } else if (action === "restore" && ent.testAccessUntil) {
+    await db.merge(path, { accessUntil: ent.testAccessUntil, testAccessUntil: null, active: isActive({ accessUntil: ent.testAccessUntil }), updatedAt: now });
+  } else if (action !== "show") {
+    return json({ error: `nothing to ${action}`, entitlement: publicEntitlement(ent) }, 409);
+  }
+  const after = await db.get(path);
+  return json({ action, entitlement: publicEntitlement(after), testAccessUntil: after.testAccessUntil || null });
 }
 
 async function adminDodoSetup(request, env, url) {
