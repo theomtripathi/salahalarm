@@ -35,7 +35,7 @@ def shot(name):
     with open(path, "wb") as f:
         f.write(subprocess.run(["adb", "exec-out", "screencap", "-p"], capture_output=True, check=True).stdout)
     shots.append(path)
-    print("screenshot", path)
+    print("screenshot", path, "|", " / ".join(t for t in (n.get("text") for n in nodes()) if t)[:300])
 
 
 def nodes():
@@ -74,11 +74,16 @@ def tap_text(pattern, wait=10):
     return False
 
 
-def type_into(field_pattern, text):
-    if not tap_text(field_pattern):
-        raise SystemExit(f"field not found: {field_pattern}")
+def type_into(index, text):
+    """Types into the index-th text field on screen (Compose labels are not reliable targets)."""
+    fields = [n for n in nodes() if n.get("class") == "android.widget.EditText"]
+    if len(fields) <= index:
+        problems.append(f"text field {index} not found ({len(fields)} on screen)")
+        return
+    tap(fields[index])
     adb("shell", "input", "text", text.replace("@", "\\@").replace(" ", "%s"))
-    time.sleep(0.5)
+    adb("shell", "input", "keyevent", "111")  # hide the keyboard so the next field is visible
+    time.sleep(1)
 
 
 def wait_for(pattern, wait=30):
@@ -115,10 +120,11 @@ shot("login")
 
 if not tap_text(r"sign in with email"):
     problems.append("login: 'Sign in with email' not found")
-type_into(r"^email$", email)
-type_into(r"^password$", password)
-adb("shell", "input", "keyevent", "111")  # hide the keyboard
-tap_text(r"^sign in$")
+type_into(0, email)
+type_into(1, password)
+shot("login-filled")
+if not tap_text(r"^sign in$"):
+    problems.append("login: 'sign in' button not found")
 time.sleep(8)
 back_to_app()
 if wait_for(r"choose a plan to start|choose a plan", 30):

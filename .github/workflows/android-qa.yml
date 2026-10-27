@@ -13,6 +13,9 @@ on:
       - "android/scripts/qa.py"
       - ".github/workflows/android-qa.yml"
 
+permissions:
+  contents: write
+
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -70,6 +73,7 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
+          profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           working-directory: android
@@ -80,3 +84,19 @@ jobs:
         with:
           name: qa
           path: android/qa-out/
+
+      # Small JPEG copies committed under android/qa-results/<run>/ on this branch, so
+      # reviewers without artifact access can open them. GITHUB_TOKEN pushes do not
+      # trigger other workflows.
+      - name: Publish screenshots
+        if: always()
+        working-directory: .
+        run: |
+          sudo apt-get install -y -qq imagemagick > /dev/null
+          out="android/qa-results/$GITHUB_RUN_ID"; mkdir -p "$out"
+          for f in android/qa-out/*.png; do [ -e "$f" ] && convert "$f" -resize 420x -quality 70 "$out/$(basename "${f%.png}").jpg"; done
+          cp android/qa-out/summary.json "$out/" 2>/dev/null || true
+          grep -E "FATAL|AndroidRuntime|salahalarm" android/qa-out/logcat.txt 2>/dev/null | tail -300 > "$out/logcat-app.txt" || true
+          git add "$out"
+          git -c user.name=qa-bot -c user.email=qa-bot@users.noreply.github.com commit --quiet -m "QA screenshots for run $GITHUB_RUN_ID"
+          for i in 1 2 3; do git pull --quiet --rebase origin "$GITHUB_REF_NAME" && git push --quiet origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done
