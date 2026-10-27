@@ -27,7 +27,7 @@ problems = []
 
 
 def adb(*args, check=True):
-    return subprocess.run(["adb", *args], capture_output=True, text=True, check=check).stdout
+    return subprocess.run(["adb", *args], capture_output=True, text=True, errors="replace", check=check).stdout
 
 
 def shot(name):
