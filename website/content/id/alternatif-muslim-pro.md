@@ -45,7 +45,7 @@ Inilah yang paling sering membuat orang kesiangan. Adzan di Muslim Pro adalah no
 
 ### Salah Alarm: kalau kamu sering kesiangan Subuh
 
-Salah Alarm adalah aplikasi buatan kami, jadi pertimbangkan itu. Aplikasi ini punya jadwal sholat akurat untuk kotamu dengan metode perhitungan utama (termasuk Kemenag RI), adzan, kiblat, Al-Qur'an dan widget doa, tanpa iklan. Bedanya, ia dibuat khusus untuk membangunkanmu Subuh: adzan berbunyi sebagai alarm dan baru berhenti setelah kamu memindai sajadah dengan kamera ponsel. Di mode ketat tidak ada tombol tunda. SalahLock juga bisa mengunci aplikasi yang mengganggu sampai kamu selesai sholat.
+Salah Alarm adalah aplikasi buatan kami, jadi pertimbangkan itu. Aplikasi ini punya jadwal sholat akurat untuk kotamu dengan metode perhitungan utama, adzan, kiblat, Al-Qur'an dan widget doa, tanpa iklan. Bedanya, ia dibuat khusus untuk membangunkanmu Subuh: adzan berbunyi sebagai alarm dan baru berhenti setelah kamu memindai sajadah dengan kamera ponsel. Di mode ketat tidak ada tombol tunda. SalahLock juga bisa mengunci aplikasi yang mengganggu sampai kamu selesai sholat.
 
 ### Pillars: kalau kamu hanya butuh jadwal sholat yang bersih
 

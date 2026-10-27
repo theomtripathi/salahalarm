@@ -56,3 +56,15 @@ test('search console rows aggregate per article', () => {
   assert.equal(p.position, 10);
   assert.equal(opportunities(rows).length, 1);
 });
+
+test('worker sends www and http to https://salahalarm.com and serves the rest', async () => {
+  const { default: worker } = await import('../src/worker.js');
+  const env = { ASSETS: { fetch: () => new Response('asset') } };
+  const www = await worker.fetch(new Request('https://www.salahalarm.com/blog/en/?a=1'), env);
+  assert.equal(www.status, 301);
+  assert.equal(www.headers.get('location'), 'https://salahalarm.com/blog/en/?a=1');
+  const http = await worker.fetch(new Request('http://salahalarm.com/'), env);
+  assert.equal(http.headers.get('location'), 'https://salahalarm.com/');
+  const ok = await worker.fetch(new Request('https://salahalarm.com/blog/en/'), env);
+  assert.equal(await ok.text(), 'asset');
+});

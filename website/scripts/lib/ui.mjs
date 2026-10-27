@@ -42,7 +42,7 @@ export function linkFor(config, platform, lang, slug) {
 export function storeButtons(config, lang, slug, cls = '') {
   const s = config.langs[lang];
   const btn = (platform, logo, name) =>
-    `<a class="store-badge store-${platform}" href="${esc(linkFor(config, platform, lang, slug))}" data-cta="${esc(`${lang}-${slug}-${platform}`)}">${logo}<span><small>${esc(s.getItFor)}</small>${name}</span></a>`;
+    `<a class="store-badge store-${platform}" rel="nofollow" href="${esc(linkFor(config, platform, lang, slug))}" data-cta="${esc(`${lang}-${slug}-${platform}`)}">${logo}<span><small>${esc(s.getItFor)}</small>${name}</span></a>`;
   return `<div class="store-buttons ${cls}">${btn('android', ANDROID, 'Android')}${btn('ios', APPLE, 'iOS')}</div>`;
 }
 
@@ -128,8 +128,8 @@ function header(config, lang) {
     <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
     <nav class="header-nav" aria-label="Main">${homeNav}<a href="/blog/${lang}/">${esc(s.guides)}</a></nav>
     <div class="header-cta">
-      <a class="btn btn-small" href="${esc(linkFor(config, 'android', lang, 'header'))}" data-cta="${lang}-header-android" aria-label="${esc(s.getItFor)} Android">${ANDROID}<span>Android</span></a>
-      <a class="btn btn-small" href="${esc(linkFor(config, 'ios', lang, 'header'))}" data-cta="${lang}-header-ios" aria-label="${esc(s.getItFor)} iOS">${APPLE}<span>iOS</span></a>
+      <a class="btn btn-small" rel="nofollow" href="${esc(linkFor(config, 'android', lang, 'header'))}" data-cta="${lang}-header-android" aria-label="${esc(s.getItFor)} Android">${ANDROID}<span>Android</span></a>
+      <a class="btn btn-small" rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'header'))}" data-cta="${lang}-header-ios" aria-label="${esc(s.getItFor)} iOS">${APPLE}<span>iOS</span></a>
     </div>
   </div>
 </header>`;
@@ -146,7 +146,7 @@ function footer(config, lang) {
       <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
       <p>The Fajr alarm that gets you to the prayer mat. Built for Muslims everywhere.</p>
     </div>
-    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
+    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a rel="nofollow" href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
     <div><h2>Guides</h2>${langs}</div>
     <div><h2>Legal</h2><a href="${esc(config.privacyUrl)}">Privacy</a><a href="${esc(config.termsUrl)}">Terms</a><a href="${esc(config.supportUrl)}">Support</a></div>
   </div>
