@@ -60,6 +60,6 @@ Masih ada lebih dari tiga bulan. Waktu yang cukup untuk membangun kebiasaan yang
 
 ## Jangan sampai kesiangan sahur dan Subuh
 
-Risiko terbesar saat Ramadhan adalah terlewat sahur dan Subuh. Salah Alarm menghitung waktu Subuh yang tepat untuk kotamu setiap hari, lalu memutar adzan sebagai alarm yang baru berhenti setelah kamu bangun dan memindai sajadah. Karena itu Salah Alarm juga bisa jadi alarm sahur yang andal: pasang sebelum imsak agar ada waktu makan, lalu sholat Subuh tepat waktu.
+Risiko terbesar saat Ramadhan adalah terlewat sahur dan Subuh. Salah Alarm menghitung waktu Subuh yang tepat untuk kotamu setiap hari, lalu memutar adzan sebagai alarm yang baru berhenti setelah kamu bangun dan memindai sajadah. Salah Alarm juga menampilkan waktu imsak dan mengirim pengingat 30 menit sebelumnya, jadi kamu diingatkan untuk sahur lalu tidak terlewat Subuh.
 
 Baca juga panduan kami tentang [cara bangun Subuh](/blog/id/cara-bangun-subuh/), dan halaman ini akan kami perbarui setelah sidang isbat Ramadhan 2027.

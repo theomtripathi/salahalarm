@@ -10,8 +10,8 @@ en-008,en,salah tracker app,habit,commercial,"US,GB,CA,AU",4,,salah-tracker,sala
 en-009,en,how to be consistent with salah,habit,info,"US,GB,CA,AU",4,,consistent-salah,how-to-be-consistent-with-salah,todo,,,,,,,,,
 en-010,en,app that locks phone until you pray,habit,tool,"US,GB,CA,AU",4,,,app-that-locks-phone-until-you-pray,todo,,,,,,,,,SalahLock feature
 en-011,en,ramadan 2027 start date,ramadan,info,"US,GB,CA,AU",5,2026-12-01,ramadan-2027-date,ramadan-2027-start-date,published,2026-10-24,,,,,,,,Publish early so it ranks by January
-en-012,en,ramadan 2027 calendar,ramadan,info,"US,GB,CA,AU",5,2026-12-10,ramadan-2027-calendar,ramadan-2027-calendar,todo,,,,,,,,,
-en-013,en,suhoor alarm app,ramadan,tool,"US,GB,CA,AU",5,2026-12-15,suhoor-alarm,suhoor-alarm-app,todo,,,,,,,,,
+en-012,en,ramadan 2027 calendar,ramadan,info,"US,GB,CA,AU",5,2026-12-10,ramadan-2027-calendar,ramadan-2027-calendar,published,2026-10-28,,,,,,,,
+en-013,en,suhoor alarm app,ramadan,tool,"US,GB,CA,AU",5,2026-12-15,suhoor-alarm,suhoor-alarm-app,published,2026-10-28,,,,,,,,
 en-014,en,how to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,,how-to-wake-up-for-suhoor,todo,,,,,,,,,
 en-015,en,ramadan planner 2027,ramadan,info,"US,GB,CA,AU",4,2026-12-20,ramadan-planner,ramadan-planner-2027,todo,,,,,,,,,Ties into Ramadan challenge feature
 en-016,en,best ramadan app,ramadan,commercial,"US,GB,CA,AU",4,2027-01-05,,best-ramadan-app,todo,,,,,,,,,
@@ -24,7 +24,7 @@ en-022,en,qibla direction app iphone,apps,tool,"US,GB,CA,AU",3,,qibla,qibla-dire
 en-023,en,2 rakat sunnah before fajr,fajr,info,"US,GB,CA,AU",3,,,sunnah-before-fajr,todo,,,,,,,,,
 en-024,en,fajr alarm not working iphone,apps,info,"US,GB,CA,AU",3,,,fajr-alarm-not-working-iphone,todo,,,,,,,,,"Focus mode, silent switch, background refresh"
 ar-025,ar,كيف أستيقظ لصلاة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",5,,wake-fajr,kayfa-astayqiz-lisalat-alfajr,published,2026-10-24,,,,,,,,
-ar-026,ar,منبه الفجر,fajr,tool,"SA,AE,EG,KW,QA,JO,MA",5,,fajr-alarm-app,munabbih-alfajr,todo,,,,,,,,,
+ar-026,ar,منبه الفجر,fajr,tool,"SA,AE,EG,KW,QA,JO,MA",5,,fajr-alarm-app,munabbih-alfajr,published,2026-10-28,,,,,,,,
 ar-027,ar,تطبيق أذان للايفون,apps,commercial,"SA,AE,EG,KW,QA,JO,MA",5,,azan-app-iphone,tatbiq-adhan-iphone,todo,,,,,,,,,
 ar-028,ar,منبه الصلاة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",4,,,munabbih-alsalah,todo,,,,,,,,,
 ar-029,ar,كيف أحافظ على الصلاة,habit,info,"SA,AE,EG,KW,QA,JO,MA",4,,consistent-salah,kayfa-uhafiz-ala-alsalah,todo,,,,,,,,,
@@ -35,7 +35,7 @@ ar-033,ar,دعاء الاستيقاظ من النوم,dua,info,"SA,AE,EG,KW,QA,J
 ar-034,ar,كيف أستيقظ لقيام الليل,fajr,info,"SA,AE,EG,KW,QA,JO,MA",3,,tahajjud,kayfa-astayqiz-liqiyam-allayl,todo,,,,,,,,,
 ar-035,ar,تطبيق اتجاه القبلة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,qibla,tatbiq-ittijah-alqibla,todo,,,,,,,,,
 tr-036,tr,sabah namazına nasıl uyanılır,fajr,info,"TR,DE,NL",5,,wake-fajr,sabah-namazina-nasil-uyanilir,published,2026-10-24,,,,,,,,
-tr-037,tr,ezan alarmı,apps,tool,"TR,DE,NL",5,,fajr-alarm-app,ezan-alarmi,todo,,,,,,,,,
+tr-037,tr,ezan alarmı,apps,tool,"TR,DE,NL",5,,fajr-alarm-app,ezan-alarmi,published,2026-10-28,,,,,,,,
 tr-038,tr,iphone ezan uygulaması,apps,commercial,"TR,DE,NL",5,,azan-app-iphone,iphone-ezan-uygulamasi,todo,,,,,,,,,
 tr-039,tr,namaz vakti alarmı,apps,tool,"TR,DE,NL",4,,,namaz-vakti-alarmi,todo,,,,,,,,,
 tr-040,tr,namaz takip uygulaması,habit,commercial,"TR,DE,NL",4,,salah-tracker,namaz-takip-uygulamasi,todo,,,,,,,,,
@@ -46,7 +46,7 @@ tr-044,tr,sahur alarmı,ramadan,tool,"TR,DE,NL",4,2026-12-15,suhoor-alarm,sahur-
 tr-045,tr,teheccüd namazına nasıl kalkılır,fajr,info,"TR,DE,NL",3,,tahajjud,teheccud-namazina-nasil-kalkilir,todo,,,,,,,,,
 tr-046,tr,kıble bulma uygulaması,apps,tool,"TR,DE,NL",3,,qibla,kible-bulma-uygulamasi,todo,,,,,,,,,
 id-047,id,cara bangun subuh,fajr,info,"ID,MY",5,,wake-fajr,cara-bangun-subuh,published,2026-10-24,,,,,,,,
-id-048,id,alarm adzan subuh,fajr,tool,"ID,MY",5,,fajr-alarm-app,alarm-adzan-subuh,todo,,,,,,,,,
+id-048,id,alarm adzan subuh,fajr,tool,"ID,MY",5,,fajr-alarm-app,alarm-adzan-subuh,published,2026-10-28,,,,,,,,
 id-049,id,aplikasi adzan iphone,apps,commercial,"ID,MY",5,,azan-app-iphone,aplikasi-adzan-iphone,todo,,,,,,,,,
 id-050,id,aplikasi pengingat sholat,apps,commercial,"ID,MY",4,,,aplikasi-pengingat-sholat,todo,,,,,,,,,
 id-051,id,cara istiqomah sholat 5 waktu,habit,info,"ID,MY",4,,consistent-salah,cara-istiqomah-sholat-5-waktu,todo,,,,,,,,,
@@ -60,8 +60,15 @@ ur-058,ur,فجر کی نماز کے لیے کیسے اٹھیں,fajr,info,"PK,IN,
 ur-059,ur,نماز کا الارم,apps,tool,"PK,IN,GB",5,,fajr-alarm-app,namaz-ka-alarm,todo,,,,,,,,,
 ur-060,ur,آئی فون کے لیے اذان ایپ,apps,commercial,"PK,IN,GB",4,,azan-app-iphone,iphone-azan-app,todo,,,,,,,,,
 ur-061,ur,نماز کی پابندی کیسے کریں,habit,info,"PK,IN,GB",4,,consistent-salah,namaz-ki-pabandi-kaise-karein,todo,,,,,,,,,
-ur-062,ur,رمضان 2027 کب ہے,ramadan,info,"PK,IN,GB",5,2026-12-01,ramadan-2027-date,ramzan-2027-kab-hai,todo,,,,,,,,,Roman Urdu: ramzan 2027 kab hai
+ur-062,ur,رمضان 2027 کب ہے,ramadan,info,"PK,IN,GB",5,2026-12-01,ramadan-2027-date,ramzan-2027-kab-hai,published,2026-10-28,,,,,,,,Roman Urdu: ramzan 2027 kab hai
 ur-063,ur,سحری کا الارم,ramadan,tool,"PK,IN,GB",4,2026-12-15,suhoor-alarm,sehri-ka-alarm,todo,,,,,,,,,
 ur-064,ur,رمضان 2027 کا کیلنڈر,ramadan,info,"PK,IN,GB",4,2026-12-10,ramadan-2027-calendar,ramzan-calendar-2027,todo,,,,,,,,,
 ur-065,ur,نیند سے جاگنے کی دعا,dua,info,"PK,IN,GB",3,,wake-dua,neend-se-jaagne-ki-dua,todo,,,,,,,,,
 ur-066,ur,تہجد کے لیے کیسے اٹھیں,fajr,info,"PK,IN,GB",3,,tahajjud,tahajjud-ke-liye-kaise-uthein,todo,,,,,,,,,
+en-067,en,what time to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,suhoor-wake,what-time-to-wake-up-for-suhoor,todo,,,,,,,,,added 2026-10-28
+en-069,en,ramadan 2027 countdown,ramadan,info,"US,GB,CA,AU",3,2027-01-10,,ramadan-2027-countdown,todo,,,,,,,,,added 2026-10-28
+ar-070,ar,كيف أستيقظ للسحور,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2026-12-20,suhoor-wake,kayfa-astayqiz-lilsuhur,todo,,,,,,,,,added 2026-10-28
+tr-071,tr,sahura nasıl kalkılır,ramadan,info,"TR,DE,NL",4,2026-12-20,suhoor-wake,sahura-nasil-kalkilir,todo,,,,,,,,,added 2026-10-28
+id-072,id,cara bangun sahur,ramadan,info,"ID,MY",4,2026-12-20,suhoor-wake,cara-bangun-sahur,todo,,,,,,,,,added 2026-10-28
+ur-073,ur,سحری کے لیے کیسے اٹھیں,ramadan,info,"PK,IN,GB",4,2026-12-20,suhoor-wake,sehri-ke-liye-kaise-uthein,todo,,,,,,,,,added 2026-10-28
+id-074,id,aplikasi muslim tanpa iklan,compare,commercial,"ID,MY",3,,,aplikasi-muslim-tanpa-iklan,todo,,,,,,,,,added 2026-10-28

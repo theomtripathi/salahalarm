@@ -24,7 +24,7 @@ const FAQ = [
   ['How does the prayer mat scan work?', 'When the alarm rings, point your phone camera at your prayer mat and confirm the scan. That stops the alarm and logs the prayer, so you have to get out of bed to switch it off.'],
   ['Is Salah Alarm free?', 'Salah Alarm is free to download. Some features, such as SalahLock and advanced alarms, are part of an optional Premium subscription.'],
   ['Which prayer time calculation methods are supported?', 'Muslim World League, Umm al-Qura (Makkah), Egyptian General Authority, ISNA (North America), Diyanet (Turkey), Kuwait, Qatar, Dubai, Singapore and more. Choose the one your local mosque follows.'],
-  ['Can I use it as a suhoor alarm in Ramadan?', 'Yes. Set your alarm before Fajr so you have time to eat, and the adhan alarm at Fajr makes sure you still pray on time.'],
+  ['Can I use it as a suhoor alarm in Ramadan?', 'Salah Alarm shows the imsak time and sends a reminder 30 minutes before it, so you get a nudge for suhoor. The adhan alarm at Fajr then makes sure you still pray on time.'],
   ['Is there an Android version?', 'Yes. Salah Alarm is available for Android and for iPhone. Tap Get it for Android to set up your account and start, or get the iPhone app from the App Store.'],
   ['Which languages does the app support?', 'English, Arabic, Turkish, Indonesian and Urdu.'],
 ];

@@ -61,6 +61,6 @@ Ayrıca iftar ve sahur sofrası için alışverişi haftalık planlamak, mutfakt
 
 ## Sahuru ve sabah namazını kaçırma
 
-Ramazan'daki en büyük pratik risk, sahura ve sabah namazına uyanamamak. Salah Alarm, Diyanet yöntemiyle şehrine göre tam imsak ve sabah vaktini her gün hesaplar ve ezanı bir alarm olarak çalar. Alarm ancak kalkıp seccadeni taradığında susar. Bu yüzden güvenilir bir sahur alarmı olarak da kullanabilirsin: yemek için yeterli zaman bırakacak şekilde imsaktan önceye kur, sonra namazını vaktinde kıl.
+Ramazan'daki en büyük pratik risk, sahura ve sabah namazına uyanamamak. Salah Alarm, Diyanet yöntemiyle şehrine göre tam imsak ve sabah vaktini her gün hesaplar ve ezanı bir alarm olarak çalar. Alarm ancak kalkıp seccadeni taradığında susar. Ayrıca imsak vaktini gösterir ve imsaktan 30 dakika önce hatırlatma gönderir; böylece sahura uyarılırsın ve sabah namazını da kaçırmazsın.
 
 Daha fazlası için [sabah namazına nasıl uyanılır](/blog/tr/sabah-namazina-nasil-uyanilir/) rehberimize göz at.

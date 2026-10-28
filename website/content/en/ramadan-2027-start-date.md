@@ -54,6 +54,6 @@ Three months is enough time to build the habits that make Ramadan easier:
 
 ## Never miss suhoor or Fajr this Ramadan
 
-The biggest practical risk in Ramadan is sleeping through suhoor and Fajr. Salah Alarm calculates the exact Fajr time for your city every day, plays the adhan as your alarm, and only stops once you get up and reach your prayer mat. That makes it a reliable suhoor alarm too: set it before Fajr so you have time to eat, then pray on time.
+The biggest practical risk in Ramadan is sleeping through suhoor and Fajr. Salah Alarm calculates the exact Fajr time for your city every day, plays the adhan as your alarm, and only stops once you get up and reach your prayer mat. In Ramadan it also shows the imsak time and sends a reminder 30 minutes before it, so you get a nudge for suhoor and then cannot sleep through Fajr.
 
 We will update this page as soon as moon sighting announcements for Ramadan 2027 are made.
