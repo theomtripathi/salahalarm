@@ -4,7 +4,7 @@ description: Cari alarm adzan Subuh? Kenapa alarm biasa dan notifikasi adzan ser
 keyword: alarm adzan subuh
 date: 2026-10-28
 status: published
-translationKey: fajr-alarm
+translationKey: fajr-alarm-app
 faq:
   - q: Aplikasi alarm adzan Subuh apa yang paling ampuh? | a: Yang menghitung waktu Subuh tepat untuk kotamu setiap hari dan tidak bisa dimatikan dari kasur. Salah Alarm memutar adzan Subuh sebagai alarm yang baru berhenti setelah kamu memindai sajadah dengan kamera ponsel.
   - q: Apa bedanya notifikasi adzan dan alarm adzan? | a: Notifikasi hanya memberi tahu waktu sholat sudah masuk dan bisa ditutup dengan satu ketukan. Alarm dibuat untuk membangunkan. Untuk Dzuhur dan Ashar notifikasi cukup, tapi untuk Subuh kamu butuh alarm yang memaksamu bangun.

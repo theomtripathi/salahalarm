@@ -4,7 +4,7 @@ description: Ezan alarmı arıyorsan: sıradan alarmlar ve ezan bildirimleri ned
 keyword: ezan alarmı
 date: 2026-10-28
 status: published
-translationKey: fajr-alarm
+translationKey: fajr-alarm-app
 faq:
   - q: En iyi ezan alarmı uygulaması hangisi? | a: Şehrine göre tam vakti her gün hesaplayan ve yataktan kapatılamayan bir alarm. Salah Alarm sabah ezanını alarm olarak çalar ve ancak seccadeni telefon kamerasıyla taradığında susar.
   - q: Ezan bildirimi ile ezan alarmı arasındaki fark nedir? | a: Bildirim vaktin girdiğini haber verir ve tek dokunuşla kapanır. Alarm ise seni uyandırmak için tasarlanır. Öğle ve ikindi için bildirim yeterlidir, sabah namazı için ise kapatmak için kalkman gereken bir alarm gerekir.
