@@ -4,7 +4,7 @@
 // ?to=ios (logged as `link_ios_store`), which 302s to the App Store campaign
 // link so App Analytics still attributes page views and installs to the same ct.
 import links from "../data/links.json";
-import { classifyAgent, chooserUrl } from "./links.js";
+import { classifyAgent, chooserUrl, campaignUrl } from "./links.js";
 
 const COOKIE = "sa_vid";
 
@@ -15,9 +15,10 @@ export default {
     const link = links[slug];
     const toStore = url.searchParams.get("to") === "ios";
     const appStore = link ? link.target : env.FALLBACK_URL || "https://apps.apple.com/app/id6758457826";
-    const target = toStore ? appStore : chooserUrl(url, link ? slug : null);
-
     const ua = request.headers.get("user-agent") || "";
+    const campaign = campaignUrl(url, slug, classifyAgent(ua).os);
+    const target = campaign || (toStore ? appStore : chooserUrl(url, link ? slug : null));
+
     const cookie = request.headers.get("cookie") || "";
     const existing = cookie.match(new RegExp(`${COOKIE}=([\\w-]+)`));
     const visitorId = existing ? existing[1] : crypto.randomUUID();
@@ -26,7 +27,7 @@ export default {
       const agent = classifyAgent(ua);
       const event = {
         api_key: env.POSTHOG_KEY,
-        event: toStore ? "link_ios_store" : link ? "link_clicked" : "link_unknown",
+        event: campaign ? "campaign_link_clicked" : toStore ? "link_ios_store" : link ? "link_clicked" : "link_unknown",
         distinct_id: visitorId,
         timestamp: new Date().toISOString(),
         properties: {

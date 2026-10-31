@@ -48,3 +48,16 @@ test("short links go to the iOS/Android chooser with the slug", () => {
   assert.equal(chooserUrl(base, "v/tt03-1024-1"), "https://salahalarm.com/get/?a=v%2Ftt03-1024-1");
   assert.equal(chooserUrl(base, null), "https://salahalarm.com/get/");
 });
+
+test("comeback email link routes by device", async () => {
+  const { campaignUrl } = await import("../src/links.js");
+  const url = new URL("https://salahalarm.com/go/comeback?utm_source=email");
+  assert.match(campaignUrl(url, "comeback", "ios"), /^https:\/\/apps\.apple\.com\/app\/apple-store\/id6758457826\?ct=email-comeback/);
+  const a = new URL(campaignUrl(url, "comeback", "android"));
+  assert.equal(a.pathname, "/android/");
+  assert.equal(a.searchParams.get("discount"), "COMEBACK33");
+  assert.equal(a.searchParams.get("resume"), "paywall");
+  assert.equal(a.searchParams.get("ref"), "email");
+  assert.equal(a.searchParams.get("utm_source"), "email");
+  assert.equal(campaignUrl(url, "ig1", "android"), null);
+});

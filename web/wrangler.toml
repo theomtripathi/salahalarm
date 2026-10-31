@@ -10,6 +10,7 @@ routes = [
   { pattern = "salahalarm.com/api/*", zone_name = "salahalarm.com" },
   { pattern = "salahalarm.com/download/*", zone_name = "salahalarm.com" },
   { pattern = "salahalarm.com/assets/*", zone_name = "salahalarm.com" },
+  { pattern = "salahalarm.com/.well-known/apple-app-site-association", zone_name = "salahalarm.com" },
 ]
 
 [assets]

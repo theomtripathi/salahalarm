@@ -51,10 +51,19 @@ export default {
   },
 };
 
+// Universal links: when the iOS app is installed, /go/comeback emails open it directly.
+// Only the comeback link, so the Instagram bio links keep going through the chooser.
+const AASA = { applinks: { details: [{ appIDs: ["63F577CS68.com.Ramadan-Pro"], components: [{ "/": "/go/comeback*" }] }] } };
+
+function appleAppSiteAssociation() {
+  return new Response(JSON.stringify(AASA), { headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
+}
+
 async function route(request, env, ctx, url) {
   const { pathname } = url;
   const method = request.method;
 
+  if (pathname === "/.well-known/apple-app-site-association") return appleAppSiteAssociation();
   if (pathname === "/api/config" && method === "GET") return config(request, env, ctx);
   if (pathname === "/api/profile" && method === "POST") return saveProfile(request, env);
   if (pathname === "/api/checkout" && method === "POST") return checkout(request, env, ctx, url);

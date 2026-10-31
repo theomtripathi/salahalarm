@@ -485,3 +485,13 @@ test("an app login code signs the installed app in once, as the same user", asyn
   assert.equal((await call("/api/app-login/redeem", { method: "POST", body: { code: "nope" } })).status, 400);
   assert.equal((await call("/api/app-login", { method: "POST" })).status, 401);
 });
+
+test("serves the apple-app-site-association file for the comeback link only", async () => {
+  const { default: worker } = await import("../src/worker.js");
+  const res = await worker.fetch(new Request("https://salahalarm.com/.well-known/apple-app-site-association"), {}, { waitUntil() {} });
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get("content-type"), "application/json");
+  const body = await res.json();
+  assert.deepEqual(body.applinks.details[0].appIDs, ["63F577CS68.com.Ramadan-Pro"]);
+  assert.deepEqual(body.applinks.details[0].components, [{ "/": "/go/comeback*" }]);
+});

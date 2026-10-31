@@ -66,3 +66,22 @@ export function chooserUrl(url, slug) {
   if (slug) target.searchParams.set("a", slug);
   return target.href;
 }
+
+// Email campaign links: one URL for every device. When the iOS app is installed,
+// a universal link opens it before this runs; otherwise iPhones go to the App Store
+// and everyone else to the Android web paywall with the discount already applied.
+export const CAMPAIGNS = {
+  comeback: { discount: "COMEBACK33", ct: "email-comeback" },
+};
+
+export function campaignUrl(url, slug, os, appStoreId = "6758457826") {
+  const c = CAMPAIGNS[slug];
+  if (!c) return null;
+  if (os === "ios") return `https://apps.apple.com/app/apple-store/id${appStoreId}?ct=${c.ct}&mt=8`;
+  const target = new URL("/android/", url);
+  for (const [k, v] of url.searchParams) target.searchParams.set(k, v);
+  if (!target.searchParams.has("ref")) target.searchParams.set("ref", "email");
+  target.searchParams.set("discount", c.discount);
+  target.searchParams.set("resume", "paywall");
+  return target.href;
+}
