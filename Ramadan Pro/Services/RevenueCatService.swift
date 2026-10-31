@@ -483,7 +483,10 @@ class RevenueCatService: ObservableObject {
     // MARK: - Check Subscription Status
     
     /// Check current subscription status
-    func checkSubscriptionStatus() async {
+    /// Returns false when RevenueCat could not be reached, so callers can tell
+    /// a confirmed "not subscribed" apart from an unknown status.
+    @discardableResult
+    func checkSubscriptionStatus() async -> Bool {
         print("🔍 RevenueCatService: Checking subscription status...")
         
         isLoading = true
@@ -492,7 +495,7 @@ class RevenueCatService: ObservableObject {
         // ADMIN BYPASS
         if checkAdminAccess() {
             isLoading = false
-            return
+            return true
         }
         
         do {
@@ -504,10 +507,12 @@ class RevenueCatService: ObservableObject {
             
             isLoading = false
             print("✅ RevenueCatService: Subscription status checked")
+            return true
         } catch {
             errorMessage = error.localizedDescription
             isLoading = false
             print("❌ RevenueCatService: Error checking subscription status: \(error.localizedDescription)")
+            return false
         }
     }
     

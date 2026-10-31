@@ -32,10 +32,10 @@ final class ComebackOfferService: ObservableObject {
         pendingSource = UserDefaults.standard.string(forKey: pendingKey)
     }
 
-    /// True for https://salahalarm.com/go/comeback (and www., with any query string).
+    /// True for https://salahalarm.com/go/comeback with any query string. Only the apex
+    /// host is registered for Universal Links (applinks:salahalarm.com).
     static func isComebackLink(_ url: URL) -> Bool {
-        guard let host = url.host?.lowercased(),
-              host == "salahalarm.com" || host == "www.salahalarm.com" else { return false }
+        guard url.host?.lowercased() == "salahalarm.com" else { return false }
         return url.path.lowercased().hasPrefix("/go/comeback")
     }
 

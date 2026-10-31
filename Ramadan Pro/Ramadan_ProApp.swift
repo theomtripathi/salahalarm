@@ -156,7 +156,9 @@ struct RootRouterView: View {
             print("⚠️ RootRouterView: Comeback offer could not confirm the account - \(error.localizedDescription)")
             return
         }
-        await RevenueCatService.shared.checkSubscriptionStatus()
+        // Fail closed: if RevenueCat can't be reached, a reinstalled subscriber's
+        // local flag may still be false, so don't show the discount.
+        guard await RevenueCatService.shared.checkSubscriptionStatus() else { return }
         comebackOfferVerified = !hasSubscription
         if hasSubscription { comebackOffer.clear() }
     }
