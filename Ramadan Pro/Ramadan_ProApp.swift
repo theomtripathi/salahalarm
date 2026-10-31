@@ -213,7 +213,12 @@ struct RootRouterView: View {
                 RatingPromptManager.shared.recordAppActivation()
             }
             Task {
-                await RevenueCatService.shared.checkSubscriptionStatus()
+                if comebackOffer.pendingSource != nil && !comebackOfferVerified {
+                    // Retries an offer check that failed earlier (e.g. RevenueCat was unreachable).
+                    await verifyComebackOffer()
+                } else {
+                    await RevenueCatService.shared.checkSubscriptionStatus()
+                }
             }
         }
     }
