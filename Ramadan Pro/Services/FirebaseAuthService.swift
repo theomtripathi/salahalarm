@@ -174,6 +174,7 @@ class FirebaseAuthService: ObservableObject {
             )
             isAuthenticated = true
             UserDefaults.standard.set(true, forKey: AppConstants.UserDefaultsKeys.isLoggedIn)
+            ComebackOfferService.shared.noteReturningSignIn()
 
             // Best-effort profile sync.
             do {
@@ -262,6 +263,7 @@ class FirebaseAuthService: ObservableObject {
             } else {
                 print("📝 FirebaseAuthService: Existing user, updating last login...")
                 try await updateLastLogin(userId: firebaseUser.uid)
+                ComebackOfferService.shared.noteReturningSignIn()
             }
             
             // Load user data
@@ -339,6 +341,7 @@ class FirebaseAuthService: ObservableObject {
             } else {
                 print("📝 FirebaseAuthService: Existing user, updating last login...")
                 try await updateLastLogin(userId: firebaseUser.uid)
+                ComebackOfferService.shared.noteReturningSignIn()
             }
             
             await loadUserData(userId: firebaseUser.uid)

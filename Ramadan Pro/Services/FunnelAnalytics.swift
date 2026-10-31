@@ -51,6 +51,10 @@ enum FunnelEvent: String {
     case paywallBackgrounded = "paywall_backgrounded"
     case paywallProductRejected = "paywall_product_rejected"
     case ratingPromptRequested = "rating_prompt_requested"
+    case comebackLinkOpened = "comeback_link_opened"
+    case comebackOfferShown = "comeback_offer_shown"
+    case comebackOfferRedeemTapped = "comeback_offer_redeem_tapped"
+    case comebackOfferDismissed = "comeback_offer_dismissed"
 }
 
 final class FunnelAnalytics {
