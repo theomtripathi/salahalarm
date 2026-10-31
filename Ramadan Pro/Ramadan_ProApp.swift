@@ -89,6 +89,7 @@ struct Ramadan_ProApp: App {
                 .environmentObject(onboardingState)
                 .environmentObject(authService)
             .onOpenURL { url in
+                if ComebackOfferService.shared.handle(url: url) { return }
                 GIDSignIn.sharedInstance.handle(url)
             }
         }
@@ -100,6 +101,10 @@ struct RootRouterView: View {
     @EnvironmentObject var authService: FirebaseAuthService
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var revenueCatService = RevenueCatService.shared
+    @ObservedObject private var comebackOffer = ComebackOfferService.shared
+    /// Set only after the subscription check has run for the signed-in account,
+    /// so a paying customer who signs in again never sees the discount.
+    @State private var comebackOfferVerified = false
 
     @AppStorage(AppConstants.UserDefaultsKeys.isSubscribed) private var isSubscribed: Bool = false
 
@@ -120,6 +125,42 @@ struct RootRouterView: View {
         }
         #endif
         return nil
+    }
+
+    private var showsComebackOffer: Binding<Bool> {
+        Binding(
+            get: {
+                replayVerificationView == nil && comebackOfferVerified && comebackOffer.shouldPresent(
+                    isAuthenticated: authService.isAuthenticated,
+                    hasSubscription: hasSubscription
+                )
+            },
+            set: { isPresented in
+                if !isPresented {
+                    comebackOfferVerified = false
+                    comebackOffer.clear()
+                }
+            }
+        )
+    }
+
+    /// Confirms the signed-in account has no active subscription before the offer shows.
+    private func verifyComebackOffer() async {
+        comebackOfferVerified = false
+        guard comebackOffer.pendingSource != nil,
+              authService.isAuthenticated,
+              let userId = authService.currentUser?.userId else { return }
+        do {
+            try await RevenueCatService.shared.setUserID(userId)
+        } catch {
+            print("⚠️ RootRouterView: Comeback offer could not confirm the account - \(error.localizedDescription)")
+            return
+        }
+        // Fail closed: if RevenueCat can't be reached, a reinstalled subscriber's
+        // local flag may still be false, so don't show the discount.
+        guard await RevenueCatService.shared.checkSubscriptionStatus() else { return }
+        comebackOfferVerified = !hasSubscription
+        if hasSubscription { comebackOffer.clear() }
     }
 
     var body: some View {
@@ -150,7 +191,14 @@ struct RootRouterView: View {
                 RatingPromptManager.shared.recordAppActivation()
             }
         }
+        .fullScreenCover(isPresented: showsComebackOffer) {
+            ComebackOfferView()
+        }
+        .task(id: "\(comebackOffer.pendingSource ?? "")|\(authService.isAuthenticated)|\(authService.currentUser?.userId ?? "")") {
+            await verifyComebackOffer()
+        }
         .onChange(of: revenueCatService.subscriptionStatus.isActive) { isActive in
+            if isActive { comebackOffer.clear() }
             UserDefaults.standard.set(isActive, forKey: AppConstants.UserDefaultsKeys.isSubscribed)
             WidgetConfig.saveIsSubscribed(isActive)
             if isActive {
@@ -165,7 +213,12 @@ struct RootRouterView: View {
                 RatingPromptManager.shared.recordAppActivation()
             }
             Task {
-                await RevenueCatService.shared.checkSubscriptionStatus()
+                if comebackOffer.pendingSource != nil && !comebackOfferVerified {
+                    // Retries an offer check that failed earlier (e.g. RevenueCat was unreachable).
+                    await verifyComebackOffer()
+                } else {
+                    await RevenueCatService.shared.checkSubscriptionStatus()
+                }
             }
         }
     }

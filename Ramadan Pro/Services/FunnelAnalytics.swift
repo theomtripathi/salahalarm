@@ -51,6 +51,10 @@ enum FunnelEvent: String {
     case paywallBackgrounded = "paywall_backgrounded"
     case paywallProductRejected = "paywall_product_rejected"
     case ratingPromptRequested = "rating_prompt_requested"
+    case comebackLinkOpened = "comeback_link_opened"
+    case comebackOfferShown = "comeback_offer_shown"
+    case comebackOfferRedeemTapped = "comeback_offer_redeem_tapped"
+    case comebackOfferDismissed = "comeback_offer_dismissed"
 }
 
 final class FunnelAnalytics {
@@ -403,6 +407,27 @@ final class FunnelAnalytics {
         AppsFlyerService.shared.logEvent(event.rawValue, parameters: enrichedProperties)
     }
     func identify(userID: String) { PostHogSDK.shared.identify(userID) }
+
+    /// Stores the sign-in email on the PostHog person so workflows can email
+    /// people who signed in but never paid. `$set` also updates people who
+    /// were identified before this property existed.
+    func setEmail(_ email: String?) {
+        guard isConfigured,
+              let email = email?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
+              email.contains("@") else { return }
+        PostHogSDK.shared.capture("$set", properties: ["$set": [
+            "email": email,
+            "email_is_apple_relay": email.hasSuffix("@privaterelay.appleid.com"),
+            "platform": "ios"
+        ]])
+    }
+
+    /// Mirrors the RevenueCat entitlement onto the person, so a workflow can
+    /// skip anyone who already pays, including purchases made on another device.
+    func setSubscribed(_ isSubscribed: Bool) {
+        guard isConfigured else { return }
+        PostHogSDK.shared.capture("$set", properties: ["$set": ["is_subscribed": isSubscribed]])
+    }
 }
 
 private extension Bundle {
