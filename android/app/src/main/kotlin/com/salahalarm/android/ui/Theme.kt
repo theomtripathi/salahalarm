@@ -225,4 +225,10 @@ fun OnceEffect(key: Any?, block: suspend () -> Unit) = LaunchedEffect(key) { blo
 fun initialsOf(name: String): String =
     name.split(" ").filter { it.isNotBlank() }.take(2).joinToString("") { it.take(1) }.uppercase().ifEmpty { "S" }
 
-fun displayName(name: String?): String = name?.trim()?.takeIf { it.isNotEmpty() } ?: t("Friend")
+/** The account's name, else a first name read from the email ("amina.k@..." -> "Amina"), else "Friend". */
+fun displayName(name: String?, email: String? = null): String {
+    name?.trim()?.takeIf { it.isNotEmpty() }?.let { return it }
+    val fromEmail = email?.substringBefore("@")?.split('.', '_', '-', '+')?.firstOrNull()
+        ?.takeWhile { it.isLetter() }?.takeIf { it.length >= 2 }
+    return fromEmail?.lowercase()?.replaceFirstChar { it.titlecase() } ?: t("Friend")
+}

@@ -106,7 +106,7 @@ fun HomeScreen() {
     val schedule = schedules.firstOrNull()
     val todayLog = logs[com.salahalarm.core.DateKeys.of(today)] ?: com.salahalarm.core.DailyPrayerLog()
     val premium = entitlement.isActive(now)
-    val name = displayName(user?.displayName)
+    val name = displayName(user?.displayName, user?.email)
     val shownStreak = streak.displayed(today)
     val needsAttention = remember(now.epochSecond / 30) {
         premium && settings.alarmsEnabled && (

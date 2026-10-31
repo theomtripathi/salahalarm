@@ -95,7 +95,7 @@ fun ProfileScreen() {
     var busy by remember { mutableStateOf(false) }
     val now = Instant.now()
     val premium = entitlement.isActive(now)
-    val name = displayName(user?.displayName)
+    val name = displayName(user?.displayName, user?.email)
 
     val locationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         scope.launch { repo.refreshLocation() }
@@ -107,7 +107,7 @@ fun ProfileScreen() {
                 Avatar(initialsOf(name), size = 64, filled = true)
                 Spacer(Modifier.width(16.dp))
                 Column {
-                    Text(user?.displayName ?: t("SalahAlarm User"), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text(name, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                     user?.email?.let { Secondary(it, size = 13) }
                     val since = user?.metadata?.creationTimestamp?.let { Instant.ofEpochMilli(it) }
                     Secondary(tf("Member since %@", since?.let { DateTimeFormatter.ofPattern("MMM yyyy", I18n.locale).format(it.atZone(ZoneId.systemDefault())) } ?: "--"), size = 12)

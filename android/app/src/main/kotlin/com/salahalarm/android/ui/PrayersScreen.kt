@@ -59,6 +59,11 @@ fun PrayersScreen() {
     var monthly by remember { mutableStateOf(false) }
     var offset by remember { mutableIntStateOf(0) }
     val today = repo.today()
+    val user by repo.user.collectAsState()
+    // Days before the account existed are not "missed"; they stay neutral.
+    val firstDay = user?.metadata?.creationTimestamp
+        ?.let { java.time.Instant.ofEpochMilli(it).atZone(java.time.ZoneId.systemDefault()).toLocalDate() }
+        ?.coerceAtMost(today) ?: today
     fun log(d: LocalDate): DailyPrayerLog = logs[DateKeys.of(d)] ?: DailyPrayerLog()
     val todayCount = log(today).prayedCount
 
@@ -89,7 +94,7 @@ fun PrayersScreen() {
                     val month = today.plusMonths(offset.toLong()).withDayOfMonth(1)
                     Text(month.format(DateTimeFormatter.ofPattern("MMMM yyyy", I18n.locale)), fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(10.dp))
-                    MonthGrid(month, today, ::log)
+                    MonthGrid(month, today, firstDay, ::log)
                 } else {
                     val start = today.plusWeeks(offset.toLong()).with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
                     val days = (0..6).map { start.plusDays(it.toLong()) }
@@ -110,7 +115,7 @@ fun PrayersScreen() {
                                 val done = log(d).isConfirmed(p)
                                 val color = when {
                                     done -> Palette.green
-                                    d < today -> Color(0xFFFFE5E5)
+                                    d < today && d >= firstDay -> Color(0xFFFFE5E5)
                                     else -> Color.Transparent
                                 }
                                 Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
@@ -123,7 +128,7 @@ fun PrayersScreen() {
             }
 
             SectionTitle(t("Recent Prayer Log"))
-            (0 until 14).forEach { back ->
+            (0 until minOf(14L, java.time.temporal.ChronoUnit.DAYS.between(firstDay, today) + 1).toInt()).forEach { back ->
                 val d = today.minusDays(back.toLong())
                 val l = log(d)
                 Row(
@@ -143,14 +148,14 @@ fun PrayersScreen() {
 }
 
 @Composable
-private fun MonthGrid(month: LocalDate, today: LocalDate, log: (LocalDate) -> DailyPrayerLog) {
+private fun MonthGrid(month: LocalDate, today: LocalDate, firstDay: LocalDate, log: (LocalDate) -> DailyPrayerLog) {
     val days = (1..month.lengthOfMonth()).map { month.withDayOfMonth(it) }
     days.chunked(7).forEach { week ->
         Row(Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
             week.forEach { d ->
                 val count = log(d).prayedCount
                 val color = when {
-                    d > today -> Palette.border
+                    d > today || (d < firstDay && count == 0) -> Palette.border
                     count == 5 -> Palette.green
                     count >= 3 -> Palette.gold
                     count >= 1 -> Color(0xFFFF9800)
