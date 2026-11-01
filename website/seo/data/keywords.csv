@@ -26,12 +26,12 @@ en-024,en,fajr alarm not working iphone,apps,info,"US,GB,CA,AU",3,,,fajr-alarm-n
 ar-025,ar,كيف أستيقظ لصلاة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",5,,wake-fajr,kayfa-astayqiz-lisalat-alfajr,published,2026-10-24,,,,,,,,
 ar-026,ar,منبه الفجر,fajr,tool,"SA,AE,EG,KW,QA,JO,MA",5,,fajr-alarm-app,munabbih-alfajr,published,2026-10-28,,,,,,,,
 ar-027,ar,تطبيق أذان للايفون,apps,commercial,"SA,AE,EG,KW,QA,JO,MA",5,,azan-app-iphone,tatbiq-adhan-iphone,published,2026-10-30,,,,,,,,
-ar-028,ar,منبه الصلاة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",4,,,munabbih-alsalah,todo,,,,,,,,,
-ar-029,ar,كيف أحافظ على الصلاة,habit,info,"SA,AE,EG,KW,QA,JO,MA",4,,consistent-salah,kayfa-uhafiz-ala-alsalah,todo,,,,,,,,,
+ar-028,ar,منبه الصلاة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",4,,,munabbih-alsalah,published,2026-11-01,,,,,,,,
+ar-029,ar,كيف أحافظ على الصلاة,habit,info,"SA,AE,EG,KW,QA,JO,MA",4,,consistent-salah,kayfa-uhafiz-ala-alsalah,published,2026-11-01,,,,,,,,
 ar-030,ar,موعد رمضان 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",5,2026-12-01,ramadan-2027-date,mawid-ramadan-2027,published,2026-10-27,,,,,,,,
 ar-031,ar,امساكية رمضان 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",5,2026-12-10,ramadan-2027-calendar,imsakiyat-ramadan-2027,published,2026-10-31,,,,,,,,
 ar-032,ar,منبه السحور,ramadan,tool,"SA,AE,EG,KW,QA,JO,MA",4,2026-12-15,suhoor-alarm,munabbih-alsuhur,published,2026-10-29,,,,,,,,
-ar-033,ar,دعاء الاستيقاظ من النوم,dua,info,"SA,AE,EG,KW,QA,JO,MA",3,,wake-dua,dua-alistiqaz-min-alnawm,todo,,,,,,,,,
+ar-033,ar,دعاء الاستيقاظ من النوم,dua,info,"SA,AE,EG,KW,QA,JO,MA",3,,wake-dua,dua-alistiqaz-min-alnawm,published,2026-11-01,,,,,,,,
 ar-034,ar,كيف أستيقظ لقيام الليل,fajr,info,"SA,AE,EG,KW,QA,JO,MA",3,,tahajjud,kayfa-astayqiz-liqiyam-allayl,todo,,,,,,,,,
 ar-035,ar,تطبيق اتجاه القبلة,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,qibla,tatbiq-ittijah-alqibla,todo,,,,,,,,,
 tr-036,tr,sabah namazına nasıl uyanılır,fajr,info,"TR,DE,NL",5,,wake-fajr,sabah-namazina-nasil-uyanilir,published,2026-10-24,,,,,,,,
@@ -65,14 +65,14 @@ ur-063,ur,سحری کا الارم,ramadan,tool,"PK,IN,GB",4,2026-12-15,suhoor-a
 ur-064,ur,رمضان 2027 کا کیلنڈر,ramadan,info,"PK,IN,GB",4,2026-12-10,ramadan-2027-calendar,ramzan-calendar-2027,published,2026-10-29,,,,,,,,
 ur-065,ur,نیند سے جاگنے کی دعا,dua,info,"PK,IN,GB",3,,wake-dua,neend-se-jaagne-ki-dua,todo,,,,,,,,,
 ur-066,ur,تہجد کے لیے کیسے اٹھیں,fajr,info,"PK,IN,GB",3,,tahajjud,tahajjud-ke-liye-kaise-uthein,todo,,,,,,,,,
-en-067,en,what time to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,suhoor-wake,what-time-to-wake-up-for-suhoor,todo,,,,,,,,,added 2026-10-28
+en-067,en,what time to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,suhoor-wake,what-time-to-wake-up-for-suhoor,published,2026-11-01,,,,,,,,added 2026-10-28
 en-069,en,ramadan 2027 countdown,ramadan,info,"US,GB,CA,AU",3,2027-01-10,,ramadan-2027-countdown,todo,,,,,,,,,added 2026-10-28
 ar-070,ar,كيف أستيقظ للسحور,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2026-12-20,suhoor-wake,kayfa-astayqiz-lilsuhur,published,2026-10-30,,,,,,,,added 2026-10-28
 tr-071,tr,sahura nasıl kalkılır,ramadan,info,"TR,DE,NL",4,2026-12-20,suhoor-wake,sahura-nasil-kalkilir,todo,,,,,,,,,added 2026-10-28
 id-072,id,cara bangun sahur,ramadan,info,"ID,MY",4,2026-12-20,suhoor-wake,cara-bangun-sahur,published,2026-10-30,,,,,,,,added 2026-10-28
 ur-073,ur,سحری کے لیے کیسے اٹھیں,ramadan,info,"PK,IN,GB",4,2026-12-20,suhoor-wake,sehri-ke-liye-kaise-uthein,todo,,,,,,,,,added 2026-10-28
 id-074,id,aplikasi muslim tanpa iklan,compare,commercial,"ID,MY",3,,,aplikasi-muslim-tanpa-iklan,todo,,,,,,,,,added 2026-10-28
-en-075,en,how to wake up for fajr in winter,fajr,info,"US,GB,CA,AU",3,,fajr-winter,wake-up-for-fajr-in-winter,todo,,,,,,,,,added 2026-10-29
+en-075,en,how to wake up for fajr in winter,fajr,info,"US,GB,CA,AU",3,,fajr-winter,wake-up-for-fajr-in-winter,published,2026-11-01,,,,,,,,added 2026-10-29
 tr-077,tr,uyanma duası,dua,info,"TR,DE,NL",3,,wake-dua,uyanma-duasi,todo,,,,,,,,,added 2026-10-29
 id-078,id,notifikasi adzan tidak bunyi,apps,info,"ID,MY",4,,adhan-not-working,notifikasi-adzan-tidak-bunyi,todo,,,,,,,,,added 2026-10-30
 tr-079,tr,ezan sesi gelmiyor iphone,apps,info,"TR,DE,NL",3,,adhan-not-working,ezan-sesi-gelmiyor,todo,,,,,,,,,added 2026-10-30
@@ -80,7 +80,7 @@ ar-080,ar,الأذان لا يعمل في الايفون,apps,info,"SA,AE,EG,KW,
 tr-081,tr,namaza uyandıran uygulama,fajr,tool,"TR,DE,NL",4,,fajr-alarm-app,namaza-uyandiran-uygulama,todo,,,,,,,,,added 2026-10-30
 ur-082,ur,فجر کا الارم ایپ,fajr,tool,"PK,IN,GB",3,,fajr-alarm-app,fajr-alarm-app-urdu,todo,,,,,,,,,added 2026-10-30
 en-083,en,tahajjud alarm app,fajr,tool,"US,GB,CA,AU",3,,tahajjud-alarm,tahajjud-alarm-app,todo,,,,,,,,,added 2026-10-30
-en-084,en,how to pray fajr on time,fajr,info,"US,GB,CA,AU",4,,wake-fajr,pray-fajr-on-time,todo,,,,,,,,,added 2026-10-31
+en-084,en,how to pray fajr on time,fajr,info,"US,GB,CA,AU",4,,wake-fajr,pray-fajr-on-time,published,2026-11-01,,,,,,,,added 2026-10-31
 en-085,en,can't wake up for fajr,fajr,info,"US,GB,CA,AU",4,,,cant-wake-up-for-fajr,todo,,,,,,,,,added 2026-10-31
 tr-086,tr,teravih namazı kaç rekat,ramadan,info,"TR,DE,NL",3,2027-01-31,taraweeh,teravih-namazi-kac-rekat,todo,,,,,,,,,added 2026-10-31
 id-087,id,niat puasa ramadhan,ramadan,info,"ID,MY",4,2027-01-31,fasting-intention,niat-puasa-ramadhan,todo,,,,,,,,,added 2026-10-31
