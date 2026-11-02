@@ -1,0 +1,300 @@
+I/GoogleInputMethodService( 1517): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8081(Password) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.salahalarm.android fieldId=-1 fieldName=null extras=Bundle[{androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false}]}, false)
+I/ImeTracker( 3052): com.salahalarm.android:8edf1cca: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1517): AbstractIme.onActivate():86 PasswordIme.onActivate() : EditorInfo = inputType=0x8081(Password) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.salahalarm.android fieldId=-1 fieldName=null extras=Bundle[{androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false}], IncognitoMode = false, DeviceLocked = false
+D/CoreBackPreview(  524): Window{7db2440 u0 com.salahalarm.android/com.salahalarm.android.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@4c30f01, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 3052): com.salahalarm.android:4cda9ca8: onShown
+I/ImeTracker( 3052): com.salahalarm.android:8edf1cca: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/AndroidRuntime( 4961): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 4961): Using default boot image
+I/AndroidRuntime( 4961): Leaving lock profiling enabled
+D/AndroidRuntime( 4961): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 4961): Shutting down VM
+D/AndroidRuntime( 4992): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 4992): Using default boot image
+I/AndroidRuntime( 4992): Leaving lock profiling enabled
+D/AndroidRuntime( 4992): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 4992): Shutting down VM
+D/AndroidRuntime( 5018): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5018): Using default boot image
+I/AndroidRuntime( 5018): Leaving lock profiling enabled
+D/AndroidRuntime( 5018): Calling main entry com.android.commands.uiautomator.Launcher
+E/FrameTracker( 3052): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.salahalarm.android>
+D/AndroidRuntime( 5018): Shutting down VM
+I/FirebaseAuth( 3052): Logging in as qa-41503376054@salahalarm-qa.test with empty reCAPTCHA token
+D/ConnectivityService(  524): requestNetwork for uid/pid:10192/3052 activeRequest: null callbackRequest: 127 [NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+D/WifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+D/UntrustedWifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+D/OemPaidWifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+D/MultiInternetWifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+I/ImeTracker( 3052): com.salahalarm.android:9bb2db58: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 3052): com.salahalarm.android:8457301f: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1517): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.salahalarm.android fieldId=0 fieldName=null extras=null}, true)
+D/ConnectivityService(  524): requestNetwork for uid/pid:10192/3052 activeRequest: null callbackRequest: 129 [NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+D/WifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+D/UntrustedWifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+D/OemPaidWifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+D/MultiInternetWifiNetworkFactory(  524): got request NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ]
+I/ImeTracker( 3052): com.salahalarm.android:8457301f: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/CoreBackPreview(  524): Window{7db2440 u0 com.salahalarm.android/com.salahalarm.android.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@2037fec, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 3052): com.salahalarm.android:4bf17671: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  524): com.salahalarm.android:4bf17671: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 3052): com.salahalarm.android:9bb2db58: onHidden
+V/WindowManagerShell(  842): Transition requested: android.os.BinderProxy@854d1b8 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=9 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW dat=https://salahalarm.com/... flg=0x10800000 cmp=com.android.chrome/com.google.android.apps.chrome.IntentDispatcher } baseActivity=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} topActivity=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} origActivity=ComponentInfo{com.android.chrome/com.google.android.apps.chrome.IntentDispatcher} realActivity=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} numActivities=1 lastActiveTime=118844 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@538b91} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{b3ecaf6 com.google.android.apps.chrome.IntentDispatcher} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+I/ActivityTaskManager(  524): START u0 {act=android.intent.action.VIEW dat=https://salahalarm.com/... flg=0x10000000 cmp=com.android.chrome/com.google.android.apps.chrome.IntentDispatcher} with LAUNCH_MULTIPLE from uid 10192 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+V/WindowManager(  524): Sent Transition #9 createdAt=11-02 18:51:49.072 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=9 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.VIEW dat=https://salahalarm.com/... flg=0x10800000 cmp=com.android.chrome/com.google.android.apps.chrome.IntentDispatcher } baseActivity=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} topActivity=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} origActivity=ComponentInfo{com.android.chrome/com.google.android.apps.chrome.IntentDispatcher} realActivity=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} numActivities=1 lastActiveTime=118844 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{4a37243 Task{d1c8ef #9 type=standard A=10150:com.android.chrome}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{93a40c0 com.google.android.apps.chrome.IntentDispatcher} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  524):     info={id=9 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{4a37243 Task{d1c8ef #9 type=standard A=10150:com.android.chrome}}} m=OPEN f=NONE leash=Surface(name=Task=9)/@0xa6e52a7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{e96f6c7 Task{68ffd77 #8 type=standard A=10192:com.salahalarm.android}}} m=TO_BACK f=NONE leash=Surface(name=Task=8)/@0x7be9ae1 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+D/AndroidRuntime( 5302): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5302): Using default boot image
+I/AndroidRuntime( 5302): Leaving lock profiling enabled
+D/AndroidRuntime( 5302): Calling main entry com.android.commands.monkey.Monkey
+W/Monkey  ( 5302): args: [-p, com.salahalarm.android, -c, android.intent.category.LAUNCHER, 1]
+W/Monkey  ( 5302):  arg: "com.salahalarm.android"
+W/Monkey  ( 5302): data="com.salahalarm.android"
+I/ActivityTaskManager(  524): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=2
+V/WindowManagerShell(  842): Transition requested: android.os.BinderProxy@3171d00 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity } baseActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} topActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} origActivity=null realActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} numActivities=1 lastActiveTime=118844 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@9ad8939} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{9c8fb7e com.salahalarm.android.ui.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+D/WindowManagerShell(  842): onActivityRestartAttempt: ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity}
+I/AndroidRuntime( 5302): VM exiting with result code 0.
+V/WindowManager(  524): Sent Transition #10 createdAt=11-02 18:51:53.804 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity } baseActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} topActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} origActivity=null realActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} numActivities=1 lastActiveTime=118844 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{e96f6c7 Task{68ffd77 #8 type=standard A=10192:com.salahalarm.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{a61e4f4 com.salahalarm.android.ui.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  524):     info={id=10 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{e96f6c7 Task{68ffd77 #8 type=standard A=10192:com.salahalarm.android}}} m=TO_FRONT f=MOVE_TO_TOP leash=Surface(name=Task=8)/@0x7be9ae1 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{4a37243 Task{d1c8ef #9 type=standard A=10150:com.android.chrome}}} m=TO_BACK f=NONE leash=Surface(name=Task=9)/@0xa6e52a7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+I/ImeTracker(  524): com.salahalarm.android:46ac1339: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  524): com.salahalarm.android:46ac1339: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1517): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.salahalarm.android fieldId=0 fieldName=null extras=null}, false)
+E/FrameTracker( 3052): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.salahalarm.android>
+D/AndroidRuntime( 5357): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5357): Using default boot image
+I/AndroidRuntime( 5357): Leaving lock profiling enabled
+D/AndroidRuntime( 5357): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5357): Shutting down VM
+D/AndroidRuntime( 5452): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5452): Using default boot image
+I/AndroidRuntime( 5452): Leaving lock profiling enabled
+D/AndroidRuntime( 5452): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5452): Shutting down VM
+D/AndroidRuntime( 5541): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5541): Using default boot image
+I/AndroidRuntime( 5541): Leaving lock profiling enabled
+D/AndroidRuntime( 5541): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5541): Shutting down VM
+I/AndroidRuntime( 5541): NOTE: attach of thread 'binder:5541_3' failed
+D/AndroidRuntime( 5628): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5628): Using default boot image
+I/AndroidRuntime( 5628): Leaving lock profiling enabled
+D/AndroidRuntime( 5628): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5628): Shutting down VM
+D/AndroidRuntime( 5675): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5675): Using default boot image
+I/AndroidRuntime( 5675): Leaving lock profiling enabled
+D/AndroidRuntime( 5675): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5675): Shutting down VM
+D/AndroidRuntime( 5724): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5724): Using default boot image
+I/AndroidRuntime( 5724): Leaving lock profiling enabled
+D/AndroidRuntime( 5724): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5724): Shutting down VM
+D/AndroidRuntime( 5807): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5807): Using default boot image
+I/AndroidRuntime( 5807): Leaving lock profiling enabled
+D/AndroidRuntime( 5807): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5807): Shutting down VM
+D/AndroidRuntime( 5893): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5893): Using default boot image
+I/AndroidRuntime( 5893): Leaving lock profiling enabled
+D/AndroidRuntime( 5893): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5893): Shutting down VM
+D/AndroidRuntime( 5932): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5932): Using default boot image
+I/AndroidRuntime( 5932): Leaving lock profiling enabled
+D/AndroidRuntime( 5932): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5932): Shutting down VM
+D/AndroidRuntime( 5992): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5992): Using default boot image
+I/AndroidRuntime( 5992): Leaving lock profiling enabled
+D/AndroidRuntime( 5992): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5992): Shutting down VM
+D/AndroidRuntime( 6247): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6247): Using default boot image
+I/AndroidRuntime( 6247): Leaving lock profiling enabled
+D/AndroidRuntime( 6247): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6247): Shutting down VM
+D/AndroidRuntime( 6364): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6364): Using default boot image
+I/AndroidRuntime( 6364): Leaving lock profiling enabled
+D/AndroidRuntime( 6364): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6364): Shutting down VM
+I/ActivityManager(  524): Force stopping com.salahalarm.android appid=10192 user=0: from pid 6540
+I/ActivityManager(  524): Killing 3052:com.salahalarm.android/u0a192 (adj 0): stop com.salahalarm.android due to from pid 6540
+W/ActivityTaskManager(  524): Force removing ActivityRecord{df1e376 u0 com.salahalarm.android/.ui.MainActivity t8 f}}: app died, no saved state
+I/ImeTracker(  524): com.salahalarm.android:ce86f13: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_REMOVE_CLIENT
+D/ConnectivityService(  524): releasing NetworkRequest [ REQUEST id=130, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ] (release request)
+D/ConnectivityService(  524): releasing NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.salahalarm.android UnderlyingNetworks: Null] ] (release request)
+I/ImeTracker(  524): com.salahalarm.android:ce86f13: onCancelled at PHASE_SERVER_SHOULD_HIDE
+V/WindowManagerShell(  842): Transition requested: android.os.BinderProxy@d36c33c TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} numActivities=0 lastActiveTime=123608 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@c3598c5} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+I/WindowManager(  524): WIN DEATH: Window{7db2440 u0 com.salahalarm.android/com.salahalarm.android.ui.MainActivity}
+W/InputManager-JNI(  524): Input channel object '7db2440 com.salahalarm.android/com.salahalarm.android.ui.MainActivity (client)' was disposed without first being removed with the input manager!
+V/ActivityManager(  524): Got obituary of 3052:com.salahalarm.android
+D/CarrierSvcBindHelper( 1054): onHandleForceStop: [com.salahalarm.android]
+W/WindowManager(  524): Failed to deliver inset control state change to w=Window{7db2440 u0 com.salahalarm.android/com.salahalarm.android.ui.MainActivity EXITING}
+V/WindowManager(  524): Sent Transition #11 createdAt=11-02 18:52:41.755 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} numActivities=0 lastActiveTime=123608 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{e96f6c7 Task{68ffd77 #8 type=standard A=10192:com.salahalarm.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  524):     info={id=11 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{e96f6c7 Task{68ffd77 #8 type=standard A=10192:com.salahalarm.android}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x7be9ae1 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{4a37243 Task{d1c8ef #9 type=standard A=10150:com.android.chrome}}} m=TO_FRONT f=NONE leash=Surface(name=Task=9)/@0xa6e52a7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+W/WindowManager(  524): Exception thrown during dispatchAppVisibility Window{7db2440 u0 com.salahalarm.android/com.salahalarm.android.ui.MainActivity EXITING}
+D/AndroidRuntime( 6543): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6543): Using default boot image
+I/AndroidRuntime( 6543): Leaving lock profiling enabled
+D/AndroidRuntime( 6543): Calling main entry com.android.commands.monkey.Monkey
+W/Monkey  ( 6543): args: [-p, com.salahalarm.android, -c, android.intent.category.LAUNCHER, 1]
+W/Monkey  ( 6543):  arg: "com.salahalarm.android"
+W/Monkey  ( 6543): data="com.salahalarm.android"
+V/SplashScreenExceptionList(  524): SplashScreen checking exception for package com.salahalarm.android (target sdk:35) -> false
+V/WindowManagerShell(  842): Transition requested: android.os.BinderProxy@a0aa291 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=10 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity } baseActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} topActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} origActivity=null realActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} numActivities=1 lastActiveTime=172407 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@13595f6} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{9c5fdf7 com.salahalarm.android.ui.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+I/ActivityTaskManager(  524): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+I/AndroidRuntime( 6543): VM exiting with result code 0.
+I/ActivityManager(  524): Start proc 6569:com.salahalarm.android/u0a192 for next-top-activity {com.salahalarm.android/com.salahalarm.android.ui.MainActivity}
+D/CoreBackPreview(  524): Window{399a251 u0 Splash Screen com.salahalarm.android}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@612d190, mPriority=0, mIsAnimationCallback=false}
+V/WindowManager(  524): Sent Transition #12 createdAt=11-02 18:52:42.637 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=10 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.salahalarm.android/.ui.MainActivity } baseActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} topActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} origActivity=null realActivity=ComponentInfo{com.salahalarm.android/com.salahalarm.android.ui.MainActivity} numActivities=1 lastActiveTime=172407 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{9cd2acb Task{14b0dde #10 type=standard A=10192:com.salahalarm.android}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{36742a8 com.salahalarm.android.ui.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  524):     info={id=12 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{9cd2acb Task{14b0dde #10 type=standard A=10192:com.salahalarm.android}}} m=OPEN f=NONE leash=Surface(name=Task=10)/@0x78812af sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{4a37243 Task{d1c8ef #9 type=standard A=10150:com.android.chrome}}} m=TO_BACK f=NONE leash=Surface(name=Task=9)/@0xa6e52a7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+D/nativeloader( 6569): Configuring clns-6 for other apk /data/app/~~8EG0Z-BlkJ5jPENQt78sSA==/com.salahalarm.android-PfWJCe_ySAKFQfmxiw9IUQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~8EG0Z-BlkJ5jPENQt78sSA==/com.salahalarm.android-PfWJCe_ySAKFQfmxiw9IUQ==/lib/x86_64:/data/app/~~8EG0Z-BlkJ5jPENQt78sSA==/com.salahalarm.android-PfWJCe_ySAKFQfmxiw9IUQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.salahalarm.android
+V/GraphicsEnvironment( 6569): ANGLE GameManagerService for com.salahalarm.android: false
+V/GraphicsEnvironment( 6569): com.salahalarm.android is not listed in per-application setting
+D/CoreBackPreview(  524): Window{72d74b0 u0 com.salahalarm.android/com.salahalarm.android.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@61400e, mPriority=0, mIsAnimationCallback=false}
+D/CoreBackPreview(  524): Window{399a251 u0 Splash Screen com.salahalarm.android}: Setting back callback null
+W/InputManager-JNI(  524): Input channel object '399a251 Splash Screen com.salahalarm.android (client)' was disposed without first being removed with the input manager!
+I/ActivityTaskManager(  524): Displayed com.salahalarm.android/.ui.MainActivity for user 0: +1s917ms
+I/ImeTracker(  524): com.salahalarm.android:62ae2d0: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  524): com.salahalarm.android:62ae2d0: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1517): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.salahalarm.android fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 6655): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6655): Using default boot image
+I/AndroidRuntime( 6655): Leaving lock profiling enabled
+D/AndroidRuntime( 6655): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6655): Shutting down VM
+D/ProfileInstaller( 6569): Skipping profile installation for com.salahalarm.android
+D/AndroidRuntime( 6886): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6886): Using default boot image
+I/AndroidRuntime( 6886): Leaving lock profiling enabled
+D/AndroidRuntime( 6886): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6886): Shutting down VM
+D/AndroidRuntime( 6948): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6948): Using default boot image
+I/AndroidRuntime( 6948): Leaving lock profiling enabled
+D/AndroidRuntime( 6948): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6948): Shutting down VM
+D/AndroidRuntime( 7022): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7022): Using default boot image
+I/AndroidRuntime( 7022): Leaving lock profiling enabled
+D/AndroidRuntime( 7022): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7022): Shutting down VM
+D/AndroidRuntime( 7075): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7075): Using default boot image
+I/AndroidRuntime( 7075): Leaving lock profiling enabled
+D/AndroidRuntime( 7075): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7075): Shutting down VM
+D/AndroidRuntime( 7113): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7113): Using default boot image
+I/AndroidRuntime( 7113): Leaving lock profiling enabled
+D/AndroidRuntime( 7113): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7113): Shutting down VM
+D/AndroidRuntime( 7132): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7132): Using default boot image
+I/AndroidRuntime( 7132): Leaving lock profiling enabled
+D/AndroidRuntime( 7132): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7132): Shutting down VM
+D/AndroidRuntime( 7151): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7151): Using default boot image
+I/AndroidRuntime( 7151): Leaving lock profiling enabled
+D/AndroidRuntime( 7151): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7151): Shutting down VM
+D/AndroidRuntime( 7170): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7170): Using default boot image
+I/AndroidRuntime( 7170): Leaving lock profiling enabled
+D/AndroidRuntime( 7170): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7170): Shutting down VM
+D/AndroidRuntime( 7199): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7199): Using default boot image
+I/AndroidRuntime( 7199): Leaving lock profiling enabled
+D/AndroidRuntime( 7199): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7199): Shutting down VM
+D/AndroidRuntime( 7219): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7219): Using default boot image
+I/AndroidRuntime( 7219): Leaving lock profiling enabled
+D/AndroidRuntime( 7219): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7219): Shutting down VM
+D/AndroidRuntime( 7238): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7238): Using default boot image
+I/AndroidRuntime( 7238): Leaving lock profiling enabled
+D/AndroidRuntime( 7238): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7238): Shutting down VM
+D/AndroidRuntime( 7270): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7270): Using default boot image
+I/AndroidRuntime( 7270): Leaving lock profiling enabled
+D/AndroidRuntime( 7270): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7270): Shutting down VM
+D/AndroidRuntime( 7289): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7289): Using default boot image
+I/AndroidRuntime( 7289): Leaving lock profiling enabled
+D/AndroidRuntime( 7289): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7289): Shutting down VM
+D/AndroidRuntime( 7325): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7325): Using default boot image
+I/AndroidRuntime( 7325): Leaving lock profiling enabled
+D/AndroidRuntime( 7325): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7325): Shutting down VM
+D/AndroidRuntime( 7361): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7361): Using default boot image
+I/AndroidRuntime( 7361): Leaving lock profiling enabled
+D/AndroidRuntime( 7361): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7361): Shutting down VM
+D/AndroidRuntime( 7380): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7380): Using default boot image
+I/AndroidRuntime( 7380): Leaving lock profiling enabled
+D/AndroidRuntime( 7380): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7380): Shutting down VM
+D/AndroidRuntime( 7399): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7399): Using default boot image
+I/AndroidRuntime( 7399): Leaving lock profiling enabled
+D/AndroidRuntime( 7399): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7399): Shutting down VM
+D/AndroidRuntime( 7430): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7430): Using default boot image
+I/AndroidRuntime( 7430): Leaving lock profiling enabled
+D/AndroidRuntime( 7430): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7430): Shutting down VM
+D/AndroidRuntime( 7449): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7449): Using default boot image
+I/AndroidRuntime( 7449): Leaving lock profiling enabled
+D/AndroidRuntime( 7449): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7449): Shutting down VM
+D/AndroidRuntime( 7469): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7469): Using default boot image
+I/AndroidRuntime( 7469): Leaving lock profiling enabled
+D/AndroidRuntime( 7469): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7469): Shutting down VM
+D/AndroidRuntime( 7499): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7499): Using default boot image
+I/AndroidRuntime( 7499): Leaving lock profiling enabled
+D/AndroidRuntime( 7499): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7499): Shutting down VM
+D/AndroidRuntime( 7518): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7518): Using default boot image
+I/AndroidRuntime( 7518): Leaving lock profiling enabled
+D/AndroidRuntime( 7518): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7518): Shutting down VM
+D/AndroidRuntime( 7537): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7537): Using default boot image
+I/AndroidRuntime( 7537): Leaving lock profiling enabled
+D/AndroidRuntime( 7537): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7537): Shutting down VM
+D/AndroidRuntime( 7561): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7561): Using default boot image
+I/AndroidRuntime( 7561): Leaving lock profiling enabled
+D/AndroidRuntime( 7561): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7561): Shutting down VM
+D/AndroidRuntime( 7580): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7580): Using default boot image
+I/AndroidRuntime( 7580): Leaving lock profiling enabled
+D/AndroidRuntime( 7580): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7580): Shutting down VM
+D/AndroidRuntime( 7607): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7607): Using default boot image
+I/AndroidRuntime( 7607): Leaving lock profiling enabled
+D/AndroidRuntime( 7607): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7607): Shutting down VM
