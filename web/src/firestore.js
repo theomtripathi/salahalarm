@@ -155,6 +155,33 @@ export class Firestore {
     return fromFields((await res.json()).fields);
   }
 
+  // Creates the document only if it doesn't exist yet; returns false when it does.
+  async create(path, data) {
+    const res = await this.fetch(`${this.docUrl(path)}?currentDocument.exists=false`, {
+      method: "PATCH",
+      headers: await this.headers(),
+      body: JSON.stringify({ fields: toFields(data) }),
+    });
+    if (res.status === 409 || res.status === 400 || res.status === 412) {
+      const text = await res.text();
+      if (/ALREADY_EXISTS|FAILED_PRECONDITION|already exists/i.test(text)) return false;
+      throw new Error(`firestore create ${path} failed (${res.status}): ${text}`);
+    }
+    if (!res.ok) throw new Error(`firestore create ${path} failed (${res.status}): ${await res.text()}`);
+    return true;
+  }
+
+  // Atomically adds `by` to a numeric field, creating the document if needed (FieldValue.increment).
+  async increment(path, field, by = 1) {
+    const name = `projects/${this.projectId}/databases/(default)/documents/${path}`;
+    const res = await this.fetch(`${this.base.replace(/\/documents$/, "")}/documents:commit`, {
+      method: "POST",
+      headers: await this.headers(),
+      body: JSON.stringify({ writes: [{ transform: { document: name, fieldTransforms: [{ fieldPath: field, increment: { integerValue: String(by) } }] } }] }),
+    });
+    if (!res.ok) throw new Error(`firestore increment ${path} failed (${res.status}): ${await res.text()}`);
+  }
+
   async delete(path) {
     const res = await this.fetch(this.docUrl(path), { method: "DELETE", headers: await this.headers() });
     if (!res.ok && res.status !== 404) throw new Error(`firestore delete ${path} failed (${res.status})`);

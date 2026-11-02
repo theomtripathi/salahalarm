@@ -495,3 +495,33 @@ test("serves the apple-app-site-association file for the comeback link only", as
   assert.deepEqual(body.applinks.details[0].appIDs, ["63F577CS68.com.Ramadan-Pro"]);
   assert.deepEqual(body.applinks.details[0].components, [{ "/": "/go/comeback*" }]);
 });
+
+test("free challenge join: invite credit, entitlement payload and APK access", async () => {
+  const e = env({ APKS: { head: async () => ({ size: 10 }) } });
+  const alice = idToken({ uid: "alice", email: "alice@example.com" });
+  const bob = idToken({ uid: "bob", email: "bob@example.com" });
+
+  let r = await call("/api/android/download", { method: "POST", token: bob, env: e });
+  assert.equal(r.status, 402);
+
+  r = await call("/api/challenge/join", { method: "POST", token: alice, body: {}, env: e });
+  assert.equal(r.status, 200);
+  const code = r.body.challenge.code;
+  assert.match(code, /^[A-Z2-9]{6}$/);
+
+  r = await call("/api/challenge/join", { method: "POST", token: bob, body: { invite: code.toLowerCase() }, env: e });
+  assert.equal(r.body.challenge.invitedBy, code);
+  assert.equal(r.body.joinedCount, 2);
+  assert.equal(backend.docs.get(`referrals/${code}`).joinedCount, 1);
+
+  r = await call("/api/entitlement", { token: bob, env: e });
+  assert.equal(r.body.challenge.invitedBy, code);
+  assert.equal(r.body.entitlement.active, false);
+
+  r = await call("/api/android/download", { method: "POST", token: bob, env: e });
+  assert.equal(r.status, 200);
+  assert.match(r.body.url, /^\/download\/salahalarm\.apk\?t=/);
+
+  r = await call("/api/challenge", { token: alice, env: e });
+  assert.equal(r.body.friendsJoined, 1);
+});

@@ -27,6 +27,7 @@ import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
 import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
 import { setupDodo } from "./dodo-setup.js";
 import { tierFor, productFor, parseProducts, displayPlans, displayOffer, CHECKOUT_PLANS, discountFor, discounted, DISCOUNTS } from "./pricing.js";
+import { joinChallenge, readChallenge, challengeCounts } from "./challenge.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
 import { sanitizeProfile } from "./profile.js";
@@ -68,6 +69,8 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/profile" && method === "POST") return saveProfile(request, env);
   if (pathname === "/api/checkout" && method === "POST") return checkout(request, env, ctx, url);
   if (pathname === "/api/trial" && method === "POST") return startTrial(request, env, ctx);
+  if (pathname === "/api/challenge/join" && method === "POST") return challengeJoin(request, env, ctx);
+  if (pathname === "/api/challenge" && method === "GET") return challengeStatus(request, env);
   if (pathname === "/api/entitlement" && method === "GET") return entitlement(request, env, url);
   if (pathname === "/api/portal" && method === "POST") return portal(request, env);
   if (pathname === "/api/webhooks/dodo" && method === "POST") return webhook(request, env, ctx);
@@ -509,7 +512,30 @@ async function entitlement(request, env, url) {
       await db.delete(`pendingEntitlements/${u.email}`);
     }
   }
-  return json({ entitlement: publicEntitlement(ent) });
+  const challenge = await readChallenge(db, u.uid).catch(() => null);
+  return json({ entitlement: publicEntitlement(ent), challenge });
+}
+
+// ---- 90-Day Ramadan Ready challenge (free) -------------------------------------
+
+async function challengeJoin(request, env, ctx) {
+  const u = await user(request, env);
+  const body = await readJson(request);
+  const db = firestore(env);
+  const { challenge, created } = await joinChallenge(db, u.uid, { invite: body.invite });
+  if (created) {
+    capture(env, ctx, "challenge_joined", u.uid, {
+      invited: Boolean(challenge.invitedBy), platform: body.platform || "android_web", ref: body.ref || null, country: geo(request).country,
+    });
+  }
+  return json({ challenge, created, ...(await challengeCounts(db, challenge.code)) });
+}
+
+async function challengeStatus(request, env) {
+  const u = await user(request, env);
+  const db = firestore(env);
+  const challenge = await readChallenge(db, u.uid);
+  return json({ challenge, ...(await challengeCounts(db, challenge?.code)) });
 }
 
 async function confirmCheckout(env, db, u, params) {
@@ -677,8 +703,10 @@ export async function verifyDownload(env, token, now = Date.now()) {
 
 async function downloadLink(request, env) {
   const u = await user(request, env);
-  const ent = await firestore(env).get(`entitlements/${u.uid}`);
-  if (!isActive(ent)) return json({ error: "no active plan", paywall: "/android/?resume=paywall" }, 402);
+  const db = firestore(env);
+  const ent = await db.get(`entitlements/${u.uid}`);
+  // Paid, trial, or joined the free Ramadan challenge (the app then runs its free tier).
+  if (!isActive(ent) && !(await readChallenge(db, u.uid))) return json({ error: "no active plan", paywall: "/android/?resume=paywall" }, 402);
   let size = null;
   if (env.APKS) size = (await env.APKS.head(APK_KEY))?.size ?? null;
   return json({ url: `/download/salahalarm.apk?t=${await signDownload(env, u.uid)}`, size });

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.salahalarm.android.Graph
 import com.salahalarm.android.data.Analytics
 import com.salahalarm.android.t
+import com.salahalarm.core.ChallengeInvite
 import com.salahalarm.core.PrayerName
 import com.salahalarm.core.PrayerLogic
 import kotlinx.coroutines.launch
@@ -46,6 +47,7 @@ sealed interface Route {
     data object Qibla : Route
     data object Setup : Route
     data object History : Route
+    data object Challenge : Route
     data class Reader(val surah: Int, val name: String, val ayah: Int? = null) : Route
 }
 
@@ -54,6 +56,8 @@ object Nav {
     var stack by mutableStateOf(listOf<Route>())
     var confirmPrayer by mutableStateOf<PrayerName?>(null)
     var loginCode by mutableStateOf<String?>(null)
+    /** A challenge link asked to open the challenge screen. */
+    var openChallenge by mutableStateOf(false)
 
     fun push(r: Route) {
         stack = stack + r
@@ -102,6 +106,16 @@ class MainActivity : ComponentActivity() {
         if (data != null && data.scheme == "salahalarm" && data.host == "login") {
             data.getQueryParameter("code")?.let { Nav.loginCode = it }
         }
+        if (data != null) {
+            when (val link = ChallengeInvite.parse(data.scheme, data.host, data.pathSegments.orEmpty())) {
+                is ChallengeInvite.Link.Invite -> {
+                    Graph.repo.storePendingInvite(link.code)
+                    Nav.openChallenge = true
+                }
+                ChallengeInvite.Link.OpenInvite, ChallengeInvite.Link.Join -> Nav.openChallenge = true
+                null -> Unit
+            }
+        }
     }
 }
 
@@ -113,10 +127,13 @@ private fun App() {
     LaunchedEffect(Unit) { Graph.repo.refreshLocation() }
 
     val entitlement by Graph.repo.entitlement.collectAsState()
+    val challenge by Graph.repo.challenge.collectAsState()
     val now by rememberNow(60_000)
 
     when {
         user == null -> LoginScreen()
+        // Free tier: joined the 90-Day Ramadan Ready challenge without a plan.
+        !entitlement.isActive(now) && challenge != null -> ChallengeFreeHome()
         // No plan (trial over, or an APK passed on without paying): the website sells plans.
         !entitlement.isActive(now) -> LockedScreen()
         !setupDone -> SetupScreen(onDone = {
@@ -142,6 +159,13 @@ private fun App() {
 
 @Composable
 private fun MainTabs() {
+    LaunchedEffect(Nav.openChallenge) {
+        if (Nav.openChallenge) {
+            Nav.openChallenge = false
+            Nav.tab = 0
+            Nav.push(Route.Challenge)
+        }
+    }
     val top = Nav.stack.lastOrNull()
     BackHandler(enabled = top != null) { Nav.pop() }
     BackHandler(enabled = top == null && Nav.tab != 0) { Nav.tab = 0 }
@@ -151,6 +175,7 @@ private fun MainTabs() {
         Route.Qibla -> QiblaScreen(onBack = Nav::pop)
         Route.Setup -> SetupScreen(onDone = Nav::pop, standalone = true)
         Route.History -> PrayersScreen()
+        Route.Challenge -> ChallengeScreen(onBack = Nav::pop)
         is Route.Reader -> QuranReader(top, onBack = Nav::pop)
         null -> Tabs()
     }

@@ -298,6 +298,8 @@ fun HomeScreen() {
                 }
             }
 
+            ChallengeCard { Nav.push(Route.Challenge) }
+
             // Today's prayers
             SLCard {
                 Row(verticalAlignment = Alignment.CenterVertically) {

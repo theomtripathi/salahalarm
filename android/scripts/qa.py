@@ -133,13 +133,30 @@ else:
     problems.append("locked screen did not appear for an account without a plan")
     shot("after-sign-in")
 
-# Start the free trial for this account through the live site, then "I've already paid".
+# Free tier: join the 90-Day Ramadan Ready challenge from the locked screen.
+if tap_text(r"join the free 90-day ramadan challenge", wait=10) and wait_for(r"today's prayers", 30):
+    shot("challenge-free-home")
+    if tap_text(r"90-day ramadan ready challenge", wait=8) and wait_for(r"be ramadan ready in 90 days", 15):
+        shot("challenge-details")
+        adb("shell", "input", "swipe", "540", "1800", "540", "600", "400")
+        time.sleep(1)
+        shot("challenge-details-invite")
+        adb("shell", "input", "keyevent", "4")
+        time.sleep(2)
+    else:
+        problems.append("challenge details screen did not open")
+else:
+    problems.append("joining the free challenge did not show the free home")
+    shot("after-join")
+
+# Start the free trial for this account through the live site, then reopen the app.
 req = urllib.request.Request(f"{API}/api/trial", method="POST", data=b"{}", headers={
     "authorization": f"Bearer {id_token}", "content-type": "application/json", "user-agent": "SalahAlarm-QA",
 })
 print("trial:", urllib.request.urlopen(req).read().decode()[:200])
-tap_text(r"already paid")
-time.sleep(6)
+adb("shell", "am", "force-stop", PKG)
+launch()
+time.sleep(8)
 shot("after-trial")
 
 # Setup checklist, then the main tabs.

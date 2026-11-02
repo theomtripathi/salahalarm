@@ -19,6 +19,8 @@ import com.salahalarm.android.I18n
 import com.salahalarm.android.alarm.AlarmScheduler
 import com.salahalarm.android.widget.Widgets
 import com.salahalarm.core.AlarmSettings
+import com.salahalarm.core.ChallengeEnrollment
+import com.salahalarm.core.ChallengeInvite
 import com.salahalarm.core.DailyPrayerLog
 import com.salahalarm.core.DateKeys
 import com.salahalarm.core.Entitlement
@@ -31,6 +33,7 @@ import com.salahalarm.core.Versions
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import org.json.JSONObject
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -60,6 +63,10 @@ class Repo(private val context: Context, private val store: Store) {
     val bookmarks = MutableStateFlow(store.bookmarks())
     val lastRead = MutableStateFlow(store.lastRead())
     val update = MutableStateFlow<UpdateInfo?>(null)
+    /** The free 90-Day Ramadan Ready challenge; set once this account has joined. */
+    val challenge = MutableStateFlow(store.string("challenge")?.let { runCatching { parseChallenge(JSONObject(it)) }.getOrNull() })
+    /** Everyone who joined, and friends who joined with this account's link. */
+    val challengeCounts = MutableStateFlow<Pair<Int?, Int>>(null to 0)
 
     init {
         auth.addAuthStateListener { a ->
@@ -232,7 +239,10 @@ class Repo(private val context: Context, private val store: Store) {
         if (!force && !entitlement.value.needsRefresh(now)) return isPremium(now)
         return try {
             val token = u.getIdToken(false).await().token ?: return isPremium(now)
-            val json = Api.entitlement(token)
+            val account = Api.account(token)
+            // The challenge first, so a free joiner never flashes the locked screen.
+            account.optJSONObject("challenge")?.let(::saveChallenge)
+            val json = account.getJSONObject("entitlement")
             store.saveEntitlement(json, now)
             val was = isPremium(now)
             entitlement.value = Entitlement.fromMap(json.toMap(), now)
@@ -255,6 +265,47 @@ class Repo(private val context: Context, private val store: Store) {
     suspend fun apkLink(): String? {
         val token = user.value?.getIdToken(false)?.await()?.token ?: return null
         return runCatching { Api.downloadLink(token) }.getOrNull()
+    }
+
+    // ---- Ramadan Ready challenge -----------------------------------------------------
+
+    /** A friend's code from salahalarm://c/CODE, kept until this account joins. The first one wins. */
+    fun storePendingInvite(code: String) {
+        if (store.string("pending_invite") == null) store.setString("pending_invite", code)
+    }
+
+    fun pendingInvite(): String? = store.string("pending_invite")
+
+    /** Joins the free challenge (no purchase). Returns an error message, or null on success. */
+    suspend fun joinChallenge(typedCode: String?): String? {
+        val u = user.value ?: return "Sign in first so your progress is saved."
+        return try {
+            val token = u.getIdToken(false).await().token ?: return "Couldn't join right now. Check your connection and try again."
+            val invite = ChallengeInvite.normalize(typedCode) ?: pendingInvite()
+            val res = Api.joinChallenge(token, invite)
+            res.optJSONObject("challenge")?.let(::saveChallenge)
+            challengeCounts.value = res.optInt("joinedCount").takeIf { !res.isNull("joinedCount") } to res.optInt("friendsJoined")
+            store.setString("pending_invite", null)
+            Analytics.capture("challenge_joined", mapOf("invited" to (challenge.value?.invitedBy != null), "platform" to "android"))
+            null
+        } catch (e: Exception) {
+            "Couldn't join right now. Check your connection and try again."
+        }
+    }
+
+    suspend fun refreshChallenge() {
+        val token = user.value?.getIdToken(false)?.await()?.token ?: return
+        runCatching {
+            val res = Api.challenge(token)
+            res.optJSONObject("challenge")?.let(::saveChallenge)
+            challengeCounts.value = res.optInt("joinedCount").takeIf { !res.isNull("joinedCount") } to res.optInt("friendsJoined")
+        }
+    }
+
+    private fun saveChallenge(json: JSONObject) {
+        val c = parseChallenge(json) ?: return
+        store.setString("challenge", json.toString())
+        challenge.value = c
     }
 
     // ---- SalahLock -----------------------------------------------------------------------
@@ -310,6 +361,9 @@ class Repo(private val context: Context, private val store: Store) {
         logs.value = emptyMap()
         streak.value = StreakData()
         entitlement.value = Entitlement.NONE
+        store.setString("challenge", null)
+        challenge.value = null
+        challengeCounts.value = null to 0
         bookmarks.value = emptyList()
         lastRead.value = null
         AlarmScheduler.reschedule(context)
@@ -436,6 +490,14 @@ class Repo(private val context: Context, private val store: Store) {
                 }
             },
         )
+
+        fun parseChallenge(o: JSONObject): ChallengeEnrollment? {
+            val code = ChallengeInvite.normalize(o.optString("code")) ?: return null
+            val joined = o.optString("joinedAt").takeIf { it.isNotEmpty() && it != "null" }
+                ?.let { runCatching { Instant.parse(it).atZone(ZoneId.systemDefault()).toLocalDate() }.getOrNull() }
+                ?: LocalDate.now()
+            return ChallengeEnrollment(joined, code, o.optString("invitedBy").takeIf { it.isNotEmpty() && it != "null" })
+        }
 
         fun parseStreak(m: Map<*, *>): StreakData = StreakData(
             currentStreak = (m["currentStreak"] as? Number)?.toInt() ?: 0,

@@ -49,7 +49,11 @@ object Api {
     private fun site(path: String) = BuildConfig.API_ORIGIN + path
 
     suspend fun config(): JSONObject = request(site("/api/config"))
-    suspend fun entitlement(token: String): JSONObject = request(site("/api/entitlement"), token = token).getJSONObject("entitlement")
+    /** { entitlement, challenge }: the plan, and the free Ramadan challenge enrollment if any. */
+    suspend fun account(token: String): JSONObject = request(site("/api/entitlement"), token = token)
+    suspend fun joinChallenge(token: String, invite: String?): JSONObject =
+        request(site("/api/challenge/join"), "POST", token, JSONObject().put("platform", "android").apply { if (invite != null) put("invite", invite) })
+    suspend fun challenge(token: String): JSONObject = request(site("/api/challenge"), token = token)
     suspend fun portal(token: String): String = request(site("/api/portal"), "POST", token, JSONObject()).getString("link")
     suspend fun redeemLogin(code: String): String =
         request(site("/api/app-login/redeem"), "POST", body = JSONObject().put("code", code)).getString("token")

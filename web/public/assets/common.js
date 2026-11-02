@@ -115,6 +115,9 @@ export function captureRef() {
   // A discount link (e.g. from the comeback email); the server decides if the code is real.
   const discount = params.get("discount");
   if (discount) store.set("sa_discount", discount.slice(0, 40).toUpperCase());
+  // A friend's Ramadan challenge invite (salahalarm.com/c/CODE); the first one wins.
+  const invite = params.get("invite");
+  if (invite && !store.get("sa_invite")) store.set("sa_invite", invite.slice(0, 12).toUpperCase());
   return store.get("sa_ref") || "";
 }
 

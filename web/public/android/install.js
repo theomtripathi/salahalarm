@@ -13,12 +13,13 @@ const app = document.getElementById("app");
 
 let config = {};
 let user = null;
-// checking | active | pending | signin | install | locked
+// checking | active | pending | signin | install | locked | challenge
 let status = "checking";
 let apk = { versionName: null, sizeMb: null, url: null }; // url: signed, only for accounts with access
 let trialUntil = null; // set when the account is on the free trial
 let lapsed = false; // the account had a plan or trial that has ended
 let appLogin = null; // intent link that opens the installed app already signed in
+let challenge = null; // { code } when the account joined the free 90-Day Ramadan challenge
 
 function svg(markup) {
   const span = document.createElement("span");
@@ -67,11 +68,18 @@ async function confirmPayment() {
 // The install page (reinstalls, the app's update prompt) checks the account once.
 async function checkAccess() {
   try {
-    const { entitlement } = await api("/api/entitlement", { token: await user.token() });
+    const res = await api("/api/entitlement", { token: await user.token() });
+    const { entitlement } = res;
+    challenge = res.challenge || null;
     if (entitlement?.active) {
       trialUntil = entitlement.status === "trial" ? entitlement.accessUntil : null;
       await prepareDownload();
       status = apk.url ? "install" : "locked";
+    } else if (challenge) {
+      // Free challenge joiners get the app's free tier: today's prayers and the challenge.
+      await prepareDownload();
+      status = apk.url ? "challenge" : "locked";
+      capture("install_challenge_viewed", {});
     } else {
       status = "locked";
       lapsed = entitlement?.provider === "dodo" || entitlement?.status === "trial";
@@ -158,6 +166,18 @@ function header() {
         class: "btn btn-primary",
         onclick: () => { status = "checking"; render(); confirmPayment(); },
       }, t("Check again")),
+    ];
+  }
+  if (status === "challenge") {
+    const link = `salahalarm.com/c/${challenge.code}`;
+    return [
+      h("div", { class: "success-mark" }, svg(icons.check)),
+      h("h1", { class: "center" }, t("You're in the 90-Day Ramadan Ready challenge")),
+      h("p", { class: "lede center" }, t("Install the app and check in all five prayers every day from 10 November. Free to join.")),
+      h("div", { class: "card tint center" },
+        h("div", { class: "small", style: "margin:0" }, t("Your invite link")),
+        h("b", { style: "font-size:18px" }, link),
+        h("p", { class: "small", style: "margin:6px 0 0" }, t("Bring 3 friends, get a month of premium free. Bring 10, get a year free."))),
     ];
   }
   if (status === "locked") {

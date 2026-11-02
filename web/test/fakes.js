@@ -63,9 +63,21 @@ export function createBackend() {
 
     if (u.host === "firestore.googleapis.com") {
       if (init.headers?.authorization !== "Bearer sa-token") return reply({ error: "unauthenticated" }, 401);
+      if (method === "POST" && u.pathname.endsWith("/documents:commit")) {
+        for (const w of JSON.parse(body).writes) {
+          const p = w.transform.document.split("/documents/")[1];
+          const d = { ...(docs.get(p) || {}) };
+          for (const t of w.transform.fieldTransforms) d[t.fieldPath] = (d[t.fieldPath] || 0) + Number(t.increment.integerValue);
+          docs.set(p, d);
+        }
+        return reply({ writeResults: [] });
+      }
       const path = decodeURIComponent(u.pathname.split("/documents/")[1]);
       if (method === "GET") {
         return docs.has(path) ? reply({ name: path, fields: toFields(docs.get(path)) }) : reply({ error: "not found" }, 404);
+      }
+      if (method === "PATCH" && u.searchParams.get("currentDocument.exists") === "false" && docs.has(path)) {
+        return reply({ error: { status: "ALREADY_EXISTS", message: "Document already exists" } }, 409);
       }
       if (method === "PATCH") {
         const incoming = fromFields(JSON.parse(body).fields);
