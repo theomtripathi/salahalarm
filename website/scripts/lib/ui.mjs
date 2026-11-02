@@ -121,7 +121,7 @@ ${footer(config, lang)}
 function header(config, lang) {
   const s = config.langs[lang];
   const homeNav = lang === 'en'
-    ? `<a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan</a>`
+    ? `<a href="/#how">How it works</a><a href="/#features">Features</a><a href="/ramadan-2027/">Ramadan challenge</a>`
     : '';
   return `<header class="site-header">
   <div class="wrap header-inner">
@@ -146,7 +146,7 @@ function footer(config, lang) {
       <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
       <p>The Fajr alarm that gets you to the prayer mat. Built for Muslims everywhere.</p>
     </div>
-    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#ramadan">Ramadan 2027</a><a rel="nofollow" href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
+    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/ramadan-2027/">Ramadan Ready challenge</a><a rel="nofollow" href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
     <div><h2>Guides</h2>${langs}</div>
     <div><h2>Legal</h2><a href="${esc(config.privacyUrl)}">Privacy</a><a href="${esc(config.termsUrl)}">Terms</a><a href="${esc(config.supportUrl)}">Support</a></div>
   </div>

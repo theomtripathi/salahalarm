@@ -42,7 +42,7 @@ export function homePage(config, latest) {
 <section class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <p class="pill">${icon('moon', 'icon icon-sm')} The Fajr alarm for Android and iPhone</p>
+      <a class="pill pill-link" href="/ramadan-2027/">${icon('moon', 'icon icon-sm')} New: the free 90-Day Ramadan Ready challenge starts 10 Nov ${icon('arrow', 'icon icon-sm')}</a>
       <h1>Never miss Fajr again.</h1>
       <p class="hero-lead">The adhan alarm that only stops when you reach your prayer mat. Exact prayer times for your city, SalahLock, streaks, Quran and Qibla in one app.</p>
       <div class="hero-actions">
@@ -142,6 +142,7 @@ export function homePage(config, latest) {
         <p class="eyebrow eyebrow-gold">Ramadan 2027</p>
         <h2>Ramadan is expected to begin on Monday 8 February 2027.</h2>
         <p>Suhoor is won or lost the same way Fajr is: in the first minute after the alarm. Build the habit now and the month will feel easy.</p>
+        <a class="link-arrow" href="/ramadan-2027/">Join the free 90-Day Ramadan Ready challenge ${icon('arrow', 'icon icon-sm')}</a>
         <a class="link-arrow" href="/blog/en/ramadan-2027-start-date/">Ramadan 2027 dates and how to prepare ${icon('arrow', 'icon icon-sm')}</a>
         ${storeButtons(config, 'en', 'ramadan', 'buttons-light')}
       </div>

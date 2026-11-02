@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "links": "node scripts/gen-links.mjs",
-    "test": "node --test test/links.test.js",
+    "test": "node --test test/*.test.js",
     "deploy": "node scripts/gen-links.mjs && wrangler deploy"
   }
 }

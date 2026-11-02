@@ -2,10 +2,17 @@ name = "salahalarm-links"
 main = "src/worker.js"
 compatibility_date = "2026-10-01"
 
-# Route only /go/* so the rest of salahalarm.com keeps working.
-routes = [{ pattern = "salahalarm.com/go/*", zone_name = "salahalarm.com" }]
+# Route only /go/* and /c/* (challenge invites) so the rest of salahalarm.com keeps working.
+routes = [
+  { pattern = "salahalarm.com/go/*", zone_name = "salahalarm.com" },
+  { pattern = "salahalarm.com/c/*", zone_name = "salahalarm.com" },
+]
 
 [vars]
 POSTHOG_HOST = "https://us.i.posthog.com"
 # Public, write-only PostHog project token (same one the app ships with).
 POSTHOG_KEY = "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX"
+# AppsFlyer OneLink for the Ramadan Ready challenge (AppsFlyer › Engage › OneLink
+# management › new link template). Until it is set, /c/<CODE> opens the challenge
+# page with the code shown and /c/join goes straight to the App Store / Android.
+# ONELINK_URL = "https://salahalarm.onelink.me/XXXX/challenge"

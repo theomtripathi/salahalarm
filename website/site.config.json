@@ -126,5 +126,18 @@
   "privacyUrl": "https://ramadan-pro.lovable.app/privacy",
   "termsUrl": "https://ramadan-pro.lovable.app/terms",
   "supportUrl": "https://ramadan-pro.lovable.app/support",
-  "ramadanStart": "2027-02-08"
+  "ramadanStart": "2027-02-08",
+  "challenge": {
+    "path": "/ramadan-2027/",
+    "name": "90-Day Ramadan Ready challenge",
+    "hashtag": "#ImRamadanReady",
+    "start": "2026-11-10",
+    "days": 90,
+    "end": "2027-02-07",
+    "joinCloses": "2026-12-01",
+    "showCountFrom": 100,
+    "joinUrl": "/c/join?src=page",
+    "inviteUrl": "/c/invite?src=page",
+    "inviteBase": "https://salahalarm.com/c/"
+  }
 }

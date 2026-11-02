@@ -68,3 +68,36 @@ test('worker sends www and http to https://salahalarm.com and serves the rest', 
   const ok = await worker.fetch(new Request('https://salahalarm.com/blog/en/'), env);
   assert.equal(await ok.text(), 'asset');
 });
+
+test('challenge page builds with the offer, buttons and live-count hook', async () => {
+  const { challengePage } = await import('../scripts/pages/challenge.mjs');
+  const fs = await import('node:fs');
+  const config = JSON.parse(fs.readFileSync(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const html = challengePage(config);
+  assert.match(html, /Bring 3 friends, get a month free\. Bring 10, get a year free\./);
+  assert.match(html, /href="\/c\/join\?src=page"[^>]*data-join/);
+  assert.match(html, /href="\/c\/invite\?src=page"/);
+  assert.match(html, /\/ramadan-2027\/stats\.json/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/salahalarm\.com\/ramadan-2027\/">/);
+  assert.match(html, /Umrah/);
+  assert.doesNotMatch(challengePage({ ...config, challenge: { ...config.challenge, prize: false } }), /Umrah/);
+});
+
+test('stats endpoint reads challengeStats/global.joinedCount from Firestore', async () => {
+  const { default: worker, joinedCountOf } = await import('../src/worker.js');
+  assert.equal(joinedCountOf({ fields: { joinedCount: { integerValue: '14203' } } }), 14203);
+  assert.equal(joinedCountOf({ fields: {} }), null);
+  const realFetch = globalThis.fetch;
+  const calls = [];
+  globalThis.fetch = async (u) => { calls.push(String(u)); return Response.json({ fields: { joinedCount: { integerValue: '321' } } }); };
+  try {
+    const res = await worker.fetch(new Request('https://salahalarm.com/ramadan-2027/stats.json'), { ASSETS: {} }, { waitUntil() {} });
+    assert.deepEqual((await res.json()).joined, 321);
+    assert.match(calls[0], /projects\/ramadan-pro-684da\/databases\/\(default\)\/documents\/challengeStats\/global$/);
+    globalThis.fetch = async () => new Response('denied', { status: 403 });
+    const denied = await worker.fetch(new Request('https://salahalarm.com/ramadan-2027/stats.json'), { ASSETS: {} }, { waitUntil() {} });
+    assert.equal((await denied.json()).joined, null);
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});

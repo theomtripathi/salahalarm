@@ -106,3 +106,21 @@ gum doctor
 
 All pipeline calls are read-only except `submit-sitemap.sh` (a write gated by
 `--allow-write`).
+
+## Ramadan Ready challenge page (/ramadan-2027/)
+
+`scripts/pages/challenge.mjs` builds the 90-Day Ramadan Ready challenge landing page
+from `challenge` in `site.config.json` (dates, hashtag, button links). Set
+`"prize": false` there to hide the Umrah prize until the official rules are signed off.
+
+- **Download and join** goes to `/c/join?src=page`; **Get my invite link** to
+  `/c/invite?src=page`. Both are handled by the `/go` Worker in
+  `Marketing/conversion-tracking` (route `salahalarm.com/c/*`), which logs the click
+  to PostHog and forwards to the AppsFlyer OneLink, or to the stores until the OneLink exists.
+- Invite links `salahalarm.com/c/<CODE>` land here as `?code=<CODE>` when there is no
+  OneLink (or on desktop): the page shows the code with a Copy button and makes the
+  Download button carry it (`/c/<CODE>?src=page-invite`).
+- The live joiner count comes from `/ramadan-2027/stats.json`, answered by
+  `src/worker.js` from Firestore `challengeStats/global.joinedCount` (cached 60s). It
+  needs the public read rule for `challengeStats` in `firestore.rules`. The page shows
+  the number only from `showCountFrom` (100) joiners; below that it says "Free to join".

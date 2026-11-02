@@ -104,3 +104,16 @@ can be filtered by either. If an account changes format after the test, change
 4. RevenueCat / ASC: trials and purchases → **Daily**.
 5. Read **Formats**: rank by installs per 10k views and trials per 10k views.
    Call a winner only after ~30 installs per format.
+
+## Ramadan Ready challenge links (/c/*)
+
+`src/invite.js`, route `salahalarm.com/c/*`:
+
+| Link | PostHog event | Phone, OneLink set | Phone, no OneLink | Desktop |
+|---|---|---|---|---|
+| `/c/<CODE>` (6 chars, app alphabet) | `challenge_invite_clicked` | OneLink, `deep_link_value=challenge`, `deep_link_sub1=<CODE>` | `/ramadan-2027/?code=<CODE>` | same page |
+| `/c/join` | `challenge_join_clicked` | OneLink, `deep_link_value=challenge` | App Store `ct=ramadan-2027` / `/android/?a=ramadan-2027` | App Store |
+| `/c/invite` | `challenge_get_invite_clicked` | OneLink, `deep_link_value=challenge_invite` | same as join | App Store |
+
+`?src=<where>` (bio, story, page…) is passed on as the AppsFlyer channel and logged.
+Set `ONELINK_URL` in `wrangler.toml` once the OneLink template exists in AppsFlyer.
