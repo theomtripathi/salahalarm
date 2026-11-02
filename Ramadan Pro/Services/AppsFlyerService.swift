@@ -34,6 +34,9 @@ final class AppsFlyerService: NSObject {
         af.appsFlyerDevKey = Self.devKey
         af.appleAppID = Self.appleAppID
         af.delegate = self
+        // Deferred deep links carry the Ramadan challenge invite code
+        // (OneLink parameter deep_link_sub1) through the App Store install.
+        af.deepLinkDelegate = self
         #if DEBUG
         af.isDebug = true
         #endif
@@ -105,5 +108,15 @@ extension AppsFlyerService: AppsFlyerLibDelegate {
 
     func onConversionDataFail(_ error: Error) {
         print("⚠️ AppsFlyerService: conversion data failed: \(error.localizedDescription)")
+    }
+}
+
+extension AppsFlyerService: DeepLinkDelegate {
+    func didResolveDeepLink(_ result: DeepLinkResult) {
+        guard result.status == .found, let deepLink = result.deepLink else { return }
+        if let code = deepLink.clickEvent["deep_link_sub1"] as? String {
+            ChallengeInvite.storePendingCode(code)
+            print("🔗 AppsFlyerService: challenge invite code captured")
+        }
     }
 }

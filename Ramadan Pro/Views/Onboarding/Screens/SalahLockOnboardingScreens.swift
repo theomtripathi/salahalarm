@@ -1833,6 +1833,18 @@ struct SLPaywallScreen: View {
             }
             .font(.system(size: 13, weight: .medium))
             .foregroundColor(AppColors.slGreen)
+            if !ChallengeService.shared.isEnrolled {
+                Button {
+                    joinFreeChallenge()
+                } label: {
+                    Text(L10n.text("Not ready to pay? Join the free 90-Day Ramadan challenge"))
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(AppColors.slTextPrimary)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .disabled(subscriptionVM.isProcessingPurchase || ChallengeService.shared.isJoining)
+            }
             if let errorMessage {
                 Text(L10n.text(errorMessage))
                     .font(.system(size: 13))
@@ -2597,6 +2609,18 @@ struct SLPaywallScreen: View {
                 if subscriptionVM.lastPurchaseOutcome == .cancelled && stage == "main" {
                     presentTrialOffer(trigger: "checkout_cancelled")
                 }
+            }
+        }
+    }
+
+    private func joinFreeChallenge() {
+        Task {
+            let joined = await ChallengeService.shared.join()
+            if joined {
+                appState.onboardingComplete = true
+                onExit?()
+            } else {
+                errorMessage = ChallengeService.shared.lastError
             }
         }
     }

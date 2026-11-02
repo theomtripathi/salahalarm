@@ -89,7 +89,16 @@ struct Ramadan_ProApp: App {
                 .environmentObject(onboardingState)
                 .environmentObject(authService)
             .onOpenURL { url in
+                if let code = ChallengeInvite.code(from: url) {
+                    ChallengeInvite.storePendingCode(code)
+                    return
+                }
                 GIDSignIn.sharedInstance.handle(url)
+            }
+            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activity in
+                if let url = activity.webpageURL, let code = ChallengeInvite.code(from: url) {
+                    ChallengeInvite.storePendingCode(code)
+                }
             }
         }
     }
@@ -100,6 +109,7 @@ struct RootRouterView: View {
     @EnvironmentObject var authService: FirebaseAuthService
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var revenueCatService = RevenueCatService.shared
+    @ObservedObject private var challengeService = ChallengeService.shared
 
     @AppStorage(AppConstants.UserDefaultsKeys.isSubscribed) private var isSubscribed: Bool = false
 
@@ -129,6 +139,10 @@ struct RootRouterView: View {
             } else if hasSubscription {
                 MainTabView()
                     .environmentObject(appState)
+            } else if authService.isAuthenticated && appState.onboardingComplete && challengeService.isEnrolled {
+                // Free tier: joined the Ramadan Ready challenge without a subscription.
+                ChallengeFreeHomeView()
+                    .environmentObject(appState)
             } else if authService.isAuthenticated && appState.onboardingComplete {
                 SLPaywallScreen(vm: OnboardingFlowViewModel())
             } else {
@@ -137,6 +151,7 @@ struct RootRouterView: View {
         }
         .task {
             guard authService.isAuthenticated, let userId = authService.currentUser?.userId else { return }
+            await ChallengeService.shared.restoreIfNeeded()
             do {
                 try await RevenueCatService.shared.setUserID(userId)
                 await RevenueCatService.shared.checkSubscriptionStatus()

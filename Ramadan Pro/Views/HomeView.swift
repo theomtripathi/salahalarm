@@ -38,6 +38,7 @@ struct HomeView: View {
                 }
                 nextPrayerCard
                 nextAlarmCard
+                RamadanChallengeCard()
                 if isEligibleTrialJourney {
                     trialJourneyCard
                 }

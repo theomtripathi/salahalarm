@@ -16,6 +16,16 @@
 				<string>com.googleusercontent.apps.151770307855-752bh07f1krbbfr36uhvvlit5ah2op0d</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>com.salahalarm.challenge</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>salahalarm</string>
+			</array>
+		</dict>
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>SalahAlarm uses your camera so you can scan your prayer mat when dismissing alarms.</string>

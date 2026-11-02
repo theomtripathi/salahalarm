@@ -57,6 +57,28 @@ service cloud.firestore {
                        resource.data.userId == request.auth.uid);
     }
     
+    // Ramadan Ready challenge: invite codes. Create-only by the owner, so a
+    // taken code fails and the app retries. Anyone signed in can read a code
+    // (to show who invited them) and bump its joinedCount by exactly 1.
+    match /referrals/{code} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() &&
+                       request.resource.data.ownerUid == request.auth.uid &&
+                       request.resource.data.joinedCount == 0;
+      allow update: if isAuthenticated() &&
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['joinedCount']) &&
+                       request.resource.data.joinedCount == resource.data.joinedCount + 1;
+    }
+
+    // Ramadan Ready challenge: public joiner count (also read by salahalarm.com).
+    match /challengeStats/{docId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.joinedCount == 1;
+      allow update: if isAuthenticated() &&
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['joinedCount']) &&
+                       request.resource.data.joinedCount == resource.data.joinedCount + 1;
+    }
+
     // Default: deny all other access
     match /{document=**} {
       allow read, write: if false;
