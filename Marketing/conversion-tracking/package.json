@@ -1,0 +1,10 @@
+{
+  "name": "salahalarm-conversion-tracking",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "links": "node scripts/gen-links.mjs",
+    "test": "node --test test/links.test.js",
+    "deploy": "node scripts/gen-links.mjs && wrangler deploy"
+  }
+}
