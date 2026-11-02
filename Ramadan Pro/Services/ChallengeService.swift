@@ -196,6 +196,40 @@ enum ChallengeInvite {
         UserDefaults.standard.string(forKey: pendingKey)
     }
 
+    /// Set when a link asks the app to open the "Invite friends" screen
+    /// (salahalarm.com/c/invite, OneLink deep_link_value=challenge_invite).
+    private static let openInviteKey = "ramadan_challenge_open_invite"
+
+    static func requestOpenInviteScreen() {
+        UserDefaults.standard.set(true, forKey: openInviteKey)
+    }
+
+    /// Returns true once per request, then clears it.
+    static func consumeOpenInviteRequest() -> Bool {
+        guard UserDefaults.standard.bool(forKey: openInviteKey) else { return false }
+        UserDefaults.standard.removeObject(forKey: openInviteKey)
+        return true
+    }
+
+    /// Handles a challenge link. Returns true if the URL was a challenge link.
+    @discardableResult
+    static func handle(url: URL) -> Bool {
+        var parts = url.pathComponents.filter { $0 != "/" }
+        if url.scheme == "salahalarm", let host = url.host { parts.insert(host, at: 0) }
+        guard let index = parts.firstIndex(where: { $0.lowercased() == "c" }), index + 1 < parts.count else { return false }
+        let target = parts[index + 1].lowercased()
+        if target == "invite" {
+            requestOpenInviteScreen()
+            return true
+        }
+        if target == "join" { return true }
+        if let code = normalizedCode(parts[index + 1]) {
+            storePendingCode(code)
+            return true
+        }
+        return false
+    }
+
     static func clearPendingCode() {
         UserDefaults.standard.removeObject(forKey: pendingKey)
     }

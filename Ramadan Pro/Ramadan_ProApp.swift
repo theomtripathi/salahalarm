@@ -89,15 +89,14 @@ struct Ramadan_ProApp: App {
                 .environmentObject(onboardingState)
                 .environmentObject(authService)
             .onOpenURL { url in
-                if let code = ChallengeInvite.code(from: url) {
-                    ChallengeInvite.storePendingCode(code)
+                if ChallengeInvite.handle(url: url) {
                     return
                 }
                 GIDSignIn.sharedInstance.handle(url)
             }
             .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activity in
-                if let url = activity.webpageURL, let code = ChallengeInvite.code(from: url) {
-                    ChallengeInvite.storePendingCode(code)
+                if let url = activity.webpageURL {
+                    ChallengeInvite.handle(url: url)
                 }
             }
         }

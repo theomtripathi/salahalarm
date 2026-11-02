@@ -114,6 +114,10 @@ extension AppsFlyerService: AppsFlyerLibDelegate {
 extension AppsFlyerService: DeepLinkDelegate {
     func didResolveDeepLink(_ result: DeepLinkResult) {
         guard result.status == .found, let deepLink = result.deepLink else { return }
+        if deepLink.deeplinkValue == "challenge_invite" {
+            ChallengeInvite.requestOpenInviteScreen()
+            return
+        }
         if let code = deepLink.clickEvent["deep_link_sub1"] as? String {
             ChallengeInvite.storePendingCode(code)
             print("🔗 AppsFlyerService: challenge invite code captured")

@@ -56,7 +56,13 @@ struct RamadanChallengeCard: View {
         .sheet(isPresented: $showDetails) {
             RamadanChallengeSheet()
         }
-        .task { await challenge.refreshCounts() }
+        .task {
+            if ChallengeInvite.consumeOpenInviteRequest() { showDetails = true }
+            await challenge.refreshCounts()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            if ChallengeInvite.consumeOpenInviteRequest() { showDetails = true }
+        }
     }
 
     private var headline: String {
