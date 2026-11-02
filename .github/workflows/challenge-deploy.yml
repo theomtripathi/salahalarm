@@ -1,0 +1,53 @@
+name: Ramadan challenge deploy
+
+# Deploys the salahalarm.com site Worker (website/) and the /go + /c link Worker
+# (Marketing/conversion-tracking) from the challenge branch.
+
+on:
+  push:
+    branches: [claude/project-thread-76eauj]
+    paths:
+      - "website/**"
+      - "Marketing/conversion-tracking/**"
+      - ".github/workflows/challenge-deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: challenge-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Links Worker (/go, /c)
+        working-directory: Marketing/conversion-tracking
+        run: |
+          npm test
+          node scripts/gen-links.mjs
+          npx --yes wrangler@4.152.0 deploy
+
+      - name: Site Worker
+        working-directory: website
+        run: |
+          npm test
+          npm run build
+          npx --yes wrangler@4.152.0 deploy
+
+      - name: Check
+        run: |
+          sleep 5
+          for p in /ramadan-2027/ /ramadan-2027/rules/ /ramadan-2027/stats.json /c/K7QX2M /c/join /go/ig1; do
+            echo "$p -> $(curl -s -o /dev/null -A 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)' -w '%{http_code} %{redirect_url}' "https://salahalarm.com$p")"
+          done
+          curl -s https://salahalarm.com/ramadan-2027/stats.json; echo
+          curl -s https://salahalarm.com/ramadan-2027/ | grep -c "Bring 3 friends"
