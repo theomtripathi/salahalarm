@@ -63,7 +63,22 @@ def tap(node):
     time.sleep(1.5)
 
 
+def dismiss_system_dialogs():
+    """The CI emulator sometimes shows "<app> isn't responding" for its own launcher; wait it out."""
+    for _ in range(3):
+        n = find(r"isn't responding")
+        if n is None:
+            return
+        w = find(r"^wait$")
+        if w is not None:
+            tap(w)
+        else:
+            adb("shell", "input", "keyevent", "4")
+        time.sleep(2)
+
+
 def tap_text(pattern, wait=10):
+    dismiss_system_dialogs()
     end = time.time() + wait
     while time.time() < end:
         n = find(pattern)
@@ -76,6 +91,7 @@ def tap_text(pattern, wait=10):
 
 def type_into(index, text):
     """Types into the index-th text field on screen (Compose labels are not reliable targets)."""
+    dismiss_system_dialogs()
     fields = [n for n in nodes() if n.get("class") == "android.widget.EditText"]
     if len(fields) <= index:
         problems.append(f"text field {index} not found ({len(fields)} on screen)")
@@ -98,6 +114,7 @@ def wait_for(pattern, wait=30):
 def launch():
     adb("shell", "monkey", "-p", PKG, "-c", "android.intent.category.LAUNCHER", "1", check=False)
     time.sleep(3)
+    dismiss_system_dialogs()
 
 
 def back_to_app():
