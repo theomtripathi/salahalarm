@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { render, parseFrontmatter, escapeHtml as esc } from './lib/markdown.mjs';
 import { layout, ctaInline, ctaBand, storeButtons, alarmPhone } from './lib/ui.mjs';
 import { homePage, card } from './pages/home.mjs';
-import { challengePage } from './pages/challenge.mjs';
+import { challengePage, challengeRulesPage } from './pages/challenge.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'site.config.json'), 'utf8'));
@@ -178,7 +178,7 @@ ${ctaBand(config, lang, 'blog-index')}`;
 function sitemap(articles, byKey) {
   const urls = [
     { loc: '/', lastmod: null, alts: [] },
-    ...(config.challenge ? [{ loc: config.challenge.path, lastmod: null, alts: [] }] : []),
+    ...(config.challenge ? [config.challenge.path, config.challenge.rulesPath].map((loc) => ({ loc, lastmod: null, alts: [] })) : []),
     ...Object.keys(config.langs).map((l) => ({ loc: `/blog/${l}/`, lastmod: null, alts: [] })),
     ...articles.map((a) => ({ loc: a.url, lastmod: a.updated || a.date, alts: a.translationKey ? byKey[a.translationKey] : [] })),
   ];
@@ -224,7 +224,10 @@ export function build() {
   for (const lang of Object.keys(config.langs)) write(`blog/${lang}/index.html`, blogIndex(lang, newestFirst.filter((a) => a.lang === lang)));
   write('blog/index.html', `<!doctype html><meta http-equiv="refresh" content="0; url=/blog/en/"><link rel="canonical" href="${config.baseUrl}/blog/en/">`);
   write('index.html', homePage(config, newestFirst.filter((a) => a.lang === 'en').slice(0, 3)));
-  if (config.challenge) write(path.join(config.challenge.path, 'index.html'), challengePage(config));
+  if (config.challenge) {
+    write(path.join(config.challenge.path, 'index.html'), challengePage(config));
+    write(path.join(config.challenge.rulesPath, 'index.html'), challengeRulesPage(config));
+  }
   write('404.html', layout(config, {
     lang: 'en',
     title: 'Page not found | Salah Alarm',

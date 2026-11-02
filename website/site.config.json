@@ -138,6 +138,8 @@
     "showCountFrom": 100,
     "joinUrl": "/c/join?src=page",
     "inviteUrl": "/c/invite?src=page",
-    "inviteBase": "https://salahalarm.com/c/"
+    "inviteBase": "https://salahalarm.com/c/",
+    "prize": false,
+    "rulesPath": "/ramadan-2027/rules/"
   }
 }

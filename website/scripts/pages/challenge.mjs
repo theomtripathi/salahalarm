@@ -17,7 +17,7 @@ const FAQ = [
   ['What if I miss a day?', 'Every phase has three grace days. A missed prayer is a setback, not the end of your challenge.'],
   ['Can I still join after Day 1?', 'Yes. Joining is open until 1 December. Late joiners follow a shorter track and can earn every badge.'],
   ['How do the invite rewards work?', 'Join, then tap Invite friends in the app to get your personal link. When 3 friends join with your link and complete their Day 1, you get a month of Premium free. At 10 friends, you get a year free.'],
-  ['How is the Umrah winner chosen?', 'Finishers send a 60-second video about their Ramadan Ready journey, and judges pick the winner on published criteria. It is not a lucky draw. No purchase is necessary, and the official rules and eligibility are in the app.'],
+  ['How is the Umrah winner chosen?', 'Finishers send a 60-second video about their Ramadan Ready journey, and judges pick the winner on published criteria. It is not a lucky draw. No purchase is necessary, and the official rules and eligibility are published before it opens.'],
   ['When does Ramadan 2027 start?', 'Ramadan 2027 is expected to begin on or around Monday 8 February 2027. The exact date depends on the moon sighting in your country.'],
 ];
 
@@ -144,7 +144,7 @@ ${showPrize ? `<section class="section prize-section">
         <p class="eyebrow eyebrow-gold">The prize</p>
         <h2>Finish the challenge. One finisher goes to Umrah with someone they love.</h2>
         <p>A 7-day Umrah trip for two: flights, a hotel near the Haram and visas. Finishers who joined by ${esc(shortDate(c.joinCloses))} send a 60-second video about their Ramadan Ready journey, and judges pick the winner on published criteria. It's not a lucky draw.</p>
-        <p class="fine">No purchase necessary. Official rules and eligibility are in the app.</p>
+        <p class="fine">No purchase necessary. Official rules and eligibility are published before it opens.</p>
       </div>
       <div class="countdown prize-badge" aria-hidden="true">
         ${icon('compass', 'icon prize-icon')}
@@ -159,6 +159,7 @@ ${showPrize ? `<section class="section prize-section">
     <p class="eyebrow">Questions</p>
     <h2 class="section-title">Before you join</h2>
     <div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>
+    <p class="faq-more"><a class="link-arrow" href="${esc(c.rulesPath)}">Official rules ${icon('arrow', 'icon icon-sm')}</a></p>
     <p class="faq-more"><a class="link-arrow" href="/blog/en/ramadan-2027-start-date/">Ramadan 2027 dates and how to prepare ${icon('arrow', 'icon icon-sm')}</a></p>
   </div>
 </section>
@@ -231,5 +232,49 @@ ${showPrize ? `<section class="section prize-section">
       },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
     ],
+  });
+}
+
+// salahalarm.com/ramadan-2027/rules/ : the official rules the app links to.
+const RULES = [
+  ['Sponsor', ['The 90-Day Ramadan Ready challenge (the "Challenge") is run by Salah Alarm, the developer of the Salah Alarm app (the "Sponsor").']],
+  ['Apple is not involved', ['Apple is not a sponsor of, and is not involved in, this Challenge in any way. Google is not a sponsor either. Questions about the Challenge go to the Sponsor, not to Apple or Google.']],
+  ['Free to join, no purchase necessary', ['Joining and taking part are free. No purchase or subscription is necessary to join, to track your days, to get an invite link or to earn any reward. Buying a subscription does not improve your results or rewards.']],
+  ['Dates', ['Day 1 is Tuesday 10 November 2026 and Day 90 is Sunday 7 February 2027. Joining is open until 1 December 2026. People who join after Day 1 start on the day they join and follow a shorter track.', 'Dates and times use the local time zone set on your phone.']],
+  ['Who can take part', ['Anyone who can use the Salah Alarm app may join. If you are under the age of majority where you live, you need a parent or guardian\'s permission. One Challenge entry per person.']],
+  ['How days are counted', ['A prayer counts when you confirm it in the app inside its prayer time for your location. Fajr counts when you dismiss the alarm and confirm before sunrise.', 'Phase 1 (days 1 to 30): Fajr on time, plus the other four prayers logged. Phase 2 (days 31 to 60): all five prayers on time, plus one page of Quran. Phase 3 (days 61 to 90): all five prayers, plus the Monday and Thursday sunnah fasts.', 'Each phase includes three grace days that cover missed days.']],
+  ['Badges', ['Ramadan Ready: all 90 days done, using at most the grace days. Silver: 80% of days done. Bronze: 30 days done. Badges have no cash value.']],
+  ['Invite rewards', ['Every person who joins gets a personal invite link and code. A friend counts toward your rewards when they join using your link or code and complete their own Day 1. A friend does not have to buy anything to count.', '3 friends who count: 1 month of Salah Alarm Premium free. 10 friends who count: 1 year of Salah Alarm Premium free. Each reward can be earned once per person.', 'Rewards are given as free Premium time in the app, for example through an App Store offer code. They cannot be exchanged for cash, transferred or sold.']],
+  ['No prize draw', ['There is no lottery or prize draw in this Challenge. If the Sponsor adds a prize later, it will come with its own official rules, published before it opens.']],
+  ['Fair play', ['Invites from your own extra accounts, fake accounts, paid or automated sign-ups, and faked prayer logs do not count. The Sponsor may remove entries, badges or rewards earned this way.']],
+  ['Privacy', ['Your Challenge progress is stored with your Salah Alarm account. Friends you invite are not shown your prayer logs. See the privacy policy for details.']],
+  ['Changes', ['The Sponsor may update these rules for clarity or to fix problems. Changes will not take away a reward you have already earned. The latest version is always on this page.']],
+];
+
+export function challengeRulesPage(config) {
+  const c = config.challenge;
+  const body = `<header class="article-hero">
+  <div class="wrap narrow">
+    <p class="crumbs"><a href="/">${esc(config.appName)}</a><span>/</span><a href="${esc(c.path)}">Ramadan Ready challenge</a></p>
+    <h1>Official rules: 90-Day Ramadan Ready challenge</h1>
+    <p class="lead">Free to join. No purchase necessary. Apple is not a sponsor of, and is not involved in, this challenge.</p>
+    <p class="meta">Last updated 2 November 2026</p>
+  </div>
+</header>
+<div class="wrap narrow">
+  <article class="prose rules">
+    ${RULES.map(([h, ps], i) => `<h2 id="r${i + 1}">${i + 1}. ${esc(h)}</h2>${ps.map((p) => `<p>${esc(p)}</p>`).join('')}`).join('\n    ')}
+    <h2 id="contact">${RULES.length + 1}. Contact</h2>
+    <p>Questions about the Challenge: <a href="${esc(config.supportUrl)}">Salah Alarm support</a>. Privacy policy: <a href="${esc(config.privacyUrl)}">${esc(config.privacyUrl)}</a>.</p>
+    <p><a class="link-arrow" href="${esc(c.path)}">Back to the challenge ${icon('arrow', 'icon icon-sm')}</a></p>
+  </article>
+</div>`;
+  return layout(config, {
+    lang: 'en',
+    title: 'Ramadan Ready Challenge Official Rules | Salah Alarm',
+    description: 'Official rules for the free 90-Day Ramadan Ready challenge in Salah Alarm: dates, how days count, invite rewards and fair play. No purchase necessary.',
+    canonical: c.rulesPath,
+    body,
+    bodyClass: 'rules-page',
   });
 }

@@ -79,8 +79,13 @@ test('challenge page builds with the offer, buttons and live-count hook', async 
   assert.match(html, /href="\/c\/invite\?src=page"/);
   assert.match(html, /\/ramadan-2027\/stats\.json/);
   assert.match(html, /<link rel="canonical" href="https:\/\/salahalarm\.com\/ramadan-2027\/">/);
-  assert.match(html, /Umrah/);
+  assert.match(challengePage({ ...config, challenge: { ...config.challenge, prize: true } }), /Umrah/);
   assert.doesNotMatch(challengePage({ ...config, challenge: { ...config.challenge, prize: false } }), /Umrah/);
+  assert.match(html, /href="\/ramadan-2027\/rules\/"/);
+  const { challengeRulesPage } = await import('../scripts/pages/challenge.mjs');
+  const rules = challengeRulesPage(config);
+  assert.match(rules, /Apple is not a sponsor of, and is not involved in, this Challenge/);
+  assert.match(rules, /No purchase or subscription is necessary/);
 });
 
 test('stats endpoint reads challengeStats/global.joinedCount from Firestore', async () => {
