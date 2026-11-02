@@ -17,6 +17,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import Combine
 
 @MainActor
 final class ChallengeService: ObservableObject {
