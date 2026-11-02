@@ -57,12 +57,6 @@ service cloud.firestore {
                        resource.data.userId == request.auth.uid);
     }
     
-    // Ramadan Ready challenge: the global joiner count is public, so
-    // salahalarm.com/ramadan-2027/ can show it. Writes stay with the app's rules.
-    match /challengeStats/{statId} {
-      allow read: if true;
-    }
-
     // Default: deny all other access
     match /{document=**} {
       allow read, write: if false;

@@ -122,5 +122,6 @@ from `challenge` in `site.config.json` (dates, hashtag, button links). Set
   Download button carry it (`/c/<CODE>?src=page-invite`).
 - The live joiner count comes from `/ramadan-2027/stats.json`, answered by
   `src/worker.js` from Firestore `challengeStats/global.joinedCount` (cached 60s). It
-  needs the public read rule for `challengeStats` in `firestore.rules`. The page shows
+  needs the public read rule for `challengeStats`, which the iOS challenge branch
+  (claude/project-thread-ahpdf3) adds to `firestore.rules`. The page shows
   the number only from `showCountFrom` (100) joiners; below that it says "Free to join".
