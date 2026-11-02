@@ -1,0 +1,16 @@
+{
+  "screenshots": 11,
+  "problems": [
+    "login: 'Sign in with email' not found",
+    "text field 0 not found (0 on screen)",
+    "text field 1 not found (0 on screen)",
+    "login: 'sign in' button not found",
+    "locked screen did not appear for an account without a plan",
+    "joining the free challenge did not show the free home",
+    "tab not found: Home",
+    "tab not found: Prayers",
+    "tab not found: Lock",
+    "tab not found: Quran",
+    "tab not found: Profile"
+  ]
+}
