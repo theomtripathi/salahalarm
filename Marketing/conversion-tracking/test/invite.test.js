@@ -35,7 +35,7 @@ test("with a OneLink, phones get the deep link with the code", () => {
 });
 
 test("without a OneLink, an invite shows the page with the code", () => {
-  for (const os of ["ios", "android", "other"]) {
+  for (const os of ["ios", "other"]) {
     const r = challengeTarget(url("/c/K7QX2M"), { kind: "invite", code: "K7QX2M" }, os, {});
     assert.equal(r.target, "https://salahalarm.com/ramadan-2027/?code=K7QX2M");
   }
@@ -44,11 +44,17 @@ test("without a OneLink, an invite shows the page with the code", () => {
   assert.equal(desk.destination, "page");
 });
 
+test("Android always goes to the web funnel with the invite code", () => {
+  const r = challengeTarget(url("/c/k7qx2m?utm_source=tiktok&src=bio"), { kind: "invite", code: "K7QX2M" }, "android", { ONELINK_URL: ONELINK });
+  assert.equal(r.destination, "android");
+  assert.equal(r.target, "https://salahalarm.com/android/?invite=K7QX2M&ref=challenge&utm_source=tiktok");
+});
+
 test("join goes to the right store without a OneLink", () => {
   const ios = challengeTarget(url("/c/join?src=page"), { kind: "join" }, "ios", {});
   assert.equal(ios.target, "https://apps.apple.com/app/apple-store/id6758457826?pt=128487036&ct=ramadan-2027&mt=8");
   const android = challengeTarget(url("/c/join?src=page"), { kind: "join" }, "android", {});
-  assert.equal(android.target, "https://salahalarm.com/android/?a=ramadan-2027&from=page");
+  assert.equal(android.target, "https://salahalarm.com/android/?ref=challenge");
   const unknown = challengeTarget(url("/c/nope"), { kind: "unknown", raw: "nope" }, "ios", { ONELINK_URL: ONELINK });
   assert.equal(unknown.target, "https://salahalarm.com/ramadan-2027/");
 });

@@ -4,7 +4,8 @@
 //   /c/join     "Download and join" on the challenge page and in bios
 //   /c/invite   "Get my invite link": opens the app on its invite screen
 //
-// With ONELINK_URL set, phones go to the AppsFlyer OneLink with
+// Android goes to the web funnel at /android/ (with invite=CODE). With
+// ONELINK_URL set, iPhones go to the AppsFlyer OneLink with
 // deep_link_value / deep_link_sub1, so the app gets the code on first open
 // (deferred deep link) or straight away when it is already installed.
 // Without it (or on a desktop for an invite), an invite opens the challenge page
@@ -71,17 +72,22 @@ export function challengeTarget(url, link, os, env = {}) {
   const page = challengePageUrl(url, code, src);
   if (link.kind === "unknown") return { target: challengePageUrl(url, null, src), destination: "page", src };
 
-  const phone = os === "ios" || os === "android";
-  if (env.ONELINK_URL && phone) {
+  // Android is not on Google Play: every Android click goes to the web funnel,
+  // which stores the code, signs the person in and joins them on the server.
+  if (os === "android") return { target: androidUrl(url, code), destination: "android", src };
+  if (env.ONELINK_URL && os === "ios") {
     return { target: oneLinkUrl(env.ONELINK_URL, { kind: link.kind, code, src, pageUrl: page }), destination: "onelink", src };
   }
   // No OneLink yet, or a desktop: an invite always shows the page with the code on it.
   if (link.kind === "invite") return { target: page, destination: "page", src };
-  if (os === "android") {
-    const android = new URL("/android/", url);
-    android.searchParams.set("a", CHALLENGE_CT);
-    if (src) android.searchParams.set("from", src);
-    return { target: android.href, destination: "android", src };
-  }
   return { target: appStoreChallengeUrl(), destination: "app_store", src };
+}
+
+// Android web funnel: /android/?invite=CODE&ref=challenge, keeping utm_* params.
+export function androidUrl(url, code) {
+  const target = new URL("/android/", url);
+  if (code) target.searchParams.set("invite", code);
+  target.searchParams.set("ref", "challenge");
+  for (const [k, v] of url.searchParams) if (k.startsWith("utm_")) target.searchParams.set(k, v);
+  return target.href;
 }
