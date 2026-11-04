@@ -13,9 +13,9 @@ en-011,en,ramadan 2027 start date,ramadan,info,"US,GB,CA,AU",5,2026-12-01,ramada
 en-012,en,ramadan 2027 calendar,ramadan,info,"US,GB,CA,AU",5,2026-12-10,ramadan-2027-calendar,ramadan-2027-calendar,published,2026-10-28,,,,,,,,
 en-013,en,suhoor alarm app,ramadan,tool,"US,GB,CA,AU",5,2026-12-15,suhoor-alarm,suhoor-alarm-app,published,2026-10-28,,,,,,,,
 en-014,en,how to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,,how-to-wake-up-for-suhoor,todo,,,,,,,,,
-en-015,en,ramadan planner 2027,ramadan,info,"US,GB,CA,AU",4,2026-12-20,ramadan-planner,ramadan-planner-2027,todo,,,,,,,,,Ties into Ramadan challenge feature
+en-015,en,ramadan planner 2027,ramadan,info,"US,GB,CA,AU",4,2026-12-20,ramadan-planner,ramadan-planner-2027,published,2026-11-04,,,,,,,,Ties into Ramadan challenge feature
 en-016,en,best ramadan app,ramadan,commercial,"US,GB,CA,AU",4,2027-01-05,,best-ramadan-app,todo,,,,,,,,,
-en-017,en,laylatul qadr 2027,ramadan,info,"US,GB,CA,AU",3,2027-01-20,,laylatul-qadr-2027,todo,,,,,,,,,
+en-017,en,laylatul qadr 2027,ramadan,info,"US,GB,CA,AU",3,2027-01-20,,laylatul-qadr-2027,published,2026-11-04,,,,,,,,
 en-018,en,how to wake up for tahajjud,fajr,info,"US,GB,CA,AU",3,,tahajjud,how-to-wake-up-for-tahajjud,todo,,,,,,,,,
 en-019,en,what time is fajr,fajr,info,"US,GB,CA,AU",3,,,what-time-is-fajr,published,2026-11-03,,,,,,,,"Explain calculation methods, not a city table"
 en-020,en,can you pray fajr after sunrise,fajr,info,"US,GB,CA,AU",3,,,pray-fajr-after-sunrise,todo,,,,,,,,,Cite scholars; no rulings of our own
@@ -89,3 +89,6 @@ ar-089,ar,متى ينتهي وقت السحور,ramadan,info,"SA,AE,EG,KW,QA,JO,
 ar-090,ar,منبه قيام الليل,fajr,tool,"SA,AE,EG,KW,QA,JO,MA",3,,tahajjud-alarm,munabbih-qiyam-allayl,published,2026-11-03,,,,,,,,added 2026-11-03
 ar-091,ar,تطبيق يقفل الهاتف حتى تصلي,habit,tool,"SA,AE,EG,KW,QA,JO,MA",3,,app-locks-until-pray,tatbiq-yuqfil-alhatif-hatta-tusalli,published,2026-11-03,,,,,,,,added 2026-11-03
 en-092,en,what time is fajr,fajr,info,"US,GB,CA,AU",3,,fajr-time,what-time-is-fajr,published,2026-11-03,,,,,,,,added 2026-11-03
+ar-093,ar,تطبيق تتبع الصلاة,habit,tool,"SA,AE,EG,KW,QA,JO,MA",3,,salah-tracker-arabic,tatbiq-tatabbu-alsalah,published,2026-11-04,,,,,,,,added 2026-11-04
+ar-094,ar,ليلة القدر 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,laylat-alqadr-2027,laylat-alqadr-2027,published,2026-11-04,,,,,,,,added 2026-11-04
+ar-095,ar,منبه الأذان للايفون,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,azan-alarm-iphone-arabic,munabbih-alathan-iphone,todo,,,,,,,,,added 2026-11-04
