@@ -19,10 +19,10 @@ en-017,en,laylatul qadr 2027,ramadan,info,"US,GB,CA,AU",3,2027-01-20,,laylatul-q
 en-018,en,how to wake up for tahajjud,fajr,info,"US,GB,CA,AU",3,,tahajjud,how-to-wake-up-for-tahajjud,todo,,,,,,,,,
 en-019,en,what time is fajr,fajr,info,"US,GB,CA,AU",3,,,what-time-is-fajr,published,2026-11-03,,,,,,,,"Explain calculation methods, not a city table"
 en-020,en,can you pray fajr after sunrise,fajr,info,"US,GB,CA,AU",3,,,pray-fajr-after-sunrise,todo,,,,,,,,,Cite scholars; no rulings of our own
-en-021,en,dua after waking up,dua,info,"US,GB,CA,AU",3,,wake-dua,dua-after-waking-up,todo,,,,,,,,,
+en-021,en,dua after waking up,dua,info,"US,GB,CA,AU",3,,wake-dua,dua-after-waking-up,published,2026-11-06,,,,,,,,
 en-022,en,qibla direction app iphone,apps,tool,"US,GB,CA,AU",3,,qibla,qibla-direction-app-iphone,published,2026-11-03,,,,,,,,
 en-023,en,2 rakat sunnah before fajr,fajr,info,"US,GB,CA,AU",3,,,sunnah-before-fajr,todo,,,,,,,,,
-en-024,en,fajr alarm not working iphone,apps,info,"US,GB,CA,AU",3,,,fajr-alarm-not-working-iphone,todo,,,,,,,,,"Focus mode, silent switch, background refresh"
+en-024,en,fajr alarm not working iphone,apps,info,"US,GB,CA,AU",3,,,fajr-alarm-not-working-iphone,published,2026-11-06,,,,,,,,"Focus mode, silent switch, background refresh"
 ar-025,ar,كيف أستيقظ لصلاة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",5,,wake-fajr,kayfa-astayqiz-lisalat-alfajr,published,2026-10-24,,,,,,,,
 ar-026,ar,منبه الفجر,fajr,tool,"SA,AE,EG,KW,QA,JO,MA",5,,fajr-alarm-app,munabbih-alfajr,published,2026-10-28,,,,,,,,
 ar-027,ar,تطبيق أذان للايفون,apps,commercial,"SA,AE,EG,KW,QA,JO,MA",5,,azan-app-iphone,tatbiq-adhan-iphone,published,2026-10-30,,,,,,,,
@@ -91,4 +91,5 @@ ar-091,ar,تطبيق يقفل الهاتف حتى تصلي,habit,tool,"SA,AE,EG,
 en-092,en,what time is fajr,fajr,info,"US,GB,CA,AU",3,,fajr-time,what-time-is-fajr,published,2026-11-03,,,,,,,,added 2026-11-03
 ar-093,ar,تطبيق تتبع الصلاة,habit,tool,"SA,AE,EG,KW,QA,JO,MA",3,,salah-tracker-arabic,tatbiq-tatabbu-alsalah,published,2026-11-04,,,,,,,,added 2026-11-04
 ar-094,ar,ليلة القدر 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,laylat-alqadr-2027,laylat-alqadr-2027,published,2026-11-04,,,,,,,,added 2026-11-04
-ar-095,ar,منبه الأذان للايفون,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,azan-alarm-iphone-arabic,munabbih-alathan-iphone,todo,,,,,,,,,added 2026-11-04
+ar-095,ar,منبه الأذان للايفون,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,azan-alarm-iphone-arabic,munabbih-alathan-iphone,published,2026-11-06,,,,,,,,added 2026-11-04
+ar-096,ar,سنة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",3,,sunnah-before-fajr,sunnat-alfajr,published,2026-11-06,,,,,,,,added 2026-11-06
