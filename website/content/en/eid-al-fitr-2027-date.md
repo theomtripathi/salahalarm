@@ -50,6 +50,12 @@ The days before Eid are part of Ramadan, so keep your worship steady. Read our g
 
 Some people wait until the last day to plan Eid, then find that the Eid prayer, the travel, or the shopping is rushed. A better plan is to set three dates: the first expected date, the official announcement date, and the Eid prayer time. Then plan around those.
 
+## Eid morning, step by step
+
+A calm Eid morning starts the night before. Set your alarm for a time that gives you enough room to bathe, dress, and eat something light before you leave. Many people also make a small plan for the sadaqah they want to give, so the charity happens with the joy of the day rather than as a rushed decision.
+
+On the morning itself, say the takbeers on your way to the prayer, pray Eid with the congregation, and then listen to the khutbah. After the prayer, greet your family and neighbours, and visit those who are alone or unwell. These simple acts make the day feel like the celebration it is meant to be.
+
 ## Summary
 
 - Eid al-Fitr 2027 is expected on 9 or 10 March 2027.
