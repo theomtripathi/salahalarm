@@ -66,7 +66,7 @@ ur-064,ur,رمضان 2027 کا کیلنڈر,ramadan,info,"PK,IN,GB",4,2026-12-10
 ur-065,ur,نیند سے جاگنے کی دعا,dua,info,"PK,IN,GB",3,,wake-dua,neend-se-jaagne-ki-dua,todo,,,,,,,,,
 ur-066,ur,تہجد کے لیے کیسے اٹھیں,fajr,info,"PK,IN,GB",3,,tahajjud,tahajjud-ke-liye-kaise-uthein,todo,,,,,,,,,
 en-067,en,what time to wake up for suhoor,ramadan,info,"US,GB,CA,AU",4,2026-12-20,suhoor-wake,what-time-to-wake-up-for-suhoor,published,2026-11-01,,,,,,,,added 2026-10-28
-en-069,en,ramadan 2027 countdown,ramadan,info,"US,GB,CA,AU",3,2027-01-10,,ramadan-2027-countdown,todo,,,,,,,,,added 2026-10-28
+en-069,en,ramadan 2027 countdown,ramadan,info,"US,GB,CA,AU",3,2027-01-10,,ramadan-2027-countdown,published,2026-11-07,,,,,,,,added 2026-10-28
 ar-070,ar,كيف أستيقظ للسحور,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2026-12-20,suhoor-wake,kayfa-astayqiz-lilsuhur,published,2026-10-30,,,,,,,,added 2026-10-28
 tr-071,tr,sahura nasıl kalkılır,ramadan,info,"TR,DE,NL",4,2026-12-20,suhoor-wake,sahura-nasil-kalkilir,todo,,,,,,,,,added 2026-10-28
 id-072,id,cara bangun sahur,ramadan,info,"ID,MY",4,2026-12-20,suhoor-wake,cara-bangun-sahur,published,2026-10-30,,,,,,,,added 2026-10-28
@@ -93,3 +93,8 @@ ar-093,ar,تطبيق تتبع الصلاة,habit,tool,"SA,AE,EG,KW,QA,JO,MA",3,,
 ar-094,ar,ليلة القدر 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,laylat-alqadr-2027,laylat-alqadr-2027,published,2026-11-04,,,,,,,,added 2026-11-04
 ar-095,ar,منبه الأذان للايفون,apps,tool,"SA,AE,EG,KW,QA,JO,MA",3,,azan-alarm-iphone-arabic,munabbih-alathan-iphone,published,2026-11-06,,,,,,,,added 2026-11-04
 ar-096,ar,سنة الفجر,fajr,info,"SA,AE,EG,KW,QA,JO,MA",3,,sunnah-before-fajr,sunnat-alfajr,published,2026-11-06,,,,,,,,added 2026-11-06
+en-100,en,eid al fitr 2027 date,ramadan,info,"US,GB,CA,AU",4,2027-03-01,eid-al-fitr-2027,eid-al-fitr-2027-date,published,2026-11-07,,,,,,,,added 2026-11-07
+en-101,en,ramadan 2027 fasting hours,ramadan,info,"US,GB,CA,AU",4,2027-01-20,ramadan-fasting-hours-2027,ramadan-2027-fasting-hours,published,2026-11-07,,,,,,,,added 2026-11-07
+ar-097,ar,موعد عيد الفطر 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-03-01,eid-al-fitr-2027,mawid-eid-alfitr-2027,published,2026-11-07,,,,,,,,added 2026-11-07
+ar-098,ar,تراويح رمضان 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,tarawih-ramadan-2027,tarawih-ramadan-2027,published,2026-11-07,,,,,,,,added 2026-11-07
+ar-099,ar,صيام رمضان 2027,ramadan,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,ramadan-fasting-hours-2027,siyam-ramadan-2027,published,2026-11-07,,,,,,,,added 2026-11-07
