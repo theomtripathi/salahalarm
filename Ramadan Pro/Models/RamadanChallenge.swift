@@ -20,25 +20,8 @@ enum RamadanChallenge {
 
     /// Day 1 of the challenge.
     static var startDate: Date { makeDate(2026, 11, 10) }
-    /// Last day to join (a 30-day track still fits before Ramadan).
-    static var prizeJoinCutoff: Date { makeDate(2027, 1, 9) }
-    /// Free Makkah Trip prize draw (Umrah trip for 2).
-    static var drawDate: Date { makeDate(2027, 2, 10) }
-    /// Cap on draw entries earned from invited friends.
-    static let maxReferralEntries = 50
-
-    /// Draw entries for full days: 30 = 1, 60 = 2, 90 = 3.
-    static func dayEntries(completedDays: Int) -> Int {
-        min(3, completedDays / 30)
-    }
-
-    /// Total entries. Friend entries only count once the user has an entry
-    /// of their own; the server confirms friend full days before the draw.
-    static func totalEntries(completedDays: Int, qualifiedFriends: Int) -> Int {
-        let own = dayEntries(completedDays: completedDays)
-        guard own > 0 else { return 0 }
-        return own + min(max(0, qualifiedFriends), maxReferralEntries)
-    }
+    /// Last day to join and still be eligible for the top reward.
+    static var prizeJoinCutoff: Date { makeDate(2026, 12, 1) }
     /// Expected first day of Ramadan 1448 (depends on the moon sighting).
     static var expectedRamadanStart: Date { makeDate(2027, 2, 8) }
 
