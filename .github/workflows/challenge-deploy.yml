@@ -46,8 +46,8 @@ jobs:
       - name: Check
         run: |
           sleep 5
-          for p in /ramadan-2027/ /ramadan-2027/rules/ /ramadan-2027/stats.json /c/K7QX2M /c/join /go/ig1; do
+          for p in /ramadan-2027/ /ramadan-2027/rules/ /ramadan-2027/stats.json /c/K7QX2M "/c/join?to=ios" "/c/join?to=android" /go/ig1; do
             echo "$p -> $(curl -s -o /dev/null -A 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)' -w '%{http_code} %{redirect_url}' "https://salahalarm.com$p")"
           done
           curl -s https://salahalarm.com/ramadan-2027/stats.json; echo
-          curl -s https://salahalarm.com/ramadan-2027/ | grep -c "Bring 3 friends"
+          curl -s https://salahalarm.com/ramadan-2027/ | grep -c "Win a free"
