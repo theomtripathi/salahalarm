@@ -22,6 +22,10 @@ export function randomCode(random = () => crypto.getRandomValues(new Uint32Array
   return out;
 }
 
+// Joining closes at the end of 9 Jan 2027 everywhere (UTC-12 midnight).
+export const JOIN_CUTOFF = Date.parse("2027-01-10T12:00:00Z");
+export const joiningOpen = (now = Date.now()) => now < JOIN_CUTOFF;
+
 export function publicChallenge(c) {
   if (!c?.code) return null;
   return { code: c.code, joinedAt: c.joinedAt || null, invitedBy: c.invitedBy || null };
@@ -35,6 +39,7 @@ export async function readChallenge(db, uid) {
 export async function joinChallenge(db, uid, { invite, now = new Date(), random } = {}) {
   const existing = await readChallenge(db, uid);
   if (existing) return { challenge: existing, created: false };
+  if (!joiningOpen(now.getTime())) throw Object.assign(new Error("joining is closed"), { status: 410 });
 
   let code = null;
   for (let i = 0; i < 6 && !code; i++) {

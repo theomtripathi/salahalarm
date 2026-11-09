@@ -177,7 +177,9 @@ function header() {
       h("div", { class: "card tint center" },
         h("div", { class: "small", style: "margin:0" }, t("Your invite link")),
         h("b", { style: "font-size:18px" }, link),
-        h("p", { class: "small", style: "margin:6px 0 0" }, t("Bring 3 friends, get a month of premium free. Bring 10, get a year free."))),
+        h("p", { class: "small", style: "margin:6px 0 0" }, t("Bring 3 friends, get a month of premium free. Bring 10, get a year free.")),
+        h("p", { class: "small", style: "margin:6px 0 0" }, t("Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2"), " · ",
+          h("a", { href: "/ramadan-2027/rules", target: "_blank", rel: "noopener" }, t("Official rules")))),
     ];
   }
   if (status === "locked") {

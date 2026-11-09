@@ -493,7 +493,8 @@ const SCREENS = {
         h("span", {}, svg(icons.check), t("Cancel anytime")),
         h("span", {}, svg(icons.card), t("Secure checkout by Dodo Payments"))),
       h("p", { class: "small center", style: "margin:0" }, t("Works on Android 8 and newer")),
-      lapsed ? null : h("button", {
+      // The free challenge closes to new joiners after 9 January 2027.
+      lapsed || Date.now() >= Date.parse("2027-01-10T12:00:00Z") ? null : h("button", {
         class: "btn btn-secondary", type: "button", id: "join-challenge", style: "margin-top:12px",
         onclick: (e) => joinChallenge(e.currentTarget, error),
       }, t("Not ready to pay? Join the free 90-Day Ramadan challenge")),

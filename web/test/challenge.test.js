@@ -53,3 +53,12 @@ test("retries when a code is taken", async () => {
   const r = await joinChallenge(db, "dave", { random: () => (n++ < 6 ? 0 : 0.5) });
   assert.notEqual(r.challenge.code, "AAAAAA");
 });
+
+test("joining closes after 9 January 2027, but existing joiners keep their code", async () => {
+  const db = memoryDb();
+  const early = await joinChallenge(db, "erin", { now: new Date("2027-01-09T20:00:00Z") });
+  assert.equal(early.created, true);
+  await assert.rejects(joinChallenge(db, "frank", { now: new Date("2027-01-11T00:00:00Z") }), /closed/);
+  const again = await joinChallenge(db, "erin", { now: new Date("2027-01-11T00:00:00Z") });
+  assert.equal(again.challenge.code, early.challenge.code);
+});

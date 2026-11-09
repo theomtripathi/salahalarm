@@ -126,7 +126,7 @@ fun LockedScreen() {
                 }
             }
             // Free tier: the 90-Day Ramadan Ready challenge needs no purchase.
-            SecondaryButton(t("Not ready to pay? Join the free 90-Day Ramadan challenge")) {
+            if (com.salahalarm.core.RamadanChallenge.joiningOpen(repo.today())) SecondaryButton(t("Not ready to pay? Join the free 90-Day Ramadan challenge")) {
                 Analytics.capture("android_locked_join_challenge", mapOf("reason" to source))
                 scope.launch {
                     checking = true

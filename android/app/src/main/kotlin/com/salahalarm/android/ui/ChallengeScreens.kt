@@ -114,7 +114,7 @@ fun ChallengeCard(onOpen: () -> Unit) {
                 if (start > 0) tf("Starts in %d days. Ramadan is in %d days.", start, RamadanChallenge.daysUntilRamadan(today))
                 else tf("Ramadan is in %d days. Lock in all five prayers and walk in ready.", RamadanChallenge.daysUntilRamadan(today)),
             )
-            Text(
+            if (RamadanChallenge.joiningOpen(today)) Text(
                 t("Join free"), color = Color.White, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(Palette.green).padding(vertical = 10.dp),
             )
@@ -172,7 +172,9 @@ fun ChallengeScreen(onBack: () -> Unit) {
             counts.first?.takeIf { it > 0 }?.let { Text(tf("%d people have joined", it), color = Palette.green, fontWeight = FontWeight.SemiBold) }
 
             val e = enrollment
-            if (e == null) {
+            if (e == null && !RamadanChallenge.joiningOpen(repo.today())) {
+                Text(t("Joining closed on 9 January."), color = Palette.alarmRed, fontWeight = FontWeight.SemiBold)
+            } else if (e == null) {
                 OutlinedTextField(
                     value = typed, onValueChange = { typed = it.take(6).uppercase() }, singleLine = true,
                     label = { Text(t("Got an invite code? (optional)")) }, modifier = Modifier.fillMaxWidth(),
@@ -202,6 +204,7 @@ fun ChallengeScreen(onBack: () -> Unit) {
                         Spacer(Modifier.height(8.dp))
                         Secondary(tf("Current tier: %@", t(p.tier.title)), size = 13)
                     }
+                    EntriesCard(p, counts.second)
                 }
                 SectionTitle(t("Invite friends"))
                 SLCard {
@@ -223,9 +226,11 @@ fun ChallengeScreen(onBack: () -> Unit) {
             Bullets(
                 "3 friends join with your link and complete Day 1: 1 month of premium free",
                 "10 friends join with your link and complete Day 1: 1 year of premium free",
-                "Finish all 90 days: Ramadan Ready badge and a finisher reward",
+                "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2",
+                "30 full days = 1 entry, 60 = 2, 90 = 3",
+                tf("Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)", RamadanChallenge.MAX_REFERRAL_ENTRIES),
             )
-            Secondary(t("Rewards are added from early December and count every friend from Day 1."), size = 13)
+            Secondary(t("A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method."), size = 13)
 
             SectionTitle(t("How it works"))
             Bullets(
@@ -238,6 +243,23 @@ fun ChallengeScreen(onBack: () -> Unit) {
             TextButton(onClick = { openUrl(context, RamadanChallenge.RULES_URL) }) { Text(t("Official rules"), color = Palette.green) }
             Secondary(t("Free to join. No purchase necessary, and a purchase does not improve your chances."), size = 12)
         }
+    }
+}
+
+/** Free Makkah Trip draw entries, like iOS entriesCard. */
+@Composable
+private fun EntriesCard(p: ChallengeProgress, friends: Int) {
+    val own = RamadanChallenge.dayEntries(p.completedDays)
+    val total = RamadanChallenge.totalEntries(p.completedDays, friends)
+    val nextMilestone = minOf(RamadanChallenge.LENGTH_DAYS, (own + 1) * 30)
+    Column(
+        Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).background(Color(0xFF0F3D2E).copy(alpha = 0.06f)).padding(14.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Text(tf("Your entries: %d", total), fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Palette.gold)
+        Text(t("Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027."), fontSize = 13.sp)
+        if (own < 3) Secondary(tf("%d of %d full days for your next entry", p.completedDays, nextMilestone), size = 13)
+        if (own == 0 && friends > 0) Secondary(t("Friend entries count once you've earned your first entry."), size = 12)
     }
 }
 

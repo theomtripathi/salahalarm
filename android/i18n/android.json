@@ -151,7 +151,16 @@
   "Free to join. No purchase necessary, and a purchase does not improve your chances.": "Free to join. No purchase necessary, and a purchase does not improve your chances.",
   "Phase 1: Fajr foundation": "Phase 1: Fajr foundation",
   "Phase 2: Five a day": "Phase 2: Five a day",
-  "Phase 3: Sha'ban training": "Phase 3: Sha'ban training"
+  "Phase 3: Sha'ban training": "Phase 3: Sha'ban training",
+  "Your entries: %d": "Your entries: %d",
+  "Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027.": "Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027.",
+  "%d of %d full days for your next entry": "%d of %d full days for your next entry",
+  "Friend entries count once you've earned your first entry.": "Friend entries count once you've earned your first entry.",
+  "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2",
+  "30 full days = 1 entry, 60 = 2, 90 = 3": "30 full days = 1 entry, 60 = 2, 90 = 3",
+  "Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)": "Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)",
+  "A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method.": "A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method.",
+  "Joining closed on 9 January.": "Joining closed on 9 January."
  },
  "ar": {
   "Snooze 5 min": "غفوة ٥ دقائق",
@@ -314,7 +323,16 @@
   "Free to join. No purchase necessary, and a purchase does not improve your chances.": "الانضمام مجاني. لا يلزم أي شراء، والشراء لا يزيد فرصك.",
   "Phase 1: Fajr foundation": "المرحلة 1: أساس الفجر",
   "Phase 2: Five a day": "المرحلة 2: خمس صلوات يوميًا",
-  "Phase 3: Sha'ban training": "المرحلة 3: تدريب شعبان"
+  "Phase 3: Sha'ban training": "المرحلة 3: تدريب شعبان",
+  "Your entries: %d": "مشاركاتك: %d",
+  "Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027.": "سحب رحلة مكة المجانية: رحلة عمرة لشخصين، يُجرى السحب في 10 فبراير 2027.",
+  "%d of %d full days for your next entry": "%d من %d يومًا كاملًا للمشاركة التالية",
+  "Friend entries count once you've earned your first entry.": "تُحتسب مشاركات الأصدقاء بعد أن تحصل على مشاركتك الأولى.",
+  "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "سحب رحلة مكة المجانية في 10 فبراير 2027: رحلة عمرة لشخصين",
+  "30 full days = 1 entry, 60 = 2, 90 = 3": "30 يومًا كاملًا = مشاركة واحدة، 60 = اثنتان، 90 = ثلاث",
+  "Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)": "بالإضافة إلى مشاركة لكل صديق ينضم برمزك ويُكمل يومًا كاملًا (حتى %d)",
+  "A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method.": "اليوم الكامل يعني تسجيل الصلوات الخمس. انضم قبل 9 يناير. لا يلزم أي شراء؛ راجع الشروط الرسمية لطريقة المشاركة المجانية.",
+  "Joining closed on 9 January.": "أُغلق باب الانضمام في 9 يناير."
  },
  "tr": {
   "Snooze 5 min": "5 dk ertele",
@@ -477,7 +495,16 @@
   "Free to join. No purchase necessary, and a purchase does not improve your chances.": "Katılım ücretsizdir. Satın alma gerekmez ve satın alma şansını artırmaz.",
   "Phase 1: Fajr foundation": "1. Aşama: Sabah namazı temeli",
   "Phase 2: Five a day": "2. Aşama: Günde beş vakit",
-  "Phase 3: Sha'ban training": "3. Aşama: Şaban hazırlığı"
+  "Phase 3: Sha'ban training": "3. Aşama: Şaban hazırlığı",
+  "Your entries: %d": "Katılım hakkın: %d",
+  "Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027.": "Ücretsiz Mekke Yolculuğu çekilişi: 2 kişilik umre yolculuğu, 10 Şubat 2027'de çekilecek.",
+  "%d of %d full days for your next entry": "Sonraki hakkın için %d / %d tam gün",
+  "Friend entries count once you've earned your first entry.": "Arkadaş hakları, ilk hakkını kazandıktan sonra sayılır.",
+  "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "10 Şubat 2027'de Ücretsiz Mekke Yolculuğu çekilişi: 2 kişilik umre",
+  "30 full days = 1 entry, 60 = 2, 90 = 3": "30 tam gün = 1 hak, 60 = 2, 90 = 3",
+  "Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)": "Kodunla katılıp bir tam gün kaydeden her arkadaş için +1 hak (en fazla %d)",
+  "A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method.": "Tam gün, beş vaktin de kaydedilmesi demektir. 9 Ocak'a kadar katıl. Satın alma gerekmez; ücretsiz katılım yolu için resmi kurallara bak.",
+  "Joining closed on 9 January.": "Katılım 9 Ocak'ta kapandı."
  },
  "id": {
   "Snooze 5 min": "Tunda 5 menit",
@@ -640,7 +667,16 @@
   "Free to join. No purchase necessary, and a purchase does not improve your chances.": "Gratis untuk bergabung. Tidak perlu membeli apa pun, dan pembelian tidak menambah peluangmu.",
   "Phase 1: Fajr foundation": "Fase 1: Fondasi Subuh",
   "Phase 2: Five a day": "Fase 2: Lima waktu sehari",
-  "Phase 3: Sha'ban training": "Fase 3: Latihan Sya'ban"
+  "Phase 3: Sha'ban training": "Fase 3: Latihan Sya'ban",
+  "Your entries: %d": "Entri kamu: %d",
+  "Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027.": "Undian Perjalanan Makkah Gratis: perjalanan umrah untuk 2 orang, diundi pada 10 Februari 2027.",
+  "%d of %d full days for your next entry": "%d dari %d hari penuh untuk entri berikutnya",
+  "Friend entries count once you've earned your first entry.": "Entri dari teman dihitung setelah kamu mendapat entri pertamamu.",
+  "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "Undian Perjalanan Makkah Gratis pada 10 Februari 2027: umrah untuk 2 orang",
+  "30 full days = 1 entry, 60 = 2, 90 = 3": "30 hari penuh = 1 entri, 60 = 2, 90 = 3",
+  "Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)": "Ditambah 1 entri untuk setiap teman yang bergabung dengan kodemu dan mencatat satu hari penuh (maksimal %d)",
+  "A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method.": "Hari penuh berarti kelima salat tercatat. Bergabunglah paling lambat 9 Januari. Tidak perlu pembelian; lihat aturan resmi untuk cara ikut gratis.",
+  "Joining closed on 9 January.": "Pendaftaran ditutup pada 9 Januari."
  },
  "ur": {
   "Snooze 5 min": "5 منٹ اسنوز",
@@ -803,6 +839,15 @@
   "Free to join. No purchase necessary, and a purchase does not improve your chances.": "شامل ہونا مفت ہے۔ کوئی خریداری ضروری نہیں، اور خریداری سے آپ کے امکانات نہیں بڑھتے۔",
   "Phase 1: Fajr foundation": "مرحلہ 1: فجر کی بنیاد",
   "Phase 2: Five a day": "مرحلہ 2: روزانہ پانچ نمازیں",
-  "Phase 3: Sha'ban training": "مرحلہ 3: شعبان کی تربیت"
+  "Phase 3: Sha'ban training": "مرحلہ 3: شعبان کی تربیت",
+  "Your entries: %d": "آپ کی انٹریز: %d",
+  "Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027.": "مفت مکہ ٹرپ قرعہ اندازی: 2 افراد کے لیے عمرے کا سفر، قرعہ اندازی 10 فروری 2027 کو۔",
+  "%d of %d full days for your next entry": "اگلی انٹری کے لیے %d از %d مکمل دن",
+  "Friend entries count once you've earned your first entry.": "دوستوں کی انٹریز آپ کی پہلی انٹری کے بعد شمار ہوں گی۔",
+  "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "10 فروری 2027 کو مفت مکہ ٹرپ قرعہ اندازی: 2 افراد کے لیے عمرہ",
+  "30 full days = 1 entry, 60 = 2, 90 = 3": "30 مکمل دن = 1 انٹری، 60 = 2، 90 = 3",
+  "Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)": "آپ کے کوڈ سے شامل ہو کر ایک مکمل دن درج کرنے والے ہر دوست پر 1 اضافی انٹری (زیادہ سے زیادہ %d)",
+  "A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method.": "مکمل دن کا مطلب ہے پانچوں نمازیں درج ہوں۔ 9 جنوری تک شامل ہوں۔ کوئی خریداری ضروری نہیں؛ مفت انٹری کے طریقے کے لیے سرکاری قواعد دیکھیں۔",
+  "Joining closed on 9 January.": "شمولیت 9 جنوری کو بند ہو گئی۔"
  }
 }

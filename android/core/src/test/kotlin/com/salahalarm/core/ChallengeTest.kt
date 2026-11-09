@@ -62,4 +62,16 @@ class ChallengeTest {
         assertEquals(ChallengeInvite.Link.OpenInvite, ChallengeInvite.parse("https", "salahalarm.com", listOf("c", "invite")))
         assertNull(ChallengeInvite.parse("https", "salahalarm.com", listOf("go", "ig1")))
     }
+
+    @Test fun makkahDrawEntries() {
+        assertEquals(0, RamadanChallenge.dayEntries(29))
+        assertEquals(1, RamadanChallenge.dayEntries(30))
+        assertEquals(2, RamadanChallenge.dayEntries(60))
+        assertEquals(3, RamadanChallenge.dayEntries(90))
+        assertEquals(0, RamadanChallenge.totalEntries(29, 10)) // friends wait for your own first entry
+        assertEquals(11, RamadanChallenge.totalEntries(30, 10))
+        assertEquals(53, RamadanChallenge.totalEntries(90, 80)) // friend entries capped at 50
+        assertTrue(RamadanChallenge.joiningOpen(LocalDate.of(2027, 1, 9)))
+        assertFalse(RamadanChallenge.joiningOpen(LocalDate.of(2027, 1, 10)))
+    }
 }

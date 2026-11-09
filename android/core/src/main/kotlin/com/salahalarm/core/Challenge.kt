@@ -20,6 +20,24 @@ object RamadanChallenge {
 
     val startDate: LocalDate = LocalDate.of(2026, 11, 10)
     val expectedRamadanStart: LocalDate = LocalDate.of(2027, 2, 8)
+    /** Last day to join (a 30-day track still fits before Ramadan). */
+    val joinCutoff: LocalDate = LocalDate.of(2027, 1, 9)
+    /** Free Makkah Trip prize draw (an Umrah trip for 2). */
+    val drawDate: LocalDate = LocalDate.of(2027, 2, 10)
+    /** Cap on draw entries earned from invited friends. */
+    const val MAX_REFERRAL_ENTRIES = 50
+
+    fun joiningOpen(today: LocalDate): Boolean = !today.isAfter(joinCutoff)
+
+    /** Draw entries for full days: 30 = 1, 60 = 2, 90 = 3. */
+    fun dayEntries(completedDays: Int): Int = minOf(3, maxOf(0, completedDays) / 30)
+
+    /** Total entries. Friend entries only count once the user has an entry of their own; the server confirms friends' full days before the draw. */
+    fun totalEntries(completedDays: Int, qualifiedFriends: Int): Int {
+        val own = dayEntries(completedDays)
+        if (own == 0) return 0
+        return own + qualifiedFriends.coerceIn(0, MAX_REFERRAL_ENTRIES)
+    }
 
     /** 1-based challenge day: 0 or less before Day 1, above 90 after the end. */
     fun dayNumber(on: LocalDate): Int = ChronoUnit.DAYS.between(startDate, on).toInt() + 1
