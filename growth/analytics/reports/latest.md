@@ -10,6 +10,7 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Salah Alarm daily brief, 2026-10-27
 =======
 # Salah Alarm daily brief, 2026-10-28
@@ -46,6 +47,9 @@
 >>>>>>> Stashed changes
 =======
 # Salah Alarm daily brief, 2026-11-08
+>>>>>>> Stashed changes
+=======
+# Salah Alarm daily brief, 2026-11-09
 >>>>>>> Stashed changes
 
 ## 1. Funnel: is the app turning installs into money?
