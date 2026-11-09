@@ -197,7 +197,36 @@ struct RamadanChallengeSheet: View {
             Text(L10n.format("Current tier: %@", progress.tier.title))
                 .font(.system(size: 14))
                 .foregroundColor(AppColors.slTextSecondary)
+            entriesCard(progress)
         }
+    }
+
+    private func entriesCard(_ progress: ChallengeProgress) -> some View {
+        let own = RamadanChallenge.dayEntries(completedDays: progress.completedDays)
+        let total = RamadanChallenge.totalEntries(completedDays: progress.completedDays,
+                                                  qualifiedFriends: challenge.friendsJoined)
+        let nextMilestone = min(RamadanChallenge.lengthInDays, (own + 1) * 30)
+        return VStack(alignment: .leading, spacing: 6) {
+            Text(L10n.format("Your entries: %d", total))
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(AppColors.slGold)
+            Text(L10n.text("Free Makkah Trip draw: an Umrah trip for 2, drawn on 10 February 2027."))
+                .font(.system(size: 13))
+                .foregroundColor(AppColors.slTextPrimary)
+            if own < 3 {
+                Text(L10n.format("%d of %d full days for your next entry", progress.completedDays, nextMilestone))
+                    .font(.system(size: 13))
+                    .foregroundColor(AppColors.slTextSecondary)
+            }
+            if own == 0 && challenge.friendsJoined > 0 {
+                Text(L10n.text("Friend entries count once you've earned your first entry."))
+                    .font(.system(size: 12))
+                    .foregroundColor(AppColors.slTextSecondary)
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(hex: "#0F3D2E").opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
     }
 
     private func inviteSection(_ enrollment: ChallengeEnrollment) -> some View {
@@ -252,8 +281,10 @@ struct RamadanChallengeSheet: View {
                 .font(.system(size: 18, weight: .bold))
             bullet(L10n.text("3 friends join with your link and complete Day 1: 1 month of premium free"))
             bullet(L10n.text("10 friends join with your link and complete Day 1: 1 year of premium free"))
-            bullet(L10n.text("Finish all 90 days: Ramadan Ready badge and a finisher reward"))
-            Text(L10n.text("Rewards are added from early December and count every friend from Day 1."))
+            bullet(L10n.text("Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2"))
+            bullet(L10n.text("30 full days = 1 entry, 60 = 2, 90 = 3"))
+            bullet(L10n.format("Plus 1 entry for each friend who joins with your code and logs a full day (up to %d)", RamadanChallenge.maxReferralEntries))
+            Text(L10n.text("A full day means all five prayers logged. Join by 9 January. No purchase necessary; see the official rules for the free entry method."))
                 .font(.system(size: 12))
                 .foregroundColor(AppColors.slTextSecondary)
         }
