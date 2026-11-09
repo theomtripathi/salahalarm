@@ -100,7 +100,6 @@ export function challengePage(config) {
         <div><b data-status>${esc(statusText)}</b><span>${esc(shortDate(c.start))} to ${esc(shortDate(c.end))}</span></div>
         <div><b data-joined>Free</b><span data-joined-label>to join, open until ${esc(shortDate(c.joinCloses))}</span></div>
       </div>
-      <p class="hero-fine">No purchase necessary. Prize draw open to residents of ${esc(c.eligibleCountries)}, 18+. <a href="${esc(c.rulesPath)}">Official rules</a>.</p>
     </div>
     <div class="hero-visual">
       <div class="rings rings-gold" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -198,6 +197,7 @@ export function challengePage(config) {
     <h2>Start tonight. Makkah could be next.</h2>
     <p>Join free on iPhone or Android, log your prayers, and bring your friends.</p>
     ${actions('band')}
+    <p class="band-fine">The challenge is open to everyone, everywhere. No purchase necessary. Prize draw eligibility is in the <a href="${esc(c.rulesPath)}">official rules</a>.</p>
   </div>
 </section>
 

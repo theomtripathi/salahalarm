@@ -571,3 +571,5 @@ html[dir="rtl"] .announce-cta .icon { transform: scaleX(-1); }
   .challenge-cta .btn { justify-content: center; }
 }
 .challenge-band .challenge-cta { justify-content: center; }
+.challenge-band .band-fine { margin: 28px auto 0; font-size: 14px; color: rgb(255 255 255 / 70%); }
+.challenge-band .band-fine a { color: var(--gold-soft); }
