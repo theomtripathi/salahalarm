@@ -129,17 +129,30 @@
   "ramadanStart": "2027-02-08",
   "challenge": {
     "path": "/ramadan-2027/",
-    "name": "90-Day Ramadan Ready challenge",
+    "name": "Free Makkah Trip Challenge",
     "hashtag": "#ImRamadanReady",
     "start": "2026-11-10",
     "days": 90,
     "end": "2027-02-07",
-    "joinCloses": "2026-12-01",
+    "joinCloses": "2027-01-09",
     "showCountFrom": 100,
-    "joinUrl": "/c/join?src=page",
     "inviteUrl": "/c/invite?src=page",
     "inviteBase": "https://salahalarm.com/c/",
-    "prize": false,
-    "rulesPath": "/ramadan-2027/rules/"
+    "prize": true,
+    "rulesPath": "/ramadan-2027/rules/",
+    "drawDate": "2027-02-10",
+    "bonusCap": 50,
+    "prizeName": "Umrah trip to Makkah for 2",
+    "prizeValueUsd": 4000,
+    "eligibleCountries": "the United States, the United Kingdom and Canada",
+    "freeEntryEmail": "challenge@salahalarm.com",
+    "iosUrl": "/c/join?to=ios&src=page",
+    "androidUrl": "/c/join?to=android&src=page"
+  },
+  "announcement": {
+    "text": "Win a free Makkah trip. Join the free prayer challenge",
+    "href": "/ramadan-2027/",
+    "cta": "Join free",
+    "short": "Win a free Makkah trip"
   }
 }

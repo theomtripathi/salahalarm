@@ -24,13 +24,13 @@ export function icon(name, cls = 'icon') {
   return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[name]}</svg>`;
 }
 
-const APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.16.77 1.1 1.68 2.34 2.87 2.3 1.15-.05 1.59-.75 2.98-.75 1.39 0 1.78.75 3 .72 1.24-.02 2.02-1.12 2.77-2.23.88-1.28 1.24-2.52 1.26-2.59-.03-.01-2.42-.93-2.44-3.66zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28z"/></svg>';
+export const APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.16.77 1.1 1.68 2.34 2.87 2.3 1.15-.05 1.59-.75 2.98-.75 1.39 0 1.78.75 3 .72 1.24-.02 2.02-1.12 2.77-2.23.88-1.28 1.24-2.52 1.26-2.59-.03-.01-2.42-.93-2.44-3.66zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28z"/></svg>';
 
 export function appStoreBadge(s, href, cta, cls = '') {
   return `<a class="store-badge ${cls}" href="${esc(href)}" data-cta="${esc(cta)}">${APPLE}<span><small>${esc(s.badgeTop)}</small>App Store</span></a>`;
 }
 
-const ANDROID = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.6 9.48 19.44 6.3a.38.38 0 0 0-.66-.38l-1.87 3.23a11.43 11.43 0 0 0-9.82 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>';
+export const ANDROID = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M17.6 9.48 19.44 6.3a.38.38 0 0 0-.66-.38l-1.87 3.23a11.43 11.43 0 0 0-9.82 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>';
 
 export function linkFor(config, platform, lang, slug) {
   const pattern = platform === 'android' ? config.androidLinkPattern : config.ctaLinkPattern;
@@ -107,7 +107,7 @@ ${alt}
 <link rel="stylesheet" href="/styles.css">
 ${ld}
 </head>
-<body class="${bodyClass}">
+<body class="${bodyClass}${config.announcement ? ' has-announce' : ''}">
 ${header(config, lang)}
 <main id="main">
 ${body}
@@ -121,7 +121,7 @@ ${footer(config, lang)}
 function header(config, lang) {
   const s = config.langs[lang];
   const homeNav = lang === 'en'
-    ? `<a href="/#how">How it works</a><a href="/#features">Features</a><a href="/ramadan-2027/">Ramadan challenge</a>`
+    ? `<a href="/#how">How it works</a><a href="/#features">Features</a><a href="/ramadan-2027/">Makkah Trip Challenge</a>`
     : '';
   return `<header class="site-header">
   <div class="wrap header-inner">
@@ -132,7 +132,15 @@ function header(config, lang) {
       <a class="btn btn-small" rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'header'))}" data-cta="${lang}-header-ios" aria-label="${esc(s.getItFor)} iOS">${APPLE}<span>iOS</span></a>
     </div>
   </div>
+  ${announcement(config)}
 </header>`;
+}
+
+// Gold bar under the navigation on every page (config.announcement).
+function announcement(config) {
+  const a = config.announcement;
+  if (!a) return '';
+  return `<a class="announce" href="${esc(a.href)}" data-cta="announce-bar"><span class="announce-text">${icon('compass', 'icon icon-sm')} <span class="announce-long">${esc(a.text)}</span><span class="announce-short">${esc(a.short || a.text)}</span></span><span class="announce-cta">${esc(a.cta)} ${icon('arrow', 'icon icon-sm')}</span></a>`;
 }
 
 function footer(config, lang) {
@@ -146,7 +154,7 @@ function footer(config, lang) {
       <a class="brand" href="/"><img src="/icon.png" alt="" width="34" height="34"><span>${esc(config.appName)}</span></a>
       <p>The Fajr alarm that gets you to the prayer mat. Built for Muslims everywhere.</p>
     </div>
-    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/ramadan-2027/">Ramadan Ready challenge</a><a rel="nofollow" href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
+    <div><h2>App</h2><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/ramadan-2027/">Free Makkah Trip Challenge</a><a rel="nofollow" href="${esc(linkFor(config, 'android', lang, 'footer'))}">Android</a><a rel="nofollow" href="${esc(linkFor(config, 'ios', lang, 'footer'))}">iOS</a></div>
     <div><h2>Guides</h2>${langs}</div>
     <div><h2>Legal</h2><a href="${esc(config.privacyUrl)}">Privacy</a><a href="${esc(config.termsUrl)}">Terms</a><a href="${esc(config.supportUrl)}">Support</a></div>
   </div>

@@ -69,23 +69,24 @@ test('worker sends www and http to https://salahalarm.com and serves the rest', 
   assert.equal(await ok.text(), 'asset');
 });
 
-test('challenge page builds with the offer, buttons and live-count hook', async () => {
-  const { challengePage } = await import('../scripts/pages/challenge.mjs');
+test('challenge page sells the Makkah trip with iPhone and Android buttons', async () => {
+  const { challengePage, challengeRulesPage } = await import('../scripts/pages/challenge.mjs');
   const fs = await import('node:fs');
   const config = JSON.parse(fs.readFileSync(new URL('../site.config.json', import.meta.url), 'utf8'));
   const html = challengePage(config);
-  assert.match(html, /Bring 3 friends, get a month free\. Bring 10, get a year free\./);
-  assert.match(html, /href="\/c\/join\?src=page"[^>]*data-join/);
+  assert.match(html, /Win a free <span class="gold">Makkah trip/);
+  assert.match(html, /href="\/c\/join\?to=ios&amp;src=page"[^>]*data-join="ios"/);
+  assert.match(html, /href="\/c\/join\?to=android&amp;src=page"[^>]*data-join="android"/);
   assert.match(html, /href="\/c\/invite\?src=page"/);
+  assert.match(html, /No purchase necessary/);
   assert.match(html, /\/ramadan-2027\/stats\.json/);
   assert.match(html, /<link rel="canonical" href="https:\/\/salahalarm\.com\/ramadan-2027\/">/);
-  assert.match(challengePage({ ...config, challenge: { ...config.challenge, prize: true } }), /Umrah/);
-  assert.doesNotMatch(challengePage({ ...config, challenge: { ...config.challenge, prize: false } }), /Umrah/);
-  assert.match(html, /href="\/ramadan-2027\/rules\/"/);
-  const { challengeRulesPage } = await import('../scripts/pages/challenge.mjs');
+  assert.match(html, /class="announce" href="\/ramadan-2027\/"/);
   const rules = challengeRulesPage(config);
   assert.match(rules, /Apple is not a sponsor of, and is not involved in, this Challenge/);
-  assert.match(rules, /No purchase or subscription is necessary/);
+  assert.match(rules, /No purchase or subscription is necessary to join, to earn entries or to win/);
+  assert.match(rules, /How to enter without the app/);
+  assert.match(rules, /drawn at random from all valid entries/);
 });
 
 test('stats endpoint reads challengeStats/global.joinedCount from Firestore', async () => {

@@ -1,5 +1,7 @@
 /* salahalarm.com — brand: deep prayer-mat green, cream, gold accents. */
+/* --header-h: sticky header height, including the announcement bar when shown */
 :root {
+  --header-h: 65px;
   --green-950: #04170f;
   --green-900: #072a1c;
   --green-800: #0a3d2a;
@@ -136,7 +138,7 @@ html[dir="rtl"] .link-arrow .icon, html[dir="rtl"] .card-more .icon { transform:
     radial-gradient(1000px 600px at 85% 10%, rgb(28 154 102 / 35%), transparent 60%),
     radial-gradient(700px 500px at 0% 100%, rgb(214 170 72 / 14%), transparent 60%),
     linear-gradient(170deg, var(--green-950), var(--green-800) 70%);
-  margin-top: -65px; padding-top: 65px;
+  margin-top: calc(-1 * var(--header-h)); padding-top: var(--header-h);
 }
 .hero::before {
   content: ""; position: absolute; inset: 0; opacity: .07; pointer-events: none;
@@ -524,3 +526,48 @@ html[dir="rtl"] .prose blockquote { border-radius: 14px 0 0 14px; }
 .pill-link { text-decoration: none; }
 .pill-link:hover { background: rgb(255 255 255 / 14%); }
 .ramadan-copy .link-arrow { display: flex; width: fit-content; margin-top: 8px; }
+
+/* Announcement bar (inside the sticky header, below the nav) */
+body.has-announce { --header-h: 103px; }
+.announce {
+  display: flex; align-items: center; justify-content: center; gap: 14px; height: 38px; padding: 0 16px;
+  background: linear-gradient(90deg, #c99a35, var(--gold) 50%, #c99a35); color: var(--green-950);
+  font-size: 14.5px; font-weight: 700; text-decoration: none; white-space: nowrap; overflow: hidden;
+}
+.announce:hover { background: var(--gold-soft); }
+.announce-short { display: none; }
+.announce-text { display: inline-flex; align-items: center; gap: 8px; overflow: hidden; text-overflow: ellipsis; }
+.announce-cta { display: inline-flex; align-items: center; gap: 4px; padding: 3px 12px; border-radius: 999px; background: var(--green-900); color: var(--gold-soft); font-size: 13px; flex: none; }
+html[dir="rtl"] .announce-cta .icon { transform: scaleX(-1); }
+@media (max-width: 560px) {
+  .announce { font-size: 13px; gap: 10px; }
+  .announce-long { display: none; }
+  .announce-short { display: inline; }
+}
+
+/* Free Makkah Trip Challenge */
+.challenge-hero h1 .gold { color: var(--gold); }
+.challenge-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.challenge-cta .btn { padding: 13px 22px; }
+.hero-fine { margin: 18px 0 0; font-size: 13px; color: rgb(255 255 255 / 60%); }
+.hero-fine a { color: var(--gold-soft); }
+.entries { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 8px; }
+.entry-card { padding: 26px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); }
+.entry-card h3 { font-size: 20px; margin: 4px 0 8px; }
+.entry-card p:last-child { margin: 0; color: var(--muted); }
+.entry-card-gold { background: linear-gradient(150deg, var(--green-900), var(--green-700)); color: #fff; border-color: transparent; }
+.entry-card-gold p:last-child { color: rgb(255 255 255 / 80%); }
+.entries-example { display: flex; gap: 10px; align-items: center; margin: 22px 0 32px; font-weight: 600; color: var(--muted); }
+.entries-example .icon { color: var(--gold); }
+.prize .fine a { color: var(--gold-soft); }
+@media (max-width: 1000px) { .entries { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 860px) {
+  .challenge-hero .challenge-cta { justify-content: center; }
+  .challenge-band .challenge-cta { justify-content: center; }
+}
+@media (max-width: 560px) {
+  .challenge-cta { flex-direction: column; align-items: stretch; }
+  .challenge-cta .store-buttons { justify-content: center; }
+  .challenge-cta .btn { justify-content: center; }
+}
+.challenge-band .challenge-cta { justify-content: center; }

@@ -84,3 +84,15 @@ test("worker logs the click to PostHog and redirects", async (t) => {
     globalThis.fetch = realFetch;
   }
 });
+
+test("?to= picks the platform whatever the device", () => {
+  const a = challengeTarget(url("/c/join?to=android&src=page"), { kind: "join" }, "other", {});
+  assert.equal(a.target, "https://salahalarm.com/android/?ref=challenge");
+  const i = challengeTarget(url("/c/join?to=ios&src=page"), { kind: "join" }, "android", {});
+  assert.equal(i.destination, "app_store");
+  const inv = challengeTarget(url("/c/K7QX2M?to=android"), { kind: "invite", code: "K7QX2M" }, "ios", {});
+  assert.equal(inv.target, "https://salahalarm.com/android/?invite=K7QX2M&ref=challenge");
+  // The page's own iPhone button must not loop back to the page.
+  const iosInv = challengeTarget(url("/c/K7QX2M?to=ios&src=page-invite"), { kind: "invite", code: "K7QX2M" }, "ios", {});
+  assert.equal(iosInv.destination, "app_store");
+});

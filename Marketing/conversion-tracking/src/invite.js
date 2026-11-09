@@ -65,8 +65,12 @@ export function oneLinkUrl(base, { kind, code, src, pageUrl }) {
   return target.href;
 }
 
-// Where a /c/ click goes. `os` is from classifyAgent.
-export function challengeTarget(url, link, os, env = {}) {
+// Where a /c/ click goes. `os` is from classifyAgent; `?to=ios|android` (the
+// page's iPhone and Android buttons) overrides it, so a desktop visitor who taps
+// Android still reaches the Android funnel.
+export function challengeTarget(url, link, agentOs, env = {}) {
+  const to = url.searchParams.get("to");
+  const os = to === "ios" || to === "android" ? to : agentOs;
   const src = (url.searchParams.get("src") || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 32) || null;
   const code = link.kind === "invite" ? link.code : null;
   const page = challengePageUrl(url, code, src);
@@ -78,8 +82,9 @@ export function challengeTarget(url, link, os, env = {}) {
   if (env.ONELINK_URL && os === "ios") {
     return { target: oneLinkUrl(env.ONELINK_URL, { kind: link.kind, code, src, pageUrl: page }), destination: "onelink", src };
   }
-  // No OneLink yet, or a desktop: an invite always shows the page with the code on it.
-  if (link.kind === "invite") return { target: page, destination: "page", src };
+  // No OneLink yet, or a desktop: an invite shows the page with the code on it,
+  // unless it came from that page's own iPhone button (?to=ios).
+  if (link.kind === "invite" && !to) return { target: page, destination: "page", src };
   return { target: appStoreChallengeUrl(), destination: "app_store", src };
 }
 
