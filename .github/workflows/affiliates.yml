@@ -1,0 +1,59 @@
+name: Affiliates deploy
+
+# Deploys affiliates/ (affiliate.salahalarm.com: the Salah Alarm Affiliates portal,
+# tracking endpoints and admin dashboard) to Cloudflare. Creates the D1 database on
+# the first run and applies migrations every run.
+
+on:
+  push:
+    branches: [claude/project-thread-0m1sd5]
+    paths:
+      - "affiliates/**"
+      - ".github/workflows/affiliates.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: affiliates-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: affiliates
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+      - run: npm test
+
+      - name: D1 database
+        run: |
+          id=$(npx wrangler d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const j=JSON.parse(s.slice(s.indexOf("[")));const d=j.find(x=>x.name==="salahalarm-affiliates");process.stdout.write(d?d.uuid:"")})')
+          if [ -z "$id" ]; then
+            npx wrangler d1 create salahalarm-affiliates
+            id=$(npx wrangler d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const j=JSON.parse(s.slice(s.indexOf("[")));const d=j.find(x=>x.name==="salahalarm-affiliates");process.stdout.write(d?d.uuid:"")})')
+          fi
+          echo "D1 id: $id"
+          test -n "$id"
+          sed -i "s/00000000-0000-0000-0000-000000000000/$id/" wrangler.jsonc
+          npx wrangler d1 migrations apply salahalarm-affiliates --remote
+
+      - name: Deploy
+        run: npx wrangler deploy
+
+      - name: Check
+        working-directory: .
+        run: |
+          sleep 20
+          for p in /healthz / /content /content/makkah-trip-story /faq /terms /resources /login /admin/login /styles.css; do
+            echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://affiliate.salahalarm.com$p)"
+          done

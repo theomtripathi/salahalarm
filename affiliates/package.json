@@ -1,0 +1,14 @@
+{
+  "name": "salahalarm-affiliates",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --no-warnings test/*.test.js",
+    "dev": "wrangler dev --local",
+    "migrate:local": "wrangler d1 migrations apply salahalarm-affiliates --local",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.152.0"
+  }
+}
