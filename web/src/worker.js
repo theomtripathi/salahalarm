@@ -28,6 +28,7 @@ import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
 import { setupDodo } from "./dodo-setup.js";
 import { tierFor, productFor, parseProducts, displayPlans, displayOffer, CHECKOUT_PLANS, discountFor, discounted, DISCOUNTS } from "./pricing.js";
 import { joinChallenge, readChallenge, challengeCounts } from "./challenge.js";
+import { ensurePaidSeat, grantShareSeat, grantRevenueCat, affiliatePayload, notifyAffiliates } from "./postpay.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
 import { sanitizeProfile } from "./profile.js";
@@ -71,6 +72,9 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/trial" && method === "POST") return startTrial(request, env, ctx);
   if (pathname === "/api/challenge/join" && method === "POST") return challengeJoin(request, env, ctx);
   if (pathname === "/api/challenge" && method === "GET") return challengeStatus(request, env);
+  if (pathname === "/api/seats" && method === "GET") return seats(request, env, ctx, url);
+  if (pathname === "/api/seats/share" && method === "POST") return seatsShare(request, env, ctx);
+  if (pathname === "/api/seats/platform" && method === "POST") return seatsPlatform(request, env, ctx);
   if (pathname === "/api/entitlement" && method === "GET") return entitlement(request, env, url);
   if (pathname === "/api/portal" && method === "POST") return portal(request, env);
   if (pathname === "/api/webhooks/dodo" && method === "POST") return webhook(request, env, ctx);
@@ -88,6 +92,8 @@ async function route(request, env, ctx, url) {
 
   if (pathname === "/get") return Response.redirect(`${url.origin}/get/${url.search}`, 301);
   if (pathname === "/android") return Response.redirect(`${url.origin}/android/${url.search}`, 301);
+  if (pathname === "/start") return Response.redirect(`${url.origin}/start/${url.search}`, 301);
+  if (pathname === "/start/paid") return Response.redirect(`${url.origin}/start/paid/${url.search}`, 301);
   if (env.ASSETS) return env.ASSETS.fetch(request);
   return new Response("not found", { status: 404 });
 }
@@ -200,6 +206,15 @@ async function config(request, env, ctx) {
       authDomain: env.FIREBASE_AUTH_DOMAIN || `${env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
       projectId: env.FIREBASE_PROJECT_ID,
     },
+    // Firebase Analytics for the web (app "salahalarm.com web" in the same project).
+    firebaseAnalytics: env.FIREBASE_MEASUREMENT_ID ? {
+      apiKey: env.FIREBASE_WEB_API_KEY || env.FIREBASE_API_KEY,
+      authDomain: env.FIREBASE_AUTH_DOMAIN || `${env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
+      projectId: env.FIREBASE_PROJECT_ID,
+      appId: env.FIREBASE_WEB_APP_ID,
+      measurementId: env.FIREBASE_MEASUREMENT_ID,
+      messagingSenderId: env.FIREBASE_SENDER_ID,
+    } : null,
     posthog: env.POSTHOG_KEY ? { key: env.POSTHOG_KEY, host: env.POSTHOG_HOST || "https://us.i.posthog.com" } : null,
     appStoreUrl: env.APP_STORE_URL,
     checkoutEnabled: Boolean(env.DODO_PAYMENTS_API_KEY),
@@ -318,14 +333,22 @@ async function checkout(request, env, ctx, url) {
   const ref = String(body.ref || "").slice(0, 60);
   const days = Number(trialDays(env)[plan] || 0);
   const discount = discountFor(body.discount, plan);
+  // The salahalarm.com onboarding (/start/) returns to its own post-payment flow.
+  const home = body.flow === "start";
+  const affiliate = /^[a-z0-9_.-]{1,40}$/i.test(String(body.affiliate || "")) ? String(body.affiliate).toLowerCase() : "";
   const session = await dodo(env).createCheckout({
     product_cart: [{ product_id: product.productId, quantity: 1 }],
     customer: { email: u.email || undefined, name: String(body.name || u.name || "").slice(0, 80) || undefined },
     ...(g.country && { billing_address: { country: g.country } }),
-    return_url: `${origin}/android/welcome/?plan=${plan}`,
+    return_url: home ? `${origin}/start/paid/?plan=${plan}` : `${origin}/android/welcome/?plan=${plan}`,
     // Backing out of checkout counts as closing the paywall: show the next exit offer.
-    cancel_url: `${origin}/android/?resume=paywall&exit=${plan === "weeklyOffer" ? "trial" : "offer"}`,
-    metadata: { uid: u.uid, plan, tier: product.tier, country: g.country || "", ref, lang, source: "android_web", ...(discount && { discount: discount.code }) },
+    cancel_url: home
+      ? `${origin}/start/?resume=paywall&exit=${plan === "weeklyOffer" ? "done" : "offer"}`
+      : `${origin}/android/?resume=paywall&exit=${plan === "weeklyOffer" ? "trial" : "offer"}`,
+    metadata: {
+      uid: u.uid, app_user_id: u.uid, plan, tier: product.tier, country: g.country || "", ref, lang,
+      source: home ? "home_web" : "android_web", ...(affiliate && { affiliate }), ...(discount && { discount: discount.code }),
+    },
     ...(discount && { discount_codes: [discount.code] }),
     customization: { force_language: lang, theme: "light", show_order_details: true },
     feature_flags: { redirect_immediately: true, allow_discount_code: true, allow_customer_editing_email: !u.email },
@@ -535,6 +558,43 @@ async function challengeJoin(request, env, ctx) {
   return json({ challenge, created, ...(await challengeCounts(db, challenge.code)) });
 }
 
+// ---- post-payment seats (/start/paid/) ---------------------------------------------
+
+async function seats(request, env, ctx, url) {
+  const u = await user(request, env);
+  const db = firestore(env);
+  const r = await ensurePaidSeat(db, u.uid, { invite: url.searchParams.get("invite") });
+  if (r.granted) capture(env, ctx, "web_challenge_seat_granted", u.uid, { reason: "paid", seats_total: r.total, $set: { challenge_seats: r.total, challenge_code: r.challenge?.code || null } });
+  const origin = env.PUBLIC_ORIGIN || url.origin;
+  return json({
+    paid: r.paid,
+    code: r.challenge?.code || null,
+    shareUrl: r.challenge?.code ? `${origin}/c/${r.challenge.code}` : null,
+    seats: r.seats,
+    total: r.total,
+    email: u.email || null,
+    provider: u.provider || null,
+  });
+}
+
+async function seatsShare(request, env, ctx) {
+  const u = await user(request, env);
+  const body = await readJson(request);
+  const db = firestore(env);
+  const r = await grantShareSeat(db, u.uid, { method: body.method });
+  if (r.granted) capture(env, ctx, "web_challenge_seat_granted", u.uid, { reason: "shared", method: body.method || null });
+  return json(r);
+}
+
+async function seatsPlatform(request, env, ctx) {
+  const u = await user(request, env);
+  const body = await readJson(request);
+  const platform = body.platform === "ios" ? "ios" : "android";
+  await firestore(env).merge(`users/${u.uid}`, { webPlatform: platform, webPlatformAt: new Date() });
+  capture(env, ctx, "web_platform_saved", u.uid, { platform, $set: { platform } });
+  return json({ ok: true, platform });
+}
+
 async function challengeStatus(request, env) {
   const u = await user(request, env);
   const db = firestore(env);
@@ -633,7 +693,30 @@ async function webhook(request, env, ctx) {
     // Same event name as iOS, so cross-platform funnels and workflows can stop on it.
     if (event.type === "subscription.active") capture(env, ctx, "purchase_completed", who, { ...props, platform: "android_web" });
   }
+  // Runs even when the entitlement was already written by the checkout confirmation (result.skipped):
+  // every step is idempotent (seat once, RevenueCat end date, affiliate dedupes by subscription id).
+  if (result.uid && (event.type === "subscription.active" || event.type === "subscription.renewed")) {
+    ctx.waitUntil(afterPayment(env, ctx, event, result.uid).catch((err) => console.warn("after payment failed", err)));
+  }
   return json({ ok: true, ...result });
+}
+
+// Seat in the draw, Pro in RevenueCat (iPhone), and the affiliate report.
+export async function afterPayment(env, ctx, event, uid, { db = firestore(env), fetchImpl = fetch } = {}) {
+  const sub = event.data || {};
+  const ent = await db.get(`entitlements/${uid}`);
+  const out = {};
+  if (event.type === "subscription.active") {
+    const seat = await ensurePaidSeat(db, uid).catch((err) => ({ error: err.message }));
+    out.seat = seat;
+    if (seat?.granted) capture(env, ctx, "web_challenge_seat_granted", uid, { reason: "paid", seats_total: seat.total, $set: { challenge_seats: seat.total, challenge_code: seat.challenge?.code || null } });
+  }
+  out.revenuecat = await grantRevenueCat(env, uid, ent, { affiliate: sub.metadata?.affiliate, fetchImpl }).catch((err) => ({ error: err.message }));
+  if (out.revenuecat?.ok === false || out.revenuecat?.error) capture(env, ctx, "revenuecat_grant_failed", uid, { status: out.revenuecat.status || 0, error: out.revenuecat.error || null });
+  else if (out.revenuecat?.ok) capture(env, ctx, "revenuecat_grant_succeeded", uid, { until: new Date(out.revenuecat.endTime).toISOString() });
+  const type = event.type === "subscription.active" ? "purchased" : "renewed";
+  out.affiliate = await notifyAffiliates(env, affiliatePayload(type, { uid, ent, sub })).catch((err) => ({ error: err.message }));
+  return out;
 }
 
 export async function handleEvent(env, db, event) {

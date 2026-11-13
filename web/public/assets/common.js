@@ -121,7 +121,10 @@ export function captureRef() {
   return store.get("sa_ref") || "";
 }
 
-// ---- analytics (PostHog capture API, no SDK) --------------------------------------
+// ---- analytics ----------------------------------------------------------------------
+// Default: PostHog capture API, no SDK (bio link, Android funnel).
+// With { sdk: true } (the salahalarm.com onboarding): the posthog-js SDK with session
+// replay, plus Firebase Analytics, both fed by the same capture() calls.
 
 let posthog = null;
 let distinctId = store.get("sa_did");
@@ -130,24 +133,93 @@ if (!distinctId) {
   store.set("sa_did", distinctId);
 }
 const superProps = {};
+let sdk = null; // window.posthog once the SDK is initialised
+let fb = null; // { logEvent, analytics } once Firebase Analytics is ready
+const fbQueue = [];
 
-export function initAnalytics(config, props = {}) {
+/** The affiliate who sent this visitor: ?via=<username> (set by the affiliate redirect) or the sa_aff cookie. */
+export function affiliate() {
+  const via = new URLSearchParams(location.search).get("via");
+  if (via && /^[a-z0-9_.-]{1,40}$/i.test(via)) store.set("sa_aff", via.toLowerCase());
+  const cookie = (document.cookie.match(/(?:^|;\s*)sa_aff=([^;]+)/) || [])[1];
+  if (!store.get("sa_aff") && cookie && /^[a-z0-9_.-]{1,40}$/i.test(decodeURIComponent(cookie))) store.set("sa_aff", decodeURIComponent(cookie).toLowerCase());
+  return store.get("sa_aff") || "";
+}
+
+export function initAnalytics(config, props = {}, { sdk: useSdk = false } = {}) {
   posthog = config?.posthog || null;
-  Object.assign(superProps, store.get("sa_from") ? { from: store.get("sa_from") } : {}, props);
+  const aff = affiliate();
+  Object.assign(superProps, store.get("sa_from") ? { from: store.get("sa_from") } : {}, aff ? { affiliate: aff } : {}, props);
+  if (useSdk && posthog) loadPosthog(posthog);
+  if (useSdk && config?.firebaseAnalytics) loadFirebaseAnalytics(config.firebaseAnalytics);
+}
+
+function loadPosthog(cfg) {
+  /* eslint-disable */
+  // Official posthog-js loader snippet (array.js from the assets host), trimmed.
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister identify alias people.set people.set_once set_config reset get_distinct_id get_session_id get_session_replay_url startSessionRecording stopSessionRecording opt_in_capturing opt_out_capturing".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  /* eslint-enable */
+  window.posthog.init(cfg.key, {
+    api_host: cfg.host,
+    person_profiles: "always",
+    bootstrap: { distinctID: distinctId },
+    capture_pageview: true,
+    capture_pageleave: true,
+    autocapture: true,
+    disable_session_recording: false,
+    enable_heatmaps: true,
+    session_recording: { maskAllInputs: true, maskInputOptions: { password: true, email: true } },
+  });
+  window.posthog.register(superProps);
+  sdk = window.posthog;
+}
+
+async function loadFirebaseAnalytics(cfg) {
+  try {
+    const base = "https://www.gstatic.com/firebasejs/12.12.0";
+    const [{ initializeApp }, an] = await Promise.all([import(`${base}/firebase-app.js`), import(`${base}/firebase-analytics.js`)]);
+    if (!(await an.isSupported().catch(() => false))) return;
+    const app = initializeApp(cfg, "web-analytics");
+    const analytics = an.getAnalytics(app);
+    if (store.get("sa_identified")) an.setUserId(analytics, store.get("sa_identified"));
+    fb = { an, analytics };
+    while (fbQueue.length) fbLog(...fbQueue.shift());
+  } catch (err) {
+    console.warn("firebase analytics unavailable", err);
+  }
+}
+
+// GA4 names: letters, digits and underscores, 40 chars; values: strings or numbers, 100 chars.
+function fbLog(event, properties) {
+  if (!fb) return fbQueue.length < 100 && fbQueue.push([event, properties]);
+  const name = event.replace(/^\$/, "").replace(/[^A-Za-z0-9_]/g, "_").slice(0, 40);
+  const params = {};
+  for (const [k, v] of Object.entries(properties || {})) {
+    if (Object.keys(params).length >= 25) break;
+    if (typeof v === "number" || typeof v === "boolean") params[k.slice(0, 40)] = Number(v);
+    else if (typeof v === "string" && v) params[k.slice(0, 40)] = v.slice(0, 100);
+  }
+  try {
+    if (name === "web_onboarding_screen_viewed") fb.an.logEvent(fb.analytics, "screen_view", { firebase_screen: params.screen, firebase_screen_class: "onboarding" });
+    fb.an.logEvent(fb.analytics, name, params);
+  } catch { /* ignore */ }
 }
 
 export function capture(event, properties = {}) {
   if (!posthog) return;
+  const props = { ...properties, app_language: lang, os: device.android ? "android" : device.ios ? "ios" : "other", in_app_browser: device.inApp };
+  if (sdk) {
+    sdk.capture(event, props);
+    if (event !== "$identify") fbLog(event, { ...superProps, ...props });
+    return;
+  }
   const body = JSON.stringify({
     api_key: posthog.key,
     event,
     distinct_id: distinctId,
     properties: {
       ...superProps,
-      ...properties,
-      app_language: lang,
-      os: device.android ? "android" : device.ios ? "ios" : "other",
-      in_app_browser: device.inApp,
+      ...props,
       $current_url: location.href,
       $referrer: document.referrer || null,
     },
@@ -158,13 +230,37 @@ export function capture(event, properties = {}) {
   fetch(url, { method: "POST", body, keepalive: true, headers: { "content-type": "text/plain" } }).catch(() => {});
 }
 
+/** Person properties ($set) without a separate event. */
+export function setPersonProps(props) {
+  if (sdk) sdk.capture("$set", { $set: props });
+  else capture("$set", { $set: props });
+}
+
 /** Links this browser's anonymous events to the Firebase uid (same id the app uses). */
 export function identify(uid, email) {
-  if (!posthog || !uid || store.get("sa_identified") === uid) return;
+  if (!posthog || !uid) return;
+  if (sdk) {
+    if (store.get("sa_identified") !== uid) sdk.identify(uid, email ? { email } : {});
+    if (fb) fb.an.setUserId(fb.analytics, uid);
+    distinctId = uid;
+    store.set("sa_did", uid);
+    store.set("sa_identified", uid);
+    return;
+  }
+  if (store.get("sa_identified") === uid) return;
   capture("$identify", { $anon_distinct_id: distinctId, $set: { email } });
   distinctId = uid;
   store.set("sa_did", uid);
   store.set("sa_identified", uid);
+}
+
+/** Tells the affiliate Worker about a checkout or a store tap (salahalarm.com/_aff/event). */
+export function affiliateBeacon(type, data = {}) {
+  try {
+    const body = JSON.stringify({ type, ...data });
+    if (navigator.sendBeacon && navigator.sendBeacon("/_aff/event", new Blob([body], { type: "application/json" }))) return;
+    fetch("/_aff/event", { method: "POST", body, keepalive: true, headers: { "content-type": "application/json" } }).catch(() => {});
+  } catch { /* ignore */ }
 }
 
 // ---- API ---------------------------------------------------------------------------

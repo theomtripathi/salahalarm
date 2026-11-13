@@ -71,6 +71,13 @@ jobs:
       - name: Deploy
         run: npx wrangler deploy
 
+      # iPhone buyers on the web get Pro in RevenueCat; the key lives as a GitHub secret.
+      - name: RevenueCat key
+        env:
+          RC_KEY: ${{ secrets.REVENUECAT_SECRET_KEY }}
+        run: |
+          if [ -n "$RC_KEY" ]; then printf %s "$RC_KEY" | npx wrangler secret put REVENUECAT_SECRET_KEY; else echo "REVENUECAT_SECRET_KEY not set"; fi
+
       # The Dodo key only exists as a Worker secret, so the Worker creates the
       # products itself; this step stores the webhook secret it hands back.
       - name: Dodo products and webhook
@@ -147,7 +154,7 @@ jobs:
 
       - name: Check
         run: |
-          for p in /get/ /android/ /api/config; do
+          for p in /get/ /android/ /start/ /start/paid/ /api/config; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://salahalarm.com$p)"
           done
 

@@ -29,7 +29,8 @@ const call = async (path, opts) => {
 test("countries map to price tiers, unknown countries to the middle tier", () => {
   assert.equal(tierFor("US"), "t1");
   assert.equal(tierFor("ae"), "t1");
-  assert.equal(tierFor("SA"), "t2");
+  assert.equal(tierFor("SA"), "t1");
+  assert.equal(tierFor("TR"), "t2");
   assert.equal(tierFor("ID"), "t3");
   assert.equal(tierFor("IN"), "t3");
   assert.equal(tierFor("PK"), "t3");
@@ -47,8 +48,8 @@ test("a tier without products falls back to t2 then t1", () => {
 test("display plans put yearly first with a weekly equivalent", () => {
   const plans = displayPlans("t3", { trialDays: { yearly: 3 } });
   assert.equal(plans[0].plan, "yearly");
-  assert.equal(plans[0].amount, 14.99);
-  assert.equal(plans[0].weeklyEquivalent, 0.28);
+  assert.equal(plans[0].amount, 19.99);
+  assert.equal(plans[0].weeklyEquivalent, 0.38);
   assert.equal(plans[0].trialDays, 3);
   assert.equal(plans[1].plan, "weekly");
   assert.equal(plans.length, 2);
@@ -57,9 +58,9 @@ test("display plans put yearly first with a weekly equivalent", () => {
 test("the exit offer is a cheaper weekly plan with its discount", () => {
   const offer = displayOffer("t1");
   assert.equal(offer.plan, "weeklyOffer");
-  assert.equal(offer.amount, 2.99);
-  assert.equal(offer.regularAmount, 3.99);
-  assert.equal(offer.percentOff, 25);
+  assert.equal(offer.amount, 3.99);
+  assert.equal(offer.regularAmount, 5.99);
+  assert.equal(offer.percentOff, 33);
 });
 
 // ---- auth ------------------------------------------------------------------
@@ -101,10 +102,10 @@ test("config returns tier, local prices and today's prayer times for the visitor
 test("config falls back to USD list prices when the preview fails", async () => {
   let r = await call("/api/config", { country: "PK" });
   assert.equal(r.body.plans[0].currency, "USD");
-  assert.equal(r.body.plans[0].amount, 14.99);
+  assert.equal(r.body.plans[0].amount, 19.99);
   r = await call("/api/config", { country: "IN" });
   assert.equal(r.body.plans[0].currency, "INR");
-  assert.equal(r.body.plans[0].amount, 1249);
+  assert.equal(r.body.plans[0].amount, 1699);
 });
 
 test("language comes from the browser first, then the country", () => {
@@ -148,7 +149,7 @@ test("checkout creates a Dodo session for the visitor's tier with the uid in met
 
 test("a discount link applies its code to the yearly checkout and shows the first-year price", async () => {
   let r = await call("/api/config?discount=comeback33", { country: "US" });
-  assert.deepEqual(r.body.discount, { code: "COMEBACK33", plan: "yearly", percentOff: 33, cycles: 1, currency: "USD", amount: 19.99 });
+  assert.deepEqual(r.body.discount, { code: "COMEBACK33", plan: "yearly", percentOff: 33, cycles: 1, currency: "USD", amount: 33.32 });
   r = await call("/api/config?discount=NOPE", { country: "US" });
   assert.equal(r.body.discount, null);
 
@@ -412,12 +413,16 @@ test("the APK only downloads through a signed link, and only for an account with
   assert.deepEqual(await latest.json(), { versionCode: 3, versionName: "1.0.2", url: "/download/salahalarm.apk" });
 });
 
-test("India and other price-sensitive countries pay half", () => {
-  const full = displayPlans(tierFor("US"));
-  const half = displayPlans(tierFor("IN"));
-  assert.deepEqual(full.map((p) => p.amount), [29.99, 3.99]);
-  assert.deepEqual(displayPlans(tierFor("SA")).map((p) => p.amount), [29.99, 3.99]);
-  for (const [i, p] of half.entries()) assert.ok(Math.abs(p.amount - full[i].amount / 2) < 0.02, `${p.plan} ${p.amount}`);
+test("prices stay within Om's ranges: weekly $1.99-5.99, yearly $19.99-49.99", () => {
+  assert.deepEqual(displayPlans(tierFor("US")).map((p) => p.amount), [49.99, 5.99]);
+  assert.deepEqual(displayPlans(tierFor("SA")).map((p) => p.amount), [49.99, 5.99]);
+  assert.deepEqual(displayPlans(tierFor("TR")).map((p) => p.amount), [29.99, 3.99]);
+  assert.deepEqual(displayPlans(tierFor("PK")).map((p) => p.amount), [19.99, 2.49]);
+  for (const tier of ["t1", "t2", "t3"]) {
+    const [yearly, weekly, offer] = displayPlans(tier, { plans: ["yearly", "weekly", "weeklyOffer"] }).map((p) => p.amount);
+    assert.ok(yearly >= 19.99 && yearly <= 49.99, `${tier} yearly ${yearly}`);
+    for (const w of [weekly, offer]) assert.ok(w >= 1.99 && w <= 5.99, `${tier} weekly ${w}`);
+  }
 });
 
 test("tiers with the same prices share one set of Dodo products", async () => {
@@ -426,20 +431,20 @@ test("tiers with the same prices share one set of Dodo products", async () => {
     created.push(body);
     return { product_id: `pdt_${created.length}` };
   });
-  assert.equal(created.length, 6);
-  assert.deepEqual(products.t2, products.t1);
+  assert.equal(created.length, 9);
+  assert.notEqual(products.t2.weekly, products.t1.weekly);
   assert.notEqual(products.t3.weekly, products.t1.weekly);
-  assert.equal(created.find((b) => b.metadata.tier === "t3" && b.metadata.plan === "yearly").price.price, 1499);
+  assert.equal(created.find((b) => b.metadata.tier === "t3" && b.metadata.plan === "yearly").price.price, 1999);
 });
 
 test("India, Indonesia, Bangladesh, Egypt and Nigeria see and pay local-currency prices", async () => {
   const [yearly, weekly] = displayPlans(tierFor("IN"), { country: "IN" });
   assert.equal(yearly.currency, "INR");
-  assert.equal(yearly.amount, 1249);
-  assert.equal(weekly.amount, 169);
+  assert.equal(yearly.amount, 1699);
+  assert.equal(weekly.amount, 209);
   const offer = displayOffer(tierFor("IN"), "IN");
-  assert.equal(offer.amount, 129);
-  assert.equal(offer.regularAmount, 169);
+  assert.equal(offer.amount, 169);
+  assert.equal(offer.regularAmount, 209);
   // Pakistan has no local price and keeps the USD half price.
   assert.equal(displayPlans(tierFor("PK"), { country: "PK" })[0].currency, "USD");
 
@@ -457,7 +462,7 @@ test("India, Indonesia, Bangladesh, Egypt and Nigeria see and pay local-currency
   assert.deepEqual(Object.keys(local), ["IN", "ID", "BD", "EG", "NG"]);
   const inrYearly = created.find((b) => b.metadata.country === "IN" && b.metadata.plan === "yearly");
   assert.equal(inrYearly.price.currency, "INR");
-  assert.equal(inrYearly.price.price, 124900);
+  assert.equal(inrYearly.price.price, 169900);
 });
 
 test("the admin routes need the Cloudflare token", async () => {

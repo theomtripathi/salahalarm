@@ -11,16 +11,16 @@
 // `weeklyOffer` is the discounted weekly plan shown when someone closes the
 // paywall without buying. It is never listed on the paywall itself.
 //
-// Om's pricing (Oct 2026): $3.99/week and $29.99/year, half price for India and
-// other lower-income countries. Dodo charges in the buyer's local currency.
-const FULL = { weekly: { usd: 3.99 }, yearly: { usd: 29.99 }, weeklyOffer: { usd: 2.99 } };
+// Om's pricing (13 Nov 2026): hard paywall, no free trial, no monthly plan.
+// Weekly from $1.99 to $5.99 and yearly from $19.99 to $49.99 depending on the
+// country. The exit offer is the weekly plan at a discount, never below $1.99.
 export const TIERS = {
-  // High-income markets
-  t1: FULL,
-  // Everything unlisted: same as t1 for now, kept separate so it can be tuned later
-  t2: FULL,
-  // Half price: the largest Android-only Muslim audiences
-  t3: { weekly: { usd: 1.99 }, yearly: { usd: 14.99 }, weeklyOffer: { usd: 1.49 } },
+  // High-income markets: North America, Western Europe, the Gulf, Australia, Singapore...
+  t1: { weekly: { usd: 5.99 }, yearly: { usd: 49.99 }, weeklyOffer: { usd: 3.99 } },
+  // Everything unlisted (Turkey, Malaysia, Eastern Europe, Latin America, South Africa...)
+  t2: { weekly: { usd: 3.99 }, yearly: { usd: 29.99 }, weeklyOffer: { usd: 2.99 } },
+  // The largest lower-income Muslim audiences (South Asia, Indonesia, most of Africa...)
+  t3: { weekly: { usd: 2.49 }, yearly: { usd: 19.99 }, weeklyOffer: { usd: 1.99 } },
 };
 
 // Where Dodo can charge in local currency, the half-price tier gets its own
@@ -29,11 +29,11 @@ export const TIERS = {
 // products (scope "local") and update PRODUCTS. Pakistan stays in USD: Dodo
 // cannot charge PKR.
 export const LOCAL = {
-  IN: { currency: "INR", weekly: 169, yearly: 1249, weeklyOffer: 129 },
-  ID: { currency: "IDR", weekly: 32900, yearly: 244900, weeklyOffer: 24900 },
-  BD: { currency: "BDT", weekly: 239, yearly: 1799, weeklyOffer: 179 },
-  EG: { currency: "EGP", weekly: 99, yearly: 749, weeklyOffer: 75 },
-  NG: { currency: "NGN", weekly: 2999, yearly: 22999, weeklyOffer: 2299 },
+  IN: { currency: "INR", weekly: 209, yearly: 1699, weeklyOffer: 169 },
+  ID: { currency: "IDR", weekly: 39900, yearly: 329900, weeklyOffer: 32900 },
+  BD: { currency: "BDT", weekly: 299, yearly: 2399, weeklyOffer: 239 },
+  EG: { currency: "EGP", weekly: 125, yearly: 999, weeklyOffer: 99 },
+  NG: { currency: "NGN", weekly: 3799, yearly: 29999, weeklyOffer: 2999 },
 };
 
 function localFor(country) {
@@ -42,7 +42,7 @@ function localFor(country) {
 
 const T1 = [
   "US", "CA", "GB", "IE", "AU", "NZ", "DE", "FR", "NL", "BE", "LU", "AT", "CH", "SE", "NO", "DK",
-  "FI", "IS", "IT", "ES", "PT", "JP", "KR", "SG", "HK", "IL", "AE", "QA", "KW",
+  "FI", "IS", "IT", "ES", "PT", "JP", "KR", "SG", "HK", "IL", "AE", "QA", "KW", "SA", "BH", "OM", "BN",
 ];
 
 const T3 = [
