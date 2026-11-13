@@ -127,13 +127,10 @@ private fun App() {
     LaunchedEffect(Unit) { Graph.repo.refreshLocation() }
 
     val entitlement by Graph.repo.entitlement.collectAsState()
-    val challenge by Graph.repo.challenge.collectAsState()
     val now by rememberNow(60_000)
 
     when {
         user == null -> LoginScreen()
-        // Free tier: joined the 90-Day Ramadan Ready challenge without a plan.
-        !entitlement.isActive(now) && challenge != null -> ChallengeFreeHome()
         // No plan (trial over, or an APK passed on without paying): the website sells plans.
         !entitlement.isActive(now) -> LockedScreen()
         !setupDone -> SetupScreen(onDone = {

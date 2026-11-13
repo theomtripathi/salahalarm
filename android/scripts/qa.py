@@ -150,21 +150,9 @@ else:
     problems.append("locked screen did not appear for an account without a plan")
     shot("after-sign-in")
 
-# Free tier: join the 90-Day Ramadan Ready challenge from the locked screen.
-if tap_text(r"join the free 90-day ramadan challenge", wait=10) and wait_for(r"today's prayers", 30):
-    shot("challenge-free-home")
-    if tap_text(r"90-day ramadan ready challenge", wait=8) and wait_for(r"be ramadan ready in 90 days", 15):
-        shot("challenge-details")
-        adb("shell", "input", "swipe", "540", "1800", "540", "600", "400")
-        time.sleep(1)
-        shot("challenge-details-invite")
-        adb("shell", "input", "keyevent", "4")
-        time.sleep(2)
-    else:
-        problems.append("challenge details screen did not open")
-else:
-    problems.append("joining the free challenge did not show the free home")
-    shot("after-join")
+# Hard paywall: no free way in from the locked screen.
+if find(r"join the free 90-day ramadan challenge") is not None:
+    problems.append("locked screen still offers free challenge access")
 
 # Start the free trial for this account through the live site, then reopen the app.
 req = urllib.request.Request(f"{API}/api/trial", method="POST", data=b"{}", headers={
@@ -190,6 +178,20 @@ for tab in ["Home", "Prayers", "Lock", "Quran", "Profile"]:
         shot(tab.lower())
     else:
         problems.append(f"tab not found: {tab}")
+
+# The Ramadan Ready challenge from the Home card (plan holders).
+if tap_text(r"^home$", wait=5):
+    for _ in range(3):
+        if find(r"90-day ramadan ready challenge") is not None:
+            break
+        adb("shell", "input", "swipe", "540", "1700", "540", "900", "400")
+        time.sleep(1)
+    if tap_text(r"90-day ramadan ready challenge", wait=5) and wait_for(r"be ramadan ready in 90 days", 15):
+        shot("challenge-details")
+        adb("shell", "input", "keyevent", "4")
+        time.sleep(2)
+    else:
+        problems.append("challenge card on Home did not open the challenge screen")
 
 # A Quran surah, if the list loaded.
 if tap_text(r"^quran$", wait=5) and tap_text(r"al-fatihah|fatiha", wait=15):

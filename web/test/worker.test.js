@@ -496,7 +496,7 @@ test("serves the apple-app-site-association file for the comeback link only", as
   assert.deepEqual(body.applinks.details[0].components, [{ "/": "/go/comeback*" }]);
 });
 
-test("free challenge join: invite credit, entitlement payload and APK access", async () => {
+test("free challenge join: invite credit and entitlement payload, but no APK without a plan", async () => {
   const e = env({ APKS: { head: async () => ({ size: 10 }) } });
   const alice = idToken({ uid: "alice", email: "alice@example.com" });
   const bob = idToken({ uid: "bob", email: "bob@example.com" });
@@ -518,10 +518,18 @@ test("free challenge join: invite credit, entitlement payload and APK access", a
   assert.equal(r.body.challenge.invitedBy, code);
   assert.equal(r.body.entitlement.active, false);
 
+  // Hard paywall: joining the challenge does not unlock the APK.
   r = await call("/api/android/download", { method: "POST", token: bob, env: e });
-  assert.equal(r.status, 200);
-  assert.match(r.body.url, /^\/download\/salahalarm\.apk\?t=/);
+  assert.equal(r.status, 402);
 
   r = await call("/api/challenge", { token: alice, env: e });
   assert.equal(r.body.friendsJoined, 1);
+});
+
+test("hard paywall: no free trial unless enabled, except CI QA accounts", async () => {
+  const e = env({ FREE_TRIAL_ENABLED: undefined });
+  let r = await call("/api/trial", { method: "POST", token: idToken({ uid: "u1", email: "someone@gmail.com" }), env: e });
+  assert.equal(r.status, 403);
+  r = await call("/api/trial", { method: "POST", token: idToken({ uid: "qa1", email: "qa-1@salahalarm-qa.test" }), env: e });
+  assert.equal(r.status, 200);
 });

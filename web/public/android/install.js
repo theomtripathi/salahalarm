@@ -75,11 +75,6 @@ async function checkAccess() {
       trialUntil = entitlement.status === "trial" ? entitlement.accessUntil : null;
       await prepareDownload();
       status = apk.url ? "install" : "locked";
-    } else if (challenge) {
-      // Free challenge joiners get the app's free tier: today's prayers and the challenge.
-      await prepareDownload();
-      status = apk.url ? "challenge" : "locked";
-      capture("install_challenge_viewed", {});
     } else {
       status = "locked";
       lapsed = entitlement?.provider === "dodo" || entitlement?.status === "trial";
@@ -237,16 +232,15 @@ function guide() {
   const row = (...cells) => h("div", { class: "row" }, cells);
   return h("ol", { class: "guide" },
     step("Download the app",
-      t("If Chrome asks, tap Download anyway. Chrome shows this for every app that comes from a website instead of Google Play."),
-      mock(h("b", {}, "SalahAlarm.apk"), row(h("span", {}, t("File might be harmful")), h("span", { class: "fake-btn hl" }, t("Download anyway"))))),
+      t("Tap the button above, then tap Download to confirm.")),
     step("Open the file",
       t("Tap Open when the download finishes, or find SalahAlarm.apk in Files › Downloads.")),
     step("Allow installs from Chrome",
       t("If your phone asks, tap Settings, turn on Allow from this source, then go back."),
       mock(row(h("span", {}, t("Allow from this source")), h("span", { class: "toggle" })))),
     step("Tap Install",
-      t("If Play Protect warns you, tap More details, then Install anyway. It appears because the app is new and not on Google Play yet."),
-      mock(h("b", {}, t("Unsafe app blocked")), row(h("span", { class: "fake-btn hl" }, t("More details")), "→", h("span", { class: "fake-btn hl" }, t("Install anyway"))))),
+      t("Tap Install. If your phone asks again, tap More details, then Install anyway."),
+      mock(row(h("span", { class: "fake-btn hl" }, t("More details")), "→", h("span", { class: "fake-btn hl" }, t("Install anyway"))))),
     step("Open SalahAlarm and sign in",
       email ? t("Use the same account: %@", email) : t("Use the same Google account or email you used here."),
       appLogin ? h("a", {

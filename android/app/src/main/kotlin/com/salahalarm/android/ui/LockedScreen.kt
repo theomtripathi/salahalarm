@@ -47,7 +47,6 @@ fun LockedScreen() {
     val entitlement by repo.entitlement.collectAsState()
     var checking by remember { mutableStateOf(false) }
     var notFound by remember { mutableStateOf(false) }
-    var joinError by remember { mutableStateOf<String?>(null) }
     val unchecked = entitlement.checkedAt == null
     val trialEnded = entitlement.isTrial
     // A paid plan that ran out or was cancelled; on_hold means a renewal payment failed.
@@ -125,16 +124,6 @@ fun LockedScreen() {
                     scope.launch { repo.portalLink()?.let { openUrl(context, it) } }
                 }
             }
-            // Free tier: the 90-Day Ramadan Ready challenge needs no purchase.
-            if (com.salahalarm.core.RamadanChallenge.joiningOpen(repo.today())) SecondaryButton(t("Not ready to pay? Join the free 90-Day Ramadan challenge")) {
-                Analytics.capture("android_locked_join_challenge", mapOf("reason" to source))
-                scope.launch {
-                    checking = true
-                    joinError = repo.joinChallenge(null)
-                    checking = false
-                }
-            }
-            joinError?.let { Text(t(it), color = Palette.alarmRed, fontSize = 14.sp, textAlign = TextAlign.Center) }
             SecondaryButton(t("I've already paid")) {
                 scope.launch {
                     checking = true

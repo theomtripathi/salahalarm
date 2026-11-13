@@ -13,7 +13,7 @@ import { initAuth, authErrorMessage } from "/assets/auth.js";
 const ROUTE = ["welcome", "mechanism", "prayers", "goals", "pace", "loading", "plan", "account", "paywall"];
 // Exit offers, shown in turn when someone closes the paywall: a discounted weekly
 // plan, then a free trial with no card. They sit outside the progress route.
-const EXITS = ["offer", "trial"];
+const EXITS = ["offer"]; // hard paywall: no free trial without payment
 const NO_BACK = new Set(["welcome", "loading", "plan", ...EXITS]);
 const PRAYERS = [
   { id: "fajr", name: "Fajr", ar: "الفجر" },
@@ -480,7 +480,6 @@ const SCREENS = {
           config.geo?.city ? h("div", { class: "k" }, config.geo.city) : null)) : null,
       lapsed ? h("p", { class: "notice" }, t("Your plan has ended. Renew to turn your prayer alarms back on.")) : null,
       config.discount ? h("p", { class: "notice" }, t("Your %d% discount is applied to the yearly plan.", config.discount.percentOff)) : null,
-      !lapsed && store.get("sa_invite") ? h("p", { class: "notice" }, t("A friend invited you to the free 90-Day Ramadan Ready challenge. Join free below, or unlock every feature now.")) : null,
       h("h1", {}, t(lapsed ? "Welcome back! Renew SalahAlarm" : "Unlock SalahAlarm for Android")),
       h("ul", { class: "benefits" },
         ["persistent prayer alarms", "mat scan + distraction blocking", "Accurate Local Prayer Times", "streaks, qibla, Quran + widgets"]
@@ -493,11 +492,6 @@ const SCREENS = {
         h("span", {}, svg(icons.check), t("Cancel anytime")),
         h("span", {}, svg(icons.card), t("Secure checkout by Dodo Payments"))),
       h("p", { class: "small center", style: "margin:0" }, t("Works on Android 8 and newer")),
-      // The free challenge closes to new joiners after 9 January 2027.
-      lapsed || Date.now() >= Date.parse("2027-01-10T12:00:00Z") ? null : h("button", {
-        class: "btn btn-secondary", type: "button", id: "join-challenge", style: "margin-top:12px",
-        onclick: (e) => joinChallenge(e.currentTarget, error),
-      }, t("Not ready to pay? Join the free 90-Day Ramadan challenge")),
       h("div", { class: "links" },
         h("a", { href: "/android/install/" }, t("Already paid? Download the app")),
         h("a", { href: "https://ramadan-pro.lovable.app/privacy", target: "_blank", rel: "noopener" }, t("privacy")),
@@ -577,12 +571,6 @@ async function signedIn(u, method) {
     .catch((err) => console.warn("profile save failed", err));
   if (await alreadySubscribed(token)) return;
   go("paywall");
-  // Tapped "Join the free challenge" before signing in: finish joining now.
-  if (store.get("sa_join_challenge")) {
-    const btn = document.getElementById("join-challenge");
-    const error = document.querySelector(".error");
-    if (btn && error) joinChallenge(btn, error);
-  }
 }
 
 // Paying subscribers skip the paywall. Trial users see it (they may want to buy
@@ -630,33 +618,6 @@ async function startCheckout(btn, error, planId) {
     error.textContent = err.status === 503
       ? t("Checkout is not available yet. Please try again soon.")
       : navigator.onLine === false ? t("No internet connection. Please try again.") : t("Something went wrong. Please try again.");
-    error.hidden = false;
-    btn.disabled = false;
-    btn.replaceChildren(label);
-  }
-}
-
-// The free 90-Day Ramadan Ready challenge: no payment, the app runs its free tier.
-async function joinChallenge(btn, error) {
-  error.hidden = true;
-  capture("web_challenge_join_tapped", { signed_in: Boolean(user) });
-  if (!user) {
-    store.set("sa_join_challenge", "1");
-    return go("account");
-  }
-  const label = btn.textContent;
-  btn.disabled = true;
-  btn.replaceChildren(h("span", { class: "spinner" }), t("processing..."));
-  try {
-    await api("/api/challenge/join", {
-      method: "POST", token: await user.token(),
-      body: { invite: store.get("sa_invite") || undefined, ref, platform: "android_web" },
-    });
-    store.del("sa_join_challenge");
-    location.href = "/android/install/?challenge=1";
-  } catch (err) {
-    capture("web_challenge_join_failed", { status: err.status || 0 });
-    error.textContent = navigator.onLine === false ? t("No internet connection. Please try again.") : t("Something went wrong. Please try again.");
     error.hidden = false;
     btn.disabled = false;
     btn.replaceChildren(label);

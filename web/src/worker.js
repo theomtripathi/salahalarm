@@ -341,6 +341,10 @@ async function checkout(request, env, ctx, url) {
 
 async function startTrial(request, env, ctx) {
   const u = await user(request, env);
+  // Hard paywall: the no-card free trial is off unless FREE_TRIAL_ENABLED is set.
+  // (Throwaway accounts from the CI emulator QA still get one, so QA can reach the full app.)
+  const qa = /@salahalarm-qa\.test$/i.test(u.email || "");
+  if (env.FREE_TRIAL_ENABLED !== "on" && !qa) return json({ error: "free trial not offered" }, 403);
   const db = firestore(env);
   const existing = await db.get(`entitlements/${u.uid}`);
   if (isActive(existing)) return json({ entitlement: publicEntitlement(existing), alreadyActive: true });
@@ -706,7 +710,8 @@ async function downloadLink(request, env) {
   const db = firestore(env);
   const ent = await db.get(`entitlements/${u.uid}`);
   // Paid, trial, or joined the free Ramadan challenge (the app then runs its free tier).
-  if (!isActive(ent) && !(await readChallenge(db, u.uid))) return json({ error: "no active plan", paywall: "/android/?resume=paywall" }, 402);
+  // Hard paywall: only a paid plan (or a trial already running) unlocks the APK.
+  if (!isActive(ent)) return json({ error: "no active plan", paywall: "/android/?resume=paywall" }, 402);
   let size = null;
   if (env.APKS) size = (await env.APKS.head(APK_KEY))?.size ?? null;
   return json({ url: `/download/salahalarm.apk?t=${await signDownload(env, u.uid)}`, size });

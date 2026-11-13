@@ -161,6 +161,7 @@ export function env(overrides = {}) {
     FIREBASE_SERVICE_ACCOUNT: JSON.stringify(serviceAccount),
     DODO_PAYMENTS_API_KEY: "dodo-key",
     DODO_ENVIRONMENT: "test_mode",
+    FREE_TRIAL_ENABLED: "on", // the trial tests cover the feature; production leaves it off
     DODO_WEBHOOK_SECRET: `whsec_${Buffer.from("super-secret-webhook-key").toString("base64")}`,
     PRODUCTS: JSON.stringify({
       t1: { weekly: "pdt_t1_w", yearly: "pdt_t1_y", weeklyOffer: "pdt_t1_o" },

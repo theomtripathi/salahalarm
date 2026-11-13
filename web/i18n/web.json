@@ -94,7 +94,9 @@
   "Your invite link": "Your invite link",
   "Bring 3 friends, get a month of premium free. Bring 10, get a year free.": "Bring 3 friends, get a month of premium free. Bring 10, get a year free.",
   "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2",
-  "Official rules": "Official rules"
+  "Official rules": "Official rules",
+  "Tap the button above, then tap Download to confirm.": "Tap the button above, then tap Download to confirm.",
+  "Tap Install. If your phone asks again, tap More details, then Install anyway.": "Tap Install. If your phone asks again, tap More details, then Install anyway."
  },
  "ar": {
   "Please enter a valid email address.": "يرجى إدخال بريد إلكتروني صحيح.",
@@ -209,7 +211,9 @@
   "Your invite link": "رابط دعوتك",
   "Bring 3 friends, get a month of premium free. Bring 10, get a year free.": "ادعُ 3 أصدقاء واحصل على شهر من البريميوم مجانًا. ادعُ 10 واحصل على سنة مجانًا.",
   "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "سحب رحلة مكة المجانية في 10 فبراير 2027: رحلة عمرة لشخصين",
-  "Official rules": "الشروط الرسمية"
+  "Official rules": "الشروط الرسمية",
+  "Tap the button above, then tap Download to confirm.": "اضغط على الزر أعلاه، ثم اضغط تنزيل للتأكيد.",
+  "Tap Install. If your phone asks again, tap More details, then Install anyway.": "اضغط تثبيت. إذا سألك هاتفك مرة أخرى، اضغط مزيد من التفاصيل ثم التثبيت على أي حال."
  },
  "tr": {
   "Please enter a valid email address.": "Lütfen geçerli bir e-posta adresi gir.",
@@ -324,7 +328,9 @@
   "Your invite link": "Davet bağlantın",
   "Bring 3 friends, get a month of premium free. Bring 10, get a year free.": "3 arkadaşını getir, 1 ay premium ücretsiz. 10 arkadaşını getir, 1 yıl ücretsiz.",
   "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "10 Şubat 2027'de Ücretsiz Mekke Yolculuğu çekilişi: 2 kişilik umre",
-  "Official rules": "Resmi kurallar"
+  "Official rules": "Resmi kurallar",
+  "Tap the button above, then tap Download to confirm.": "Yukarıdaki düğmeye dokun, ardından onaylamak için İndir'e dokun.",
+  "Tap Install. If your phone asks again, tap More details, then Install anyway.": "Yükle'ye dokun. Telefonun tekrar sorarsa Diğer ayrıntılar'a, ardından Yine de yükle'ye dokun."
  },
  "id": {
   "Please enter a valid email address.": "Masukkan alamat email yang valid.",
@@ -439,7 +445,9 @@
   "Your invite link": "Tautan undanganmu",
   "Bring 3 friends, get a month of premium free. Bring 10, get a year free.": "Ajak 3 teman, dapat premium 1 bulan gratis. Ajak 10, dapat 1 tahun gratis.",
   "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "Undian Perjalanan Makkah Gratis pada 10 Februari 2027: umrah untuk 2 orang",
-  "Official rules": "Aturan resmi"
+  "Official rules": "Aturan resmi",
+  "Tap the button above, then tap Download to confirm.": "Ketuk tombol di atas, lalu ketuk Download untuk mengonfirmasi.",
+  "Tap Install. If your phone asks again, tap More details, then Install anyway.": "Ketuk Instal. Jika ponsel bertanya lagi, ketuk Detail selengkapnya, lalu Tetap instal."
  },
  "ur": {
   "Please enter a valid email address.": "براہ کرم درست ای میل ایڈریس درج کریں۔",
@@ -554,6 +562,8 @@
   "Your invite link": "آپ کا دعوتی لنک",
   "Bring 3 friends, get a month of premium free. Bring 10, get a year free.": "3 دوست لائیں، ایک مہینہ پریمیم مفت۔ 10 لائیں، ایک سال مفت۔",
   "Free Makkah Trip draw on 10 February 2027: an Umrah trip for 2": "10 فروری 2027 کو مفت مکہ ٹرپ قرعہ اندازی: 2 افراد کے لیے عمرہ",
-  "Official rules": "سرکاری قواعد"
+  "Official rules": "سرکاری قواعد",
+  "Tap the button above, then tap Download to confirm.": "اوپر والے بٹن پر ٹیپ کریں، پھر تصدیق کے لیے ڈاؤن لوڈ پر ٹیپ کریں۔",
+  "Tap Install. If your phone asks again, tap More details, then Install anyway.": "انسٹال پر ٹیپ کریں۔ اگر فون دوبارہ پوچھے تو مزید تفصیلات، پھر بہرحال انسٹال کریں پر ٹیپ کریں۔"
  }
 }
