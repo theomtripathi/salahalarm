@@ -238,7 +238,9 @@ async function localPrices(env, ctx, tier, country) {
   if (!env.DODO_PAYMENTS_API_KEY || env.PRICE_PREVIEW === "off" || !country) return fallback;
   const products = parseProducts(env.PRODUCTS);
   const cache = typeof caches !== "undefined" ? caches.default : null;
-  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/v4/${tier}/${country}/${env.DODO_ENVIRONMENT || "test_mode"}`);
+  // Keyed by the weekly product id too, so switching PRODUCTS shows new prices at once.
+  const productKey = productFor(products, tier, "weekly", country)?.productId || "none";
+  const cacheKey = new Request(`https://cache.salahalarm.internal/prices/v5/${tier}/${country}/${productKey}/${env.DODO_ENVIRONMENT || "test_mode"}`);
   if (cache) {
     const hit = await cache.match(cacheKey);
     if (hit) return hit.json();
