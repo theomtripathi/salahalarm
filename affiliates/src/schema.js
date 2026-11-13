@@ -1,4 +1,5 @@
--- Salah Alarm Affiliates: accounts, link visits, attributed events, conversions, payouts.
+// Database schema. Applied on every Durable Object start (all statements are IF NOT EXISTS).
+export default `-- Salah Alarm Affiliates: accounts, link visits, attributed events, conversions, payouts.
 CREATE TABLE IF NOT EXISTS affiliates (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   email TEXT NOT NULL UNIQUE,
@@ -123,3 +124,4 @@ CREATE TABLE IF NOT EXISTS settings (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+`;

@@ -1,8 +1,8 @@
 name: Affiliates deploy
 
 # Deploys affiliates/ (affiliate.salahalarm.com: the Salah Alarm Affiliates portal,
-# tracking endpoints and admin dashboard) to Cloudflare. Creates the D1 database on
-# the first run and applies migrations every run.
+# tracking endpoints and admin dashboard) to Cloudflare. Data lives in a SQLite
+# Durable Object, created by the deploy itself.
 
 on:
   push:
@@ -34,18 +34,6 @@ jobs:
 
       - run: npm ci
       - run: npm test
-
-      - name: D1 database
-        run: |
-          id=$(npx wrangler d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const j=JSON.parse(s.slice(s.indexOf("[")));const d=j.find(x=>x.name==="salahalarm-affiliates");process.stdout.write(d?d.uuid:"")})')
-          if [ -z "$id" ]; then
-            npx wrangler d1 create salahalarm-affiliates
-            id=$(npx wrangler d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const j=JSON.parse(s.slice(s.indexOf("[")));const d=j.find(x=>x.name==="salahalarm-affiliates");process.stdout.write(d?d.uuid:"")})')
-          fi
-          echo "D1 id: $id"
-          test -n "$id"
-          sed -i "s/00000000-0000-0000-0000-000000000000/$id/" wrangler.jsonc
-          npx wrangler d1 migrations apply salahalarm-affiliates --remote
 
       - name: Deploy
         run: npx wrangler deploy

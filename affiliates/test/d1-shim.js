@@ -1,10 +1,10 @@
 // Minimal D1 stand-in on node:sqlite, enough for the Worker's queries in tests.
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import schema from '../src/schema.js';
 
 export function makeDb() {
   const db = new DatabaseSync(':memory:');
-  db.exec(readFileSync(new URL('../migrations/0001_init.sql', import.meta.url), 'utf8'));
+  db.exec(schema);
   const stmt = (sql, args = []) => ({
     bind: (...a) => stmt(sql, a),
     async first() { return db.prepare(sql).get(...args) ?? null; },

@@ -1,9 +1,8 @@
 // Salah Alarm Affiliates Worker: affiliate.salahalarm.com
-// The D1 database id is filled in by .github/workflows/affiliates.yml (it creates the
-// database on the first deploy). Locally, `wrangler dev` uses a local D1.
+// Data lives in one SQLite-backed Durable Object (AffiliatesStore); no D1 needed.
 {
   "name": "salahalarm-affiliates",
-  "main": "src/worker.js",
+  "main": "src/index.js",
   "compatibility_date": "2026-10-01",
   "workers_dev": false,
   "routes": [
@@ -14,9 +13,10 @@
     "binding": "ASSETS",
     "run_worker_first": false
   },
-  "d1_databases": [
-    { "binding": "DB", "database_name": "salahalarm-affiliates", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
-  ],
+  "durable_objects": {
+    "bindings": [{ "name": "STORE", "class_name": "AffiliatesStore" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["AffiliatesStore"] }],
   "observability": { "enabled": true },
   "vars": {
     "MAIN_SITE": "https://salahalarm.com",
@@ -25,7 +25,7 @@
     // Public, write-only PostHog project token (same one the app and links Worker use).
     "POSTHOG_KEY": "phc_AmAGJBxqjVu2fSzoNZjNRmfAQrf6iyQjgzhRRmatutGX",
     // PBKDF2 hash of the admin password (the password itself is not in the repo).
-    // Om can change it in /admin/settings, which stores a new hash in D1 and overrides this.
+    // Om can change it in /admin/settings, which stores a new hash in the database and overrides this.
     "ADMIN_PASSWORD_HASH": "pbkdf2$100000$wCyQJhbfC+eQOK5LhE75Yg==$C6lSyUOw4egEyhmSsDIAJj3w/2AaLlPkxtuBsW20Jwg="
   }
   // Optional secret: RESEND_API_KEY (sends sign-in links directly instead of via PostHog Workflows).

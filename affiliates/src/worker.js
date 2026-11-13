@@ -18,16 +18,15 @@ import * as adm from './views/admin.js';
 
 const INTERNAL_HOST = 'aff.internal';
 
-export default {
-  async fetch(request, env, ctx) {
-    try {
-      return await route(request, env, ctx);
-    } catch (e) {
-      console.error(e?.stack || e);
-      return html('<h1>Something went wrong</h1><p>Please try again in a minute.</p>', { status: 500 });
-    }
-  },
-};
+export async function app(request, env, ctx) {
+  try {
+    return await route(request, env, ctx);
+  } catch (e) {
+    console.error(e?.stack || e);
+    return html('<h1>Something went wrong</h1><p>Please try again in a minute.</p>', { status: 500 });
+  }
+}
+
 
 async function route(request, env, ctx) {
   const url = new URL(request.url);
@@ -372,3 +371,5 @@ async function exportCsv(env) {
   const body = [cols.join(','), ...rows.results.map((r) => cols.map((k) => q(r[k])).join(','))].join('\n');
   return new Response(body, { headers: { 'content-type': 'text/csv; charset=utf-8', 'content-disposition': 'attachment; filename="affiliate-conversions.csv"', 'cache-control': 'no-store' } });
 }
+
+export default { fetch: app };
