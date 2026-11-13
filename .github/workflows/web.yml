@@ -74,7 +74,7 @@ jobs:
       # iPhone buyers on the web get Pro in RevenueCat; the key lives as a GitHub secret.
       - name: RevenueCat key
         env:
-          RC_KEY: ${{ secrets.REVENUECAT_SECRET_KEY }}
+          RC_KEY: ${{ secrets.REVENUECAT_SECRET_KEY || secrets.REVENUE_CAT }}
         run: |
           if [ -n "$RC_KEY" ]; then printf %s "$RC_KEY" | npx wrangler secret put REVENUECAT_SECRET_KEY; else echo "REVENUECAT_SECRET_KEY not set"; fi
 
