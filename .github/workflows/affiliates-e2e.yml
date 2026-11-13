@@ -15,7 +15,7 @@ jobs:
           EMAIL="e2e-check-$(date +%s)@example.com"
           echo "signup $EMAIL"
           curl -sS -c a.txt -b a.txt -o /dev/null -w "signup %{http_code} -> %{redirect_url}\n" -H "Origin: $P" -H "Content-Type: application/x-www-form-urlencoded" -A "Mozilla/5.0 e2e" --data-urlencode "email=$EMAIL" $P/signup
-          U=$(curl -sS -b a.txt -A "Mozilla/5.0 e2e" $P/dashboard | grep -oE 'salahalarm\.com/[A-Za-z0-9_]{3,24}' | grep -v '\.com/\(get\|android\|download\|api\)' | head -1 | cut -d/ -f2)
+          U=$(curl -sS -b a.txt -A "Mozilla/5.0 e2e" $P/dashboard | grep -oE 'Your username is <b>[A-Za-z0-9_]+' | head -1 | sed 's/.*<b>//')
           echo "username=$U"
           test -n "$U"
           curl -sS -c b.txt -o /dev/null -D h.txt -A "Mozilla/5.0 (iPhone) e2e" "https://salahalarm.com/$U?utm_source=e2e"
