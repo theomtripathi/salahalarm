@@ -11,6 +11,10 @@
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   },
+  // Affiliate links (salahalarm.com/<username>) and onboarding beacons go to the affiliate Worker.
+  "services": [
+    { "binding": "AFFILIATES", "service": "salahalarm-affiliates" }
+  ],
   "routes": [
     { "pattern": "salahalarm.com/*", "zone_name": "salahalarm.com" },
     { "pattern": "www.salahalarm.com/*", "zone_name": "salahalarm.com" }
