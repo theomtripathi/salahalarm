@@ -43,7 +43,7 @@ export function homePage(config, latest) {
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <a class="pill pill-link" href="/ramadan-2027/">${icon('moon', 'icon icon-sm')} Win a free Makkah trip: join the free 90-day prayer challenge ${icon('arrow', 'icon icon-sm')}</a>
-      <h1>Never miss Fajr again.</h1>
+      <h2 class="hero-title">Never miss Fajr again.</h2>
       <p class="hero-lead">The adhan alarm that only stops when you reach your prayer mat. Exact prayer times for your city, SalahLock, streaks, Quran and Qibla in one app.</p>
       <div class="hero-actions">
         ${storeButtons(config, 'en', 'hero', 'buttons-light')}
@@ -165,7 +165,7 @@ export function homePage(config, latest) {
   </div>
 </section>
 
-${latest.length ? `<section class="section">
+${latest.length ? `<section class="section" id="guides">
   <div class="wrap">
     <div class="section-head"><div><p class="eyebrow">Guides</p><h2 class="section-title">Read before you sleep</h2></div><a class="link-arrow" href="/blog/en/">All guides ${icon('arrow', 'icon icon-sm')}</a></div>
     <div class="cards">${latest.map((a) => card(config, a)).join('')}</div>
@@ -173,7 +173,7 @@ ${latest.length ? `<section class="section">
   </div>
 </section>` : ''}
 
-<section class="section faq-section">
+<section class="section faq-section" id="faq">
   <div class="wrap narrow">
     <p class="eyebrow">Questions</p>
     <h2 class="section-title">Frequently asked questions</h2>
@@ -195,11 +195,15 @@ ${ctaBand(config, 'en', 'home')}
 
   return layout(config, {
     lang: 'en',
+    // The home page is the onboarding flow (served by the funnel Worker at /start/),
+    // with every existing section kept below it, collapsed, so no URL or anchor is lost.
+    head: ONBOARDING_HEAD,
+    top: onboarding(config),
     title: 'Salah Alarm: Fajr Alarm & Prayer Times App for Android & iPhone',
     description: 'Salah Alarm wakes you for Fajr at the exact prayer time and only stops at your prayer mat. Prayer times, SalahLock, Qibla, Quran and duas for Android and iPhone.',
     canonical: '/',
-    body,
-    bodyClass: 'home',
+    body: aboutWrap(body),
+    bodyClass: 'home home-onboarding',
     jsonLd: [
       { '@context': 'https://schema.org', '@type': 'MobileApplication', name: config.appName, operatingSystem: 'iOS, Android', applicationCategory: 'LifestyleApplication', downloadUrl: config.appStoreUrl, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
@@ -215,4 +219,81 @@ export function card(config, a) {
   <p>${esc(a.description)}</p>
   <span class="card-more">${esc(s.readMore)} ${icon('arrow', 'icon icon-sm')}</span>
 </a>`;
+}
+
+// ---- onboarding home (Nov 2026) ------------------------------------------------------
+
+const ONBOARDING_HEAD = `<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/start/onboard.css">
+<style>
+body.home-onboarding{background:#fbf8f1}
+.home-about{max-width:1200px;margin:0 auto;padding:0 16px}
+.home-about>summary{cursor:pointer;list-style:none;text-align:center;padding:18px 0;font-weight:700;color:#5f6b65;font-size:14px}
+.home-about>summary::-webkit-details-marker{display:none}
+.home-about>summary::after{content:" ▾"}
+.home-about[open]>summary::after{content:" ▴"}
+</style>
+<script src="/assets/i18n.js" defer></script>
+<script type="module" src="/start/app.js"></script>`;
+
+// Every page and home section, linked from the small area under the flow.
+export function importantPages(config) {
+  const blogs = Object.entries(config.langs).map(([code, l]) => [`/blog/${code}/`, `${l.blogTitle} (${l.name})`]);
+  const groups = [
+    ['Ramadan 2027', [[config.challenge?.path || '/ramadan-2027/', 'Free Makkah Trip Challenge'], [config.challenge?.rulesPath || '/ramadan-2027/rules/', 'Challenge rules'], ['/blog/en/ramadan-2027-start-date/', 'Ramadan 2027 start date']]],
+    ['About Salah Alarm', [['/#how', 'How it works'], ['/#features', 'Features'], ['/#ramadan', 'Ramadan countdown'], ['/#guides', 'Latest guides'], ['/#faq', 'FAQ']]],
+    ['Get the app', [['/get/', 'Download for iPhone or Android'], ['/android/', 'Android setup'], ['/start/paid/', 'Already paid? Get the app'], ['/android/install/', 'Reinstall on Android']]],
+    ['Guides', blogs],
+    ['Legal', [[config.privacyUrl, 'Privacy Policy'], [config.termsUrl, 'Terms of Use'], [config.supportUrl, 'Support']]],
+  ];
+  if (config.affiliatesUrl) groups.splice(3, 0, ['Partners', [[config.affiliatesUrl, 'Salah Alarm Affiliates']]]);
+  return `<details class="ob-pages" id="important-pages">
+  <summary>Important pages and sections</summary>
+  <nav aria-label="Important pages">${groups.map(([h, links]) => `<h3>${esc(h)}</h3>${links.map(([href, label]) => `<a href="${esc(href)}">${esc(label)}</a>`).join('')}`).join('')}</nav>
+</details>`;
+}
+
+function onboarding(config) {
+  return `<div id="ob" data-theme="night" data-screen="welcome">
+  <div class="ob-shell">
+    <header class="ob-top">
+      <button class="ob-back" type="button" aria-label="Back" data-ob-back style="visibility:hidden"></button>
+      <div class="ob-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progress"><i data-ob-progress></i></div>
+      <span class="ob-lang" data-ob-lang></span>
+    </header>
+    <main class="ob-main" data-ob-app aria-live="polite">
+      <section class="ob-screen">
+        <div class="ob-body">
+          <p class="ob-kicker">${esc(config.appName)}</p>
+          <h1 class="ob-h1">Never miss Fajr <em>again.</em></h1>
+          <p class="ob-lede">The prayer alarm that only stops when you reach your prayer mat. Answer a few questions and we'll build your plan.</p>
+        </div>
+        <div class="ob-foot"><a class="ob-btn ob-btn-primary" href="/start/">Build my prayer plan</a></div>
+      </section>
+    </main>
+  </div>
+  ${importantPages(config)}
+</div>`;
+}
+
+// The previous home page, kept whole below the flow. A link to /#how etc. opens it.
+function aboutWrap(body) {
+  return `<details class="home-about" id="about">
+<summary>About Salah Alarm</summary>
+${body}
+</details>
+<script>
+(function () {
+  function openFor(hash) {
+    if (!hash || hash.length < 2) return;
+    var el = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (!el) return;
+    var d = el.closest('details');
+    while (d) { d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+    setTimeout(function () { el.scrollIntoView(); }, 0);
+  }
+  openFor(location.hash);
+  addEventListener('hashchange', function () { openFor(location.hash); });
+})();
+</script>`;
 }

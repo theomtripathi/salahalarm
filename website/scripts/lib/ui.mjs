@@ -74,7 +74,7 @@ const FONTS = {
   ur: 'family=Noto+Nastaliq+Urdu:wght@400;600;700',
 };
 
-export function layout(config, { lang, title, description, canonical, alternates = [], body, jsonLd = [], ogType = 'website', bodyClass = '' }) {
+export function layout(config, { lang, title, description, canonical, alternates = [], body, jsonLd = [], ogType = 'website', bodyClass = '', head = '', top = null }) {
   const s = config.langs[lang];
   // Arabic script is used on every page (language links, the alarm screen); Google Fonts
   // serves it with unicode-range, so browsers only fetch it where Arabic text appears.
@@ -105,10 +105,11 @@ ${alt}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?${fonts}&display=swap">
 <link rel="stylesheet" href="/styles.css">
+${head}
 ${ld}
 </head>
 <body class="${bodyClass}${config.announcement ? ' has-announce' : ''}">
-${header(config, lang)}
+${top ?? header(config, lang)}
 <main id="main">
 ${body}
 </main>
