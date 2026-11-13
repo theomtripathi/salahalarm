@@ -1,0 +1,28 @@
+name: affiliates-e2e
+on:
+  push:
+    branches: [claude/project-thread-0m1sd5]
+    paths: [.github/workflows/affiliates-e2e.yml]
+  workflow_dispatch:
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Link end to end
+        run: |
+          set -u
+          P=https://affiliate.salahalarm.com
+          EMAIL="e2e-check-$(date +%s)@example.com"
+          echo "signup $EMAIL"
+          curl -sS -c a.txt -b a.txt -o /dev/null -w "signup %{http_code} -> %{redirect_url}\n" -H "Origin: $P" -H "Content-Type: application/x-www-form-urlencoded" -A "Mozilla/5.0 e2e" --data-urlencode "email=$EMAIL" $P/signup
+          U=$(curl -sS -b a.txt -A "Mozilla/5.0 e2e" $P/dashboard | grep -oE 'salahalarm\.com/[A-Za-z0-9_]{3,24}' | grep -v '\.com/\(get\|android\|download\|api\)' | head -1 | cut -d/ -f2)
+          echo "username=$U"
+          test -n "$U"
+          curl -sS -c b.txt -o /dev/null -D h.txt -A "Mozilla/5.0 (iPhone) e2e" "https://salahalarm.com/$U?utm_source=e2e"
+          cat h.txt | grep -iE '^(HTTP|location|set-cookie)'
+          grep -q " 302" h.txt
+          grep -qi "sa_aff=$U" h.txt
+          curl -sS -o /dev/null -w "nobody %{http_code}\n" https://salahalarm.com/zz_no_such_user_e2e
+          curl -sS -b b.txt -w " event %{http_code}\n" -H "Origin: https://salahalarm.com" -H "Content-Type: application/json" -A "Mozilla/5.0 (iPhone) e2e" -d '{"type":"checkout_started","app_user_id":"e2e-test-uid"}' https://salahalarm.com/_aff/event
+          sleep 3
+          curl -sS -b a.txt -A "Mozilla/5.0 e2e" $P/dashboard | grep -oiE '(visits?|clicks?|checkouts?|downloads?)[^<]{0,40}<[^>]*>[^<]{0,20}' | head -20
