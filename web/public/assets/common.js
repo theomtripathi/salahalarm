@@ -133,7 +133,10 @@ if (!distinctId) {
   store.set("sa_did", distinctId);
 }
 const superProps = {};
-let sdk = null; // window.posthog once the SDK is initialised
+// The snippet's stub is replaced by the real instance once array.js loads, so always
+// read window.posthog at call time (calls on a stale stub are silently dropped).
+let sdkOn = false;
+const sdkNow = () => (sdkOn ? window.posthog : null);
 let fb = null; // { logEvent, analytics } once Firebase Analytics is ready
 const fbQueue = [];
 
@@ -171,7 +174,7 @@ function loadPosthog(cfg) {
     session_recording: { maskAllInputs: true, maskInputOptions: { password: true, email: true } },
   });
   window.posthog.register(superProps);
-  sdk = window.posthog;
+  sdkOn = true;
 }
 
 async function loadFirebaseAnalytics(cfg) {
@@ -208,6 +211,7 @@ function fbLog(event, properties) {
 export function capture(event, properties = {}) {
   if (!posthog) return;
   const props = { ...properties, app_language: lang, os: device.android ? "android" : device.ios ? "ios" : "other", in_app_browser: device.inApp };
+  const sdk = sdkNow();
   if (sdk) {
     sdk.capture(event, props);
     if (event !== "$identify") fbLog(event, { ...superProps, ...props });
@@ -232,6 +236,7 @@ export function capture(event, properties = {}) {
 
 /** Person properties ($set) without a separate event. */
 export function setPersonProps(props) {
+  const sdk = sdkNow();
   if (sdk) sdk.capture("$set", { $set: props });
   else capture("$set", { $set: props });
 }
@@ -239,6 +244,7 @@ export function setPersonProps(props) {
 /** Links this browser's anonymous events to the Firebase uid (same id the app uses). */
 export function identify(uid, email) {
   if (!posthog || !uid) return;
+  const sdk = sdkNow();
   if (sdk) {
     if (store.get("sa_identified") !== uid) sdk.identify(uid, email ? { email } : {});
     if (fb) fb.an.setUserId(fb.analytics, uid);

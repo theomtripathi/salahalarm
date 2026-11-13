@@ -922,6 +922,12 @@ async function boot() {
     store.set("sa_start_started", "1");
     capture("web_onboarding_started", { entry: location.pathname, ref, landing_screen: state.screen, flow: "start" });
   }
+  // The first screen painted before analytics existed; record its view now.
+  {
+    const route = routeNow();
+    const index = Math.max(0, route.indexOf(state.screen));
+    capture("web_onboarding_screen_viewed", { screen: state.screen, index: index + 1, total: route.length, step_index: index + 1, step_count: route.length, first: true });
+  }
 
   try {
     auth = await initAuth(config.firebase);
