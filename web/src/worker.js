@@ -21,6 +21,7 @@
 //   /api/admin/test-entitlement show, expire or restore one account's access, for testing renewals (same auth)
 //   /api/admin/prices        what each country is charged (Cloudflare token holders only)
 //   /download/salahalarm.apk the APK, streamed from R2; needs a link from /api/android/download
+//   (cron)                   copy Firebase sign-in emails to PostHog persons, see src/emailsync.js
 
 import { verifyIdToken, bearer, AuthError } from "./auth.js";
 import { Firestore, parseServiceAccount, customToken } from "./firestore.js";
@@ -31,6 +32,7 @@ import { joinChallenge, readChallenge, challengeCounts } from "./challenge.js";
 import { ensurePaidSeat, grantShareSeat, grantRevenueCat, affiliatePayload, notifyAffiliates } from "./postpay.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
+import { syncEmails, FULL_SYNC_CRON } from "./emailsync.js";
 import { sanitizeProfile } from "./profile.js";
 
 const APK_KEY = "salahalarm-latest.apk";
@@ -50,6 +52,18 @@ export default {
       const res = json({ error: err instanceof DodoError ? "payment provider error" : err.message }, status);
       return url.pathname.startsWith("/api/") ? cors(res, request, env) : res;
     }
+  },
+
+  // Cron: copy Firebase sign-in emails onto PostHog persons (src/emailsync.js).
+  async scheduled(event, env, ctx) {
+    const sa = parseServiceAccount(env.FIREBASE_SERVICE_ACCOUNT);
+    if (!sa) return console.error("email sync skipped: FIREBASE_SERVICE_ACCOUNT is not set");
+    const full = event.cron === FULL_SYNC_CRON;
+    ctx.waitUntil(
+      syncEmails(env, sa, { full, now: event.scheduledTime || Date.now() })
+        .then((r) => console.log(`email sync: ${JSON.stringify(r)}`))
+        .catch((err) => console.error(`email sync failed: ${err.stack || err}`)),
+    );
   },
 };
 
