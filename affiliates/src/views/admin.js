@@ -27,13 +27,17 @@ export function adminOverview({ totals, rows, msg, range }) {
   <div class="toc" style="margin:0">${ranges.map(([v, l]) => `<a href="/admin?range=${v}"${range === v ? ' style="border-color:var(--gold)"' : ''}>${l}</a>`).join('')}<a href="/admin/export.csv">Export CSV</a></div>
 </div>
 ${flash(msg)}
-<div class="stats">
+<p class="stats-label">Traffic and sales in this range</p>
+<div class="stats stats-5">
   <div class="stat"><div class="v">${totals.affiliates}</div><div class="k">Affiliates</div></div>
   <div class="stat"><div class="v">${totals.visits}</div><div class="k">Clicks</div></div>
   <div class="stat"><div class="v">${totals.checkouts}</div><div class="k">Checkouts started</div></div>
   <div class="stat"><div class="v">${totals.downloads}</div><div class="k">Downloads</div></div>
   <div class="stat"><div class="v">${totals.charges}</div><div class="k">Charges</div></div>
-  <div class="stat"><div class="v">${money(totals.revenue)}</div><div class="k">Revenue (USD)</div></div>
+</div>
+<p class="stats-label">Money</p>
+<div class="stats stats-4">
+  <div class="stat stat-hi"><div class="v">${money(totals.revenue)}</div><div class="k">Revenue in this range (USD)</div></div>
   <div class="stat"><div class="v">${money(totals.pending)}</div><div class="k">Commission waiting for you</div></div>
   <div class="stat"><div class="v">${money(totals.owed)}</div><div class="k">Approved, unpaid</div></div>
   <div class="stat"><div class="v">${money(totals.paid)}</div><div class="k">Paid out</div></div>
@@ -98,7 +102,7 @@ export function adminAffiliate({ aff, stats, convs, payouts, posts, events, msg 
 <h1>${esc(aff.username)} ${aff.status !== 'active' ? statusPill(aff.status) : ''}</h1>
 <p class="muted">${esc(aff.email)} · joined ${fmtDate(aff.created_at)} · last active ${fmtDate(aff.last_active_at)} · link <code>salahalarm.com/${esc(aff.username)}</code></p>
 ${flash(msg)}
-<div class="stats">
+<div class="stats stats-6">
   <div class="stat"><div class="v">${stats.visits}</div><div class="k">Clicks</div></div>
   <div class="stat"><div class="v">${stats.uniqueVisitors}</div><div class="k">Unique visitors</div></div>
   <div class="stat"><div class="v">${events.checkouts}</div><div class="k">Checkouts</div></div>
@@ -119,7 +123,7 @@ ${flash(msg)}
   </div>
   <div class="card">
     <h3 style="margin-top:0">Add a conversion by hand</h3>
-    <p class="small muted">For a sale you know came from this affiliate but wasn't tracked (e.g. an App Store purchase). It's added as approved.</p>
+    <p class="small muted">For a salahalarm.com sale you know came from this affiliate but wasn't tracked. It's added as approved.</p>
     <form method="post" action="/admin/affiliates/${aff.id}/manual">
       <div class="row"><div><label>Charge (USD)</label><input type="number" name="amount" step="0.01" min="0" required></div>
       <div><label>Plan</label><select name="interval"><option value="year">Yearly</option><option value="week">Weekly</option><option value="lifetime">Lifetime</option></select></div></div>

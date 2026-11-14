@@ -31,13 +31,13 @@ ${flash(msg, kind)}
 </div>
 <p class="small muted" style="margin-top:8px">Put it in the bio of every TikTok and Instagram page you post on.</p>
 
-<div class="stats">
+<div class="stats stats-6">
   <div class="stat"><div class="v">${stats.visits}</div><div class="k">Clicks</div></div>
   <div class="stat"><div class="v">${stats.downloads}</div><div class="k">Downloads</div></div>
   <div class="stat"><div class="v">${stats.sales}</div><div class="k">Approved sales</div></div>
   <div class="stat"><div class="v">${money(stats.earned)}</div><div class="k">Earned</div></div>
   <div class="stat"><div class="v">${money(stats.paid)}</div><div class="k">Paid out</div></div>
-  <div class="stat"><div class="v">${money(stats.balance)}</div><div class="k">Balance</div></div>
+  <div class="stat stat-hi"><div class="v">${money(stats.balance)}</div><div class="k">Balance</div></div>
 </div>
 
 <div class="card">

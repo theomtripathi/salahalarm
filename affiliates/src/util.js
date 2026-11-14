@@ -73,7 +73,7 @@ export async function readForm(request) {
   return out;
 }
 
-export const money = (n) => `${Number(n) < 0 ? '-' : ''}$${Math.abs(Math.round((Number(n) || 0) * 100) / 100).toFixed(2)}`;
+export const money = (n) => `${Number(n) < 0 ? '-' : ''}$${Math.abs(Math.round((Number(n) || 0) * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 export const isEmail = (s) => typeof s === 'string' && s.length <= 254 && /^[^\s@<>"']+@[^\s@<>"']+\.[a-z]{2,}$/i.test(s);
 

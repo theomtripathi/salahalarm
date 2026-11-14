@@ -40,25 +40,23 @@ function signupForm(msg) {
 
 export function landing({ user, msg }) {
   const body = `
-<section class="hero">
-  <div>
+<section class="hero" id="join">
+  <div class="hero-copy">
     <span class="kicker">Salah Alarm Affiliates</span>
-    <h1>Help Muslims never miss a prayer. Earn 50% of the revenue.</h1>
+    <h1>Help Muslims never miss a prayer. Earn <em>50% of the revenue.</em></h1>
     <p class="lead">Post short videos and slideshows about Salah Alarm on TikTok and Instagram. Everyone who buys Salah Alarm on salahalarm.com through your link earns you half of what they pay. We give you the content ideas, hooks, prompts and assets.</p>
-    ${user ? `<a class="btn" href="/dashboard">Open my dashboard</a>` : `<a class="btn" href="#join">Get my link</a> <a class="btn btn-ghost" href="/content">See what to post</a>`}
+    ${user ? `<a class="btn btn-gold btn-lg" href="/dashboard">Open my dashboard</a>` : `<div class="hero-join">
+      <p class="hero-join-title">Get your link in 10 seconds. No forms, no approval wait.</p>
+      ${flash(msg && msg.startsWith('!') ? msg.slice(1) : '', 'bad')}
+      ${signupForm(msg && !msg.startsWith('!') ? msg : '')}
+    </div>
+    <a class="hero-more" href="/content">See what to post &rarr;</a>`}
   </div>
-  <div class="hero-phones">
-    <img src="/img/app/store-03.webp" alt="Salah Alarm Fajr alarm screen" width="270" height="584">
-    <img src="/img/app/store-04.webp" alt="SalahLock: apps blocked until you pray" width="270" height="584">
+  <div class="hero-phones" aria-hidden="true">
+    <img src="/img/app/store-03.webp" alt="" width="270" height="584">
+    <img src="/img/app/store-04.webp" alt="" width="270" height="584">
   </div>
 </section>
-
-${user ? '' : `<section class="join" id="join">
-  <h2>Get your link in 10 seconds</h2>
-  <p>Enter your email. No forms, no approval wait.</p>
-  ${flash(msg && msg.startsWith('!') ? msg.slice(1) : '', 'bad')}
-  ${signupForm(msg && !msg.startsWith('!') ? msg : '')}
-</section>`}
 
 <h2>What you earn</h2>
 ${termsBox()}
@@ -82,7 +80,7 @@ ${termsBox()}
 </div>
 
 <h2>Content you can post today</h2>
-<div class="grid">${TYPES.map(typeCard).join('')}</div>
+<div class="grid types">${TYPES.map(typeCard).join('')}</div>
 
 <h2>Join the community</h2>
 <div class="card">
@@ -121,7 +119,7 @@ export function contentIndex({ user, env }) {
   const body = `
 <h1 style="margin-top:32px">What to post</h1>
 <p class="muted">Seven content types, each with real examples that hit 100K+ views, hooks, CTAs, scripts, app screenshots and AI voice settings. Start with one, post it every day for a week, then add a second.</p>
-<div class="grid">${TYPES.map(typeCard).join('')}</div>
+<div class="grid types">${TYPES.map(typeCard).join('')}</div>
 
 <h2>The playbook in 6 lines</h2>
 <div class="card">
