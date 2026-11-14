@@ -226,12 +226,21 @@ export function card(config, a) {
 const ONBOARDING_HEAD = `<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="stylesheet" href="/start/onboard.css">
 <style>
-body.home-onboarding{background:#fbf8f1}
-.home-about{max-width:1200px;margin:0 auto;padding:0 16px}
-.home-about>summary{cursor:pointer;list-style:none;text-align:center;padding:18px 0;font-weight:700;color:#5f6b65;font-size:14px}
+/* Old home content, kept for SEO under "About Salah Alarm". Uses the site's own colours (light and dark mode). */
+.home-about{margin:0;padding:0;background:var(--bg)}
+.home-about>summary{cursor:pointer;list-style:none;text-align:center;padding:22px 16px;font-weight:700;color:var(--muted);font-size:15px;border-top:1px solid var(--border)}
 .home-about>summary::-webkit-details-marker{display:none}
 .home-about>summary::after{content:" ▾"}
 .home-about[open]>summary::after{content:" ▴"}
+.home-about>summary:hover{color:var(--text)}
+/* Its hero becomes a short intro band so the page has one hero (the flow above). */
+.home-about .hero{margin-top:0;padding-top:0}
+.home-about .hero-inner{grid-template-columns:1fr;justify-items:center;text-align:center;padding-top:56px;padding-bottom:64px;gap:0}
+.home-about .hero-visual{display:none}
+.home-about .hero-title{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.02em;margin:0}
+.home-about .hero-lead{margin-inline:auto}
+.home-about .hero-actions{justify-content:center}
+</style>
 </style>
 <script src="/assets/i18n.js" defer></script>
 <script type="module" src="/start/app.js"></script>`;
