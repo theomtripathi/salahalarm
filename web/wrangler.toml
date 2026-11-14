@@ -17,7 +17,7 @@ routes = [
 # Email sync to PostHog (src/emailsync.js): recent sign-ins every 15 minutes,
 # everyone on Sundays. The second entry must match FULL_SYNC_CRON.
 [triggers]
-crons = ["*/15 * * * *", "17 3 * * 0"]
+crons = ["*/15 * * * *", "17 3 * * SUN"]
 
 [assets]
 directory = "./public"

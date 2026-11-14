@@ -4,14 +4,14 @@
 //
 // Runs on the Worker's cron (see wrangler.toml):
 //   every 15 minutes  people who signed up or signed in within the last 45 minutes
-//   Sundays 03:17 UTC everyone (backfill, and catches anything the short runs missed)
+//   Sundays 03:17 UTC everyone (Cloudflare wants SUN, not 0) (backfill, and catches anything the short runs missed)
 //
 // It only sends `$set` events, which no workflow triggers on, so a run never starts
 // or restarts an email sequence. It never removes or overwrites an email with nothing.
 
 import { signServiceJwt } from "./firestore.js";
 
-export const FULL_SYNC_CRON = "17 3 * * 0";
+export const FULL_SYNC_CRON = "17 3 * * SUN";
 const RECENT_MS = 45 * 60 * 1000;
 const PAGE = 1000;
 const POSTHOG_BATCH = 500;
