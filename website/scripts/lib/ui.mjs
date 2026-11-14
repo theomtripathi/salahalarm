@@ -114,6 +114,7 @@ ${top ?? header(config, lang)}
 ${body}
 </main>
 ${footer(config, lang)}
+${/article-page|blog-page/.test(bodyClass) ? blogAnalytics(config, lang) : ''}
 </body>
 </html>
 `;
@@ -219,6 +220,42 @@ export function stickyApp(config, lang, slug) {
     bar.hidden = true;
     try { localStorage.setItem(key, String(Date.now())); } catch (e) {}
   });
+})();
+</script>`;
+}
+
+// Blog analytics: PostHog capture API, no SDK and no cookies. Shares the funnel's
+// visitor id (localStorage sa_did), so a reader who later starts onboarding on
+// salahalarm.com is the same person in PostHog and the blog gets credit.
+export function blogAnalytics(config, lang) {
+  const ph = config.posthog;
+  if (!ph || !ph.key) return '';
+  return `<script>
+(function () {
+  var KEY = ${JSON.stringify(ph.key)}, HOST = ${JSON.stringify(ph.host)}, LANG = ${JSON.stringify(lang)};
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var id = get('sa_did');
+  if (!id) { id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Math.random()).slice(2); set('sa_did', id); }
+  var q = new URLSearchParams(location.search), utm = {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { if (q.get(k)) utm[k] = q.get(k); });
+  if (!get('sa_from')) set('sa_from', 'blog' + location.pathname);
+  function send(event, props) {
+    var body = JSON.stringify({ api_key: KEY, event: event, distinct_id: id, properties: Object.assign({
+      $current_url: location.href, $pathname: location.pathname, $referrer: document.referrer || '$direct',
+      app_language: LANG, source: 'blog', $process_person_profile: false
+    }, utm, props || {}) });
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(HOST + '/capture/', new Blob([body], { type: 'text/plain' }))) return;
+    } catch (e) {}
+    try { fetch(HOST + '/capture/', { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+  }
+  send('$pageview', { page_type: document.body.classList.contains('article-page') ? 'article' : 'blog_index' });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-cta]');
+    if (!a) return;
+    send('blog_cta_clicked', { cta: a.getAttribute('data-cta'), href: a.href });
+  }, true);
 })();
 </script>`;
 }
