@@ -74,6 +74,8 @@ export function setEvent(user, email, now) {
       $set: { email },
       $set_once: { email_source: "firebase_auth" },
       $lib: "salahalarm-email-sync",
+      // Backend enrichment: do not make dormant people look active.
+      $update_person_last_seen_at: false,
     },
   };
 }
