@@ -75,7 +75,7 @@ Many people put extra effort into the 27th night, but no single night is certain
 
 ## Suhoor and iftar times
 
-The calendar above gives the dates. The times depend on where you live. Suhoor ends at imsak, just before Fajr, and iftar is at Maghrib (sunset). Both shift by a minute or so each day.
+The calendar above gives the dates. The times depend on where you live. Suhoor ends at imsak, just before Fajr, and iftar is at Maghrib (sunset). Both shift by a minute or so each day. For full day-by-day sehri and iftar times, see our [Ramadan 2027 timetables by city](/ramadan-timetable-2027/), with London, Birmingham, New York, Toronto and more.
 
 Because Ramadan 2027 falls in February, fasts are relatively short for most of the world: roughly 11 to 13 hours in the UK, Europe, North America, the Gulf and South Asia. The hard part is not the length of the fast but waking up for suhoor in the dark.
 

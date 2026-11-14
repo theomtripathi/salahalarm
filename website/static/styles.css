@@ -606,3 +606,15 @@ html[dir="rtl"] .announce-cta .icon { transform: scaleX(-1); }
 .sticky-app .btn { background: var(--gold); color: var(--green-950); flex: none; }
 .sticky-app-close { background: none; border: 0; color: rgb(255 255 255 / 70%); font-size: 22px; line-height: 1; padding: 4px 6px; cursor: pointer; }
 @media (min-width: 900px) { .sticky-app { display: none !important; } }
+
+/* Ramadan timetable pages */
+.tt-wrap { overflow-x: auto; margin: 1.5rem 0; -webkit-overflow-scrolling: touch; }
+.prose .tt, .tt { min-width: 0; width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .95rem; }
+.tt th, .tt td { padding: .55rem .7rem; border-bottom: 1px solid rgba(127,127,127,.25); text-align: start; white-space: nowrap; }
+.tt thead th { font-weight: 700; background: var(--green-900); color: #fff; white-space: normal; }
+@media (max-width: 520px) { .prose .tt, .tt { font-size: .85rem; } .tt th, .tt td { padding: .45rem .4rem; } }
+.tt tbody tr:nth-child(even) { background: rgba(127,127,127,.04); }
+.tt-note { font-size: .9rem; opacity: .8; }
+.tt-cities { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .5rem 1rem; }
+.tt-cities a { font-weight: 600; }
+.tt-country { opacity: .7; font-size: .9rem; }

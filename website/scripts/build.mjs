@@ -10,6 +10,7 @@ import { render, parseFrontmatter, escapeHtml as esc } from './lib/markdown.mjs'
 import { layout, ctaInline, ctaBand, ctaChallenge, stickyApp, storeButtons, alarmPhone } from './lib/ui.mjs';
 import { homePage, card } from './pages/home.mjs';
 import { challengePage, challengeRulesPage } from './pages/challenge.mjs';
+import { cityPage, hubPage, CITIES, cityUrl, HUB } from './pages/timetable.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'site.config.json'), 'utf8'));
@@ -182,6 +183,7 @@ function sitemap(articles, byKey) {
   const urls = [
     { loc: '/', lastmod: null, alts: [] },
     ...(config.challenge ? [config.challenge.path, config.challenge.rulesPath].map((loc) => ({ loc, lastmod: null, alts: [] })) : []),
+    ...[HUB, ...CITIES.map(cityUrl)].map((loc) => ({ loc, lastmod: null, alts: [] })),
     ...Object.keys(config.langs).map((l) => ({ loc: `/blog/${l}/`, lastmod: null, alts: [] })),
     ...articles.map((a) => ({ loc: a.url, lastmod: a.updated || a.date, alts: a.translationKey ? byKey[a.translationKey] : [] })),
   ];
@@ -231,6 +233,8 @@ export function build() {
     write(path.join(config.challenge.path, 'index.html'), challengePage(config));
     write(path.join(config.challenge.rulesPath, 'index.html'), challengeRulesPage(config));
   }
+  write(path.join(HUB, 'index.html'), hubPage(config));
+  for (const c of CITIES) write(path.join(cityUrl(c), 'index.html'), cityPage(config, c));
   write('404.html', layout(config, {
     lang: 'en',
     title: 'Page not found | Salah Alarm',

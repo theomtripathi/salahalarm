@@ -102,3 +102,74 @@ en-102,en,how to make up missed prayers,habit,info,"US,GB,CA,AU",4,,missed-praye
 ar-100,ar,قضاء الصلوات الفائتة,habit,info,"SA,AE,EG,KW,QA,JO,MA",4,,missed-prayers-qada,qada-alsalawat-alfaita,published,2026-11-08,,,,,,,,added 2026-11-08
 en-103,en,dhuhr prayer time,fajr,info,"US,GB,CA,AU",3,,dhuhr-prayer-time,dhuhr-prayer-time,published,2026-11-09,,,,,,,,added 2026-11-09
 ar-101,ar,أذكار الصباح والمساء,dua,info,"SA,AE,EG,KW,QA,JO,MA",3,,morning-evening-athkar,athkar-alsabah-almasaa,published,2026-11-09,,,,,,,,added 2026-11-09
+en-104,en,first day of ramadan 2027,ramadan-dates,info,"US,GB,CA,AU",5,2027-01-15,first-day-ramadan-2027,first-day-of-ramadan-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-105,en,when does ramadan 2027 end,ramadan-dates,info,"US,GB,CA,AU",4,2027-02-20,,ramadan-2027-end-date,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-106,en,islamic calendar 2027,ramadan-dates,info,"US,GB,CA,AU",4,2026-12-31,islamic-calendar-2027,islamic-calendar-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-107,en,hijri date today,ramadan-dates,info,"US,GB,CA,AU",3,,,hijri-date-today,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-108,en,ramadan timetable 2027 london,timetable,tool,"US,GB,CA,AU",5,2027-01-20,,ramadan-timetable-2027/london,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-109,en,ramadan timetable 2027 birmingham,timetable,tool,"US,GB,CA,AU",5,2027-01-20,,ramadan-timetable-2027/birmingham,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-110,en,ramadan timetable 2027 manchester,timetable,tool,"US,GB,CA,AU",5,2027-01-20,,ramadan-timetable-2027/manchester,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-111,en,ramadan timetable 2027 bradford,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/bradford,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-112,en,ramadan timetable 2027 leicester,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/leicester,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-113,en,ramadan timetable 2027 glasgow,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/glasgow,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-114,en,ramadan timetable 2027 new york,timetable,tool,"US,GB,CA,AU",5,2027-01-20,,ramadan-timetable-2027/new-york,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-115,en,ramadan timetable 2027 chicago,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/chicago,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-116,en,ramadan timetable 2027 houston,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/houston,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-117,en,ramadan timetable 2027 dallas,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/dallas,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-118,en,ramadan timetable 2027 los angeles,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/los-angeles,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-119,en,ramadan timetable 2027 detroit,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/detroit,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-120,en,ramadan timetable 2027 toronto,timetable,tool,"US,GB,CA,AU",5,2027-01-20,,ramadan-timetable-2027/toronto,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-121,en,ramadan timetable 2027 mississauga,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/mississauga,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-122,en,ramadan timetable 2027 montreal,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/montreal,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-123,en,ramadan timetable 2027 calgary,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/calgary,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-124,en,ramadan timetable 2027 vancouver,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,ramadan-timetable-2027/vancouver,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+en-125,en,sehri time today,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,sehri-time-today,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-126,en,iftar time today,timetable,tool,"US,GB,CA,AU",4,2027-01-20,,iftar-time-today,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-127,en,laylatul qadr dua,laylatul-qadr,info,"US,GB,CA,AU",4,2027-02-20,,laylatul-qadr-dua,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-128,en,signs of laylatul qadr,laylatul-qadr,info,"US,GB,CA,AU",3,2027-02-20,,signs-of-laylatul-qadr,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-129,en,how to do itikaf,laylatul-qadr,info,"US,GB,CA,AU",3,2027-02-20,,itikaf-guide,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-130,en,zakat al fitr 2027 amount,eid,info,"US,GB,CA,AU",4,2027-02-25,zakat-al-fitr-2027,zakat-al-fitr-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-131,en,how to pray eid prayer,eid,info,"US,GB,CA,AU",3,2027-03-01,,eid-prayer-how-to,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-132,en,eid mubarak wishes,eid,info,"US,GB,CA,AU",3,2027-03-01,,eid-mubarak-wishes,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-133,en,what breaks your fast,fasting,info,"US,GB,CA,AU",4,2027-01-31,,what-breaks-your-fast,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-134,en,dua for breaking fast,fasting,info,"US,GB,CA,AU",4,2027-01-31,dua-iftar,dua-for-breaking-fast,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-135,en,niyyah for fasting in ramadan,fasting,info,"US,GB,CA,AU",3,2027-01-31,niyyah-fasting,intention-for-fasting-ramadan,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-136,en,can you brush your teeth while fasting,fasting,info,"US,GB,CA,AU",3,2027-01-31,,brushing-teeth-while-fasting,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-137,en,healthy suhoor ideas,fasting,info,"US,GB,CA,AU",3,2027-01-31,,healthy-suhoor-ideas,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-138,en,fasting in ramadan while sick,fasting,info,"US,GB,CA,AU",3,2027-01-31,,fasting-while-sick,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-139,en,how to make up missed fasts,fasting,info,"US,GB,CA,AU",3,2027-01-31,,making-up-missed-fasts,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-140,en,how to finish the quran in ramadan,quran,info,"US,GB,CA,AU",4,2027-01-31,khatam-plan,quran-in-30-days,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-141,en,quran reading schedule for ramadan,quran,tool,"US,GB,CA,AU",3,2027-01-31,,quran-reading-schedule-ramadan,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-142,en,ramadan goals ideas,habit,info,"US,GB,CA,AU",3,2027-01-31,,ramadan-goals,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-143,en,ramadan checklist,habit,info,"US,GB,CA,AU",3,2027-01-31,,ramadan-checklist,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-144,en,ramadan activities for kids,habit,info,"US,GB,CA,AU",3,2027-01-31,,ramadan-for-kids,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-145,en,best islamic apps,apps,commercial,"US,GB,CA,AU",4,2027-01-05,,best-islamic-apps,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-146,en,prayer times app,apps,commercial,"US,GB,CA,AU",4,,,prayer-times-app,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-147,en,best quran app for iphone,apps,commercial,"US,GB,CA,AU",3,,,quran-app-iphone,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-148,en,ramadan challenge 2027,challenge,commercial,"US,GB,CA,AU",4,2027-01-09,,ramadan-challenge-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-149,en,win a free umrah trip,challenge,commercial,"US,GB,CA,AU",4,2027-01-09,,win-umrah-trip,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-150,ar,اول يوم رمضان 2027,ramadan-dates,info,"SA,AE,EG,KW,QA,JO,MA",5,2027-01-15,first-day-ramadan-2027,awwal-yawm-ramadan-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-151,ar,كم باقي على رمضان 2027,ramadan-dates,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-15,,kam-baqi-ala-ramadan,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-152,ar,التقويم الهجري 2027,ramadan-dates,info,"SA,AE,EG,KW,QA,JO,MA",4,2026-12-31,islamic-calendar-2027,altaqwim-alhijri-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-153,ar,امساكية رمضان 2027 الرياض,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",5,2027-01-20,,ramadan-timetable-2027/riyadh,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-154,ar,امساكية رمضان 2027 جدة,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",5,2027-01-20,,ramadan-timetable-2027/jeddah,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-155,ar,امساكية رمضان 2027 مكة,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,,ramadan-timetable-2027/makkah,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-156,ar,امساكية رمضان 2027 القاهرة,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",5,2027-01-20,,ramadan-timetable-2027/cairo,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-157,ar,امساكية رمضان 2027 دبي,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,,ramadan-timetable-2027/dubai,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-158,ar,امساكية رمضان 2027 الكويت,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,,ramadan-timetable-2027/kuwait,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-159,ar,امساكية رمضان 2027 الدوحة,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,,ramadan-timetable-2027/doha,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-160,ar,امساكية رمضان 2027 عمان,timetable,tool,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-20,,ramadan-timetable-2027/amman,published,2026-11-14,,,,,,,,added 2026-11-14; volume to verify
+ar-161,ar,علامات ليلة القدر,laylatul-qadr,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-02-20,,alamat-laylat-alqadr,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-162,ar,دعاء ليلة القدر,laylatul-qadr,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-02-20,,dua-laylat-alqadr,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-163,ar,كيفية الاعتكاف في رمضان,laylatul-qadr,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-02-20,,aliitikaf,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-164,ar,زكاة الفطر 2027,eid,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-02-25,zakat-al-fitr-2027,zakat-alfitr-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-165,ar,كيفية صلاة العيد,eid,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-03-01,,salat-aleid,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-166,ar,تكبيرات العيد,eid,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-03-01,,takbirat-aleid,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-167,ar,مبطلات الصيام,fasting,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,,mubtilat-alsiyam,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-168,ar,دعاء الافطار,fasting,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,dua-iftar,dua-aliftar,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-169,ar,نية صيام رمضان,fasting,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-01-31,niyyah-fasting,niyyat-alsiyam,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-170,ar,ختم القران في رمضان,quran,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,khatam-plan,khatm-alquran-fi-ramadan,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-171,ar,جدول ختم القرآن في رمضان,quran,tool,"SA,AE,EG,KW,QA,JO,MA",3,2027-01-31,,jadwal-khatm-alquran,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-172,ar,افضل تطبيق رمضان,apps,commercial,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-05,,afdal-tatbiq-ramadan,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-173,ar,تطبيق مواقيت الصلاة,apps,commercial,"SA,AE,EG,KW,QA,JO,MA",4,,,tatbiq-mawaqit-alsalah,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-174,ar,اهداف رمضان,habit,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-01-31,,ahdaf-ramadan,todo,,,,,,,,,added 2026-11-14; volume to verify
