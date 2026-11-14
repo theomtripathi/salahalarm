@@ -75,5 +75,5 @@ test("helpers", () => {
   assert.equal(emailOf({}), null);
   assert.equal(isRecent({ createdAt: ago(10) }, NOW - 45 * 60_000), true);
   assert.equal(isRecent({ createdAt: ago(100), lastLoginAt: ago(50) }, NOW - 45 * 60_000), false);
-  assert.equal(FULL_SYNC_CRON, "17 3 * * 0");
+  assert.equal(FULL_SYNC_CRON, "17 3 * * SUN");
 });
