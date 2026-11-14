@@ -1,6 +1,6 @@
 ---
-title: Laylatul Qadr 2027: Expected Dates and How to Spend the Last Nights
-description: When is Laylatul Qadr in 2027? The expected odd nights if Ramadan starts on 8 February, the Prophet's guidance, and a simple plan.
+title: Laylatul Qadr 2027: Last 10 Nights of Ramadan and the Odd Nights
+description: The last 10 nights of Ramadan 2027 are expected to start on 27 February. Read the expected odd nights, the Prophet's guidance, and a simple plan for them.
 keyword: laylatul qadr 2027
 date: 2026-11-04
 status: published

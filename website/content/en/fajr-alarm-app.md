@@ -1,6 +1,6 @@
 ---
 title: Fajr Alarm App: How to Set One Up So You Actually Wake Up
-description: A Fajr alarm app should know the exact Fajr time and refuse to stop until you are up. How it works, how to set it up on your iPhone, and the mistakes to avoid.
+description: Set up a Fajr alarm app that knows your exact Fajr time and stays on until you are up. Steps for iPhone, what to check first, and the mistakes to avoid.
 keyword: fajr alarm app
 date: 2026-10-29
 status: published
