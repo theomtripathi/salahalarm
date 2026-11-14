@@ -176,6 +176,53 @@ export function ctaInline(config, lang, slug) {
 </aside>`;
 }
 
+// Free Makkah Trip Challenge promo inside English articles (the draw is open to
+// the US, UK and Canada only, so other languages do not show it).
+export function ctaChallenge(config, slug) {
+  const c = config.challenge;
+  if (!c || !c.prize) return '';
+  const href = `${c.path}?from=${encodeURIComponent(slug)}`;
+  return `<aside class="cta-challenge">
+  <p class="cta-challenge-tag">${icon('compass', 'icon icon-sm')} ${esc(c.name)}</p>
+  <p class="cta-title">Win an ${esc(c.prizeName)}</p>
+  <p>Log your five daily prayers in Salah Alarm for 30, 60 or 90 days before Ramadan to earn entries in the draw. Free to join, open to residents of ${esc(c.eligibleCountries)}.</p>
+  <p class="cta-challenge-actions"><a class="btn" href="${esc(href)}" data-cta="en-${esc(slug)}-challenge">Join the challenge free</a> <a class="cta-challenge-rules" href="${esc(c.rulesPath)}">Official rules</a></p>
+</aside>`;
+}
+
+// Slim app bar fixed to the bottom of article pages on phones. It appears after the
+// reader scrolls a third of the page, can be dismissed for a week, and never covers
+// the content (no interstitial), so it does not trip Google's intrusive-popup rule.
+export function stickyApp(config, lang, slug) {
+  const s = config.langs[lang];
+  const ios = linkFor(config, 'ios', lang, `${slug}-sticky`);
+  const android = linkFor(config, 'android', lang, `${slug}-sticky`);
+  return `<div class="sticky-app" hidden>
+  <img src="/icon.png" alt="" width="40" height="40">
+  <p><strong>${esc(config.appName)}</strong><span>${esc(s.ctaTitle)}</span></p>
+  <a class="btn btn-small" rel="nofollow" href="${esc(ios)}" data-android="${esc(android)}" data-cta="${esc(`${lang}-${slug}-sticky`)}">${esc(s.getApp)}</a>
+  <button type="button" class="sticky-app-close" aria-label="Close">×</button>
+</div>
+<script>
+(function () {
+  var bar = document.querySelector('.sticky-app');
+  if (!bar) return;
+  var key = 'sa-sticky-closed';
+  try { var t = +localStorage.getItem(key); if (t && Date.now() - t < 6048e5) return; } catch (e) {}
+  var link = bar.querySelector('a');
+  if (/Android/i.test(navigator.userAgent)) link.href = link.getAttribute('data-android');
+  function onScroll() {
+    if (window.scrollY > document.body.scrollHeight / 3) { bar.hidden = false; window.removeEventListener('scroll', onScroll); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  bar.querySelector('.sticky-app-close').addEventListener('click', function () {
+    bar.hidden = true;
+    try { localStorage.setItem(key, String(Date.now())); } catch (e) {}
+  });
+})();
+</script>`;
+}
+
 // Dark full-width band closing every page.
 export function ctaBand(config, lang, slug) {
   const s = config.langs[lang];

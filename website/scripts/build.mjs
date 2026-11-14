@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { render, parseFrontmatter, escapeHtml as esc } from './lib/markdown.mjs';
-import { layout, ctaInline, ctaBand, storeButtons, alarmPhone } from './lib/ui.mjs';
+import { layout, ctaInline, ctaBand, ctaChallenge, stickyApp, storeButtons, alarmPhone } from './lib/ui.mjs';
 import { homePage, card } from './pages/home.mjs';
 import { challengePage, challengeRulesPage } from './pages/challenge.mjs';
 
@@ -77,6 +77,8 @@ function articlePage(a, siblings, related) {
   // One CTA before the second section.
   const parts = html.split(/(?=<h2 )/);
   if (parts.length > 2) parts.splice(2, 0, ctaInline(config, a.lang, a.slug));
+  // English articles also promote the Makkah challenge further down.
+  if (a.lang === 'en' && parts.length > 4) parts.splice(parts.length - 1, 0, ctaChallenge(config, a.slug));
   const content = parts.join('\n');
   const faqHtml = a.faq.length
     ? `<section class="article-faq"><h2 id="faq">${esc(s.faq)}</h2><div class="faq">${a.faq
@@ -153,7 +155,8 @@ function articlePage(a, siblings, related) {
   </aside>
 </div>
 ${related.length ? `<section class="section related"><div class="wrap"><h2 class="section-title">${esc(s.related)}</h2><div class="cards">${related.map((r) => card(config, r)).join('')}</div></div></section>` : ''}
-${ctaBand(config, a.lang, a.slug)}`;
+${ctaBand(config, a.lang, a.slug)}
+${stickyApp(config, a.lang, a.slug)}`;
   return layout(config, { lang: a.lang, title: a.title, description: a.description, canonical: a.url, alternates, body, jsonLd, ogType: 'article', bodyClass: 'article-page' });
 }
 
