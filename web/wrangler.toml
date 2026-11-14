@@ -14,6 +14,11 @@ routes = [
   { pattern = "salahalarm.com/.well-known/apple-app-site-association", zone_name = "salahalarm.com" },
 ]
 
+# Email sync to PostHog (src/emailsync.js): recent sign-ins every 15 minutes,
+# everyone on Sundays. The second entry must match FULL_SYNC_CRON.
+[triggers]
+crons = ["*/15 * * * *", "17 3 * * 0"]
+
 [assets]
 directory = "./public"
 binding = "ASSETS"
