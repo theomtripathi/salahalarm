@@ -35,7 +35,7 @@ html[lang="ur"] #ob { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", va
 
 .ob-shell { max-width: 480px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; }
 .ob-top { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; gap: 10px; padding: max(10px, env(safe-area-inset-top)) 16px 6px; background: inherit; }
-#ob[data-theme="night"] .ob-top { background: transparent; }
+#ob[data-theme="night"] .ob-top { background: rgb(10 46 34 / 82%); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .ob-back { width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; display: grid; place-items: center; flex: none; }
 .ob-back:focus-visible { outline: 2px solid var(--ob-gold); }
 html[dir="rtl"] .ob-back svg { transform: scaleX(-1); }
@@ -113,8 +113,8 @@ html[dir="rtl"] .ob-back svg { transform: scaleX(-1); }
 .ob-stars { position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 20% 30%, #fff8, transparent), radial-gradient(1px 1px at 70% 20%, #fff9, transparent), radial-gradient(1.5px 1.5px at 85% 55%, #fff6, transparent), radial-gradient(1px 1px at 35% 70%, #fff7, transparent), radial-gradient(1px 1px at 55% 45%, #fff5, transparent); animation: ob-twinkle 4s ease-in-out infinite alternate; }
 @keyframes ob-twinkle { from { opacity: .5; } to { opacity: 1; } }
 .ob-moon { position: absolute; top: 14%; inset-inline-end: 16%; width: 46px; height: 46px; border-radius: 50%; box-shadow: -10px 6px 0 0 #f6e7b0; transform: rotate(-20deg); opacity: .95; }
-.ob-sunrise { position: absolute; bottom: -40%; left: 50%; width: 140%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle at 50% 30%, rgb(243 196 90 / 55%), transparent 55%); animation: ob-rise 6s ease-in-out infinite alternate; }
-@keyframes ob-rise { from { transform: translate(-50%, 8%); } to { transform: translate(-50%, 0); } }
+.ob-sunrise { position: absolute; inset: 0; background: radial-gradient(closest-side at 50% 62%, rgb(243 196 90 / 42%), rgb(243 196 90 / 12%) 60%, transparent); animation: ob-rise 6s ease-in-out infinite alternate; }
+@keyframes ob-rise { from { opacity: .75; transform: translateY(6%); } to { opacity: 1; transform: none; } }
 .ob-phone { position: relative; width: 168px; height: 300px; border-radius: 30px; background: #0b1512; border: 6px solid #1d2a25; box-shadow: 0 30px 60px rgb(0 0 0 / 45%); display: grid; place-items: center; text-align: center; padding: 16px 10px; color: #fff; animation: ob-shake 2.4s ease-in-out infinite; }
 @keyframes ob-shake { 0%, 60%, 100% { transform: rotate(0); } 64% { transform: rotate(-3deg); } 68% { transform: rotate(3deg); } 72% { transform: rotate(-2deg); } 76% { transform: rotate(2deg); } 80% { transform: rotate(0); } }
 .ob-phone .t { white-space: nowrap; font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
@@ -276,3 +276,22 @@ html[dir="rtl"] .ob-back svg { transform: scaleX(-1); }
 .ob-pages nav a { color: var(--ob-muted); text-decoration: none; padding: 4px 0; }
 .ob-pages nav a:hover { color: var(--ob-text); text-decoration: underline; }
 .ob-pages h3 { grid-column: 1 / -1; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ob-gold); margin: 8px 0 0; }
+
+/* ---- tablet and desktop -------------------------------------------------------------
+   The flow stays one focused column, but on a wide window it sits in a card in the middle
+   of the screen, content is vertically centred, and the button follows the content
+   instead of being pinned to the bottom of a tall window. */
+@media (min-width: 760px) {
+  #ob { display: grid; place-items: center; padding: 40px 24px; background: radial-gradient(90% 70% at 50% 0%, #ffffff, var(--ob-cream) 70%); }
+  #ob[data-theme="night"] { background: radial-gradient(70% 60% at 50% 20%, var(--ob-night-2), var(--ob-night) 75%); }
+  .ob-shell { width: 100%; max-width: 560px; min-height: min(760px, calc(100dvh - 80px)); border-radius: 32px; background: var(--ob-cream); border: 1px solid var(--ob-line); box-shadow: 0 30px 80px rgb(19 32 26 / 12%); overflow: hidden; }
+  #ob[data-theme="night"] .ob-shell { background: rgb(255 255 255 / 4%); border-color: rgb(255 255 255 / 10%); box-shadow: 0 40px 100px rgb(0 0 0 / 35%); }
+  .ob-top { padding: 18px 24px 8px; border-radius: 32px 32px 0 0; }
+  .ob-screen { justify-content: center; padding: 12px 40px 36px; }
+  .ob-body { flex: none; padding-bottom: 8px; }
+  .ob-foot { position: static; background: none; padding-top: 20px; }
+  .ob-h1 { font-size: 38px; }
+  .ob-lede { font-size: 18px; }
+  .ob-hero { height: 320px; margin: 0 -40px 10px; }
+  .ob-pages { width: 100%; max-width: 560px; border-top: 0; }
+}
