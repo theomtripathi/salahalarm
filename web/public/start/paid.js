@@ -120,17 +120,16 @@ const SCREENS = {
   // 1. The seat.
   seat() {
     setTimeout(confetti, 150);
-    const n = seats?.total || 1;
     return screen([
       h("p", { class: "ob-chip", style: "margin-bottom:14px" }, "✓ ", t("Payment confirmed")),
       h("div", { class: "ob-ticket", style: "margin-bottom:20px" },
         h("div", { class: "kaaba", "aria-hidden": "true" }),
         h("div", { class: "k" }, t("Ramadan 2027 challenge")),
         h("div", { class: "big" }, t("Free Makkah Trip draw")),
-        h("div", { class: "seat" }, "🎟️ ", n === 1 ? t("Seat #1 is yours") : t("%d seats", n))),
-      title("You've paid, so you get one seat for the Ramadan challenge."),
-      lede("Your seat is in the draw for Umrah for two: flights, visas and a hotel by the Haram. The draw is on 10 February 2027."),
-      h("p", { class: "ob-small" }, t("A random draw: every seat is a chance, nobody is guaranteed to win."), " ", h("a", { href: "/ramadan-2027/rules/", target: "_blank", rel: "noopener" }, t("Rules"))),
+        h("div", { class: "seat" }, "🎟️ ", t("You're in"))),
+      title("Premium is yours, and you're in the Ramadan challenge."),
+      lede("The challenge is free for everyone, and as a Premium member you're joined automatically. Log your five prayers in the app to earn entries in the draw for Umrah for two on 10 February 2027."),
+      h("p", { class: "ob-small" }, t("No purchase necessary; your purchase does not improve your chances."), " ", h("a", { href: "/ramadan-2027/rules/", target: "_blank", rel: "noopener" }, t("Rules"))),
     ], primary("Get the app", () => go("platform")));
   },
 
@@ -174,7 +173,7 @@ const SCREENS = {
           h("li", {}, h("span", {}, t("Download Salah Alarm from the App Store."))),
           h("li", {}, h("span", {}, h("b", {}, t("Open the app and tap Sign in.")), " ", t("Don't buy again: your Premium is already paid."))),
           h("li", {}, h("span", {}, how)),
-          h("li", {}, h("span", {}, t("Premium and your draw seat unlock on that account.")))),
+          h("li", {}, h("span", {}, t("Premium and your challenge unlock on that account.")))),
         h("p", { class: "ob-notice" }, t("Use the same account you paid with. Signing in with Apple or a different email creates a new account without your plan.")),
       ], [
         h("a", { class: "ob-btn ob-btn-dark ob-store", href: APP_STORE(), target: "_blank", rel: "noopener", onclick: toStore }, svg(icons.apple), t("Download on the App Store")),
@@ -200,23 +199,7 @@ const SCREENS = {
   more() {
     const url = seats?.shareUrl;
     const s = seats?.seats || { paid: 1, shared: 0, friends: 0 };
-    const total = h("b", {}, String(seats?.total ?? 1));
-    const shareRow = h("div", { class: `s${s.shared ? " got" : ""}` }, h("span", {}, t("Share your link")), h("b", {}, s.shared ? "+1 ✓" : "+1"));
-    const markShared = async (method) => {
-      capture("web_share_link_shared", { code: seats?.code, method });
-      if (s.shared) return;
-      try {
-        const r = await api("/api/seats/share", { method: "POST", token: await user.token(), body: { method } });
-        if (r.granted) {
-          s.shared = 1;
-          seats.total = (seats.total || 1) + 1;
-          total.textContent = String(seats.total);
-          shareRow.className = "s got";
-          shareRow.lastChild.textContent = "+1 ✓";
-          setPersonProps({ challenge_seats: seats.total });
-        }
-      } catch { /* ignore */ }
-    };
+    const markShared = (method) => capture("web_share_link_shared", { code: seats?.code, method });
     const text = t("I'm getting ready for Ramadan with Salah Alarm. Join me in the Free Makkah Trip challenge:");
     const copyBtn = h("button", { class: "ob-btn ob-btn-ghost", type: "button", style: "min-height:44px;width:auto;padding:8px 14px;font-size:14px" }, t("Copy"));
     copyBtn.addEventListener("click", async () => {
@@ -235,17 +218,15 @@ const SCREENS = {
     const wa = h("a", { class: "ob-btn ob-btn-ghost", href: `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`, target: "_blank", rel: "noopener", onclick: () => markShared("whatsapp") }, "💬 ", t("Send on WhatsApp"));
     return screen([
       h("p", { class: "ob-kicker" }, t("Step 4 of 4")),
-      title("Want more seats in the challenge?"),
-      lede("Every seat is another chance in the draw. Share your link, make a video about your Fajr journey, and bring your friends."),
+      title("Want more entries in the challenge?"),
+      lede("Every friend who joins with your link and logs their first full day adds an entry. Share your link, make a video about your Fajr journey, and bring your friends."),
       url ? h("div", { class: "ob-share", style: "margin-bottom:16px" }, h("div", { class: "ob-code" }, h("span", {}, url), copyBtn), share, wa)
-        : h("p", { class: "ob-notice", style: "margin-bottom:16px" }, t("Your link appears here once your seat is confirmed. Refresh in a minute.")),
+        : h("p", { class: "ob-notice", style: "margin-bottom:16px" }, t("Your link appears here once your account is confirmed. Refresh in a minute.")),
       h("div", { class: "ob-card ob-seats" },
-        h("div", { class: "s got" }, h("span", {}, t("You paid")), h("b", {}, "1 ✓")),
-        shareRow,
-        h("div", { class: `s${s.friends ? " got" : ""}` }, h("span", {}, t("Each friend who joins with your link")), h("b", {}, s.friends ? t("+%d so far", s.friends) : "+1")),
-        h("div", { class: "s" }, h("span", {}, t("Log all 5 prayers for 30 / 60 / 90 days")), h("b", {}, "+1 / +2 / +3")),
-        h("div", { class: "s" }, h("span", {}, h("b", {}, t("Your seats so far"))), total)),
-      h("p", { class: "ob-small", style: "margin-top:12px" }, t("Friends count up to 50. Prayer logging is counted in the app. Draw on 10 Feb 2027."), " ", h("a", { href: "/ramadan-2027/rules/", target: "_blank", rel: "noopener" }, t("Rules"))),
+        h("div", { class: "s got" }, h("span", {}, t("Joined the challenge")), h("b", {}, "✓")),
+        h("div", { class: "s" }, h("span", {}, t("Log all 5 prayers for 30 / 60 / 90 days")), h("b", {}, "1 / 2 / 3")),
+        h("div", { class: `s${s.friends ? " got" : ""}` }, h("span", {}, t("Each friend who joins with your link")), h("b", {}, s.friends ? t("+%d so far", s.friends) : "+1"))),
+      h("p", { class: "ob-small", style: "margin-top:12px" }, t("Friends count up to 50, once you have earned your first entry. Free entry by email is also open to everyone. Draw on 10 Feb 2027."), " ", h("a", { href: "/ramadan-2027/rules/", target: "_blank", rel: "noopener" }, t("Rules"))),
     ], [
       platform ? h("button", { class: "ob-link", type: "button", onclick: () => go("install") }, t("Back to download")) : null,
     ]);

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { ensurePaidSeat, grantShareSeat, grantRevenueCat, affiliatePayload, seatSummary, notifyAffiliates } from "../src/postpay.js";
+import { ensurePaidSeat, grantRevenueCat, affiliatePayload, seatSummary, notifyAffiliates } from "../src/postpay.js";
 
 function memoryDb() {
   const docs = new Map();
@@ -15,16 +15,17 @@ function memoryDb() {
 const NOW = new Date("2026-11-14T10:00:00Z");
 const paid = { provider: "dodo", active: true, status: "active", plan: "yearly", accessUntil: "2027-11-16T10:00:00Z" };
 
-test("paying puts the buyer in the challenge with one seat, once", async () => {
+test("paying joins the buyer to the free challenge once, with no extra entries", async () => {
   const db = memoryDb();
   db.docs.set("entitlements/u1", paid);
   const a = await ensurePaidSeat(db, "u1", { now: NOW });
   assert.equal(a.granted, true);
-  assert.equal(a.total, 1);
+  assert.equal(a.total, 0);
+  assert.equal(a.seats.joined, 1);
   assert.match(a.challenge.code, /^[A-Z2-9]{6}$/);
   const b = await ensurePaidSeat(db, "u1", { now: NOW });
   assert.equal(b.granted, false);
-  assert.equal(b.total, 1);
+  assert.equal(b.total, 0);
   assert.equal(b.challenge.code, a.challenge.code);
   assert.equal(db.docs.get("challengeStats/global").joinedCount, 1);
 });
@@ -38,16 +39,14 @@ test("no seat without a paid plan", async () => {
   assert.equal(r.challenge, null);
 });
 
-test("sharing adds one seat once; friends add one each up to 50", async () => {
+test("friends add one entry each, up to 50; sharing alone adds nothing", async () => {
   const db = memoryDb();
   db.docs.set("entitlements/u1", paid);
   const { challenge } = await ensurePaidSeat(db, "u1", { now: NOW });
-  assert.equal((await grantShareSeat(db, "u1", { method: "native" })).granted, true);
-  assert.equal((await grantShareSeat(db, "u1", { method: "copy" })).granted, false);
   db.docs.set(`referrals/${challenge.code}`, { ownerUid: "u1", joinedCount: 3 });
   const r = await ensurePaidSeat(db, "u1", { now: NOW });
-  assert.deepEqual(r.seats, { paid: 1, shared: 1, friends: 3 });
-  assert.equal(r.total, 5);
+  assert.deepEqual(r.seats, { joined: 1, friends: 3 });
+  assert.equal(r.total, 3);
   assert.equal(seatSummary({ paid: true, friends: 80 }).seats.friends, 50);
 });
 

@@ -621,17 +621,17 @@ const SCREENS = {
     ], primary("continue", next));
   },
 
-  // 20. The Ramadan draw seat, earned by starting Premium.
+  // 20. The free Ramadan challenge: open to everyone; Premium members are entered automatically.
   seat() {
     return screen([
       h("div", { class: "ob-ticket", style: "margin:8px 0 18px" },
         h("div", { class: "kaaba", "aria-hidden": "true" }),
         h("div", { class: "k" }, t("Ramadan 2027 challenge")),
         h("div", { class: "big" }, t("Free Makkah Trip draw")),
-        h("div", { class: "seat" }, "🎟️ ", t("1 seat with Premium"))),
-      title("Your plan comes with a seat in the draw."),
-      lede("Start Premium today and you get a seat in the draw for Umrah for two: flights, visas and a hotel by the Haram. Share your link and invite friends to earn more seats."),
-      h("p", { class: "ob-small" }, t("A random draw on 10 Feb 2027. More seats mean more chances; nobody is guaranteed to win."), " ",
+        h("div", { class: "seat" }, "🎟️ ", t("Free to join · included with Premium"))),
+      title("You're invited to the free Ramadan challenge."),
+      lede("The challenge is free for everyone. With Premium you're joined automatically: log your five prayers in the app for 30, 60 or 90 days to earn entries in the draw for Umrah for two, and invite friends for more."),
+      h("p", { class: "ob-small" }, t("No purchase necessary to join or win; buying Premium does not improve your chances. Random draw on 10 Feb 2027."), " ",
         h("a", { href: "/ramadan-2027/rules/", target: "_blank", rel: "noopener" }, t("Rules"))),
     ], primary("Save my plan", next));
   },
@@ -711,7 +711,7 @@ const SCREENS = {
     return screen([
       kicker("Last step"),
       title("Save your plan"),
-      lede("Create your account so your plan, alarms and draw seat are waiting in the app. Use the same account to sign in on your phone."),
+      lede("Create your account so your plan, alarms and challenge are waiting in the app. Use the same account to sign in on your phone."),
       body,
       error,
       h("p", { class: "ob-small", style: "margin-top:14px" }, t("We'll never post anything or share your email.")),
@@ -754,7 +754,7 @@ const SCREENS = {
       config.discount ? h("p", { class: "ob-notice", style: "margin-bottom:12px" }, t("Your %d% discount is applied to the yearly plan.", config.discount.percentOff)) : null,
       title(goalLine),
       h("ul", { class: "ob-list", style: "margin:4px 0 6px" },
-        ["Adhan alarms that only stop at your prayer mat", "SalahLock pauses your distracting apps", "Exact prayer times, streaks, Qibla and Quran", "🎟️ A seat in the Free Makkah Trip draw"].map((b) => h("li", {}, svg(icons.check), t(b)))),
+        ["Adhan alarms that only stop at your prayer mat", "SalahLock pauses your distracting apps", "Exact prayer times, streaks, Qibla and Quran", "🕋 Joined to the free Makkah Trip challenge automatically"].map((b) => h("li", {}, svg(icons.check), t(b)))),
       plans.length ? h("div", { class: "ob-plans", role: "radiogroup" }, plans.map(planCard)) : h("p", { class: "ob-notice" }, t("loading deals...")),
     ], [
       error,
@@ -780,7 +780,7 @@ const SCREENS = {
         h("div", { class: "p" }, o.regularAmount ? h("s", {}, money(o.regularAmount, o.currency)) : null, " ", t("%@/week", money(o.amount, o.currency))),
         h("div", { class: "ob-small" }, t("Billed %@ weekly. Cancel anytime.", money(o.amount, o.currency)))) : h("p", { class: "ob-notice" }, t("loading deals...")),
       h("ul", { class: "ob-list", style: "margin-top:16px" },
-        ["Adhan alarms that only stop at your prayer mat", "SalahLock pauses your distracting apps", "🎟️ A seat in the Free Makkah Trip draw"].map((b) => h("li", {}, svg(icons.check), t(b)))),
+        ["Adhan alarms that only stop at your prayer mat", "SalahLock pauses your distracting apps", "🕋 Joined to the free Makkah Trip challenge automatically"].map((b) => h("li", {}, svg(icons.check), t(b)))),
     ], [
       error,
       cta,

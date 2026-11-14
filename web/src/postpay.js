@@ -1,27 +1,25 @@
 // What happens after a web payment (salahalarm.com/start/paid/):
-//   - a seat in the Ramadan 2027 Free Makkah Trip draw for paying (users/{uid}.challengeSeats.paid)
-//   - one more seat for sharing their link (challengeSeats.shared)
+//   - the buyer is joined to the free Ramadan 2027 Makkah Trip challenge automatically, as a
+//     perk of Premium (users/{uid}.challengeSeats.paid marks the auto-join). The challenge itself
+//     is free for everyone and paying adds no entries (Om, 14 Nov 2026; see the published rules).
+//   - entries follow the published rules: logging all five prayers for 30 / 60 / 90 full days
+//     = 1 / 2 / 3 (counted in the apps), and each friend who joins with your link +1 (up to 50)
 //   - iPhone buyers: Pro granted in RevenueCat to the same Firebase uid, so the iOS
 //     app unlocks when they sign in with the same account
 //   - purchases reported to the affiliate Worker (service binding AFFILIATES)
-//
-// Seat rules shown to buyers (Om left them to us, 13 Nov 2026):
-//   paid 1 · shared your link +1 (once) · each friend who joins with your link +1 (up to 50)
-//   · logging all five prayers for 30 / 60 / 90 full days +1 / +2 / +3 (the published draw rules).
 
 import { joinChallenge, readChallenge, joiningOpen } from "./challenge.js";
 import { isActive } from "./entitlement.js";
 
 export const FRIEND_SEAT_CAP = 50;
 
-/** Seats as the post-payment page shows them. `logged` comes from the apps and is not known here. */
-export function seatSummary({ paid = false, shared = false, friends = 0 } = {}) {
+/** What the post-payment page shows. Only friends are counted here (logged days come from the apps); paying adds no entries. */
+export function seatSummary({ paid = false, friends = 0 } = {}) {
   const seats = {
-    paid: paid ? 1 : 0,
-    shared: shared ? 1 : 0,
+    joined: paid ? 1 : 0,
     friends: Math.min(FRIEND_SEAT_CAP, Math.max(0, Number(friends) || 0)),
   };
-  return { seats, total: seats.paid + seats.shared + seats.friends };
+  return { seats, total: seats.friends };
 }
 
 export function isPaid(ent, now = Date.now()) {
@@ -48,17 +46,7 @@ export async function ensurePaidSeat(db, uid, { invite, now = new Date() } = {})
     granted = true;
   }
   const friends = challenge?.code ? (await db.get(`referrals/${challenge.code}`).catch(() => null))?.joinedCount || 0 : 0;
-  return { challenge, created, granted, paid, ...seatSummary({ paid: Boolean(current.paid), shared: Boolean(current.shared), friends }) };
-}
-
-/** +1 seat for sharing the invite link, counted once. */
-export async function grantShareSeat(db, uid, { method = "share", now = new Date() } = {}) {
-  const profile = await db.get(`users/${uid}`);
-  const current = profile?.challengeSeats || {};
-  if (!profile?.challenge?.code) return { granted: false, reason: "not in the challenge" };
-  if (current.shared) return { granted: false, reason: "already counted" };
-  await db.merge(`users/${uid}`, { challengeSeats: { ...current, shared: 1, sharedAt: now, sharedVia: String(method).slice(0, 20) } });
-  return { granted: true };
+  return { challenge, created, granted, paid, ...seatSummary({ paid: Boolean(current.paid), friends }) };
 }
 
 // ---- RevenueCat --------------------------------------------------------------

@@ -28,7 +28,7 @@ import { Dodo, DodoError, verifyWebhook } from "./dodo.js";
 import { setupDodo } from "./dodo-setup.js";
 import { tierFor, productFor, parseProducts, displayPlans, displayOffer, CHECKOUT_PLANS, discountFor, discounted, DISCOUNTS } from "./pricing.js";
 import { joinChallenge, readChallenge, challengeCounts } from "./challenge.js";
-import { ensurePaidSeat, grantShareSeat, grantRevenueCat, affiliatePayload, notifyAffiliates } from "./postpay.js";
+import { ensurePaidSeat, grantRevenueCat, affiliatePayload, notifyAffiliates } from "./postpay.js";
 import { entitlementFromSubscription, shouldReplace, isActive, publicEntitlement } from "./entitlement.js";
 import { scheduleFor } from "./prayer.js";
 import { sanitizeProfile } from "./profile.js";
@@ -73,7 +73,6 @@ async function route(request, env, ctx, url) {
   if (pathname === "/api/challenge/join" && method === "POST") return challengeJoin(request, env, ctx);
   if (pathname === "/api/challenge" && method === "GET") return challengeStatus(request, env);
   if (pathname === "/api/seats" && method === "GET") return seats(request, env, ctx, url);
-  if (pathname === "/api/seats/share" && method === "POST") return seatsShare(request, env, ctx);
   if (pathname === "/api/seats/platform" && method === "POST") return seatsPlatform(request, env, ctx);
   if (pathname === "/api/entitlement" && method === "GET") return entitlement(request, env, url);
   if (pathname === "/api/portal" && method === "POST") return portal(request, env);
@@ -577,15 +576,6 @@ async function seats(request, env, ctx, url) {
     email: u.email || null,
     provider: u.provider || null,
   });
-}
-
-async function seatsShare(request, env, ctx) {
-  const u = await user(request, env);
-  const body = await readJson(request);
-  const db = firestore(env);
-  const r = await grantShareSeat(db, u.uid, { method: body.method });
-  if (r.granted) capture(env, ctx, "web_challenge_seat_granted", u.uid, { reason: "shared", method: body.method || null });
-  return json(r);
 }
 
 async function seatsPlatform(request, env, ctx) {
