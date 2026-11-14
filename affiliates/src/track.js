@@ -1,5 +1,5 @@
 // Tracking: link visits, onboarding funnel events, and charges (Dodo via the
-// salahalarm-android Worker, App Store/Play via the RevenueCat webhook).
+// salahalarm-android Worker). App Store, Play and in-app purchases never count.
 import { json, nowIso, dayOf, getCookie, cookie, classifyOs, isBot, randomToken } from './util.js';
 import { resolveUsername, getAffiliate, balanceOf } from './store.js';
 import { toUsd, intervalOf, commissionFor, MIN_PAYOUT_USD } from './commission.js';
@@ -160,37 +160,6 @@ export async function handleIngest(request, env, ctx) {
     source: 'dodo', externalId: `dodo:${ext}`, kind: b.type === 'purchased' ? 'first' : 'renewal',
     affiliate: b.affiliate, appUserIds: [appUserId], platform: b.platform, productId: b.product_id, interval: b.interval,
     plan: b.plan, amount: b.amount, currency: b.currency, amountUsd: b.amount_usd, raw: b,
-  });
-  return json({ ok: true, ...r });
-}
-
-// POST affiliate.salahalarm.com/api/revenuecat  (RevenueCat webhook, Authorization header from admin settings)
-export async function handleRevenueCat(request, env, ctx, expectedAuth) {
-  const auth = request.headers.get('authorization') || '';
-  if (!expectedAuth || (auth !== expectedAuth && auth !== `Bearer ${expectedAuth}`)) return json({ ok: false }, 401);
-  const body = await request.json().catch(() => null);
-  const e = body?.event;
-  if (!e) return json({ ok: false, error: 'no event' }, 400);
-  // Web purchases are granted as PROMOTIONAL entitlements and already counted from Dodo.
-  if (e.store === 'PROMOTIONAL' || e.environment === 'SANDBOX') return json({ ok: true, ignored: e.store || e.environment });
-  const ids = [e.app_user_id, e.original_app_user_id, ...(e.aliases || [])].map(cleanId).filter(Boolean);
-  const affiliate = e.subscriber_attributes?.affiliate?.value || null;
-  const price = Number(e.price ?? 0);
-  const ext = `rc:${e.transaction_id || e.id}`;
-
-  if (e.type === 'CANCELLATION' && (e.cancel_reason === 'CUSTOMER_SUPPORT' || price < 0)) {
-    const orig = `rc:${e.original_transaction_id || e.transaction_id}`;
-    return json({ ok: true, ...(await recordRefund(env, orig, Math.abs(price) || null)) });
-  }
-  let kind = null;
-  if (e.type === 'INITIAL_PURCHASE' || e.type === 'NON_RENEWING_PURCHASE') kind = 'first';
-  if (e.type === 'RENEWAL') kind = e.is_trial_conversion ? 'first' : 'renewal';
-  if (!kind || e.period_type === 'TRIAL' || price <= 0) return json({ ok: true, ignored: e.type });
-  const r = await recordCharge(env, ctx, {
-    source: 'revenuecat', externalId: ext, kind, affiliate, appUserIds: ids,
-    platform: e.store === 'APP_STORE' ? 'ios' : e.store === 'PLAY_STORE' ? 'android' : (e.store || '').toLowerCase(),
-    productId: e.product_id, interval: null, amount: price, currency: 'USD', amountUsd: price,
-    at: e.purchased_at_ms ? new Date(e.purchased_at_ms).toISOString() : undefined, raw: { type: e.type, id: e.id, store: e.store, product_id: e.product_id },
   });
   return json({ ok: true, ...r });
 }

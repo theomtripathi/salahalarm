@@ -43,7 +43,7 @@ ${flash(msg, kind)}
 <div class="card">
   <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b>${stats.payable ? 'You\'re over the $100 minimum 🎉' : `${money(Math.max(0, MIN_PAYOUT_USD - stats.balance))} to go until your first payout`}</b><span class="muted small">Next payout date: ${next}</span></div>
   <div class="progress" style="margin-top:10px"><i style="width:${pct}%"></i></div>
-  <p class="small muted" style="margin:10px 0 0">Sales show here once they're reviewed and approved. Payouts every 15 days once your balance is $100 or more.</p>
+  <p class="small muted" style="margin:10px 0 0">Only purchases on salahalarm.com through your link count. Sales show here once they're reviewed and approved. Payouts every 15 days once your balance is $100 or more.</p>
 </div>
 
 <div class="grid-2" style="margin-top:14px">

@@ -44,7 +44,7 @@ export function landing({ user, msg }) {
   <div>
     <span class="kicker">Salah Alarm Affiliates</span>
     <h1>Help Muslims never miss a prayer. Earn 50% of the revenue.</h1>
-    <p class="lead">Post short videos and slideshows about Salah Alarm on TikTok and Instagram. Everyone who joins through your link earns you half of what they pay. We give you the content ideas, hooks, prompts and assets.</p>
+    <p class="lead">Post short videos and slideshows about Salah Alarm on TikTok and Instagram. Everyone who buys Salah Alarm on salahalarm.com through your link earns you half of what they pay. We give you the content ideas, hooks, prompts and assets.</p>
     ${user ? `<a class="btn" href="/dashboard">Open my dashboard</a>` : `<a class="btn" href="#join">Get my link</a> <a class="btn btn-ghost" href="/content">See what to post</a>`}
   </div>
   <div class="hero-phones">
@@ -233,7 +233,7 @@ ${shotsSection()}
 
 <h2 id="rules">Rules for this format</h2>
 <ul>${t.rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
-<p class="small muted">Plus the general <a href="/faq#content-rules">content rules</a>.</p>`;
+<p class="small muted">Always use your own link (in your bio or caption), never a direct App Store or Play Store link: only purchases on salahalarm.com through your link earn commission. Plus the general <a href="/faq#content-rules">content rules</a>.</p>`;
   return page({ title: `${t.title} · Salah Alarm Affiliates`, description: t.short, body, user, active: '/content' });
 }
 
@@ -294,7 +294,7 @@ ${shotsSection()}`;
 // FAQ answers. Marked (assumed) in the source where Om hasn't decided yet; easy to edit here.
 export const FAQ = [
   ['Getting paid', [
-    ['How much do I earn?', 'You earn 50% of the revenue from the users you bring in. Payments are counted when a user who came through your link pays for Salah Alarm.'],
+    ['How much do I earn?', 'You earn 50% of the revenue from the users you bring in. A sale counts when someone opens your link and buys Salah Alarm on salahalarm.com.'],
     ['When do I get paid?', 'Every 15 days: on the 1st and 16th of each month. Your approved balance is paid if it is at least $100 on that date.'],
     ['What is the minimum payout?', '$100. If your balance is below $100 on a payout date, it rolls over to the next one. Nothing expires.'],
     ['How do I get paid?', 'Wise, PayPal or Payoneer. Choose one and enter your account email in your dashboard under "Payout details". Payouts are sent manually by the Salah Alarm team.'],
@@ -304,7 +304,8 @@ export const FAQ = [
     ['What if someone asks for a refund?', 'Refunded payments are removed from your earnings. If a refund comes in after you were already paid, it is taken off your next payout.'],
   ]],
   ['Tracking', [
-    ['How does tracking work?', 'Your link is unique to you. When someone opens it, we remember (for 60 days on that device) that they came from you. If they sign up and pay within that time, the sale is yours.'],
+    ['How does tracking work?', 'Your link is unique to you. When someone opens it, we remember (for 60 days on that device) that they came from you. If they buy Salah Alarm on salahalarm.com within that time, the sale is yours.'],
+    ['Do App Store or Google Play purchases count?', 'No. Only purchases made on salahalarm.com through your link earn commission. If someone finds the app in the App Store or Google Play on their own and buys inside the app, that sale isn\'t linked to you. Always share your own link, never a direct App Store or Play Store link.'],
     ['What if they click someone else\'s link after mine?', 'The last affiliate link they opened before signing up gets the sale.'],
     ['What do I see in my dashboard?', 'Clicks on your link, downloads, approved sales, your balance, what has been paid, and the next payout date.'],
     ['Why isn\'t a sale showing yet?', 'Every sale is reviewed before it appears in your dashboard, to filter out refunds, test purchases and fraud. Most are reviewed within a few days. Your dashboard only shows approved sales.'],
@@ -361,6 +362,7 @@ ${termsBox()}
   <li>Payouts every <b>15 days</b> (1st and 16th of each month).</li>
   <li>Payment methods: <b>Wise, PayPal or Payoneer</b>.</li>
   <li>Payouts are sent manually by the Salah Alarm team. The dashboard tracks and reports what you're owed.</li>
+  <li>Only purchases made on <b>salahalarm.com</b> through your link earn commission. Purchases made directly in the App Store, Google Play or inside the app don't count.</li>
   <li>Every sale is reviewed before it is approved and added to your balance. Refunded, fraudulent or self-referred sales are not paid.</li>
   <li>We may update these terms; changes apply to sales after the change and will be announced in Discord.</li>
 </ul>

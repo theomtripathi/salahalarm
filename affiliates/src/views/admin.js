@@ -165,17 +165,11 @@ ${history.length ? history.map((p) => `<tr><td>${fmtDate(p.created_at)}</td><td>
   return page({ title: 'Payouts · Admin', body, admin: true, active: 'payouts', wide: true });
 }
 
-export function adminSettings({ rcUrl, rcAuth, msg, kind }) {
+export function adminSettings({ msg, kind }) {
   const body = `
 <h1 style="margin-top:24px">Settings</h1>
 ${flash(msg, kind)}
-<h2>RevenueCat webhook (App Store and Play purchases)</h2>
-<div class="card">
-  <p>Web purchases (Dodo) are tracked automatically. To also credit affiliates for purchases made inside the app, add this webhook in RevenueCat → Project settings → Integrations → Webhooks:</p>
-  <div class="field"><label>Webhook URL</label><input type="text" readonly value="${esc(rcUrl)}"></div>
-  <div class="field"><label>Authorization header value</label><input type="text" readonly value="${esc(rcAuth)}"></div>
-  <p class="small muted" style="margin:0">Purchases are credited when the RevenueCat customer has the subscriber attribute <code>affiliate</code> or their app user ID was seen at web checkout.</p>
-</div>
+<p class="muted">Affiliates are credited only for purchases made on salahalarm.com (Dodo checkout), which are tracked automatically. App Store, Google Play and in-app purchases never count.</p>
 <h2>Change admin password</h2>
 <form method="post" action="/admin/settings/password" class="card">
   <div class="row"><div><label>Current password</label><input type="password" name="current" required></div><div><label>New password (12+ characters)</label><input type="password" name="next" required minlength="12"></div></div>

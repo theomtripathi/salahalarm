@@ -186,21 +186,11 @@ test('full flow: sign up, visit, checkout, Dodo purchase, approval, payout', asy
   assert.match(await res.text(), /^id,created_at,username/);
 });
 
-test('RevenueCat webhook', async () => {
-  const { env, call } = await setup();
-  await call('/signup', { method: 'POST', form: { email: 'ali@example.com' } });
-  const adminJar = {};
-  await call('/admin/login', { method: 'POST', form: { password: PW }, cookies: adminJar });
-  const settings = await (await call('/admin/settings', { cookies: adminJar })).text();
-  const auth = settings.match(/value="(Bearer [^"]+)"/)[1];
-  const evt = (e) => call('/api/revenuecat', { method: 'POST', json: { event: e }, headers: { authorization: auth }, cookies: {} });
-  assert.equal((await call('/api/revenuecat', { method: 'POST', json: { event: {} }, cookies: {} })).status, 401);
-  let r = await (await evt({ id: 'e1', type: 'INITIAL_PURCHASE', app_user_id: 'u9', price: 5.99, product_id: 'weekly', store: 'APP_STORE', subscriber_attributes: { affiliate: { value: 'ali' } }, transaction_id: 't1' })).json();
-  assert.equal(r.commission, 3);
-  r = await (await evt({ id: 'e2', type: 'INITIAL_PURCHASE', app_user_id: 'u9', price: 29.99, product_id: 'x', store: 'PROMOTIONAL' })).json();
-  assert.equal(r.ignored, 'PROMOTIONAL');
-  r = await (await evt({ id: 'e3', type: 'RENEWAL', app_user_id: 'u9', price: 5.99, product_id: 'weekly', store: 'APP_STORE', transaction_id: 't2' })).json();
-  assert.equal(r.status, 'no_commission');
-  r = await (await evt({ id: 'e4', type: 'CANCELLATION', cancel_reason: 'CUSTOMER_SUPPORT', app_user_id: 'u9', price: -5.99, transaction_id: 't1', original_transaction_id: 't1' })).json();
-  assert.equal(r.voided, true);
+test('only salahalarm.com purchases count', async () => {
+  const { call } = await setup();
+  assert.equal((await call('/api/revenuecat', { method: 'POST', json: { event: {} }, cookies: {} })).status, 404);
+  const faq = await (await call('/faq', { cookies: {} })).text();
+  assert.match(faq, /Do App Store or Google Play purchases count\?/);
+  const terms = await (await call('/terms', { cookies: {} })).text();
+  assert.match(terms, /Only purchases made on <b>salahalarm\.com<\/b>/);
 });

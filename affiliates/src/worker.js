@@ -9,7 +9,7 @@ import {
 import {
   createAffiliate, getAffiliateByEmail, getAffiliate, affiliateStats, changeUsername, touch, balanceOf,
 } from './store.js';
-import { handleVisit, handleBrowserEvent, handleIngest, handleRevenueCat, afterApproval } from './track.js';
+import { handleVisit, handleBrowserEvent, handleIngest, afterApproval } from './track.js';
 import { capture, affiliateSet, sendLoginEmail } from './posthog.js';
 import { commissionFor } from './commission.js';
 import * as pub from './views/public.js';
@@ -42,7 +42,6 @@ async function route(request, env, ctx) {
   }
 
   if (path === '/healthz') return json({ ok: true });
-  if (path === '/api/revenuecat' && method === 'POST') return handleRevenueCat(request, env, ctx, await rcAuth(env));
 
   if (path === '/admin' || path.startsWith('/admin/')) return admin(request, env, ctx, url, path, method);
 
@@ -193,15 +192,6 @@ async function dashboardRoute(request, env, ctx, url, path, method, aff) {
 
 // ---------- Admin ----------
 
-async function rcAuth(env) {
-  const row = await env.DB.prepare("SELECT value FROM settings WHERE key = 'revenuecat_auth'").first();
-  if (row) return row.value;
-  const v = `Bearer ${randomToken(24)}`;
-  await env.DB.prepare("INSERT OR IGNORE INTO settings (key, value) VALUES ('revenuecat_auth', ?)").bind(v).run();
-  const again = await env.DB.prepare("SELECT value FROM settings WHERE key = 'revenuecat_auth'").first();
-  return again.value;
-}
-
 async function admin(request, env, ctx, url, path, method) {
   if (method === 'POST' && !sameOrigin(request, url)) return html('Bad origin', { status: 403 });
   if (path === '/admin/login') {
@@ -274,7 +264,7 @@ async function admin(request, env, ctx, url, path, method) {
     return html(adm.adminPayouts({ due, history: history.results, msg }));
   }
   if (path === '/admin/settings') {
-    return html(adm.adminSettings({ rcUrl: `${portal(env, url)}/api/revenuecat`, rcAuth: await rcAuth(env), msg, kind: url.searchParams.get('k') === 'bad' ? 'bad' : 'ok' }));
+    return html(adm.adminSettings({ msg, kind: url.searchParams.get('k') === 'bad' ? 'bad' : 'ok' }));
   }
   if (path === '/admin/settings/password' && method === 'POST') {
     const form = await readForm(request);
