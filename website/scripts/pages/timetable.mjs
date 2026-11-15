@@ -41,6 +41,14 @@ export const CITIES = [
   { slug: 'montreal', lang: 'en', name: 'Montreal', country: 'Canada', lat: 45.5017, lng: -73.5673, tz: 'America/Toronto', method: 'NorthAmerica' },
   { slug: 'calgary', lang: 'en', name: 'Calgary', country: 'Canada', lat: 51.0447, lng: -114.0719, tz: 'America/Edmonton', method: 'NorthAmerica' },
   { slug: 'vancouver', lang: 'en', name: 'Vancouver', country: 'Canada', lat: 49.2827, lng: -123.1207, tz: 'America/Vancouver', method: 'NorthAmerica' },
+  { slug: 'leeds', lang: 'en', name: 'Leeds', country: 'UK', lat: 53.8008, lng: -1.5491, tz: 'Europe/London', method: 'MoonsightingCommittee' },
+  { slug: 'sheffield', lang: 'en', name: 'Sheffield', country: 'UK', lat: 53.3811, lng: -1.4701, tz: 'Europe/London', method: 'MoonsightingCommittee' },
+  { slug: 'luton', lang: 'en', name: 'Luton', country: 'UK', lat: 51.8787, lng: -0.4200, tz: 'Europe/London', method: 'MoonsightingCommittee' },
+  { slug: 'blackburn', lang: 'en', name: 'Blackburn', country: 'UK', lat: 53.7480, lng: -2.4820, tz: 'Europe/London', method: 'MoonsightingCommittee' },
+  { slug: 'philadelphia', lang: 'en', name: 'Philadelphia', country: 'US', lat: 39.9526, lng: -75.1652, tz: 'America/New_York', method: 'NorthAmerica' },
+  { slug: 'minneapolis', lang: 'en', name: 'Minneapolis', country: 'US', lat: 44.9778, lng: -93.2650, tz: 'America/Chicago', method: 'NorthAmerica' },
+  { slug: 'ottawa', lang: 'en', name: 'Ottawa', country: 'Canada', lat: 45.4215, lng: -75.6972, tz: 'America/Toronto', method: 'NorthAmerica' },
+  { slug: 'edmonton', lang: 'en', name: 'Edmonton', country: 'Canada', lat: 53.5461, lng: -113.4938, tz: 'America/Edmonton', method: 'NorthAmerica' },
   { slug: 'riyadh', lang: 'ar', name: 'الرياض', country: 'السعودية', lat: 24.7136, lng: 46.6753, tz: 'Asia/Riyadh', method: 'UmmAlQura' },
   { slug: 'jeddah', lang: 'ar', name: 'جدة', country: 'السعودية', lat: 21.4858, lng: 39.1925, tz: 'Asia/Riyadh', method: 'UmmAlQura' },
   { slug: 'makkah', lang: 'ar', name: 'مكة المكرمة', country: 'السعودية', lat: 21.3891, lng: 39.8579, tz: 'Asia/Riyadh', method: 'UmmAlQura' },
@@ -49,6 +57,11 @@ export const CITIES = [
   { slug: 'kuwait', lang: 'ar', name: 'الكويت', country: 'الكويت', lat: 29.3759, lng: 47.9774, tz: 'Asia/Kuwait', method: 'Kuwait' },
   { slug: 'doha', lang: 'ar', name: 'الدوحة', country: 'قطر', lat: 25.2854, lng: 51.5310, tz: 'Asia/Qatar', method: 'Qatar' },
   { slug: 'amman', lang: 'ar', name: 'عمّان', country: 'الأردن', lat: 31.9454, lng: 35.9284, tz: 'Asia/Amman', method: 'MuslimWorldLeague' },
+  { slug: 'madinah', lang: 'ar', name: 'المدينة المنورة', country: 'السعودية', lat: 24.4672, lng: 39.6111, tz: 'Asia/Riyadh', method: 'UmmAlQura' },
+  { slug: 'dammam', lang: 'ar', name: 'الدمام', country: 'السعودية', lat: 26.4207, lng: 50.0888, tz: 'Asia/Riyadh', method: 'UmmAlQura' },
+  { slug: 'alexandria', lang: 'ar', name: 'الإسكندرية', country: 'مصر', lat: 31.2001, lng: 29.9187, tz: 'Africa/Cairo', method: 'Egyptian' },
+  { slug: 'abu-dhabi', lang: 'ar', name: 'أبوظبي', country: 'الإمارات', lat: 24.4539, lng: 54.3773, tz: 'Asia/Dubai', method: 'Dubai' },
+  { slug: 'sharjah', lang: 'ar', name: 'الشارقة', country: 'الإمارات', lat: 25.3463, lng: 55.4209, tz: 'Asia/Dubai', method: 'Dubai' },
 ];
 
 export const cityUrl = (c) => `${HUB}${c.slug}/`;
