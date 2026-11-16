@@ -129,7 +129,7 @@ en-127,en,laylatul qadr dua,laylatul-qadr,info,"US,GB,CA,AU",4,2027-02-20,,layla
 en-128,en,signs of laylatul qadr,laylatul-qadr,info,"US,GB,CA,AU",3,2027-02-20,,signs-of-laylatul-qadr,todo,,,,,,,,,added 2026-11-14; volume to verify
 en-129,en,how to do itikaf,laylatul-qadr,info,"US,GB,CA,AU",3,2027-02-20,,itikaf-guide,todo,,,,,,,,,added 2026-11-14; volume to verify
 en-130,en,zakat al fitr 2027 amount,eid,info,"US,GB,CA,AU",4,2027-02-25,zakat-al-fitr-2027,zakat-al-fitr-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
-en-131,en,how to pray eid prayer,eid,info,"US,GB,CA,AU",3,2027-03-01,,eid-prayer-how-to,todo,,,,,,,,,added 2026-11-14; volume to verify
+en-131,en,how to pray eid prayer,eid,info,"US,GB,CA,AU",3,2027-03-01,eid-prayer,eid-prayer-how-to,published,2026-11-16,,,,,,,,added 2026-11-14; volume to verify
 en-132,en,eid mubarak wishes,eid,info,"US,GB,CA,AU",3,2027-03-01,,eid-mubarak-wishes,todo,,,,,,,,,added 2026-11-14; volume to verify
 en-133,en,what breaks your fast,fasting,info,"US,GB,CA,AU",4,2027-01-31,,what-breaks-your-fast,published,2026-11-15,,,,,,,,added 2026-11-14; volume to verify
 en-134,en,dua for breaking fast,fasting,info,"US,GB,CA,AU",4,2027-01-31,dua-iftar,dua-for-breaking-fast,todo,,,,,,,,,added 2026-11-14; volume to verify
@@ -163,7 +163,7 @@ ar-161,ar,علامات ليلة القدر,laylatul-qadr,info,"SA,AE,EG,KW,QA,JO
 ar-162,ar,دعاء ليلة القدر,laylatul-qadr,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-02-20,,dua-laylat-alqadr,todo,,,,,,,,,added 2026-11-14; volume to verify
 ar-163,ar,كيفية الاعتكاف في رمضان,laylatul-qadr,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-02-20,,aliitikaf,todo,,,,,,,,,added 2026-11-14; volume to verify
 ar-164,ar,زكاة الفطر 2027,eid,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-02-25,zakat-al-fitr-2027,zakat-alfitr-2027,todo,,,,,,,,,added 2026-11-14; volume to verify
-ar-165,ar,كيفية صلاة العيد,eid,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-03-01,,salat-aleid,todo,,,,,,,,,added 2026-11-14; volume to verify
+ar-165,ar,كيفية صلاة العيد,eid,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-03-01,eid-prayer,salat-aleid,published,2026-11-16,,,,,,,,added 2026-11-14; volume to verify
 ar-166,ar,تكبيرات العيد,eid,info,"SA,AE,EG,KW,QA,JO,MA",3,2027-03-01,,takbirat-aleid,todo,,,,,,,,,added 2026-11-14; volume to verify
 ar-167,ar,مبطلات الصيام,fasting,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,,mubtilat-alsiyam,todo,,,,,,,,,added 2026-11-14; volume to verify
 ar-168,ar,دعاء الافطار,fasting,info,"SA,AE,EG,KW,QA,JO,MA",4,2027-01-31,dua-iftar,dua-aliftar,todo,,,,,,,,,added 2026-11-14; volume to verify

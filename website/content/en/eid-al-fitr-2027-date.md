@@ -63,4 +63,6 @@ On the morning itself, say the takbeers on your way to the prayer, pray Eid with
 - Confirm the date with the official announcement before you finalise your plans.
 - Keep your last days of Ramadan steady, and plan the Eid prayer early.
 
+Once the date is confirmed, our step-by-step guide on [how to pray the Eid prayer](/blog/en/eid-prayer-how-to/) covers the takbirs, the khutbah and the sunnahs of the morning.
+
 Salah Alarm can help you keep the morning routine on track during the month. It calculates prayer times for your location each day, and its Fajr adhan alarm stops only when you scan your prayer mat with your phone camera, which helps on the mornings after a late night.
